@@ -108,26 +108,54 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .reading-header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--gray-5); background:var(--white); position:fixed; top:0; left:0; right:0; z-index:50; }
 .back-btn { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:12px 16px 12px 0; min-height:44px; min-width:70px; }
 .next-btn { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:12px 0 12px 16px; min-height:44px; min-width:70px; text-align:right; }
-.reading-chapter { font-size:14px; font-weight:700; color:var(--black); text-align:center; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.reading-chapter { font-size:14px; font-weight:700; color:var(--black); text-align:center; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:var(--font); }
 .reading-progress-bar { padding:0 16px; display:flex; align-items:center; gap:8px; margin-top:50px; padding-top:8px; }
 .reading-prog-track { flex:1; height:1px; background:var(--gray-5); border-radius:1px; overflow:hidden; }
 .reading-prog-fill { height:100%; background:var(--black); border-radius:1px; transition: width 0.3s ease; }
 .reading-prog-text { font-size:11px; color:var(--gray-3); white-space:nowrap; }
-.reading-body { padding:16px 16px 40px; overflow-y:auto; }
-.psalm-header-reading { text-align:center; margin-bottom:28px; padding:24px 16px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); }
+.reading-body { padding:12px 16px 40px; overflow-y:auto; }
+/* INSTA POST CARD */
+.insta-post { background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; }
+.insta-post-header { display:flex; align-items:center; gap:10px; padding:12px 14px; }
+.insta-post-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #fcaf45); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.insta-post-avatar-inner { width:28px; height:28px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:12px; font-weight:700; color:var(--black); direction:rtl; }
+.insta-post-user { font-size:13px; font-weight:700; color:var(--black); }
+.insta-post-location { font-size:11px; color:var(--gray-3); }
+.insta-post-content { padding:16px 16px 20px; }
+.psalm-header-reading { text-align:center; margin-bottom:24px; }
 .psalm-num-hebrew-big { font-family:'Noto Serif Hebrew',serif; font-size:38px; font-weight:700; color:var(--black); display:block; line-height:1.2; direction:rtl; }
-.psalm-num-sub { font-size:13px; color:var(--gray-3); display:block; margin-top:6px; }
+.psalm-num-sub { font-size:13px; color:var(--gray-3); display:block; margin-top:6px; font-family:var(--font); }
 .psalm-section-label { display:block; font-size:11px; color:var(--gray-3); margin-top:4px; font-weight:600; letter-spacing:0.5px; }
 .verse-block { margin-bottom:24px; padding-left:28px; position:relative; }
 .verse-num { position:absolute; left:0; top:3px; font-size:11px; color:var(--gray-4); font-weight:600; width:20px; text-align:right; }
 .hebrew-text { font-family:'Noto Serif Hebrew',serif; font-size:19px; line-height:2; direction:rtl; text-align:right; color:var(--black); margin-bottom:6px; }
 .french-text { font-size:14px; line-height:1.7; color:var(--gray-3); font-style:italic; font-family:'EB Garamond',Georgia,serif; }
-.reading-actions { margin-top:32px; text-align:center; }
-.mark-read-btn { background:linear-gradient(135deg, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #fcaf45); color:var(--white); border:none; padding:12px 32px; border-radius:var(--radius-sm); font-size:14px; font-weight:700; cursor:pointer; transition:all 0.15s; }
-.mark-read-btn:active { opacity:0.8; }
-.already-read-btn { color:var(--gray-2); font-size:13px; font-weight:600; padding:12px 24px; background:var(--gray-6); border:none; border-radius:var(--radius-sm); cursor:pointer; transition:all 0.15s; }
-.already-read-btn:active { background:var(--gray-5); }
-.nav-buttons { display:flex; justify-content:center; gap:8px; margin-top:14px; }
+/* INSTA ACTION BAR */
+.insta-actions { padding:10px 14px 4px; display:flex; align-items:center; gap:14px; border-top:1px solid var(--gray-6); }
+.insta-heart-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; transition:transform 0.15s; }
+.insta-heart-btn:active { transform:scale(1.3); }
+.insta-heart-btn svg { width:26px; height:26px; transition:all 0.2s; }
+.insta-heart-btn.liked svg { fill:#ed4956; stroke:#ed4956; }
+.insta-nav-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; }
+.insta-nav-btn svg { width:24px; height:24px; stroke:var(--gray-1); fill:none; stroke-width:1.5; }
+.insta-bookmark { margin-left:auto; }
+.insta-likes { padding:4px 14px 6px; font-size:13px; font-weight:700; color:var(--black); cursor:pointer; display:inline-block; }
+.insta-timestamp { padding:0 14px 12px; font-size:10px; color:var(--gray-3); text-transform:uppercase; letter-spacing:0.5px; }
+/* READING HISTORY POPUP */
+.history-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:200; display:flex; align-items:flex-end; justify-content:center; }
+.history-popup { background:var(--white); border-radius:20px 20px 0 0; width:100%; max-width:500px; max-height:60vh; overflow-y:auto; animation:slideUp 0.3s ease; }
+@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
+.history-header { display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid var(--gray-6); position:sticky; top:0; background:var(--white); border-radius:20px 20px 0 0; }
+.history-title { font-size:15px; font-weight:700; color:var(--black); }
+.history-close { background:none; border:none; font-size:18px; color:var(--gray-3); cursor:pointer; padding:4px 8px; }
+.history-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--gray-6); }
+.history-item-info { display:flex; align-items:center; gap:10px; }
+.history-item-icon { font-size:16px; }
+.history-item-date { font-size:13px; color:var(--gray-1); }
+.history-item-time { font-size:11px; color:var(--gray-3); display:block; }
+.history-item-remove { background:none; border:none; font-size:11px; color:#ed4956; cursor:pointer; padding:6px 10px; font-weight:600; }
+.history-empty { padding:32px 16px; text-align:center; color:var(--gray-3); font-size:13px; }
+.nav-buttons { display:flex; justify-content:center; gap:8px; margin:12px 16px; }
 .nav-btn { background:var(--white); border:1px solid var(--gray-5); color:var(--gray-1); padding:10px 22px; border-radius:var(--radius-sm); font-size:13px; cursor:pointer; font-weight:600; transition:all 0.15s; }
 .nav-btn:active { background:var(--gray-6); }
 
@@ -1143,23 +1171,42 @@ function openPsalm(index) {
   renderReading();
 }
 
+function getReadHistory(num) {
+  try { return JSON.parse(localStorage.getItem("tehilim_history_" + num)) || []; } catch(e) { return []; }
+}
+function saveReadHistory(num, history) {
+  localStorage.setItem("tehilim_history_" + num, JSON.stringify(history));
+}
+
 function renderReading() {
   const psalm = availablePsalms[currentPsalm];
   if (!psalm) { goHome(); return; }
   const isRead = readPsalms.has(psalm.number);
   const label = psalm.sectionLabel ? " · " + psalm.sectionLabel : "";
+  const history = getReadHistory(psalm.number);
+  const readCount = history.length;
 
   document.getElementById("reading-chapter").textContent = "Perek " + toHebrewNumeral(psalm.number) + " / Chapitre " + psalm.number + label;
   document.getElementById("reading-prog-fill").style.width = (((currentPsalm + 1) / availablePsalms.length) * 100) + "%";
   document.getElementById("reading-prog-text").textContent = (currentPsalm + 1) + " / " + availablePsalms.length;
   var nextBtn = document.getElementById("header-next-btn");
-  if (currentPsalm < availablePsalms.length - 1) {
-    nextBtn.style.visibility = "visible";
-  } else {
-    nextBtn.style.visibility = "hidden";
-  }
+  nextBtn.style.visibility = currentPsalm < availablePsalms.length - 1 ? "visible" : "hidden";
 
-  let html = '<div class="psalm-header-reading"><span class="psalm-num-hebrew-big">פרק ' + toHebrewNumeral(psalm.number) + '</span><span class="psalm-num-sub">Perek ' + hebrewLetterName(psalm.number) + ' / Chapitre ' + psalm.number + '</span>';
+  const heartSVG = isRead
+    ? '<svg viewBox="0 0 24 24" fill="#ed4956" stroke="#ed4956" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-1)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+
+  let html = '<div class="insta-post">';
+  // Header
+  html += '<div class="insta-post-header">';
+  html += '<div class="insta-post-avatar"><div class="insta-post-avatar-inner">תהלים</div></div>';
+  html += '<div><div class="insta-post-user">Tehilim · Chapitre ' + psalm.number + '</div>';
+  html += '<div class="insta-post-location">' + psalm.verses.length + ' versets' + label + '</div></div></div>';
+
+  // Content
+  html += '<div class="insta-post-content">';
+  html += '<div class="psalm-header-reading"><span class="psalm-num-hebrew-big">פרק ' + toHebrewNumeral(psalm.number) + '</span>';
+  html += '<span class="psalm-num-sub">Perek ' + hebrewLetterName(psalm.number) + ' / Chapitre ' + psalm.number + '</span>';
   if (psalm.sectionLabel) html += '<span class="psalm-section-label">' + psalm.sectionLabel + '</span>';
   html += '</div>';
 
@@ -1168,24 +1215,100 @@ function renderReading() {
     html += '<p class="hebrew-text">' + v.hebrew + '</p>';
     html += '<p class="french-text">' + v.french + '</p></div>';
   });
+  html += '</div>';
 
-  html += '<div class="reading-actions">';
-  if (!isRead) {
-    html += '<button class="mark-read-btn" onclick="markRead(' + psalm.number + ')">✓ Marquer comme lu</button>';
-  } else {
-    html += '<button class="already-read-btn" onclick="unmarkRead(' + psalm.number + ')">✓ Lu — annuler</button>';
+  // Action bar
+  html += '<div class="insta-actions">';
+  html += '<button class="insta-heart-btn' + (isRead ? ' liked' : '') + '" onclick="toggleHeart(' + psalm.number + ')">' + heartSVG + '</button>';
+  // Prev/Next as comment & share icons
+  if (currentPsalm > 0) {
+    html += '<button class="insta-nav-btn" onclick="prevPsalm()" title="Précédent"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>';
   }
+  if (currentPsalm < availablePsalms.length - 1) {
+    html += '<button class="insta-nav-btn" onclick="nextPsalm()" title="Suivant"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>';
+  }
+  html += '</div>';
+
+  // Likes count
+  if (readCount > 0) {
+    html += '<div class="insta-likes" onclick="showHistory(' + psalm.number + ')">' + readCount + ' lecture' + (readCount > 1 ? 's' : '') + '</div>';
+  }
+
+  // Timestamp
+  if (history.length > 0) {
+    const last = new Date(history[history.length - 1]);
+    html += '<div class="insta-timestamp">Dernière lecture · ' + formatTimestamp(last) + '</div>';
+  }
+
+  html += '</div>'; // close insta-post
+
+  // Nav buttons below
   html += '<div class="nav-buttons">';
   if (currentPsalm > 0) html += '<button class="nav-btn" onclick="prevPsalm()">← Précédent</button>';
   if (currentPsalm < availablePsalms.length - 1) html += '<button class="nav-btn" onclick="nextPsalm()">Suivant →</button>';
-  html += '</div></div>';
+  html += '</div>';
 
   document.getElementById("reading-body").innerHTML = html;
   document.getElementById("reading-body").scrollTop = 0;
 }
 
+function formatTimestamp(d) {
+  const months = ["jan","fév","mar","avr","mai","juin","juil","aoû","sep","oct","nov","déc"];
+  return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear() + " à " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
+}
+
+function toggleHeart(num) {
+  if (readPsalms.has(num)) {
+    // Show history so they can remove readings
+    showHistory(num);
+  } else {
+    markRead(num);
+  }
+}
+
+function showHistory(num) {
+  const history = getReadHistory(num);
+  let html = '<div class="history-overlay" onclick="if(event.target===this)closeHistory()">';
+  html += '<div class="history-popup">';
+  html += '<div class="history-header"><span class="history-title">❤️ ' + history.length + ' lecture' + (history.length > 1 ? 's' : '') + ' · Chapitre ' + num + '</span>';
+  html += '<button class="history-close" onclick="closeHistory()">✕</button></div>';
+  if (history.length === 0) {
+    html += '<div class="history-empty">Aucune lecture enregistrée</div>';
+  } else {
+    history.slice().reverse().forEach((ts, i) => {
+      const d = new Date(ts);
+      const idx = history.length - 1 - i;
+      html += '<div class="history-item"><div class="history-item-info"><span class="history-item-icon">❤️</span><div><span class="history-item-date">' + formatTimestamp(d) + '</span></div></div>';
+      html += '<button class="history-item-remove" onclick="removeReading(' + num + ',' + idx + ')">Supprimer</button></div>';
+    });
+  }
+  html += '</div></div>';
+  document.getElementById("reading-body").insertAdjacentHTML("beforeend", html);
+}
+
+function closeHistory() {
+  const overlay = document.querySelector(".history-overlay");
+  if (overlay) overlay.remove();
+}
+
+function removeReading(num, index) {
+  const history = getReadHistory(num);
+  history.splice(index, 1);
+  saveReadHistory(num, history);
+  if (history.length === 0) {
+    readPsalms.delete(num);
+  }
+  closeHistory();
+  renderReading();
+}
+
 function markRead(num) {
   readPsalms.add(num);
+  // Log reading timestamp
+  const history = getReadHistory(num);
+  history.push(new Date().toISOString());
+  saveReadHistory(num, history);
+
   // Check if all psalms of the day are read
   if (browseSource === "jour") {
     const allRead = availablePsalms.every(p => readPsalms.has(p.number));
