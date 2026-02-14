@@ -37,7 +37,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-dot { height:6px; border-radius:3px; transition: all 0.4s ease; }
 .splash-tap { color:var(--gray-4); font-size:11px; margin-top:32px; letter-spacing:2px; animation: pulse 2.5s ease-in-out infinite; }
 .splash-footer { margin-top:32px; text-align:center; }
-.footer-logo { height:36px; width:auto; opacity:0.4; }
+.footer-logo { height:52px; width:auto; opacity:0.6; }
 @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
 
 /* HOME */
@@ -46,7 +46,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .home-header { background:var(--white); padding:48px 16px 16px; border-bottom:1px solid var(--gray-5); position:relative; }
 .bh-mark { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
 .home-header-top { display:flex; justify-content:space-between; align-items:center; }
-.app-footer { text-align:center; padding:40px 16px 24px; }
+.app-footer { text-align:center; padding:48px 16px 32px; }
 .home-greeting { font-family:'Noto Serif Hebrew',serif; font-size:28px; font-weight:700; color:var(--black); direction:rtl; }
 .header-dates { text-align:right; }
 .hebrew-date { display:block; font-size:12px; color:var(--gray-1); font-weight:600; margin-bottom:1px; direction:ltr; }
@@ -117,9 +117,17 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .reading-body { padding:12px 16px 40px; overflow-y:auto; }
 /* INSTA POST CARD */
 .insta-post { background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; }
+
+/* READING MODE TOGGLE */
+.reading-toggle { display:flex; background:var(--gray-6); border-radius:8px; padding:3px; margin:0 16px 16px; position:relative; }
+.reading-toggle-btn { flex:1; padding:8px 4px; text-align:center; font-size:12px; font-weight:600; color:var(--gray-3); background:none; border:none; cursor:pointer; border-radius:6px; transition:all 0.25s ease; z-index:1; position:relative; font-family:var(--font); }
+.reading-toggle-btn.active { color:var(--black); }
+.reading-toggle-slider { position:absolute; top:3px; bottom:3px; left:3px; width:calc(33.333% - 2px); background:var(--white); border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.1); transition:transform 0.25s ease; }
+.reading-toggle[data-mode="phonetique"] .reading-toggle-slider { transform:translateX(100%); }
+.reading-toggle[data-mode="francais"] .reading-toggle-slider { transform:translateX(200%); }
 .insta-post-header { display:flex; align-items:center; gap:10px; padding:12px 14px; }
-.insta-post-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #fcaf45); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.insta-post-avatar-inner { width:28px; height:28px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:12px; font-weight:700; color:var(--black); direction:rtl; }
+.insta-post-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #fcaf45); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.insta-post-avatar-inner { width:34px; height:34px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:15px; font-weight:700; color:var(--black); direction:rtl; }
 .insta-post-user { font-size:13px; font-weight:700; color:var(--black); }
 .insta-post-location { font-size:11px; color:var(--gray-3); }
 .insta-post-content { padding:16px 16px 20px; }
@@ -128,9 +136,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .psalm-num-sub { font-size:13px; color:var(--gray-3); display:block; margin-top:6px; font-family:var(--font); }
 .psalm-section-label { display:block; font-size:11px; color:var(--gray-3); margin-top:4px; font-weight:600; letter-spacing:0.5px; }
 .verse-block { margin-bottom:24px; padding-left:28px; position:relative; }
-.verse-num { position:absolute; left:0; top:3px; font-size:11px; color:var(--gray-4); font-weight:600; width:20px; text-align:right; }
+.verse-num { position:absolute; left:0; top:5px; font-size:12px; color:var(--gray-3); font-weight:600; width:22px; text-align:center; font-family:'Noto Serif Hebrew',serif; direction:rtl; }
 .hebrew-text { font-family:'Noto Serif Hebrew',serif; font-size:19px; line-height:2; direction:rtl; text-align:right; color:var(--black); margin-bottom:6px; }
-.french-text { font-size:14px; line-height:1.7; color:var(--gray-3); font-style:italic; font-family:'EB Garamond',Georgia,serif; }
+.french-text { font-size:16px; line-height:1.7; color:var(--gray-1); font-style:italic; font-family:'EB Garamond',Georgia,serif; }
+.phonetic-text { font-size:15px; line-height:1.8; color:var(--gray-2); font-family:'EB Garamond',Georgia,serif; font-style:italic; margin-top:4px; direction:ltr; text-align:left; }
+/* Sefer style - continuous Hebrew */
+.sefer-text { font-family:'Noto Serif Hebrew',serif; font-size:20px; line-height:2.2; direction:rtl; text-align:justify; color:var(--black); padding:0 4px; }
+.sefer-verse-num { font-size:14px; font-weight:700; color:var(--black); font-family:'Noto Serif Hebrew',serif; margin:0 2px; }
 /* INSTA ACTION BAR */
 .insta-actions { padding:10px 14px 4px; display:flex; align-items:center; gap:14px; border-top:1px solid var(--gray-6); }
 .insta-heart-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; transition:transform 0.15s; }
@@ -597,6 +609,330 @@ const TEHILIM = [
       { hebrew: "הַבִּיטָֽה עֲנֵנִי יְהֹוָה אֱלֹהָי הָאִירָה עֵינַי פֶּן־אִישַׁן הַמָּֽוֶת׃", french: "Regarde de grâce, exauce-moi, Éternel, mon Dieu. Éclaire mes yeux, pour que je ne m'endorme pas dans la mort," },
       { hebrew: "פֶּן־יֹאמַר אֹיְבִי יְכָלְתִּיו צָרַי יָגִילוּ כִּי אֶמּֽוֹט׃", french: "pour que mon ennemi ne puisse dire : « J'en suis venu à bout ! » Et que mes adversaires ne se réjouissent en me voyant tomber !" },
       { hebrew: "וַאֲנִי ׀ בְּחַסְדְּךָ בָטַחְתִּי יָגֵל לִבִּי בִּישׁוּעָתֶךָ אָשִׁירָה לַֽיהֹוָה כִּי גָמַל עָלָֽי׃", french: "Or moi, j'ai confiance en ta bonté, mon cœur est joyeux de ton secours : je veux chanter l'Éternel, car il me comble de bienfaits." },
+    ]
+  },
+  {
+    number: 14,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד אָמַר נָבָל בְּלִבּוֹ אֵין אֱלֹהִים הִשְׁחִיתוּ הִתְעִיבוּ עֲלִילָה אֵין עֹשֵׂה טוֹב:", french: "Au chef des chantres. De David. L'insensé dit en son cœur : Il n'y a point de Dieu ! Ils se sont corrompus, ils ont commis des actions abominables ; il n'en est aucun qui fasse le bien." },
+      { hebrew: "יהוה מִשָּׁמַיִם הִשְׁקִיף עַל בְּנֵי אָדָם לִרְאוֹת הֲיֵשׁ מַשְׂכִּיל דֹּרֵשׁ אֶת אֱלֹהִים:", french: "L'Éternel, du haut des cieux, regarde les fils de l'homme, pour voir s'il en est un qui soit intelligent, qui cherche Dieu." },
+      { hebrew: "הַכֹּל סָר יַחְדָּו נֶאֱלָחוּ אֵין עֹשֵׂה טוֹב אֵין גַּם אֶחָד:", french: "Tous se sont égarés, ensemble ils se sont corrompus ; il n'en est aucun qui fasse le bien, pas même un seul." },
+      { hebrew: "הֲלֹא יָדְעוּ כָּל פֹּעֲלֵי אָוֶן אֹכְלֵי עַמִּי אָכְלוּ לֶחֶם יהוה לֹא קָרָאוּ:", french: "Sont-ils dénués de sens, tous ces artisans d'iniquité, qui dévorent mon peuple comme on mange du pain, et n'invoquent point l'Éternel ?" },
+      { hebrew: "שָׁם פָּחֲדוּ פָחַד כִּי אֱלֹהִים בְּדוֹר צַדִּיק:", french: "Là ils ont été saisis de frayeur, car Dieu est avec la race des justes." },
+      { hebrew: "עֲצַת עָנִי תָבִישׁוּ כִּי יהוה מַחְסֵהוּ:", french: "Vous voudriez couvrir de honte le dessein du malheureux, mais l'Éternel est son refuge." },
+      { hebrew: "מִי יִתֵּן מִצִּיּוֹן יְשׁוּעַת יִשְׂרָאֵל בְּשׁוּב יהוה שְׁבוּת עַמּוֹ יָגֵל יַעֲקֹב יִשְׂמַח יִשְׂרָאֵל:", french: "Oh ! qui fera partir de Sion la délivrance d'Israël ? Quand l'Éternel ramènera les captifs de son peuple, Jacob sera dans l'allégresse, Israël se réjouira." },
+    ]
+  },
+  {
+    number: 15,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד יהוה מִי יָגוּר בְּאָהֳלֶךָ מִי יִשְׁכֹּן בְּהַר קָדְשֶׁךָ:", french: "Psaume de David. Éternel, qui séjournera dans ta tente ? Qui demeurera sur ta montagne sainte ?" },
+      { hebrew: "הוֹלֵךְ תָּמִים וּפֹעֵל צֶדֶק וְדֹבֵר אֱמֶת בִּלְבָבוֹ:", french: "Celui qui marche dans l'intégrité, qui pratique la justice et qui dit la vérité selon son cœur." },
+      { hebrew: "לֹא רָגַל עַל לְשֹׁנוֹ לֹא עָשָׂה לְרֵעֵהוּ רָעָה וְחֶרְפָּה לֹא נָשָׂא עַל קְרֹבוֹ:", french: "Il ne calomnie point avec sa langue, il ne fait point de mal à son prochain, et il ne lance point l'opprobre contre son voisin." },
+      { hebrew: "נִבְזֶה בְּעֵינָיו נִמְאָס וְאֶת יִרְאֵי יהוה יְכַבֵּד נִשְׁבַּע לְהָרַע וְלֹא יָמִר:", french: "Il regarde avec dédain celui qui est méprisable, mais il honore ceux qui craignent l'Éternel ; il ne se rétracte point quand il a juré à son détriment." },
+      { hebrew: "כַּסְפּוֹ לֹא נָתַן בְּנֶשֶׁךְ וְשֹׁחַד עַל נָקִי לֹא לָקָח עֹשֵׂה אֵלֶּה לֹא יִמּוֹט לְעוֹלָם:", french: "Il n'a point mis son argent à intérêt, et n'a point accepté de don contre l'innocent. Celui qui agit ainsi ne chancellera jamais." },
+    ]
+  },
+  {
+    number: 16,
+    verses: [
+      { hebrew: "מִכְתָּם לְדָוִד שָׁמְרֵנִי אֵל כִּי חָסִיתִי בָךְ:", french: "Hymne de David. Garde-moi, ô Dieu, car je cherche en toi mon refuge." },
+      { hebrew: "אָמַרְתְּ לַיהוה אֲדֹנָי אָתָּה טוֹבָתִי בַּל עָלֶיךָ:", french: "Je dis à l'Éternel : Tu es mon Seigneur, mon bonheur n'est point au-dessus de toi." },
+      { hebrew: "לִקְדוֹשִׁים אֲשֶׁר בָּאָרֶץ הֵמָּה וְאַדִּירֵי כָּל חֶפְצִי בָם:", french: "Les saints qui sont sur la terre sont les hommes illustres en qui est tout mon plaisir." },
+      { hebrew: "יִרְבּוּ עַצְּבוֹתָם אַחֵר מָהָרוּ בַּל אַסִּיךְ נִסְכֵּיהֶם מִדָּם וּבַל אֶשָּׂא אֶת שְׁמוֹתָם עַל שְׂפָתָי:", french: "Les douleurs de ceux qui se hâtent après un autre dieu se multiplieront ; je ne répandrai pas leurs libations de sang, et mes lèvres ne prononceront pas leurs noms." },
+      { hebrew: "יהוה מְנָת חֶלְקִי וְכוֹסִי אַתָּה תּוֹמִיךְ גּוֹרָלִי:", french: "L'Éternel est mon partage et mon calice ; c'est toi qui maintiens mon lot." },
+      { hebrew: "חֲבָלִים נָפְלוּ לִי בַּנְּעִמִים אַף נַחֲלָת שָׁפְרָה עָלָי:", french: "Un héritage délicieux m'est échu, une belle possession m'est accordée." },
+      { hebrew: "אֲבָרֵךְ אֶת יהוה אֲשֶׁר יְעָצָנִי אַף לֵילוֹת יִסְּרוּנִי כִלְיוֹתָי:", french: "Je bénis l'Éternel qui me conseille ; même la nuit, mes reins m'instruisent." },
+      { hebrew: "שִׁוִּיתִי יהוה לְנֶגְדִּי תָמִיד כִּי מִימִינִי בַּל אֶמּוֹט:", french: "J'ai constamment l'Éternel sous mes yeux ; quand il est à ma droite, je ne chancelle pas." },
+      { hebrew: "לָכֵן שָׂמַח לִבִּי וַיָּגֶל כְּבוֹדִי אַף בְּשָׂרִי יִשְׁכֹּן לָבֶטַח:", french: "Aussi mon cœur se réjouit et mon âme est dans l'allégresse ; même ma chair reposera en sécurité." },
+      { hebrew: "כִּי לֹא תַעֲזֹב נַפְשִׁי לִשְׁאוֹל לֹא תִתֵּן חֲסִידְךָ לִרְאוֹת שָׁחַת:", french: "Car tu ne livreras pas mon âme au séjour des morts, tu ne permettras pas que ton bien-aimé voie la corruption." },
+      { hebrew: "תּוֹדִיעֵנִי אֹרַח חַיִּים שֹׂבַע שְׂמָחוֹת אֶת פָּנֶיךָ נְעִמוֹת בִּימִינְךָ נֶצַח:", french: "Tu me feras connaître le sentier de la vie ; il y a d'abondantes joies devant ta face, des délices éternelles à ta droite." },
+    ]
+  },
+  {
+    number: 17,
+    verses: [
+      { hebrew: "תְּפִלָּה לְדָוִד שִׁמְעָה יהוה צֶדֶק הַקְשִׁיבָה רִנָּתִי הַאֲזִינָה תְפִלָּתִי בְּלֹא שִׂפְתֵי מִרְמָה:", french: "Prière de David. Éternel, entends la droiture, sois attentif à mes cris, prête l'oreille à ma prière faite avec des lèvres sans tromperie." },
+      { hebrew: "מִלְּפָנֶיךָ מִשְׁפָּטִי יֵצֵא עֵינֶיךָ תֶּחֱזֶינָה מֵישָׁרִים:", french: "Que mon droit sorte de devant ta face, que tes yeux voient la droiture." },
+      { hebrew: "בָּחַנְתָּ לִבִּי פָּקַדְתָּ לַּיְלָה צְרַפְתַּנִי בַל תִּמְצָא זַמֹּתִי בַּל יַעֲבָר פִּי:", french: "Si tu sondes mon cœur, si tu le visites la nuit, si tu m'éprouves, tu ne trouveras rien ; ma pensée n'est pas autre que ce qui sort de ma bouche." },
+      { hebrew: "לִפְעֻלּוֹת אָדָם בִּדְבַר שְׂפָתֶיךָ אֲנִי שָׁמַרְתִּי אֹרְחוֹת פָּרִיץ:", french: "À l'encontre des actions des hommes, par la parole de tes lèvres, je me suis gardé des sentiers des violents." },
+      { hebrew: "תָּמֹךְ אֲשֻׁרַי בְּמַעְגְּלוֹתֶיךָ בַּל נָמוֹטּוּ פְעָמָי:", french: "Mes pas sont demeurés fermes dans tes sentiers, mes pieds n'ont point chancelé." },
+      { hebrew: "אֲנִי קְרָאתִיךָ כִי תַעֲנֵנִי אֵל הַט אָזְנְךָ לִי שְׁמַע אִמְרָתִי:", french: "Je t'invoque, car tu m'exauces, ô Dieu ! Incline vers moi ton oreille, écoute ma parole." },
+      { hebrew: "הַפְלֵה חֲסָדֶיךָ מוֹשִׁיעַ חוֹסִים מִמִּתְקוֹמְמִים בִּימִינֶךָ:", french: "Signale ta bonté, toi qui sauves ceux qui cherchent un refuge, et qui par ta droite les délivres de leurs adversaires." },
+      { hebrew: "שָׁמְרֵנִי כְּאִישׁוֹן בַּת עָיִן בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי:", french: "Garde-moi comme la prunelle de l'œil ; protège-moi à l'ombre de tes ailes." },
+      { hebrew: "מִפְּנֵי רְשָׁעִים זוּ שַׁדּוּנִי אֹיְבַי בְּנֶפֶשׁ יַקִּיפוּ עָלָי:", french: "Contre les méchants qui me dépouillent, contre mes ennemis acharnés qui m'environnent." },
+      { hebrew: "חֶלְבָּמוֹ סָגְרוּ פִּימוֹ דִּבְּרוּ בְגֵאוּת:", french: "Ils ferment leurs cœurs, ils parlent avec arrogance." },
+      { hebrew: "אַשֻּׁרֵינוּ עַתָּה סְבָבוּנוּ עֵינֵיהֶם יָשִׁיתוּ לִנְטוֹת בָּאָרֶץ:", french: "Ils sont sur nos pas, déjà ils nous entourent, ils fixent les yeux pour nous renverser à terre." },
+      { hebrew: "דִּמְיֹנוֹ כְּאַרְיֵה יִכְסוֹף לִטְרוֹף וְכִכְפִיר יֹשֵׁב בְּמִסְתָּרִים:", french: "On dirait un lion avide de déchirer, un lionceau aux aguets dans son repaire." },
+      { hebrew: "קוּמָה יהוה קַדְּמָה פָנָיו הַכְרִיעֵהוּ פַּלְּטָה נַפְשִׁי מֵרָשָׁע חַרְבֶּךָ:", french: "Lève-toi, Éternel, marche à sa rencontre, terrasse-le ! Délivre-moi du méchant par ton épée !" },
+      { hebrew: "מִמְתִים יָדְךָ יהוה מִמְתִים מֵחֶלֶד חֶלְקָם בַּחַיִּים וּצְפוּנְךָ תְּמַלֵּא בִטְנָם יִשְׂבְּעוּ בָנִים וְהִנִּיחוּ יִתְרָם לְעוֹלְלֵיהֶם:", french: "Que par ta main, Éternel, ils périssent, ces gens dont le partage est dans la vie ; remplis leur ventre de tes trésors, qu'ils en rassasient leurs enfants et laissent le reste à leurs petits." },
+      { hebrew: "אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ:", french: "Pour moi, dans mon innocence, je verrai ta face ; dès le réveil, je me rassasierai de ton image." },
+    ]
+  },
+  {
+    number: 18,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְעֶבֶד יהוה לְדָוִד אֲשֶׁר דִּבֶּר לַיהוה אֶת דִּבְרֵי הַשִּׁירָה הַזֹּאת בְּיוֹם הִצִּיל יהוה אוֹתוֹ מִכַּף כָּל אֹיְבָיו וּמִיַּד שָׁאוּל:", french: "Au chef des chantres. Du serviteur de l'Éternel, de David, qui adressa à l'Éternel les paroles de ce cantique, lorsque l'Éternel l'eut délivré de la main de tous ses ennemis et de la main de Saül." },
+      { hebrew: "וַיֹּאמַר אֶרְחָמְךָ יהוה חִזְקִי:", french: "Il dit : Je t'aime, ô Éternel, ma force !" },
+      { hebrew: "יהוה סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי אֵלִי צוּרִי אֶחֱסֶה בּוֹ מָגִנִּי וְקֶרֶן יִשְׁעִי מִשְׂגַּבִּי:", french: "L'Éternel est mon rocher, ma forteresse, mon libérateur ; mon Dieu est mon roc où je trouve un abri, mon bouclier, la force qui me sauve, ma haute retraite." },
+      { hebrew: "מְהֻלָּל אֶקְרָא יהוה וּמִן אֹיְבַי אִוָּשֵׁעַ:", french: "Je m'écrie : Loué soit l'Éternel ! Et je suis délivré de mes ennemis." },
+      { hebrew: "אֲפָפוּנִי חֶבְלֵי מָוֶת וְנַחֲלֵי בְלִיַּעַל יְבַעֲתוּנִי:", french: "Les liens de la mort m'avaient environné, et les torrents de la destruction m'avaient épouvanté." },
+      { hebrew: "חֶבְלֵי שְׁאוֹל סְבָבוּנִי קִדְּמוּנִי מוֹקְשֵׁי מָוֶת:", french: "Les liens du séjour des morts m'avaient enlacé, les filets de la mort m'avaient surpris." },
+      { hebrew: "בַּצַּר לִי אֶקְרָא יהוה וְאֶל אֱלֹהַי אֲשַׁוֵּעַ יִשְׁמַע מֵהֵיכָלוֹ קוֹלִי וְשַׁוְעָתִי לְפָנָיו תָּבוֹא בְאָזְנָיו:", french: "Dans ma détresse, j'ai invoqué l'Éternel, j'ai crié à mon Dieu ; de son palais il a entendu ma voix, et mon cri est parvenu devant lui à ses oreilles." },
+      { hebrew: "וַתִּגְעַשׁ וַתִּרְעַשׁ הָאָרֶץ וּמוֹסְדֵי הָרִים יִרְגָּזוּ וַיִּתְגָּעֲשׁוּ כִּי חָרָה לוֹ:", french: "La terre fut ébranlée et trembla, les fondements des montagnes frémirent et furent ébranlés, parce qu'il était en courroux." },
+      { hebrew: "עָלָה עָשָׁן בְּאַפּוֹ וְאֵשׁ מִפִּיו תֹּאכֵל גֶּחָלִים בָּעֲרוּ מִמֶּנּוּ:", french: "Il s'élevait de la fumée dans ses narines, et un feu dévorant sortait de sa bouche : il en jaillissait des charbons embrasés." },
+      { hebrew: "וַיֵּט שָׁמַיִם וַיֵּרַד וַעֲרָפֶל תַּחַת רַגְלָיו:", french: "Il abaissa les cieux, et il descendit : il y avait une épaisse nuée sous ses pieds." },
+      { hebrew: "וַיִּרְכַּב עַל כְּרוּב וַיָּעֹף וַיֵּדֶא עַל כַּנְפֵי רוּחַ:", french: "Il était monté sur un chérubin, et il volait, il planait sur les ailes du vent." },
+      { hebrew: "יָשֶׁת חֹשֶׁךְ סִתְרוֹ סְבִיבוֹתָיו סֻכָּתוֹ חֶשְׁכַת מַיִם עָבֵי שְׁחָקִים:", french: "Il faisait des ténèbres sa retraite, sa tente autour de lui : les eaux obscures et les sombres nuages." },
+      { hebrew: "מִנֹּגַהּ נֶגְדּוֹ עָבָיו עָבְרוּ בָּרָד וְגַחֲלֵי אֵשׁ:", french: "De la splendeur qui le précédait, ses nuées se dissipèrent, avec grêle et charbons de feu." },
+      { hebrew: "וַיַּרְעֵם בַּשָּׁמַיִם יהוה וְעֶלְיוֹן יִתֵּן קֹלוֹ בָּרָד וְגַחֲלֵי אֵשׁ:", french: "L'Éternel tonna dans les cieux, le Très-Haut fit retentir sa voix, avec la grêle et les charbons de feu." },
+      { hebrew: "וַיִּשְׁלַח חִצָּיו וַיְפִיצֵם וּבְרָקִים רָב וַיְהֻמֵּם:", french: "Il lança ses flèches et les dispersa, il multiplia les éclairs et les mit en déroute." },
+      { hebrew: "וַיֵּרָאוּ אֲפִיקֵי מַיִם וַיִּגָּלוּ מוֹסְדוֹת תֵּבֵל מִגַּעֲרָתְךָ יהוה מִנִּשְׁמַת רוּחַ אַפֶּךָ:", french: "Le lit des eaux apparut, les fondements du monde furent découverts, par ta menace, ô Éternel, par le souffle de tes narines." },
+      { hebrew: "יִשְׁלַח מִמָּרוֹם יִקָּחֵנִי יַמְשֵׁנִי מִמַּיִם רַבִּים:", french: "Il étendit sa main d'en haut, il me saisit, il me retira des grandes eaux." },
+      { hebrew: "יַצִּילֵנִי מֵאֹיְבִי עָז וּמִשֹּׂנְאַי כִּי אָמְצוּ מִמֶּנִּי:", french: "Il me délivra de mon adversaire puissant, de mes ennemis qui étaient plus forts que moi." },
+      { hebrew: "יְקַדְּמוּנִי בְיוֹם אֵידִי וַיְהִי יהוה לְמִשְׁעָן לִי:", french: "Ils m'avaient surpris au jour de ma détresse ; mais l'Éternel fut mon appui." },
+      { hebrew: "וַיּוֹצִיאֵנִי לַמֶּרְחָב יְחַלְּצֵנִי כִּי חָפֵץ בִּי:", french: "Il m'a mis au large, il m'a sauvé, parce qu'il m'aime." },
+      { hebrew: "יִגְמְלֵנִי יהוה כְּצִדְקִי כְּבֹר יָדַי יָשִׁיב לִי:", french: "L'Éternel m'a traité selon ma justice, il m'a rendu selon la pureté de mes mains." },
+      { hebrew: "כִּי שָׁמַרְתִּי דַּרְכֵי יהוה וְלֹא רָשַׁעְתִּי מֵאֱלֹהָי:", french: "Car j'ai observé les voies de l'Éternel, et je n'ai pas été coupable envers mon Dieu." },
+      { hebrew: "כִּי כָל מִשְׁפָּטָיו לְנֶגְדִּי וְחֻקֹּתָיו לֹא אָסִיר מֶנִּי:", french: "Toutes ses ordonnances ont été devant moi, et je ne me suis point écarté de ses lois." },
+      { hebrew: "וָאֱהִי תָמִים עִמּוֹ וָאֶשְׁתַּמֵּר מֵעֲוֹנִי:", french: "J'ai été sans reproche envers lui, et je me suis tenu en garde contre mon iniquité." },
+      { hebrew: "וַיָּשֶׁב יהוה לִי כְצִדְקִי כְּבֹר יָדַי לְנֶגֶד עֵינָיו:", french: "L'Éternel m'a rendu selon ma justice, selon la pureté de mes mains devant ses yeux." },
+      { hebrew: "עִם חָסִיד תִּתְחַסָּד עִם גְּבַר תָּמִים תִּתַּמָּם:", french: "Avec celui qui est bon, tu te montres bon ; avec l'homme droit, tu agis avec droiture." },
+      { hebrew: "עִם נָבָר תִּתְבָּרָר וְעִם עִקֵּשׁ תִּתְפַּתָּל:", french: "Avec celui qui est pur, tu te montres pur ; et avec le pervers, tu agis selon sa perversité." },
+      { hebrew: "כִּי אַתָּה עַם עָנִי תוֹשִׁיעַ וְעֵינַיִם רָמוֹת תַּשְׁפִּיל:", french: "Tu sauves le peuple affligé, et tu abaisses les regards hautains." },
+      { hebrew: "כִּי אַתָּה תָּאִיר נֵרִי יהוה אֱלֹהַי יַגִּיהַּ חָשְׁכִּי:", french: "Oui, tu fais briller ma lumière ; l'Éternel, mon Dieu, éclaire mes ténèbres." },
+      { hebrew: "כִּי בְךָ אָרֻץ גְּדוּד וּבֵאלֹהַי אֲדַלֶּג שׁוּר:", french: "Avec toi, je me précipite sur une troupe en armes ; avec mon Dieu, je franchis une muraille." },
+      { hebrew: "הָאֵל תָּמִים דַּרְכּוֹ אִמְרַת יהוה צְרוּפָה מָגֵן הוּא לְכֹל הַחוֹסִים בּוֹ:", french: "Les voies de Dieu sont parfaites, la parole de l'Éternel est éprouvée ; il est un bouclier pour tous ceux qui se confient en lui." },
+      { hebrew: "כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יהוה וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ:", french: "Car qui est Dieu, si ce n'est l'Éternel ? Et qui est un rocher, si ce n'est notre Dieu ?" },
+      { hebrew: "הָאֵל הַמְאַזְּרֵנִי חָיִל וַיִּתֵּן תָּמִים דַּרְכִּי:", french: "C'est Dieu qui me ceint de force, et qui me conduit dans la voie droite." },
+      { hebrew: "מְשַׁוֶּה רַגְלַי כָּאַיָּלוֹת וְעַל בָּמֹתַי יַעֲמִידֵנִי:", french: "Il rend mes pieds semblables à ceux des biches, et il me place sur mes lieux élevés." },
+      { hebrew: "מְלַמֵּד יָדַי לַמִּלְחָמָה וְנִחֲתָה קֶשֶׁת נְחוּשָׁה זְרוֹעֹתָי:", french: "Il exerce mes mains au combat, et mes bras tendent l'arc d'airain." },
+      { hebrew: "וַתִּתֶּן לִי מָגֵן יִשְׁעֶךָ וִימִינְךָ תִסְעָדֵנִי וְעַנְוָתְךָ תַרְבֵּנִי:", french: "Tu me donnes le bouclier de ton salut, ta droite me soutient, et ta bonté me rend grand." },
+      { hebrew: "תַּרְחִיב צַעֲדִי תַחְתָּי וְלֹא מָעֲדוּ קַרְסֻלָּי:", french: "Tu élargis le chemin sous mes pas, et mes pieds ne chancellent point." },
+      { hebrew: "אֶרְדּוֹף אוֹיְבַי וְאַשִּׂיגֵם וְלֹא אָשׁוּב עַד כַּלּוֹתָם:", french: "Je poursuis mes ennemis, je les atteins, et je ne reviens pas avant de les avoir anéantis." },
+      { hebrew: "אֶמְחָצֵם וְלֹא יֻכְלוּ קוּם יִפְּלוּ תַּחַת רַגְלָי:", french: "Je les brise, et ils ne peuvent se relever ; ils tombent sous mes pieds." },
+      { hebrew: "וַתְּאַזְּרֵנִי חַיִל לַמִּלְחָמָה תַּכְרִיעַ קָמַי תַּחְתָּי:", french: "Tu me ceins de force pour le combat, tu fais plier sous moi mes adversaires." },
+      { hebrew: "וְאֹיְבַי נָתַתָּה לִּי עֹרֶף וּמְשַׂנְאַי אַצְמִיתֵם:", french: "Tu fais tourner le dos à mes ennemis devant moi, et j'extermine ceux qui me haïssent." },
+      { hebrew: "יְשַׁוְּעוּ וְאֵין מוֹשִׁיעַ עַל יהוה וְלֹא עָנָם:", french: "Ils crient, et personne pour les sauver ! Ils crient à l'Éternel, et il ne leur répond pas." },
+      { hebrew: "וְאֶשְׁחָקֵם כְּעָפָר עַל פְּנֵי רוּחַ כְּטִיט חוּצוֹת אֲרִיקֵם:", french: "Je les broie comme la poussière qu'emporte le vent, je les foule comme la boue des rues." },
+      { hebrew: "תְּפַלְּטֵנִי מֵרִיבֵי עָם תְּשִׂימֵנִי לְרֹאשׁ גּוֹיִם עַם לֹא יָדַעְתִּי יַעַבְדוּנִי:", french: "Tu me délivres des dissensions du peuple ; tu m'établis chef des nations ; un peuple que je ne connaissais pas m'est assujetti." },
+      { hebrew: "לְשֵׁמַע אֹזֶן יִשָּׁמְעוּ לִי בְּנֵי נֵכָר יְכַחֲשׁוּ לִי:", french: "Au premier bruit, ils m'obéissent ; les fils de l'étranger me flattent." },
+      { hebrew: "בְּנֵי נֵכָר יִבֹּלוּ וְיַחְרְגוּ מִמִּסְגְּרוֹתֵיהֶם:", french: "Les fils de l'étranger perdent courage, ils tremblent hors de leurs forteresses." },
+      { hebrew: "חַי יהוה וּבָרוּךְ צוּרִי וְיָרוּם אֱלוֹהֵי יִשְׁעִי:", french: "Vive l'Éternel ! Béni soit mon rocher ! Que le Dieu de mon salut soit exalté !" },
+      { hebrew: "הָאֵל הַנּוֹתֵן נְקָמוֹת לִי וַיַּדְבֵּר עַמִּים תַּחְתָּי:", french: "Dieu, qui m'accorde la vengeance, et qui m'assujettit les peuples." },
+      { hebrew: "מְפַלְּטִי מֵאֹיְבָי אַף מִן קָמַי תְּרוֹמְמֵנִי מֵאִישׁ חָמָס תַּצִּילֵנִי:", french: "Tu me délivres de mes ennemis ; tu m'élèves au-dessus de mes adversaires, tu me sauves de l'homme violent." },
+      { hebrew: "עַל כֵּן אוֹדְךָ בַגּוֹיִם יהוה וּלְשִׁמְךָ אֲזַמֵּרָה:", french: "C'est pourquoi je te louerai parmi les nations, ô Éternel, et je chanterai à la gloire de ton nom." },
+      { hebrew: "מַגְדִּל יְשׁוּעוֹת מַלְכּוֹ וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ לְדָוִד וּלְזַרְעוֹ עַד עוֹלָם:", french: "Il accorde de grandes délivrances à son roi, et il fait miséricorde à son oint, à David et à sa postérité, pour toujours." },
+    ]
+  },
+  {
+    number: 19,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד אֵל וּמַעֲשֵׂה יָדָיו מַגִּיד הָרָקִיעַ:", french: "Les cieux racontent la gloire de Dieu, et l'étendue manifeste l'œuvre de ses mains." },
+      { hebrew: "יוֹם לְיוֹם יַבִּיעַ אֹמֶר וְלַיְלָה לְּלַיְלָה יְחַוֶּה דָּעַת:", french: "Le jour en instruit un autre jour, la nuit en donne connaissance à une autre nuit." },
+      { hebrew: "אֵין אֹמֶר וְאֵין דְּבָרִים בְּלִי נִשְׁמָע קוֹלָם:", french: "Ce n'est pas un langage, ce ne sont pas des paroles dont le son ne soit point entendu." },
+      { hebrew: "בְּכָל הָאָרֶץ יָצָא קַוָּם וּבִקְצֵה תֵבֵל מִלֵּיהֶם לַשֶּׁמֶשׁ שָׂם אֹהֶל בָּהֶם:", french: "Leur retentissement parcourt toute la terre, leurs accents vont aux extrémités du monde, où il a dressé une tente pour le soleil." },
+      { hebrew: "וְהוּא כְּחָתָן יֹצֵא מֵחֻפָּתוֹ יָשִׂישׂ כְּגִבּוֹר לָרוּץ אֹרַח:", french: "Et le soleil, semblable à un époux qui sort de sa chambre, s'élance dans la carrière avec la joie d'un héros." },
+      { hebrew: "מִקְצֵה הַשָּׁמַיִם מוֹצָאוֹ וּתְקוּפָתוֹ עַל קְצוֹתָם וְאֵין נִסְתָּר מֵחַמָּתוֹ:", french: "Il part d'une extrémité des cieux, et achève sa course à l'autre extrémité ; rien ne se dérobe à sa chaleur." },
+      { hebrew: "תּוֹרַת יהוה תְּמִימָה מְשִׁיבַת נָפֶשׁ עֵדוּת יהוה נֶאֱמָנָה מַחְכִּימַת פֶּתִי:", french: "La loi de l'Éternel est parfaite, elle restaure l'âme ; le témoignage de l'Éternel est véritable, il rend sage l'ignorant." },
+      { hebrew: "פִּקּוּדֵי יהוה יְשָׁרִים מְשַׂמְּחֵי לֵב מִצְוַת יהוה בָּרָה מְאִירַת עֵינָיִם:", french: "Les ordonnances de l'Éternel sont droites, elles réjouissent le cœur ; les commandements de l'Éternel sont purs, ils éclairent les yeux." },
+      { hebrew: "יִרְאַת יהוה טְהוֹרָה עוֹמֶדֶת לָעַד מִשְׁפְּטֵי יהוה אֱמֶת צָדְקוּ יַחְדָּו:", french: "La crainte de l'Éternel est pure, elle subsiste à toujours ; les jugements de l'Éternel sont vrais, ils sont tous justes." },
+      { hebrew: "הַנֶּחֱמָדִים מִזָּהָב וּמִפַּז רָב וּמְתוּקִים מִדְּבַשׁ וְנֹפֶת צוּפִים:", french: "Ils sont plus précieux que l'or, que beaucoup d'or fin ; ils sont plus doux que le miel, que celui qui coule des rayons." },
+      { hebrew: "גַּם עַבְדְּךָ נִזְהָר בָּהֶם בְּשָׁמְרָם עֵקֶב רָב:", french: "Ton serviteur aussi en est averti ; pour qui les observe, la récompense est grande." },
+      { hebrew: "שְׁגִיאוֹת מִי יָבִין מִנִּסְתָּרוֹת נַקֵּנִי:", french: "Qui connaît ses égarements ? Pardonne-moi ceux que j'ignore." },
+      { hebrew: "גַּם מִזֵּדִים חֲשֹׂךְ עַבְדֶּךָ אַל יִמְשְׁלוּ בִי אָז אֵיתָם וְנִקֵּיתִי מִפֶּשַׁע רָב:", french: "Préserve aussi ton serviteur des orgueilleux ; qu'ils ne dominent point sur moi ! Alors je serai intègre, innocent de grands péchés." },
+      { hebrew: "יִהְיוּ לְרָצוֹן אִמְרֵי פִי וְהֶגְיוֹן לִבִּי לְפָנֶיךָ יהוה צוּרִי וְגֹאֲלִי:", french: "Reçois favorablement les paroles de ma bouche et les sentiments de mon cœur, ô Éternel, mon rocher et mon rédempteur !" },
+    ]
+  },
+  {
+    number: 20,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "יַעַנְךָ יהוה בְּיוֹם צָרָה יְשַׂגֶּבְךָ שֵׁם אֱלֹהֵי יַעֲקֹב:", french: "Que l'Éternel t'exauce au jour de la détresse, que le nom du Dieu de Jacob te protège !" },
+      { hebrew: "יִשְׁלַח עֶזְרְךָ מִקֹּדֶשׁ וּמִצִּיּוֹן יִסְעָדֶךָּ:", french: "Que du sanctuaire il t'envoie du secours, que de Sion il te soutienne !" },
+      { hebrew: "יִזְכֹּר כָּל מִנְחֹתֶךָ וְעוֹלָתְךָ יְדַשְּׁנֶה סֶלָה:", french: "Qu'il se souvienne de toutes tes offrandes et qu'il agrée ton holocauste ! Sélah !" },
+      { hebrew: "יִתֶּן לְךָ כִלְבָבֶךָ וְכָל עֲצָתְךָ יְמַלֵּא:", french: "Qu'il te donne ce que ton cœur désire, et qu'il accomplisse tous tes desseins !" },
+      { hebrew: "נְרַנְּנָה בִּישׁוּעָתֶךָ וּבְשֵׁם אֱלֹהֵינוּ נִדְגֹּל יְמַלֵּא יהוה כָּל מִשְׁאֲלוֹתֶיךָ:", french: "Nous nous réjouirons de ton salut, et nous lèverons l'étendard au nom de notre Dieu. Que l'Éternel exauce tous tes vœux !" },
+      { hebrew: "עַתָּה יָדַעְתִּי כִּי הוֹשִׁיעַ יהוה מְשִׁיחוֹ יַעֲנֵהוּ מִשְּׁמֵי קָדְשׁוֹ בִּגְבוּרוֹת יֵשַׁע יְמִינוֹ:", french: "Je sais que l'Éternel sauve son oint ; il l'exaucera des cieux, de sa sainte demeure, par le secours puissant de sa droite." },
+      { hebrew: "אֵלֶּה בָרֶכֶב וְאֵלֶּה בַסּוּסִים וַאֲנַחְנוּ בְּשֵׁם יהוה אֱלֹהֵינוּ נַזְכִּיר:", french: "Ceux-ci s'appuient sur leurs chars, ceux-là sur leurs chevaux ; nous, nous invoquons le nom de l'Éternel, notre Dieu." },
+      { hebrew: "הֵמָּה כָּרְעוּ וְנָפָלוּ וַאֲנַחְנוּ קַּמְנוּ וַנִּתְעוֹדָד:", french: "Eux, ils plient et ils tombent ; nous, nous tenons ferme et restons debout." },
+      { hebrew: "יהוה הוֹשִׁיעָה הַמֶּלֶךְ יַעֲנֵנוּ בְיוֹם קָרְאֵנוּ:", french: "Éternel, sauve le roi ! Qu'il nous exauce, quand nous l'invoquons !" },
+    ]
+  },
+  {
+    number: 21,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "יהוה בְּעָזְּךָ יִשְׂמַח מֶלֶךְ וּבִישׁוּעָתְךָ מַה יָּגֶל מְאֹד:", french: "Éternel, le roi se réjouit de ta protection ; oh ! combien ton secours le remplit d'allégresse !" },
+      { hebrew: "תַּאֲוַת לִבּוֹ נָתַתָּה לּוֹ וַאֲרֶשֶׁת שְׂפָתָיו בַּל מָנַעְתָּ סֶּלָה:", french: "Tu lui as donné le désir de son cœur, et tu n'as pas refusé la demande de ses lèvres. Sélah !" },
+      { hebrew: "כִּי תְקַדְּמֶנּוּ בִּרְכוֹת טוֹב תָּשִׁית לְרֹאשׁוֹ עֲטֶרֶת פָּז:", french: "Car tu l'as prévenu par les bénédictions de ta grâce, tu as mis sur sa tête une couronne d'or pur." },
+      { hebrew: "חַיִּים שָׁאַל מִמְּךָ נָתַתָּה לּוֹ אֹרֶךְ יָמִים עוֹלָם וָעֶד:", french: "Il te demandait la vie, tu la lui as donnée, une longue suite de jours, pour l'éternité." },
+      { hebrew: "גָּדוֹל כְּבוֹדוֹ בִּישׁוּעָתֶךָ הוֹד וְהָדָר תְּשַׁוֶּה עָלָיו:", french: "Sa gloire est grande à cause de ton secours ; tu places sur lui la majesté et la magnificence." },
+      { hebrew: "כִּי תְשִׁיתֵהוּ בְרָכוֹת לָעַד תְּחַדֵּהוּ בְשִׂמְחָה אֶת פָּנֶיךָ:", french: "Tu le rends à jamais un objet de bénédictions, tu le combles de joie devant ta face." },
+      { hebrew: "כִּי הַמֶּלֶךְ בֹּטֵחַ בַּיהוה וּבְחֶסֶד עֶלְיוֹן בַּל יִמּוֹט:", french: "Le roi se confie en l'Éternel, et par la grâce du Très-Haut, il ne chancelle pas." },
+      { hebrew: "תִּמְצָא יָדְךָ לְכָל אֹיְבֶיךָ יְמִינְךָ תִּמְצָא שֹׂנְאֶיךָ:", french: "Ta main trouvera tous tes ennemis, ta droite trouvera ceux qui te haïssent." },
+      { hebrew: "תְּשִׁיתֵמוֹ כְּתַנּוּר אֵשׁ לְעֵת פָּנֶיךָ יהוה בְּאַפּוֹ יְבַלְּעֵם וְתֹאכְלֵם אֵשׁ:", french: "Tu les rendras semblables à une fournaise ardente, au jour où tu te montreras ; l'Éternel les engloutira dans sa colère, et le feu les dévorera." },
+      { hebrew: "פִּרְיָמוֹ מֵאֶרֶץ תְּאַבֵּד וְזַרְעָם מִבְּנֵי אָדָם:", french: "Tu feras disparaître leur postérité de la terre, et leur race du milieu des fils de l'homme." },
+      { hebrew: "כִּי נָטוּ עָלֶיךָ רָעָה חָשְׁבוּ מְזִמָּה בַּל יוּכָלוּ:", french: "Car ils ont voulu te faire du mal, ils ont conçu de mauvais desseins, mais ils ne réussiront pas." },
+      { hebrew: "כִּי תְשִׁיתֵמוֹ שֶׁכֶם בְּמֵיתָרֶיךָ תְּכוֹנֵן עַל פְּנֵיהֶם:", french: "Car tu leur feras tourner le dos ; avec ton arc, tu tireras sur eux." },
+      { hebrew: "רוּמָה יהוה בְּעֻזֶּךָ נָשִׁירָה וּנְזַמְּרָה גְּבוּרָתֶךָ:", french: "Lève-toi, Éternel, par ta force ! Nous chanterons, nous célébrerons ta puissance." },
+    ]
+  },
+  {
+    number: 22,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל אַיֶּלֶת הַשַּׁחַר מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Sur la biche de l'aurore. Psaume de David." },
+      { hebrew: "אֵלִי אֵלִי לָמָה עֲזַבְתָּנִי רָחוֹק מִישׁוּעָתִי דִּבְרֵי שַׁאֲגָתִי:", french: "Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné, et t'éloignes-tu sans me secourir, sans écouter mes plaintes ?" },
+      { hebrew: "אֱלֹהַי אֶקְרָא יוֹמָם וְלֹא תַעֲנֶה וְלַיְלָה וְלֹא דוּמִיָּה לִי:", french: "Mon Dieu, je crie le jour, et tu ne réponds pas ; la nuit, et je n'ai point de repos." },
+      { hebrew: "וְאַתָּה קָדוֹשׁ יוֹשֵׁב תְּהִלּוֹת יִשְׂרָאֵל:", french: "Pourtant tu es le Saint, tu sièges au milieu des louanges d'Israël." },
+      { hebrew: "בְּךָ בָּטְחוּ אֲבֹתֵינוּ בָּטְחוּ וַתְּפַלְּטֵמוֹ:", french: "En toi se confiaient nos pères ; ils se confiaient, et tu les délivrais." },
+      { hebrew: "אֵלֶיךָ זָעֲקוּ וְנִמְלָטוּ בְּךָ בָטְחוּ וְלֹא בוֹשׁוּ:", french: "Ils criaient à toi et ils étaient sauvés ; ils se confiaient en toi et n'étaient point confus." },
+      { hebrew: "וְאָנֹכִי תוֹלַעַת וְלֹא אִישׁ חֶרְפַּת אָדָם וּבְזוּי עָם:", french: "Et moi, je suis un ver et non un homme, l'opprobre des hommes et le méprisé du peuple." },
+      { hebrew: "כָּל רֹאַי יַלְעִגוּ לִי יַפְטִירוּ בְשָׂפָה יָנִיעוּ רֹאשׁ:", french: "Tous ceux qui me voient se moquent de moi, ils ouvrent la bouche, secouent la tête." },
+      { hebrew: "גֹּל אֶל יהוה יְפַלְּטֵהוּ יַצִּילֵהוּ כִּי חָפֵץ בּוֹ:", french: "Recommande-toi à l'Éternel ! L'Éternel le sauvera, il le délivrera, puisqu'il l'aime !" },
+      { hebrew: "כִּי אַתָּה גֹחִי מִבָּטֶן מַבְטִיחִי עַל שְׁדֵי אִמִּי:", french: "Oui, tu m'as fait sortir du sein maternel, tu m'as mis en sûreté sur les mamelles de ma mère." },
+      { hebrew: "עָלֶיךָ הָשְׁלַכְתִּי מֵרָחֶם מִבֶּטֶן אִמִּי אֵלִי אָתָּה:", french: "Dès le sein maternel j'ai été sous ta garde, dès le ventre de ma mère tu as été mon Dieu." },
+      { hebrew: "אַל תִּרְחַק מִמֶּנִּי כִּי צָרָה קְרוֹבָה כִּי אֵין עוֹזֵר:", french: "Ne t'éloigne pas de moi, quand la détresse est proche, quand personne ne vient à mon secours !" },
+      { hebrew: "סְבָבוּנִי פָּרִים רַבִּים אַבִּירֵי בָשָׁן כִּתְּרוּנִי:", french: "De nombreux taureaux sont autour de moi, des taureaux de Basan m'environnent." },
+      { hebrew: "פָּצוּ עָלַי פִּיהֶם אַרְיֵה טֹרֵף וְשֹׁאֵג:", french: "Ils ouvrent contre moi leur gueule, semblables au lion qui déchire et rugit." },
+      { hebrew: "כַּמַּיִם נִשְׁפַּכְתִּי וְהִתְפָּרְדוּ כָּל עַצְמוֹתָי הָיָה לִבִּי כַּדּוֹנָג נָמֵס בְּתוֹךְ מֵעָי:", french: "Je suis comme de l'eau qui s'écoule, et tous mes os se séparent ; mon cœur est comme de la cire, il se fond dans mes entrailles." },
+      { hebrew: "יָבֵשׁ כַּחֶרֶשׂ כֹּחִי וּלְשׁוֹנִי מֻדְבָּק מַלְקוֹחָי וְלַעֲפַר מָוֶת תִּשְׁפְּתֵנִי:", french: "Ma force se dessèche comme l'argile, et ma langue s'attache à mon palais ; tu me réduis à la poussière de la mort." },
+      { hebrew: "כִּי סְבָבוּנִי כְּלָבִים עֲדַת מְרֵעִים הִקִּיפוּנִי כָּאֲרִי יָדַי וְרַגְלָי:", french: "Car des chiens m'environnent, une bande de scélérats rôdent autour de moi ; ils ont percé mes mains et mes pieds." },
+      { hebrew: "אֲסַפֵּר כָּל עַצְמוֹתָי הֵמָּה יַבִּיטוּ יִרְאוּ בִי:", french: "Je pourrais compter tous mes os. Eux, ils observent, ils me regardent." },
+      { hebrew: "יְחַלְּקוּ בְגָדַי לָהֶם וְעַל לְבוּשִׁי יַפִּילוּ גוֹרָל:", french: "Ils se partagent mes vêtements, ils tirent au sort ma tunique." },
+      { hebrew: "וְאַתָּה יהוה אַל תִּרְחָק אֱיָלוּתִי לְעֶזְרָתִי חוּשָׁה:", french: "Et toi, Éternel, ne t'éloigne pas ! Toi qui es ma force, viens en hâte à mon secours !" },
+      { hebrew: "הַצִּילָה מֵחֶרֶב נַפְשִׁי מִיַּד כֶּלֶב יְחִידָתִי:", french: "Protège mon âme contre le glaive, ma vie contre le pouvoir des chiens !" },
+      { hebrew: "הוֹשִׁיעֵנִי מִפִּי אַרְיֵה וּמִקַּרְנֵי רֵמִים עֲנִיתָנִי:", french: "Sauve-moi de la gueule du lion, délivre-moi des cornes du buffle !" },
+      { hebrew: "אֲסַפְּרָה שִׁמְךָ לְאֶחָי בְּתוֹךְ קָהָל אֲהַלְלֶךָּ:", french: "Je publierai ton nom parmi mes frères, je te célébrerai au milieu de l'assemblée." },
+      { hebrew: "יִרְאֵי יהוה הַלְלוּהוּ כָּל זֶרַע יַעֲקֹב כַּבְּדוּהוּ וְגוּרוּ מִמֶּנּוּ כָּל זֶרַע יִשְׂרָאֵל:", french: "Vous qui craignez l'Éternel, louez-le ! Vous tous, postérité de Jacob, glorifiez-le ! Tremblez devant lui, vous tous, postérité d'Israël !" },
+      { hebrew: "כִּי לֹא בָזָה וְלֹא שִׁקַּץ עֱנוּת עָנִי וְלֹא הִסְתִּיר פָּנָיו מִמֶּנּוּ וּבְשַׁוְּעוֹ אֵלָיו שָׁמֵעַ:", french: "Car il n'a ni méprisé ni dédaigné l'affliction de l'affligé, et il ne lui a point caché sa face ; mais il l'a exaucé quand il a crié à lui." },
+      { hebrew: "מֵאִתְּךָ תְהִלָּתִי בְּקָהָל רָב נְדָרַי אֲשַׁלֵּם נֶגֶד יְרֵאָיו:", french: "Tu seras dans la grande assemblée l'objet de mes louanges ; j'accomplirai mes vœux en présence de ceux qui le craignent." },
+      { hebrew: "יֹאכְלוּ עֲנָוִים וְיִשְׂבָּעוּ יְהַלְלוּ יהוה דֹּרְשָׁיו יְחִי לְבַבְכֶם לָעַד:", french: "Les malheureux mangeront et se rassasieront, ceux qui cherchent l'Éternel le célébreront. Que votre cœur vive à toujours !" },
+      { hebrew: "יִזְכְּרוּ וְיָשֻׁבוּ אֶל יהוה כָּל אַפְסֵי אָרֶץ וְיִשְׁתַּחֲווּ לְפָנֶיךָ כָּל מִשְׁפְּחוֹת גּוֹיִם:", french: "Toutes les extrémités de la terre penseront à l'Éternel et se tourneront vers lui ; toutes les familles des nations se prosterneront devant ta face." },
+      { hebrew: "כִּי לַיהוה הַמְּלוּכָה וּמֹשֵׁל בַּגּוֹיִם:", french: "Car à l'Éternel appartient le règne : il domine sur les nations." },
+      { hebrew: "אָכְלוּ וַיִּשְׁתַּחֲווּ כָּל דִּשְׁנֵי אֶרֶץ לְפָנָיו יִכְרְעוּ כָּל יוֹרְדֵי עָפָר וְנַפְשׁוֹ לֹא חִיָּה:", french: "Tous les puissants de la terre mangeront et se prosterneront aussi ; devant lui s'inclineront tous ceux qui descendent dans la poussière, ceux qui ne peuvent conserver leur vie." },
+      { hebrew: "זֶרַע יַעַבְדֶנּוּ יְסֻפַּר לַאדֹנָי לַדּוֹר:", french: "La postérité le servira ; on parlera du Seigneur à la génération future." },
+      { hebrew: "יָבֹאוּ וְיַגִּידוּ צִדְקָתוֹ לְעַם נוֹלָד כִּי עָשָׂה:", french: "Ils viendront et publieront sa justice, ils annonceront au peuple qui naîtra ce que Dieu a fait." },
+    ]
+  },
+  {
+    number: 23,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד יהוה רֹעִי לֹא אֶחְסָר:", french: "Psaume de David. L'Éternel est mon berger : je ne manquerai de rien." },
+      { hebrew: "בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל מֵי מְנֻחוֹת יְנַהֲלֵנִי:", french: "Il me fait reposer dans de verts pâturages, il me dirige près des eaux paisibles." },
+      { hebrew: "נַפְשִׁי יְשׁוֹבֵב יַנְחֵנִי בְמַעְגְּלֵי צֶדֶק לְמַעַן שְׁמוֹ:", french: "Il restaure mon âme, il me conduit dans les sentiers de la justice, à cause de son nom." },
+      { hebrew: "גַּם כִּי אֵלֵךְ בְּגֵיא צַלְמָוֶת לֹא אִירָא רָע כִּי אַתָּה עִמָּדִי שִׁבְטְךָ וּמִשְׁעַנְתֶּךָ הֵמָּה יְנַחֲמֻנִי:", french: "Quand je marche dans la vallée de l'ombre de la mort, je ne crains aucun mal, car tu es avec moi : ta houlette et ton bâton me rassurent." },
+      { hebrew: "תַּעֲרֹךְ לְפָנַי שֻׁלְחָן נֶגֶד צֹרְרָי דִּשַּׁנְתָּ בַשֶּׁמֶן רֹאשִׁי כּוֹסִי רְוָיָה:", french: "Tu dresses devant moi une table, en face de mes adversaires ; tu oins d'huile ma tête, et ma coupe déborde." },
+      { hebrew: "אַךְ טוֹב וָחֶסֶד יִרְדְּפוּנִי כָּל יְמֵי חַיָּי וְשַׁבְתִּי בְּבֵית יהוה לְאֹרֶךְ יָמִים:", french: "Oui, le bonheur et la grâce m'accompagneront tous les jours de ma vie, et j'habiterai dans la maison de l'Éternel jusqu'à la fin de mes jours." },
+    ]
+  },
+  {
+    number: 24,
+    verses: [
+      { hebrew: "לְדָוִד מִזְמוֹר לַיהוה הָאָרֶץ וּמְלוֹאָהּ תֵּבֵל וְיֹשְׁבֵי בָהּ:", french: "De David. Psaume. À l'Éternel la terre et ce qu'elle renferme, le monde et ceux qui l'habitent !" },
+      { hebrew: "כִּי הוּא עַל יַמִּים יְסָדָהּ וְעַל נְהָרוֹת יְכוֹנְנֶהָ:", french: "Car il l'a fondée sur les mers, et il l'a affermie sur les fleuves." },
+      { hebrew: "מִי יַעֲלֶה בְהַר יהוה וּמִי יָקוּם בִּמְקוֹם קָדְשׁוֹ:", french: "Qui pourra monter à la montagne de l'Éternel ? Qui s'élèvera jusqu'à son lieu saint ?" },
+      { hebrew: "נְקִי כַפַּיִם וּבַר לֵבָב אֲשֶׁר לֹא נָשָׂא לַשָּׁוְא נַפְשִׁי וְלֹא נִשְׁבַּע לְמִרְמָה:", french: "Celui qui a les mains innocentes et le cœur pur ; celui qui ne livre pas son âme au mensonge, et qui ne jure pas pour tromper." },
+      { hebrew: "יִשָּׂא בְרָכָה מֵאֵת יהוה וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ:", french: "Il obtiendra la bénédiction de l'Éternel, la miséricorde du Dieu de son salut." },
+      { hebrew: "זֶה דּוֹר דֹּרְשָׁיו מְבַקְשֵׁי פָנֶיךָ יַעֲקֹב סֶלָה:", french: "Voilà la génération de ceux qui le cherchent, de ceux qui cherchent ta face, de Jacob ! Sélah !" },
+      { hebrew: "שְׂאוּ שְׁעָרִים רָאשֵׁיכֶם וְהִנָּשְׂאוּ פִּתְחֵי עוֹלָם וְיָבוֹא מֶלֶךְ הַכָּבוֹד:", french: "Portes, élevez vos linteaux ; élevez-vous, portes éternelles ! Que le roi de gloire fasse son entrée !" },
+      { hebrew: "מִי זֶה מֶלֶךְ הַכָּבוֹד יהוה עִזּוּז וְגִבּוֹר יהוה גִּבּוֹר מִלְחָמָה:", french: "Qui est ce roi de gloire ? L'Éternel fort et puissant, l'Éternel puissant dans les combats." },
+      { hebrew: "שְׂאוּ שְׁעָרִים רָאשֵׁיכֶם וּשְׂאוּ פִּתְחֵי עוֹלָם וְיָבֹא מֶלֶךְ הַכָּבוֹד:", french: "Portes, élevez vos linteaux ; élevez-les, portes éternelles ! Que le roi de gloire fasse son entrée !" },
+      { hebrew: "מִי הוּא זֶה מֶלֶךְ הַכָּבוֹד יהוה צְבָאוֹת הוּא מֶלֶךְ הַכָּבוֹד סֶלָה:", french: "Qui est ce roi de gloire ? L'Éternel des armées : voilà le roi de gloire ! Sélah !" },
+    ]
+  },
+  {
+    number: 25,
+    verses: [
+      { hebrew: "לְדָוִד אֵלֶיךָ יהוה נַפְשִׁי אֶשָּׂא:", french: "De David. Vers toi, ô Éternel, j'élève mon âme." },
+      { hebrew: "אֱלֹהַי בְּךָ בָטַחְתִּי אַל אֵבוֹשָׁה אַל יַעַלְצוּ אוֹיְבַי לִי:", french: "Mon Dieu, en toi je me confie : que je ne sois pas couvert de honte ! Que mes ennemis ne se réjouissent pas à mon sujet !" },
+      { hebrew: "גַּם כָּל קֹוֶיךָ לֹא יֵבֹשׁוּ יֵבֹשׁוּ הַבּוֹגְדִים רֵיקָם:", french: "Tous ceux qui espèrent en toi ne seront point confus ; ceux qui agissent perfidement sans motif seront confus." },
+      { hebrew: "דְּרָכֶיךָ יהוה הוֹדִיעֵנִי אֹרְחוֹתֶיךָ לַמְּדֵנִי:", french: "Éternel, fais-moi connaître tes voies, enseigne-moi tes sentiers." },
+      { hebrew: "הַדְרִיכֵנִי בַאֲמִתֶּךָ וְלַמְּדֵנִי כִּי אַתָּה אֱלֹהֵי יִשְׁעִי אוֹתְךָ קִוִּיתִי כָּל הַיּוֹם:", french: "Conduis-moi dans ta vérité, et instruis-moi ; car tu es le Dieu de mon salut, tu es toujours mon espérance." },
+      { hebrew: "זְכֹר רַחֲמֶיךָ יהוה וַחֲסָדֶיךָ כִּי מֵעוֹלָם הֵמָּה:", french: "Souviens-toi de ta miséricorde, ô Éternel, et de ta bonté, car elles sont de toute éternité." },
+      { hebrew: "חַטֹּאות נְעוּרַי וּפְשָׁעַי אַל תִּזְכֹּר כְּחַסְדְּךָ זְכָר לִי אַתָּה לְמַעַן טוּבְךָ יהוה:", french: "Ne te souviens pas des péchés de ma jeunesse ni de mes transgressions ; souviens-toi de moi selon ta miséricorde, à cause de ta bonté, ô Éternel !" },
+      { hebrew: "טוֹב וְיָשָׁר יהוה עַל כֵּן יוֹרֶה חַטָּאִים בַּדָּרֶךְ:", french: "L'Éternel est bon et droit : c'est pourquoi il montre aux pécheurs la voie." },
+      { hebrew: "יַדְרֵךְ עֲנָוִים בַּמִּשְׁפָּט וִילַמֵּד עֲנָוִים דַּרְכּוֹ:", french: "Il conduit les humbles dans la justice, il enseigne aux humbles sa voie." },
+      { hebrew: "כָּל אָרְחוֹת יהוה חֶסֶד וֶאֱמֶת לְנֹצְרֵי בְרִיתוֹ וְעֵדֹתָיו:", french: "Tous les sentiers de l'Éternel sont miséricorde et fidélité, pour ceux qui gardent son alliance et ses commandements." },
+      { hebrew: "לְמַעַן שִׁמְךָ יהוה וְסָלַחְתָּ לַעֲוֹנִי כִּי רַב הוּא:", french: "C'est à cause de ton nom, ô Éternel, que tu pardonneras mon iniquité, car elle est grande." },
+      { hebrew: "מִי זֶה הָאִישׁ יְרֵא יהוה יוֹרֶנּוּ בְּדֶרֶךְ יִבְחָר:", french: "Quel est l'homme qui craint l'Éternel ? L'Éternel lui montre la voie qu'il doit choisir." },
+      { hebrew: "נַפְשׁוֹ בְּטוֹב תָּלִין וְזַרְעוֹ יִירַשׁ אָרֶץ:", french: "Son âme reposera dans le bonheur, et sa postérité possédera le pays." },
+      { hebrew: "סוֹד יהוה לִירֵאָיו וּבְרִיתוֹ לְהוֹדִיעָם:", french: "Le conseil de l'Éternel est pour ceux qui le craignent, et son alliance leur donne instruction." },
+      { hebrew: "עֵינַי תָּמִיד אֶל יהוה כִּי הוּא יוֹצִיא מֵרֶשֶׁת רַגְלָי:", french: "Je tourne constamment les yeux vers l'Éternel, car il fera sortir mes pieds du filet." },
+      { hebrew: "פְּנֵה אֵלַי וְחָנֵּנִי כִּי יָחִיד וְעָנִי אָנִי:", french: "Regarde-moi et aie pitié de moi, car je suis abandonné et malheureux." },
+      { hebrew: "צָרוֹת לְבָבִי הִרְחִיבוּ מִמְּצוּקוֹתַי הוֹצִיאֵנִי:", french: "Les angoisses de mon cœur augmentent ; tire-moi de ma détresse." },
+      { hebrew: "רְאֵה עָנְיִי וַעֲמָלִי וְשָׂא לְכָל חַטֹּאותָי:", french: "Vois ma misère et ma peine, et pardonne tous mes péchés." },
+      { hebrew: "רְאֵה אוֹיְבַי כִּי רָבּוּ וְשִׂנְאַת חָמָס שְׂנֵאוּנִי:", french: "Vois combien mes ennemis sont nombreux, et de quelle haine violente ils me poursuivent." },
+      { hebrew: "שָׁמְרָה נַפְשִׁי וְהַצִּילֵנִי אַל אֵבוֹשׁ כִּי חָסִיתִי בָךְ:", french: "Garde mon âme et sauve-moi ! Que je ne sois pas confus, quand je cherche en toi mon refuge." },
+      { hebrew: "תֹּם וָיֹשֶׁר יִצְּרוּנִי כִּי קִוִּיתִיךָ:", french: "Que l'innocence et la droiture me protègent, quand je mets en toi mon espérance !" },
+      { hebrew: "פְּדֵה אֱלֹהִים אֶת יִשְׂרָאֵל מִכֹּל צָרוֹתָיו:", french: "Ô Dieu, délivre Israël de toutes ses détresses !" },
+    ]
+  },
+  {
+    number: 26,
+    verses: [
+      { hebrew: "לְדָוִד שָׁפְטֵנִי יהוה כִּי אֲנִי בְּתֻמִּי הָלַכְתִּי וּבַיהוה בָּטַחְתִּי לֹא אֶמְעָד:", french: "De David. Rends-moi justice, ô Éternel, car je marche dans l'intégrité, je me confie en l'Éternel, je ne chancelle pas." },
+      { hebrew: "בְּחָנֵנִי יהוה וְנַסֵּנִי צָרְפָה כִלְיוֹתַי וְלִבִּי:", french: "Sonde-moi, ô Éternel, éprouve-moi, passe au creuset mes reins et mon cœur." },
+      { hebrew: "כִּי חַסְדְּךָ לְנֶגֶד עֵינָי וְהִתְהַלַּכְתִּי בַּאֲמִתֶּךָ:", french: "Car ta bonté est devant mes yeux, et je marche dans ta vérité." },
+      { hebrew: "לֹא יָשַׁבְתִּי עִם מְתֵי שָׁוְא וְעִם נַעֲלָמִים לֹא אָבוֹא:", french: "Je ne m'assieds pas avec les hommes faux, je ne vais pas avec les gens dissimulés." },
+      { hebrew: "שָׂנֵאתִי קְהַל מְרֵעִים וְעִם רְשָׁעִים לֹא אֵשֵׁב:", french: "Je hais l'assemblée de ceux qui font le mal, je ne m'assieds pas avec les méchants." },
+      { hebrew: "אֶרְחַץ בְּנִקָּיוֹן כַּפָּי וַאֲסֹבְבָה אֶת מִזְבַּחֲךָ יהוה:", french: "Je lave mes mains dans l'innocence, et je fais le tour de ton autel, ô Éternel !" },
+      { hebrew: "לַשְׁמִעַ בְּקוֹל תּוֹדָה וּלְסַפֵּר כָּל נִפְלְאוֹתֶיךָ:", french: "Pour éclater en actions de grâces, et raconter toutes tes merveilles." },
+      { hebrew: "יהוה אָהַבְתִּי מְעוֹן בֵּיתֶךָ וּמְקוֹם מִשְׁכַּן כְּבוֹדֶךָ:", french: "Éternel, j'aime le séjour de ta maison, le lieu où ta gloire habite." },
+      { hebrew: "אַל תֶּאֱסֹף עִם חַטָּאִים נַפְשִׁי וְעִם אַנְשֵׁי דָמִים חַיָּי:", french: "N'enlève pas mon âme avec les pécheurs, ma vie avec les hommes de sang." },
+      { hebrew: "אֲשֶׁר בִּידֵיהֶם זִמָּה וִימִינָם מָלְאָה שֹׁחַד:", french: "Dont les mains sont pleines de crimes, et dont la droite est pleine de présents." },
+      { hebrew: "וַאֲנִי בְּתֻמִּי אֵלֵךְ פְּדֵנִי וְחָנֵּנִי:", french: "Moi, je marche dans l'intégrité ; délivre-moi et aie pitié de moi !" },
+      { hebrew: "רַגְלִי עָמְדָה בְמִישׁוֹר בְּמַקְהֵלִים אֲבָרֵךְ יהוה:", french: "Mon pied est ferme dans la droiture ; je bénirai l'Éternel dans les assemblées." },
+    ]
+  },
+  {
+    number: 27,
+    verses: [
+      { hebrew: "לְדָוִד יהוה אוֹרִי וְיִשְׁעִי מִמִּי אִירָא יהוה מָעוֹז חַיַּי מִמִּי אֶפְחָד:", french: "De David. L'Éternel est ma lumière et mon salut : de qui aurais-je crainte ? L'Éternel est le soutien de ma vie : de qui aurais-je peur ?" },
+      { hebrew: "בִּקְרֹב עָלַי מְרֵעִים לֶאֱכֹל אֶת בְּשָׂרִי צָרַי וְאֹיְבַי לִי הֵמָּה כָשְׁלוּ וְנָפָלוּ:", french: "Quand des méchants s'avancent contre moi, pour dévorer ma chair, ce sont mes persécuteurs et mes ennemis qui chancellent et qui tombent." },
+      { hebrew: "אִם תַּחֲנֶה עָלַי מַחֲנֶה לֹא יִירָא לִבִּי אִם תָּקוּם עָלַי מִלְחָמָה בְּזֹאת אֲנִי בוֹטֵחַ:", french: "Si une armée se campait contre moi, mon cœur n'aurait aucune crainte ; si une guerre s'élevait contre moi, je serais malgré cela plein de confiance." },
+      { hebrew: "אַחַת שָׁאַלְתִּי מֵאֵת יהוה אוֹתָהּ אֲבַקֵּשׁ שִׁבְתִּי בְּבֵית יהוה כָּל יְמֵי חַיַּי לַחֲזוֹת בְּנֹעַם יהוה וּלְבַקֵּר בְּהֵיכָלוֹ:", french: "Je demande à l'Éternel une chose, que je désire ardemment : je voudrais habiter toute ma vie dans la maison de l'Éternel, pour contempler la magnificence de l'Éternel et pour admirer son temple." },
+      { hebrew: "כִּי יִצְפְּנֵנִי בְּסֻכֹּה בְּיוֹם רָעָה יַסְתִּרֵנִי בְּסֵתֶר אָהֳלוֹ בְּצוּר יְרוֹמְמֵנִי:", french: "Car il me protégera dans son tabernacle au jour du malheur, il me cachera sous l'abri de sa tente ; il m'élèvera sur un rocher." },
+      { hebrew: "וְעַתָּה יָרוּם רֹאשִׁי עַל אֹיְבַי סְבִיבוֹתַי וְאֶזְבְּחָה בְאָהֳלוֹ זִבְחֵי תְרוּעָה אָשִׁירָה וַאֲזַמְּרָה לַיהוה:", french: "Et déjà ma tête s'élève sur mes ennemis qui m'entourent ; j'offrirai des sacrifices dans sa tente, au son de la trompette ; je chanterai, je célébrerai l'Éternel." },
+      { hebrew: "שְׁמַע יהוה קוֹלִי אֶקְרָא וְחָנֵּנִי וַעֲנֵנִי:", french: "Éternel, écoute ma voix, je t'invoque : aie pitié de moi et exauce-moi !" },
+      { hebrew: "לְךָ אָמַר לִבִּי בַּקְּשׁוּ פָנָי אֶת פָּנֶיךָ יהוה אֲבַקֵּשׁ:", french: "Mon cœur dit de ta part : Cherchez ma face ! Je cherche ta face, ô Éternel !" },
+      { hebrew: "אַל תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי אַל תַּט בְּאַף עַבְדֶּךָ עֶזְרָתִי הָיִיתָ אַל תִּטְּשֵׁנִי וְאַל תַּעַזְבֵנִי אֱלֹהֵי יִשְׁעִי:", french: "Ne me cache pas ta face, ne repousse pas avec colère ton serviteur ! Tu es mon secours, ne me laisse pas, ne m'abandonne pas, Dieu de mon salut !" },
+      { hebrew: "כִּי אָבִי וְאִמִּי עֲזָבוּנִי וַיהוה יַאַסְפֵנִי:", french: "Car mon père et ma mère m'abandonnent, mais l'Éternel me recueillera." },
+      { hebrew: "הוֹרֵנִי יהוה דַּרְכֶּךָ וּנְחֵנִי בְּאֹרַח מִישׁוֹר לְמַעַן שׁוֹרְרָי:", french: "Éternel, enseigne-moi ta voie, conduis-moi dans le sentier de la droiture, à cause de mes ennemis." },
+      { hebrew: "אַל תִּתְּנֵנִי בְּנֶפֶשׁ צָרָי כִּי קָמוּ בִי עֵדֵי שֶׁקֶר וִיפֵחַ חָמָס:", french: "Ne me livre pas au bon plaisir de mes adversaires, car il s'élève contre moi de faux témoins et des gens qui ne respirent que la violence." },
+      { hebrew: "לוּלֵא הֶאֱמַנְתִּי לִרְאוֹת בְּטוּב יהוה בְּאֶרֶץ חַיִּים:", french: "Oh ! si je n'étais pas sûr de voir la bonté de l'Éternel sur la terre des vivants !..." },
+      { hebrew: "קַוֵּה אֶל יהוה חֲזַק וְיַאֲמֵץ לִבֶּךָ וְקַוֵּה אֶל יהוה:", french: "Espère en l'Éternel ! Fortifie-toi et que ton cœur s'affermisse ! Espère en l'Éternel !" },
+    ]
+  },
+  {
+    number: 28,
+    verses: [
+      { hebrew: "לְדָוִד אֵלֶיךָ יהוה אֶקְרָא צוּרִי אַל תֶּחֱרַשׁ מִמֶּנִּי פֶּן תֶּחֱשֶׁה מִמֶּנִּי וְנִמְשַׁלְתִּי עִם יוֹרְדֵי בוֹר:", french: "De David. Éternel, c'est à toi que je crie. Mon rocher, ne reste pas sourd à ma voix, de peur que, si tu t'éloignes sans me répondre, je ne sois semblable à ceux qui descendent dans la fosse." },
+      { hebrew: "שְׁמַע קוֹל תַּחֲנוּנַי בְּשַׁוְּעִי אֵלֶיךָ בְּנָשְׂאִי יָדַי אֶל דְּבִיר קָדְשֶׁךָ:", french: "Écoute la voix de mes supplications, quand je crie à toi, quand j'élève mes mains vers ton très saint sanctuaire." },
+      { hebrew: "אַל תִּמְשְׁכֵנִי עִם רְשָׁעִים וְעִם פֹּעֲלֵי אָוֶן דֹּבְרֵי שָׁלוֹם עִם רֵעֵיהֶם וְרָעָה בִּלְבָבָם:", french: "Ne m'entraîne pas avec les méchants et avec ceux qui font l'iniquité, qui parlent de paix avec leur prochain, et qui ont la malice dans le cœur." },
+      { hebrew: "תֶּן לָהֶם כְּפָעֳלָם וּכְרֹעַ מַעַלְלֵיהֶם כְּמַעֲשֵׂה יְדֵיהֶם תֵּן לָהֶם הָשֵׁב גְּמוּלָם לָהֶם:", french: "Rends-leur selon leurs œuvres et selon la malice de leurs actions, rends-leur selon l'ouvrage de leurs mains, donne-leur leur salaire." },
+      { hebrew: "כִּי לֹא יָבִינוּ אֶל פְּעֻלֹּת יהוה וְאֶל מַעֲשֵׂה יָדָיו יֶהֶרְסֵם וְלֹא יִבְנֵם:", french: "Car ils ne prennent point garde aux œuvres de l'Éternel, à l'ouvrage de ses mains. Qu'il les renverse et ne les relève pas !" },
+      { hebrew: "בָּרוּךְ יהוה כִּי שָׁמַע קוֹל תַּחֲנוּנָי:", french: "Béni soit l'Éternel ! Car il exauce la voix de mes supplications." },
+      { hebrew: "יהוה עֻזִּי וּמָגִנִּי בּוֹ בָטַח לִבִּי וְנֶעֱזָרְתִּי וַיַּעֲלֹז לִבִּי וּמִשִּׁירִי אֲהוֹדֶנּוּ:", french: "L'Éternel est ma force et mon bouclier ; en lui mon cœur se confie, et je suis secouru ; aussi mon cœur est dans la joie, et je le loue par mes chants." },
+      { hebrew: "יהוה עֹז לָמוֹ וּמָעוֹז יְשׁוּעוֹת מְשִׁיחוֹ הוּא:", french: "L'Éternel est la force de son peuple, il est le rocher des délivrances de son oint." },
+      { hebrew: "הוֹשִׁיעָה אֶת עַמֶּךָ וּבָרֵךְ אֶת נַחֲלָתֶךָ וּרְעֵם וְנַשְּׂאֵם עַד הָעוֹלָם:", french: "Sauve ton peuple et bénis ton héritage ! Sois leur berger et soutiens-les à jamais !" },
+    ]
+  },
+  {
+    number: 29,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד הָבוּ לַיהוה בְּנֵי אֵלִים הָבוּ לַיהוה כָּבוֹד וָעֹז:", french: "Psaume de David. Fils de Dieu, rendez à l'Éternel, rendez à l'Éternel gloire et honneur !" },
+      { hebrew: "הָבוּ לַיהוה כְּבוֹד שְׁמוֹ הִשְׁתַּחֲווּ לַיהוה בְּהַדְרַת קֹדֶשׁ:", french: "Rendez à l'Éternel gloire pour son nom ! Prosternez-vous devant l'Éternel avec des ornements sacrés !" },
+      { hebrew: "קוֹל יהוה עַל הַמָּיִם אֵל הַכָּבוֹד הִרְעִים יהוה עַל מַיִם רַבִּים:", french: "La voix de l'Éternel retentit sur les eaux, le Dieu de gloire fait gronder le tonnerre ; l'Éternel est sur les grandes eaux." },
+      { hebrew: "קוֹל יהוה בַּכֹּחַ קוֹל יהוה בֶּהָדָר:", french: "La voix de l'Éternel est puissante, la voix de l'Éternel est majestueuse." },
+      { hebrew: "קוֹל יהוה שֹׁבֵר אֲרָזִים וַיְשַׁבֵּר יהוה אֶת אַרְזֵי הַלְּבָנוֹן:", french: "La voix de l'Éternel brise les cèdres ; l'Éternel brise les cèdres du Liban." },
+      { hebrew: "וַיַּרְקִידֵם כְּמוֹ עֵגֶל לְבָנוֹן וְשִׂרְיֹן כְּמוֹ בֶן רְאֵמִים:", french: "Il les fait bondir comme un veau, le Liban et le Sirion comme un jeune buffle." },
+      { hebrew: "קוֹל יהוה חֹצֵב לַהֲבוֹת אֵשׁ:", french: "La voix de l'Éternel fait jaillir des flammes de feu." },
+      { hebrew: "קוֹל יהוה יָחִיל מִדְבָּר יָחִיל יהוה מִדְבַּר קָדֵשׁ:", french: "La voix de l'Éternel fait trembler le désert ; l'Éternel fait trembler le désert de Kadès." },
+      { hebrew: "קוֹל יהוה יְחוֹלֵל אַיָּלוֹת וַיֶּחֱשֹׂף יְעָרוֹת וּבְהֵיכָלוֹ כֻּלּוֹ אֹמֵר כָּבוֹד:", french: "La voix de l'Éternel fait enfanter les biches, elle dépouille les forêts. Dans son palais, tout s'écrie : Gloire !" },
+      { hebrew: "יהוה לַמַּבּוּל יָשָׁב וַיֵּשֶׁב יהוה מֶלֶךְ לְעוֹלָם:", french: "L'Éternel était sur son trône lors du déluge ; l'Éternel sur son trône règne éternellement." },
+      { hebrew: "יהוה עֹז לְעַמּוֹ יִתֵּן יהוה יְבָרֵךְ אֶת עַמּוֹ בַשָּׁלוֹם:", french: "L'Éternel donnera la force à son peuple ; l'Éternel bénira son peuple par la paix." },
     ]
   },
   {
@@ -1156,7 +1492,8 @@ function renderHome() {
     html += '<button class="psalm-card' + (isRead ? ' read' : '') + '" onclick="openPsalm(' + i + ')">';
     html += '<div class="psalm-card-left"><div class="psalm-card-num' + (isRead ? ' done' : '') + '">' + (isRead ? "✓" : psalm.number) + '</div>';
     html += '<div><span class="psalm-card-title">Tehilim ' + psalm.number + label + '</span>';
-    html += '<span class="psalm-card-verses">' + psalm.verses.length + ' verset' + (psalm.verses.length > 1 ? 's' : '') + '</span></div></div>';
+    const pTitle = PSALM_TITLES[psalm.number] || '';
+    html += '<span class="psalm-card-verses">' + pTitle + ' · ' + psalm.verses.length + ' verset' + (psalm.verses.length > 1 ? 's' : '') + '</span></div></div>';
     html += '<span class="psalm-card-arrow">›</span></button>';
   });
   list.innerHTML = html;
@@ -1170,6 +1507,206 @@ function openPsalm(index) {
   document.getElementById("reading").style.display = "block";
   window.scrollTo(0, 0);
   renderReading();
+}
+
+const PSALM_TITLES = [
+  "",
+  "Pour prévenir une fausse couche",
+  "Contre une tempête en mer",
+  "En toute occasion",
+  "En toute occasion",
+  "Contre un mauvais esprit",
+  "Pour ceux qui souffrent des yeux",
+  "Pour écarter ses ennemis",
+  "Pour plaire",
+  "Pour un garçon malade",
+  "Pour conjurer la haine",
+  "Pour détruire ses ennemis",
+  "Contre la faiblesse",
+  "Pour échapper à une mort violente",
+  "Contre la peur",
+  "Pour tuer un démon",
+  "Pour découvrir un voleur",
+  "À lire en route",
+  "Pour échapper à des rois méchants",
+  "Pour la sagesse",
+  "Bon pour un jugement",
+  "Avant d\'aller devant une autorité",
+  "Contre tout chagrin",
+  "Pour comprendre un rêve",
+  "Pour être sauvé d\'une inondation",
+  "Pour conjurer le malheur",
+  "Contre le danger et le malheur",
+  "Contre les bêtes sauvages",
+  "Pour qu\'une prière soit acceptée",
+  "Contre le mauvais esprit",
+  "Contre toutes les mauvaises choses",
+  "Contre le mauvais œil",
+  "Pour demander miséricorde",
+  "Pour une mère qui a perdu ses enfants",
+  "Pendant la route",
+  "Contre ses rivaux",
+  "Pour annihiler les méchants",
+  "Pour une location",
+  "Contre les mauvais conseils",
+  "Pour celui qui jeûne",
+  "Pour échapper à un mauvais esprit",
+  "Pour ne pas perdre son emploi",
+  "Avant de construire une maison",
+  "Avant de construire une maison",
+  "Pour échapper à un mauvais esprit",
+  "Pour celui qui a une épouse méchante",
+  "Si un homme haït sa femme",
+  "Pour faire pénitence",
+  "Pour faire peur à ses ennemis",
+  "Contre la fièvre",
+  "Pour échapper aux brigands",
+  "Pour un débauché",
+  "Contre la tentation de la médisance",
+  "Pour faire peur à ses ennemis",
+  "Pour se venger de ses ennemis",
+  "Pour toutes les mauvaises choses",
+  "Pour un détenu",
+  "Pour la réussite",
+  "Contre un chien méchant",
+  "Contre le mauvais penchant",
+  "Pour aller en guerre",
+  "Pour celui qui a peur de rester à la maison",
+  "Après les prières de Min\'ha et \'Arvit",
+  "Pour réussir dans les affaires",
+  "Avant de traverser une rivière",
+  "Pour obtenir quelque chose de quelqu\'un",
+  "Pour un possédé du démon",
+  "Contre une fièvre persistante",
+  "Contre le mauvais esprit",
+  "Pour un homme cupide et débauché",
+  "En temps de guerre",
+  "Pour plaire",
+  "Pour trouver grâce",
+  "Pour conjurer la haine",
+  "Si vous craignez des ennemis",
+  "Pour éliminer l\'orgueil",
+  "Pour échapper à l\'eau et au feu",
+  "Pour échapper à l\'eau et au feu",
+  "Pour trouver grâce devant les autorités",
+  "Pour vaincre des ennemis",
+  "Pour se protéger de l\'idolâtrie",
+  "Pour se protéger de l\'idolâtrie",
+  "Pour celui qui perd ses membres",
+  "En cas de guerre",
+  "Pour un malade qui maigrit",
+  "Pour contenter un ami",
+  "Pour échapper à un mauvais sort",
+  "Pour sauver la ville",
+  "Pour sauver la ville",
+  "Pour celui qui perd ses membres",
+  "Pour échapper à un lion",
+  "Contre un mauvais esprit",
+  "Pour assister à de grands miracles",
+  "Pour gagner un procès",
+  "Si votre ennemi vous poursuit",
+  "Pour ne pas être trompé par les gens",
+  "Pour réjouir sa famille",
+  "Pour réjouir sa famille",
+  "Pour faire la paix avec son prochain",
+  "Pour avoir la foi",
+  "Pour vaincre son ennemi",
+  "Contre un mauvais esprit",
+  "Pour une femme stérile",
+  "Pour une femme stérile",
+  "Pour éloigner une chose nuisible",
+  "Maladie qui récidive une quatrième fois",
+  "Maladie qui récidive une troisième fois",
+  "Contre une maladie persistante",
+  "Pour la réussite",
+  "Si votre ennemi vous poursuit",
+  "Pour faire la paix avec son ennemi",
+  "Pour se faire des amis",
+  "Pour devenir fort et puissant",
+  "Contre l\'hérésie",
+  "Avant d\'acheter et de vendre",
+  "Avant de discuter avec ses pareils",
+  "Pour échapper à une mort violente",
+  "Si on vous a dénoncé à tort",
+  "Avant de répondre à un mécréant",
+  "Avant d\'accomplir une mitsva",
+  "Pour faire la paix",
+  "Pour sortir seul la nuit",
+  "Avant de rencontrer un homme important",
+  "Pour un esclave en fuite",
+  "Pour une traversée en bateau",
+  "Contre les ennemis",
+  "Pour une femme qui a perdu ses enfants",
+  "Pour un bébé qui vient de naître",
+  "Pour une femme enceinte",
+  "Pour une mitsva",
+  "Avant une traversée en bateau",
+  "Contre l\'orgueilleux",
+  "Pour tenir ses serments",
+  "Pour inspirer l\'amitié",
+  "À dire avant l\'étude",
+  "Contre les pensées hérétiques",
+  "Pour avouer ses fautes",
+  "Pour conjurer la haine",
+  "Pour lutter contre l\'orgueil",
+  "Pour ramener l\'amour entre mari et femme",
+  "Contre la haine entre mari et femme",
+  "Contre les douleurs du cœur",
+  "Pour ceux qui souffrent des cuisses",
+  "Pour ceux qui souffrent des bras",
+  "Pour celui qui s\'est brisé une main",
+  "Contre la peur",
+  "Pour se protéger des coups d\'épée",
+  "Contre la morsure du serpent",
+  "Contre un incendie",
+  "Contre la propagation d\'un incendie",
+  "Pour louer Hachem dans toutes Ses actions",
+];
+
+var readingMode = "hebrew"; // hebrew | phonetique | francais
+
+function setReadingMode(mode) {
+  readingMode = mode;
+  // Save scroll position
+  const scrollY = window.scrollY;
+  renderReading();
+  // Restore scroll position
+  window.scrollTo(0, scrollY);
+}
+
+// Basic Hebrew to phonetic transliteration
+function transliterate(heb) {
+  const map = {
+    'א':'', 'בּ':'b', 'ב':'v', 'גּ':'g', 'ג':'g', 'דּ':'d', 'ד':'d',
+    'ה':'h', 'ו':'v', 'ז':'z', 'ח':'kh', 'ט':'t', 'י':'y',
+    'כּ':'k', 'כ':'kh', 'ך':'kh', 'ל':'l', 'מ':'m', 'ם':'m',
+    'נ':'n', 'ן':'n', 'ס':'s', 'ע':'', 'פּ':'p', 'פ':'f', 'ף':'f',
+    'צ':'ts', 'ץ':'ts', 'ק':'k', 'ר':'r', 'שׁ':'sh', 'שׂ':'s', 'ש':'sh',
+    'תּ':'t', 'ת':'t',
+    'ַ':'a', 'ָ':'a', 'ֶ':'e', 'ֵ':'é', 'ִ':'i', 'ֹ':'o', 'ֻ':'ou', 'ּ':'',
+    'וֹ':'o', 'וּ':'ou', 'ְ':'e', 'ֲ':'a', 'ֳ':'o', 'ֱ':'e',
+    ':':'', '׃':'', '־':'-'
+  };
+  let result = '';
+  let i = 0;
+  const s = heb;
+  while (i < s.length) {
+    // Try 2-char match first
+    if (i + 1 < s.length && map[s[i] + s[i+1]] !== undefined) {
+      result += map[s[i] + s[i+1]];
+      i += 2;
+    } else if (map[s[i]] !== undefined) {
+      result += map[s[i]];
+      i++;
+    } else if (s[i] === ' ') {
+      result += ' ';
+      i++;
+    } else {
+      i++; // skip unknown
+    }
+  }
+  // Clean up: remove double spaces, trim
+  return result.replace(/\s+/g, ' ').trim();
 }
 
 function getReadHistory(num) {
@@ -1200,9 +1737,9 @@ function renderReading() {
   let html = '<div class="insta-post">';
   // Header
   html += '<div class="insta-post-header">';
-  html += '<div class="insta-post-avatar"><div class="insta-post-avatar-inner">תהלים</div></div>';
-  html += '<div><div class="insta-post-user">Tehilim · Chapitre ' + psalm.number + '</div>';
-  html += '<div class="insta-post-location">' + psalm.verses.length + ' versets' + label + '</div></div></div>';
+  html += '<div class="insta-post-avatar"><div class="insta-post-avatar-inner">' + toHebrewNumeral(psalm.number) + '</div></div>';
+  html += '<div><div class="insta-post-user">' + (PSALM_TITLES[psalm.number] || 'Tehilim ' + psalm.number) + '</div>';
+  html += '<div class="insta-post-location">Chapitre ' + psalm.number + ' · ' + psalm.verses.length + ' versets / ' + psalm.verses.length + ' passouk' + label + '</div></div></div>';
 
   // Content
   html += '<div class="insta-post-content">';
@@ -1211,11 +1748,35 @@ function renderReading() {
   if (psalm.sectionLabel) html += '<span class="psalm-section-label">' + psalm.sectionLabel + '</span>';
   html += '</div>';
 
-  psalm.verses.forEach((v, i) => {
-    html += '<div class="verse-block"><span class="verse-num">' + (i + 1) + '</span>';
-    html += '<p class="hebrew-text">' + v.hebrew + '</p>';
-    html += '<p class="french-text">' + v.french + '</p></div>';
-  });
+  // Mode toggle
+  html += '<div class="reading-toggle" data-mode="' + readingMode + '">';
+  html += '<div class="reading-toggle-slider"></div>';
+  html += '<button class="reading-toggle-btn' + (readingMode === 'hebrew' ? ' active' : '') + '" onclick="setReadingMode(\'hebrew\')">עברית</button>';
+  html += '<button class="reading-toggle-btn' + (readingMode === 'phonetique' ? ' active' : '') + '" onclick="setReadingMode(\'phonetique\')">Phonétique</button>';
+  html += '<button class="reading-toggle-btn' + (readingMode === 'francais' ? ' active' : '') + '" onclick="setReadingMode(\'francais\')">Français</button>';
+  html += '</div>';
+
+  if (readingMode === 'hebrew') {
+    // Sefer style: continuous text with inline verse letters
+    html += '<div class="sefer-text">';
+    psalm.verses.forEach((v, i) => {
+      html += '<span class="sefer-verse-num">' + toHebrewNumeral(i + 1) + '</span> ' + v.hebrew + ' ';
+    });
+    html += '</div>';
+  } else if (readingMode === 'phonetique') {
+    psalm.verses.forEach((v, i) => {
+      const verseHebLetter = toHebrewNumeral(i + 1);
+      html += '<div class="verse-block"><span class="verse-num">' + verseHebLetter + '</span>';
+      html += '<p class="hebrew-text">' + v.hebrew + '</p>';
+      html += '<p class="phonetic-text">' + transliterate(v.hebrew) + '</p></div>';
+    });
+  } else {
+    psalm.verses.forEach((v, i) => {
+      const verseHebLetter = toHebrewNumeral(i + 1);
+      html += '<div class="verse-block"><span class="verse-num">' + verseHebLetter + '</span>';
+      html += '<p class="french-text" style="font-style:normal;color:var(--black);font-size:17px;">' + v.french + '</p></div>';
+    });
+  }
   html += '</div>';
 
   // Action bar
