@@ -20,7 +20,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 /* SPLASH */
 #splash {
   min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  background:var(--white); cursor:pointer; position:fixed; top:0; left:0; right:0; bottom:0; z-index:100;
+  background:var(--white); cursor:pointer; position:fixed; top:0; left:0; right:0; bottom:0; z-index:999;
   transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
@@ -63,6 +63,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .footer-logo-wrap:hover { opacity:0.55; }
 .footer-logo-icon { width:28px; height:18px; }
 .footer-logo-text { font-size:11px; font-weight:500; letter-spacing:1.5px; color:var(--black); font-family:var(--font); text-transform:uppercase; }
+.patakh-tab { padding:8px 14px; border:1px solid var(--gray-5); border-radius:20px; background:var(--white); font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap; color:var(--gray-2); transition:all 0.15s; }
+.patakh-tab.active { background:var(--black); color:var(--white); border-color:var(--black); }
+.patakh-he { direction:rtl; text-align:right; font-family:'Noto Serif Hebrew',serif; font-size:20px; line-height:2; color:var(--black); margin-bottom:12px; }
+.patakh-ph { font-size:14px; line-height:1.8; color:var(--gray-2); font-style:italic; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--gray-6); }
 @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
 
 /* HOME */
@@ -633,6 +637,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .bday-popup-highlight { font-size:15px; color:var(--black); font-weight:600; margin-bottom:4px; }
 .bday-close { background:var(--black); color:var(--white); border:none; padding:12px 32px; border-radius:var(--radius-sm); font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font); margin-top:16px; }
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -696,11 +702,39 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         </div>
         <div class="big-card-arrow">›</div>
       </div>
+      <div class="hyy-card" id="rambam-card" onclick="openRambam(event)">
+        <div class="hyy-header">
+          <span class="hyy-icon">📚</span>
+          <span class="hyy-title">Rambam</span>
+          <span class="hyy-date" id="rambam-date"></span>
+        </div>
+        <div class="hyy-text" id="rambam-text"><span class="hyy-loading">Chargement…</span></div>
+        <div class="hyy-expand" id="rambam-expand" style="display:none">Lire la suite ▾</div>
+        <div class="hyy-link" id="rambam-link" style="display:none">
+          <span>Lire sur Loubavitch.fr</span> <span>↗</span>
+        </div>
+      </div>
       <div class="big-card" onclick="switchTab('sub-club')">
         <div class="big-card-icon">🤝</div>
         <div class="big-card-info">
           <div class="big-card-title">Chabad Club</div>
           <div class="big-card-sub">Éclaire le monde</div>
+        </div>
+        <div class="big-card-arrow">›</div>
+      </div>
+      <div class="big-card" onclick="openBethChabad()">
+        <div class="big-card-icon">🕍</div>
+        <div class="big-card-info">
+          <div class="big-card-title">Beth Chabad</div>
+          <div class="big-card-sub">Trouver un Beth Chabad près de moi</div>
+        </div>
+        <div class="big-card-arrow">›</div>
+      </div>
+      <div class="big-card" onclick="switchTab('sub-sidour')">
+        <div class="big-card-icon">🕯️</div>
+        <div class="big-card-info">
+          <div class="big-card-title">Sidour</div>
+          <div class="big-card-sub">Patakh Eliyahou · Tehilat Hachem</div>
         </div>
         <div class="big-card-arrow">›</div>
       </div>
@@ -796,6 +830,85 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <span class="menu-card-icon">🍽️</span>
         <div class="menu-card-content"><span class="menu-card-title">Jours de jeûne</span></div>
       </button>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: BETH CHABAD -->
+  <div id="panel-sub-beth" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div style="padding:0 16px 16px;">
+      <div style="font-size:16px;font-weight:800;color:var(--black);margin-bottom:2px;">🕍 Trouver un Beth Chabad</div>
+      <div style="font-size:11px;color:var(--gray-3);margin-bottom:12px;" id="beth-location-info">Localisation en cours…</div>
+      <div id="beth-map-container" style="width:100%;height:50vh;border-radius:var(--radius);overflow:hidden;background:var(--gray-6);position:relative;">
+        <div id="beth-map" style="width:100%;height:100%;"></div>
+        <div id="beth-map-loading" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:var(--gray-6);z-index:10;">
+          <div style="text-align:center;color:var(--gray-3);">
+            <div style="font-size:32px;margin-bottom:12px;">📍</div>
+            <div style="font-size:13px;font-weight:600;">Géolocalisation en cours…</div>
+          </div>
+        </div>
+      </div>
+      <div id="beth-results" style="margin-top:12px;"></div>
+      <div style="display:flex;gap:10px;margin-top:12px;">
+        <button onclick="refreshBethMap()" style="flex:1;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">📍 Actualiser</button>
+        <button onclick="openChabadLocator()" style="flex:1;padding:12px;border:none;border-radius:var(--radius);background:var(--black);color:var(--white);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">Chabad.org Locator ↗</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: SIDOUR -->
+  <div id="panel-sub-sidour" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div style="padding:0 16px 16px;">
+      <div style="font-size:18px;font-weight:800;color:var(--black);margin-bottom:4px;">🕯️ Sidour</div>
+      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Livres de prières</div>
+
+      <!-- Patakh Eliyahou -->
+      <div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:16px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="font-size:24px;">📕</span>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--black);">Patakh Eliyahou</div>
+            <div style="font-size:11px;color:var(--gray-3);">Rite Séfarade · Hébreu & Phonétique</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button onclick="switchTab('sub-sidour-patakh')" style="padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;cursor:pointer;text-align:left;">🔤 Prières en hébreu & phonétique</button>
+          <a href="https://www.770live.com/en770/siddur/siddur.htm" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">🌐 Sidour en ligne (770live) ↗</a>
+        </div>
+      </div>
+
+      <!-- Tehilat Hachem -->
+      <div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:16px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="font-size:24px;">📗</span>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--black);">Tehilat Hachem</div>
+            <div style="font-size:11px;color:var(--gray-3);">Nousakh Ha-Arizal · Chabad-Loubavitch</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://www.chabad.org/library/siddur/default_cdo/aid/1495868/jewish/Online-Siddur-with-Commentary.htm" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">📖 Sidour en ligne (Chabad.org) ↗</a>
+          <a href="https://www.sefaria.org/Siddur_Tehilat_Hashem" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">📚 Siddur Sefaria (Hébreu) ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: SIDOUR PATAKH ELIYAHOU (Prayers) -->
+  <div id="panel-sub-sidour-patakh" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('sub-sidour')">← Sidour</button></div>
+    <div style="padding:0 16px 16px;">
+      <div style="font-size:16px;font-weight:800;color:var(--black);margin-bottom:2px;">📕 Patakh Eliyahou</div>
+      <div style="font-size:11px;color:var(--gray-3);margin-bottom:16px;">Prières en hébreu & phonétique</div>
+      <div id="patakh-tabs" style="display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;">
+        <button class="patakh-tab active" onclick="showPatakh('shaharit')">Cha'harit</button>
+        <button class="patakh-tab" onclick="showPatakh('minha')">Min'ha</button>
+        <button class="patakh-tab" onclick="showPatakh('arvit')">Arvit</button>
+        <button class="patakh-tab" onclick="showPatakh('shema')">Chéma</button>
+        <button class="patakh-tab" onclick="showPatakh('birkat')">Birkat</button>
+      </div>
+      <div id="patakh-content" style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:16px;max-height:60vh;overflow-y:auto;"></div>
     </div>
   </div>
 
@@ -4764,6 +4877,7 @@ function showHome() {
   renderHome();
   renderObjStoryBar();
   loadHayomYom();
+  loadRambam();
   updateBigObjSub();
   cleanOldObjectives();
   updateBirthdaySub();
@@ -4802,7 +4916,7 @@ function goHome() {
 
 function switchTab(tab) {
   activeTab = tab;
-  var panels = ["menu","sub-objectifs","sub-tehilim","sub-club","jour","perek","birthday","chains","chain-detail","t119","cemetery"];
+  var panels = ["menu","sub-objectifs","sub-tehilim","sub-club","sub-beth","sub-sidour","sub-sidour-patakh","jour","perek","birthday","chains","chain-detail","t119","cemetery"];
   panels.forEach(function(p) {
     var el = document.getElementById("panel-" + p);
     if (el) el.style.display = p === tab ? "block" : "none";
@@ -4813,6 +4927,7 @@ function switchTab(tab) {
   if (tab === "chains") renderChainList();
   if (tab === "cemetery") renderCemetery();
   if (tab === "sub-objectifs") { renderObjectives(); renderObjStoryBar(); }
+  if (tab === "sub-sidour-patakh") { showPatakhDirect('shaharit'); }
   if (tab === "menu") { renderObjStoryBar(); updateBigObjSub(); }
   window.scrollTo(0, 0);
   document.getElementById("reading").scrollTop = 0;
@@ -8082,7 +8197,7 @@ function updateHomeNav(activeTab) {
   if (!nav) return;
   var items = nav.querySelectorAll('.insta-nav-item');
   items.forEach(function(item) { item.classList.remove('active'); });
-  var tabMap = { menu: 0, 'sub-objectifs': 0, 'sub-tehilim': 0, 'sub-club': 0, jour: 1, chains: 2, 'chain-detail': 2, perek: 3 };
+  var tabMap = { menu: 0, 'sub-objectifs': 0, 'sub-tehilim': 0, 'sub-club': 0, 'sub-beth': 0, 'sub-sidour': 0, 'sub-sidour-patakh': 0, jour: 1, chains: 2, 'chain-detail': 2, perek: 3 };
   var idx = tabMap[activeTab];
   if (idx !== undefined && items[idx]) items[idx].classList.add('active');
 }
@@ -8320,6 +8435,351 @@ function displayHyyFallback() {
     var url = 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
     window.open(url, '_blank');
   };
+}
+
+// ====== RAMBAM (Sefaria Calendar API) ======
+var _rambamExpanded = false;
+function openRambam(e) {
+  var txt = document.getElementById('rambam-text');
+  var exp = document.getElementById('rambam-expand');
+  if (!txt || txt.querySelector('.hyy-loading')) return;
+  var evt = e || window.event;
+  if (evt && evt.target && evt.target.closest && evt.target.closest('.hyy-link')) {
+    evt.stopPropagation();
+    window.open('https://www.loubavitch.fr/etude/etudes-quotidiennes/rambam-1/248171/rambam-1-chapitre', '_blank');
+    return;
+  }
+  _rambamExpanded = !_rambamExpanded;
+  if (_rambamExpanded) {
+    txt.classList.add('expanded');
+    exp.textContent = 'R\u00e9duire \u25b4';
+  } else {
+    txt.classList.remove('expanded');
+    exp.textContent = 'Lire la suite \u25be';
+  }
+}
+
+function loadRambam() {
+  var d = new Date();
+  var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+  var cacheKey = 'tehilim_rambam_' + dateKey;
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+  if (cached && (cached.he || cached.en)) {
+    displayRambam(cached);
+    return;
+  }
+  // Use Sefaria Calendar API to get today's Rambam
+  var calUrl = 'https://www.sefaria.org/api/calendars';
+  fetch(calUrl)
+    .then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(cal) {
+      var rambamRef = null;
+      var rambamTitle = '';
+      var items = cal.calendar_items || [];
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (item.title && item.title.en && item.title.en.indexOf('Daily Rambam') !== -1 && item.title.en.indexOf('1 Chapter') !== -1) {
+          rambamRef = item.ref || (item.url ? item.url.replace('/','') : null);
+          rambamTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
+          break;
+        }
+      }
+      if (!rambamRef) {
+        // Try broader match
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          if (item.title && item.title.en && item.title.en.indexOf('Rambam') !== -1 && item.title.en.indexOf('3') === -1) {
+            rambamRef = item.ref || (item.url ? item.url.replace('/','') : null);
+            rambamTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
+            break;
+          }
+        }
+      }
+      if (!rambamRef) { displayRambamFallback(); return; }
+      console.log('Rambam ref:', rambamRef, 'title:', rambamTitle);
+      // Fetch the text
+      var textUrl = 'https://www.sefaria.org/api/v3/texts/' + encodeURIComponent(rambamRef) + '?context=0';
+      return fetch(textUrl).then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function(txt) { _rambamProcessSefaria(txt, rambamTitle, dateKey); });
+    })
+    .catch(function(err) {
+      console.log('Rambam fetch failed:', err);
+      displayRambamFallback();
+    });
+}
+
+function _rambamProcessSefaria(txt, title, dateKey) {
+  var heText = '', enText = '';
+  var versions = txt.versions || [];
+  for (var v = 0; v < versions.length; v++) {
+    var ver = versions[v];
+    if (ver.language === 'he' && !heText) {
+      var t = ver.text;
+      if (Array.isArray(t)) t = t.join(' ');
+      heText = t || '';
+    }
+    if (ver.language === 'en' && !enText) {
+      var t = ver.text;
+      if (Array.isArray(t)) t = t.join(' ');
+      enText = t || '';
+    }
+  }
+  function strip(s) { var tmp = document.createElement('div'); tmp.innerHTML = s; return tmp.textContent || tmp.innerText || ''; }
+  var result = {
+    he: strip(heText),
+    en: strip(enText),
+    title: title,
+    fetched: dateKey
+  };
+  if (!result.he && !result.en) { displayRambamFallback(); return; }
+  try { localStorage.setItem('tehilim_rambam_' + dateKey, JSON.stringify(result)); } catch(e) {}
+  displayRambam(result);
+}
+
+function displayRambam(data) {
+  var el = document.getElementById('rambam-text');
+  var dateEl = document.getElementById('rambam-date');
+  var expEl = document.getElementById('rambam-expand');
+  var linkEl = document.getElementById('rambam-link');
+  if (!el) return;
+  var content = '';
+  if (data.title && dateEl) dateEl.textContent = data.title;
+  if (data.he) content += '<div style="direction:rtl;text-align:right;font-family:\'Noto Serif Hebrew\',serif;line-height:1.9;margin-bottom:10px;">' + data.he + '</div>';
+  if (data.en) content += '<div style="color:var(--gray-2);font-size:14px;line-height:1.7;">' + data.en + '</div>';
+  if (content) {
+    el.innerHTML = content;
+    expEl.style.display = 'block';
+    if (linkEl) linkEl.style.display = 'flex';
+  } else {
+    displayRambamFallback();
+  }
+}
+
+function displayRambamFallback() {
+  var el = document.getElementById('rambam-text');
+  var linkEl = document.getElementById('rambam-link');
+  var dateEl = document.getElementById('rambam-date');
+  if (!el) return;
+  var d = new Date();
+  var months = ['Janvier','F\u00e9vrier','Mars','Avril','Mai','Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre'];
+  if (dateEl) dateEl.textContent = d.getDate() + ' ' + months[d.getMonth()];
+  el.innerHTML = '<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Appuyez pour lire le Rambam du jour sur Loubavitch.fr</span>';
+  if (linkEl) linkEl.style.display = 'flex';
+  var card = document.getElementById('rambam-card');
+  if (card) card.onclick = function() {
+    window.open('https://www.loubavitch.fr/etude/etudes-quotidiennes/rambam-1/248171/rambam-1-chapitre', '_blank');
+  };
+}
+
+// ====== BETH CHABAD (Leaflet + Overpass API) ======
+var _bethMap = null;
+var _bethMarkers = [];
+
+function openBethChabad() {
+  switchTab('sub-beth');
+  setTimeout(loadBethMap, 200);
+}
+
+function loadBethMap() {
+  var loading = document.getElementById('beth-map-loading');
+  var info = document.getElementById('beth-location-info');
+  if (loading) loading.style.display = 'flex';
+  if (info) info.textContent = 'Localisation en cours\u2026';
+
+  if (!navigator.geolocation) {
+    if (info) info.textContent = 'G\u00e9olocalisation non disponible';
+    showBethMap(48.8566, 2.3522);
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    function(pos) { showBethMap(pos.coords.latitude, pos.coords.longitude); },
+    function(err) {
+      console.log('Geo error:', err);
+      if (info) info.textContent = 'Position par d\u00e9faut (Paris)';
+      showBethMap(48.8566, 2.3522);
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+  );
+}
+
+function showBethMap(lat, lng) {
+  var loading = document.getElementById('beth-map-loading');
+  var info = document.getElementById('beth-location-info');
+  if (loading) loading.style.display = 'none';
+
+  if (!_bethMap) {
+    _bethMap = L.map('beth-map').setView([lat, lng], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '\u00a9 OpenStreetMap'
+    }).addTo(_bethMap);
+    setTimeout(function(){ _bethMap.invalidateSize(); }, 300);
+  } else {
+    _bethMap.setView([lat, lng], 13);
+    _bethMap.invalidateSize();
+  }
+
+  L.marker([lat, lng], {
+    icon: L.divIcon({ className:'', html:'<div style="background:#e53e3e;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div>', iconSize:[20,20], iconAnchor:[10,10] })
+  }).addTo(_bethMap).bindPopup('<b>Vous \u00eates ici</b>');
+
+  if (info) info.textContent = 'Recherche des Beth Chabad\u2026';
+
+  var radius = 50000;
+  var query = '[out:json][timeout:15];(' +
+    'node["name"~"[Cc]habad|[Hh]abad|[Ll]oubavitch|[Ll]ubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
+    'way["name"~"[Cc]habad|[Hh]abad|[Ll]oubavitch|[Ll]ubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
+    'node["denomination"="chabad_lubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
+    'way["denomination"="chabad_lubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
+    ');out center body;';
+
+  fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query))
+    .then(function(r) { return r.json(); })
+    .then(function(data) { displayBethResults(data.elements || [], lat, lng); })
+    .catch(function(err) {
+      console.log('Overpass error:', err);
+      if (info) info.textContent = 'Utilisez le bouton Chabad.org pour les r\u00e9sultats complets';
+    });
+}
+
+function displayBethResults(elements, userLat, userLng) {
+  var info = document.getElementById('beth-location-info');
+  var results = document.getElementById('beth-results');
+  _bethMarkers.forEach(function(m) { _bethMap.removeLayer(m); });
+  _bethMarkers = [];
+
+  var seen = {};
+  var places = [];
+  elements.forEach(function(el) {
+    var lat = el.lat || (el.center && el.center.lat);
+    var lng = el.lon || (el.center && el.center.lon);
+    if (!lat || !lng) return;
+    var name = (el.tags && el.tags.name) || 'Beth Chabad';
+    var key = Math.round(lat*1000) + ',' + Math.round(lng*1000);
+    if (seen[key]) return;
+    seen[key] = true;
+    var dist = haversine(userLat, userLng, lat, lng);
+    places.push({ name:name, lat:lat, lng:lng, dist:dist, addr:(el.tags&&el.tags['addr:street'])||'', phone:(el.tags&&el.tags.phone)||'', website:(el.tags&&el.tags.website)||'' });
+  });
+  places.sort(function(a,b) { return a.dist - b.dist; });
+
+  if (info) info.textContent = places.length + ' Beth Chabad trouv\u00e9' + (places.length > 1 ? 's' : '') + ' dans un rayon de 50km';
+
+  var chabadIcon = L.divIcon({ className:'', html:'<div style="font-size:22px;">\ud83d\udd4d</div>', iconSize:[28,28], iconAnchor:[14,14] });
+  places.forEach(function(p) {
+    var m = L.marker([p.lat, p.lng], { icon: chabadIcon }).addTo(_bethMap);
+    var popup = '<b>' + p.name + '</b>';
+    if (p.addr) popup += '<br>' + p.addr;
+    if (p.dist) popup += '<br><small>' + p.dist.toFixed(1) + ' km</small>';
+    if (p.phone) popup += '<br><a href="tel:' + p.phone + '">' + p.phone + '</a>';
+    if (p.website) popup += '<br><a href="' + p.website + '" target="_blank">Site web \u2197</a>';
+    m.bindPopup(popup);
+    _bethMarkers.push(m);
+  });
+
+  if (places.length > 0) {
+    var group = L.featureGroup(_bethMarkers);
+    _bethMap.fitBounds(group.getBounds().pad(0.15));
+  }
+
+  if (results && places.length > 0) {
+    var html = '';
+    places.slice(0, 8).forEach(function(p) {
+      html += '<div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;" onclick="_bethMap.setView([' + p.lat + ',' + p.lng + '],15)">';
+      html += '<div style="font-size:14px;font-weight:700;color:var(--black);">' + p.name + '</div>';
+      if (p.addr) html += '<div style="font-size:12px;color:var(--gray-3);">' + p.addr + '</div>';
+      html += '<div style="font-size:11px;color:var(--gray-3);margin-top:2px;">' + p.dist.toFixed(1) + ' km</div>';
+      html += '</div>';
+    });
+    results.innerHTML = html;
+  } else if (results) {
+    results.innerHTML = '<div style="text-align:center;padding:12px;color:var(--gray-3);font-size:13px;">Aucun r\u00e9sultat OSM. Essayez le <b>Chabad.org Locator</b> pour des r\u00e9sultats complets.</div>';
+  }
+}
+
+function haversine(lat1,lon1,lat2,lon2) {
+  var R = 6371;
+  var d2r = Math.PI/180;
+  var dLat = (lat2-lat1)*d2r;
+  var dLon = (lon2-lon1)*d2r;
+  var a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1*d2r)*Math.cos(lat2*d2r)*Math.sin(dLon/2)*Math.sin(dLon/2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function refreshBethMap() {
+  if (_bethMap) { _bethMap.remove(); _bethMap = null; }
+  _bethMarkers = [];
+  var r = document.getElementById('beth-results');
+  if (r) r.innerHTML = '';
+  loadBethMap();
+}
+
+function openChabadLocator() {
+  window.open('https://www.chabad.org/jewish-centers/', '_blank');
+}
+
+// ====== SIDOUR / PATAKH ELIYAHOU ======
+var PATAKH_PRAYERS = {
+  shaharit: {
+    title: "Cha\'harit (Pri\u00e8re du matin)",
+    sections: [
+      { name: "Mod\u00e9 Ani", he: "\u05de\u05d5\u05b9\u05d3\u05b6\u05d4 \u05d0\u05b2\u05e0\u05b4\u05d9 \u05dc\u05b0\u05e4\u05b8\u05e0\u05b6\u05d9\u05da\u05b8 \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d7\u05b7\u05d9 \u05d5\u05b0\u05e7\u05b7\u05d9\u05b8\u05bc\u05dd, \u05e9\u05b6\u05c1\u05d4\u05b6\u05d7\u05b1\u05d6\u05b7\u05e8\u05b0\u05ea\u05b8\u05bc \u05d1\u05b4\u05bc\u05d9 \u05e0\u05b4\u05e9\u05b0\u05c1\u05de\u05b8\u05ea\u05b4\u05d9 \u05d1\u05b0\u05bc\u05d7\u05b6\u05de\u05b0\u05dc\u05b8\u05d4, \u05e8\u05b7\u05d1\u05b8\u05bc\u05d4 \u05d0\u05b1\u05de\u05d5\u05e0\u05b8\u05ea\u05b6\u05da\u05b8.", ph: "Mod\u00e9 ani l\u00e9fan\u00e9kha, m\u00e9lekh \u2018ha\u00ef v\u00e9kayam, ch\u00e9h\u00e9\u2018h\u00e9zarta bi nichmati b\u00e9\u2018h\u00e9mla, raba \u00e9mounat\u00e9kha." },
+      { name: "N\u00e9tilat Yada\u00efm", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d0\u05b2\u05e9\u05b6\u05c1\u05e8 \u05e7\u05b4\u05d3\u05b0\u05bc\u05e9\u05b8\u05c1\u05e0\u05d5\u05bc \u05d1\u05b0\u05bc\u05de\u05b4\u05e6\u05b0\u05d5\u05b9\u05ea\u05b8\u05d9\u05d5, \u05d5\u05b0\u05e6\u05b4\u05d5\u05b8\u05bc\u05e0\u05d5\u05bc \u05e2\u05b7\u05dc \u05e0\u05b0\u05d8\u05b4\u05d9\u05dc\u05b7\u05ea \u05d9\u05b8\u05d3\u05b8\u05d9\u05b4\u05dd.", ph: "Baroukh ata Ado-na\u00ef Elo-h\u00e9nou m\u00e9lekh ha\u2018olam, ach\u00e9r kid\u00e9chanou b\u00e9mitsvotav, v\u00e9tsivanou al n\u00e9tilat yada\u00efm." },
+      { name: "\u00c9lo-ha\u00ef N\u00e9chama", he: "\u05d0\u05b1\u05dc\u05b9\u05d4\u05b7\u05d9, \u05e0\u05b0\u05e9\u05b8\u05c1\u05de\u05b8\u05d4 \u05e9\u05b6\u05c1\u05e0\u05b8\u05bc\u05ea\u05b7\u05ea\u05b8\u05bc \u05d1\u05b4\u05bc\u05d9 \u05d8\u05b0\u05d4\u05d5\u05b9\u05e8\u05b8\u05d4 \u05d4\u05b4\u05d9\u05d0. \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d1\u05b0\u05e8\u05b8\u05d0\u05ea\u05b8\u05bc\u05d4\u05bc, \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05e6\u05b7\u05e8\u05b0\u05ea\u05b8\u05bc\u05d4\u05bc, \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05e0\u05b0\u05e4\u05b7\u05d7\u05b0\u05ea\u05b8\u05bc\u05d4\u05bc \u05d1\u05b4\u05bc\u05d9.", ph: "\u00c9lo-ha\u00ef, n\u00e9chama ch\u00e9natata bi t\u00e9hora hi. Ata b\u00e9rata, ata y\u00e9tsarta, ata n\u00e9fa\u2018htah bi." },
+      { name: "Birkhot HaTorah", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d0\u05b2\u05e9\u05b6\u05c1\u05e8 \u05e7\u05b4\u05d3\u05b0\u05bc\u05e9\u05b8\u05c1\u05e0\u05d5\u05bc \u05d1\u05b0\u05bc\u05de\u05b4\u05e6\u05b0\u05d5\u05b9\u05ea\u05b8\u05d9\u05d5, \u05d5\u05b0\u05e6\u05b4\u05d5\u05b8\u05bc\u05e0\u05d5\u05bc \u05dc\u05b7\u05e2\u05b2\u05e1\u05d5\u05b9\u05e7 \u05d1\u05b0\u05bc\u05d3\u05b4\u05d1\u05b0\u05e8\u05b5\u05d9 \u05ea\u05d5\u05b9\u05e8\u05b8\u05d4.", ph: "Baroukh ata Ado-na\u00ef Elo-h\u00e9nou m\u00e9lekh ha\u2018olam, ach\u00e9r kid\u00e9chanou b\u00e9mitsvotav, v\u00e9tsivanou la\u2018assok b\u00e9divr\u00e9 Tora." }
+    ]
+  },
+  minha: {
+    title: "Min\u2018ha (Pri\u00e8re de l\u2018apr\u00e8s-midi)",
+    sections: [
+      { name: "Achr\u00e9", he: "\u05d0\u05b7\u05e9\u05b0\u05c1\u05e8\u05b5\u05d9 \u05d9\u05d5\u05b9\u05e9\u05b0\u05c1\u05d1\u05b5\u05d9 \u05d1\u05b5\u05d9\u05ea\u05b6\u05da\u05b8, \u05e2\u05d5\u05b9\u05d3 \u05d9\u05b0\u05d4\u05b7\u05dc\u05b0\u05dc\u05d5\u05bc\u05da\u05b8 \u05e1\u05b6\u05bc\u05dc\u05b8\u05d4.", ph: "Achr\u00e9 yochv\u00e9 v\u00e9t\u00e9kha, \u2018od y\u00e9hal\u00e9loukha s\u00e9la." },
+      { name: "Amida", he: "\u05d0\u05b2\u05d3\u05b9\u05e0\u05b8\u05d9 \u05e9\u05b0\u05c2\u05e4\u05b8\u05ea\u05b7\u05d9 \u05ea\u05b4\u05bc\u05e4\u05b0\u05ea\u05b8\u05bc\u05d7, \u05d5\u05bc\u05e4\u05b4\u05d9 \u05d9\u05b7\u05d2\u05b4\u05bc\u05d9\u05d3 \u05ea\u05b0\u05bc\u05d4\u05b4\u05dc\u05b8\u05bc\u05ea\u05b6\u05da\u05b8.", ph: "Ado-na\u00ef sfata\u00ef tifta\u2018h, oufi yaguid t\u00e9hilat\u00e9kha." }
+    ]
+  },
+  arvit: {
+    title: "Arvit (Pri\u00e8re du soir)",
+    sections: [
+      { name: "V\u00e9hou Ra\u2018houm", he: "\u05d5\u05b0\u05d4\u05d5\u05bc\u05d0 \u05e8\u05b7\u05d7\u05d5\u05bc\u05dd \u05d9\u05b0\u05db\u05b7\u05e4\u05b5\u05bc\u05e8 \u05e2\u05b8\u05d5\u05b9\u05df \u05d5\u05b0\u05dc\u05b9\u05d0 \u05d9\u05b7\u05e9\u05b0\u05c1\u05d7\u05b4\u05d9\u05ea, \u05d5\u05b0\u05d4\u05b4\u05e8\u05b0\u05d1\u05b8\u05bc\u05d4 \u05dc\u05b0\u05d4\u05b8\u05e9\u05b4\u05c1\u05d9\u05d1 \u05d0\u05b7\u05e4\u05bc\u05d5\u05b9, \u05d5\u05b0\u05dc\u05b9\u05d0 \u05d9\u05b8\u05e2\u05b4\u05d9\u05e8 \u05db\u05b8\u05bc\u05dc \u05d7\u05b2\u05de\u05b8\u05ea\u05d5\u05b9.", ph: "V\u00e9hou ra\u2018houm y\u00e9khap\u00e9r \u2018avon v\u00e9lo yach\u2018hit, v\u00e9hirba l\u00e9hachiv apo, v\u00e9lo ya\u2018ir kol \u2018hamato." },
+      { name: "Ch\u00e9ma", he: "\u05e9\u05b0\u05c1\u05de\u05b7\u05e2 \u05d9\u05b4\u05e9\u05b0\u05c2\u05e8\u05b8\u05d0\u05b5\u05dc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b6\u05d7\u05b8\u05d3.", ph: "Ch\u00e9ma Isra\u00ebl, Ado-na\u00ef \u00c9lo-h\u00e9nou, Ado-na\u00ef \u00c9\u2018had." }
+    ]
+  },
+  shema: {
+    title: "Ch\u00e9ma Isra\u00ebl",
+    sections: [
+      { name: "Ch\u00e9ma", he: "\u05e9\u05b0\u05c1\u05de\u05b7\u05e2 \u05d9\u05b4\u05e9\u05b0\u05c2\u05e8\u05b8\u05d0\u05b5\u05dc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b6\u05d7\u05b8\u05d3.", ph: "Ch\u00e9ma Isra\u00ebl, Ado-na\u00ef \u00c9lo-h\u00e9nou, Ado-na\u00ef \u00c9\u2018had." },
+      { name: "V\u00e9ahavta", he: "\u05d5\u05b0\u05d0\u05b8\u05d4\u05b7\u05d1\u05b0\u05ea\u05b8\u05bc \u05d0\u05b5\u05ea \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b6\u05d9\u05da\u05b8, \u05d1\u05b0\u05bc\u05db\u05b8\u05dc \u05dc\u05b0\u05d1\u05b8\u05d1\u05b0\u05da\u05b8, \u05d5\u05bc\u05d1\u05b0\u05db\u05b8\u05dc \u05e0\u05b7\u05e4\u05b0\u05e9\u05b0\u05c1\u05da\u05b8, \u05d5\u05bc\u05d1\u05b0\u05db\u05b8\u05dc \u05de\u05b0\u05d0\u05b9\u05d3\u05b6\u05da\u05b8.", ph: "V\u00e9ahavta \u00e9t Ado-na\u00ef \u00c9lo-h\u00e9kha, b\u00e9khol l\u00e9vav\u00e9kha, ouv\u00e9khol nafch\u00e9kha, ouv\u00e9khol m\u00e9od\u00e9kha." }
+    ]
+  },
+  birkat: {
+    title: "Birkat Hamazon",
+    sections: [
+      { name: "Zimoun", he: "\u05e8\u05b7\u05d1\u05bc\u05d5\u05b9\u05ea\u05b7\u05d9 \u05e0\u05b0\u05d1\u05b8\u05e8\u05b5\u05da\u05b0. \u05d9\u05b0\u05d4\u05b4\u05d9 \u05e9\u05b5\u05c1\u05dd \u05d9\u05b0\u05d9\u05b8 \u05de\u05b0\u05d1\u05b9\u05e8\u05b8\u05da\u05b0 \u05de\u05b5\u05e2\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d5\u05b0\u05e2\u05b7\u05d3 \u05e2\u05d5\u05b9\u05dc\u05b8\u05dd.", ph: "Rabota\u00ef n\u00e9var\u00e9\u2018kh. Y\u00e9hi ch\u00e9m Ado-na\u00ef m\u00e9vora\u2018kh m\u00e9\u2018ata v\u00e9\u2018ad \u2018olam." },
+      { name: "Hazan", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d4\u05b7\u05d6\u05b8\u05bc\u05df \u05d0\u05b6\u05ea \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd \u05db\u05bb\u05bc\u05dc\u05bc\u05d5\u05b9 \u05d1\u05b0\u05bc\u05d8\u05d5\u05bc\u05d1\u05d5\u05b9.", ph: "Baroukh ata Ado-na\u00ef \u00c9lo-h\u00e9nou m\u00e9lekh ha\u2018olam, hazan \u00e9t ha\u2018olam koulo b\u00e9touvo." }
+    ]
+  }
+};
+
+function showPatakh(key) {
+  var data = PATAKH_PRAYERS[key];
+  if (!data) return;
+  document.querySelectorAll('.patakh-tab').forEach(function(t) { t.classList.remove('active'); });
+  event.target.classList.add('active');
+  showPatakhDirect(key);
+}
+
+function showPatakhDirect(key) {
+  var data = PATAKH_PRAYERS[key];
+  if (!data) return;
+  var el = document.getElementById('patakh-content');
+  if (!el) return;
+  var html = '<div style="font-size:15px;font-weight:700;color:var(--black);margin-bottom:16px;">' + data.title + '</div>';
+  data.sections.forEach(function(s) {
+    html += '<div style="font-size:12px;font-weight:700;color:var(--gray-3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">' + s.name + '</div>';
+    html += '<div class="patakh-he">' + s.he + '</div>';
+    html += '<div class="patakh-ph">' + s.ph + '</div>';
+  });
+  el.innerHTML = html;
+  el.scrollTop = 0;
 }
 
 // ====== START ======
