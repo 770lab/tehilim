@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Tehilim Quotidien</title>
+<title>Chabad</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -25,18 +25,45 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
 .splash-bh { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
 .splash-content { text-align:center; padding:40px 30px; max-width:440px; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-.splash-icon { font-size:40px; margin-bottom:20px; }
+.splash-icon { font-size:40px; margin-bottom:20px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
 .splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
-.splash-subtitle { font-size:14px; color:var(--gray-3); letter-spacing:4px; text-transform:uppercase; font-weight:400; margin-bottom:28px; }
-.splash-divider { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:28px; }
+/* CHABAD ANIMATED TITLE */
+.splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-bottom:4px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:baseline; justify-content:center; overflow:visible; height:70px; }
+.sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; }
+.sc-static:nth-child(1) { animation-delay:0.1s; }
+.sc-static:nth-child(2) { animation-delay:0.15s; }
+.sc-static:nth-child(3) { animation-delay:0.2s; }
+.sc-static:nth-child(4) { animation-delay:0.25s; }
+.sc-static:nth-child(5) { animation-delay:0.3s; }
+@keyframes scFadeIn { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+.sc-letter-d { display:inline-block; opacity:0; animation:scDrop 2.4s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; transform-origin:center center; position:relative; }
+@keyframes scDrop {
+  0%   { opacity:0; transform:translateY(-60px); }
+  8%   { opacity:1; transform:translateY(0px); }
+  14%  { opacity:1; transform:translateY(0px); }
+  /* d falls down, rotates to p */
+  22%  { transform:translateY(18px) rotate(0deg); }
+  35%  { transform:translateY(18px) rotate(180deg); opacity:1; }
+  /* pause as p */
+  50%  { transform:translateY(18px) rotate(180deg); opacity:1; }
+  /* bounce back up, rotate to d */
+  65%  { transform:translateY(-8px) rotate(360deg); }
+  75%  { transform:translateY(3px) rotate(360deg); }
+  82%  { transform:translateY(-2px) rotate(360deg); }
+  88%  { transform:translateY(0px) rotate(360deg); }
+  100% { transform:translateY(0px) rotate(360deg); opacity:1; }
+}
+.splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 1.8s forwards; direction:rtl; }
+@keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.splash-divider { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:28px; opacity:0; animation:scSubIn 0.6s ease 2.2s forwards; }
 .splash-divider-line { flex:1; max-width:60px; height:1px; background:var(--gray-5); }
 .splash-divider-star { color:var(--gray-4); font-size:8px; }
-.splash-quote { font-style:italic; color:var(--gray-2); font-size:16px; line-height:1.7; border:none; margin:0 0 14px; padding:0 10px; min-height:80px; display:flex; align-items:center; justify-content:center; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; }
-.splash-source { color:var(--gray-3); font-size:11px; letter-spacing:1.5px; font-weight:600; transition: opacity 0.6s ease; }
-.splash-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; cursor:pointer; padding:8px 0; }
+.splash-quote { font-style:italic; color:var(--gray-2); font-size:16px; line-height:1.7; border:none; margin:0 0 14px; padding:0 10px; min-height:80px; display:flex; align-items:center; justify-content:center; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; opacity:0; animation:scSubIn 0.8s ease 2.6s forwards; }
+.splash-source { color:var(--gray-3); font-size:11px; letter-spacing:1.5px; font-weight:600; transition: opacity 0.6s ease; opacity:0; animation:scSubIn 0.6s ease 2.8s forwards; }
+.splash-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; cursor:pointer; padding:8px 0; opacity:0; animation:scSubIn 0.5s ease 3s forwards; }
 .splash-dot { height:6px; border-radius:3px; transition: all 0.4s ease; cursor:pointer; }
-.splash-tap { color:var(--gray-4); font-size:11px; margin-top:32px; letter-spacing:2px; animation: pulse 2.5s ease-in-out infinite; }
-.splash-footer { margin-top:auto; padding-top:40px; text-align:center; }
+.splash-tap { color:var(--gray-4); font-size:11px; margin-top:32px; letter-spacing:2px; opacity:0; animation: scSubIn 0.5s ease 3.2s forwards; }
+.splash-footer { margin-top:auto; padding-top:40px; text-align:center; opacity:0; animation:scSubIn 0.5s ease 3.2s forwards; }
 .footer-logo-wrap { display:inline-flex; align-items:center; gap:6px; opacity:0.35; transition:opacity 0.3s; }
 .footer-logo-wrap:hover { opacity:0.55; }
 .footer-logo-icon { width:20px; height:20px; }
@@ -101,6 +128,36 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .psalm-card-arrow { font-size:16px; color:var(--gray-4); }
 .unavailable-card { opacity:0.5; cursor:default; pointer-events:none; }
 .unavailable-num { background:var(--gray-5) !important; color:var(--gray-3) !important; }
+
+/* STORY BAR OBJECTIFS */
+.obj-story-bar { display:flex; align-items:center; gap:12px; padding:10px 16px 6px; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.obj-story-bar::-webkit-scrollbar { display:none; }
+.os-item { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
+.os-ring { width:62px; height:62px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; padding:2.5px; transition:all 0.3s; }
+.os-item.done .os-ring { background:#dbdbdb; }
+.os-item.current .os-ring { animation:storyPulse 2s ease-in-out infinite; }
+@keyframes storyPulse { 0%,100% { box-shadow:0 0 0 0 rgba(238,42,123,0.3); } 50% { box-shadow:0 0 0 6px rgba(238,42,123,0); } }
+.os-circle { width:100%; height:100%; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:24px; }
+.os-label { font-size:9px; color:var(--gray-3); font-weight:600; white-space:nowrap; max-width:64px; overflow:hidden; text-overflow:ellipsis; text-align:center; font-family:var(--font); }
+.os-item.current .os-label { color:var(--black); font-weight:700; }
+/* STORY OVERLAY */
+#obj-story-overlay { position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; display:none; flex-direction:column; max-width:520px; margin:0 auto; }
+#obj-story-overlay[style*="flex"] { display:flex !important; }
+.os-progress { display:flex; gap:3px; padding:12px 8px 0; flex-shrink:0; position:absolute; top:0; left:0; right:0; z-index:10; }
+.os-prog-seg { flex:1; height:2.5px; border-radius:2px; background:rgba(255,255,255,0.3); overflow:hidden; }
+.os-prog-fill { height:100%; border-radius:2px; background:rgba(255,255,255,0.9); width:0%; transition:width 0.3s; }
+.os-close { position:absolute; top:24px; right:16px; z-index:20; background:none; border:none; color:white; font-size:22px; cursor:pointer; width:40px; height:40px; display:flex; align-items:center; justify-content:center; text-shadow:0 1px 4px rgba(0,0,0,0.3); }
+.os-content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 30px 40px; text-align:center; transition:opacity 0.3s; }
+.os-emoji { font-size:72px; margin-bottom:16px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15)); }
+.os-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:32px; font-weight:700; margin-bottom:8px; direction:rtl; text-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.os-name { font-size:18px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:24px; opacity:0.9; }
+.os-msg { font-size:16px; line-height:1.7; max-width:340px; opacity:0.9; font-family:'EB Garamond',Georgia,serif; margin-bottom:32px; }
+.os-check-btn { padding:14px 40px; border-radius:50px; border:2px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); transition:all 0.3s; display:flex; align-items:center; gap:10px; }
+.os-check-btn:active { transform:scale(0.95); }
+.os-check-btn.checked { background:rgba(255,255,255,0.95); border-color:transparent; }
+.os-time-badge { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; opacity:0.6; margin-bottom:20px; }
+.os-tap-left { position:absolute; left:0; top:60px; bottom:80px; width:30%; z-index:5; }
+.os-tap-right { position:absolute; right:0; top:60px; bottom:80px; width:70%; z-index:5; }
 
 /* DAILY OBJECTIVES */
 .daily-objectives { margin:16px 16px 0; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; }
@@ -526,8 +583,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="splash-bh">ב״ה</div>
   <div class="splash-content" id="splash-content">
     <div class="splash-icon">✡</div>
-    <h1 class="splash-title">תהלים</h1>
-    <p class="splash-subtitle">Tehilim Quotidien</p>
+    <h1 class="splash-title-chabad" id="splash-title-chabad">
+      <span class="sc-static">C</span><span class="sc-static">h</span><span class="sc-static">a</span><span class="sc-static">b</span><span class="sc-static">a</span><span class="sc-letter-d" id="sc-d">d</span>
+    </h1>
+    <p class="splash-subtitle" id="splash-sub">חב״ד</p>
     <div class="splash-divider">
       <span class="splash-divider-line"></span>
       <span class="splash-divider-star">✦</span>
@@ -553,7 +612,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <span class="hebrew-date" id="hebrew-date"></span>
         <span class="gregorian-date" id="gregorian-date"></span>
       </div>
-      <span class="home-greeting">תהלים</span>
+      <span class="home-greeting" style="font-family:var(--font);direction:ltr;letter-spacing:1px;">Chabad</span>
       <div></div>
     </div>
   </div>
@@ -561,10 +620,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <!-- MENU CARDS (visible by default) -->
   <div id="panel-menu">
 
-    <!-- 10 OBJECTIFS QUOTIDIENS -->
+    <!-- STORY BAR OBJECTIFS -->
+    <div class="obj-story-bar" id="obj-story-bar"></div>
+
+    <!-- 11 OBJECTIFS QUOTIDIENS -->
     <div class="daily-objectives">
-      <div class="obj-header">
-        <span class="obj-title">🕎 Mes 10 objectifs du jour</span>
+      <div class="obj-header" onclick="toggleObjList()">
+        <span class="obj-title">🕎 Mes objectifs du jour</span>
         <span class="obj-counter" id="obj-counter">0/10</span>
       </div>
       <div class="obj-progress-bar"><div class="obj-progress-fill" id="obj-progress-fill"></div></div>
@@ -928,6 +990,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     <button class="insta-nav-item" onclick="goHome();switchTab('chains');renderChainList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg><span>Chaînes</span></button>
     <button class="insta-nav-item" onclick="goHome();switchTab('perek');renderPerek()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Chapitres</span></button>
   </div>
+</div>
+
+<!-- STORY OVERLAY -->
+<div id="obj-story-overlay" style="display:none">
+  <div class="os-progress" id="os-progress"></div>
+  <button class="os-close" onclick="closeObjStory()">✕</button>
+  <div class="os-content" id="os-content"></div>
+  <div class="os-tap-left" onclick="objStoryPrev()"></div>
+  <div class="os-tap-right" onclick="objStoryNext()"></div>
 </div>
 
 <script>
@@ -4524,10 +4595,12 @@ function showHome() {
   setTimeout(() => document.getElementById("home").classList.add("visible"), 50);
   renderHome();
   renderObjectives();
+  renderObjStoryBar();
   cleanOldObjectives();
   updateBirthdaySub();
   setTimeout(checkBirthdayPopup, 1000);
   setTimeout(checkSharedChain, 500);
+  setTimeout(autoShowObjStory, 1500);
   currentScreen = "home";
 }
 
@@ -6957,17 +7030,21 @@ function renderT119Results(letters, hebrewName) {
 
 // ====== 10 OBJECTIFS QUOTIDIENS ======
 var DAILY_OBJECTIVES = [
-  { id: 'modeh', emoji: '🌅', label: 'Modé Ani', time: 'Réveil' },
-  { id: 'brakhot', emoji: '🙌', label: 'Brakhot du matin', time: 'Matin' },
-  { id: 'tefila', emoji: '🙏', label: 'Téfila (Cha\'harit)', time: 'Matin' },
-  { id: 'tehilim', emoji: '📖', label: 'Tehilim', time: 'Journée' },
-  { id: 'casher', emoji: '🥩', label: 'Manger Casher', time: 'Journée' },
-  { id: 'minha', emoji: '🌤️', label: 'Min\'ha', time: 'Après-midi' },
-  { id: 'arvit', emoji: '🌙', label: 'Arvit', time: 'Soir' },
-  { id: 'famille', emoji: '👨‍👩‍👧‍👦', label: 'Temps en famille', time: 'Soir' },
-  { id: 'etude', emoji: '📚', label: 'Étude de Torah', time: 'Journée' },
-  { id: 'transmission', emoji: '💡', label: 'Transmission / Bonnes actions', time: 'Journée' }
+  { id: 'modeh', emoji: '🌅', label: 'Modé Ani', time: 'Réveil', h0: 5, h1: 7, bg: 'linear-gradient(135deg,#ffecd2,#fcb69f)', msg: 'En ouvrant les yeux, remercie Hachem de t\'avoir rendu ton âme. « Modé Ani Lefanekha... »', hebrew: 'מוֹדֶה אֲנִי לְפָנֶיךָ' },
+  { id: 'brakhot', emoji: '🙌', label: 'Brakhot du matin', time: 'Matin', h0: 7, h1: 8, bg: 'linear-gradient(135deg,#fdfcfb,#e2d1c3)', msg: 'Les Brakhot du matin nous reconnectent à Hachem pour chaque bienfait : la vue, la force, la liberté...', hebrew: 'בִּרְכוֹת הַשַּׁחַר' },
+  { id: 'tefila', emoji: '🙏', label: 'Tsédaka & Cha\'harit', time: 'Matin', h0: 8, h1: 10, bg: 'linear-gradient(135deg,#667eea,#764ba2)', msg: 'Donne la Tsédaka avant la prière puis connecte-toi à Hachem par Cha\'harit. La charité ouvre les portes du ciel.', hebrew: 'צְדָקָה · תְּפִלָּה', dark: true },
+  { id: 'tehilim', emoji: '📖', label: 'Tehilim', time: 'Journée', h0: 10, h1: 12, bg: 'linear-gradient(135deg,#a18cd1,#fbc2eb)', msg: 'Chaque mot de Tehilim brise les barrières et s\'élève sans obstacle. Lis tes chapitres du jour !', hebrew: 'תְּהִלִּים' },
+  { id: 'casher', emoji: '🥩', label: 'Manger Casher', time: 'Journée', h0: 12, h1: 14, bg: 'linear-gradient(135deg,#d4fc79,#96e6a1)', msg: 'La Cacherout sanctifie notre corps et notre âme. Ce que nous mangeons influence ce que nous devenons.', hebrew: 'כַּשְׁרוּת' },
+  { id: 'minha', emoji: '🌤️', label: 'Min\'ha', time: 'Après-midi', h0: 14, h1: 17, bg: 'linear-gradient(135deg,#f6d365,#fda085)', msg: 'Min\'ha est la prière la plus précieuse : elle interrompt nos occupations pour se tourner vers Hachem.', hebrew: 'תְּפִלַּת מִנְחָה' },
+  { id: 'etude', emoji: '📚', label: 'Étude de Torah', time: 'Journée', h0: 17, h1: 19, bg: 'linear-gradient(135deg,#89f7fe,#66a6ff)', msg: 'Fixe des moments pour l\'étude de la Torah. Même quelques minutes illuminent toute ta journée.', hebrew: 'לִימוּד תּוֹרָה' },
+  { id: 'arvit', emoji: '🌙', label: 'Arvit', time: 'Soir', h0: 19, h1: 21, bg: 'linear-gradient(135deg,#0c3483,#a2b6df)', msg: 'Arvit clôture la journée dans la sainteté. Même seul, récite le Chéma et les bénédictions du soir.', hebrew: 'תְּפִלַּת עַרְבִית', dark: true },
+  { id: 'famille', emoji: '👨‍👩‍👧‍👦', label: 'Temps en famille', time: 'Soir', h0: 21, h1: 22, bg: 'linear-gradient(135deg,#ff9a9e,#fecfef)', msg: 'La famille est le sanctuaire. Accorde du temps de qualité, parle avec tes proches, transmets de l\'amour.', hebrew: 'מִשְׁפָּחָה' },
+  { id: 'transmission', emoji: '💡', label: 'Transmission', time: 'Soir', h0: 22, h1: 5, bg: 'linear-gradient(135deg,#1a1a2e,#16213e)', msg: 'Sois une Dougma \'Haya — un exemple vivant. Chaque bonne action rapproche la venue du Machia\'h !', hebrew: 'דּוּגְמָא חַיָּה', dark: true }
 ];
+
+var _objStoryIdx = 0;
+var _objStoryTimer = null;
+var TOTAL_OBJ = DAILY_OBJECTIVES.length; // 11
 
 function getObjStorageKey() {
   var d = new Date();
@@ -6981,6 +7058,153 @@ function getObjState() {
 
 function saveObjState(state) {
   localStorage.setItem(getObjStorageKey(), JSON.stringify(state));
+}
+
+function getCurrentObjIndex() {
+  var h = new Date().getHours();
+  for (var i = 0; i < DAILY_OBJECTIVES.length; i++) {
+    var obj = DAILY_OBJECTIVES[i];
+    if (obj.h1 > obj.h0) { // normal range
+      if (h >= obj.h0 && h < obj.h1) return i;
+    } else { // wraps midnight (e.g. 22-5)
+      if (h >= obj.h0 || h < obj.h1) return i;
+    }
+  }
+  return 0;
+}
+
+// ---- STORY BAR (home screen) ----
+function renderObjStoryBar() {
+  var bar = document.getElementById('obj-story-bar');
+  if (!bar) return;
+  var state = getObjState();
+  var currentIdx = getCurrentObjIndex();
+  var html = '';
+  DAILY_OBJECTIVES.forEach(function(obj, i) {
+    var done = !!state[obj.id];
+    var isCurrent = i === currentIdx;
+    html += '<div class="os-item' + (done ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openObjStory(' + i + ')">';
+    html += '<div class="os-ring"><div class="os-circle">' + obj.emoji + '</div></div>';
+    html += '<span class="os-label">' + obj.label + '</span>';
+    html += '</div>';
+  });
+  bar.innerHTML = html;
+  // Scroll to current
+  setTimeout(function() {
+    var items = bar.querySelectorAll('.os-item');
+    if (items[currentIdx]) {
+      items[currentIdx].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    }
+  }, 100);
+}
+
+// ---- STORY OVERLAY ----
+function openObjStory(idx) {
+  _objStoryIdx = idx;
+  var overlay = document.getElementById('obj-story-overlay');
+  overlay.style.display = 'flex';
+  renderObjStoryContent();
+  startObjStoryTimer();
+}
+
+function closeObjStory() {
+  var overlay = document.getElementById('obj-story-overlay');
+  overlay.style.display = 'none';
+  if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
+  renderObjStoryBar();
+  renderObjectives();
+}
+
+function renderObjStoryContent() {
+  var obj = DAILY_OBJECTIVES[_objStoryIdx];
+  var state = getObjState();
+  var done = !!state[obj.id];
+  var dark = obj.dark;
+  var textColor = dark ? '#fff' : '#1a1a1a';
+
+  // Progress bars
+  var progHtml = '';
+  for (var i = 0; i < DAILY_OBJECTIVES.length; i++) {
+    var pct = i < _objStoryIdx ? 100 : (i === _objStoryIdx ? 0 : 0);
+    progHtml += '<div class="os-prog-seg"><div class="os-prog-fill" style="width:' + pct + '%"></div></div>';
+  }
+  document.getElementById('os-progress').innerHTML = progHtml;
+
+  // Animate current segment
+  setTimeout(function() {
+    var segs = document.querySelectorAll('.os-prog-fill');
+    if (segs[_objStoryIdx]) segs[_objStoryIdx].style.width = '100%';
+    segs[_objStoryIdx].style.transition = 'width 6s linear';
+  }, 50);
+
+  // Content
+  var btnColor = dark ? 'color:#fff;' : 'color:#1a1a1a;';
+  var btnCheckedColor = dark ? 'color:#1a1a1a;' : 'color:#1a1a1a;';
+  var html = '<div class="os-time-badge" style="color:' + textColor + '">' + obj.time + '</div>';
+  html += '<div class="os-emoji">' + obj.emoji + '</div>';
+  html += '<div class="os-hebrew" style="color:' + textColor + '">' + obj.hebrew + '</div>';
+  html += '<div class="os-name" style="color:' + textColor + '">' + obj.label + '</div>';
+  html += '<div class="os-msg" style="color:' + textColor + '">' + obj.msg + '</div>';
+  html += '<button class="os-check-btn' + (done ? ' checked' : '') + '" style="' + (done ? btnCheckedColor : btnColor) + '" onclick="toggleObjFromStory(\'' + obj.id + '\')">';
+  html += done ? '✅ Accompli' : '☐ Marquer comme fait';
+  html += '</button>';
+
+  var content = document.getElementById('os-content');
+  content.innerHTML = html;
+
+  // Background
+  document.getElementById('obj-story-overlay').style.background = obj.bg;
+}
+
+function toggleObjFromStory(id) {
+  var state = getObjState();
+  if (state[id]) {
+    delete state[id];
+  } else {
+    state[id] = new Date().toISOString();
+  }
+  saveObjState(state);
+  renderObjStoryContent();
+}
+
+function objStoryNext() {
+  if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
+  if (_objStoryIdx < DAILY_OBJECTIVES.length - 1) {
+    _objStoryIdx++;
+    renderObjStoryContent();
+    startObjStoryTimer();
+  } else {
+    closeObjStory();
+  }
+}
+
+function objStoryPrev() {
+  if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
+  if (_objStoryIdx > 0) {
+    _objStoryIdx--;
+    renderObjStoryContent();
+    startObjStoryTimer();
+  }
+}
+
+function startObjStoryTimer() {
+  if (_objStoryTimer) clearTimeout(_objStoryTimer);
+  _objStoryTimer = setTimeout(objStoryNext, 6000);
+}
+
+// Auto-show story on app open if there's a current unchecked objective
+function autoShowObjStory() {
+  var state = getObjState();
+  var idx = getCurrentObjIndex();
+  var obj = DAILY_OBJECTIVES[idx];
+  if (!state[obj.id]) {
+    // Only auto-show once per session
+    var sessionKey = 'tehilim_story_shown_' + new Date().getHours();
+    if (!sessionStorage.getItem(sessionKey)) {
+      sessionStorage.setItem(sessionKey, '1');
+      setTimeout(function() { openObjStory(idx); }, 600);
+    }
+  }
 }
 
 function renderObjectives() {
@@ -7005,7 +7229,7 @@ function renderObjectives() {
 
   // Completion quote
   var cqEl = document.getElementById('obj-complete-quote');
-  if (checked === 10) {
+  if (checked === TOTAL_OBJ) {
     var dayIdx = new Date().getDate() % COMPLETION_QUOTES.length;
     var cq = COMPLETION_QUOTES[dayIdx];
     cqEl.innerHTML = '<div class="obj-cq-bravo">🎉 Kol HaKavod !</div><div class="obj-cq-text">« ' + cq.text + ' »</div><div class="obj-cq-source">— ' + cq.source + '</div>';
@@ -7017,12 +7241,15 @@ function renderObjectives() {
 
   // Update counter
   var counter = document.getElementById('obj-counter');
-  counter.textContent = checked + '/10';
-  counter.classList.toggle('done', checked === 10);
+  counter.textContent = checked + '/' + TOTAL_OBJ;
+  counter.classList.toggle('done', checked === TOTAL_OBJ);
 
   // Update progress bar
   var fill = document.getElementById('obj-progress-fill');
-  fill.style.width = (checked / 10 * 100) + '%';
+  fill.style.width = (checked / TOTAL_OBJ * 100) + '%';
+
+  // Update story bar too
+  renderObjStoryBar();
 }
 
 function toggleObjective(id) {
