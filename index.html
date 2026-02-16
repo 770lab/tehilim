@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Chabap</title>
+<title>Chab'app</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' fill='none'%3E%3Cstyle%3E.s{stroke:%23000;stroke-width:28;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Inter,system-ui,sans-serif;font-weight:800;fill:%23000}%3C/style%3E%3Cpath class='s' d='M200 520L200 260L300 160L400 260L400 520'/%3E%3Cline class='s' x1='300' y1='210' x2='300' y2='520'/%3E%3Ccircle class='s' cx='300' cy='300' r='26'/%3E%3Cline class='s' x1='280' y1='520' x2='280' y2='420'/%3E%3Cpath class='s' d='M400 520L400 290L500 190L600 290L600 520'/%3E%3Cline class='s' x1='500' y1='230' x2='500' y2='520'/%3E%3Ccircle class='s' cx='500' cy='330' r='26'/%3E%3Cline class='s' x1='500' y1='520' x2='500' y2='420'/%3E%3Cpath class='s' d='M600 520L600 260L700 160L800 260L800 520'/%3E%3Cline class='s' x1='700' y1='210' x2='700' y2='520'/%3E%3Ccircle class='s' cx='700' cy='300' r='26'/%3E%3Cline class='s' x1='720' y1='520' x2='720' y2='420'/%3E%3Cline class='s' x1='160' y1='560' x2='840' y2='560'/%3E%3Ctext class='t' x='500' y='820' font-size='210' text-anchor='middle'%3E770 Lab%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -19,23 +19,22 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 
 /* SPLASH */
 #splash {
-  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
   background:var(--white); cursor:pointer; position:fixed; top:0; left:0; right:0; bottom:0; z-index:100;
   transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
 .splash-bh { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
-.splash-content { text-align:center; padding:40px 30px; max-width:440px; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-.splash-icon { font-size:40px; margin-bottom:20px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
+.splash-content { text-align:center; padding:0 30px; max-width:440px; margin-top:-15vh; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.splash-icon { margin-bottom:20px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
+.splash-icon .icon-770 { width:120px; height:auto; color:var(--black); }
 .splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
 /* CHABAD ANIMATED TITLE */
 .splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-bottom:4px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:baseline; justify-content:center; overflow:visible; height:70px; }
 .sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; }
-.sc-static:nth-child(1) { animation-delay:0.1s; }
-.sc-static:nth-child(2) { animation-delay:0.15s; }
-.sc-static:nth-child(3) { animation-delay:0.2s; }
-.sc-static:nth-child(4) { animation-delay:0.25s; }
-.sc-static:nth-child(5) { animation-delay:0.3s; }
+.sc-apos { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.5s ease 2.5s forwards; }
+.sc-extra-p { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.5s ease 2.7s forwards; }
+@keyframes scInsert { to { max-width:30px; opacity:1; letter-spacing:2px; } }
 @keyframes scFadeIn { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
 .sc-letter-d { display:inline-block; opacity:0; animation:scDrop 1.8s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; transform-origin:center center; position:relative; }
 @keyframes scDrop {
@@ -44,10 +43,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   20%  { opacity:1; transform:translateY(0px); }
   35%  { transform:translateY(30px) rotate(0deg); }
   55%  { transform:translateY(30px) rotate(180deg); opacity:1; }
-  70%  { transform:translateY(10px) rotate(180deg); }
-  80%  { transform:translateY(13px) rotate(180deg); }
-  90%  { transform:translateY(12px) rotate(180deg); }
-  100% { transform:translateY(12px) rotate(180deg); opacity:1; }
+  70%  { transform:translateY(8px) rotate(180deg); }
+  80%  { transform:translateY(8px) rotate(180deg); }
+  90%  { transform:translateY(8px) rotate(180deg); }
+  100% { transform:translateY(8px) rotate(180deg); opacity:1; }
 }
 .splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 1.8s forwards; direction:rtl; }
 @keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -59,7 +58,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; cursor:pointer; padding:8px 0; opacity:0; animation:scSubIn 0.5s ease 3s forwards; }
 .splash-dot { height:6px; border-radius:3px; transition: all 0.4s ease; cursor:pointer; }
 .splash-tap { color:var(--gray-4); font-size:11px; margin-top:32px; letter-spacing:2px; opacity:0; animation: scSubIn 0.5s ease 3.2s forwards; }
-.splash-footer { margin-top:auto; padding-top:40px; text-align:center; opacity:0; animation:scSubIn 0.5s ease 3.2s forwards; }
+.splash-footer { position:absolute; bottom:32px; left:0; right:0; text-align:center; opacity:0; animation:scSubIn 0.5s ease 3.2s forwards; }
 .footer-logo-wrap { display:inline-flex; align-items:center; gap:6px; opacity:0.35; transition:opacity 0.3s; }
 .footer-logo-wrap:hover { opacity:0.55; }
 .footer-logo-icon { width:28px; height:18px; }
@@ -132,9 +131,42 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .big-card-title { font-size:17px; font-weight:700; color:var(--black); }
 .big-card-sub { font-size:12px; color:var(--gray-3); margin-top:2px; }
 .big-card-arrow { font-size:24px; color:var(--gray-4); font-weight:300; flex-shrink:0; }
+
+/* HAYOM YOM CARD */
+.hyy-card { padding:20px 18px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; }
+.hyy-card:active { transform:scale(0.98); background:var(--gray-6); }
+.hyy-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.hyy-icon { font-size:24px; }
+.hyy-title { font-size:14px; font-weight:700; color:var(--black); flex:1; }
+.hyy-date { font-size:11px; color:var(--gray-3); font-weight:600; }
+.hyy-text { font-family:'EB Garamond',Georgia,serif; font-size:15px; line-height:1.7; color:var(--gray-1); max-height:120px; overflow:hidden; transition:max-height 0.4s ease; position:relative; }
+.hyy-text.expanded { max-height:2000px; }
+.hyy-expand { font-size:11px; color:var(--gray-3); font-weight:600; margin-top:8px; text-align:right; }
+.hyy-loading { font-size:13px; color:var(--gray-3); font-style:italic; }
+.hyy-link { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:12px; padding-top:10px; border-top:1px solid var(--gray-6); font-size:11px; color:var(--gray-3); font-weight:600; letter-spacing:0.5px; }
 .sub-panel-header { font-size:20px; font-weight:800; color:var(--black); text-align:center; padding:8px 16px 12px; }
 /* Club section */
 .club-section { padding:0 0 24px; }
+.club-story { padding:20px 20px 24px; text-align:center; }
+.club-story-title { font-size:18px; font-weight:800; color:var(--black); margin-bottom:12px; letter-spacing:0.5px; }
+.club-story-text { font-size:14px; line-height:1.7; color:var(--gray-2); margin-bottom:0; font-family:'EB Garamond',Georgia,serif; }
+.club-story-tagline { font-size:12px; font-weight:700; color:var(--gray-3); letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+.club-divider { width:40px; height:2px; background:var(--black); margin:16px auto; border-radius:1px; }
+.club-products-title { font-size:14px; font-weight:700; color:var(--black); text-transform:uppercase; letter-spacing:1.5px; padding:0 20px 12px; }
+.club-products { display:flex; gap:12px; padding:0 20px 20px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; scroll-snap-type:x mandatory; }
+.club-products::-webkit-scrollbar { display:none; }
+.club-product-card { flex:0 0 160px; scroll-snap-align:start; border-radius:var(--radius); overflow:hidden; background:var(--white); border:1px solid var(--gray-6); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform 0.2s; }
+.club-product-card:active { transform:scale(0.97); }
+.club-product-img { width:100%; aspect-ratio:1; object-fit:cover; background:var(--gray-6); display:block; }
+.club-product-info { padding:10px 12px; }
+.club-product-name { font-size:12px; font-weight:700; color:var(--black); line-height:1.3; margin-bottom:4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.club-product-price { font-size:13px; font-weight:800; color:var(--black); }
+.club-product-collection { font-size:10px; color:var(--gray-3); font-weight:600; margin-bottom:2px; }
+.club-cta { display:block; margin:0 20px 20px; padding:14px; text-align:center; background:var(--black); color:var(--white); font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; border-radius:var(--radius); text-decoration:none; transition:opacity 0.2s; }
+.club-cta:active { opacity:0.85; }
+.club-maasser { background:var(--gray-6); border-radius:var(--radius); margin:0 20px 20px; padding:16px; text-align:center; }
+.club-maasser-emoji { font-size:24px; margin-bottom:6px; }
+.club-maasser-text { font-size:12px; color:var(--gray-2); line-height:1.6; }
 .club-hero { text-align:center; padding:28px 20px 20px; }
 .club-hero-emoji { font-size:48px; margin-bottom:8px; }
 .club-hero-title { font-size:22px; font-weight:800; color:var(--black); margin-bottom:4px; }
@@ -150,7 +182,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .os-ring { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
 .os-item.done .os-ring { background:#dbdbdb !important; }
 .os-item.current .os-ring { animation:storyPulse 2s ease-in-out infinite; }
-@keyframes storyPulse { 0%,100% { box-shadow:0 0 0 0 rgba(238,42,123,0.3); } 50% { box-shadow:0 0 0 6px rgba(238,42,123,0); } }
+@keyframes storyPulse { 0%,100% { box-shadow:0 0 0 0 rgba(238,42,123,0.4); } 50% { box-shadow:0 0 0 8px rgba(238,42,123,0); } }
 .os-circle { width:100%; height:100%; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:28px; }
 .os-label { font-size:10px; color:var(--gray-3); font-weight:600; white-space:nowrap; text-align:center; font-family:var(--font); }
 .os-item.current .os-label { color:var(--black); font-weight:700; }
@@ -608,22 +640,14 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 <div id="splash" onclick="skipSplash()">
   <div class="splash-bh">ב״ה</div>
   <div class="splash-content" id="splash-content">
-    <div class="splash-icon">✡</div>
+<div class="splash-icon"><img src="data:image/png;base64,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" alt="Crown" style="width:120px;height:auto;opacity:0;animation:scFadeIn 0.6s ease 0s forwards;"></div>
     <h1 class="splash-title-chabad" id="splash-title-chabad">
-      <span class="sc-static">C</span><span class="sc-static">h</span><span class="sc-static">a</span><span class="sc-static">b</span><span class="sc-static">a</span><span class="sc-letter-d" id="sc-d">d</span>
+      <span class="sc-static" style="animation-delay:0.1s">C</span><span class="sc-static" style="animation-delay:0.15s">h</span><span class="sc-static" style="animation-delay:0.2s">a</span><span class="sc-static" style="animation-delay:0.25s">b</span><span class="sc-apos">'</span><span class="sc-static" style="animation-delay:0.3s">a</span><span class="sc-letter-d" id="sc-d">d</span><span class="sc-extra-p">p</span>
     </h1>
-    <p class="splash-subtitle" id="splash-sub">חב״ד</p>
-    <div class="splash-divider">
-      <span class="splash-divider-line"></span>
-      <span class="splash-divider-star">✦</span>
-      <span class="splash-divider-line"></span>
-    </div>
-    <blockquote class="splash-quote" id="splash-quote"></blockquote>
-    <p class="splash-source" id="splash-source"></p>
-    <div class="splash-dots" id="splash-dots"></div>
+    <p class="splash-subtitle" id="splash-sub" style="direction:ltr;font-family:var(--font);font-size:11px;letter-spacing:2px;">MACHIA'H ARRIVE, SOYONS PRÊT À L'ACCUEILLIR</p>
     <p class="splash-tap">Appuyez pour commencer</p>
-    <p class="splash-footer"><span class="footer-logo-wrap"><svg class="footer-logo-icon" viewBox="100 100 800 500" fill="none"><style>.fs{stroke:#000;stroke-width:28;stroke-linecap:round;stroke-linejoin:round}</style><path class="fs" d="M200 520L200 260L300 160L400 260L400 520"/><line class="fs" x1="300" y1="210" x2="300" y2="520"/><circle class="fs" cx="300" cy="300" r="26"/><line class="fs" x1="280" y1="520" x2="280" y2="420"/><path class="fs" d="M400 520L400 290L500 190L600 290L600 520"/><line class="fs" x1="500" y1="230" x2="500" y2="520"/><circle class="fs" cx="500" cy="330" r="26"/><line class="fs" x1="500" y1="520" x2="500" y2="420"/><path class="fs" d="M600 520L600 260L700 160L800 260L800 520"/><line class="fs" x1="700" y1="210" x2="700" y2="520"/><circle class="fs" cx="700" cy="300" r="26"/><line class="fs" x1="720" y1="520" x2="720" y2="420"/><line class="fs" x1="160" y1="560" x2="840" y2="560"/></svg><span class="footer-logo-text">770 Lab</span></span></p>
   </div>
+  <p class="splash-footer"><span class="footer-logo-wrap"><svg class="footer-logo-icon" viewBox="100 100 800 500" fill="none"><style>.fs{stroke:#000;stroke-width:28;stroke-linecap:round;stroke-linejoin:round}</style><path class="fs" d="M200 520L200 260L300 160L400 260L400 520"/><line class="fs" x1="300" y1="210" x2="300" y2="520"/><circle class="fs" cx="300" cy="300" r="26"/><line class="fs" x1="280" y1="520" x2="280" y2="420"/><path class="fs" d="M400 520L400 290L500 190L600 290L600 520"/><line class="fs" x1="500" y1="230" x2="500" y2="520"/><circle class="fs" cx="500" cy="330" r="26"/><line class="fs" x1="500" y1="520" x2="500" y2="420"/><path class="fs" d="M600 520L600 260L700 160L800 260L800 520"/><line class="fs" x1="700" y1="210" x2="700" y2="520"/><circle class="fs" cx="700" cy="300" r="26"/><line class="fs" x1="720" y1="520" x2="720" y2="420"/><line class="fs" x1="160" y1="560" x2="840" y2="560"/></svg><span class="footer-logo-text">770 Lab</span></span></p>
 </div>
 
 <!-- NOTIFICATION -->
@@ -634,7 +658,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="home-header">
     <div class="bh-mark">ב״ה</div>
     <div class="home-header-top">
-      <span class="home-greeting">Chabap</span>
+      <span class="home-greeting">Chab'app</span>
     </div>
   </div>
 
@@ -651,6 +675,19 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         </div>
         <div class="big-card-arrow">›</div>
       </div>
+      <!-- HAYOM YOM CARD -->
+      <div class="hyy-card" id="hyy-card" onclick="toggleHyy(event)">
+        <div class="hyy-header">
+          <span class="hyy-icon">📜</span>
+          <span class="hyy-title">Hayom Yom</span>
+          <span class="hyy-date" id="hyy-date"></span>
+        </div>
+        <div class="hyy-text" id="hyy-text"><span class="hyy-loading">Chargement…</span></div>
+        <div class="hyy-expand" id="hyy-expand" style="display:none">Lire la suite ▾</div>
+        <div class="hyy-link" id="hyy-link" style="display:none">
+          <span>Lire sur Chabad.org</span> <span>↗</span>
+        </div>
+      </div>
       <div class="big-card" onclick="switchTab('sub-tehilim')">
         <div class="big-card-icon">📖</div>
         <div class="big-card-info">
@@ -662,7 +699,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <div class="big-card" onclick="switchTab('sub-club')">
         <div class="big-card-icon">🤝</div>
         <div class="big-card-info">
-          <div class="big-card-title">Chabap Club</div>
+          <div class="big-card-title">Chabad Club</div>
           <div class="big-card-sub">Éclaire le monde</div>
         </div>
         <div class="big-card-arrow">›</div>
@@ -765,7 +802,58 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <!-- SUB-PANEL: CHABAP CLUB -->
   <div id="panel-sub-club" style="display:none">
     <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div class="sub-panel-header">🤝 Chabap Club</div>
+    <div class="sub-panel-header">🤝 Chabad Club</div>
+
+    <!-- NOTRE HISTOIRE -->
+    <div class="club-story">
+      <div class="club-story-tagline">Portez fièrement · Soutenez puissamment</div>
+      <div class="club-story-title">Notre Histoire</div>
+      <p class="club-story-text">
+        Depuis 1951, dans la célèbre synagogue 770 à Crown Heights, l'influence du Rabbi de Loubavitch se propage dans le monde entier et le mouvement Chabad connaît une expansion sans fin.
+      </p>
+      <div class="club-divider"></div>
+      <p class="club-story-text">
+        Nous souhaitons rendre hommage à cet endroit magique qui continue d'influencer le monde grâce au mérite de notre Rabbi. En achetant un produit Chabad Club, vous devenez un membre actif de la communauté&nbsp;: le Maasser de votre commande est reversé aux Beth Chabad.
+      </p>
+    </div>
+
+    <!-- 3 PRODUITS -->
+    <div class="club-products-title">🛍️ Nos produits</div>
+    <div class="club-products">
+      <a class="club-product-card" href="https://chabadclub.org/products/sweatshirt-chabad-club-770-olive" target="_blank" rel="noopener">
+        <img class="club-product-img" src="https://chabadclub.org/cdn/shop/files/SweatshirtChabadClub770OliveRecto.png?v=1769600050&width=400" alt="Sweatshirt 770 Olive" loading="lazy">
+        <div class="club-product-info">
+          <div class="club-product-collection">From Crown Heights to the World</div>
+          <div class="club-product-name">Sweatshirt Chabad Club 770 Olive</div>
+          <div class="club-product-price">120,00 €</div>
+        </div>
+      </a>
+      <a class="club-product-card" href="https://chabadclub.org/products/gilet-a-capuche-chabad-club-770-ecru" target="_blank" rel="noopener">
+        <img class="club-product-img" src="https://chabadclub.org/cdn/shop/files/CHABAD_CLUB_GILET_SYNA_ECRU_RECTO.png?v=1767189371&width=400" alt="Gilet 770 Écru" loading="lazy">
+        <div class="club-product-info">
+          <div class="club-product-collection">From Crown Heights to the World</div>
+          <div class="club-product-name">Gilet à capuche Chabad Club 770 Écru</div>
+          <div class="club-product-price">120,00 €</div>
+        </div>
+      </a>
+      <a class="club-product-card" href="https://chabadclub.org/products/t-shirt-coupe-normale-dollar-khaki-vintage" target="_blank" rel="noopener">
+        <img class="club-product-img" src="https://chabadclub.org/cdn/shop/files/CHABAD_CLUB_TSHIRT_DOLLAR_KHAKI_VINTAGE_RECTO.png?v=1745267646&width=400" alt="T-Shirt Dollar Khaki" loading="lazy">
+        <div class="club-product-info">
+          <div class="club-product-collection">In God We Trust</div>
+          <div class="club-product-name">T-Shirt Dollar Khaki Vintage</div>
+          <div class="club-product-price">60,00 €</div>
+        </div>
+      </a>
+    </div>
+    <a class="club-cta" href="https://chabadclub.org" target="_blank" rel="noopener">Voir toute la boutique →</a>
+
+    <div class="club-maasser">
+      <div class="club-maasser-emoji">🤲</div>
+      <div class="club-maasser-text"><strong>Le Maasser</strong> de chaque commande est reversé aux Beth Chabad pour faire perdurer les actions menées par le Rabbi depuis 1951.</div>
+    </div>
+
+    <!-- FONCTIONNALITES EXISTANTES -->
+    <div class="club-products-title" style="margin-top:8px;">⚡ Fonctionnalités</div>
     <div class="club-cards">
       <button class="menu-card" onclick="switchTab('chains')">
         <span class="menu-card-icon">🔗</span>
@@ -4675,12 +4763,13 @@ function showHome() {
   setTimeout(() => document.getElementById("home").classList.add("visible"), 50);
   renderHome();
   renderObjStoryBar();
+  loadHayomYom();
   updateBigObjSub();
   cleanOldObjectives();
   updateBirthdaySub();
   setTimeout(checkBirthdayPopup, 1000);
   setTimeout(checkSharedChain, 500);
-  setTimeout(autoShowObjStory, 1500);
+  // autoShowObjStory disabled — user taps the glowing ring instead
   currentScreen = "home";
 }
 
@@ -5913,8 +6002,8 @@ function dismissNotif() {
 // ====== QUOTES ======
 function updateQuote() {
   const q = QUOTES[quoteIndex];
-  document.getElementById("splash-quote").textContent = "« " + q.text + " »";
-  document.getElementById("splash-source").textContent = "— " + q.source;
+  var sq = document.getElementById("splash-quote"); if (sq) sq.textContent = "« " + q.text + " »";
+  var ss = document.getElementById("splash-source"); if (ss) ss.textContent = "— " + q.source;
   var hq = document.getElementById("home-quote"); if (hq) hq.textContent = "« " + q.text + " »";
   var hs = document.getElementById("home-source"); if (hs) hs.textContent = "— " + q.source;
   renderDots();
@@ -7233,7 +7322,7 @@ function renderObjStoryBar() {
     var allDone = done === total;
     var isCurrent = i === currentIdx;
     var pct = total > 0 ? Math.round(done / total * 100) : 0;
-    var ringBg = allDone ? '#dbdbdb' : 'conic-gradient(from 0deg, #f9ce34 0%, #ee2a7b ' + pct + '%, var(--gray-5) ' + pct + '%)';
+    var ringBg = allDone ? '#dbdbdb' : (isCurrent ? 'conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34)' : 'conic-gradient(from 0deg, #f9ce34 0%, #ee2a7b ' + pct + '%, var(--gray-5) ' + pct + '%)');
     html3 += '<div class="os-item' + (allDone ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openObjStory(' + i + ')">';
     html3 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + p.emoji + '</div></div>';
     html3 += '<span class="os-label">' + p.label + ' ' + done + '/' + total + '</span>';
@@ -8044,6 +8133,193 @@ function checkSharedChain() {
   
   // Open chain detail (will load from API)
   setTimeout(function() { openChainDetail(chainId); }, 300);
+}
+
+// ====== HAYOM YOM (Hebrew date calc + Sefaria JSONP) ======
+var _hyyExpanded = false;
+function toggleHyy(e) {
+  var txt = document.getElementById('hyy-text');
+  var exp = document.getElementById('hyy-expand');
+  if (!txt || txt.querySelector('.hyy-loading')) return;
+  var evt = e || window.event;
+  if (evt && evt.target && evt.target.closest && evt.target.closest('.hyy-link')) {
+    evt.stopPropagation();
+    var d = new Date();
+    var url = 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+    window.open(url, '_blank');
+    return;
+  }
+  _hyyExpanded = !_hyyExpanded;
+  if (_hyyExpanded) {
+    txt.classList.add('expanded');
+    exp.textContent = 'R\u00e9duire \u25b4';
+  } else {
+    txt.classList.remove('expanded');
+    exp.textContent = 'Lire la suite \u25be';
+  }
+}
+
+// ---- Pure JS Hebrew date converter ----
+function _hyyFloor(x){return Math.floor(x);}
+function _hyyMod(x,y){return x-y*_hyyFloor(x/y);}
+function _hyyHebElapsedDays(y){
+  var m=_hyyFloor((235*y-234)/19);
+  var p=12084+13753*m;
+  var d=29*m+_hyyFloor(p/25920);
+  if(_hyyMod(3*(d+1),7)<3)d++;
+  return d;
+}
+function _hyyHebYearDays(y){return _hyyHebElapsedDays(y+1)-_hyyHebElapsedDays(y);}
+function _hyyIsLeap(y){return _hyyMod(7*y+1,19)<7;}
+function _hyyHebMonthDays(y,m){
+  // m: 1=Tishrei(30),2=Cheshvan(29/30),3=Kislev(29/30),4=Tevet(29),5=Shevat(30)
+  // 6=AdarI(30leap/29),7=AdarII(29leap/0),8=Nisan(30),9=Iyyar(29),10=Sivan(30)
+  // 11=Tammuz(29),12=Av(30),13=Elul(29)
+  if(m==2)return _hyyHebYearDays(y)%10==5?30:29;
+  if(m==3)return _hyyHebYearDays(y)%10!=3?30:29;
+  if(m==4)return 29;
+  if(m==6)return _hyyIsLeap(y)?30:29;
+  if(m==7)return _hyyIsLeap(y)?29:0;
+  if(m==9||m==11||m==13)return 29;
+  return 30;
+}
+function _hyyGregToAbs(gy,gm,gd){
+  var a=_hyyFloor((gy-1)/4)-_hyyFloor((gy-1)/100)+_hyyFloor((gy-1)/400);
+  var b=365*(gy-1)+a+gd;
+  var ml=[0,31,28,31,30,31,30,31,31,30,31,30];
+  for(var i=1;i<gm;i++){b+=ml[i];}
+  if(gm>2&&((gy%4==0&&gy%100!=0)||gy%400==0))b++;
+  return b;
+}
+function gregToHebrew(gy,gm,gd){
+  var abs=_hyyGregToAbs(gy,gm,gd);
+  // Approximate Hebrew year
+  var hy=gy+3760;
+  // Hebrew epoch offset (calibrated: abs(1 Tishrei Y) = elapsed(Y) + epoch)
+  var epoch=-1373427;
+  // Use elapsed days to find year
+  while(_hyyHebElapsedDays(hy+1)+epoch<=abs)hy++;
+  while(_hyyHebElapsedDays(hy)+epoch>abs)hy--;
+  var dayInYear=abs-(_hyyHebElapsedDays(hy)+epoch)+1;
+  var hm=1,md;
+  var monthOrder=_hyyIsLeap(hy)?[1,2,3,4,5,6,7,8,9,10,11,12,13]:[1,2,3,4,5,6,8,9,10,11,12,13];
+  for(var i=0;i<monthOrder.length;i++){
+    md=_hyyHebMonthDays(hy,monthOrder[i]);
+    if(dayInYear<=md){hm=monthOrder[i];break;}
+    dayInYear-=md;
+  }
+  var hd=dayInYear;
+  var names={1:'Tishrei',2:'Cheshvan',3:'Kislev',4:'Tevet',5:'Shevat',6:'Adar I',7:'Adar II',8:'Nisan',9:'Iyyar',10:'Sivan',11:'Tammuz',12:'Av',13:'Elul'};
+  // If not leap year, Adar I is just "Adar"
+  var mName=names[hm]||'';
+  if(hm==6&&!_hyyIsLeap(hy))mName='Adar';
+  return {hy:hy,hm:hm,hd:hd,mName:mName};
+}
+
+function loadHayomYom() {
+  var d = new Date();
+  var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+  var cacheKey = 'tehilim_hyy3_' + dateKey;
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+  if (cached && (cached.he || cached.en)) {
+    displayHyy(cached);
+    return;
+  }
+  // Compute Hebrew date in pure JS
+  var heb = gregToHebrew(d.getFullYear(), d.getMonth()+1, d.getDate());
+  var ref = 'HaYom Yom, ' + heb.mName + ' ' + heb.hd;
+  console.log('HYY ref:', ref);
+  // Try fetch first (Sefaria may support CORS)
+  var textUrl = 'https://www.sefaria.org/api/v3/texts/' + encodeURIComponent(ref) + '?context=0';
+  fetch(textUrl)
+    .then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(txt) { _hyyProcessSefaria(txt, heb, dateKey); })
+    .catch(function(err) {
+      console.log('HYY fetch failed, trying JSONP:', err);
+      // Fallback: JSONP via old v2 API
+      var cbName = '_hyyJsonp' + Date.now();
+      window[cbName] = function(txt) {
+        delete window[cbName];
+        var s = document.getElementById('hyy-jsonp');
+        if(s) s.remove();
+        _hyyProcessSefariaV2(txt, heb, dateKey);
+      };
+      var s = document.createElement('script');
+      s.id = 'hyy-jsonp';
+      s.src = 'https://www.sefaria.org/api/texts/' + encodeURIComponent(ref) + '?context=0&callback=' + cbName;
+      s.onerror = function() { delete window[cbName]; s.remove(); displayHyyFallback(); };
+      document.head.appendChild(s);
+    });
+}
+
+function _hyyProcessSefaria(txt, heb, dateKey) {
+  var heText = '', enText = '';
+  var versions = txt.versions || [];
+  for (var v = 0; v < versions.length; v++) {
+    var ver = versions[v];
+    if (ver.language === 'he' && !heText) heText = Array.isArray(ver.text) ? ver.text.join(' ') : (ver.text || '');
+    if (ver.language === 'en' && !enText) enText = Array.isArray(ver.text) ? ver.text.join(' ') : (ver.text || '');
+  }
+  _hyyFinish(heText, enText, heb, dateKey);
+}
+
+function _hyyProcessSefariaV2(txt, heb, dateKey) {
+  var heText = txt.he || '';
+  var enText = txt.text || '';
+  if (Array.isArray(heText)) heText = heText.join(' ');
+  if (Array.isArray(enText)) enText = enText.join(' ');
+  _hyyFinish(heText, enText, heb, dateKey);
+}
+
+function _hyyFinish(heText, enText, heb, dateKey) {
+  function strip(s) { var tmp = document.createElement('div'); tmp.innerHTML = s; return tmp.textContent || tmp.innerText || ''; }
+  var result = {
+    he: strip(heText),
+    en: strip(enText),
+    heDate: heb.mName + ' ' + heb.hd,
+    fetched: dateKey
+  };
+  if (!result.he && !result.en) { displayHyyFallback(); return; }
+  try { localStorage.setItem('tehilim_hyy3_' + dateKey, JSON.stringify(result)); } catch(e) {}
+  displayHyy(result);
+}
+
+function displayHyy(data) {
+  var el = document.getElementById('hyy-text');
+  var dateEl = document.getElementById('hyy-date');
+  var expEl = document.getElementById('hyy-expand');
+  var linkEl = document.getElementById('hyy-link');
+  if (!el) return;
+  var content = '';
+  if (data.he) content += '<div style="direction:rtl;text-align:right;font-family:\'Noto Serif Hebrew\',serif;line-height:1.9;margin-bottom:10px;">' + data.he + '</div>';
+  if (data.en) content += '<div style="color:var(--gray-2);font-size:14px;line-height:1.7;">' + data.en + '</div>';
+  if (content) {
+    el.innerHTML = content;
+    expEl.style.display = 'block';
+    if (linkEl) linkEl.style.display = 'flex';
+  } else {
+    displayHyyFallback();
+    return;
+  }
+  if (dateEl) dateEl.textContent = data.heDate || '';
+}
+
+function displayHyyFallback() {
+  var el = document.getElementById('hyy-text');
+  var linkEl = document.getElementById('hyy-link');
+  var dateEl = document.getElementById('hyy-date');
+  if (!el) return;
+  var d = new Date();
+  var months = ['Janvier','F\u00e9vrier','Mars','Avril','Mai','Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre'];
+  if (dateEl) dateEl.textContent = d.getDate() + ' ' + months[d.getMonth()];
+  el.innerHTML = '<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Appuyez pour lire le Hayom Yom du jour sur Chabad.org</span>';
+  if (linkEl) linkEl.style.display = 'flex';
+  var card = document.getElementById('hyy-card');
+  if (card) card.onclick = function() {
+    var url = 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+    window.open(url, '_blank');
+  };
 }
 
 // ====== START ======
