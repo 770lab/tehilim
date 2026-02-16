@@ -36,17 +36,17 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .sc-static:nth-child(4) { animation-delay:0.25s; }
 .sc-static:nth-child(5) { animation-delay:0.3s; }
 @keyframes scFadeIn { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
-.sc-letter-d { display:inline-block; opacity:0; animation:scDrop 1.8s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; transform-origin:center 45%; position:relative; }
+.sc-letter-d { display:inline-block; opacity:0; animation:scDrop 1.8s cubic-bezier(0.22,1,0.36,1) 0.35s forwards; transform-origin:center center; position:relative; }
 @keyframes scDrop {
   0%   { opacity:0; transform:translateY(-60px); }
   12%  { opacity:1; transform:translateY(0px); }
   20%  { opacity:1; transform:translateY(0px); }
   35%  { transform:translateY(30px) rotate(0deg); }
   55%  { transform:translateY(30px) rotate(180deg); opacity:1; }
-  70%  { transform:translateY(3px) rotate(180deg); }
-  80%  { transform:translateY(5px) rotate(180deg); }
-  90%  { transform:translateY(4px) rotate(180deg); }
-  100% { transform:translateY(4px) rotate(180deg); opacity:1; }
+  70%  { transform:translateY(10px) rotate(180deg); }
+  80%  { transform:translateY(13px) rotate(180deg); }
+  90%  { transform:translateY(12px) rotate(180deg); }
+  100% { transform:translateY(12px) rotate(180deg); opacity:1; }
 }
 .splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 1.8s forwards; direction:rtl; }
 @keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -121,10 +121,17 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .unavailable-card { opacity:0.5; cursor:default; pointer-events:none; }
 .unavailable-num { background:var(--gray-5) !important; color:var(--gray-3) !important; }
 
-/* HOME BLOCS */
+/* HOME BIG CARDS */
 .home-date-line { font-size:12px; color:var(--gray-3); text-align:center; padding:6px 16px 0; font-weight:500; }
-.home-bloc { margin:0 0 8px; }
-.home-bloc-title { font-size:13px; font-weight:800; color:var(--black); padding:14px 16px 6px; letter-spacing:0.5px; text-transform:uppercase; }
+.home-big-cards { padding:8px 16px 0; display:flex; flex-direction:column; gap:10px; }
+.big-card { display:flex; align-items:center; gap:14px; padding:18px 16px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; }
+.big-card:active { transform:scale(0.98); background:var(--gray-6); }
+.big-card-icon { font-size:36px; flex-shrink:0; }
+.big-card-info { flex:1; min-width:0; }
+.big-card-title { font-size:17px; font-weight:700; color:var(--black); }
+.big-card-sub { font-size:12px; color:var(--gray-3); margin-top:2px; }
+.big-card-arrow { font-size:24px; color:var(--gray-4); font-weight:300; flex-shrink:0; }
+.sub-panel-header { font-size:20px; font-weight:800; color:var(--black); text-align:center; padding:8px 16px 12px; }
 /* Club section */
 .club-section { padding:0 0 24px; }
 .club-hero { text-align:center; padding:28px 20px 20px; }
@@ -626,166 +633,162 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     </div>
   </div>
 
-  <!-- MENU CARDS (visible by default) -->
+  <!-- HOME: 3 BIG CARDS -->
   <div id="panel-menu">
-
-    <!-- DATE LINE -->
     <div class="home-date-line" id="home-date-line"></div>
-
-    <!-- STORY BAR OBJECTIFS -->
     <div class="obj-story-bar" id="obj-story-bar"></div>
-
-    <!-- BLOC 1: OBJECTIFS -->
-    <div class="home-bloc">
-      <div class="home-bloc-title">🕎 Objectifs</div>
-      <div class="daily-objectives">
-        <div class="obj-header">
-          <span class="obj-title">🕎 Mes objectifs du jour</span>
-          <span class="obj-counter" id="obj-counter">0/13</span>
+    <div class="home-big-cards">
+      <div class="big-card" onclick="switchTab('sub-objectifs')">
+        <div class="big-card-icon">🕎</div>
+        <div class="big-card-info">
+          <div class="big-card-title">Objectifs du jour</div>
+          <div class="big-card-sub" id="big-obj-sub">0/13 accomplis</div>
         </div>
-        <div class="obj-progress-bar"><div class="obj-progress-fill" id="obj-progress-fill"></div></div>
-        <div class="obj-list" id="obj-list"></div>
-        <div class="obj-complete-quote" id="obj-complete-quote"></div>
-        <div class="obj-reset-wrap"><button class="obj-reset-btn" onclick="resetObjectives()">↺ Réinitialiser</button></div>
+        <div class="big-card-arrow">›</div>
+      </div>
+      <div class="big-card" onclick="switchTab('sub-tehilim')">
+        <div class="big-card-icon">📖</div>
+        <div class="big-card-info">
+          <div class="big-card-title">Tehilim</div>
+          <div class="big-card-sub" id="big-teh-sub">Lire les Tehilim</div>
+        </div>
+        <div class="big-card-arrow">›</div>
+      </div>
+      <div class="big-card" onclick="switchTab('sub-club')">
+        <div class="big-card-icon">🤝</div>
+        <div class="big-card-info">
+          <div class="big-card-title">Chabap Club</div>
+          <div class="big-card-sub">Éclaire le monde</div>
+        </div>
+        <div class="big-card-arrow">›</div>
       </div>
     </div>
-
-    <!-- BLOC 2: TEHILIM -->
-    <div class="home-bloc">
-      <div class="home-bloc-title">📖 Tehilim</div>
-      <div class="menu-cards">
-        <button class="menu-card card-jour" onclick="openJourReading()">
-          <span class="menu-card-icon">📅</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Tehilim du jour</span>
-            <span class="menu-card-sub" id="menu-jour-sub"></span>
-          </div>
-        </button>
-        <button class="menu-card card-perek" onclick="switchTab('perek')">
-          <span class="menu-card-icon">📖</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Tehilim par Perek</span>
-            <span class="menu-card-sub">150 chapitres</span>
-          </div>
-        </button>
-        <button class="menu-card" onclick="switchTab('birthday')">
-          <span class="menu-card-icon">🎂</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Mon Tehilim</span>
-            <span class="menu-card-sub">Chapitre personnel</span>
-          </div>
-        </button>
-        <button class="menu-card" onclick="switchTab('t119')">
-          <span class="menu-card-icon">🔤</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Tehilim 119 par nom</span>
-            <span class="menu-card-sub">Prière personnalisée</span>
-          </div>
-        </button>
-        <button class="menu-card" onclick="switchTab('cemetery')">
-          <span class="menu-card-icon">🪦</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Tehilim au cimetière</span>
-            <span class="menu-card-sub">7 Psaumes + Psaume 119 נשמה</span>
-          </div>
-        </button>
-        <button class="menu-card" onclick="switchTab('chains')">
-          <span class="menu-card-icon">🙏</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Demandes personnelles</span>
-            <span class="menu-card-sub">Chaînes de Tehilim</span>
-          </div>
-        </button>
-        <button class="menu-card coming-soon">
-          <span class="menu-card-icon">🩺</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Réfoua Chéléma</span>
-          </div>
-        </button>
-        <button class="menu-card coming-soon">
-          <span class="menu-card-icon">✡️</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Pour le peuple juif</span>
-          </div>
-        </button>
-        <button class="menu-card coming-soon">
-          <span class="menu-card-icon">💍</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Pour les occasions</span>
-          </div>
-        </button>
-        <button class="menu-card coming-soon">
-          <span class="menu-card-icon">🕎</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Pour les fêtes</span>
-          </div>
-        </button>
-        <button class="menu-card coming-soon">
-          <span class="menu-card-icon">🍽️</span>
-          <div class="menu-card-content">
-            <span class="menu-card-title">Jours de jeûne</span>
-          </div>
-        </button>
-      </div>
-    </div>
-
-    <!-- BLOC 3: CHABAP CLUB -->
-    <div class="home-bloc">
-      <div class="home-bloc-title">🤝 Chabap Club</div>
-      <div class="club-cards">
-          <button class="menu-card" onclick="switchTab('chains')">
-            <span class="menu-card-icon">🔗</span>
-            <div class="menu-card-content">
-              <span class="menu-card-title">Chaînes de Tehilim</span>
-              <span class="menu-card-sub">Priez ensemble</span>
-            </div>
-          </button>
-          <button class="menu-card coming-soon">
-            <span class="menu-card-icon">📊</span>
-            <div class="menu-card-content">
-              <span class="menu-card-title">Classement</span>
-              <span class="menu-card-sub">Top lecteurs</span>
-            </div>
-          </button>
-          <button class="menu-card coming-soon">
-            <span class="menu-card-icon">🎯</span>
-            <div class="menu-card-content">
-              <span class="menu-card-title">Défis</span>
-              <span class="menu-card-sub">Défis communautaires</span>
-            </div>
-          </button>
-          <button class="menu-card coming-soon">
-            <span class="menu-card-icon">📰</span>
-            <div class="menu-card-content">
-              <span class="menu-card-title">Actualités</span>
-              <span class="menu-card-sub">Torah & Halacha</span>
-            </div>
-          </button>
-          <button class="menu-card coming-soon">
-            <span class="menu-card-icon">🗓️</span>
-            <div class="menu-card-content">
-              <span class="menu-card-title">Événements</span>
-              <span class="menu-card-sub">Cours & Chabbat</span>
-            </div>
-          </button>
-          <button class="menu-card coming-soon">
-            <span class="menu-card-icon">💬</span>
-            <div class="menu-card-content">
-              <span class="menu-card-title">Communauté</span>
-              <span class="menu-card-sub">Entraide & partage</span>
-            </div>
-          </button>
-        </div>
-    </div>
-
-    <!-- DAILY QUOTE -->
     <div class="daily-quote">
       <div class="quote-decor">✦</div>
       <p class="quote-text" id="home-quote"></p>
       <p class="quote-source" id="home-source"></p>
       <div class="quote-dots" id="home-dots"></div>
     </div>
+  </div>
 
+  <!-- SUB-PANEL: OBJECTIFS -->
+  <div id="panel-sub-objectifs" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div class="daily-objectives">
+      <div class="obj-header">
+        <span class="obj-title">🕎 Mes objectifs du jour</span>
+        <span class="obj-counter" id="obj-counter">0/13</span>
+      </div>
+      <div class="obj-progress-bar"><div class="obj-progress-fill" id="obj-progress-fill"></div></div>
+      <div class="obj-list" id="obj-list"></div>
+      <div class="obj-complete-quote" id="obj-complete-quote"></div>
+      <div class="obj-reset-wrap"><button class="obj-reset-btn" onclick="resetObjectives()">↺ Réinitialiser</button></div>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: TEHILIM -->
+  <div id="panel-sub-tehilim" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div class="sub-panel-header">📖 Tehilim</div>
+    <div class="menu-cards">
+      <button class="menu-card card-jour" onclick="openJourReading()">
+        <span class="menu-card-icon">📅</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Tehilim du jour</span>
+          <span class="menu-card-sub" id="menu-jour-sub"></span>
+        </div>
+      </button>
+      <button class="menu-card card-perek" onclick="switchTab('perek')">
+        <span class="menu-card-icon">📖</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Tehilim par Perek</span>
+          <span class="menu-card-sub">150 chapitres</span>
+        </div>
+      </button>
+      <button class="menu-card" onclick="switchTab('birthday')">
+        <span class="menu-card-icon">🎂</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Mon Tehilim</span>
+          <span class="menu-card-sub">Chapitre personnel</span>
+        </div>
+      </button>
+      <button class="menu-card" onclick="switchTab('t119')">
+        <span class="menu-card-icon">🔤</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Tehilim 119 par nom</span>
+          <span class="menu-card-sub">Prière personnalisée</span>
+        </div>
+      </button>
+      <button class="menu-card" onclick="switchTab('cemetery')">
+        <span class="menu-card-icon">🪦</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Tehilim au cimetière</span>
+          <span class="menu-card-sub">7 Psaumes + Psaume 119 נשמה</span>
+        </div>
+      </button>
+      <button class="menu-card" onclick="switchTab('chains')">
+        <span class="menu-card-icon">🙏</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Demandes personnelles</span>
+          <span class="menu-card-sub">Chaînes de Tehilim</span>
+        </div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">🩺</span>
+        <div class="menu-card-content"><span class="menu-card-title">Réfoua Chéléma</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">✡️</span>
+        <div class="menu-card-content"><span class="menu-card-title">Pour le peuple juif</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">💍</span>
+        <div class="menu-card-content"><span class="menu-card-title">Pour les occasions</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">🕎</span>
+        <div class="menu-card-content"><span class="menu-card-title">Pour les fêtes</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">🍽️</span>
+        <div class="menu-card-content"><span class="menu-card-title">Jours de jeûne</span></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- SUB-PANEL: CHABAP CLUB -->
+  <div id="panel-sub-club" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div class="sub-panel-header">🤝 Chabap Club</div>
+    <div class="club-cards">
+      <button class="menu-card" onclick="switchTab('chains')">
+        <span class="menu-card-icon">🔗</span>
+        <div class="menu-card-content">
+          <span class="menu-card-title">Chaînes de Tehilim</span>
+          <span class="menu-card-sub">Priez ensemble</span>
+        </div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">📊</span>
+        <div class="menu-card-content"><span class="menu-card-title">Classement</span><span class="menu-card-sub">Top lecteurs</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">🎯</span>
+        <div class="menu-card-content"><span class="menu-card-title">Défis</span><span class="menu-card-sub">Défis communautaires</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">📰</span>
+        <div class="menu-card-content"><span class="menu-card-title">Actualités</span><span class="menu-card-sub">Torah & Halacha</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">🗓️</span>
+        <div class="menu-card-content"><span class="menu-card-title">Événements</span><span class="menu-card-sub">Cours & Chabbat</span></div>
+      </button>
+      <button class="menu-card coming-soon">
+        <span class="menu-card-icon">💬</span>
+        <div class="menu-card-content"><span class="menu-card-title">Communauté</span><span class="menu-card-sub">Entraide & partage</span></div>
+      </button>
+    </div>
   </div>
 
   <!-- PANEL: TEHILIM DU JOUR -->
@@ -4629,6 +4632,7 @@ function init() {
     if (dateLineEl) dateLineEl.textContent = hebrewDate.day + " " + hebrewDate.monthName + " " + hebrewDate.year + " — " + new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
     document.getElementById("home-badge").textContent = badgeText;
     document.getElementById("menu-jour-sub").textContent = badgeText;
+    var bigTeh = document.getElementById("big-teh-sub"); if (bigTeh) bigTeh.textContent = badgeText;
 
     // Init quotes
     updateQuote();
@@ -4664,8 +4668,8 @@ function showHome() {
   switchTab("menu");
   setTimeout(() => document.getElementById("home").classList.add("visible"), 50);
   renderHome();
-  renderObjectives();
   renderObjStoryBar();
+  updateBigObjSub();
   cleanOldObjectives();
   updateBirthdaySub();
   setTimeout(checkBirthdayPopup, 1000);
@@ -4703,23 +4707,28 @@ function goHome() {
 
 function switchTab(tab) {
   activeTab = tab;
-  document.getElementById("panel-menu").style.display = tab === "menu" ? "block" : "none";
-  document.getElementById("panel-jour").style.display = tab === "jour" ? "block" : "none";
-  document.getElementById("panel-perek").style.display = tab === "perek" ? "block" : "none";
-  document.getElementById("panel-birthday").style.display = tab === "birthday" ? "block" : "none";
-  document.getElementById("panel-chains").style.display = tab === "chains" ? "block" : "none";
-  document.getElementById("panel-chain-detail").style.display = tab === "chain-detail" ? "block" : "none";
-  document.getElementById("panel-t119").style.display = tab === "t119" ? "block" : "none";
-  document.getElementById("panel-cemetery").style.display = tab === "cemetery" ? "block" : "none";
+  var panels = ["menu","sub-objectifs","sub-tehilim","sub-club","jour","perek","birthday","chains","chain-detail","t119","cemetery"];
+  panels.forEach(function(p) {
+    var el = document.getElementById("panel-" + p);
+    if (el) el.style.display = p === tab ? "block" : "none";
+  });
   if (tab === "perek") renderPerek();
   if (tab === "jour") renderHome();
   if (tab === "birthday") renderBirthday();
   if (tab === "chains") renderChainList();
   if (tab === "cemetery") renderCemetery();
-  if (tab === "menu") { renderObjectives(); renderObjStoryBar(); }
+  if (tab === "sub-objectifs") { renderObjectives(); renderObjStoryBar(); }
+  if (tab === "menu") { renderObjStoryBar(); updateBigObjSub(); }
   window.scrollTo(0, 0);
   document.getElementById("reading").scrollTop = 0;
   updateHomeNav(tab);
+}
+
+function updateBigObjSub() {
+  var state = getObjState();
+  var n = countAllChecked(state);
+  var el = document.getElementById("big-obj-sub");
+  if (el) el.textContent = n + "/" + TOTAL_OBJ + " accomplis";
 }
 
 function renderPerek(filter) {
@@ -7217,7 +7226,9 @@ function closeObjStory() {
   overlay.style.display = 'none';
   if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
   renderObjStoryBar();
-  renderObjectives();
+  updateBigObjSub();
+  var objList = document.getElementById('obj-list');
+  if (objList && objList.offsetParent !== null) renderObjectives();
 }
 
 function renderObjStoryContent() {
@@ -7354,10 +7365,11 @@ function renderObjectives() {
 
   // Counter & progress
   var counter = document.getElementById('obj-counter');
-  counter.textContent = checked + '/' + TOTAL_OBJ;
-  counter.classList.toggle('done', checked === TOTAL_OBJ);
+  if (counter) { counter.textContent = checked + '/' + TOTAL_OBJ; counter.classList.toggle('done', checked === TOTAL_OBJ); }
   var fill = document.getElementById('obj-progress-fill');
-  fill.style.width = (checked / TOTAL_OBJ * 100) + '%';
+  if (fill) fill.style.width = (checked / TOTAL_OBJ * 100) + '%';
+  var bigSub = document.getElementById('big-obj-sub');
+  if (bigSub) bigSub.textContent = checked + '/' + TOTAL_OBJ + ' accomplis';
   renderObjStoryBar();
 }
 
@@ -7842,7 +7854,7 @@ function updateHomeNav(activeTab) {
   if (!nav) return;
   var items = nav.querySelectorAll('.insta-nav-item');
   items.forEach(function(item) { item.classList.remove('active'); });
-  var tabMap = { menu: 0, jour: 1, chains: 2, 'chain-detail': 2, perek: 3 };
+  var tabMap = { menu: 0, 'sub-objectifs': 0, 'sub-tehilim': 0, 'sub-club': 0, jour: 1, chains: 2, 'chain-detail': 2, perek: 3 };
   var idx = tabMap[activeTab];
   if (idx !== undefined && items[idx]) items[idx].classList.add('active');
 }
