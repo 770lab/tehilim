@@ -33,8 +33,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-divider-star { color:var(--gray-4); font-size:8px; }
 .splash-quote { font-style:italic; color:var(--gray-2); font-size:16px; line-height:1.7; border:none; margin:0 0 14px; padding:0 10px; min-height:80px; display:flex; align-items:center; justify-content:center; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; }
 .splash-source { color:var(--gray-3); font-size:11px; letter-spacing:1.5px; font-weight:600; transition: opacity 0.6s ease; }
-.splash-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; }
-.splash-dot { height:6px; border-radius:3px; transition: all 0.4s ease; }
+.splash-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; cursor:pointer; padding:8px 0; }
+.splash-dot { height:6px; border-radius:3px; transition: all 0.4s ease; cursor:pointer; }
 .splash-tap { color:var(--gray-4); font-size:11px; margin-top:32px; letter-spacing:2px; animation: pulse 2.5s ease-in-out infinite; }
 .splash-footer { margin-top:auto; padding-top:40px; text-align:center; }
 .footer-logo-wrap { display:inline-flex; align-items:center; gap:6px; opacity:0.35; transition:opacity 0.3s; }
@@ -102,13 +102,43 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .unavailable-card { opacity:0.5; cursor:default; pointer-events:none; }
 .unavailable-num { background:var(--gray-5) !important; color:var(--gray-3) !important; }
 
+/* DAILY OBJECTIVES */
+.daily-objectives { margin:16px 16px 0; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; }
+.obj-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 8px; }
+.obj-title { font-size:14px; font-weight:700; color:var(--black); }
+.obj-counter { font-size:12px; font-weight:700; color:var(--gray-3); background:var(--gray-6); padding:3px 10px; border-radius:20px; transition:all 0.3s; }
+.obj-counter.done { background:#dcfce7; color:#16a34a; }
+.obj-progress-bar { height:3px; background:var(--gray-6); margin:0 16px 6px; border-radius:2px; overflow:hidden; }
+.obj-progress-fill { height:100%; background:linear-gradient(90deg, #f9ce34, #ee2a7b, #6228d7); border-radius:2px; transition:width 0.4s cubic-bezier(0.4,0,0.2,1); width:0%; }
+.obj-list { padding:0 8px 4px; }
+.obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
+.obj-item:active { background:var(--gray-6); }
+.obj-checkbox { width:22px; height:22px; border-radius:50%; border:2px solid var(--gray-4); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all 0.25s; }
+.obj-item.checked .obj-checkbox { border-color:#16a34a; background:#16a34a; }
+.obj-check-svg { width:12px; height:12px; opacity:0; transform:scale(0); transition:all 0.25s; }
+.obj-item.checked .obj-check-svg { opacity:1; transform:scale(1); }
+.obj-emoji { font-size:18px; flex-shrink:0; width:26px; text-align:center; }
+.obj-label { font-size:13px; color:var(--gray-1); font-weight:500; flex:1; }
+.obj-item.checked .obj-label { color:var(--gray-3); text-decoration:line-through; text-decoration-color:var(--gray-4); }
+.obj-time { font-size:10px; color:var(--gray-4); font-weight:600; flex-shrink:0; }
+.obj-reset-wrap { text-align:center; padding:4px 0 10px; }
+.obj-reset-btn { background:none; border:none; color:var(--gray-4); font-size:11px; cursor:pointer; font-family:var(--font); font-weight:600; padding:4px 12px; }
+.obj-complete-msg { text-align:center; padding:8px 16px 12px; font-size:12px; font-weight:600; color:#16a34a; display:none; }
+.obj-complete-msg.show { display:block; animation:objFadeIn 0.5s ease; }
+.obj-complete-quote { display:none; padding:12px 16px; text-align:center; }
+.obj-complete-quote.show { display:block; animation:objFadeIn 0.6s ease; }
+.obj-cq-text { font-style:italic; font-size:13px; color:var(--gray-1); line-height:1.6; margin-bottom:6px; font-family:'EB Garamond',Georgia,serif; }
+.obj-cq-source { font-size:10px; color:var(--gray-3); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+.obj-cq-bravo { font-size:13px; font-weight:600; color:#16a34a; margin-bottom:8px; }
+@keyframes objFadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
 /* DAILY QUOTE */
-.daily-quote { margin:80px 16px 0; padding:20px; text-align:center; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); }
+.daily-quote { margin:20px 16px 24px; padding:20px; text-align:center; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); }
 .quote-decor { color:var(--gray-4); font-size:14px; margin-bottom:10px; }
 .quote-text { font-style:italic; color:var(--gray-2); font-size:17px; line-height:1.7; margin-bottom:10px; min-height:50px; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; }
 .quote-source { font-size:11px; color:var(--gray-3); font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition: opacity 0.6s ease; }
-.quote-dots { display:flex; gap:5px; justify-content:center; margin-top:10px; }
-.quote-dot { height:4px; border-radius:2px; transition: all 0.4s ease; }
+.quote-dots { display:flex; gap:5px; justify-content:center; margin-top:10px; cursor:pointer; padding:8px 0; }
+.quote-dot { height:4px; border-radius:2px; transition: all 0.4s ease; cursor:pointer; }
 
 /* READING */
 #home, #reading { max-width:520px; margin:0 auto; }
@@ -296,6 +326,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .chain-type-btn.active { border-color:var(--black); background:var(--black); color:var(--white); }
 .chain-input { width:100%; padding:10px 12px; border-radius:10px; border:1.5px solid var(--gray-5); font-size:14px; font-family:var(--font); color:var(--black); outline:none; box-sizing:border-box; }
 .chain-input:focus { border-color:var(--gray-2); }
+.chain-name-row { display:flex; gap:8px; align-items:center; }
+.chain-name-half { flex:1; min-width:0; }
 .chain-form-actions { display:flex; gap:8px; }
 .chain-cancel-btn { flex:1; padding:12px; border-radius:10px; border:1px solid var(--gray-5); background:var(--white); font-size:13px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); }
 .chain-submit-btn { flex:2; padding:12px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:13px; font-weight:700; cursor:pointer; font-family:var(--font); }
@@ -350,6 +382,24 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .t119-title { font-size:20px; font-weight:700; color:var(--black); margin:0 0 6px; font-family:var(--font); }
 .t119-desc { font-size:12px; color:var(--gray-3); margin:0; line-height:1.5; }
 .t119-input-section { padding:0 16px; }
+.t119-fullname-row { display:flex; gap:8px; align-items:flex-end; margin-bottom:8px; }
+.t119-field { flex:1; min-width:0; }
+.t119-name-label { font-size:11px; font-weight:600; color:var(--gray-3); display:block; margin-bottom:4px; }
+.t119-input-half { width:100%; padding:12px 10px; font-size:14px; text-align:center; }
+.t119-clear-wrap { text-align:center; margin-bottom:6px; }
+.t119-clear-btn { background:none; border:none; color:var(--gray-3); font-size:11px; font-weight:600; cursor:pointer; padding:4px 12px; font-family:var(--font); }
+/* Sliding Ben/Bat toggle */
+.t119-benbat-slider, .chain-benbat-slider { flex-shrink:0; cursor:pointer; -webkit-tap-highlight-color:transparent; padding-bottom:1px; }
+.bb-slider-track { position:relative; display:flex; width:52px; height:32px; background:var(--gray-6); border-radius:16px; border:1.5px solid var(--gray-5); overflow:hidden; }
+.bb-slider-option { flex:1; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:13px; font-weight:700; color:var(--gray-3); position:relative; z-index:2; transition:color 0.25s; pointer-events:none; }
+.bb-slider-option.active { color:var(--white); }
+.bb-slider-thumb { position:absolute; top:1px; left:1px; width:calc(50% - 1px); height:calc(100% - 2px); background:var(--black); border-radius:14px; transition:transform 0.25s cubic-bezier(0.4,0,0.2,1); z-index:1; }
+.bb-slider-track.bat .bb-slider-thumb { transform:translateX(100%); }
+.bb-slider-track.bat [data-bb="bat"] { color:var(--white); }
+.bb-slider-track.bat [data-bb="ben"] { color:var(--gray-3); }
+.bb-slider-track:not(.bat) [data-bb="ben"] { color:var(--white); }
+/* Keyboard hint */
+.t119-kbd-hint { text-align:center; font-size:12px; color:var(--gray-3); margin-bottom:10px; padding:8px 12px; background:var(--gray-6); border-radius:10px; line-height:1.4; }
 .t119-input-wrap { position:relative; margin-bottom:8px; }
 .t119-input { width:100%; padding:14px 40px 14px 14px; border-radius:12px; border:1.5px solid var(--gray-5); font-size:16px; font-family:var(--font); color:var(--black); outline:none; box-sizing:border-box; text-align:center; }
 .t119-input:focus { border-color:var(--gray-2); }
@@ -510,6 +560,19 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 
   <!-- MENU CARDS (visible by default) -->
   <div id="panel-menu">
+
+    <!-- 10 OBJECTIFS QUOTIDIENS -->
+    <div class="daily-objectives">
+      <div class="obj-header">
+        <span class="obj-title">🕎 Mes 10 objectifs du jour</span>
+        <span class="obj-counter" id="obj-counter">0/10</span>
+      </div>
+      <div class="obj-progress-bar"><div class="obj-progress-fill" id="obj-progress-fill"></div></div>
+      <div class="obj-list" id="obj-list"></div>
+      <div class="obj-complete-quote" id="obj-complete-quote"></div>
+      <div class="obj-reset-wrap"><button class="obj-reset-btn" onclick="resetObjectives()">↺ Réinitialiser</button></div>
+    </div>
+
     <div class="menu-cards">
       <button class="menu-card card-jour" onclick="openJourReading()">
         <span class="menu-card-icon">📅</span>
@@ -584,6 +647,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         </div>
       </button>
     </div>
+
     <div class="daily-quote">
       <div class="quote-decor">✦</div>
       <p class="quote-text" id="home-quote"></p>
@@ -664,8 +728,18 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           </div>
         </div>
         <div class="chain-form-group">
-          <label class="chain-label">Nom complet (ex: Yaakov ben Sarah)</label>
-          <input type="text" class="chain-input" id="chain-name" placeholder="Prénom ben/bat Nom de la mère" dir="auto">
+          <label class="chain-label">Nom complet</label>
+          <div class="chain-name-row">
+            <input type="text" class="chain-input chain-name-half" id="chain-firstname" placeholder="Prénom" dir="auto">
+            <div class="t119-benbat-slider chain-benbat-slider" onclick="toggleBenBat('chain')">
+              <div class="bb-slider-track">
+                <span class="bb-slider-option" data-bb="ben">בן</span>
+                <span class="bb-slider-option" data-bb="bat">בת</span>
+                <div class="bb-slider-thumb"></div>
+              </div>
+            </div>
+            <input type="text" class="chain-input chain-name-half" id="chain-mothername" placeholder="Mère" dir="auto">
+          </div>
         </div>
         <div class="chain-form-group">
           <label class="chain-label">Description (optionnel)</label>
@@ -696,16 +770,32 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     </div>
     <div class="t119-header">
       <h2 class="t119-title">Tehilim 119 par nom</h2>
-      <p class="t119-desc">Entrez un prénom en français ou en hébreu. Les sections du Psaume 119 correspondant aux lettres du nom seront affichées.</p>
+      <p class="t119-desc">Entrez le prénom de la personne et celui de sa mère. Les sections du Psaume 119 correspondant aux lettres seront affichées.</p>
     </div>
     <div class="t119-input-section">
-      <div class="t119-input-wrap">
-        <input type="text" class="t119-input" id="t119-input" placeholder="Tapez un prénom (ex: david, sarah...)" dir="auto" oninput="onT119Input()" autocomplete="off">
-        <button class="t119-clear" onclick="clearT119()" id="t119-clear" style="display:none">✕</button>
+      <div class="t119-fullname-row">
+        <div class="t119-field">
+          <label class="t119-name-label">Prénom</label>
+          <input type="text" class="t119-input t119-input-half" id="t119-input" placeholder="David, יעקב..." dir="auto" oninput="onT119Input()" autocomplete="off">
+          <div class="t119-suggestions" id="t119-suggestions"></div>
+        </div>
+        <div class="t119-benbat-slider" onclick="toggleBenBat('t119')">
+          <div class="bb-slider-track">
+            <span class="bb-slider-option" data-bb="ben">בן</span>
+            <span class="bb-slider-option" data-bb="bat">בת</span>
+            <div class="bb-slider-thumb"></div>
+          </div>
+        </div>
+        <div class="t119-field">
+          <label class="t119-name-label">Mère</label>
+          <input type="text" class="t119-input t119-input-half" id="t119-mother-input" placeholder="Sarah, רחל..." dir="auto" oninput="onT119Input()" autocomplete="off">
+          <div class="t119-suggestions" id="t119-mother-suggestions"></div>
+        </div>
       </div>
-      <div class="t119-suggestions" id="t119-suggestions"></div>
       <div class="t119-hebrew-preview" id="t119-hebrew-preview"></div>
+      <div class="t119-clear-wrap"><button class="t119-clear-btn" onclick="clearT119()" id="t119-clear" style="display:none">✕ Effacer</button></div>
       <div id="t119-kbd-wrap">
+      <div class="t119-kbd-hint">✍️ Vous pouvez aussi écrire directement en français dans les cases ci-dessus</div>
       <div class="t119-keyboard" id="t119-keyboard">
         <div class="t119-kb-row">
           <button onclick="t119AddLetter('א')">א</button>
@@ -4146,6 +4236,29 @@ const QUOTES = [
   { text: "Les Tehilim ont été composés avec Roua'h HaKodech pour toutes les générations et toutes les situations.", source: "Le Rambam" },
 ];
 
+const COMPLETION_QUOTES = [
+  { text: "Chaque bonne action que tu accomplis rapproche la venue du Machia'h. Tu as fait ta part aujourd'hui !", source: "Le Rabbi de Loubavitch" },
+  { text: "Sois une « Dougma 'Haya » — un exemple vivant. Les gens sont plus touchés par ce que tu fais que par ce que tu dis.", source: "Le Rabbi de Loubavitch" },
+  { text: "L'éducation d'un enfant est la plus grande des mitsvot, car elle contient en elle toutes les autres.", source: "Le Rabbi de Loubavitch" },
+  { text: "Nous sommes la dernière génération de l'exil et la première de la délivrance !", source: "Le Rabbi de Loubavitch" },
+  { text: "Une bougie allume une autre bougie sans perdre de sa propre lumière. Transmets la Torah avec joie.", source: "Le Rabbi de Loubavitch" },
+  { text: "Le monde tient sur trois piliers : la Torah, la prière et les actes de bonté. Tu les as accomplis aujourd'hui.", source: "Pirké Avot 1:2" },
+  { text: "Ne dis pas « quand j'aurai du temps libre j'étudierai », car peut-être n'auras-tu jamais de temps libre.", source: "Hillel, Pirké Avot 2:4" },
+  { text: "Un seul acte, une seule parole, une seule pensée peut faire pencher la balance du monde entier vers le mérite.", source: "Rambam, Hilkhot Téchouva 3:4" },
+  { text: "Éduquer un enfant selon sa voie, même quand il vieillira, il ne s'en écartera pas.", source: "Michlé (Proverbes) 22:6" },
+  { text: "Le Machia'h attend à la porte. Chaque mitsva est une clé qui ouvre un verrou de plus.", source: "Le Rabbi de Loubavitch" },
+  { text: "L'exemple est la plus puissante des leçons. Sois la lumière que tu veux voir dans le monde.", source: "Le Baal Chem Tov" },
+  { text: "Toute la Torah se résume en une phrase : ce qui t'est odieux, ne le fais pas à ton prochain. Le reste est commentaire — va et étudie !", source: "Hillel, Talmud Chabbat 31a" },
+  { text: "Quand une personne s'améliore, elle améliore le monde entier.", source: "Le Rabbi de Loubavitch" },
+  { text: "Le but de l'étude n'est pas l'étude elle-même, mais l'action qui en découle.", source: "Talmud Kiddouchin 40b" },
+  { text: "Les enfants sont les garants de la Torah. Sans eux, la Torah nous serait reprise.", source: "Midrash Chir HaChirim Rabba" },
+  { text: "Le Machia'h viendra dans une génération qui sera soit entièrement méritante, soit entièrement… courageuse dans le repentir.", source: "Talmud Sanhédrin 98a" },
+  { text: "Fais une mitsva de plus, et tu auras peut-être fait pencher le monde entier vers la délivrance.", source: "Le Rabbi de Loubavitch" },
+  { text: "L'obscurité n'est pas chassée par un bâton, mais par la lumière. Allume ta lumière intérieure.", source: "Le Rabbi de Loubavitch" },
+  { text: "Le plus grand cadeau que l'on puisse faire à ses enfants, c'est leur transmettre l'amour de la Torah.", source: "Rav Chimchon Raphaël Hirsch" },
+  { text: "Vis de telle manière que les gens veulent connaître ta Torah.", source: "Le Rabbi de Loubavitch" },
+];
+
 const DAILY_SCHEDULE = {
   1: [1, 9], 2: [10, 17], 3: [18, 22], 4: [23, 28], 5: [29, 34],
   6: [35, 38], 7: [39, 43], 8: [44, 48], 9: [49, 54], 10: [55, 59],
@@ -4387,6 +4500,10 @@ function init() {
       showHome();
     }, firstDuration + 1500);
 
+    // T119 keyboard targets active field
+    document.getElementById('t119-input').addEventListener('focus', function() { _t119ActiveField = 't119-input'; });
+    document.getElementById('t119-mother-input').addEventListener('focus', function() { _t119ActiveField = 't119-mother-input'; });
+
   } catch(e) {
     document.body.innerHTML = '<div style="padding:40px;color:#000;background:#fafafa;min-height:100vh;font-family:serif"><h2>Erreur</h2><p>'+e.message+'</p></div>';
   }
@@ -4406,6 +4523,8 @@ function showHome() {
   switchTab("menu");
   setTimeout(() => document.getElementById("home").classList.add("visible"), 50);
   renderHome();
+  renderObjectives();
+  cleanOldObjectives();
   updateBirthdaySub();
   setTimeout(checkBirthdayPopup, 1000);
   setTimeout(checkSharedChain, 500);
@@ -4453,6 +4572,7 @@ function switchTab(tab) {
   if (tab === "birthday") renderBirthday();
   if (tab === "chains") renderChainList();
   if (tab === "cemetery") renderCemetery();
+  if (tab === "menu") renderObjectives();
   window.scrollTo(0, 0);
   document.getElementById("reading").scrollTop = 0;
   updateHomeNav(tab);
@@ -5648,10 +5768,36 @@ function renderDots() {
     QUOTES.forEach((_, i) => {
       const w = i === quoteIndex ? 18 : 6;
       const bg = i === quoteIndex ? "var(--black)" : "var(--gray-5)";
-      html += '<div class="' + (id === "splash-dots" ? "splash-dot" : "quote-dot") + '" style="width:' + w + 'px;background:' + bg + '"></div>';
+      html += '<div class="' + (id === "splash-dots" ? "splash-dot" : "quote-dot") + '" data-qi="' + i + '" style="width:' + w + 'px;background:' + bg + '"></div>';
     });
     el.innerHTML = html;
+    el.onclick = function(e) {
+      var dot = e.target.closest('[data-qi]');
+      var idx = dot ? parseInt(dot.getAttribute('data-qi')) : -1;
+      if (idx >= 0 && idx !== quoteIndex) {
+        jumpToQuote(idx);
+      } else {
+        jumpToQuote((quoteIndex + 1) % QUOTES.length);
+      }
+    };
   });
+}
+
+function jumpToQuote(idx) {
+  if (quoteTimer) clearTimeout(quoteTimer);
+  ["splash-quote", "splash-source", "home-quote", "home-source"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.opacity = "0"; el.style.transform = "translateY(8px)"; }
+  });
+  setTimeout(() => {
+    quoteIndex = idx;
+    updateQuote();
+    ["splash-quote", "splash-source", "home-quote", "home-source"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }
+    });
+    scheduleNextQuote();
+  }, 400);
 }
 
 function scheduleNextQuote() {
@@ -6540,11 +6686,8 @@ function selectT119Name(hebrew) {
   document.getElementById('t119-input').value = hebrew;
   document.getElementById('t119-suggestions').classList.remove('active');
   document.getElementById('t119-suggestions').innerHTML = '';
-  document.getElementById('t119-hebrew-preview').textContent = hebrew;
-  var clearBtn = document.getElementById('t119-clear');
-  clearBtn.style.display = 'flex';
-  var letters = extractHebrewLetters(hebrew);
-  renderT119Results(letters, hebrew);
+  document.getElementById('t119-clear').style.display = 'inline-block';
+  onT119Input();
 }
 
 function renderT119Suggestions(query) {
@@ -6661,47 +6804,120 @@ function extractHebrewLetters(text) {
 }
 
 function t119AddLetter(l) {
-  var input = document.getElementById('t119-input');
+  var input = document.getElementById(_t119ActiveField);
   input.value += l;
   onT119Input();
 }
 function t119Backspace() {
-  var input = document.getElementById('t119-input');
+  var input = document.getElementById(_t119ActiveField);
   input.value = input.value.slice(0, -1);
   onT119Input();
 }
 function clearT119() {
   document.getElementById('t119-input').value = '';
+  document.getElementById('t119-mother-input').value = '';
   document.getElementById('t119-suggestions').classList.remove('active');
   document.getElementById('t119-suggestions').innerHTML = '';
+  document.getElementById('t119-mother-suggestions').classList.remove('active');
+  document.getElementById('t119-mother-suggestions').innerHTML = '';
   onT119Input();
+}
+
+function toggleBenBat(ctx) {
+  var selector = ctx === 'chain' ? '.chain-benbat-slider .bb-slider-track' : '.t119-benbat-slider .bb-slider-track';
+  var track = document.querySelector(selector);
+  if (!track) return;
+  track.classList.toggle('bat');
+  if (ctx === 't119') onT119Input();
+}
+
+function getT119BenBat() {
+  var track = document.querySelector('.t119-benbat-slider .bb-slider-track');
+  return track && track.classList.contains('bat') ? 'bat' : 'ben';
+}
+
+function getChainBenBat() {
+  var track = document.querySelector('.chain-benbat-slider .bb-slider-track');
+  return track && track.classList.contains('bat') ? 'bat' : 'ben';
 }
 
 function onT119Input() {
   var val = document.getElementById('t119-input').value;
+  var motherVal = document.getElementById('t119-mother-input').value;
   var clearBtn = document.getElementById('t119-clear');
-  clearBtn.style.display = val.length > 0 ? 'flex' : 'none';
+  clearBtn.style.display = (val.length > 0 || motherVal.length > 0) ? 'inline-block' : 'none';
   
-  // Check if input is Hebrew (from keyboard or paste)
+  // Show suggestions for active field
   var isHebrew = val.length > 0 && val.charCodeAt(0) >= 0x0590 && val.charCodeAt(0) <= 0x05FF;
+  var isMotherHebrew = motherVal.length > 0 && motherVal.charCodeAt(0) >= 0x0590 && motherVal.charCodeAt(0) <= 0x05FF;
   
-  if (isHebrew) {
-    // Direct Hebrew input - show preview and results directly
-    document.getElementById('t119-hebrew-preview').textContent = val;
+  // Suggestions for person name
+  if (!isHebrew && val.length > 0) {
+    renderT119Suggestions(val);
+  } else {
     document.getElementById('t119-suggestions').classList.remove('active');
     document.getElementById('t119-suggestions').innerHTML = '';
-    var letters = extractHebrewLetters(val);
-    renderT119Results(letters, val);
-  } else {
-    // Latin input - show suggestions from dictionary
-    renderT119Suggestions(val);
-    // Also show transliterated preview as fallback
-    var hebrew = frenchToHebrew(val);
-    var preview = document.getElementById('t119-hebrew-preview');
-    preview.textContent = hebrew;
-    var letters = extractHebrewLetters(hebrew);
-    renderT119Results(letters, hebrew);
   }
+  
+  // Suggestions for mother name
+  if (!isMotherHebrew && motherVal.length > 0) {
+    renderT119MotherSuggestions(motherVal);
+  } else {
+    document.getElementById('t119-mother-suggestions').classList.remove('active');
+    document.getElementById('t119-mother-suggestions').innerHTML = '';
+  }
+  
+  // Get hebrew for both names
+  var hebrewPerson = isHebrew ? val : frenchToHebrew(val);
+  var hebrewMother = isMotherHebrew ? motherVal : frenchToHebrew(motherVal);
+  
+  // Build preview
+  var bb = getT119BenBat();
+  var bbHeb = bb === 'bat' ? 'בת' : 'בן';
+  var preview = '';
+  if (hebrewPerson) preview = hebrewPerson;
+  if (hebrewPerson && hebrewMother) preview += ' ' + bbHeb + ' ' + hebrewMother;
+  else if (hebrewMother) preview = bbHeb + ' ' + hebrewMother;
+  document.getElementById('t119-hebrew-preview').textContent = preview;
+  
+  // Combine all letters for T119 results
+  var allLetters = [];
+  if (hebrewPerson) allLetters = allLetters.concat(extractHebrewLetters(hebrewPerson));
+  if (hebrewMother) allLetters = allLetters.concat(extractHebrewLetters(hebrewMother));
+  
+  renderT119Results(allLetters, preview);
+}
+
+function renderT119MotherSuggestions(query) {
+  var container = document.getElementById('t119-mother-suggestions');
+  if (!query || query.length < 1) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+  var results = searchNames(query);
+  if (results.length === 0) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+  var html = '';
+  results.slice(0, 5).forEach(function(r) {
+    html += '<div class="t119-sug-item" onclick="selectT119MotherSuggestion(\'' + r.hebrew.replace(/'/g,"\\'") + '\')">';
+    html += '<span class="t119-sug-hebrew">' + r.hebrew + '</span>';
+    html += '<span class="t119-sug-latin">' + r.latin + '</span>';
+    if (r.gender) html += '<span class="t119-sug-gender">' + (r.gender === 'M' ? '♂' : '♀') + '</span>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  container.classList.add('active');
+}
+
+function selectT119MotherSuggestion(hebrew) {
+  document.getElementById('t119-mother-input').value = hebrew;
+  document.getElementById('t119-mother-suggestions').classList.remove('active');
+  document.getElementById('t119-mother-suggestions').innerHTML = '';
+  onT119Input();
 }
 
 function renderT119Results(letters, hebrewName) {
@@ -6737,6 +6953,110 @@ function renderT119Results(letters, hebrewName) {
   });
   
   container.innerHTML = html;
+}
+
+// ====== 10 OBJECTIFS QUOTIDIENS ======
+var DAILY_OBJECTIVES = [
+  { id: 'modeh', emoji: '🌅', label: 'Modé Ani', time: 'Réveil' },
+  { id: 'brakhot', emoji: '🙌', label: 'Brakhot du matin', time: 'Matin' },
+  { id: 'tefila', emoji: '🙏', label: 'Téfila (Cha\'harit)', time: 'Matin' },
+  { id: 'tehilim', emoji: '📖', label: 'Tehilim', time: 'Journée' },
+  { id: 'casher', emoji: '🥩', label: 'Manger Casher', time: 'Journée' },
+  { id: 'minha', emoji: '🌤️', label: 'Min\'ha', time: 'Après-midi' },
+  { id: 'arvit', emoji: '🌙', label: 'Arvit', time: 'Soir' },
+  { id: 'famille', emoji: '👨‍👩‍👧‍👦', label: 'Temps en famille', time: 'Soir' },
+  { id: 'etude', emoji: '📚', label: 'Étude de Torah', time: 'Journée' },
+  { id: 'transmission', emoji: '💡', label: 'Transmission / Bonnes actions', time: 'Journée' }
+];
+
+function getObjStorageKey() {
+  var d = new Date();
+  return 'tehilim_obj_' + d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function getObjState() {
+  try { return JSON.parse(localStorage.getItem(getObjStorageKey()) || '{}'); }
+  catch(e) { return {}; }
+}
+
+function saveObjState(state) {
+  localStorage.setItem(getObjStorageKey(), JSON.stringify(state));
+}
+
+function renderObjectives() {
+  var container = document.getElementById('obj-list');
+  if (!container) return;
+  var state = getObjState();
+  var checked = 0;
+  var html = '';
+
+  DAILY_OBJECTIVES.forEach(function(obj) {
+    var done = !!state[obj.id];
+    if (done) checked++;
+    html += '<div class="obj-item' + (done ? ' checked' : '') + '" onclick="toggleObjective(\'' + obj.id + '\')">';
+    html += '<div class="obj-checkbox"><svg class="obj-check-svg" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+    html += '<span class="obj-emoji">' + obj.emoji + '</span>';
+    html += '<span class="obj-label">' + obj.label + '</span>';
+    html += '<span class="obj-time">' + obj.time + '</span>';
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+
+  // Completion quote
+  var cqEl = document.getElementById('obj-complete-quote');
+  if (checked === 10) {
+    var dayIdx = new Date().getDate() % COMPLETION_QUOTES.length;
+    var cq = COMPLETION_QUOTES[dayIdx];
+    cqEl.innerHTML = '<div class="obj-cq-bravo">🎉 Kol HaKavod !</div><div class="obj-cq-text">« ' + cq.text + ' »</div><div class="obj-cq-source">— ' + cq.source + '</div>';
+    cqEl.classList.add('show');
+  } else {
+    cqEl.classList.remove('show');
+    cqEl.innerHTML = '';
+  }
+
+  // Update counter
+  var counter = document.getElementById('obj-counter');
+  counter.textContent = checked + '/10';
+  counter.classList.toggle('done', checked === 10);
+
+  // Update progress bar
+  var fill = document.getElementById('obj-progress-fill');
+  fill.style.width = (checked / 10 * 100) + '%';
+}
+
+function toggleObjective(id) {
+  var state = getObjState();
+  if (state[id]) {
+    delete state[id];
+  } else {
+    state[id] = new Date().toISOString();
+  }
+  saveObjState(state);
+  renderObjectives();
+
+  // If tehilim is checked and we're on the menu, could auto-open jour
+  // Just a subtle animation for now
+}
+
+function resetObjectives() {
+  if (!confirm('Réinitialiser tous les objectifs du jour ?')) return;
+  localStorage.removeItem(getObjStorageKey());
+  renderObjectives();
+}
+
+// Clean up old objective data (keep only last 7 days)
+function cleanOldObjectives() {
+  var now = new Date();
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    if (key && key.startsWith('tehilim_obj_')) {
+      var dateStr = key.replace('tehilim_obj_', '');
+      var date = new Date(dateStr);
+      var diff = (now - date) / (1000 * 60 * 60 * 24);
+      if (diff > 7) localStorage.removeItem(key);
+    }
+  }
 }
 
 // ====== CHAINS DE TEHILIM ======
@@ -6804,11 +7124,13 @@ var chainTypeLabels = {
 function showChainForm() {
   document.getElementById('chain-form').style.display = 'block';
   document.getElementById('chain-create-section').style.display = 'none';
-  document.getElementById('chain-name').value = '';
+  document.getElementById('chain-firstname').value = '';
+  document.getElementById('chain-mothername').value = '';
   document.getElementById('chain-desc-input').value = '';
   document.querySelectorAll('.chain-type-btn').forEach(function(b) { b.classList.remove('active'); });
   document.querySelector('.chain-type-btn[data-type="refoua"]').classList.add('active');
-  // Add name field if no name set
+  var chainSlider = document.querySelector('.chain-benbat-slider .bb-slider-track');
+  if (chainSlider) chainSlider.classList.remove('bat');
   ensureNamePrompt();
 }
 function hideChainForm() {
@@ -6832,8 +7154,12 @@ function ensureNamePrompt() {
 
 // --- CREATE CHAIN ---
 function createChain() {
-  var name = document.getElementById('chain-name').value.trim();
-  if (!name) { document.getElementById('chain-name').style.borderColor = '#e74c3c'; return; }
+  var firstname = document.getElementById('chain-firstname').value.trim();
+  var mothername = document.getElementById('chain-mothername').value.trim();
+  if (!firstname) { document.getElementById('chain-firstname').style.borderColor = '#e74c3c'; return; }
+  var bb = getChainBenBat();
+  var name = firstname + ' ' + bb + ' ' + mothername;
+  if (!mothername) name = firstname;
   ensureNamePrompt();
   
   var chain = {
