@@ -140,6 +140,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .club-hero-sub { font-size:13px; color:var(--gray-3); }
 .club-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; padding:0 16px 16px; }
 .obj-story-bar { display:flex; align-items:center; gap:20px; padding:12px 16px 8px; justify-content:center; }
+.obj-story-bar-scroll { justify-content:flex-start; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; gap:12px; }
+.obj-story-bar-scroll::-webkit-scrollbar { display:none; }
+.obj-story-bar-scroll .os-ring { width:56px; height:56px; }
+.obj-story-bar-scroll .os-circle { font-size:22px; }
 .obj-story-bar::-webkit-scrollbar { display:none; }
 .os-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
 .os-ring { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
@@ -674,6 +678,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <!-- SUB-PANEL: OBJECTIFS -->
   <div id="panel-sub-objectifs" style="display:none">
     <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div class="obj-story-bar obj-story-bar-scroll" id="obj-story-bar-sub"></div>
     <div class="daily-objectives">
       <div class="obj-header">
         <span class="obj-title">🕎 Mes objectifs du jour</span>
@@ -1070,8 +1075,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="os-progress" id="os-progress"></div>
   <button class="os-close" onclick="closeObjStory()">✕</button>
   <div class="os-content" id="os-content"></div>
-  <div class="os-tap-left" onclick="objStoryPrev()"></div>
-  <div class="os-tap-right" onclick="objStoryNext()"></div>
+  <div class="os-tap-left" onclick="storyNav('prev')"></div>
+  <div class="os-tap-right" onclick="storyNav('next')"></div>
 </div>
 
 <script>
@@ -7190,30 +7195,163 @@ function countPeriodChecked(period, state) {
 }
 
 // ---- STORY BAR (3 circles: matin / aprem / soir) ----
+// Build flat list of all items with period info
+var ALL_OBJ_ITEMS = [];
+DAILY_PERIODS.forEach(function(p) {
+  p.items.forEach(function(it) {
+    ALL_OBJ_ITEMS.push({ id: it.id, emoji: it.emoji, label: it.label, period: p });
+  });
+});
+
+function getCurrentItemIndex() {
+  var pi = getCurrentPeriodIndex();
+  var p = DAILY_PERIODS[pi];
+  var state = getObjState();
+  // Find first unchecked in current period
+  var offset = 0;
+  for (var i = 0; i < DAILY_PERIODS.length; i++) {
+    if (i === pi) {
+      for (var j = 0; j < p.items.length; j++) {
+        if (!state[p.items[j].id]) return offset + j;
+      }
+      return offset;
+    }
+    offset += DAILY_PERIODS[i].items.length;
+  }
+  return 0;
+}
+
 function renderObjStoryBar() {
-  var bar = document.getElementById('obj-story-bar');
-  if (!bar) return;
   var state = getObjState();
   var currentIdx = getCurrentPeriodIndex();
-  var html = '';
+  // HOME: 3 period circles
+  var html3 = '';
   DAILY_PERIODS.forEach(function(p, i) {
     var total = p.items.length;
     var done = countPeriodChecked(p, state);
     var allDone = done === total;
     var isCurrent = i === currentIdx;
-    // Ring shows progress as conic gradient
     var pct = total > 0 ? Math.round(done / total * 100) : 0;
     var ringBg = allDone ? '#dbdbdb' : 'conic-gradient(from 0deg, #f9ce34 0%, #ee2a7b ' + pct + '%, var(--gray-5) ' + pct + '%)';
-    html += '<div class="os-item' + (allDone ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openObjStory(' + i + ')">';
-    html += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + p.emoji + '</div></div>';
-    html += '<span class="os-label">' + p.label + ' ' + done + '/' + total + '</span>';
-    html += '</div>';
+    html3 += '<div class="os-item' + (allDone ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openObjStory(' + i + ')">';
+    html3 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + p.emoji + '</div></div>';
+    html3 += '<span class="os-label">' + p.label + ' ' + done + '/' + total + '</span>';
+    html3 += '</div>';
   });
-  bar.innerHTML = html;
+  var bar = document.getElementById('obj-story-bar');
+  if (bar) bar.innerHTML = html3;
+
+  // SUB: 13 individual circles
+  var curItem = getCurrentItemIndex();
+  var html13 = '';
+  ALL_OBJ_ITEMS.forEach(function(it, i) {
+    var done = !!state[it.id];
+    var isCurrent = i === curItem;
+    var ringBg = done ? '#dbdbdb' : 'conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34)';
+    html13 += '<div class="os-item' + (done ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openItemStory(' + i + ')">';
+    html13 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + it.emoji + '</div></div>';
+    html13 += '<span class="os-label">' + it.label + '</span>';
+    html13 += '</div>';
+  });
+  var barSub = document.getElementById('obj-story-bar-sub');
+  if (barSub) {
+    barSub.innerHTML = html13;
+    // Scroll to current
+    setTimeout(function() {
+      var items = barSub.querySelectorAll('.os-item');
+      if (items[curItem]) items[curItem].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    }, 100);
+  }
+}
+
+// ---- ITEM STORY (13 individual) ----
+var _itemStoryIdx = 0;
+var _itemStoryTimer = null;
+var _storyMode = 'period'; // 'period' or 'item'
+
+function storyNav(dir) {
+  if (_storyMode === 'item') { dir === 'next' ? itemStoryNext() : itemStoryPrev(); }
+  else { dir === 'next' ? objStoryNext() : objStoryPrev(); }
+}
+
+function openItemStory(idx) {
+  _storyMode = 'item';
+  _itemStoryIdx = idx;
+  var overlay = document.getElementById('obj-story-overlay');
+  overlay.style.display = 'flex';
+  renderItemStoryContent();
+  startItemStoryTimer();
+}
+
+function renderItemStoryContent() {
+  var it = ALL_OBJ_ITEMS[_itemStoryIdx];
+  var period = it.period;
+  var state = getObjState();
+  var done = !!state[it.id];
+  var dark = period.dark;
+  var textColor = dark ? '#fff' : '#1a1a1a';
+
+  // Progress bars (13 segments)
+  var progHtml = '';
+  for (var i = 0; i < ALL_OBJ_ITEMS.length; i++) {
+    var pct = i < _itemStoryIdx ? 100 : (i === _itemStoryIdx ? 0 : 0);
+    progHtml += '<div class="os-prog-seg"><div class="os-prog-fill" style="width:' + pct + '%"></div></div>';
+  }
+  document.getElementById('os-progress').innerHTML = progHtml;
+  setTimeout(function() {
+    var segs = document.querySelectorAll('.os-prog-fill');
+    if (segs[_itemStoryIdx]) {
+      segs[_itemStoryIdx].style.transition = 'width 6s linear';
+      segs[_itemStoryIdx].style.width = '100%';
+    }
+  }, 50);
+
+  var html = '<div class="os-time-badge" style="color:' + textColor + '">' + period.label + '</div>';
+  html += '<div class="os-emoji">' + it.emoji + '</div>';
+  html += '<div class="os-name" style="color:' + textColor + '">' + it.label + '</div>';
+  html += '<div class="os-msg" style="color:' + textColor + '">' + period.msg + '</div>';
+  html += '<button class="os-check-btn' + (done ? ' checked' : '') + '" style="color:' + textColor + '" onclick="event.stopPropagation();toggleItemFromStory(\'' + it.id + '\')">';
+  html += done ? '✅ Accompli' : '☐ Marquer comme fait';
+  html += '</button>';
+
+  document.getElementById('os-content').innerHTML = html;
+  document.getElementById('obj-story-overlay').style.background = period.bg;
+}
+
+function toggleItemFromStory(id) {
+  var state = getObjState();
+  if (state[id]) { delete state[id]; } else { state[id] = new Date().toISOString(); }
+  saveObjState(state);
+  renderItemStoryContent();
+  startItemStoryTimer();
+}
+
+function itemStoryNext() {
+  if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
+  if (_itemStoryIdx < ALL_OBJ_ITEMS.length - 1) {
+    _itemStoryIdx++;
+    renderItemStoryContent();
+    startItemStoryTimer();
+  } else { closeObjStory(); }
+}
+
+function itemStoryPrev() {
+  if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
+  if (_itemStoryIdx > 0) {
+    _itemStoryIdx--;
+    renderItemStoryContent();
+    startItemStoryTimer();
+  }
+}
+
+function startItemStoryTimer() {
+  if (_itemStoryTimer) clearTimeout(_itemStoryTimer);
+  _itemStoryTimer = setTimeout(itemStoryNext, 6000);
 }
 
 // ---- STORY OVERLAY (fullscreen per period) ----
 function openObjStory(idx) {
+  _storyMode = 'period';
   _objStoryIdx = idx;
   var overlay = document.getElementById('obj-story-overlay');
   overlay.style.display = 'flex';
@@ -7225,6 +7363,7 @@ function closeObjStory() {
   var overlay = document.getElementById('obj-story-overlay');
   overlay.style.display = 'none';
   if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
+  if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
   renderObjStoryBar();
   updateBigObjSub();
   var objList = document.getElementById('obj-list');
@@ -7311,14 +7450,13 @@ function startObjStoryTimer() {
 // Auto-show story on app open for current period
 function autoShowObjStory() {
   var state = getObjState();
-  var idx = getCurrentPeriodIndex();
-  var period = DAILY_PERIODS[idx];
-  var allDone = countPeriodChecked(period, state) === period.items.length;
-  if (!allDone) {
+  var itemIdx = getCurrentItemIndex();
+  var it = ALL_OBJ_ITEMS[itemIdx];
+  if (!state[it.id]) {
     var sessionKey = 'tehilim_story_shown_' + new Date().getHours();
     if (!sessionStorage.getItem(sessionKey)) {
       sessionStorage.setItem(sessionKey, '1');
-      setTimeout(function() { openObjStory(idx); }, 600);
+      setTimeout(function() { openItemStory(itemIdx); }, 600);
     }
   }
 }
