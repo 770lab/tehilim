@@ -388,6 +388,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .cem-119-info { font-size:13px; font-weight:700; color:var(--black); }
 .cem-119-range { font-size:11px; color:var(--gray-3); font-weight:400; }
 .cem-neshama-word { text-align:center; margin:16px 0 6px; font-family:'Noto Serif Hebrew',serif; font-size:36px; font-weight:700; color:var(--black); direction:rtl; letter-spacing:8px; }
+.cem-name-section { padding:12px 0 8px; }
 .panel-back-wrap { padding:12px 16px 0; display:flex; justify-content:space-between; align-items:center; }
 .panel-back { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:8px 12px 8px 0; min-height:44px; }
 .day-badge-wrap { padding:0 16px 0; }
@@ -733,9 +734,57 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     <div class="cem-header">
       <div class="cem-icon">🕯️</div>
       <h2 class="cem-title">Tehilim au cimetière</h2>
-      <p class="cem-desc">Psaumes traditionnels récités lors d'une visite au cimetière, suivis des sections du Psaume 119 qui forment le mot <strong>נשמה</strong> (Néchama – âme).</p>
+      <p class="cem-desc">Psaumes traditionnels récités lors d'une visite au cimetière, suivis des sections du Psaume 119 correspondant au nom du défunt et au mot <strong>נשמה</strong> (Néchama – âme).</p>
     </div>
     <div id="cemetery-content"></div>
+    <div class="cem-section-title" id="cem-name-title">🔤 Psaume 119 · Nom du défunt</div>
+    <div class="cem-name-section">
+      <div class="t119-input-wrap" style="margin:0 16px">
+        <input type="text" class="t119-input" id="cem-name-input" placeholder="Nom du défunt (ex: david, sarah...)" dir="auto" oninput="onCemNameInput()" autocomplete="off">
+        <button class="t119-clear" onclick="clearCemName()" id="cem-name-clear" style="display:none">✕</button>
+      </div>
+      <div class="t119-suggestions" id="cem-suggestions"></div>
+      <div class="t119-hebrew-preview" id="cem-hebrew-preview"></div>
+      <div id="cem-kbd-wrap">
+      <div class="t119-keyboard" id="cem-keyboard">
+        <div class="t119-kb-row">
+          <button onclick="cemAddLetter('א')">א</button>
+          <button onclick="cemAddLetter('ב')">ב</button>
+          <button onclick="cemAddLetter('ג')">ג</button>
+          <button onclick="cemAddLetter('ד')">ד</button>
+          <button onclick="cemAddLetter('ה')">ה</button>
+          <button onclick="cemAddLetter('ו')">ו</button>
+          <button onclick="cemAddLetter('ז')">ז</button>
+          <button onclick="cemAddLetter('ח')">ח</button>
+          <button onclick="cemAddLetter('ט')">ט</button>
+        </div>
+        <div class="t119-kb-row">
+          <button onclick="cemAddLetter('י')">י</button>
+          <button onclick="cemAddLetter('כ')">כ</button>
+          <button onclick="cemAddLetter('ל')">ל</button>
+          <button onclick="cemAddLetter('מ')">מ</button>
+          <button onclick="cemAddLetter('נ')">נ</button>
+          <button onclick="cemAddLetter('ס')">ס</button>
+          <button onclick="cemAddLetter('ע')">ע</button>
+          <button onclick="cemAddLetter('פ')">פ</button>
+          <button onclick="cemAddLetter('צ')">צ</button>
+        </div>
+        <div class="t119-kb-row">
+          <button onclick="cemAddLetter('ק')">ק</button>
+          <button onclick="cemAddLetter('ר')">ר</button>
+          <button onclick="cemAddLetter('ש')">ש</button>
+          <button onclick="cemAddLetter('ת')">ת</button>
+        </div>
+        <div class="t119-kb-row">
+          <button class="t119-kb-space" onclick="cemAddLetter(' ')">Espace</button>
+          <button class="t119-kb-del" onclick="cemBackspace()">⌫</button>
+        </div>
+      </div>
+      <div class="t119-convert-hint">💡 Tapez en français ou en hébreu</div>
+      </div>
+    </div>
+    <div id="cem-name-results"></div>
+    <div id="cem-neshama-section"></div>
   </div>
 
   <!-- BIRTHDAY POPUP -->
@@ -5742,58 +5791,171 @@ var NESHAMA_LETTERS = [
 
 function renderCemetery() {
   var container = document.getElementById('cemetery-content');
-  if (container.innerHTML) return; // already rendered
-  
-  var html = '';
-  
-  // Psalms section
-  html += '<div class="cem-section-title">📖 Les 7 Psaumes</div>';
-  
-  CEMETERY_PSALMS.forEach(function(num) {
-    var psalm = TEHILIM.find(function(p) { return p.number === num; });
-    if (!psalm) return;
-    var id = 'cem-psalm-' + num;
-    html += '<div class="cem-psalm-card">';
-    html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
-    html += '<span class="cem-psalm-num">פרק ' + toHebrewNumeral(num) + ' · Psaume ' + num + '</span>';
-    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
-    html += '</div>';
-    html += '<div class="cem-psalm-body" id="' + id + '">';
-    psalm.verses.forEach(function(v, i) {
-      html += '<div class="cem-verse"><span class="cem-verse-num">' + toHebrewNumeral(i + 1) + '</span> ' + v.hebrew + '</div>';
-    });
-    html += '</div></div>';
-  });
-  
-  // Psalm 119 - Neshama section
-  html += '<div class="cem-section-title">✡ Psaume 119 · נשמה</div>';
-  html += '<div class="cem-neshama-word">נ ש מ ה</div>';
-  html += '<div style="text-align:center;font-size:12px;color:var(--gray-3);margin-bottom:16px">Néchama · L\'âme</div>';
-  
-  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
-  if (psalm119) {
-    NESHAMA_LETTERS.forEach(function(info) {
-      var id = 'cem-119-' + info.letter;
+  if (!container.innerHTML) {
+    var html = '';
+    html += '<div class="cem-section-title">📖 Les 7 Psaumes</div>';
+    CEMETERY_PSALMS.forEach(function(num) {
+      var psalm = TEHILIM.find(function(p) { return p.number === num; });
+      if (!psalm) return;
+      var id = 'cem-psalm-' + num;
       html += '<div class="cem-psalm-card">';
       html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
-      html += '<div style="display:flex;align-items:center;gap:10px">';
-      html += '<div class="cem-119-circle">' + info.letter + '</div>';
-      html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + '<div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
-      html += '</div>';
+      html += '<span class="cem-psalm-num">פרק ' + toHebrewNumeral(num) + ' · Psaume ' + num + '</span>';
       html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
       html += '</div>';
       html += '<div class="cem-psalm-body" id="' + id + '">';
-      for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
-        html += '<div class="cem-verse"><span class="cem-verse-num">' + toHebrewNumeral(v + 1) + '</span> ' + psalm119.verses[v].hebrew + '</div>';
-      }
+      psalm.verses.forEach(function(v, i) {
+        html += '<div class="cem-verse"><span class="cem-verse-num">' + toHebrewNumeral(i + 1) + '</span> ' + v.hebrew + '</div>';
+      });
       html += '</div></div>';
     });
+    container.innerHTML = html;
+    toggleCemPsalm('cem-psalm-33');
   }
+  // Render neshama section
+  renderCemNeshama();
+}
+
+function renderCemNeshama() {
+  var container = document.getElementById('cem-neshama-section');
+  if (container.innerHTML) return;
+  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
+  if (!psalm119) return;
+  
+  var html = '<div class="cem-section-title">✡ Psaume 119 · נשמה</div>';
+  html += '<div class="cem-neshama-word">נ ש מ ה</div>';
+  html += '<div style="text-align:center;font-size:12px;color:var(--gray-3);margin-bottom:16px">Néchama · L\'âme</div>';
+  
+  NESHAMA_LETTERS.forEach(function(info) {
+    var id = 'cem-nesh-' + info.letter;
+    html += '<div class="cem-psalm-card">';
+    html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
+    html += '<div style="display:flex;align-items:center;gap:10px">';
+    html += '<div class="cem-119-circle">' + info.letter + '</div>';
+    html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + '<div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
+    html += '</div>';
+    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
+    html += '</div>';
+    html += '<div class="cem-psalm-body" id="' + id + '">';
+    for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
+      html += '<div class="cem-verse"><span class="cem-verse-num">' + toHebrewNumeral(v + 1) + '</span> ' + psalm119.verses[v].hebrew + '</div>';
+    }
+    html += '</div></div>';
+  });
   
   container.innerHTML = html;
+}
+
+// Cemetery name input handlers
+function cemAddLetter(l) {
+  var input = document.getElementById('cem-name-input');
+  input.value += l;
+  onCemNameInput();
+}
+function cemBackspace() {
+  var input = document.getElementById('cem-name-input');
+  input.value = input.value.slice(0, -1);
+  onCemNameInput();
+}
+function clearCemName() {
+  document.getElementById('cem-name-input').value = '';
+  document.getElementById('cem-suggestions').classList.remove('active');
+  document.getElementById('cem-suggestions').innerHTML = '';
+  document.getElementById('cem-hebrew-preview').textContent = '';
+  document.getElementById('cem-name-results').innerHTML = '';
+  document.getElementById('cem-name-clear').style.display = 'none';
+}
+
+function selectCemName(hebrew) {
+  document.getElementById('cem-name-input').value = hebrew;
+  document.getElementById('cem-suggestions').classList.remove('active');
+  document.getElementById('cem-suggestions').innerHTML = '';
+  onCemNameInput();
+}
+
+function renderCemSuggestions(query) {
+  var container = document.getElementById('cem-suggestions');
+  if (!query || query.length < 1) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+  var results = searchNames(query);
+  if (results.length === 0) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+  var html = '';
+  results.forEach(function(r) {
+    var genderIcon = r[2] === 'M' ? '👨' : r[2] === 'F' ? '👩' : '⚧';
+    html += '<div class="t119-suggestion" onclick="selectCemName(\'' + r[1] + '\')">';
+    html += '<span class="t119-sug-hebrew">' + r[1] + '</span>';
+    html += '<span class="t119-sug-latin">' + r[0][0] + '</span>';
+    html += '<span class="t119-sug-gender">' + genderIcon + '</span>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  container.classList.add('active');
+}
+
+function onCemNameInput() {
+  var val = document.getElementById('cem-name-input').value;
+  var clearBtn = document.getElementById('cem-name-clear');
+  clearBtn.style.display = val.length > 0 ? 'flex' : 'none';
   
-  // Auto-open first psalm
-  toggleCemPsalm('cem-psalm-33');
+  var isHebrew = val.length > 0 && val.charCodeAt(0) >= 0x0590 && val.charCodeAt(0) <= 0x05FF;
+  
+  if (isHebrew) {
+    document.getElementById('cem-hebrew-preview').textContent = val;
+    document.getElementById('cem-suggestions').classList.remove('active');
+    document.getElementById('cem-suggestions').innerHTML = '';
+    var letters = extractHebrewLetters(val);
+    renderCemNameResults(letters, val);
+  } else {
+    renderCemSuggestions(val);
+    var hebrew = frenchToHebrew(val);
+    document.getElementById('cem-hebrew-preview').textContent = hebrew;
+    var letters = extractHebrewLetters(hebrew);
+    renderCemNameResults(letters, hebrew);
+  }
+}
+
+function renderCemNameResults(letters, hebrewName) {
+  var container = document.getElementById('cem-name-results');
+  if (letters.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
+  if (!psalm119) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  var html = '<div style="text-align:center;padding:8px 16px 12px;font-size:13px;color:var(--gray-2)">';
+  html += '<strong>' + letters.length + ' section' + (letters.length > 1 ? 's' : '') + '</strong> pour <span style="font-family:Noto Serif Hebrew,serif;font-size:16px;font-weight:700">' + hebrewName.trim() + '</span>';
+  html += '</div>';
+  
+  letters.forEach(function(info, idx) {
+    var id = 'cem-name-119-' + idx;
+    html += '<div class="cem-psalm-card">';
+    html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
+    html += '<div style="display:flex;align-items:center;gap:10px">';
+    html += '<div class="cem-119-circle">' + info.letter + '</div>';
+    html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + ' <span style="font-size:11px;color:var(--gray-3);font-weight:400">(lettre ' + (idx + 1) + ')</span><div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
+    html += '</div>';
+    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
+    html += '</div>';
+    html += '<div class="cem-psalm-body open" id="' + id + '">';
+    for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
+      html += '<div class="cem-verse"><span class="cem-verse-num">' + toHebrewNumeral(v + 1) + '</span> ' + psalm119.verses[v].hebrew + '</div>';
+    }
+    html += '</div></div>';
+  });
+  
+  container.innerHTML = html;
 }
 
 function toggleCemPsalm(id) {
