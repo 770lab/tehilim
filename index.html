@@ -145,6 +145,36 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .cal-day-label { font-size:9px; color:var(--gray-3); font-weight:600; text-align:center; line-height:1.2; }
 .cal-day.today .cal-day-label { color:var(--gray-1); font-weight:700; }
 .cal-day.today .cal-day-num { color:var(--black); }
+.cal-day.done { background:#f0faf0; border-color:#c3e6c3; }
+.cal-day.done .cal-day-check { font-size:10px; color:#27ae60; line-height:1; }
+.cal-day.done.today { }
+
+/* Calendar progress banner */
+.cal-progress-banner { margin:0 16px 12px; padding:14px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); display:flex; align-items:center; gap:12px; }
+.cal-progress-banner.done { background:linear-gradient(135deg, #f9fafb, #f0fdf4); border-color:#bbf7d0; }
+.cal-progress-banner.perso { background:linear-gradient(135deg, #fffbeb, #fef3c7); border-color:#fcd34d; cursor:pointer; }
+.cal-progress-banner.perso:active { opacity:0.8; }
+.cal-progress-emoji { font-size:28px; flex-shrink:0; }
+.cal-progress-msg { font-size:13px; color:var(--gray-2); line-height:1.4; flex:1; }
+.cal-progress-msg strong { color:var(--black); }
+.cal-progress-info { flex:1; }
+.cal-progress-bar-wrap { display:flex; align-items:center; gap:8px; margin-top:6px; }
+.cal-progress-bar-bg { flex:1; height:5px; border-radius:3px; background:var(--gray-5); overflow:hidden; }
+.cal-progress-bar-fill { height:100%; border-radius:3px; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7); }
+.cal-progress-pct { font-size:11px; font-weight:600; color:var(--gray-2); }
+.cal-progress-go { flex-shrink:0; padding:8px 14px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); }
+.cal-progress-go:active { opacity:0.8; }
+.cal-progress-arrow { font-size:16px; color:var(--gray-4); flex-shrink:0; }
+
+/* Completion card */
+.cal-completion-card { margin:0 16px 16px; padding:24px 20px; border-radius:16px; background:linear-gradient(135deg, #0f0f0f, #1a1a2e); text-align:center; position:relative; overflow:hidden; }
+.cal-completion-card::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:conic-gradient(from 210deg, rgba(249,206,52,0.1), rgba(238,42,123,0.1), rgba(98,40,215,0.1), rgba(238,42,123,0.1), rgba(249,206,52,0.1)); animation:shimmer 4s linear infinite; }
+@keyframes shimmer { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+.cal-completion-emoji { font-size:36px; position:relative; z-index:1; margin-bottom:10px; }
+.cal-completion-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:15px; color:rgba(255,255,255,0.7); direction:rtl; position:relative; z-index:1; margin-bottom:12px; line-height:1.6; }
+.cal-completion-text { font-size:13px; color:rgba(255,255,255,0.9); position:relative; z-index:1; line-height:1.6; margin-bottom:14px; }
+.cal-completion-text strong { color:#f9ce34; }
+.cal-completion-footer { font-size:11px; color:rgba(255,255,255,0.4); position:relative; z-index:1; font-family:'Noto Serif Hebrew',serif; }
 .story-item.active .story-label { color:var(--black); }
 @keyframes storySpinIn { 0% { transform:scale(0) rotate(0deg); opacity:0; } 50% { transform:scale(0.8) rotate(180deg); opacity:0.7; } 100% { transform:scale(1) rotate(360deg); opacity:1; } }
 .story-item.anim-in { animation: storySpinIn 0.5s ease forwards; opacity:0; }
@@ -235,7 +265,109 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .card-perek { }
 .menu-card.coming-soon { opacity:0.5; }
 .menu-card.coming-soon .menu-card-title::after { content:' · Bientôt'; font-weight:400; font-size:9px; color:var(--gray-4); }
-.panel-back-wrap { padding:12px 16px 0; }
+
+/* Chains */
+.chain-header { padding:16px; text-align:center; }
+.chain-title { font-size:20px; font-weight:700; color:var(--black); margin:0 0 6px; font-family:var(--font); }
+.chain-desc { font-size:12px; color:var(--gray-3); margin:0; line-height:1.5; }
+.chain-create-btn { display:block; width:calc(100% - 32px); margin:0 16px 16px; padding:14px; border-radius:var(--radius); border:2px dashed var(--gray-4); background:transparent; font-size:14px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); transition:all 0.15s; }
+.chain-create-btn:active { background:var(--gray-6); }
+.chain-form-card { margin:0 16px 16px; padding:16px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); }
+.chain-form-group { margin-bottom:14px; }
+.chain-label { font-size:12px; font-weight:600; color:var(--gray-2); display:block; margin-bottom:6px; }
+.chain-type-btns { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.chain-type-btn { padding:10px 6px; border-radius:10px; border:1.5px solid var(--gray-5); background:var(--white); font-size:11px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); transition:all 0.15s; }
+.chain-type-btn.active { border-color:var(--black); background:var(--black); color:var(--white); }
+.chain-input { width:100%; padding:10px 12px; border-radius:10px; border:1.5px solid var(--gray-5); font-size:14px; font-family:var(--font); color:var(--black); outline:none; box-sizing:border-box; }
+.chain-input:focus { border-color:var(--gray-2); }
+.chain-form-actions { display:flex; gap:8px; }
+.chain-cancel-btn { flex:1; padding:12px; border-radius:10px; border:1px solid var(--gray-5); background:var(--white); font-size:13px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); }
+.chain-submit-btn { flex:2; padding:12px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:13px; font-weight:700; cursor:pointer; font-family:var(--font); }
+.chain-submit-btn:active { opacity:0.8; }
+
+.chain-card { margin:0 16px 10px; padding:14px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); cursor:pointer; transition:all 0.15s; }
+.chain-card:active { background:var(--gray-6); }
+.chain-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; }
+.chain-card-type { font-size:10px; font-weight:600; color:var(--white); background:var(--black); padding:3px 8px; border-radius:6px; }
+.chain-card-type.refoua { background:#e74c3c; }
+.chain-card-type.mariage { background:#9b59b6; }
+.chain-card-type.memoire { background:#2c3e50; }
+.chain-card-type.autre { background:#27ae60; }
+.chain-card-date { font-size:10px; color:var(--gray-4); }
+.chain-card-name { font-size:16px; font-weight:700; color:var(--black); margin-bottom:4px; direction:auto; }
+.chain-card-descr { font-size:12px; color:var(--gray-3); margin-bottom:10px; }
+.chain-card-progress { display:flex; align-items:center; gap:8px; }
+.chain-progress-bar { flex:1; height:6px; border-radius:3px; background:var(--gray-5); overflow:hidden; }
+.chain-progress-fill { height:100%; border-radius:3px; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7); transition:width 0.3s; }
+.chain-progress-text { font-size:11px; font-weight:600; color:var(--gray-2); white-space:nowrap; }
+
+/* Chain detail */
+.chain-detail-header { text-align:center; padding:20px 16px; }
+.chain-detail-type { font-size:11px; font-weight:600; color:var(--white); display:inline-block; padding:4px 12px; border-radius:8px; margin-bottom:8px; }
+.chain-detail-name { font-size:22px; font-weight:700; color:var(--black); direction:auto; margin-bottom:4px; }
+.chain-detail-desc { font-size:13px; color:var(--gray-3); }
+.chain-wheel { display:flex; justify-content:center; padding:10px 0 20px; }
+.chain-wheel-ring { width:160px; height:160px; border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; }
+.chain-wheel-inner { width:130px; height:130px; border-radius:50%; background:var(--white); display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.chain-wheel-count { font-size:32px; font-weight:700; color:var(--black); }
+.chain-wheel-label { font-size:11px; color:var(--gray-3); }
+.chain-wheel-cycle { font-size:10px; color:var(--gray-4); margin-top:2px; }
+.chain-next-section { padding:0 16px 16px; text-align:center; }
+.chain-next-btn { display:block; width:100%; padding:16px; border-radius:var(--radius); border:none; background:var(--black); color:var(--white); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); }
+.chain-next-btn:active { opacity:0.8; }
+.chain-psalms-grid { display:grid; grid-template-columns:repeat(10, 1fr); gap:3px; padding:0 16px 20px; }
+.chain-psalm-cell { width:100%; aspect-ratio:1; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; background:var(--gray-5); color:var(--gray-3); }
+.chain-psalm-cell.read { background:#27ae60; color:var(--white); }
+.chain-psalm-cell.current { background:var(--black); color:var(--white); }
+.chain-share-section { padding:0 16px 20px; display:flex; gap:8px; }
+.chain-share-btn { flex:1; padding:12px; border-radius:10px; border:1px solid var(--gray-5); background:var(--white); font-size:12px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); text-align:center; }
+.chain-share-btn.whatsapp { background:#25D366; color:white; border-color:#25D366; }
+.chain-share-btn:active { opacity:0.8; }
+.chain-share-top { font-size:12px; font-weight:600; color:var(--gray-2); background:none; border:1px solid var(--gray-5); border-radius:8px; padding:6px 12px; cursor:pointer; font-family:var(--font); }
+.chain-delete-btn { display:block; margin:0 auto 20px; padding:10px 20px; border:none; background:none; color:#e74c3c; font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); }
+.chain-empty { text-align:center; padding:40px 16px; color:var(--gray-3); font-size:14px; }
+
+/* T119 by name */
+.t119-header { padding:16px; text-align:center; }
+.t119-title { font-size:20px; font-weight:700; color:var(--black); margin:0 0 6px; font-family:var(--font); }
+.t119-desc { font-size:12px; color:var(--gray-3); margin:0; line-height:1.5; }
+.t119-input-section { padding:0 16px; }
+.t119-input-wrap { position:relative; margin-bottom:8px; }
+.t119-input { width:100%; padding:14px 40px 14px 14px; border-radius:12px; border:1.5px solid var(--gray-5); font-size:16px; font-family:var(--font); color:var(--black); outline:none; box-sizing:border-box; text-align:center; }
+.t119-input:focus { border-color:var(--gray-2); }
+.t119-clear { position:absolute; right:10px; top:50%; transform:translateY(-50%); background:var(--gray-5); border:none; border-radius:50%; width:24px; height:24px; font-size:12px; cursor:pointer; color:var(--gray-2); display:flex; align-items:center; justify-content:center; }
+.t119-hebrew-preview { text-align:center; font-family:'Noto Serif Hebrew',serif; font-size:28px; font-weight:700; color:var(--black); direction:rtl; min-height:40px; margin-bottom:10px; }
+.t119-keyboard { display:flex; flex-direction:column; gap:4px; margin-bottom:8px; }
+.t119-kb-row { display:flex; justify-content:center; gap:3px; }
+.t119-kb-row button { width:30px; height:36px; border-radius:6px; border:1px solid var(--gray-5); background:var(--white); font-family:'Noto Serif Hebrew',serif; font-size:15px; cursor:pointer; color:var(--black); transition:all 0.1s; }
+.t119-kb-row button:active { background:var(--gray-6); transform:scale(0.95); }
+.t119-kb-space { width:120px !important; font-family:var(--font) !important; font-size:11px !important; }
+.t119-kb-del { width:50px !important; font-size:16px !important; }
+.t119-convert-hint { text-align:center; font-size:10px; color:var(--gray-4); margin-bottom:16px; }
+.t119-suggestions { margin:0 0 10px; max-height:200px; overflow-y:auto; border-radius:12px; background:var(--white); border:1.5px solid var(--gray-5); display:none; }
+.t119-suggestions.active { display:block; }
+.t119-sug-item { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; cursor:pointer; transition:background 0.1s; border-bottom:1px solid var(--gray-6); }
+.t119-sug-item:last-child { border-bottom:none; }
+.t119-sug-item:active { background:var(--gray-6); }
+.t119-sug-heb { font-family:'Noto Serif Hebrew',serif; font-size:20px; font-weight:700; color:var(--black); direction:rtl; }
+.t119-sug-lat { font-size:13px; color:var(--gray-3); font-family:var(--font); }
+.t119-sug-gender { font-size:10px; margin-left:6px; }
+.t119-sug-header { padding:8px 14px 4px; font-size:10px; font-weight:700; color:var(--gray-4); text-transform:uppercase; letter-spacing:0.5px; background:var(--gray-6); }
+.t119-dict-toggle { display:flex; align-items:center; justify-content:center; gap:6px; padding:6px; margin:0 0 8px; font-size:11px; color:var(--gray-3); cursor:pointer; background:none; border:none; width:100%; font-family:var(--font); }
+.t119-dict-toggle:active { color:var(--black); }
+.t119-kbd-collapsed { display:none; }
+
+.t119-letter-section { margin:0 16px 16px; padding:16px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); }
+.t119-letter-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--gray-5); }
+.t119-letter-circle { width:44px; height:44px; border-radius:50%; background:var(--black); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; flex-shrink:0; }
+.t119-letter-info { }
+.t119-letter-name { font-size:15px; font-weight:700; color:var(--black); }
+.t119-letter-range { font-size:11px; color:var(--gray-3); }
+.t119-verse { direction:rtl; font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-hebrew, 20px); line-height:2; color:var(--black); padding:4px 0; text-align:justify; }
+.t119-verse-num { font-size:calc(var(--fs-hebrew, 20px) - 4px); font-weight:700; color:var(--gray-3); margin:0 4px; }
+.t119-read-btn { display:block; width:100%; margin:16px 0 0; padding:12px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:13px; font-weight:700; cursor:pointer; font-family:var(--font); }
+.t119-read-btn:active { opacity:0.8; }
+.panel-back-wrap { padding:12px 16px 0; display:flex; justify-content:space-between; align-items:center; }
 .panel-back { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:8px 12px 8px 0; min-height:44px; }
 .day-badge-wrap { padding:0 16px 0; }
 
@@ -366,10 +498,11 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <span class="menu-card-title">Réfoua Chéléma</span>
         </div>
       </button>
-      <button class="menu-card coming-soon">
+      <button class="menu-card" onclick="switchTab('t119')">
         <span class="menu-card-icon">🔤</span>
         <div class="menu-card-content">
           <span class="menu-card-title">Tehilim 119 par nom</span>
+          <span class="menu-card-sub">Prière personnalisée</span>
         </div>
       </button>
       <button class="menu-card coming-soon">
@@ -378,10 +511,11 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <span class="menu-card-title">Tehilim au cimetière</span>
         </div>
       </button>
-      <button class="menu-card coming-soon">
+      <button class="menu-card" onclick="switchTab('chains')">
         <span class="menu-card-icon">🙏</span>
         <div class="menu-card-content">
           <span class="menu-card-title">Demandes personnelles</span>
+          <span class="menu-card-sub">Chaînes de Tehilim</span>
         </div>
       </button>
       <button class="menu-card coming-soon">
@@ -463,6 +597,113 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
     </div>
     <div id="birthday-content"></div>
+  </div>
+
+  <!-- PANEL: CHAINES DE TEHILIM -->
+  <div id="panel-chains" style="display:none">
+    <div class="panel-back-wrap">
+      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
+    </div>
+    <div class="chain-header">
+      <h2 class="chain-title">Chaînes de Tehilim</h2>
+      <p class="chain-desc">Créez une chaîne de lecture collaborative. Partagez le lien et chaque participant reçoit un psaume différent à lire.</p>
+    </div>
+    <div id="chain-create-section">
+      <button class="chain-create-btn" onclick="showChainForm()">+ Créer une nouvelle chaîne</button>
+    </div>
+    <div id="chain-form" style="display:none">
+      <div class="chain-form-card">
+        <div class="chain-form-group">
+          <label class="chain-label">Type de demande</label>
+          <div class="chain-type-btns" id="chain-type-btns">
+            <button class="chain-type-btn active" data-type="refoua" onclick="selectChainType(this)">🩺 Réfoua Chéléma</button>
+            <button class="chain-type-btn" data-type="mariage" onclick="selectChainType(this)">💍 Mariage</button>
+            <button class="chain-type-btn" data-type="memoire" onclick="selectChainType(this)">🕯️ À la mémoire</button>
+            <button class="chain-type-btn" data-type="autre" onclick="selectChainType(this)">✨ Autre</button>
+          </div>
+        </div>
+        <div class="chain-form-group">
+          <label class="chain-label">Nom complet (ex: Yaakov ben Sarah)</label>
+          <input type="text" class="chain-input" id="chain-name" placeholder="Prénom ben/bat Nom de la mère" dir="auto">
+        </div>
+        <div class="chain-form-group">
+          <label class="chain-label">Description (optionnel)</label>
+          <input type="text" class="chain-input" id="chain-desc-input" placeholder="Brève description..." dir="auto">
+        </div>
+        <div class="chain-form-actions">
+          <button class="chain-cancel-btn" onclick="hideChainForm()">Annuler</button>
+          <button class="chain-submit-btn" onclick="createChain()">Créer la chaîne</button>
+        </div>
+      </div>
+    </div>
+    <div id="chain-list"></div>
+  </div>
+
+  <!-- CHAIN DETAIL VIEW -->
+  <div id="panel-chain-detail" style="display:none">
+    <div class="panel-back-wrap">
+      <button class="panel-back" onclick="backToChains()">← Retour</button>
+      <button class="chain-share-top" onclick="shareChain()">Partager</button>
+    </div>
+    <div id="chain-detail-content"></div>
+  </div>
+
+  <!-- PANEL: TEHILIM 119 PAR NOM -->
+  <div id="panel-t119" style="display:none">
+    <div class="panel-back-wrap">
+      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
+    </div>
+    <div class="t119-header">
+      <h2 class="t119-title">Tehilim 119 par nom</h2>
+      <p class="t119-desc">Entrez un prénom en français ou en hébreu. Les sections du Psaume 119 correspondant aux lettres du nom seront affichées.</p>
+    </div>
+    <div class="t119-input-section">
+      <div class="t119-input-wrap">
+        <input type="text" class="t119-input" id="t119-input" placeholder="Tapez un prénom (ex: david, sarah...)" dir="auto" oninput="onT119Input()" autocomplete="off">
+        <button class="t119-clear" onclick="clearT119()" id="t119-clear" style="display:none">✕</button>
+      </div>
+      <div class="t119-suggestions" id="t119-suggestions"></div>
+      <div class="t119-hebrew-preview" id="t119-hebrew-preview"></div>
+      <button class="t119-dict-toggle" id="t119-kbd-toggle" onclick="toggleT119Keyboard()">
+        <span id="t119-kbd-toggle-text">⌨️ Clavier hébreu</span>
+      </button>
+      <div id="t119-kbd-wrap" style="display:none">
+      <div class="t119-keyboard" id="t119-keyboard">
+        <div class="t119-kb-row">
+          <button onclick="t119AddLetter('א')">א</button>
+          <button onclick="t119AddLetter('ב')">ב</button>
+          <button onclick="t119AddLetter('ג')">ג</button>
+          <button onclick="t119AddLetter('ד')">ד</button>
+          <button onclick="t119AddLetter('ה')">ה</button>
+          <button onclick="t119AddLetter('ו')">ו</button>
+          <button onclick="t119AddLetter('ז')">ז</button>
+          <button onclick="t119AddLetter('ח')">ח</button>
+          <button onclick="t119AddLetter('ט')">ט</button>
+          <button onclick="t119AddLetter('י')">י</button>
+          <button onclick="t119AddLetter('כ')">כ</button>
+        </div>
+        <div class="t119-kb-row">
+          <button onclick="t119AddLetter('ל')">ל</button>
+          <button onclick="t119AddLetter('מ')">מ</button>
+          <button onclick="t119AddLetter('נ')">נ</button>
+          <button onclick="t119AddLetter('ס')">ס</button>
+          <button onclick="t119AddLetter('ע')">ע</button>
+          <button onclick="t119AddLetter('פ')">פ</button>
+          <button onclick="t119AddLetter('צ')">צ</button>
+          <button onclick="t119AddLetter('ק')">ק</button>
+          <button onclick="t119AddLetter('ר')">ר</button>
+          <button onclick="t119AddLetter('ש')">ש</button>
+          <button onclick="t119AddLetter('ת')">ת</button>
+        </div>
+        <div class="t119-kb-row">
+          <button class="t119-kb-space" onclick="t119AddLetter(' ')">Espace</button>
+          <button class="t119-kb-del" onclick="t119Backspace()">⌫</button>
+        </div>
+      </div>
+      <div class="t119-convert-hint">💡 Tapez en français : sh→שׁ, ts→צ, kh→ח, th→ת etc.</div>
+      </div>
+    </div>
+    <div id="t119-results"></div>
   </div>
 
   <!-- BIRTHDAY POPUP -->
@@ -1961,6 +2202,152 @@ const TEHILIM = [
     ]
   },
   {
+    number: 72,
+    verses: [
+      { hebrew: "לִשְׁלֹמֹה אֱלֹהִים מִשְׁפָּטֶיךָ לְמֶלֶךְ תֵּן וְצִדְקָתְךָ לְבֶן מֶלֶךְ:", french: "De Salomon. Ô Dieu, donne Tes jugements au roi, et Ta justice au fils du roi !" },
+      { hebrew: "יָדִין עַמְּךָ בְצֶדֶק וַעֲנִיֶּיךָ בְמִשְׁפָּט:", french: "Il jugera Ton peuple avec justice, et Tes malheureux avec équité." },
+      { hebrew: "יִשְׂאוּ הָרִים שָׁלוֹם לָעָם וּגְבָעוֹת בִּצְדָקָה:", french: "Les montagnes porteront la paix pour le peuple, et les collines aussi, par la justice." },
+      { hebrew: "יִשְׁפֹּט עֲנִיֵּי עָם יוֹשִׁיעַ לִבְנֵי אֶבְיוֹן וִידַכֵּא עוֹשֵׁק:", french: "Il fera droit aux malheureux du peuple, il sauvera les fils du pauvre, et il écrasera l'oppresseur." },
+      { hebrew: "יִירָאוּךָ עִם שָׁמֶשׁ וְלִפְנֵי יָרֵחַ דּוֹר דּוֹרִים:", french: "On Te craindra tant que durera le soleil, tant que paraîtra la lune, de génération en génération." },
+      { hebrew: "יֵרֵד כְּמָטָר עַל גֵּז כִּרְבִיבִים זַרְזִיף אָרֶץ:", french: "Il descendra comme la pluie sur un terrain fauché, comme les ondées qui arrosent la terre." },
+      { hebrew: "יִפְרַח בְּיָמָיו צַדִּיק וְרֹב שָׁלוֹם עַד בְּלִי יָרֵחַ:", french: "En ses jours le juste fleurira, et la paix sera grande jusqu'à ce qu'il n'y ait plus de lune." },
+      { hebrew: "וְיֵרְדְּ מִיָּם עַד יָם וּמִנָּהָר עַד אַפְסֵי אָרֶץ:", french: "Il dominera d'une mer à l'autre, et du fleuve jusqu'aux extrémités de la terre." },
+      { hebrew: "לְפָנָיו יִכְרְעוּ צִיִּים וְאֹיְבָיו עָפָר יְלַחֵכוּ:", french: "Devant lui, les habitants du désert se prosterneront, et ses ennemis lécheront la poussière." },
+      { hebrew: "מַלְכֵי תַרְשִׁישׁ וְאִיִּים מִנְחָה יָשִׁיבוּ מַלְכֵי שְׁבָא וּסְבָא אֶשְׁכָּר יַקְרִיבוּ:", french: "Les rois de Tarsis et des îles offriront des présents, les rois de Saba et de Seba paieront tribut." },
+      { hebrew: "וְיִשְׁתַּחֲווּ לוֹ כָל מְלָכִים כָּל גּוֹיִם יַעַבְדוּהוּ:", french: "Tous les rois se prosterneront devant lui, toutes les nations le serviront." },
+      { hebrew: "כִּי יַצִּיל אֶבְיוֹן מְשַׁוֵּעַ וְעָנִי וְאֵין עֹזֵר לוֹ:", french: "Car il délivrera le pauvre qui crie, et le malheureux qui n'a point d'aide." },
+      { hebrew: "יָחֹס עַל דַּל וְאֶבְיוֹן וְנַפְשׁוֹת אֶבְיוֹנִים יוֹשִׁיעַ:", french: "Il aura pitié du faible et du pauvre, et il sauvera la vie des pauvres." },
+      { hebrew: "מִתּוֹךְ וּמֵחָמָס יִגְאַל נַפְשָׁם וְיֵיקַר דָּמָם בְּעֵינָיו:", french: "Il les affranchira de l'oppression et de la violence, et leur sang sera précieux à ses yeux." },
+      { hebrew: "וִיחִי וְיִתֶּן לוֹ מִזְּהַב שְׁבָא וְיִתְפַּלֵּל בַּעֲדוֹ תָמִיד כָּל הַיּוֹם יְבָרְכֶנְהוּ:", french: "Il vivra et on lui donnera de l'or de Saba, on priera pour lui sans cesse, on le bénira tout le jour." },
+      { hebrew: "יְהִי פִסַּת בַּר בָּאָרֶץ בְּרֹאשׁ הָרִים יִרְעַשׁ כַּלְּבָנוֹן פִּרְיוֹ וְיָצִיצוּ מֵעִיר כְּעֵשֶׂב הָאָרֶץ:", french: "Les blés abonderont dans le pays, au sommet des montagnes ; leurs épis onduleront comme le Liban, et les habitants des villes fleuriront comme l'herbe de la terre." },
+      { hebrew: "יְהִי שְׁמוֹ לְעוֹלָם לִפְנֵי שֶׁמֶשׁ יִנּוֹן שְׁמוֹ וְיִתְבָּרְכוּ בוֹ כָּל גּוֹיִם יְאַשְּׁרוּהוּ:", french: "Son nom subsistera à jamais ; tant que le soleil durera, son nom se perpétuera ; par lui on se bénira mutuellement, toutes les nations le diront heureux." },
+      { hebrew: "בָּרוּךְ יהוה אֱלֹהִים אֱלֹהֵי יִשְׂרָאֵל עֹשֵׂה נִפְלָאוֹת לְבַדּוֹ:", french: "Béni soit l'Éternel Dieu, le Dieu d'Israël, qui seul fait des prodiges !" },
+      { hebrew: "וּבָרוּךְ שֵׁם כְּבוֹדוֹ לְעוֹלָם וְיִמָּלֵא כְבוֹדוֹ אֶת כָּל הָאָרֶץ אָמֵן וְאָמֵן:", french: "Béni soit à jamais Son nom glorieux ! Que toute la terre soit remplie de Sa gloire ! Amen et amen !" },
+      { hebrew: "כָּלּוּ תְפִלּוֹת דָּוִד בֶּן יִשָׁי:", french: "Fin des prières de David, fils de Jessé." },
+    ]
+  },
+  {
+    number: 73,
+    verses: [
+      { hebrew: "מִזְמוֹר לְאָסָף אַךְ טוֹב לְיִשְׂרָאֵל אֱלֹהִים לְבָרֵי לֵבָב:", french: "Psaume d'Assaph. Oui, Dieu est bon pour Israël, pour ceux qui ont le cœur pur." },
+      { hebrew: "וַאֲנִי כִּמְעַט נָטָיוּ רַגְלָי כְּאַיִן שֻׁפְּכוּ אֲשֻׁרָי:", french: "Et moi, peu s'en est fallu que mes pieds ne glissent, que mes pas ne chancellent." },
+      { hebrew: "כִּי קִנֵּאתִי בַּהוֹלְלִים שְׁלוֹם רְשָׁעִים אֶרְאֶה:", french: "Car je portais envie aux insensés, en voyant la prospérité des méchants." },
+      { hebrew: "כִּי אֵין חַרְצֻבּוֹת לְמוֹתָם וּבָרִיא אוּלָם:", french: "Car il n'y a pas de souffrances pour eux jusqu'à leur mort, et leur corps est vigoureux." },
+      { hebrew: "בַּעֲמַל אֱנוֹשׁ אֵינֵמוֹ וְעִם אָדָם לֹא יְנֻגָּעוּ:", french: "Ils n'ont point part aux peines des humains, et ils ne sont pas frappés comme les autres hommes." },
+      { hebrew: "לָכֵן עֲנָקַתְמוֹ גַאֲוָה יַעֲטָף שִׁית חָמָס לָמוֹ:", french: "Aussi l'orgueil leur sert de collier, la violence les enveloppe comme un vêtement." },
+      { hebrew: "יָצָא מֵחֵלֶב עֵינֵמוֹ עָבְרוּ מַשְׂכִּיּוֹת לֵבָב:", french: "Leurs yeux sortent de la graisse ; les pensées de leur cœur débordent." },
+      { hebrew: "יָמִיקוּ וִידַבְּרוּ בְרָע עֹשֶׁק מִמָּרוֹם יְדַבֵּרוּ:", french: "Ils raillent et parlent méchamment d'opprimer ; ils parlent de haut." },
+      { hebrew: "שַׁתּוּ בַשָּׁמַיִם פִּיהֶם וּלְשׁוֹנָם תִּהֲלַךְ בָּאָרֶץ:", french: "Ils élèvent leur bouche jusqu'aux cieux, et leur langue se promène sur la terre." },
+      { hebrew: "לָכֵן יָשׁוּב עַמּוֹ הֲלֹם וּמֵי מָלֵא יִמָּצוּ לָמוֹ:", french: "C'est pourquoi Son peuple se tourne de leur côté, et ils trouvent des eaux en abondance." },
+      { hebrew: "וְאָמְרוּ אֵיכָה יָדַע אֵל וְיֵשׁ דֵּעָה בְעֶלְיוֹן:", french: "Et ils disent : Comment Dieu saurait-Il ? Le Très-Haut a-t-Il la connaissance ?" },
+      { hebrew: "הִנֵּה אֵלֶּה רְשָׁעִים וְשַׁלְוֵי עוֹלָם הִשְׂגּוּ חָיִל:", french: "Voilà, tels sont les méchants : toujours heureux, ils accroissent leur richesse." },
+      { hebrew: "אַךְ רִיק זִכִּיתִי לְבָבִי וָאֶרְחַץ בְּנִקָּיוֹן כַּפָּי:", french: "C'est donc en vain que j'ai purifié mon cœur et que j'ai lavé mes mains dans l'innocence !" },
+      { hebrew: "וָאֱהִי נָגוּעַ כָּל הַיּוֹם וְתוֹכַחְתִּי לַבְּקָרִים:", french: "Et j'étais frappé chaque jour, et mon châtiment revenait chaque matin." },
+      { hebrew: "אִם אָמַרְתִּי אֲסַפְּרָה כְמוֹ הִנֵּה דוֹר בָּנֶיךָ בָגָדְתִּי:", french: "Si je disais : Je veux parler ainsi, voici, je trahirais la génération de Tes enfants." },
+      { hebrew: "וָאֲחַשְּׁבָה לָדַעַת זֹאת עָמָל הוּא בְעֵינָי:", french: "J'ai réfléchi pour comprendre cela, mais c'était pénible à mes yeux," },
+      { hebrew: "עַד אָבוֹא אֶל מִקְדְּשֵׁי אֵל אָבִינָה לְאַחֲרִיתָם:", french: "jusqu'à ce que je sois entré dans les sanctuaires de Dieu, et que j'aie compris leur fin." },
+      { hebrew: "אַךְ בַּחֲלָקוֹת תָּשִׁית לָמוֹ הִפַּלְתָּם לְמַשּׁוּאוֹת:", french: "Oui, Tu les places sur des pentes glissantes, Tu les fais tomber dans la ruine." },
+      { hebrew: "אֵיךְ הָיוּ לְשַׁמָּה כְרָגַע סָפוּ תַמּוּ מִן בַּלָּהוֹת:", french: "Comment, en un instant, sont-ils détruits ! Ils périssent, ils disparaissent par la terreur !" },
+      { hebrew: "כַּחֲלוֹם מֵהָקִיץ אֲדֹנָי בָּעִיר צַלְמָם תִּבְזֶה:", french: "Comme un songe au réveil, Seigneur, à Ton réveil, Tu mépriseras leur image." },
+      { hebrew: "כִּי יִתְחַמֵּץ לְבָבִי וְכִלְיוֹתַי אֶשְׁתּוֹנָן:", french: "Quand mon cœur s'aigrissait et que mes reins étaient percés," },
+      { hebrew: "וַאֲנִי בַעַר וְלֹא אֵדָע בְּהֵמוֹת הָיִיתִי עִמָּךְ:", french: "j'étais stupide et ignorant, j'étais comme une bête devant Toi." },
+      { hebrew: "וַאֲנִי תָמִיד עִמָּךְ אָחַזְתָּ בְיַד יְמִינִי:", french: "Et moi, je suis toujours avec Toi ; Tu m'as saisi la main droite." },
+      { hebrew: "בַּעֲצָתְךָ תַנְחֵנִי וְאַחַר כָּבוֹד תִּקָּחֵנִי:", french: "Tu me conduiras par Ton conseil, et après Tu me recevras dans la gloire." },
+      { hebrew: "מִי לִי בַשָּׁמָיִם וְעִמְּךָ לֹא חָפַצְתִּי בָאָרֶץ:", french: "Qui ai-je au ciel ? Et sur la terre, je ne désire rien qu'être avec Toi." },
+      { hebrew: "כָּלָה שְׁאֵרִי וּלְבָבִי צוּר לְבָבִי וְחֶלְקִי אֱלֹהִים לְעוֹלָם:", french: "Ma chair et mon cœur défaillent ; Dieu est le rocher de mon cœur et mon partage pour toujours." },
+      { hebrew: "כִּי הִנֵּה רְחֵקֶיךָ יֹאבֵדוּ הִצְמַתָּה כָּל זוֹנֶה מִמֶּךָ:", french: "Car voici, ceux qui s'éloignent de Toi périront ; Tu anéantis tous ceux qui Te sont infidèles." },
+      { hebrew: "וַאֲנִי קִרְבַת אֱלֹהִים לִי טוֹב שַׁתִּי בַּאדֹנָי יהוה מַחְסִי לְסַפֵּר כָּל מַלְאֲכוֹתֶיךָ:", french: "Et moi, m'approcher de Dieu, c'est mon bien ; je place mon refuge dans le Seigneur, l'Éternel, afin de raconter toutes Tes œuvres." },
+    ]
+  },
+  {
+    number: 74,
+    verses: [
+      { hebrew: "מַשְׂכִּיל לְאָסָף לָמָה אֱלֹהִים זָנַחְתָּ לָנֶצַח יֶעְשַׁן אַפְּךָ בְּצֹאן מַרְעִיתֶךָ:", french: "Cantique d'Assaph. Pourquoi, ô Dieu, nous repousses-Tu pour toujours ? Pourquoi Ta colère fume-t-elle contre les brebis de Ton pâturage ?" },
+      { hebrew: "זְכֹר עֲדָתְךָ קָנִיתָ קֶדֶם גָּאַלְתָּ שֵׁבֶט נַחֲלָתֶךָ הַר צִיּוֹן זֶה שָׁכַנְתָּ בּוֹ:", french: "Souviens-Toi de Ton assemblée que Tu as acquise autrefois, que Tu as rachetée comme la tribu de Ton héritage, de la montagne de Sion où Tu as établi Ta demeure." },
+      { hebrew: "הָרִימָה פְעָמֶיךָ לְמַשֻּׁאוֹת נֶצַח כָּל הֵרַע אוֹיֵב בַּקֹּדֶשׁ:", french: "Porte Tes pas vers ces ruines éternelles ! L'ennemi a tout ravagé dans le sanctuaire." },
+      { hebrew: "שָׁאֲגוּ צֹרְרֶיךָ בְּקֶרֶב מוֹעֲדֶךָ שָׂמוּ אוֹתֹתָם אֹתוֹת:", french: "Tes adversaires ont rugi au milieu de Ton lieu saint ; ils ont établi pour signes leurs signes." },
+      { hebrew: "יִוָּדַע כְּמֵבִיא לְמַעְלָה בִּסְבָךְ עֵץ קַרְדֻּמּוֹת:", french: "On les a vus, pareils à celui qui lève la cognée dans une épaisse forêt." },
+      { hebrew: "וְעַתָּה פִּתּוּחֶיהָ יַחַד בְּכַשִּׁיל וְכֵילַפּוֹת יַהֲלֹמוּן:", french: "Et maintenant, ses sculptures, ils les brisent avec la hache et le marteau." },
+      { hebrew: "שִׁלְחוּ בָאֵשׁ מִקְדָּשֶׁךָ לָאָרֶץ חִלְּלוּ מִשְׁכַּן שְׁמֶךָ:", french: "Ils ont livré au feu Ton sanctuaire, ils ont profané la demeure de Ton nom jusqu'à terre." },
+      { hebrew: "אָמְרוּ בְלִבָּם נִינָם יָחַד שָׂרְפוּ כָל מוֹעֲדֵי אֵל בָּאָרֶץ:", french: "Ils ont dit dans leur cœur : Détruisons-les tous ! Ils ont brûlé tous les lieux saints de Dieu dans le pays." },
+      { hebrew: "אוֹתֹתֵינוּ לֹא רָאִינוּ אֵין עוֹד נָבִיא וְלֹא אִתָּנוּ יֹדֵעַ עַד מָה:", french: "Nous ne voyons plus nos signes ; il n'y a plus de prophète, et personne parmi nous ne sait jusqu'à quand." },
+      { hebrew: "עַד מָתַי אֱלֹהִים יְחָרֶף צָר יְנָאֵץ אוֹיֵב שִׁמְךָ לָנֶצַח:", french: "Jusqu'à quand, ô Dieu, l'adversaire outragera-t-il ? L'ennemi méprisera-t-il Ton nom pour toujours ?" },
+      { hebrew: "לָמָה תָשִׁיב יָדְךָ וִימִינֶךָ מִקֶּרֶב חֵיקְךָ כַלֵּה:", french: "Pourquoi retires-Tu Ta main et Ta droite ? Sors-la du milieu de Ton sein ! Détruis !" },
+      { hebrew: "וֵאלֹהִים מַלְכִּי מִקֶּדֶם פֹּעֵל יְשׁוּעוֹת בְּקֶרֶב הָאָרֶץ:", french: "Dieu est mon Roi dès les temps anciens, Lui qui opère des délivrances au milieu de la terre." },
+      { hebrew: "אַתָּה פוֹרַרְתָּ בְעָזְּךָ יָם שִׁבַּרְתָּ רָאשֵׁי תַנִּינִים עַל הַמָּיִם:", french: "Tu as fendu la mer par Ta puissance, Tu as brisé les têtes des monstres sur les eaux." },
+      { hebrew: "אַתָּה רִצַּצְתָּ רָאשֵׁי לִוְיָתָן תִּתְּנֶנּוּ מַאֲכָל לְעָם לְצִיִּים:", french: "Tu as écrasé les têtes du Léviathan, Tu l'as donné en pâture au peuple du désert." },
+      { hebrew: "אַתָּה בָקַעְתָּ מַעְיָן וָנָחַל אַתָּה הוֹבַשְׁתָּ נַהֲרוֹת אֵיתָן:", french: "Tu as fait jaillir la source et le torrent, Tu as mis à sec des fleuves intarissables." },
+      { hebrew: "לְךָ יוֹם אַף לְךָ לָיְלָה אַתָּה הֲכִינוֹתָ מָאוֹר וָשָׁמֶשׁ:", french: "À Toi est le jour, à Toi aussi la nuit ; Tu as établi la lumière et le soleil." },
+      { hebrew: "אַתָּה הִצַּבְתָּ כָּל גְּבוּלוֹת אָרֶץ קַיִץ וָחֹרֶף אַתָּה יְצַרְתָּם:", french: "Tu as fixé toutes les limites de la terre ; l'été et l'hiver, Tu les as formés." },
+      { hebrew: "זְכָר זֹאת אוֹיֵב חֵרֵף יהוה וְעַם נָבָל נִאֲצוּ שְׁמֶךָ:", french: "Souviens-Toi : l'ennemi outrage l'Éternel, et un peuple insensé méprise Ton nom." },
+      { hebrew: "אַל תִּתֵּן לְחַיַּת נֶפֶשׁ תּוֹרֶךָ חַיַּת עֲנִיֶּיךָ אַל תִּשְׁכַּח לָנֶצַח:", french: "Ne livre pas aux bêtes l'âme de Ta tourterelle ; n'oublie pas à jamais la vie de Tes malheureux !" },
+      { hebrew: "הַבֵּט לַבְּרִית כִּי מָלְאוּ מַחֲשַׁכֵּי אֶרֶץ נְאוֹת חָמָס:", french: "Regarde l'alliance ! Car les lieux ténébreux du pays sont remplis de repaires de violence." },
+      { hebrew: "אַל יָשֹׁב דַּךְ נִכְלָם עָנִי וְאֶבְיוֹן יְהַלְלוּ שְׁמֶךָ:", french: "Que l'opprimé ne s'en retourne pas confus ! Que le pauvre et le malheureux louent Ton nom !" },
+      { hebrew: "קוּמָה אֱלֹהִים רִיבָה רִיבֶךָ זְכֹר חֶרְפָּתְךָ מִנִּי נָבָל כָּל הַיּוֹם:", french: "Lève-Toi, ô Dieu, défends Ta cause ! Souviens-Toi des outrages que l'insensé Te fait tout le jour !" },
+      { hebrew: "אַל תִּשְׁכַּח קוֹל צֹרְרֶיךָ שְׁאוֹן קָמֶיךָ עֹלֶה תָמִיד:", french: "N'oublie pas les clameurs de Tes adversaires, le tumulte toujours croissant de ceux qui s'élèvent contre Toi !" },
+    ]
+  },
+  {
+    number: 75,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אַל תַּשְׁחֵת מִזְמוֹר לְאָסָף שִׁיר:", french: "Au chef des chantres. Ne détruis pas. Psaume d'Assaph. Cantique." },
+      { hebrew: "הוֹדִינוּ לְּךָ אֱלֹהִים הוֹדִינוּ וְקָרוֹב שְׁמֶךָ סִפְּרוּ נִפְלְאוֹתֶיךָ:", french: "Nous Te louons, ô Dieu, nous Te louons ; Ton nom est proche, on raconte Tes merveilles." },
+      { hebrew: "כִּי אֶקַּח מוֹעֵד אֲנִי מֵישָׁרִים אֶשְׁפֹּט:", french: "Quand Je choisirai le moment, Je jugerai avec droiture." },
+      { hebrew: "נְמֹגִים אֶרֶץ וְכָל יֹשְׁבֶיהָ אָנֹכִי תִכַּנְתִּי עַמּוּדֶיהָ סֶלָה:", french: "La terre se fond avec tous ses habitants ; c'est Moi qui affermis ses colonnes. Sélah." },
+      { hebrew: "אָמַרְתִּי לַהוֹלְלִים אַל תָּהֹלּוּ וְלָרְשָׁעִים אַל תָּרִימוּ קָרֶן:", french: "Je dis aux insensés : Ne soyez pas insensés ! Et aux méchants : N'élevez pas la tête !" },
+      { hebrew: "אַל תָּרִימוּ לַמָּרוֹם קַרְנְכֶם תְּדַבְּרוּ בְצַוָּאר עָתָק:", french: "N'élevez pas si haut votre tête, ne parlez pas avec un cou raide !" },
+      { hebrew: "כִּי לֹא מִמּוֹצָא וּמִמַּעֲרָב וְלֹא מִמִּדְבַּר הָרִים:", french: "Car ce n'est ni de l'orient, ni de l'occident, ni du désert que vient l'élévation." },
+      { hebrew: "כִּי אֱלֹהִים שֹׁפֵט זֶה יַשְׁפִּיל וְזֶה יָרִים:", french: "Mais Dieu est celui qui juge : Il abaisse l'un et élève l'autre." },
+      { hebrew: "כִּי כוֹס בְּיַד יהוה וְיַיִן חָמַר מָלֵא מֶסֶךְ וַיַּגֵּר מִזֶּה אַךְ שְׁמָרֶיהָ יִמְצוּ יִשְׁתּוּ כֹּל רִשְׁעֵי אָרֶץ:", french: "Car il y a dans la main de l'Éternel une coupe dont le vin fermenté est plein de mélange ; Il en verse, et tous les méchants de la terre en boiront, en suceront la lie." },
+      { hebrew: "וַאֲנִי אַגִּיד לְעֹלָם אֲזַמְּרָה לֵאלֹהֵי יַעֲקֹב:", french: "Et moi, je proclamerai à jamais, je chanterai le Dieu de Jacob." },
+      { hebrew: "וְכָל קַרְנֵי רְשָׁעִים אֲגַדֵּעַ תְּרוֹמַמְנָה קַרְנוֹת צַדִּיק:", french: "Et j'abattrai toutes les cornes des méchants ; les cornes du juste seront élevées." },
+    ]
+  },
+  {
+    number: 76,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינֹת מִזְמוֹר לְאָסָף שִׁיר:", french: "Au chef des chantres. Avec instruments à cordes. Psaume d'Assaph. Cantique." },
+      { hebrew: "נוֹדָע בִּיהוּדָה אֱלֹהִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ:", french: "Dieu est connu en Juda, Son nom est grand en Israël." },
+      { hebrew: "וַיְהִי בְשָׁלֵם סֻכּוֹ וּמְעוֹנָתוֹ בְצִיּוֹן:", french: "Sa tente est à Salem, et Sa demeure à Sion." },
+      { hebrew: "שָׁמָּה שִׁבַּר רִשְׁפֵי קָשֶׁת מָגֵן וְחֶרֶב וּמִלְחָמָה סֶלָה:", french: "C'est là qu'Il a brisé les flèches de l'arc, le bouclier, l'épée et la guerre. Sélah." },
+      { hebrew: "נָאוֹר אַתָּה אַדִּיר מֵהַרְרֵי טָרֶף:", french: "Tu es resplendissant, majestueux, depuis les montagnes de la proie." },
+      { hebrew: "אֶשְׁתּוֹלְלוּ אַבִּירֵי לֵב נָמוּ שְׁנָתָם וְלֹא מָצְאוּ כָל אַנְשֵׁי חַיִל יְדֵיהֶם:", french: "Les vaillants de cœur ont été dépouillés, ils se sont endormis de leur sommeil, et aucun homme de guerre n'a retrouvé ses mains." },
+      { hebrew: "מִגַּעֲרָתְךָ אֱלֹהֵי יַעֲקֹב נִרְדָּם וְרֶכֶב וָסוּס:", french: "À Ta menace, ô Dieu de Jacob, char et cheval se sont endormis." },
+      { hebrew: "אַתָּה נוֹרָא אַתָּה וּמִי יַעֲמֹד לְפָנֶיךָ מֵאָז אַפֶּךָ:", french: "Tu es redoutable, Toi ! Qui peut subsister devant Toi quand Ta colère éclate ?" },
+      { hebrew: "מִשָּׁמַיִם הִשְׁמַעְתָּ דִּין אֶרֶץ יָרְאָה וְשָׁקָטָה:", french: "Du haut des cieux Tu as fait entendre Ta sentence ; la terre a eu peur et s'est tenue tranquille," },
+      { hebrew: "בְּקוּם לַמִּשְׁפָּט אֱלֹהִים לְהוֹשִׁיעַ כָּל עַנְוֵי אֶרֶץ סֶלָה:", french: "quand Dieu s'est levé pour juger, pour sauver tous les malheureux de la terre. Sélah." },
+      { hebrew: "כִּי חֲמַת אָדָם תּוֹדֶךָּ שְׁאֵרִית חֵמֹת תַּחְגֹּר:", french: "Car la fureur de l'homme tourne à Ta louange ; Tu Te ceins du reste de la fureur." },
+      { hebrew: "נִדְרוּ וְשַׁלְּמוּ לַיהוה אֱלֹהֵיכֶם כָּל סְבִיבָיו יוֹבִילוּ שַׁי לַמּוֹרָא:", french: "Faites des vœux et acquittez-les envers l'Éternel votre Dieu ! Que tous ceux qui L'entourent apportent des présents au Redoutable !" },
+      { hebrew: "יִבְצֹר רוּחַ נְגִידִים נוֹרָא לְמַלְכֵי אָרֶץ:", french: "Il retranche l'esprit des princes, Il est redoutable pour les rois de la terre." },
+    ]
+  },
+  {
+    number: 77,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל יְדוּתוּן לְאָסָף מִזְמוֹר:", french: "Au chef des chantres. D'après Yedoutoun. D'Assaph. Psaume." },
+      { hebrew: "קוֹלִי אֶל אֱלֹהִים וְאֶצְעָקָה קוֹלִי אֶל אֱלֹהִים וְהַאֲזִין אֵלָי:", french: "Ma voix s'élève à Dieu, et je crie ; ma voix s'élève à Dieu, et Il me prête l'oreille." },
+      { hebrew: "בְּיוֹם צָרָתִי אֲדֹנָי דָּרָשְׁתִּי יָדִי לַיְלָה נִגְּרָה וְלֹא תָפוּג מָאֲנָה הִנָּחֵם נַפְשִׁי:", french: "Au jour de ma détresse, je cherche le Seigneur ; la nuit, ma main est étendue sans se lasser ; mon âme refuse d'être consolée." },
+      { hebrew: "אֶזְכְּרָה אֱלֹהִים וְאֶהֱמָיָה אָשִׂיחָה וְתִתְעַטֵּף רוּחִי סֶלָה:", french: "Je me souviens de Dieu et je gémis ; je médite et mon esprit est accablé. Sélah." },
+      { hebrew: "אָחַזְתָּ שְׁמֻרוֹת עֵינָי נִפְעַמְתִּי וְלֹא אֲדַבֵּר:", french: "Tu tiens mes paupières ouvertes ; je suis troublé et je ne puis parler." },
+      { hebrew: "חִשַּׁבְתִּי יָמִים מִקֶּדֶם שְׁנוֹת עוֹלָמִים:", french: "Je pense aux jours anciens, aux années d'autrefois." },
+      { hebrew: "אֶזְכְּרָה נְגִינָתִי בַּלָּיְלָה עִם לְבָבִי אָשִׂיחָה וַיְחַפֵּשׂ רוּחִי:", french: "Je me rappelle mes cantiques pendant la nuit, je médite dans mon cœur, et mon esprit fait des recherches." },
+      { hebrew: "הַלְעוֹלָמִים יִזְנַח אֲדֹנָי וְלֹא יֹסִיף לִרְצוֹת עוֹד:", french: "Le Seigneur rejettera-t-Il pour toujours ? Ne sera-t-Il plus favorable ?" },
+      { hebrew: "הֶאָפֵס לָנֶצַח חַסְדּוֹ גָּמַר אֹמֶר לְדֹר וָדֹר:", french: "Sa bonté est-elle épuisée pour toujours ? Sa parole est-elle anéantie pour tous les âges ?" },
+      { hebrew: "הֲשָׁכַח חַנּוֹת אֵל אִם קָפַץ בְּאַף רַחֲמָיו סֶלָה:", french: "Dieu a-t-Il oublié d'avoir pitié ? A-t-Il, dans Sa colère, fermé Ses compassions ? Sélah." },
+      { hebrew: "וָאֹמַר חַלּוֹתִי הִיא שְׁנוֹת יְמִין עֶלְיוֹן:", french: "Et je dis : Ce qui fait ma souffrance, c'est que la droite du Très-Haut a changé." },
+      { hebrew: "אֶזְכּוֹר מַעַלְלֵי יָהּ כִּי אֶזְכְּרָה מִקֶּדֶם פִּלְאֶךָ:", french: "Je rappellerai les hauts faits de l'Éternel, car je me souviens de Tes merveilles d'autrefois." },
+      { hebrew: "וְהָגִיתִי בְכָל פָּעֳלֶךָ וּבַעֲלִילוֹתֶיךָ אָשִׂיחָה:", french: "Je méditerai sur toutes Tes œuvres, et je parlerai de Tes hauts faits." },
+      { hebrew: "אֱלֹהִים בַּקֹּדֶשׁ דַּרְכֶּךָ מִי אֵל גָּדוֹל כֵּאלֹהִים:", french: "Ô Dieu, Tes voies sont saintes ; quel dieu est grand comme Dieu ?" },
+      { hebrew: "אַתָּה הָאֵל עֹשֵׂה פֶלֶא הוֹדַעְתָּ בָעַמִּים עֻזֶּךָ:", french: "Tu es le Dieu qui fait des prodiges ; Tu as fait connaître Ta puissance parmi les peuples." },
+      { hebrew: "גָּאַלְתָּ בִּזְרוֹעַ עַמֶּךָ בְּנֵי יַעֲקֹב וְיוֹסֵף סֶלָה:", french: "Tu as racheté Ton peuple par Ton bras, les fils de Jacob et de Joseph. Sélah." },
+      { hebrew: "רָאוּךָ מַיִם אֱלֹהִים רָאוּךָ מַיִם יָחִילוּ אַף יִרְגְּזוּ תְהֹמוֹת:", french: "Les eaux T'ont vu, ô Dieu, les eaux T'ont vu et ont tremblé, les abîmes aussi ont frémi." },
+      { hebrew: "זֹרְמוּ מַיִם עָבוֹת קוֹל נָתְנוּ שְׁחָקִים אַף חֲצָצֶיךָ יִתְהַלָּכוּ:", french: "Les nuées ont versé leurs eaux, le tonnerre a retenti dans les nues, et Tes flèches ont volé de toutes parts." },
+      { hebrew: "קוֹל רַעַמְךָ בַּגַּלְגַּל הֵאִירוּ בְרָקִים תֵּבֵל רָגְזָה וַתִּרְעַשׁ הָאָרֶץ:", french: "Le bruit de Ton tonnerre était dans le tourbillon, les éclairs ont illuminé le monde, la terre a tremblé et frémi." },
+      { hebrew: "בַּיָּם דַּרְכֶּךָ וּשְׁבִילְךָ בְּמַיִם רַבִּים וְעִקְּבוֹתֶיךָ לֹא נֹדָעוּ:", french: "Tu as marché à travers la mer, Ton chemin a traversé les grandes eaux, et Tes traces n'ont pas été connues." },
+      { hebrew: "נָחִיתָ כַצֹּאן עַמֶּךָ בְּיַד מֹשֶׁה וְאַהֲרֹן:", french: "Tu as conduit Ton peuple comme un troupeau, par la main de Moïse et d'Aaron." },
+    ]
+  },
+  {
     number: 140,
     verses: [
       { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
@@ -2528,6 +2915,12 @@ function goHome() {
   } else if (browseSource === "jour") {
     switchTab("jour");
     renderJourCalendar();
+  } else if (browseSource === "chain") {
+    if (currentChainId) {
+      openChainDetail(currentChainId);
+    } else {
+      switchTab("chains");
+    }
   } else {
     switchTab("menu");
   }
@@ -2540,9 +2933,13 @@ function switchTab(tab) {
   document.getElementById("panel-jour").style.display = tab === "jour" ? "block" : "none";
   document.getElementById("panel-perek").style.display = tab === "perek" ? "block" : "none";
   document.getElementById("panel-birthday").style.display = tab === "birthday" ? "block" : "none";
+  document.getElementById("panel-chains").style.display = tab === "chains" ? "block" : "none";
+  document.getElementById("panel-chain-detail").style.display = tab === "chain-detail" ? "block" : "none";
+  document.getElementById("panel-t119").style.display = tab === "t119" ? "block" : "none";
   if (tab === "perek") renderPerek();
   if (tab === "jour") renderHome();
   if (tab === "birthday") renderBirthday();
+  if (tab === "chains") renderChainList();
   window.scrollTo(0, 0);
   document.getElementById("reading").scrollTop = 0;
 }
@@ -2682,7 +3079,57 @@ function renderJourCalendar() {
   var monthLatin = getHebrewMonthName(heb.year, heb.month);
   var yearHeb = toHebrewYear(heb.year);
   
-  var html = '<div class="cal-header">';
+  var html = '';
+  
+  // Today's progress banner
+  var todaySchedule = DAILY_SCHEDULE[todayDay];
+  if (todaySchedule) {
+    var todayStart = todaySchedule[0];
+    var todayEnd = todaySchedule[1];
+    var todayTotal = todayEnd - todayStart + 1;
+    if (todaySchedule[2]) todayTotal = 1; // psalm 119 counts as 1
+    var todayRead = 0;
+    for (var p = todayStart; p <= todayEnd; p++) {
+      if (readPsalms.has(p)) todayRead++;
+    }
+    if (todaySchedule[2]) todayRead = readPsalms.has(119) ? 1 : 0;
+    var todayPct = Math.round((todayRead / todayTotal) * 100);
+    var allDone = todayRead >= todayTotal;
+    
+    if (allDone) {
+      html += '<div class="cal-progress-banner done">';
+      html += '<div class="cal-progress-emoji">🌟</div>';
+      html += '<div class="cal-progress-msg"><strong>Kol HaKavod !</strong><br>Tu as terminé les Tehilim du jour</div>';
+      html += '</div>';
+      
+      // Check personal tehilim
+      var bday = getBirthday();
+      if (bday) {
+        var age = calcHebrewAge(bday.month, bday.day, bday.year);
+        var persoChap = age + 1;
+        if (!readPsalms.has(persoChap)) {
+          html += '<div class="cal-progress-banner perso" onclick="openPersoTehilim(' + persoChap + ')">';
+          html += '<div class="cal-progress-emoji">📖</div>';
+          html += '<div class="cal-progress-msg">As-tu lu ton Tehilim personnel ?<br><strong>Chapitre ' + persoChap + '</strong></div>';
+          html += '<div class="cal-progress-arrow">→</div>';
+          html += '</div>';
+        } else {
+          // Both done! Show Mashiach message
+          html += getCompletionMessage();
+        }
+      }
+    } else {
+      html += '<div class="cal-progress-banner">';
+      html += '<div class="cal-progress-info">';
+      html += '<div class="cal-progress-msg"><strong>Jour ' + todayDay + '</strong> · ' + todayRead + '/' + todayTotal + ' chapitres lus</div>';
+      html += '<div class="cal-progress-bar-wrap"><div class="cal-progress-bar-bg"><div class="cal-progress-bar-fill" style="width:' + todayPct + '%"></div></div><span class="cal-progress-pct">' + todayPct + '%</span></div>';
+      html += '</div>';
+      html += '<button class="cal-progress-go" onclick="openDayReading(' + todayDay + ')">Continuer →</button>';
+      html += '</div>';
+    }
+  }
+  
+  html += '<div class="cal-header">';
   html += '<div class="cal-month-hebrew">' + monthHeb + ' ' + yearHeb + '</div>';
   html += '<div class="cal-month-name">' + monthLatin + ' ' + heb.year + '</div>';
   html += '</div>';
@@ -2697,9 +3144,24 @@ function renderJourCalendar() {
       else if (schedule[0] === schedule[1]) rangeLabel = 'Ch. ' + schedule[0];
       else rangeLabel = schedule[0] + '–' + schedule[1];
     }
-    var cls = 'cal-day' + (isToday ? ' today' : '');
+    // Check if day is fully read
+    var dayDone = false;
+    if (schedule) {
+      dayDone = true;
+      if (schedule[2]) {
+        dayDone = readPsalms.has(119);
+      } else {
+        for (var pp = schedule[0]; pp <= schedule[1]; pp++) {
+          if (!readPsalms.has(pp)) { dayDone = false; break; }
+        }
+      }
+    }
+    var cls = 'cal-day';
+    if (isToday) cls += ' today';
+    if (dayDone) cls += ' done';
     html += '<div class="' + cls + '" onclick="openDayReading(' + d + ')">';
     html += '<div class="cal-day-inner">';
+    if (dayDone) html += '<div class="cal-day-check">✓</div>';
     html += '<div class="cal-day-num">' + toHebrewNumeral(d) + '</div>';
     html += '<div class="cal-day-label">' + rangeLabel + '</div>';
     html += '</div></div>';
@@ -2726,6 +3188,65 @@ function renderJourCalendar() {
   if (recapCard) recapCard.style.display = "none";
   var psalmsList = document.getElementById("psalms-list");
   if (psalmsList) psalmsList.style.display = "none";
+}
+
+function openPersoTehilim(chap) {
+  var psalmData = TEHILIM.find(function(p) { return p.number === chap; });
+  if (!psalmData) { alert('Chapitre ' + chap + ' bientôt disponible !'); return; }
+  browseSource = 'birthday';
+  availablePsalms = [psalmData];
+  currentPsalm = 0;
+  currentScreen = 'reading';
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('reading').style.display = 'flex';
+  window.scrollTo(0, 0);
+  document.getElementById('reading').scrollTop = 0;
+  renderReading();
+}
+
+var COMPLETION_MESSAGES = [
+  {
+    emoji: '👑',
+    hebrew: 'כָּל יִשְׂרָאֵל יֵשׁ לָהֶם חֵלֶק לָעוֹלָם הַבָּא',
+    text: 'Chaque mot de Tehilim que tu prononces <strong>brise un voile</strong> entre ce monde et la Guéoula. Aujourd\'hui, tu as fait ta part pour rapprocher la venue du <strong>Machia\'h</strong>.'
+  },
+  {
+    emoji: '🕊️',
+    hebrew: 'אֲנִי מַאֲמִין בֶּאֱמוּנָה שְׁלֵמָה בְּבִיאַת הַמָּשִׁיחַ',
+    text: 'Le Rabbi de Loubavitch enseigne que <strong>chaque chapitre de Tehilim</strong> a le pouvoir de transformer le monde. Aujourd\'hui, tu as planté des graines de <strong>Guéoula</strong>.'
+  },
+  {
+    emoji: '✨',
+    hebrew: 'בְּזָכוּת הַתְּהִלִּים יָבוֹא מָשִׁיחַ צִדְקֵנוּ',
+    text: 'Le Ba\'al Shem Tov a dit : <strong>Les Tehilim peuvent tout.</strong> Ta lecture d\'aujourd\'hui a ouvert des portes dans le Ciel. Demain, continue — <strong>Machia\'h arrive</strong>.'
+  },
+  {
+    emoji: '🔥',
+    hebrew: 'עוֹד מְעַט וְנִזְכֶּה לִגְאֻלָּה שְׁלֵמָה',
+    text: 'Chaque Tehilim est une <strong>prière qui monte directement</strong> devant le Trône Céleste. Le mérite de ta lecture protège tout le <strong>Klal Israël</strong>.'
+  },
+  {
+    emoji: '💎',
+    hebrew: 'גָּדוֹל הַמַּעֲשֶׂה יוֹתֵר מִן הַמְּדַבֵּר',
+    text: 'Tu ne l\'as peut-être pas senti, mais tes Tehilim ont <strong>ébranlé des mondes</strong> aujourd\'hui. Le Zohar dit que la voix de celui qui lit les Tehilim est <strong>la plus douce devant Hachem</strong>.'
+  },
+  {
+    emoji: '🌅',
+    hebrew: 'הַבּוֹטֵחַ בַּיהוה חֶסֶד יְסוֹבְבֶנּוּ',
+    text: 'Aujourd\'hui tu as choisi de <strong>te connecter à Hachem</strong> par les mots du Roi David. Ce mérite t\'accompagnera et celui de tes proches. <strong>Bientôt la Guéoula !</strong>'
+  }
+];
+
+function getCompletionMessage() {
+  var dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  var msg = COMPLETION_MESSAGES[dayOfYear % COMPLETION_MESSAGES.length];
+  var h = '<div class="cal-completion-card">';
+  h += '<div class="cal-completion-emoji">' + msg.emoji + '</div>';
+  h += '<div class="cal-completion-hebrew">' + msg.hebrew + '</div>';
+  h += '<div class="cal-completion-text">' + msg.text + '</div>';
+  h += '<div class="cal-completion-footer">Rendez-vous demain בעזרת ה׳</div>';
+  h += '</div>';
+  return h;
 }
 
 function openDayReading(day) {
@@ -3147,6 +3668,10 @@ function updateReadingHeader() {
     document.getElementById("reading-chapter").textContent = "Tehilim par Perek";
   } else if (browseSource === 'birthday') {
     document.getElementById("reading-chapter").textContent = "Mon Tehilim";
+  } else if (browseSource === 'chain') {
+    var chains = getChains();
+    var ch = chains.find(function(c) { return c.id === currentChainId; });
+    document.getElementById("reading-chapter").textContent = ch ? "Chaîne · " + ch.name : "Chaîne de Tehilim";
   } else {
     var schedule = DAILY_SCHEDULE[currentJourDay];
     var rangeText = "";
@@ -3465,6 +3990,19 @@ function markRead(num) {
       return;
     }
   }
+  if (browseSource === "birthday") {
+    // Personal tehilim read - go back to jour calendar to show completion message
+    setTimeout(function() {
+      browseSource = "jour";
+      document.getElementById("reading").style.display = "none";
+      document.getElementById("home").style.display = "block";
+      switchTab("jour");
+      renderJourCalendar();
+      window.scrollTo(0, 0);
+      currentScreen = "home";
+    }, 800);
+    return;
+  }
   // Auto-advance to next psalm after a short pause
   if (currentPsalm < availablePsalms.length - 1) {
     setTimeout(function() { nextPsalm(); }, 700);
@@ -3755,6 +4293,844 @@ function checkBirthdayPopup() {
 
 function closeBdayPopup() {
   document.getElementById("birthday-popup").style.display = "none";
+}
+
+// ====== TEHILIM 119 PAR NOM ======
+
+// Dictionary of ~400 Hebrew first names: [french/latin variants, hebrew, gender M/F/U]
+var HEBREW_NAMES = [
+  // === HOMMES (M) ===
+  [['avraham','abraham','avraam'], 'אברהם', 'M'],
+  [['itskhak','itshak','yitshak','yitzhak','isaac','its\'hak'], 'יצחק', 'M'],
+  [['yaakov','yaacov','jacob'], 'יעקב', 'M'],
+  [['moshe','moche','moise'], 'משה', 'M'],
+  [['aharon','aaron','aron'], 'אהרן', 'M'],
+  [['david','davide','dawid'], 'דוד', 'M'],
+  [['shlomo','chelomo','salomon'], 'שלמה', 'M'],
+  [['yossef','yosef','joseph'], 'יוסף', 'M'],
+  [['binyamin','beniamin','benjamin'], 'בנימין', 'M'],
+  [['reuven','reuben','ruben'], 'ראובן', 'M'],
+  [['shimon','chimon','simon','simeon'], 'שמעון', 'M'],
+  [['levi','levy','lewi'], 'לוי', 'M'],
+  [['yehuda','yehouda','juda','judah'], 'יהודה', 'M'],
+  [['dan','dane'], 'דן', 'M'],
+  [['naftali','naphtali'], 'נפתלי', 'M'],
+  [['gad'], 'גד', 'M'],
+  [['asher','acher'], 'אשר', 'M'],
+  [['issachar','issakhar','issakar','issakhar'], 'יששכר', 'M'],
+  [['zevouloun','zevulun','zebulun'], 'זבולון', 'M'],
+  [['menahem','menakhem','menahem','mena\'hem'], 'מנחם', 'M'],
+  [['mendel'], 'מענדל', 'M'],
+  [['menahem mendel','menakhem mendel'], 'מנחם מענדל', 'M'],
+  [['shneur','chneur'], 'שניאור', 'M'],
+  [['shneur zalman','chneur zalman'], 'שניאור זלמן', 'M'],
+  [['zalman','zalmen'], 'זלמן', 'M'],
+  [['dov','dove'], 'דב', 'M'],
+  [['dovber','dov ber','dov bear'], 'דובער', 'M'],
+  [['shmuel','chemuel','samuel','chmuel'], 'שמואל', 'M'],
+  [['eliezer','elieser','elizer'], 'אליעזר', 'M'],
+  [['eliyahou','eliyahu','eliahou','elie','eliaou'], 'אליהו', 'M'],
+  [['yeshaya','yechaya','ishaya','ichaya','isaie'], 'ישעיה', 'M'],
+  [['yeshayahou','yechayahou','isaie'], 'ישעיהו', 'M'],
+  [['yirmeyahou','yirmiyahu','jeremie'], 'ירמיהו', 'M'],
+  [['yekhezkel','yehezkel','ezechiel'], 'יחזקאל', 'M'],
+  [['daniel','danielle'], 'דניאל', 'M'],
+  [['mordekhai','mordehai','mordechai','morde\'hai'], 'מרדכי', 'M'],
+  [['efraim','efrayim','ephraim'], 'אפרים', 'M'],
+  [['menasche','menashe','menache','manasse'], 'מנשה', 'M'],
+  [['yehochoua','yehoshua','josue','yehoshouah'], 'יהושע', 'M'],
+  [['kalev','calev','caleb'], 'כלב', 'M'],
+  [['pinkhas','pin\'has','pinhas','phineas'], 'פינחס', 'M'],
+  [['yona','yonah','jonas'], 'יונה', 'M'],
+  [['nahman','na\'hman','nachman'], 'נחמן', 'M'],
+  [['nathan','natan','nathane'], 'נתן', 'M'],
+  [['netanel','nethaniel','nathanael'], 'נתנאל', 'M'],
+  [['baroukh','barukh','baruch'], 'ברוך', 'M'],
+  [['tsvi','tzvi','zvi','tsevi'], 'צבי', 'M'],
+  [['meir','meier','meyer'], 'מאיר', 'M'],
+  [['haim','chaim','haym','hayim','\'haim'], 'חיים', 'M'],
+  [['raphael','rafael','refael'], 'רפאל', 'M'],
+  [['michael','mikhael','mikael','micha\'el'], 'מיכאל', 'M'],
+  [['gavriel','gabriel','gavri\'el'], 'גבריאל', 'M'],
+  [['ouriel','uriel'], 'אוריאל', 'M'],
+  [['ariel','ari\'el'], 'אריאל', 'M'],
+  [['israel','isra\'el','yisrael','yisra\'el'], 'ישראל', 'M'],
+  [['ari','arye','arié','aryeh'], 'אריה', 'M'],
+  [['zeev','zeev','ze\'ev','wolf'], 'זאב', 'M'],
+  [['nahum','na\'houm','nahoum'], 'נחום', 'M'],
+  [['ovadia','ovadya','obadia'], 'עובדיה', 'M'],
+  [['tsadok','tzadok','zadok'], 'צדוק', 'M'],
+  [['yohai','yokhai','yo\'hai'], 'יוחאי', 'M'],
+  [['yoel','joel'], 'יואל', 'M'],
+  [['amos'], 'עמוס', 'M'],
+  [['eitan','eytan','ethan'], 'איתן', 'M'],
+  [['boaz','bo\'az'], 'בועז', 'M'],
+  [['guershon','gershon','gershom'], 'גרשון', 'M'],
+  [['eldad'], 'אלדד', 'M'],
+  [['elyakim','eliakim'], 'אליקים', 'M'],
+  [['noakh','noa\'h','noah','noe'], 'נח', 'M'],
+  [['hanokh','hanoch','enoch','\'hanokh'], 'חנוך', 'M'],
+  [['nimrod'], 'נמרוד', 'M'],
+  [['oren'], 'אורן', 'M'],
+  [['yishai','ishai','ichay','ishay','yichai','jesse'], 'ישי', 'M'],
+  [['nethanel','netanel'], 'נתנאל', 'M'],
+  [['itamar','ithamar'], 'איתמר', 'M'],
+  [['avishai','avichai'], 'אבישי', 'M'],
+  [['avner','abner'], 'אבנר', 'M'],
+  [['ido'], 'עידו', 'M'],
+  [['gilad','guilad'], 'גלעד', 'M'],
+  [['nadav'], 'נדב', 'M'],
+  [['oded'], 'עודד', 'M'],
+  [['yotam','yotham','jotham'], 'יותם', 'M'],
+  [['yigal','yigael'], 'יגאל', 'M'],
+  [['amit'], 'עמית', 'M'],
+  [['tomer'], 'תומר', 'M'],
+  [['noam'], 'נועם', 'M'],
+  [['ori'], 'אורי', 'M'],
+  [['roi','roï'], 'רועי', 'M'],
+  [['tal'], 'טל', 'U'],
+  [['maayan','ma\'ayan'], 'מעיין', 'U'],
+  [['shahar','sha\'har','cha\'har'], 'שחר', 'U'],
+  [['yarden','yardene'], 'ירדן', 'U'],
+  [['oz'], 'עוז', 'M'],
+  [['omer'], 'עומר', 'M'],
+  [['amir'], 'אמיר', 'M'],
+  [['ilan'], 'אילן', 'M'],
+  [['ofir'], 'אופיר', 'M'],
+  [['nir'], 'ניר', 'M'],
+  [['erez'], 'ארז', 'M'],
+  [['lior'], 'ליאור', 'M'],
+  [['matan','mathan'], 'מתן', 'M'],
+  [['dvir'], 'דביר', 'M'],
+  [['yogev'], 'יוגב', 'M'],
+  [['yonatan','yonathan','jonathan'], 'יונתן', 'M'],
+  [['elad','ellade'], 'אלעד', 'M'],
+  [['assaf'], 'אסף', 'M'],
+  [['guy','gui'], 'גיא', 'M'],
+  [['shaoul','shaul','saul'], 'שאול', 'M'],
+  [['shmoulik','shmulik'], 'שמוליק', 'M'],
+  [['avigdor','abigdor'], 'אביגדור', 'M'],
+  [['avital'], 'אביטל', 'U'],
+  [['avia'], 'אביה', 'U'],
+  [['aviad'], 'אביעד', 'M'],
+  [['achinoam','ahinoam'], 'אחינועם', 'F'],
+  [['adin'], 'עדין', 'M'],
+  [['adom','adam'], 'אדם', 'M'],
+  [['agam'], 'אגם', 'U'],
+  [['akiva','akiba'], 'עקיבא', 'M'],
+  [['alon'], 'אלון', 'M'],
+  [['amnon'], 'אמנון', 'M'],
+  [['amram'], 'עמרם', 'M'],
+  [['aryeh','arieh'], 'אריה', 'M'],
+  [['asaf'], 'אסף', 'M'],
+  [['ayala','ayalah'], 'איילה', 'F'],
+  [['azriel','azri\'el'], 'עזריאל', 'M'],
+  [['batsion','bat tsion','bat tsiyon'], 'בת ציון', 'F'],
+  [['benyamin','benjamin'], 'בנימין', 'M'],
+  [['bezalel','betsalel','betzalel'], 'בצלאל', 'M'],
+  [['elazar','eleazar'], 'אלעזר', 'M'],
+  [['elimelekh','elimelech'], 'אלימלך', 'M'],
+  [['elisha','elicha'], 'אלישע', 'M'],
+  [['emmanuel','imanuel','immanouel'], 'עמנואל', 'M'],
+  [['gamliel','gamaliel'], 'גמליאל', 'M'],
+  [['gershon','guershon'], 'גרשון', 'M'],
+  [['gideon','guideon'], 'גדעון', 'M'],
+  [['hillel','hilel'], 'הלל', 'M'],
+  [['hiram','\'hiram'], 'חירם', 'M'],
+  [['ido','iddo'], 'עידו', 'M'],
+  [['ilan'], 'אילן', 'M'],
+  [['lev','lev'], 'לב', 'M'],
+  [['matan'], 'מתן', 'M'],
+  [['matityahou','matityahu','matthias','matisyahu'], 'מתתיהו', 'M'],
+  [['nahshon','nakhshon','nachshon','na\'hchon'], 'נחשון', 'M'],
+  [['oren'], 'אורן', 'M'],
+  [['shai','shay'], 'שי', 'M'],
+  [['shamgar','chamgar'], 'שמגר', 'M'],
+  [['shalom','chalom'], 'שלום', 'M'],
+  [['shimshon','chimchon','samson'], 'שמשון', 'M'],
+  [['shimon','chimon'], 'שמעון', 'M'],
+  [['tzion','tsion','sion'], 'ציון', 'M'],
+  [['yaaков'], 'יעקב', 'M'],
+  [['yo\'el','yoel'], 'יואל', 'M'],
+  [['yoav','joab'], 'יואב', 'M'],
+  [['yossi','yosi'], 'יוסי', 'M'],
+  [['zekharya','zekharia','zacharie','zechariah','za\'haria'], 'זכריה', 'M'],
+  [['tsemakh','tsemah','zemakh','tsema\'h'], 'צמח', 'M'],
+  [['shmouel','chmuel'], 'שמואל', 'M'],
+  [['yitzhak','yits\'hak'], 'יצחק', 'M'],
+  [['shelomo','chelomo'], 'שלמה', 'M'],
+  [['shimshin'], 'שמשון', 'M'],
+  [['shmaryahou','shmaryahu','chemaryahou'], 'שמריהו', 'M'],
+  [['shmarya','chemarya'], 'שמריה', 'M'],
+  [['yehiel','ye\'hiel'], 'יחיאל', 'M'],
+  [['nissan','nisan','nissane'], 'ניסן', 'M'],
+  [['nisim','nissim'], 'ניסים', 'M'],
+  [['yaron'], 'ירון', 'M'],
+  [['ronen'], 'רונן', 'M'],
+  [['ron'], 'רון', 'M'],
+  [['yehonatan','yehonathan'], 'יהונתן', 'M'],
+  [['barak','baraq'], 'ברק', 'M'],
+  [['moti'], 'מוטי', 'M'],
+  [['avi'], 'אבי', 'M'],
+  [['dror'], 'דרור', 'M'],
+  [['yossef haim','yosef haim','yosef chaim'], 'יוסף חיים', 'M'],
+  [['shlomo yitshak','chelomo yitshak','rachi'], 'שלמה יצחק', 'M'],
+  [['yaakov israel','yaacov israel'], 'יעקב ישראל', 'M'],
+  [['simha','sim\'ha','simkha'], 'שמחה', 'M'],
+  [['pessakh','pessah','pessa\'h'], 'פסח', 'M'],
+  [['yedidia','yedidya','jedidiah'], 'ידידיה', 'M'],
+  [['yoshiyahou','josias','yoshiyahu'], 'יאשיהו', 'M'],
+  [['nerya','neriya'], 'נריה', 'M'],
+  [['ouriya','uriya','uriyah','ouriyah'], 'אוריה', 'M'],
+  [['ovadiya','obadiah'], 'עובדיה', 'M'],
+  [['shabtai','chabtai'], 'שבתי', 'M'],
+  [['shraga'], 'שרגא', 'M'],
+  [['shmaya','shemaya','chemaya'], 'שמעיה', 'M'],
+  [['tuvya','tuvia','tobie','touvya'], 'טוביה', 'M'],
+  [['tzfanya','tsefanya','tsefania','sophonie'], 'צפניה', 'M'],
+  [['yekutiel','yekoutiel'], 'יקותיאל', 'M'],
+  [['yair','yaïr'], 'יאיר', 'M'],
+  [['yiftakh','yiftach','jephte'], 'יפתח', 'M'],
+  [['yokheved','yokhaved'], 'יוכבד', 'F'],
+  [['zohar'], 'זהר', 'U'],
+  [['ziv'], 'זיו', 'M'],
+  
+  // === FEMMES (F) ===
+  [['sarah','sara'], 'שרה', 'F'],
+  [['rivka','rebecca','rivkah'], 'רבקה', 'F'],
+  [['rahel','rachel','ra\'hel'], 'רחל', 'F'],
+  [['leah','lea','léa'], 'לאה', 'F'],
+  [['miriam','myriam'], 'מרים', 'F'],
+  [['esther','ester'], 'אסתר', 'F'],
+  [['ruth','routh'], 'רות', 'F'],
+  [['naomi','noémi','naomie','no\'omi'], 'נעמי', 'F'],
+  [['hannah','hanna','anna','\'hanna','\'hannah'], 'חנה', 'F'],
+  [['devora','devorah','deborah','debora'], 'דבורה', 'F'],
+  [['tamar','thamar','tamara'], 'תמר', 'F'],
+  [['batsheva','bathcheva','bat sheva','batcheva'], 'בת שבע', 'F'],
+  [['tsipora','tzipora','tsippora','tsipora','sephora'], 'צפורה', 'F'],
+  [['dina','dinah'], 'דינה', 'F'],
+  [['yael','yaëlle','yaël'], 'יעל', 'F'],
+  [['michal','mikhal'], 'מיכל', 'F'],
+  [['abigail','avigail','avigaïl'], 'אביגיל', 'F'],
+  [['atara','atarah'], 'עטרה', 'F'],
+  [['noa','noa\'h'], 'נעה', 'F'],
+  [['shifra','chifra'], 'שפרה', 'F'],
+  [['poua','pou\'a','puah'], 'פועה', 'F'],
+  [['yehoudit','yehudit','judith'], 'יהודית', 'F'],
+  [['orpah','orpa'], 'ערפה', 'F'],
+  [['penina','peninna','peninah'], 'פנינה', 'F'],
+  [['hadassah','hadassa','hadasa'], 'הדסה', 'F'],
+  [['shulamit','choulamit','sulamite'], 'שולמית', 'F'],
+  [['hagar','agar'], 'הגר', 'F'],
+  [['keturah','ketoura'], 'קטורה', 'F'],
+  [['tirtsa','tirzah','tirtza'], 'תרצה', 'F'],
+  [['avishag','avichag','abishag'], 'אבישג', 'F'],
+  [['bilha','bilhah','bilha'], 'בלהה', 'F'],
+  [['zilpa','zilpah'], 'זלפה', 'F'],
+  [['moriya','moriyah'], 'מוריה', 'F'],
+  [['shira','chirah','shirah'], 'שירה', 'F'],
+  [['tehila','tehilah','te\'hila','tehilla'], 'תהילה', 'F'],
+  [['maya','maïa'], 'מאיה', 'F'],
+  [['yaffa','jaffa','yafa'], 'יפה', 'F'],
+  [['simha','sim\'ha','simkha'], 'שמחה', 'F'],
+  [['malka','malca','malkah'], 'מלכה', 'F'],
+  [['ora','orah'], 'אורה', 'F'],
+  [['orit'], 'אורית', 'F'],
+  [['nava','navah'], 'נאוה', 'F'],
+  [['bracha','brakha','bra\'ha'], 'ברכה', 'F'],
+  [['guila','gila','guilah','gilah'], 'גילה', 'F'],
+  [['dalya','dalia','daliah'], 'דליה', 'F'],
+  [['elana','ellanah','ilanah','ilana'], 'אילנה', 'F'],
+  [['galit','galith'], 'גלית', 'F'],
+  [['haya','khaya','\'haya'], 'חיה', 'F'],
+  [['hedva','hedvah'], 'חדוה', 'F'],
+  [['idit','idith'], 'עידית', 'F'],
+  [['keren'], 'קרן', 'F'],
+  [['liora','liorah'], 'ליאורה', 'F'],
+  [['liat'], 'ליאת', 'F'],
+  [['limor'], 'לימור', 'F'],
+  [['linoy','linoï'], 'לינוי', 'F'],
+  [['meital','meital'], 'מיטל', 'F'],
+  [['moriah','moria'], 'מוריה', 'F'],
+  [['neta'], 'נטע', 'F'],
+  [['nirit'], 'נירית', 'F'],
+  [['nurit','nourith'], 'נורית', 'F'],
+  [['orna','ornah'], 'אורנה', 'F'],
+  [['osnat','asnath','ossnath'], 'אסנת', 'F'],
+  [['pnina','pninah'], 'פנינה', 'F'],
+  [['rakefet'], 'רקפת', 'F'],
+  [['rinat','rinath'], 'רינת', 'F'],
+  [['ronit','ronith'], 'רונית', 'F'],
+  [['roni'], 'רוני', 'F'],
+  [['sapir','saphir'], 'ספיר', 'F'],
+  [['sarit','sarith'], 'שרית', 'F'],
+  [['sigal','sigalit','sigalith'], 'סיגל', 'F'],
+  [['sivan','sivane'], 'סיון', 'F'],
+  [['talia','talya','thalia'], 'טליה', 'F'],
+  [['tammy','tami'], 'תמי', 'F'],
+  [['vered'], 'ורד', 'F'],
+  [['yardena','yardénah'], 'ירדנה', 'F'],
+  [['dikla','diklah'], 'דקלה', 'F'],
+  [['einat','einath'], 'עינת', 'F'],
+  [['etti','etty'], 'אתי', 'F'],
+  [['gali'], 'גלי', 'F'],
+  [['hagit','haguith'], 'חגית', 'F'],
+  [['inbar'], 'ענבר', 'F'],
+  [['livnat'], 'לבנת', 'F'],
+  [['merav'], 'מירב', 'F'],
+  [['mirit','mirith'], 'מירית', 'F'],
+  [['naamah','na\'amah','naama'], 'נעמה', 'F'],
+  [['nechama','ne\'hama','nekhama'], 'נחמה', 'F'],
+  [['carmela','carmella'], 'כרמלה', 'F'],
+  [['carmel'], 'כרמל', 'U'],
+  [['chana','\'hana'], 'חנה', 'F'],
+  [['chava','hava','eve','\'hava'], 'חוה', 'F'],
+  [['dafna','dafnah','daphna','daphnee'], 'דפנה', 'F'],
+  [['efrat','efrath'], 'אפרת', 'F'],
+  [['margalit','margalith'], 'מרגלית', 'F'],
+  [['mazal'], 'מזל', 'F'],
+  [['tova','tovah','touvah'], 'טובה', 'F'],
+  [['tsila','tzila','zilla','tsillah'], 'צילה', 'F'],
+  [['dvora','devoirah','dvoire'], 'דבורה', 'F'],
+  [['freidel','fraydel','fraidel'], 'פריידל', 'F'],
+  [['feiga','feigah','feigue'], 'פייגא', 'F'],
+  [['guitel','gittel','guittel','gitel'], 'גיטל', 'F'],
+  [['guenendel','gnendel'], 'גנענדל', 'F'],
+  [['hentcha','hentche'], 'הענטשע', 'F'],
+  [['mushka','mouchka','moushka'], 'מושקא', 'F'],
+  [['haya mushka','haya mouchka','\'haya mouchka'], 'חיה מושקא', 'F'],
+  [['shoula','shula','choulah'], 'שולה', 'F'],
+  [['tsherna','tcherna'], 'טשערנא', 'F'],
+  [['yenta','yentah'], 'יענטא', 'F'],
+  [['zelda'], 'זעלדא', 'F'],
+  [['reizl','reizel','rayzel'], 'רייזל', 'F'],
+  [['bassya','bassia','batya','bathia'], 'בתיה', 'F'],
+  [['menuha','menou\'ha','menukhah'], 'מנוחה', 'F'],
+  [['sterna','sterno'], 'שטערנא', 'F'],
+  [['perl','perel','perle'], 'פערל', 'F'],
+  [['brouria','brouria'], 'ברוריה', 'F'],
+  [['adina','adinah'], 'עדינה', 'F'],
+  [['aliza','alizah'], 'עליזה', 'F'],
+  [['aviva','avivah'], 'אביבה', 'F'],
+  [['chochana','shoshana','shoshanah','chochannah','suzanne'], 'שושנה', 'F'],
+  [['rinah','rina'], 'רנה', 'F'],
+  [['shoshana','chochana','susanne'], 'שושנה', 'F'],
+  [['yocheved','yokheved','jochebed'], 'יוכבד', 'F'],
+  [['zehava','zehavah'], 'זהבה', 'F'],
+  [['meira','me\'irah'], 'מאירה', 'F'],
+  [['batsheva','batcheva'], 'בת שבע', 'F'],
+  [['odelia','odelya','odélia'], 'אודליה', 'F'],
+  [['orly','orli'], 'אורלי', 'F'],
+  [['revital','revithal'], 'רויטל', 'F'],
+  [['tzivya','tsivya','tsivyah'], 'צביה', 'F'],
+  [['yehoudith','yehudis'], 'יהודית', 'F'],
+  [['noga','nogah'], 'נגה', 'F'],
+  [['pazit','pazith'], 'פזית', 'F'],
+  [['rakhelé','rachelé'], 'רחלה', 'F'],
+  [['adel','adele','adelle'], 'אדל', 'F'],
+  [['raizy','raisy','raïzy'], 'רייזי', 'F'],
+  [['baila','bailah','beïla'], 'ביילא', 'F'],
+  [['blima','blimah','blimé'], 'בלימה', 'F'],
+  [['breindel','braindel','breindl'], 'בריינדל', 'F'],
+  [['libby','libbé','liba','libah'], 'ליבא', 'F'],
+  [['shaindel','chaindel','shaindl'], 'שיינדל', 'F'],
+  [['zissel','zisel','zisil'], 'זיסל', 'F'],
+  [['dobrish','dobrush'], 'דאברוש', 'F'],
+  [['nechama dina','ne\'hama dinah'], 'נחמה דינה', 'F'],
+  [['sara rivka'], 'שרה רבקה', 'F'],
+  [['hanna leah','hannah leah','\'hanna lea'], 'חנה לאה', 'F'],
+  [['raizel','rayzel','raïzel'], 'רייזל', 'F'],
+  [['mirel','mirele'], 'מירל', 'F'],
+];
+
+var t119KbdVisible = false;
+function toggleT119Keyboard() {
+  t119KbdVisible = !t119KbdVisible;
+  var wrap = document.getElementById('t119-kbd-wrap');
+  var txt = document.getElementById('t119-kbd-toggle-text');
+  wrap.style.display = t119KbdVisible ? 'block' : 'none';
+  txt.textContent = t119KbdVisible ? '⌨️ Masquer le clavier' : '⌨️ Clavier hébreu';
+}
+
+function searchNames(query) {
+  if (!query || query.length < 1) return [];
+  var lower = query.toLowerCase().replace(/[''`]/g, "'");
+  var results = [];
+  var seen = {};
+  for (var i = 0; i < HEBREW_NAMES.length; i++) {
+    var entry = HEBREW_NAMES[i];
+    var variants = entry[0];
+    var hebrew = entry[1];
+    if (seen[hebrew]) continue;
+    for (var j = 0; j < variants.length; j++) {
+      if (variants[j].indexOf(lower) === 0 || (lower.length >= 2 && variants[j].indexOf(lower) !== -1)) {
+        results.push({ latin: variants[0], hebrew: hebrew, gender: entry[2], match: variants[j] });
+        seen[hebrew] = true;
+        break;
+      }
+    }
+    // Also check if hebrew input matches
+    if (!seen[hebrew]) {
+      var hebrewInput = frenchToHebrew(query);
+      if (hebrew.indexOf(hebrewInput) === 0 && hebrewInput.length > 0) {
+        results.push({ latin: variants[0], hebrew: hebrew, gender: entry[2], match: variants[0] });
+        seen[hebrew] = true;
+      }
+    }
+  }
+  // Sort: exact start matches first, then by length
+  results.sort(function(a, b) {
+    var aStart = a.match.indexOf(lower) === 0 ? 0 : 1;
+    var bStart = b.match.indexOf(lower) === 0 ? 0 : 1;
+    if (aStart !== bStart) return aStart - bStart;
+    return a.hebrew.length - b.hebrew.length;
+  });
+  return results.slice(0, 8);
+}
+
+function selectT119Name(hebrew) {
+  document.getElementById('t119-input').value = hebrew;
+  document.getElementById('t119-suggestions').classList.remove('active');
+  document.getElementById('t119-suggestions').innerHTML = '';
+  document.getElementById('t119-hebrew-preview').textContent = hebrew;
+  var clearBtn = document.getElementById('t119-clear');
+  clearBtn.style.display = 'flex';
+  var letters = extractHebrewLetters(hebrew);
+  renderT119Results(letters, hebrew);
+}
+
+function renderT119Suggestions(query) {
+  var container = document.getElementById('t119-suggestions');
+  if (!query || query.length < 1) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+  var results = searchNames(query);
+  if (results.length === 0) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+  var genderIcon = { M: '👨', F: '👩', U: '' };
+  var html = '';
+  results.forEach(function(r) {
+    html += '<div class="t119-sug-item" onclick="selectT119Name(\'' + r.hebrew.replace(/'/g, "\\'") + '\')">';
+    html += '<span class="t119-sug-heb">' + r.hebrew + '</span>';
+    html += '<span class="t119-sug-lat">' + r.latin + '<span class="t119-sug-gender">' + (genderIcon[r.gender] || '') + '</span></span>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  container.classList.add('active');
+}
+
+var HEBREW_LETTERS_119 = [
+  { letter: 'א', name: 'Aleph', start: 1, end: 8 },
+  { letter: 'ב', name: 'Beth', start: 9, end: 16 },
+  { letter: 'ג', name: 'Guimel', start: 17, end: 24 },
+  { letter: 'ד', name: 'Daleth', start: 25, end: 32 },
+  { letter: 'ה', name: 'Hé', start: 33, end: 40 },
+  { letter: 'ו', name: 'Vav', start: 41, end: 48 },
+  { letter: 'ז', name: 'Zayin', start: 49, end: 56 },
+  { letter: 'ח', name: 'Heth', start: 57, end: 64 },
+  { letter: 'ט', name: 'Teth', start: 65, end: 72 },
+  { letter: 'י', name: 'Youd', start: 73, end: 80 },
+  { letter: 'כ', name: 'Kaf', start: 81, end: 88 },
+  { letter: 'ל', name: 'Lamed', start: 89, end: 96 },
+  { letter: 'מ', name: 'Mem', start: 97, end: 104 },
+  { letter: 'נ', name: 'Noun', start: 105, end: 112 },
+  { letter: 'ס', name: 'Samekh', start: 113, end: 120 },
+  { letter: 'ע', name: 'Ayin', start: 121, end: 128 },
+  { letter: 'פ', name: 'Pé', start: 129, end: 136 },
+  { letter: 'צ', name: 'Tsadi', start: 137, end: 144 },
+  { letter: 'ק', name: 'Kouf', start: 145, end: 152 },
+  { letter: 'ר', name: 'Rech', start: 153, end: 160 },
+  { letter: 'ש', name: 'Chin', start: 161, end: 168 },
+  { letter: 'ת', name: 'Tav', start: 169, end: 176 }
+];
+
+// French → Hebrew transliteration map (digraphs first)
+var FR_HEB_DIGRAPHS = [
+  ['sh', 'ש'], ['ch', 'ש'], ['ts', 'צ'], ['tz', 'צ'], ['kh', 'ח'],
+  ['th', 'ת'], ['ph', 'פ'], ['dj', 'ג'], ['ou', 'ו'], ['gn', 'ג']
+];
+var FR_HEB_MAP = {
+  'a': 'א', 'b': 'ב', 'c': 'כ', 'd': 'ד', 'e': 'א', 'f': 'פ',
+  'g': 'ג', 'h': 'ה', 'i': 'י', 'j': 'ג', 'k': 'כ', 'l': 'ל',
+  'm': 'מ', 'n': 'נ', 'o': 'ע', 'p': 'פ', 'q': 'ק', 'r': 'ר',
+  's': 'ס', 't': 'ת', 'u': 'ו', 'v': 'ו', 'w': 'ו', 'x': 'כ',
+  'y': 'י', 'z': 'ז'
+};
+
+function frenchToHebrew(text) {
+  var result = '';
+  var lower = text.toLowerCase();
+  var i = 0;
+  while (i < lower.length) {
+    if (lower[i] === ' ') { result += ' '; i++; continue; }
+    // Check if already Hebrew
+    var code = lower.charCodeAt(i);
+    if (code >= 0x0590 && code <= 0x05FF) { result += lower[i]; i++; continue; }
+    // Check digraphs
+    var found = false;
+    if (i < lower.length - 1) {
+      var di = lower.substr(i, 2);
+      for (var d = 0; d < FR_HEB_DIGRAPHS.length; d++) {
+        if (di === FR_HEB_DIGRAPHS[d][0]) {
+          result += FR_HEB_DIGRAPHS[d][1];
+          i += 2;
+          found = true;
+          break;
+        }
+      }
+    }
+    if (found) continue;
+    // Single char
+    var mapped = FR_HEB_MAP[lower[i]];
+    if (mapped) result += mapped;
+    i++;
+  }
+  return result;
+}
+
+function extractHebrewLetters(text) {
+  var letters = [];
+  var seen = {};
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    // Normalize final letters to regular
+    if (c === 'ך') c = 'כ';
+    if (c === 'ם') c = 'מ';
+    if (c === 'ן') c = 'נ';
+    if (c === 'ף') c = 'פ';
+    if (c === 'ץ') c = 'צ';
+    // Check if it's a valid Hebrew letter in our list
+    var found = HEBREW_LETTERS_119.find(function(l) { return l.letter === c; });
+    if (found && !seen[c]) {
+      letters.push(found);
+      seen[c] = true;
+    }
+  }
+  return letters;
+}
+
+function t119AddLetter(l) {
+  var input = document.getElementById('t119-input');
+  input.value += l;
+  onT119Input();
+}
+function t119Backspace() {
+  var input = document.getElementById('t119-input');
+  input.value = input.value.slice(0, -1);
+  onT119Input();
+}
+function clearT119() {
+  document.getElementById('t119-input').value = '';
+  document.getElementById('t119-suggestions').classList.remove('active');
+  document.getElementById('t119-suggestions').innerHTML = '';
+  onT119Input();
+}
+
+function onT119Input() {
+  var val = document.getElementById('t119-input').value;
+  var clearBtn = document.getElementById('t119-clear');
+  clearBtn.style.display = val.length > 0 ? 'flex' : 'none';
+  
+  // Check if input is Hebrew (from keyboard or paste)
+  var isHebrew = val.length > 0 && val.charCodeAt(0) >= 0x0590 && val.charCodeAt(0) <= 0x05FF;
+  
+  if (isHebrew) {
+    // Direct Hebrew input - show preview and results directly
+    document.getElementById('t119-hebrew-preview').textContent = val;
+    document.getElementById('t119-suggestions').classList.remove('active');
+    document.getElementById('t119-suggestions').innerHTML = '';
+    var letters = extractHebrewLetters(val);
+    renderT119Results(letters, val);
+  } else {
+    // Latin input - show suggestions from dictionary
+    renderT119Suggestions(val);
+    // Also show transliterated preview as fallback
+    var hebrew = frenchToHebrew(val);
+    var preview = document.getElementById('t119-hebrew-preview');
+    preview.textContent = hebrew;
+    var letters = extractHebrewLetters(hebrew);
+    renderT119Results(letters, hebrew);
+  }
+}
+
+function renderT119Results(letters, hebrewName) {
+  var container = document.getElementById('t119-results');
+  if (letters.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  
+  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
+  if (!psalm119) {
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray-3)">Psaume 119 bientôt disponible</div>';
+    return;
+  }
+  
+  var html = '<div style="text-align:center;padding:8px 16px 12px;font-size:13px;color:var(--gray-2)">';
+  html += '<strong>' + letters.length + ' section' + (letters.length > 1 ? 's' : '') + '</strong> pour <span style="font-family:Noto Serif Hebrew,serif;font-size:16px;font-weight:700">' + hebrewName.trim() + '</span>';
+  html += '</div>';
+  
+  letters.forEach(function(info) {
+    html += '<div class="t119-letter-section">';
+    html += '<div class="t119-letter-header">';
+    html += '<div class="t119-letter-circle">' + info.letter + '</div>';
+    html += '<div class="t119-letter-info"><div class="t119-letter-name">' + info.name + ' · ' + info.letter + '</div>';
+    html += '<div class="t119-letter-range">Versets ' + info.start + '–' + info.end + '</div></div></div>';
+    
+    // Show verses
+    for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
+      var verse = psalm119.verses[v];
+      html += '<div class="t119-verse"><span class="t119-verse-num">' + toHebrewNumeral(v + 1) + '</span> ' + verse.hebrew + '</div>';
+    }
+    html += '</div>';
+  });
+  
+  container.innerHTML = html;
+}
+
+// ====== CHAINS DE TEHILIM ======
+var currentChainId = null;
+
+function getChains() {
+  try { return JSON.parse(localStorage.getItem('tehilim_chains') || '[]'); }
+  catch(e) { return []; }
+}
+function saveChains(chains) {
+  localStorage.setItem('tehilim_chains', JSON.stringify(chains));
+}
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
+}
+
+var chainTypeLabels = {
+  refoua: '🩺 Réfoua Chéléma',
+  mariage: '💍 Pour le mariage',
+  memoire: '🕯️ À la mémoire',
+  autre: '✨ Autre'
+};
+
+function showChainForm() {
+  document.getElementById('chain-form').style.display = 'block';
+  document.getElementById('chain-create-section').style.display = 'none';
+  document.getElementById('chain-name').value = '';
+  document.getElementById('chain-desc-input').value = '';
+  // Reset type
+  document.querySelectorAll('.chain-type-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelector('.chain-type-btn[data-type="refoua"]').classList.add('active');
+}
+function hideChainForm() {
+  document.getElementById('chain-form').style.display = 'none';
+  document.getElementById('chain-create-section').style.display = 'block';
+}
+function selectChainType(el) {
+  document.querySelectorAll('.chain-type-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+}
+function getSelectedType() {
+  var active = document.querySelector('.chain-type-btn.active');
+  return active ? active.getAttribute('data-type') : 'refoua';
+}
+
+function createChain() {
+  var name = document.getElementById('chain-name').value.trim();
+  if (!name) { document.getElementById('chain-name').style.borderColor = '#e74c3c'; return; }
+  var chain = {
+    id: generateId(),
+    type: getSelectedType(),
+    name: name,
+    description: document.getElementById('chain-desc-input').value.trim(),
+    created: new Date().toISOString(),
+    psalmsRead: [], // array of psalm numbers read
+    cycles: 0, // complete cycles
+    nextPsalm: 1 // next psalm to assign
+  };
+  var chains = getChains();
+  chains.unshift(chain);
+  saveChains(chains);
+  hideChainForm();
+  renderChainList();
+  // Open it
+  openChainDetail(chain.id);
+}
+
+function renderChainList() {
+  var chains = getChains();
+  var list = document.getElementById('chain-list');
+  if (chains.length === 0) {
+    list.innerHTML = '<div class="chain-empty"><div style="font-size:40px;margin-bottom:12px">🔗</div>Aucune chaîne pour le moment.<br>Créez-en une pour commencer !</div>';
+    return;
+  }
+  var html = '';
+  chains.forEach(function(c) {
+    var progress = Math.round((c.psalmsRead.length / 150) * 100);
+    var typeLabel = c.type === 'refoua' ? 'Réfoua' : c.type === 'mariage' ? 'Mariage' : c.type === 'memoire' ? 'Mémoire' : 'Autre';
+    var dateStr = new Date(c.created).toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
+    html += '<div class="chain-card" onclick="openChainDetail(\'' + c.id + '\')">';
+    html += '<div class="chain-card-top"><span class="chain-card-type ' + c.type + '">' + typeLabel + '</span><span class="chain-card-date">' + dateStr + '</span></div>';
+    html += '<div class="chain-card-name">' + escapeHtml(c.name) + '</div>';
+    if (c.description) html += '<div class="chain-card-descr">' + escapeHtml(c.description) + '</div>';
+    html += '<div class="chain-card-progress"><div class="chain-progress-bar"><div class="chain-progress-fill" style="width:' + progress + '%"></div></div>';
+    html += '<span class="chain-progress-text">' + c.psalmsRead.length + '/150' + (c.cycles > 0 ? ' · ×' + (c.cycles + 1) : '') + '</span></div>';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function escapeHtml(t) {
+  var d = document.createElement('div'); d.textContent = t; return d.innerHTML;
+}
+
+function openChainDetail(id) {
+  currentChainId = id;
+  var chains = getChains();
+  var chain = chains.find(function(c) { return c.id === id; });
+  if (!chain) return;
+  switchTab('chain-detail');
+  renderChainDetail(chain);
+}
+
+function renderChainDetail(chain) {
+  var content = document.getElementById('chain-detail-content');
+  var progress = Math.round((chain.psalmsRead.length / 150) * 100);
+  var typeLabel = chainTypeLabels[chain.type] || chain.type;
+  var typeCls = chain.type;
+
+  var html = '<div class="chain-detail-header">';
+  html += '<div class="chain-detail-type ' + typeCls + '" style="background:' + getTypeColor(chain.type) + '">' + typeLabel + '</div>';
+  html += '<div class="chain-detail-name">' + escapeHtml(chain.name) + '</div>';
+  if (chain.description) html += '<div class="chain-detail-desc">' + escapeHtml(chain.description) + '</div>';
+  html += '</div>';
+
+  // Progress wheel
+  html += '<div class="chain-wheel">';
+  html += '<div class="chain-wheel-ring" style="background:conic-gradient(#ee2a7b 0% ' + progress + '%, var(--gray-5) ' + progress + '% 100%)">';
+  html += '<div class="chain-wheel-inner">';
+  html += '<div class="chain-wheel-count">' + chain.psalmsRead.length + '<span style="font-size:16px;color:var(--gray-3)">/150</span></div>';
+  html += '<div class="chain-wheel-label">psaumes lus</div>';
+  if (chain.cycles > 0) html += '<div class="chain-wheel-cycle">Cycle ' + (chain.cycles + 1) + '</div>';
+  html += '</div></div></div>';
+
+  // Next psalm button
+  var nextNum = chain.nextPsalm;
+  html += '<div class="chain-next-section">';
+  html += '<button class="chain-next-btn" onclick="readNextPsalm()">📖 Lire le prochain psaume · Tehilim ' + nextNum + '</button>';
+  html += '</div>';
+
+  // Grid of 150
+  html += '<div class="chain-psalms-grid">';
+  for (var i = 1; i <= 150; i++) {
+    var cls = 'chain-psalm-cell';
+    if (chain.psalmsRead.indexOf(i) !== -1) cls += ' read';
+    if (i === nextNum) cls += ' current';
+    html += '<div class="' + cls + '">' + i + '</div>';
+  }
+  html += '</div>';
+
+  // Share buttons
+  html += '<div class="chain-share-section">';
+  html += '<button class="chain-share-btn whatsapp" onclick="shareChainWhatsApp()">WhatsApp</button>';
+  html += '<button class="chain-share-btn" onclick="shareChain()">📋 Copier le lien</button>';
+  html += '</div>';
+
+  // Delete
+  html += '<button class="chain-delete-btn" onclick="deleteChain()">🗑️ Supprimer cette chaîne</button>';
+
+  content.innerHTML = html;
+}
+
+function getTypeColor(type) {
+  if (type === 'refoua') return '#e74c3c';
+  if (type === 'mariage') return '#9b59b6';
+  if (type === 'memoire') return '#2c3e50';
+  return '#27ae60';
+}
+
+function readNextPsalm() {
+  var chains = getChains();
+  var idx = chains.findIndex(function(c) { return c.id === currentChainId; });
+  if (idx === -1) return;
+  var chain = chains[idx];
+  var psalmNum = chain.nextPsalm;
+
+  // Check if psalm exists in data
+  var psalmData = TEHILIM.find(function(p) { return p.number === psalmNum; });
+  if (psalmData) {
+    // Open in reading mode
+    browseSource = 'chain';
+    window._chainPsalmNum = psalmNum;
+    availablePsalms = [psalmData];
+    currentPsalm = 0;
+    currentScreen = 'reading';
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('reading').style.display = 'flex';
+    window.scrollTo(0, 0);
+    document.getElementById('reading').scrollTop = 0;
+    renderReading();
+  }
+
+  // Mark as read
+  if (chain.psalmsRead.indexOf(psalmNum) === -1) {
+    chain.psalmsRead.push(psalmNum);
+  }
+
+  // Advance next
+  chain.nextPsalm = psalmNum + 1;
+  if (chain.nextPsalm > 150) {
+    chain.cycles += 1;
+    chain.psalmsRead = [];
+    chain.nextPsalm = 1;
+  }
+
+  chains[idx] = chain;
+  saveChains(chains);
+
+  if (!psalmData) {
+    // Psalm not yet in data, just refresh detail
+    renderChainDetail(chain);
+  }
+}
+
+function backToChains() {
+  switchTab('chains');
+  currentChainId = null;
+}
+
+function deleteChain() {
+  if (!confirm('Supprimer cette chaîne ?')) return;
+  var chains = getChains();
+  chains = chains.filter(function(c) { return c.id !== currentChainId; });
+  saveChains(chains);
+  backToChains();
+}
+
+function shareChain() {
+  var chains = getChains();
+  var chain = chains.find(function(c) { return c.id === currentChainId; });
+  if (!chain) return;
+  var text = chainTypeLabels[chain.type] + ' · ' + chain.name;
+  if (chain.description) text += '\n' + chain.description;
+  text += '\n\nRejoignez la chaîne de Tehilim ! ' + chain.psalmsRead.length + '/150 psaumes lus.';
+  if (navigator.share) {
+    navigator.share({ title: 'Chaîne de Tehilim', text: text }).catch(function(){});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() { alert('Copié !'); });
+  }
+}
+
+function shareChainWhatsApp() {
+  var chains = getChains();
+  var chain = chains.find(function(c) { return c.id === currentChainId; });
+  if (!chain) return;
+  var text = chainTypeLabels[chain.type] + ' · ' + chain.name;
+  if (chain.description) text += '\n' + chain.description;
+  text += '\n\n📖 Rejoignez la chaîne de Tehilim ! ' + chain.psalmsRead.length + '/150 psaumes lus.';
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
 
 // ====== START ======
