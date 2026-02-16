@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Chabap</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' fill='none'%3E%3Cstyle%3E.s{stroke:%23000;stroke-width:28;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Inter,system-ui,sans-serif;font-weight:800;fill:%23000}%3C/style%3E%3Cpath class='s' d='M200 520L200 260L300 160L400 260L400 520'/%3E%3Cline class='s' x1='300' y1='210' x2='300' y2='520'/%3E%3Ccircle class='s' cx='300' cy='300' r='26'/%3E%3Cline class='s' x1='280' y1='520' x2='280' y2='420'/%3E%3Cpath class='s' d='M400 520L400 290L500 190L600 290L600 520'/%3E%3Cline class='s' x1='500' y1='230' x2='500' y2='520'/%3E%3Ccircle class='s' cx='500' cy='330' r='26'/%3E%3Cline class='s' x1='500' y1='520' x2='500' y2='420'/%3E%3Cpath class='s' d='M600 520L600 260L700 160L800 260L800 520'/%3E%3Cline class='s' x1='700' y1='210' x2='700' y2='520'/%3E%3Ccircle class='s' cx='700' cy='300' r='26'/%3E%3Cline class='s' x1='720' y1='520' x2='720' y2='420'/%3E%3Cline class='s' x1='160' y1='560' x2='840' y2='560'/%3E%3Ctext class='t' x='500' y='820' font-size='210' text-anchor='middle'%3E770 Lab%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -61,7 +62,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-footer { margin-top:auto; padding-top:40px; text-align:center; opacity:0; animation:scSubIn 0.5s ease 3.2s forwards; }
 .footer-logo-wrap { display:inline-flex; align-items:center; gap:6px; opacity:0.35; transition:opacity 0.3s; }
 .footer-logo-wrap:hover { opacity:0.55; }
-.footer-logo-icon { width:20px; height:20px; }
+.footer-logo-icon { width:28px; height:18px; }
 .footer-logo-text { font-size:11px; font-weight:500; letter-spacing:1.5px; color:var(--black); font-family:var(--font); text-transform:uppercase; }
 @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
 
@@ -165,7 +166,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .os-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:26px; font-weight:700; margin-bottom:6px; direction:rtl; text-shadow:0 2px 8px rgba(0,0,0,0.1); }
 .os-name { font-size:16px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; opacity:0.9; }
 .os-msg { font-size:14px; line-height:1.6; max-width:320px; opacity:0.85; font-family:'EB Garamond',Georgia,serif; margin-bottom:20px; }
-.os-check-btn { padding:14px 40px; border-radius:50px; border:2px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); transition:all 0.3s; display:flex; align-items:center; gap:10px; }
+.os-check-btn { padding:14px 40px; border-radius:50px; border:2px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); transition:all 0.3s; display:flex; align-items:center; gap:10px; pointer-events:auto; position:relative; z-index:10; }
 .os-check-btn:active { transform:scale(0.95); }
 .os-check-btn.checked { background:rgba(255,255,255,0.95); border-color:transparent; }
 .os-time-badge { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; opacity:0.6; margin-bottom:20px; }
@@ -621,7 +622,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     <p class="splash-source" id="splash-source"></p>
     <div class="splash-dots" id="splash-dots"></div>
     <p class="splash-tap">Appuyez pour commencer</p>
-    <p class="splash-footer"><span class="footer-logo-wrap"><svg class="footer-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><line x1="5" y1="20" x2="5" y2="10"/><line x1="4.2" y1="11" x2="5" y2="7"/><line x1="5.8" y1="11" x2="5" y2="7"/><line x1="9" y1="20" x2="9" y2="9"/><line x1="8.2" y1="10" x2="9" y2="6"/><line x1="9.8" y1="10" x2="9" y2="6"/><line x1="12" y1="20" x2="12" y2="7"/><line x1="11.2" y1="8" x2="12" y2="4"/><line x1="12.8" y1="8" x2="12" y2="4"/><line x1="15" y1="20" x2="15" y2="9"/><line x1="14.2" y1="10" x2="15" y2="6"/><line x1="15.8" y1="10" x2="15" y2="6"/><line x1="19" y1="20" x2="19" y2="10"/><line x1="18.2" y1="11" x2="19" y2="7"/><line x1="19.8" y1="11" x2="19" y2="7"/><line x1="4" y1="14" x2="20" y2="14"/></svg><span class="footer-logo-text">770 Lab</span></span></p>
+    <p class="splash-footer"><span class="footer-logo-wrap"><svg class="footer-logo-icon" viewBox="100 100 800 500" fill="none"><style>.fs{stroke:#000;stroke-width:28;stroke-linecap:round;stroke-linejoin:round}</style><path class="fs" d="M200 520L200 260L300 160L400 260L400 520"/><line class="fs" x1="300" y1="210" x2="300" y2="520"/><circle class="fs" cx="300" cy="300" r="26"/><line class="fs" x1="280" y1="520" x2="280" y2="420"/><path class="fs" d="M400 520L400 290L500 190L600 290L600 520"/><line class="fs" x1="500" y1="230" x2="500" y2="520"/><circle class="fs" cx="500" cy="330" r="26"/><line class="fs" x1="500" y1="520" x2="500" y2="420"/><path class="fs" d="M600 520L600 260L700 160L800 260L800 520"/><line class="fs" x1="700" y1="210" x2="700" y2="520"/><circle class="fs" cx="700" cy="300" r="26"/><line class="fs" x1="720" y1="520" x2="720" y2="420"/><line class="fs" x1="160" y1="560" x2="840" y2="560"/></svg><span class="footer-logo-text">770 Lab</span></span></p>
   </div>
 </div>
 
@@ -1043,7 +1044,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     </div>
   </div>
 
-  <div class="app-footer"><span class="footer-logo-wrap"><svg class="footer-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><line x1="5" y1="20" x2="5" y2="10"/><line x1="4.2" y1="11" x2="5" y2="7"/><line x1="5.8" y1="11" x2="5" y2="7"/><line x1="9" y1="20" x2="9" y2="9"/><line x1="8.2" y1="10" x2="9" y2="6"/><line x1="9.8" y1="10" x2="9" y2="6"/><line x1="12" y1="20" x2="12" y2="7"/><line x1="11.2" y1="8" x2="12" y2="4"/><line x1="12.8" y1="8" x2="12" y2="4"/><line x1="15" y1="20" x2="15" y2="9"/><line x1="14.2" y1="10" x2="15" y2="6"/><line x1="15.8" y1="10" x2="15" y2="6"/><line x1="19" y1="20" x2="19" y2="10"/><line x1="18.2" y1="11" x2="19" y2="7"/><line x1="19.8" y1="11" x2="19" y2="7"/><line x1="4" y1="14" x2="20" y2="14"/></svg><span class="footer-logo-text">770 Lab</span></span></div>
+  <div class="app-footer"><span class="footer-logo-wrap"><svg class="footer-logo-icon" viewBox="100 100 800 500" fill="none"><style>.fs{stroke:#000;stroke-width:28;stroke-linecap:round;stroke-linejoin:round}</style><path class="fs" d="M200 520L200 260L300 160L400 260L400 520"/><line class="fs" x1="300" y1="210" x2="300" y2="520"/><circle class="fs" cx="300" cy="300" r="26"/><line class="fs" x1="280" y1="520" x2="280" y2="420"/><path class="fs" d="M400 520L400 290L500 190L600 290L600 520"/><line class="fs" x1="500" y1="230" x2="500" y2="520"/><circle class="fs" cx="500" cy="330" r="26"/><line class="fs" x1="500" y1="520" x2="500" y2="420"/><path class="fs" d="M600 520L600 260L700 160L800 260L800 520"/><line class="fs" x1="700" y1="210" x2="700" y2="520"/><circle class="fs" cx="700" cy="300" r="26"/><line class="fs" x1="720" y1="520" x2="720" y2="420"/><line class="fs" x1="160" y1="560" x2="840" y2="560"/></svg><span class="footer-logo-text">770 Lab</span></span></div>
   <div class="insta-bottom-nav" id="home-nav">
     <button class="insta-nav-item active" onclick="switchTab('menu')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
     <button class="insta-nav-item" onclick="openJourReading()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Jour</span></button>
