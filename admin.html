@@ -367,13 +367,14 @@ function resetSetup() {
 }
 
 // ====== GITHUB API ======
-function ghHeaders() {
+function ghHeaders(isWrite) {
   var token = localStorage.getItem('chabapp_token');
-  return {
-    'Authorization': 'Bearer ' + token,
-    'Accept': 'application/vnd.github.v3+json',
-    'Content-Type': 'application/json'
+  var h = {
+    'Authorization': 'token ' + token,
+    'Accept': 'application/vnd.github.v3+json'
   };
+  if (isWrite) h['Content-Type'] = 'application/json';
+  return h;
 }
 
 function loadData() {
@@ -424,7 +425,7 @@ function commitData(msg) {
 
   return fetch(GITHUB_API + '/repos/' + REPO + '/contents/' + FILE_PATH, {
     method: 'PUT',
-    headers: ghHeaders(),
+    headers: ghHeaders(true),
     body: JSON.stringify(body)
   })
   .then(function(r) {
