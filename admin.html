@@ -6,597 +6,167 @@
 <title>Chab'app Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0f0f0f;
-  --card: #1a1a1a;
-  --card-border: #2a2a2a;
-  --gold: #c9a84c;
-  --gold-dim: #8a7333;
-  --text: #e8e4dc;
-  --text-dim: #8a8578;
-  --green: #4ade80;
-  --red: #f87171;
-  --blue: #60a5fa;
-  --radius: 12px;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body {
-  font-family: 'DM Sans', -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100dvh;
-  padding: 0 0 40px;
-}
-.header {
-  padding: 20px 20px 16px;
-  border-bottom: 1px solid var(--card-border);
-  display: flex; align-items: center; gap: 12px;
-  position: sticky; top: 0; background: var(--bg); z-index: 10;
-}
-.header-icon { font-size: 24px; }
-.header h1 { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 700; color: var(--gold); }
-.header .badge { font-size: 10px; background: var(--gold-dim); color: var(--bg); padding: 2px 8px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px; }
+:root{--bg:#f5f3ef;--card:#fff;--border:#e4e0d8;--gold:#c9a84c;--gold-bg:#f8f4ea;--gold-dark:#8a7333;--text:#1c1c1c;--dim:#9a9590;--green:#2d8a4e;--green-bg:#eaf5ec;--red:#c0392b;--red-bg:#fdeaea;--r:14px;--shadow:0 1px 8px rgba(0,0,0,.06);--font:'DM Sans',-apple-system,sans-serif;--serif:'EB Garamond',Georgia,serif}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100dvh;padding-bottom:60px}
+.hdr{padding:14px 20px;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:10}
+.hdr h1{font-family:var(--serif);font-size:20px;flex:1}
+.badge{font-size:9px;background:var(--gold);color:#fff;padding:3px 8px;border-radius:20px;font-weight:700;letter-spacing:1px}
+.back{display:block;padding:10px 20px;font-size:13px;color:var(--dim);text-decoration:none}
+.wrap{max-width:540px;margin:0 auto;padding:0 16px}
 
-/* Setup */
-.setup { padding: 20px; display: none; }
-.setup.active { display: block; }
-.setup-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-.setup-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px; }
-.setup-desc a { color: var(--gold); text-decoration: none; }
-.setup-desc code { background: var(--card); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+.setup{display:none;padding:32px 0}
+.setup.active{display:block}
+.setup-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
+.setup-card h2{font-family:var(--serif);font-size:20px;margin-bottom:6px}
+.setup-card p{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:18px}
+.setup-card a{color:var(--gold-dark);font-weight:600;text-decoration:none}
+.setup-card code{background:var(--gold-bg);padding:2px 6px;border-radius:4px;font-size:12px;color:var(--gold-dark)}
 
-.input-group { margin-bottom: 16px; }
-.input-label { font-size: 12px; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-input[type="text"], input[type="password"], textarea {
-  width: 100%; padding: 12px 14px; background: var(--card); border: 1px solid var(--card-border);
-  border-radius: var(--radius); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px;
-  outline: none; transition: border-color 0.2s;
-}
-input:focus, textarea:focus { border-color: var(--gold); }
-textarea { min-height: 200px; line-height: 1.7; resize: vertical; }
+.fld{margin-bottom:14px}
+.fld-l{font-size:11px;font-weight:700;color:var(--dim);margin-bottom:5px;text-transform:uppercase;letter-spacing:.8px}
+input[type="text"],input[type="password"],textarea{width:100%;padding:11px 13px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font);font-size:14px;outline:none;transition:border .2s,box-shadow .2s}
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-bg)}
+textarea{min-height:160px;line-height:1.7;resize:vertical;font-family:var(--serif);font-size:15px}
 
-/* Tabs */
-.tabs { display: flex; gap: 0; padding: 16px 20px 0; }
-.tab {
-  flex: 1; padding: 12px; text-align: center; font-size: 13px; font-weight: 600;
-  background: var(--card); border: 1px solid var(--card-border); cursor: pointer;
-  transition: all 0.2s; color: var(--text-dim);
-}
-.tab:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-.tab:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
-.tab.active { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+.tabs{display:flex;margin:16px 0;background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.tab{flex:1;padding:13px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;color:var(--dim);background:var(--card);border:none}
+.tab.active{background:var(--gold);color:#fff}
 
-/* Editor */
-.editor { padding: 20px; display: none; }
-.editor.active { display: block; }
+.btn{padding:13px 20px;border:none;border-radius:10px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
+.btn:active{transform:scale(.97)}
+.btn-g{background:var(--gold);color:#fff;width:100%}
+.btn-g:disabled{opacity:.4;cursor:not-allowed}
+.btn-o{background:transparent;border:1.5px solid var(--border);color:var(--dim);width:100%}
+.btn-d{background:var(--red-bg);color:var(--red);border:none;font-weight:700;cursor:pointer;border-radius:10px;padding:13px 14px}
 
-.date-bar {
-  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
-  background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius);
-  margin-bottom: 16px;
-}
-.date-bar .icon { font-size: 20px; }
-.date-bar .info { flex: 1; }
-.date-bar .heb-date { font-family: 'EB Garamond', serif; font-size: 17px; font-weight: 600; }
-.date-bar .greg-date { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
-.date-nav { display: flex; gap: 6px; }
-.date-nav button {
-  width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--card-border);
-  background: var(--card); color: var(--text); font-size: 16px; cursor: pointer;
-}
-.date-nav button:active { background: var(--card-border); }
+.editor{display:none}.editor.active{display:block}
 
-.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-.status-dot.filled { background: var(--green); }
-.status-dot.empty { background: var(--red); }
+.dbar{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;box-shadow:var(--shadow)}
+.dbar-i{width:38px;height:38px;border-radius:10px;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;font-size:16px}
+.dbar-info{flex:1}
+.dbar-main{font-family:var(--serif);font-size:17px;font-weight:700}
+.dbar-sub{font-size:12px;color:var(--dim);margin-top:2px}
+.dnav{display:flex;gap:4px}
+.dnav button{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-size:15px;cursor:pointer;transition:.15s}
+.dnav button:active{background:var(--gold-bg)}
 
-.btn {
-  width: 100%; padding: 14px; border: none; border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
-  cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
-}
-.btn:active { transform: scale(0.98); }
-.btn-gold { background: var(--gold); color: var(--bg); }
-.btn-gold:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-outline { background: transparent; border: 1px solid var(--card-border); color: var(--text); }
-.btn-red { background: var(--red); color: var(--bg); }
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.sc{padding:14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);text-align:center;box-shadow:var(--shadow)}
+.sc-n{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--gold-dark)}
+.sc-l{font-size:11px;color:var(--dim);margin-top:3px;font-weight:600}
 
-.toast {
-  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-  padding: 12px 24px; border-radius: 30px; font-size: 13px; font-weight: 600;
-  z-index: 100; transition: transform 0.3s ease; pointer-events: none;
-  white-space: nowrap;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
-.toast.success { background: var(--green); color: #000; }
-.toast.error { background: var(--red); color: #000; }
+.ext{padding:12px 14px;background:var(--green-bg);border:1px solid #c8e6c9;border-radius:var(--r);margin-bottom:14px}
+.ext-l{font-size:10px;color:var(--green);font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px}
+.ext-c{font-family:var(--serif);font-size:14px;line-height:1.7;color:#555;max-height:100px;overflow-y:auto}
 
-.stats {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;
-}
-.stat-card {
-  padding: 14px; background: var(--card); border: 1px solid var(--card-border);
-  border-radius: var(--radius); text-align: center;
-}
-.stat-num { font-family: 'EB Garamond', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
-.stat-label { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+.acts{display:flex;gap:10px;margin:14px 0 20px}
+.acts .btn-g{flex:3}
+.acts .btn-d{flex:1}
 
-.existing-text {
-  padding: 14px; background: var(--card); border: 1px solid var(--card-border);
-  border-radius: var(--radius); margin-bottom: 16px;
-}
-.existing-label { font-size: 11px; color: var(--green); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-.existing-content { font-family: 'EB Garamond', serif; font-size: 14px; line-height: 1.7; color: var(--text-dim); max-height: 150px; overflow-y: auto; }
+.help{margin-top:20px;padding:18px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow)}
+.help-t{font-size:12px;font-weight:700;color:var(--dim);margin-bottom:12px;letter-spacing:.3px}
+.hs{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.hs-n{width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hs-t{font-size:13px;color:var(--dim);line-height:1.6}
+.hs-t strong{color:var(--text)}
 
-.back-link { display: inline-block; padding: 20px; font-size: 13px; color: var(--text-dim); text-decoration: none; }
-.back-link:hover { color: var(--gold); }
+.rst{margin-top:14px}
 
-.help-section { padding: 0 20px; margin-top: 24px; }
-.help-title { font-size: 13px; font-weight: 600; color: var(--text-dim); margin-bottom: 10px; }
-.help-step { display: flex; gap: 10px; margin-bottom: 12px; }
-.help-num { width: 24px; height: 24px; border-radius: 50%; background: var(--gold-dim); color: var(--bg); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.help-text { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);padding:11px 22px;border-radius:30px;font-size:13px;font-weight:600;z-index:100;transition:transform .3s ease;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.success{background:var(--green);color:#fff}
+.toast.error{background:var(--red);color:#fff}
 </style>
 </head>
 <body>
-
-<div class="header">
-  <span class="header-icon">👑</span>
-  <h1>Chab'app Admin</h1>
-  <span class="badge">ADMIN</span>
-</div>
-
-<a href="index.html" class="back-link">← Retour à l'app</a>
-
-<!-- SETUP SCREEN (first time) -->
+<div class="hdr"><h1>Chab'app Admin</h1><span class="badge">ADMIN</span></div>
+<a href="index.html" class="back">← Retour à l'app</a>
+<div class="wrap">
 <div id="setup-screen" class="setup">
-  <div class="setup-title">🔐 Configuration initiale</div>
-  <div class="setup-desc">
-    Pour mettre à jour les textes, tu as besoin d'un <strong>token GitHub</strong> avec accès au repo <code>770lab/tehilim</code>.<br><br>
-    <a href="https://github.com/settings/tokens/new?scopes=repo&description=Chabapp%20Admin" target="_blank">→ Créer un token ici</a> (coche "repo", puis copie-le)
-  </div>
-  <div class="input-group">
-    <div class="input-label">Token GitHub</div>
-    <input type="password" id="setup-token" placeholder="ghp_xxxxxxxxxxxx">
-  </div>
-  <div class="input-group">
-    <div class="input-label">Repo (ne pas changer)</div>
-    <input type="text" id="setup-repo" value="770lab/tehilim">
-  </div>
-  <button class="btn btn-gold" onclick="saveSetup()">Sauvegarder & Continuer</button>
+<div class="setup-card">
+<h2>🔐 Configuration</h2>
+<p>Tu as besoin d'un <strong>token GitHub</strong> avec accès au repo <code>770lab/tehilim</code>.<br><br>
+<a href="https://github.com/settings/tokens/new?scopes=repo&description=Chabapp%20Admin" target="_blank">→ Créer un token</a> (permission "Contents: Read and write")</p>
+<div class="fld"><div class="fld-l">Token GitHub</div><input type="password" id="setup-token" placeholder="github_pat_xxxxxxxxxxxx"></div>
+<div class="fld"><div class="fld-l">Repo</div><input type="text" id="setup-repo" value="770lab/tehilim"></div>
+<button class="btn btn-g" onclick="saveSetup()">Continuer →</button>
 </div>
-
-<!-- MAIN EDITOR -->
-<div id="main-screen" style="display:none;">
-
-  <div class="tabs">
-    <div class="tab active" id="tab-hyy" onclick="switchEditorTab('hyy')">📜 Hayom Yom</div>
-    <div class="tab" id="tab-rambam" onclick="switchEditorTab('rambam')">📚 Rambam</div>
-  </div>
-
-  <!-- HAYOM YOM EDITOR -->
-  <div id="editor-hyy" class="editor active">
-    <div class="stats" id="hyy-stats"></div>
-
-    <div class="date-bar">
-      <span class="icon">📅</span>
-      <div class="info">
-        <div class="heb-date" id="hyy-heb-date">Shevat 30</div>
-        <div class="greg-date" id="hyy-greg-date">17 Février 2026</div>
-      </div>
-      <div class="date-nav">
-        <button onclick="navDate('hyy',-1)">‹</button>
-        <button onclick="navDate('hyy',0)" style="font-size:12px;">●</button>
-        <button onclick="navDate('hyy',1)">›</button>
-      </div>
-    </div>
-
-    <div id="hyy-existing" class="existing-text" style="display:none;">
-      <div class="existing-label">✓ Texte existant</div>
-      <div class="existing-content" id="hyy-existing-text"></div>
-    </div>
-
-    <div class="input-group">
-      <div class="input-label">Texte français du jour</div>
-      <textarea id="hyy-textarea" placeholder="Colle ici le texte français du Hayom Yom..."></textarea>
-    </div>
-
-    <div style="display:flex;gap:10px;margin-bottom:12px;">
-      <button class="btn btn-gold" onclick="saveText('hyy')" id="hyy-save-btn" style="flex:3;">💾 Sauvegarder</button>
-      <button class="btn btn-outline" onclick="deleteText('hyy')" id="hyy-del-btn" style="flex:1;">🗑️</button>
-    </div>
-  </div>
-
-  <!-- RAMBAM EDITOR -->
-  <div id="editor-rambam" class="editor">
-    <div class="stats" id="rambam-stats"></div>
-
-    <div class="date-bar">
-      <span class="icon">📅</span>
-      <div class="info">
-        <div class="heb-date" id="rambam-heb-date">17 Février 2026</div>
-        <div class="greg-date" id="rambam-greg-date">Rambam 1 Chapitre</div>
-      </div>
-      <div class="date-nav">
-        <button onclick="navDate('rambam',-1)">‹</button>
-        <button onclick="navDate('rambam',0)" style="font-size:12px;">●</button>
-        <button onclick="navDate('rambam',1)">›</button>
-      </div>
-    </div>
-
-    <div id="rambam-existing" class="existing-text" style="display:none;">
-      <div class="existing-label">✓ Texte existant</div>
-      <div class="existing-content" id="rambam-existing-text"></div>
-    </div>
-
-    <div class="input-group">
-      <div class="input-label">Titre du chapitre</div>
-      <input type="text" id="rambam-title-input" placeholder="Ex: Hilkhot Yessodei HaTorah, Chapitre 1">
-    </div>
-
-    <div class="input-group">
-      <div class="input-label">Texte français du jour</div>
-      <textarea id="rambam-textarea" placeholder="Colle ici le texte français du Rambam du jour..."></textarea>
-    </div>
-
-    <div style="display:flex;gap:10px;margin-bottom:12px;">
-      <button class="btn btn-gold" onclick="saveText('rambam')" id="rambam-save-btn" style="flex:3;">💾 Sauvegarder</button>
-      <button class="btn btn-outline" onclick="deleteText('rambam')" id="rambam-del-btn" style="flex:1;">🗑️</button>
-    </div>
-  </div>
-
-  <!-- HELP -->
-  <div class="help-section">
-    <div class="help-title">Comment ça marche ?</div>
-    <div class="help-step">
-      <div class="help-num">1</div>
-      <div class="help-text">Va sur <strong>fr.chabad.org</strong> et copie le texte du Hayom Yom ou Rambam du jour</div>
-    </div>
-    <div class="help-step">
-      <div class="help-num">2</div>
-      <div class="help-text">Colle-le ici et clique <strong>Sauvegarder</strong></div>
-    </div>
-    <div class="help-step">
-      <div class="help-num">3</div>
-      <div class="help-text">Le texte est envoyé sur GitHub — l'app se met à jour en <strong>1-2 minutes</strong></div>
-    </div>
-    <div class="help-step">
-      <div class="help-num">💡</div>
-      <div class="help-text">Le Hayom Yom est indexé par date <strong>hébraïque</strong> — une fois les 365 entrées remplies, c'est fini pour toujours !</div>
-    </div>
-  </div>
-
-  <div style="padding:20px;">
-    <button class="btn btn-outline" onclick="resetSetup()" style="font-size:12px;color:var(--text-dim);">⚙️ Reconfigurer le token GitHub</button>
-  </div>
 </div>
-
+<div id="main-screen" style="display:none">
+<div class="tabs"><div class="tab active" id="tab-hyy" onclick="switchTab('hyy')">📜 Hayom Yom</div><div class="tab" id="tab-rambam" onclick="switchTab('rambam')">📚 Rambam</div></div>
+<div id="editor-hyy" class="editor active">
+<div class="stats" id="hyy-stats"></div>
+<div class="dbar"><div class="dbar-i">📅</div><div class="dbar-info"><div class="dbar-main" id="hyy-hd"></div><div class="dbar-sub" id="hyy-gd"></div></div><div class="dnav"><button onclick="nav('hyy',-1)">‹</button><button onclick="nav('hyy',0)" style="font-size:9px">●</button><button onclick="nav('hyy',1)">›</button></div></div>
+<div id="hyy-ext" class="ext" style="display:none"><div class="ext-l">✓ Texte existant</div><div class="ext-c" id="hyy-ext-t"></div></div>
+<div class="fld"><div class="fld-l">Texte français du jour</div><textarea id="hyy-ta" placeholder="Colle ici le texte du Hayom Yom..."></textarea></div>
+<div class="acts"><button class="btn btn-g" onclick="save('hyy')" id="hyy-btn">💾 Sauvegarder</button><button class="btn-d" onclick="del('hyy')">🗑</button></div>
+</div>
+<div id="editor-rambam" class="editor">
+<div class="stats" id="rambam-stats"></div>
+<div class="dbar"><div class="dbar-i">📅</div><div class="dbar-info"><div class="dbar-main" id="rambam-hd"></div><div class="dbar-sub" id="rambam-gd">Rambam 1 Chapitre</div></div><div class="dnav"><button onclick="nav('rambam',-1)">‹</button><button onclick="nav('rambam',0)" style="font-size:9px">●</button><button onclick="nav('rambam',1)">›</button></div></div>
+<div id="rambam-ext" class="ext" style="display:none"><div class="ext-l">✓ Texte existant</div><div class="ext-c" id="rambam-ext-t"></div></div>
+<div class="fld"><div class="fld-l">Titre du chapitre</div><input type="text" id="rambam-ti" placeholder="Ex: Hilkhot Yessodei HaTorah, Ch. 1"></div>
+<div class="fld"><div class="fld-l">Texte français</div><textarea id="rambam-ta" placeholder="Colle ici le texte du Rambam..."></textarea></div>
+<div class="acts"><button class="btn btn-g" onclick="save('rambam')" id="rambam-btn">💾 Sauvegarder</button><button class="btn-d" onclick="del('rambam')">🗑</button></div>
+</div>
+<div class="help">
+<div class="help-t">Comment ça marche ?</div>
+<div class="hs"><div class="hs-n">1</div><div class="hs-t">Va sur <strong>fr.chabad.org</strong> et copie le texte du jour</div></div>
+<div class="hs"><div class="hs-n">2</div><div class="hs-t">Colle-le ici et clique <strong>Sauvegarder</strong></div></div>
+<div class="hs"><div class="hs-n">3</div><div class="hs-t">L'app se met à jour en <strong>1-2 minutes</strong></div></div>
+<div class="hs"><div class="hs-n">💡</div><div class="hs-t">Le Hayom Yom est indexé par date <strong>hébraïque</strong> — une fois les 365 entrées remplies, c'est permanent !</div></div>
+</div>
+<div class="rst"><button class="btn btn-o" onclick="resetSetup()" style="font-size:12px">⚙️ Reconfigurer le token</button></div>
+</div>
+</div>
 <div class="toast" id="toast"></div>
-
 <script>
-// ====== CONFIG ======
-var REPO = '770lab/tehilim';
-var FILE_PATH = 'hyy-data.json';
-var GITHUB_API = 'https://api.github.com';
+var REPO='770lab/tehilim',FILE_PATH='hyy-data.json',API='https://api.github.com';
+var D={hayom_yom:{},rambam:{}},sha=null,hOff=0,rOff=0;
+function fl(x){return Math.floor(x)}function md(x,y){return x-y*fl(x/y)}
+function hE(y){var m=fl((235*y-234)/19),p=12084+13753*m,d=29*m+fl(p/25920);if(md(3*(d+1),7)<3)d++;return d}
+function hYD(y){return hE(y+1)-hE(y)}function isL(y){return md(7*y+1,19)<7}
+function hMD(y,m){if(m==2)return hYD(y)%10==5?30:29;if(m==3)return hYD(y)%10!=3?30:29;if(m==4)return 29;if(m==6)return isL(y)?30:29;if(m==7)return isL(y)?29:0;if(m==9||m==11||m==13)return 29;return 30}
+function gTA(gy,gm,gd){var a=fl((gy-1)/4)-fl((gy-1)/100)+fl((gy-1)/400),b=365*(gy-1)+a+gd,ml=[0,31,28,31,30,31,30,31,31,30,31,30];for(var i=1;i<gm;i++)b+=ml[i];if(gm>2&&((gy%4==0&&gy%100!=0)||gy%400==0))b++;return b}
+function g2h(gy,gm,gd){var abs=gTA(gy,gm,gd),hy=gy+3760,ep=-1373427;while(hE(hy+1)+ep<=abs)hy++;while(hE(hy)+ep>abs)hy--;var diy=abs-(hE(hy)+ep)+1,hm=1,m,mo=isL(hy)?[1,2,3,4,5,6,7,8,9,10,11,12,13]:[1,2,3,4,5,6,8,9,10,11,12,13];for(var i=0;i<mo.length;i++){m=hMD(hy,mo[i]);if(diy<=m){hm=mo[i];break}diy-=m}var n={1:'Tishrei',2:'Cheshvan',3:'Kislev',4:'Tevet',5:'Shevat',6:'Adar I',7:'Adar II',8:'Nisan',9:'Iyyar',10:'Sivan',11:'Tammuz',12:'Av',13:'Elul'},mn=n[hm]||'';if(hm==6&&!isL(hy))mn='Adar';return{hy:hy,hm:hm,hd:diy,mName:mn}}
 
-// ====== STATE ======
-var _data = { hayom_yom: {}, rambam: {} };
-var _fileSha = null;
-var _currentTab = 'hyy';
-var _hyyDateOffset = 0;
-var _rambamDateOffset = 0;
+function checkSetup(){var t=localStorage.getItem('chabapp_token'),r=localStorage.getItem('chabapp_repo');if(t&&r){REPO=r;$('setup-screen').style.display='none';$('main-screen').style.display='block';loadData()}else{$('setup-screen').classList.add('active')}}
+function saveSetup(){var t=$('setup-token').value.trim(),r=$('setup-repo').value.trim();if(!t){toast('Token requis','error');return}localStorage.setItem('chabapp_token',t);localStorage.setItem('chabapp_repo',r||'770lab/tehilim');REPO=r||'770lab/tehilim';toast('OK !','success');setTimeout(function(){$('setup-screen').classList.remove('active');$('setup-screen').style.display='none';$('main-screen').style.display='block';loadData()},400)}
+function resetSetup(){if(!confirm('Réinitialiser ?'))return;localStorage.removeItem('chabapp_token');location.reload()}
+function $(id){return document.getElementById(id)}
+function ghH(w){var t=localStorage.getItem('chabapp_token'),h={'Authorization':'token '+t,'Accept':'application/vnd.github.v3+json'};if(w)h['Content-Type']='application/json';return h}
+function loadData(){toast('Chargement...','success');fetch(API+'/repos/'+REPO+'/contents/'+FILE_PATH,{headers:ghH()}).then(function(r){if(r.status===404){D={hayom_yom:{},rambam:{}};sha=null;ui();toast('Prêt !','success');return}if(!r.ok)return r.json().then(function(e){throw new Error(e.message||'HTTP '+r.status)});return r.json()}).then(function(f){if(!f)return;sha=f.sha;var c=atob(f.content.replace(/\n/g,'')),b=new Uint8Array(c.length);for(var i=0;i<c.length;i++)b[i]=c.charCodeAt(i);D=JSON.parse(new TextDecoder('utf-8').decode(b));if(!D.hayom_yom)D.hayom_yom={};if(!D.rambam)D.rambam={};ui();toast('Données chargées !','success')}).catch(function(e){console.error(e);toast('Erreur: '+e.message,'error')})}
+function commit(msg){var j=JSON.stringify(D,null,2),enc=btoa(unescape(encodeURIComponent(j))),body={message:msg||'Update',content:enc};if(sha)body.sha=sha;return fetch(API+'/repos/'+REPO+'/contents/'+FILE_PATH,{method:'PUT',headers:ghH(true),body:JSON.stringify(body)}).then(function(r){if(!r.ok)return r.json().then(function(e){throw new Error(e.message||'HTTP '+r.status)});return r.json()}).then(function(r){sha=r.content.sha;return r})}
 
-// ====== HEBREW DATE (same logic as main app) ======
-function _floor(x){return Math.floor(x);}
-function _mod(x,y){return x-y*_floor(x/y);}
-function _hElapsed(y){var m=_floor((235*y-234)/19);var p=12084+13753*m;var d=29*m+_floor(p/25920);if(_mod(3*(d+1),7)<3)d++;return d;}
-function _hYearDays(y){return _hElapsed(y+1)-_hElapsed(y);}
-function _isLeap(y){return _mod(7*y+1,19)<7;}
-function _hMonthDays(y,m){
-  if(m==2)return _hYearDays(y)%10==5?30:29;
-  if(m==3)return _hYearDays(y)%10!=3?30:29;
-  if(m==4)return 29;
-  if(m==6)return _isLeap(y)?30:29;
-  if(m==7)return _isLeap(y)?29:0;
-  if(m==9||m==11||m==13)return 29;
-  return 30;
-}
-function _gregToAbs(gy,gm,gd){
-  var a=_floor((gy-1)/4)-_floor((gy-1)/100)+_floor((gy-1)/400);
-  var b=365*(gy-1)+a+gd;
-  var ml=[0,31,28,31,30,31,30,31,31,30,31,30];
-  for(var i=1;i<gm;i++){b+=ml[i];}
-  if(gm>2&&((gy%4==0&&gy%100!=0)||gy%400==0))b++;
-  return b;
-}
-function gregToHebrew(gy,gm,gd){
-  var abs=_gregToAbs(gy,gm,gd);
-  var hy=gy+3760;
-  var epoch=-1373427;
-  while(_hElapsed(hy+1)+epoch<=abs)hy++;
-  while(_hElapsed(hy)+epoch>abs)hy--;
-  var dayInYear=abs-(_hElapsed(hy)+epoch)+1;
-  var hm=1,md;
-  var monthOrder=_isLeap(hy)?[1,2,3,4,5,6,7,8,9,10,11,12,13]:[1,2,3,4,5,6,8,9,10,11,12,13];
-  for(var i=0;i<monthOrder.length;i++){
-    md=_hMonthDays(hy,monthOrder[i]);
-    if(dayInYear<=md){hm=monthOrder[i];break;}
-    dayInYear-=md;
-  }
-  var hd=dayInYear;
-  var names={1:'Tishrei',2:'Cheshvan',3:'Kislev',4:'Tevet',5:'Shevat',6:'Adar I',7:'Adar II',8:'Nisan',9:'Iyyar',10:'Sivan',11:'Tammuz',12:'Av',13:'Elul'};
-  var mName=names[hm]||'';
-  if(hm==6&&!_isLeap(hy))mName='Adar';
-  return {hy:hy,hm:hm,hd:hd,mName:mName};
-}
+function gd(t){var o=t==='hyy'?hOff:rOff,d=new Date();d.setDate(d.getDate()+o);return d}
+function hK(d){var h=g2h(d.getFullYear(),d.getMonth()+1,d.getDate());return h.mName.replace(' ','_')+'_'+h.hd}
+function rK(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function nav(t,dir){if(dir===0){if(t==='hyy')hOff=0;else rOff=0}else{if(t==='hyy')hOff+=dir;else rOff+=dir}ui()}
+function switchTab(t){$('tab-hyy').classList.toggle('active',t==='hyy');$('tab-rambam').classList.toggle('active',t==='rambam');$('editor-hyy').classList.toggle('active',t==='hyy');$('editor-rambam').classList.toggle('active',t==='rambam')}
+var MO=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+function ui(){
+var dd=gd('hyy'),h=g2h(dd.getFullYear(),dd.getMonth()+1,dd.getDate()),k=hK(dd);
+$('hyy-hd').textContent=h.mName+' '+h.hd+' '+h.hy;
+$('hyy-gd').textContent=dd.getDate()+' '+MO[dd.getMonth()]+' '+dd.getFullYear();
+var ex=D.hayom_yom[k];if(ex){$('hyy-ext').style.display='block';$('hyy-ext-t').textContent=ex;$('hyy-ta').value=ex}else{$('hyy-ext').style.display='none';$('hyy-ta').value=''}
+var hc=Object.keys(D.hayom_yom).length;
+$('hyy-stats').innerHTML='<div class="sc"><div class="sc-n">'+hc+'</div><div class="sc-l">Remplies</div></div><div class="sc"><div class="sc-n">'+(354-hc)+'</div><div class="sc-l">Restantes</div></div>';
+var rd=gd('rambam'),rk=rK(rd);
+$('rambam-hd').textContent=rd.getDate()+' '+MO[rd.getMonth()]+' '+rd.getFullYear();
+var re=D.rambam[rk],rel=$('rambam-ext');
+if(re){rel.style.display='block';$('rambam-ext-t').textContent=(re.title?re.title+'\n\n':'')+(re.text||re);$('rambam-ti').value=re.title||'';$('rambam-ta').value=re.text||re||''}else{rel.style.display='none';$('rambam-ti').value='';$('rambam-ta').value=''}
+var rc=Object.keys(D.rambam).length;
+$('rambam-stats').innerHTML='<div class="sc"><div class="sc-n">'+rc+'</div><div class="sc-l">Jours remplis</div></div><div class="sc"><div class="sc-n">'+(re?'✓':'—')+'</div><div class="sc-l">Aujourd\'hui</div></div>'}
 
-// ====== SETUP ======
-function checkSetup() {
-  var token = localStorage.getItem('chabapp_token');
-  var repo = localStorage.getItem('chabapp_repo');
-  if (token && repo) {
-    REPO = repo;
-    document.getElementById('setup-screen').style.display = 'none';
-    document.getElementById('main-screen').style.display = 'block';
-    loadData();
-  } else {
-    document.getElementById('setup-screen').classList.add('active');
-  }
-}
+function save(t){var d=gd(t),txt,msg;
+if(t==='hyy'){txt=$('hyy-ta').value.trim();if(!txt){toast('Texte vide !','error');return}var k=hK(d);D.hayom_yom[k]=txt;var h=g2h(d.getFullYear(),d.getMonth()+1,d.getDate());msg='HYY: '+h.mName+' '+h.hd}
+else{txt=$('rambam-ta').value.trim();var ti=$('rambam-ti').value.trim();if(!txt){toast('Texte vide !','error');return}var k=rK(d);D.rambam[k]={title:ti,text:txt};msg='Rambam: '+k}
+var b=$(t+'-btn');b.disabled=true;b.textContent='⏳...';
+commit(msg).then(function(){toast('✓ Sauvegardé !','success');b.textContent='✓';setTimeout(function(){b.textContent='💾 Sauvegarder';b.disabled=false},1500);ui()}).catch(function(e){toast('Erreur: '+e.message,'error');b.textContent='💾 Sauvegarder';b.disabled=false})}
 
-function saveSetup() {
-  var token = document.getElementById('setup-token').value.trim();
-  var repo = document.getElementById('setup-repo').value.trim();
-  if (!token) { showToast('Token requis', 'error'); return; }
-  localStorage.setItem('chabapp_token', token);
-  localStorage.setItem('chabapp_repo', repo || '770lab/tehilim');
-  REPO = repo || '770lab/tehilim';
-  showToast('Configuration sauvegardée !', 'success');
-  setTimeout(function() {
-    document.getElementById('setup-screen').classList.remove('active');
-    document.getElementById('setup-screen').style.display = 'none';
-    document.getElementById('main-screen').style.display = 'block';
-    loadData();
-  }, 500);
-}
-
-function resetSetup() {
-  if (!confirm('Réinitialiser la configuration ?')) return;
-  localStorage.removeItem('chabapp_token');
-  location.reload();
-}
-
-// ====== GITHUB API ======
-function ghHeaders(isWrite) {
-  var token = localStorage.getItem('chabapp_token');
-  var h = {
-    'Authorization': 'token ' + token,
-    'Accept': 'application/vnd.github.v3+json'
-  };
-  if (isWrite) h['Content-Type'] = 'application/json';
-  return h;
-}
-
-function loadData() {
-  showToast('Chargement...', 'success');
-  fetch(GITHUB_API + '/repos/' + REPO + '/contents/' + FILE_PATH, { headers: ghHeaders() })
-    .then(function(r) {
-      if (r.status === 404) {
-        // File doesn't exist yet, create it
-        _data = { hayom_yom: {}, rambam: {} };
-        _fileSha = null;
-        updateUI();
-        showToast('Prêt ! Le fichier sera créé au premier enregistrement.', 'success');
-        return;
-      }
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function(file) {
-      if (!file) return;
-      _fileSha = file.sha;
-      var content = atob(file.content.replace(/\n/g, ''));
-      // Handle UTF-8
-      var bytes = new Uint8Array(content.length);
-      for (var i = 0; i < content.length; i++) bytes[i] = content.charCodeAt(i);
-      var decoded = new TextDecoder('utf-8').decode(bytes);
-      _data = JSON.parse(decoded);
-      if (!_data.hayom_yom) _data.hayom_yom = {};
-      if (!_data.rambam) _data.rambam = {};
-      updateUI();
-      showToast('Données chargées !', 'success');
-    })
-    .catch(function(err) {
-      console.error('Load error:', err);
-      showToast('Erreur: ' + err.message, 'error');
-    });
-}
-
-function commitData(msg) {
-  var json = JSON.stringify(_data, null, 2);
-  // Encode UTF-8 to base64
-  var encoded = btoa(unescape(encodeURIComponent(json)));
-
-  var body = {
-    message: msg || 'Update daily texts',
-    content: encoded
-  };
-  if (_fileSha) body.sha = _fileSha;
-
-  return fetch(GITHUB_API + '/repos/' + REPO + '/contents/' + FILE_PATH, {
-    method: 'PUT',
-    headers: ghHeaders(true),
-    body: JSON.stringify(body)
-  })
-  .then(function(r) {
-    if (!r.ok) return r.json().then(function(e) { throw new Error(e.message || 'HTTP ' + r.status); });
-    return r.json();
-  })
-  .then(function(result) {
-    _fileSha = result.content.sha;
-    return result;
-  });
-}
-
-// ====== DATE HELPERS ======
-function getTargetDate(type) {
-  var offset = type === 'hyy' ? _hyyDateOffset : _rambamDateOffset;
-  var d = new Date();
-  d.setDate(d.getDate() + offset);
-  return d;
-}
-
-function getHyyKey(d) {
-  var heb = gregToHebrew(d.getFullYear(), d.getMonth() + 1, d.getDate());
-  return heb.mName.replace(' ', '_') + '_' + heb.hd;
-}
-
-function getRambamKey(d) {
-  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-}
-
-function navDate(type, dir) {
-  if (dir === 0) {
-    if (type === 'hyy') _hyyDateOffset = 0;
-    else _rambamDateOffset = 0;
-  } else {
-    if (type === 'hyy') _hyyDateOffset += dir;
-    else _rambamDateOffset += dir;
-  }
-  updateUI();
-}
-
-// ====== EDITOR TABS ======
-function switchEditorTab(tab) {
-  _currentTab = tab;
-  document.getElementById('tab-hyy').classList.toggle('active', tab === 'hyy');
-  document.getElementById('tab-rambam').classList.toggle('active', tab === 'rambam');
-  document.getElementById('editor-hyy').classList.toggle('active', tab === 'hyy');
-  document.getElementById('editor-rambam').classList.toggle('active', tab === 'rambam');
-}
-
-// ====== UI UPDATE ======
-function updateUI() {
-  // HYY
-  var hyyDate = getTargetDate('hyy');
-  var heb = gregToHebrew(hyyDate.getFullYear(), hyyDate.getMonth() + 1, hyyDate.getDate());
-  var hyyKey = getHyyKey(hyyDate);
-  var months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-
-  document.getElementById('hyy-heb-date').textContent = heb.mName + ' ' + heb.hd + ' ' + heb.hy;
-  document.getElementById('hyy-greg-date').textContent = hyyDate.getDate() + ' ' + months[hyyDate.getMonth()] + ' ' + hyyDate.getFullYear();
-
-  var existing = _data.hayom_yom[hyyKey];
-  var existingEl = document.getElementById('hyy-existing');
-  if (existing) {
-    existingEl.style.display = 'block';
-    document.getElementById('hyy-existing-text').textContent = existing;
-    document.getElementById('hyy-textarea').value = existing;
-  } else {
-    existingEl.style.display = 'none';
-    document.getElementById('hyy-textarea').value = '';
-  }
-
-  // HYY Stats
-  var hyyCount = Object.keys(_data.hayom_yom).length;
-  document.getElementById('hyy-stats').innerHTML =
-    '<div class="stat-card"><div class="stat-num">' + hyyCount + '</div><div class="stat-label">Entrées remplies</div></div>' +
-    '<div class="stat-card"><div class="stat-num">' + (354 - hyyCount) + '</div><div class="stat-label">Restantes</div></div>';
-
-  // RAMBAM
-  var rambamDate = getTargetDate('rambam');
-  var rambamKey = getRambamKey(rambamDate);
-  document.getElementById('rambam-heb-date').textContent = rambamDate.getDate() + ' ' + months[rambamDate.getMonth()] + ' ' + rambamDate.getFullYear();
-
-  var rambamEntry = _data.rambam[rambamKey];
-  var rambamExEl = document.getElementById('rambam-existing');
-  if (rambamEntry) {
-    rambamExEl.style.display = 'block';
-    document.getElementById('rambam-existing-text').textContent = (rambamEntry.title ? rambamEntry.title + '\n\n' : '') + (rambamEntry.text || rambamEntry);
-    document.getElementById('rambam-title-input').value = rambamEntry.title || '';
-    document.getElementById('rambam-textarea').value = rambamEntry.text || rambamEntry || '';
-  } else {
-    rambamExEl.style.display = 'none';
-    document.getElementById('rambam-title-input').value = '';
-    document.getElementById('rambam-textarea').value = '';
-  }
-
-  var rambamCount = Object.keys(_data.rambam).length;
-  document.getElementById('rambam-stats').innerHTML =
-    '<div class="stat-card"><div class="stat-num">' + rambamCount + '</div><div class="stat-label">Jours remplis</div></div>' +
-    '<div class="stat-card"><div class="stat-num">' + (rambamEntry ? '✓' : '✗') + '</div><div class="stat-label">Aujourd\'hui</div></div>';
-}
-
-// ====== SAVE / DELETE ======
-function saveText(type) {
-  var d = getTargetDate(type);
-  var text, msg;
-
-  if (type === 'hyy') {
-    text = document.getElementById('hyy-textarea').value.trim();
-    if (!text) { showToast('Texte vide !', 'error'); return; }
-    var key = getHyyKey(d);
-    _data.hayom_yom[key] = text;
-    var heb = gregToHebrew(d.getFullYear(), d.getMonth() + 1, d.getDate());
-    msg = 'HYY: ' + heb.mName + ' ' + heb.hd;
-  } else {
-    text = document.getElementById('rambam-textarea').value.trim();
-    var title = document.getElementById('rambam-title-input').value.trim();
-    if (!text) { showToast('Texte vide !', 'error'); return; }
-    var key = getRambamKey(d);
-    _data.rambam[key] = { title: title, text: text };
-    msg = 'Rambam: ' + key;
-  }
-
-  var btn = document.getElementById(type + '-save-btn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Sauvegarde...';
-
-  commitData(msg)
-    .then(function() {
-      showToast('✓ Sauvegardé ! L\'app se mettra à jour dans ~2 min.', 'success');
-      btn.textContent = '✓ Sauvegardé !';
-      setTimeout(function() { btn.textContent = '💾 Sauvegarder'; btn.disabled = false; }, 2000);
-      updateUI();
-    })
-    .catch(function(err) {
-      showToast('Erreur: ' + err.message, 'error');
-      btn.textContent = '💾 Sauvegarder';
-      btn.disabled = false;
-    });
-}
-
-function deleteText(type) {
-  if (!confirm('Supprimer ce texte ?')) return;
-  var d = getTargetDate(type);
-
-  if (type === 'hyy') {
-    var key = getHyyKey(d);
-    delete _data.hayom_yom[key];
-  } else {
-    var key = getRambamKey(d);
-    delete _data.rambam[key];
-  }
-
-  commitData('Delete ' + type + ' entry')
-    .then(function() {
-      showToast('Supprimé !', 'success');
-      updateUI();
-    })
-    .catch(function(err) {
-      showToast('Erreur: ' + err.message, 'error');
-    });
-}
-
-// ====== TOAST ======
-function showToast(msg, type) {
-  var el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'toast ' + (type || 'success') + ' show';
-  setTimeout(function() { el.classList.remove('show'); }, 3000);
-}
-
-// ====== INIT ======
+function del(t){if(!confirm('Supprimer ?'))return;var d=gd(t);if(t==='hyy')delete D.hayom_yom[hK(d)];else delete D.rambam[rK(d)];commit('Delete').then(function(){toast('Supprimé !','success');ui()}).catch(function(e){toast('Erreur: '+e.message,'error')})}
+function toast(m,t){var e=$('toast');e.textContent=m;e.className='toast '+(t||'success')+' show';setTimeout(function(){e.classList.remove('show')},3000)}
 checkSetup();
 </script>
 </body>
