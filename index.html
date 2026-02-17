@@ -25,8 +25,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 }
 #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
 .splash-bh { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
-.splash-content { text-align:center; padding:0 30px; max-width:440px; margin-top:0; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-.splash-icon { margin-bottom:20px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
+.splash-content { text-align:center; padding:0 30px; max-width:440px; margin-top:-10vh; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.splash-icon { margin-bottom:8px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
 .splash-icon .icon-770 { width:120px; height:auto; color:var(--black); }
 .splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
 /* CHABAD ANIMATED TITLE */
@@ -650,7 +650,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 <div id="splash" onclick="skipSplash()">
   <div class="splash-bh">ב״ה</div>
   <div class="splash-content" id="splash-content">
-<div class="splash-icon"><img src="770lab-logo.svg" alt="770 Lab" style="width:120px;height:auto;opacity:0;animation:scFadeIn 0.6s ease 0s forwards;"></div>
+<div class="splash-icon"><img src="770lab-logo.svg" alt="770 Lab" style="width:180px;height:auto;opacity:0;animation:scFadeIn 0.6s ease 0s forwards;"></div>
     <h1 class="splash-title-chabad" id="splash-title-chabad">
       <span class="sc-static" style="animation-delay:0.1s">C</span><span class="sc-static" style="animation-delay:0.15s">h</span><span class="sc-static" style="animation-delay:0.2s">a</span><span class="sc-static" style="animation-delay:0.25s">b</span><span class="sc-apos">'</span><span class="sc-static" style="animation-delay:0.3s">a</span><span class="sc-letter-d" id="sc-d1">d</span><span class="sc-letter-d2" id="sc-d2">d</span>
     </h1>
