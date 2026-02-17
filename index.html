@@ -694,9 +694,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         </div>
         <div class="hyy-text" id="hyy-text"><span class="hyy-loading">Chargement…</span></div>
         <div class="hyy-expand" id="hyy-expand" style="display:none">Lire la suite ▾</div>
-        <div class="hyy-link" id="hyy-link" style="display:none">
-          <span>Lire en français sur Chabad.org</span> <span>↗</span>
-        </div>
       </div>
       <div class="big-card" onclick="switchTab('sub-tehilim')">
         <div class="big-card-icon">📖</div>
@@ -855,7 +852,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <div id="beth-results" style="margin-top:12px;"></div>
       <div style="display:flex;gap:10px;margin-top:12px;">
         <button onclick="refreshBethMap()" style="flex:1;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">📍 Actualiser</button>
-        <button onclick="openChabadLocator()" style="flex:1;padding:12px;border:none;border-radius:var(--radius);background:var(--black);color:var(--white);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">Chabad.org Locator ↗</button>
       </div>
     </div>
   </div>
@@ -892,7 +888,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <a href="https://www.chabad.org/library/siddur/default_cdo/aid/1495868/jewish/Online-Siddur-with-Commentary.htm" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">📖 Sidour en ligne (Chabad.org) ↗</a>
           <a href="https://www.sefaria.org/Siddur_Tehilat_Hashem" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">📚 Siddur Sefaria (Hébreu) ↗</a>
         </div>
       </div>
@@ -5468,17 +5463,17 @@ function setReadingMode(mode) {
   renderReading();
 }
 
-// Basic Hebrew to phonetic transliteration
+// French Chabad-style Hebrew to phonetic transliteration
 function transliterate(heb) {
   const map = {
     'א':'', 'בּ':'b', 'ב':'v', 'גּ':'g', 'ג':'g', 'דּ':'d', 'ד':'d',
-    'ה':'h', 'ו':'v', 'ז':'z', 'ח':'kh', 'ט':'t', 'י':'y',
+    'ה':'h', 'ו':'v', 'ז':'z', 'ח':'\u2019h', 'ט':'t', 'י':'y',
     'כּ':'k', 'כ':'kh', 'ך':'kh', 'ל':'l', 'מ':'m', 'ם':'m',
-    'נ':'n', 'ן':'n', 'ס':'s', 'ע':'', 'פּ':'p', 'פ':'f', 'ף':'f',
-    'צ':'ts', 'ץ':'ts', 'ק':'k', 'ר':'r', 'שׁ':'sh', 'שׂ':'s', 'ש':'sh',
+    'נ':'n', 'ן':'n', 'ס':'s', 'ע':'\u2019', 'פּ':'p', 'פ':'f', 'ף':'f',
+    'צ':'ts', 'ץ':'ts', 'ק':'k', 'ר':'r', 'שׁ':'ch', 'שׂ':'s', 'ש':'ch',
     'תּ':'t', 'ת':'t',
-    'ַ':'a', 'ָ':'a', 'ֶ':'e', 'ֵ':'é', 'ִ':'i', 'ֹ':'o', 'ֻ':'ou', 'ּ':'',
-    'וֹ':'o', 'וּ':'ou', 'ְ':'e', 'ֲ':'a', 'ֳ':'o', 'ֱ':'e',
+    'ַ':'a', 'ָ':'a', 'ֶ':'é', 'ֵ':'é', 'ִ':'i', 'ֹ':'o', 'ֻ':'ou', 'ּ':'',
+    'וֹ':'o', 'וּ':'ou', 'ְ':'e', 'ֲ':'a', 'ֳ':'o', 'ֱ':'é',
     ':':'', '׃':'', '־':'-'
   };
   let result = '';
@@ -5499,8 +5494,11 @@ function transliterate(heb) {
       i++; // skip unknown
     }
   }
-  // Clean up: remove double spaces, trim
-  return result.replace(/\s+/g, ' ').trim();
+  // Clean up: remove double spaces, trim, fix apostrophe spacing
+  result = result.replace(/\s+/g, ' ').trim();
+  // Clean leading apostrophe after space (keep attached to next letter)
+  result = result.replace(/ \u2019 /g, ' \u2019');
+  return result;
 }
 
 function getReadHistory(num) {
@@ -8260,13 +8258,6 @@ function toggleHyy(e) {
   var txt = document.getElementById('hyy-text');
   var exp = document.getElementById('hyy-expand');
   if (!txt || txt.querySelector('.hyy-loading')) return;
-  var evt = e || window.event;
-  if (evt && evt.target && evt.target.closest && evt.target.closest('.hyy-link')) {
-    evt.stopPropagation();
-    var d = new Date();
-    window.open(_hyyGetChabadUrl(d), '_blank');
-    return;
-  }
   _hyyExpanded = !_hyyExpanded;
   if (_hyyExpanded) {
     txt.classList.add('expanded');
@@ -8334,9 +8325,6 @@ function gregToHebrew(gy,gm,gd){
   return {hy:hy,hm:hm,hd:hd,mName:mName};
 }
 
-function _hyyGetChabadUrl(d) {
-  return 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
-}
 
 // HaYom Yom: month index mapping for Sefaria-Export dataset
 // text[0]=Tishrei, text[1]=Cheshvan, ..., text[4]=Shevat, text[5]=Adar/AdarI, text[6]=AdarII, text[7]=Nisan, ..., text[12]=Elul
@@ -8489,11 +8477,9 @@ function displayHyy(data) {
   var el=document.getElementById('hyy-text');
   var dateEl=document.getElementById('hyy-date');
   var expEl=document.getElementById('hyy-expand');
-  var linkEl=document.getElementById('hyy-link');
   if(!el) return;
   var content='';
   if(data.fr) {
-    // French text from admin - primary!
     content='<div style="font-size:15px;line-height:1.8;color:var(--gray-1);">'+data.fr.replace(/\n/g,'<br>')+'</div>';
   } else if(data.en) {
     content='<div style="font-size:14.5px;line-height:1.8;color:var(--gray-1);font-family:\'EB Garamond\',Georgia,serif;">'+data.en+'</div>';
@@ -8502,23 +8488,18 @@ function displayHyy(data) {
   if(content){
     el.innerHTML=content;
     expEl.style.display='block';
-    if(linkEl) linkEl.style.display='flex';
   } else { displayHyyFallback(); return; }
   if(dateEl) dateEl.textContent=data.heDate||'';
 }
 
 function displayHyyFallback() {
   var el=document.getElementById('hyy-text');
-  var linkEl=document.getElementById('hyy-link');
   var dateEl=document.getElementById('hyy-date');
   if(!el) return;
   var d=new Date();
   var heb=gregToHebrew(d.getFullYear(),d.getMonth()+1,d.getDate());
   if(dateEl) dateEl.textContent=heb.mName+' '+heb.hd;
-  el.innerHTML='<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Appuyez pour lire le Hayom Yom du jour sur Chabad.org</span>';
-  if(linkEl) linkEl.style.display='flex';
-  var card=document.getElementById('hyy-card');
-  if(card) card.onclick=function(){window.open(_hyyGetChabadUrl(d),'_blank');};
+  el.innerHTML='<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Le texte du Hayom Yom sera bientôt disponible</span>';
 }
 
 
@@ -8784,7 +8765,7 @@ function showBethMap(lat, lng) {
     .then(function(data) { displayBethResults(data.elements || [], lat, lng); })
     .catch(function(err) {
       console.log('Overpass error:', err);
-      if (info) info.textContent = 'Utilisez le bouton Chabad.org pour les r\u00e9sultats complets';
+      if (info) info.textContent = 'Erreur de connexion. Essayez de r\u00e9actualiser.';
     });
 }
 
@@ -8839,7 +8820,7 @@ function displayBethResults(elements, userLat, userLng) {
     });
     results.innerHTML = html;
   } else if (results) {
-    results.innerHTML = '<div style="text-align:center;padding:12px;color:var(--gray-3);font-size:13px;">Aucun r\u00e9sultat OSM. Essayez le <b>Chabad.org Locator</b> pour des r\u00e9sultats complets.</div>';
+    results.innerHTML = '<div style="text-align:center;padding:12px;color:var(--gray-3);font-size:13px;">Aucun Beth Chabad trouv\u00e9 dans un rayon de 50km. Essayez d\u2019actualiser votre position.</div>';
   }
 }
 
@@ -8860,9 +8841,6 @@ function refreshBethMap() {
   loadBethMap();
 }
 
-function openChabadLocator() {
-  window.open('https://www.chabad.org/jewish-centers/', '_blank');
-}
 
 // ====== SIDOUR / PATAKH ELIYAHOU ======
 var PATAKH_PRAYERS = {
