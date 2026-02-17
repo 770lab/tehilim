@@ -25,7 +25,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 }
 #splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
 .splash-bh { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
-.splash-content { text-align:center; padding:0 30px; max-width:440px; margin-top:-15vh; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.splash-content { text-align:center; padding:0 30px; max-width:440px; margin-top:0; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
 .splash-icon { margin-bottom:20px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
 .splash-icon .icon-770 { width:120px; height:auto; color:var(--black); }
 .splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
@@ -43,10 +43,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   20%  { opacity:1; transform:translateY(0px); }
   35%  { transform:translateY(30px) rotate(0deg); }
   55%  { transform:translateY(30px) rotate(180deg); opacity:1; }
-  70%  { transform:translateY(8px) rotate(180deg); }
-  80%  { transform:translateY(8px) rotate(180deg); }
-  90%  { transform:translateY(8px) rotate(180deg); }
-  100% { transform:translateY(8px) rotate(180deg); opacity:1; }
+  70%  { transform:translateY(10px) rotate(180deg); }
+  80%  { transform:translateY(10px) rotate(180deg); }
+  90%  { transform:translateY(10px) rotate(180deg); }
+  100% { transform:translateY(10px) rotate(180deg); opacity:1; }
 }
 .splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 1.8s forwards; direction:rtl; }
 @keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
