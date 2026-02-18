@@ -444,7 +444,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .verse-num { position:absolute; left:0; top:5px; font-size:12px; color:var(--gray-3); font-weight:600; width:22px; text-align:center; font-family:'Noto Serif Hebrew',serif; direction:rtl; }
 .hebrew-text { font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-hebrew, 21px); line-height:2; direction:rtl; text-align:right; color:var(--black); margin-bottom:6px; }
 .french-text { font-size:var(--fs-french, 20px); line-height:1.7; color:var(--gray-1); font-family:'EB Garamond',Georgia,serif; }
-.phonetic-text { font-size:var(--fs-phonetic, 19px); line-height:1.8; color:var(--gray-2); font-family:'EB Garamond',Georgia,serif; font-style:italic; margin-top:4px; direction:ltr; text-align:left; }
+.phonetic-text { font-size:var(--fs-phonetic, 20px); line-height:1.8; color:var(--gray-1); font-family:'EB Garamond',Georgia,serif; letter-spacing:0.2px; margin-top:4px; direction:ltr; text-align:left; }
 /* Sefer style - continuous Hebrew */
 .sefer-text { font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-sefer, 22px); line-height:2.2; direction:rtl; text-align:justify; color:var(--black); padding:0 4px; }
 .sefer-verse-num { font-size:calc(var(--fs-sefer, 22px) - 6px); font-weight:700; color:var(--black); font-family:'Noto Serif Hebrew',serif; margin:0 2px; }
@@ -2449,13 +2449,13 @@ var readingMode = "hebrew"; // hebrew | phonetique | francais
 var fontSizeLevel = parseInt(localStorage.getItem("tehilim_fontsize") || "3");
 const FONT_SIZES = {
   // [hebrew, french, phonetic, sefer] per level
-  0: [17, 16, 15, 18],
-  1: [18, 17, 16, 19],
-  2: [20, 19, 18, 21],
-  3: [21, 20, 19, 22],  // default
-  4: [23, 22, 21, 24],
-  5: [25, 24, 23, 26],
-  6: [28, 27, 26, 29],
+  0: [17, 16, 16, 18],
+  1: [18, 17, 17, 19],
+  2: [20, 19, 19, 21],
+  3: [21, 20, 20, 22],  // default
+  4: [23, 22, 22, 24],
+  5: [25, 24, 24, 26],
+  6: [28, 27, 27, 29],
 };
 
 function applyFontSize() {
