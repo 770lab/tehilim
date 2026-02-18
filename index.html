@@ -34,8 +34,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-top:0; margin-bottom:4px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:baseline; justify-content:center; overflow:visible; height:70px; }
 .sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; }
 .sc-apos { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.6s ease 3.2s forwards; }
-.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; }
-.sc-letter-d2 { display:inline-block; max-width:0; opacity:0; overflow:hidden; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; }
+.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:2; }
+.sc-letter-d2 { display:inline-block; opacity:0; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:1; }
 @keyframes scFadeIn { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
 @keyframes scInsert { to { max-width:30px; opacity:1; letter-spacing:2px; } }
 @keyframes scD1 {
@@ -46,12 +46,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   100% { transform:translateY(12px) rotate(180deg); opacity:1; }
 }
 @keyframes scD2 {
-  0%   { max-width:0; opacity:0; transform:translateY(0) rotate(0deg); }
-  30%  { max-width:0; opacity:0; transform:translateY(0) rotate(0deg); }
-  40%  { max-width:40px; opacity:1; transform:translateY(0) rotate(0deg); }
-  50%  { max-width:40px; opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { max-width:40px; opacity:1; transform:translateY(12px) rotate(180deg); }
-  100% { max-width:40px; opacity:1; transform:translateY(12px) rotate(180deg); }
+  0%   { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
+  28%  { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
+  30%  { margin-left:-0.62em; opacity:1; transform:translateY(0) rotate(0deg); }
+  46%  { margin-left:0px; opacity:1; transform:translateY(0) rotate(0deg); }
+  50%  { margin-left:0px; opacity:1; transform:translateY(0) rotate(0deg); }
+  68%  { margin-left:0px; opacity:1; transform:translateY(12px) rotate(180deg); }
+  100% { margin-left:0px; opacity:1; transform:translateY(12px) rotate(180deg); }
 }
 .splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 3.8s forwards; direction:rtl; }
 @keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -8335,16 +8336,6 @@ function gregToHebrew(gy,gm,gd){
 
 // HaYom Yom: month index mapping for Sefaria-Export dataset
 // text[0]=Tishrei, text[1]=Cheshvan, ..., text[4]=Shevat, text[5]=Adar/AdarI, text[6]=AdarII, text[7]=Nisan, ..., text[12]=Elul
-function _hyyGetEntry(textArr, heb) {
-  if (!textArr) return null;
-  var mIdx = heb.hm - 1;
-  if (!textArr[mIdx] || !textArr[mIdx][heb.hd - 1]) {
-    if (heb.hm === 6 && textArr[5] && textArr[5][heb.hd - 1]) return textArr[5][heb.hd - 1];
-    return null;
-  }
-  return textArr[mIdx][heb.hd - 1];
-}
-
 function loadHayomYom() {
   var d = new Date();
   var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
@@ -8353,29 +8344,8 @@ function loadHayomYom() {
   var hyyKey = heb.mName.replace(' ', '_') + '_' + heb.hd;
   console.log('HYY: Hebrew date =', heb.mName, heb.hd, 'key=', hyyKey);
 
-  // PRIORITY 1: Always check hyy-data.json first (admin French texts)
-  fetch('hyy-data.json?_=' + dateKey)
-    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data) {
-      if (data.hayom_yom && data.hayom_yom[hyyKey]) {
-        console.log('HYY: French text found in hyy-data.json!');
-        var result = { fr: data.hayom_yom[hyyKey], heDate: heb.mName + ' ' + heb.hd, fetched: dateKey };
-        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-        displayHyy(result);
-        return;
-      }
-      console.log('HYY: No French for', hyyKey, '- checking cache/English');
-      _hyyLoadCacheOrEnglish(heb, dateKey, cacheKey);
-    })
-    .catch(function(err) {
-      console.log('HYY: hyy-data.json failed:', err.message);
-      _hyyLoadCacheOrEnglish(heb, dateKey, cacheKey);
-    });
-}
-
-function _hyyLoadCacheOrEnglish(heb, dateKey, cacheKey) {
-  // PRIORITY 2: Try fr.chabad.org via CORS proxy (automatic French!)
-  _hyyLoadFrChabad(heb, dateKey, cacheKey);
+  // PRIORITY 1: fr.chabad.org (automatic French)
+  _hyyLoadFrChabad(heb, dateKey, cacheKey, hyyKey);
 }
 
 // ====== FR.CHABAD.ORG AUTO-FETCH ======
@@ -8456,7 +8426,7 @@ function _extractChabadText(html) {
   }
 }
 
-function _hyyLoadFrChabad(heb, dateKey, cacheKey) {
+function _hyyLoadFrChabad(heb, dateKey, cacheKey, hyyKey) {
   var d = new Date();
   var url = 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
   console.log('HYY: Trying fr.chabad.org:', url);
@@ -8468,124 +8438,40 @@ function _hyyLoadFrChabad(heb, dateKey, cacheKey) {
       try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
       displayHyy(result);
     } else {
-      console.log('HYY: fr.chabad.org - could not extract text, falling back');
-      _hyyFallbackToCache(heb, dateKey, cacheKey);
+      console.log('HYY: fr.chabad.org - could not extract text, falling back to admin');
+      _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey);
     }
   }, function() {
-    console.log('HYY: fr.chabad.org unreachable, falling back');
-    _hyyFallbackToCache(heb, dateKey, cacheKey);
+    console.log('HYY: fr.chabad.org unreachable, falling back to admin');
+    _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey);
   });
 }
 
-function _hyyFallbackToCache(heb, dateKey, cacheKey) {
-  var cached = null;
-  try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-  if (cached && (cached.fr || cached.en || cached.he)) {
-    displayHyy(cached);
-    return;
-  }
-  _hyyLoadEnglish(heb, dateKey);
-}
-
-function _hyyLoadEnglish(heb, dateKey) {
-  // Check full English dataset in localStorage
-  var fullEn = null;
-  try { fullEn = JSON.parse(localStorage.getItem('hyy_full_en')); } catch(e) {}
-  if (fullEn) {
-    var entry = _hyyGetEntry(fullEn, heb);
-    if (entry) {
-      console.log('HYY: from cached full English dataset');
-      displayHyy(_hyyMakeResult(entry, heb, dateKey));
-      return;
-    }
-  }
-  // jsDelivr CDN fallback
-  _hyyLoadCDN(heb, dateKey, 0);
-}
-
-var _hyyCDNs = [
-  'https://cdn.jsdelivr.net/gh/Sefaria/Sefaria-Export@master/json/Chasidut/HaYom%20Yom/English/merged.json',
-  'https://raw.githubusercontent.com/Sefaria/Sefaria-Export/master/json/Chasidut/HaYom%20Yom/English/merged.json',
-  'https://cdn.statically.io/gh/Sefaria/Sefaria-Export/master/json/Chasidut/HaYom%20Yom/English/merged.json'
-];
-
-function _hyyLoadCDN(heb, dateKey, idx) {
-  if (idx >= _hyyCDNs.length) {
-    console.log('HYY: CDNs failed, trying Sefaria API...');
-    _hyyLoadSefaria(heb, dateKey);
-    return;
-  }
-  console.log('HYY: CDN attempt', idx);
-  var controller = null;
-  try { controller = new AbortController(); setTimeout(function(){controller.abort();}, 8000); } catch(e){}
-
-  fetch(_hyyCDNs[idx], controller ? {signal: controller.signal} : {})
+function _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey) {
+  // PRIORITY 2: Check hyy-data.json (admin panel)
+  fetch('hyy-data.json?_=' + dateKey)
     .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(data) {
-      var textArr = data.text || data;
-      try { localStorage.setItem('hyy_full_en', JSON.stringify(textArr)); console.log('HYY: Full dataset cached!'); } catch(e){}
-      var entry = _hyyGetEntry(textArr, heb);
-      if (entry) {
-        displayHyy(_hyyMakeResult(entry, heb, dateKey));
-      } else {
-        _hyyLoadCDN(heb, dateKey, idx+1);
+      if (data.hayom_yom && data.hayom_yom[hyyKey]) {
+        console.log('HYY: French text found in admin panel!');
+        var result = { fr: data.hayom_yom[hyyKey], heDate: heb.mName + ' ' + heb.hd, fetched: dateKey };
+        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+        displayHyy(result);
+        return;
       }
+      // PRIORITY 3: Cache
+      var cached = null;
+      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+      if (cached && cached.fr) { displayHyy(cached); return; }
+      displayHyyFallback();
     })
     .catch(function(err) {
-      console.log('HYY: CDN', idx, 'error:', err.message);
-      _hyyLoadCDN(heb, dateKey, idx+1);
+      console.log('HYY: admin failed:', err.message);
+      var cached = null;
+      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+      if (cached && cached.fr) { displayHyy(cached); return; }
+      displayHyyFallback();
     });
-}
-
-function _hyyMakeResult(entry, heb, dateKey) {
-  var text = Array.isArray(entry) ? entry.join(' ') : (entry || '');
-  var tmp = document.createElement('div'); tmp.innerHTML = text;
-  var clean = tmp.textContent || tmp.innerText || '';
-  var result = { en: clean, heDate: heb.mName + ' ' + heb.hd, fetched: dateKey };
-  try { localStorage.setItem('tehilim_hyy8_' + dateKey, JSON.stringify(result)); } catch(e){}
-  return result;
-}
-
-function _hyyLoadSefaria(heb, dateKey) {
-  var ref = 'HaYom Yom, ' + heb.mName + ' ' + heb.hd;
-  console.log('HYY: Sefaria API for:', ref);
-  fetch('https://www.sefaria.org/api/v3/texts/' + encodeURIComponent(ref) + '?context=0')
-    .then(function(r){if(!r.ok) throw new Error('HTTP '+r.status); return r.json();})
-    .then(function(txt){
-      var he='',en='';
-      (txt.versions||[]).forEach(function(v){
-        if(v.language==='he'&&!he) he=Array.isArray(v.text)?v.text.join(' '):(v.text||'');
-        if(v.language==='en'&&!en) en=Array.isArray(v.text)?v.text.join(' '):(v.text||'');
-      });
-      function strip(s){var t=document.createElement('div');t.innerHTML=s;return t.textContent||t.innerText||'';}
-      var result={he:strip(he),en:strip(en),heDate:heb.mName+' '+heb.hd,fetched:dateKey};
-      if(!result.he&&!result.en){_hyyLoadJsonp(heb,dateKey);return;}
-      try{localStorage.setItem('tehilim_hyy8_'+dateKey,JSON.stringify(result));}catch(e){}
-      displayHyy(result);
-    })
-    .catch(function(err){
-      console.log('HYY: Sefaria API failed:', err.message);
-      _hyyLoadJsonp(heb, dateKey);
-    });
-}
-
-function _hyyLoadJsonp(heb, dateKey) {
-  var ref = 'HaYom Yom, ' + heb.mName + ' ' + heb.hd;
-  var cb = '_hyyJp' + Date.now();
-  window[cb] = function(txt) {
-    delete window[cb]; var s=document.getElementById('hyy-jsonp'); if(s)s.remove();
-    var he=txt.he||'', en=txt.text||'';
-    if(Array.isArray(he))he=he.join(' '); if(Array.isArray(en))en=en.join(' ');
-    function strip(s){var t=document.createElement('div');t.innerHTML=s;return t.textContent||t.innerText||'';}
-    var result={he:strip(he),en:strip(en),heDate:heb.mName+' '+heb.hd,fetched:dateKey};
-    if(!result.he&&!result.en){displayHyyFallback();return;}
-    try{localStorage.setItem('tehilim_hyy8_'+dateKey,JSON.stringify(result));}catch(e){}
-    displayHyy(result);
-  };
-  var s=document.createElement('script'); s.id='hyy-jsonp';
-  s.src='https://www.sefaria.org/api/texts/'+encodeURIComponent(ref)+'?context=0&callback='+cb;
-  s.onerror=function(){delete window[cb];s.remove();displayHyyFallback();};
-  document.head.appendChild(s);
 }
 
 function displayHyy(data) {
@@ -8639,29 +8525,7 @@ function loadRambam() {
   var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
   var cacheKey = 'tehilim_rambam3_' + dateKey;
 
-  // PRIORITY 1: Always check hyy-data.json for French Rambam first
-  fetch('hyy-data.json?_=' + dateKey)
-    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data) {
-      if (data.rambam && data.rambam[dateKey]) {
-        var entry = data.rambam[dateKey];
-        var result = { fr: entry.text || entry, title: entry.title || '', fetched: dateKey };
-        console.log('Rambam: French text found in hyy-data.json!');
-        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-        displayRambam(result);
-        return;
-      }
-      console.log('Rambam: No French for', dateKey, '- checking cache/Sefaria');
-      _rambamLoadCacheOrSefaria(dateKey, cacheKey);
-    })
-    .catch(function(err) {
-      console.log('Rambam: hyy-data.json failed:', err.message);
-      _rambamLoadCacheOrSefaria(dateKey, cacheKey);
-    });
-}
-
-function _rambamLoadCacheOrSefaria(dateKey, cacheKey) {
-  // PRIORITY 2: Try fr.chabad.org via CORS proxy (automatic French!)
+  // PRIORITY 1: fr.chabad.org (automatic French)
   _rambamLoadFrChabad(dateKey, cacheKey);
 }
 
@@ -8673,131 +8537,47 @@ function _rambamLoadFrChabad(dateKey, cacheKey) {
     var text = _extractChabadText(html);
     if (text && text.length > 30) {
       console.log('Rambam: French text from fr.chabad.org! (' + text.length + ' chars)');
-      // Try to extract title from page
       var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
       var title = titleMatch ? titleMatch[1].replace(/\s*-\s*fr\.chabad\.org.*/i, '').trim() : '';
       var result = { fr: text, title: title, fetched: dateKey, source: 'fr.chabad.org' };
       try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
       displayRambam(result);
     } else {
-      console.log('Rambam: fr.chabad.org - could not extract text, falling back');
-      _rambamFallbackToCache(dateKey, cacheKey);
+      console.log('Rambam: fr.chabad.org - could not extract text, falling back to admin');
+      _rambamLoadAdmin(dateKey, cacheKey);
     }
   }, function() {
-    console.log('Rambam: fr.chabad.org unreachable, falling back');
-    _rambamFallbackToCache(dateKey, cacheKey);
+    console.log('Rambam: fr.chabad.org unreachable, falling back to admin');
+    _rambamLoadAdmin(dateKey, cacheKey);
   });
 }
 
-function _rambamFallbackToCache(dateKey, cacheKey) {
-  var cached = null;
-  try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-  if (cached && (cached.fr || cached.he || cached.en)) {
-    displayRambam(cached);
-    return;
-  }
-  _rambamLoadSefaria(dateKey);
-}
-
-function _rambamLoadSefaria(dateKey) {
-  // Sefaria Calendar API
-  console.log('Rambam: trying Sefaria Calendar API...');
-  fetch('https://www.sefaria.org/api/calendars')
+function _rambamLoadAdmin(dateKey, cacheKey) {
+  // PRIORITY 2: Check hyy-data.json (admin panel)
+  fetch('hyy-data.json?_=' + dateKey)
     .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(cal) { _rambamProcessCalendar(cal, dateKey); })
-    .catch(function(err) {
-      console.log('Rambam: Calendar API failed:', err.message, '- trying JSONP');
-      _rambamCalendarJsonp(dateKey);
-    });
-}
-
-function _rambamCalendarJsonp(dateKey) {
-  var cb = '_rambamCal' + Date.now();
-  window[cb] = function(cal) {
-    delete window[cb]; var s = document.getElementById('rambam-jsonp-cal'); if(s) s.remove();
-    _rambamProcessCalendar(cal, dateKey);
-  };
-  var s = document.createElement('script'); s.id = 'rambam-jsonp-cal';
-  s.src = 'https://www.sefaria.org/api/calendars?callback=' + cb;
-  s.onerror = function() { delete window[cb]; s.remove(); console.log('Rambam: JSONP calendar failed'); displayRambamFallback(); };
-  document.head.appendChild(s);
-}
-
-function _rambamProcessCalendar(cal, dateKey) {
-  var rambamRef = null, rambamTitle = '';
-  var items = cal.calendar_items || [];
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i];
-    if (item.title && item.title.en && item.title.en.indexOf('Daily Rambam') !== -1 && item.title.en.indexOf('1 Chapter') !== -1) {
-      rambamRef = item.ref || (item.url ? item.url.replace('/','') : null);
-      rambamTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
-      break;
-    }
-  }
-  if (!rambamRef) {
-    for (var j = 0; j < items.length; j++) {
-      var it = items[j];
-      if (it.title && it.title.en && it.title.en.indexOf('Rambam') !== -1 && it.title.en.indexOf('3') === -1) {
-        rambamRef = it.ref || (it.url ? it.url.replace('/','') : null);
-        rambamTitle = it.displayValue ? (it.displayValue.en || '') : (it.ref || '');
-        break;
+    .then(function(data) {
+      if (data.rambam && data.rambam[dateKey]) {
+        var entry = data.rambam[dateKey];
+        var result = { fr: entry.text || entry, title: entry.title || '', fetched: dateKey };
+        console.log('Rambam: French text found in admin panel!');
+        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+        displayRambam(result);
+        return;
       }
-    }
-  }
-  if (!rambamRef) { displayRambamFallback(); return; }
-  console.log('Rambam ref:', rambamRef, 'title:', rambamTitle);
-  _rambamLoadText(rambamRef, rambamTitle, dateKey, 0);
-}
-
-var _rambamTextCDNs = [
-  function(ref) { return 'https://cdn.jsdelivr.net/gh/Sefaria/Sefaria-Export@master/json/Mishneh%20Torah/' + encodeURIComponent(ref.replace(/ /g, '%20')) + '/English/merged.json'; }
-];
-
-function _rambamLoadText(ref, title, dateKey, method) {
-  // Method 0: Sefaria API fetch
-  if (method === 0) {
-    fetch('https://www.sefaria.org/api/v3/texts/' + encodeURIComponent(ref) + '?context=0')
-      .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-      .then(function(txt) { _rambamProcessText(txt, title, dateKey); })
-      .catch(function(err) {
-        console.log('Rambam: text fetch failed:', err.message, '- trying JSONP');
-        _rambamLoadText(ref, title, dateKey, 1);
-      });
-  }
-  // Method 1: JSONP
-  else if (method === 1) {
-    var cb = '_rambamTxt' + Date.now();
-    window[cb] = function(txt) {
-      delete window[cb]; var s = document.getElementById('rambam-jsonp-txt'); if(s) s.remove();
-      var he = txt.he || '', en = txt.text || '';
-      if(Array.isArray(he)) he = he.join(' '); if(Array.isArray(en)) en = en.join(' ');
-      function strip(s){var t=document.createElement('div');t.innerHTML=s;return t.textContent||t.innerText||'';}
-      var result = { he: strip(he), en: strip(en), title: title, fetched: dateKey };
-      if(!result.he && !result.en) { displayRambamFallback(); return; }
-      try { localStorage.setItem('tehilim_rambam3_' + dateKey, JSON.stringify(result)); } catch(e) {}
-      displayRambam(result);
-    };
-    var s = document.createElement('script'); s.id = 'rambam-jsonp-txt';
-    s.src = 'https://www.sefaria.org/api/texts/' + encodeURIComponent(ref) + '?context=0&callback=' + cb;
-    s.onerror = function() { delete window[cb]; s.remove(); displayRambamFallback(); };
-    document.head.appendChild(s);
-  }
-  else {
-    displayRambamFallback();
-  }
-}
-
-function _rambamProcessText(txt, title, dateKey) {
-  var he = '', en = '';
-  (txt.versions || []).forEach(function(v) {
-    if(v.language === 'he' && !he) { var t = v.text; he = Array.isArray(t) ? t.join(' ') : (t||''); }
-    if(v.language === 'en' && !en) { var t = v.text; en = Array.isArray(t) ? t.join(' ') : (t||''); }
-  });
-  function strip(s){var t=document.createElement('div');t.innerHTML=s;return t.textContent||t.innerText||'';}
-  var result = { he: strip(he), en: strip(en), title: title, fetched: dateKey };
-  if(!result.he && !result.en) { displayRambamFallback(); return; }
-  try { localStorage.setItem('tehilim_rambam3_' + dateKey, JSON.stringify(result)); } catch(e) {}
-  displayRambam(result);
+      // PRIORITY 3: Cache
+      var cached = null;
+      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+      if (cached && cached.fr) { displayRambam(cached); return; }
+      displayRambamFallback();
+    })
+    .catch(function(err) {
+      console.log('Rambam: admin failed:', err.message);
+      var cached = null;
+      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+      if (cached && cached.fr) { displayRambam(cached); return; }
+      displayRambamFallback();
+    });
 }
 
 function displayRambam(data) {
