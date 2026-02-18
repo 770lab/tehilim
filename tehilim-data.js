@@ -3628,4 +3628,3 @@ var HEBREW_NAMES = [
   [['raizel','rayzel','raïzel'], 'רייזל', 'F'],
   [['mirel','mirele'], 'מירל', 'F'],
 ];
-
