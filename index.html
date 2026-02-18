@@ -182,18 +182,18 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .club-hero-title { font-size:22px; font-weight:800; color:var(--black); margin-bottom:4px; }
 .club-hero-sub { font-size:13px; color:var(--gray-3); }
 .club-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; padding:0 16px 16px; }
-.obj-story-bar { display:flex; align-items:center; gap:20px; padding:12px 16px 8px; justify-content:center; }
+.obj-story-bar { display:flex; align-items:center; gap:10px; padding:12px 16px 8px; justify-content:center; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
 .obj-story-bar-scroll { justify-content:flex-start; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; gap:12px; }
 .obj-story-bar-scroll::-webkit-scrollbar { display:none; }
 .obj-story-bar-scroll .os-ring { width:56px; height:56px; }
 .obj-story-bar-scroll .os-circle { font-size:22px; }
 .obj-story-bar::-webkit-scrollbar { display:none; }
 .os-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
-.os-ring { width:72px; height:72px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
+.os-ring { width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
 .os-item.done .os-ring { background:#dbdbdb !important; }
 .os-item.current .os-ring { animation:storyPulse 2s ease-in-out infinite; }
 @keyframes storyPulse { 0%,100% { box-shadow:0 0 0 0 rgba(238,42,123,0.4); } 50% { box-shadow:0 0 0 8px rgba(238,42,123,0); } }
-.os-circle { width:100%; height:100%; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:28px; }
+.os-circle { width:100%; height:100%; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:24px; }
 .os-label { font-size:10px; color:var(--gray-3); font-weight:600; white-space:nowrap; text-align:center; font-family:var(--font); }
 .os-item.current .os-label { color:var(--black); font-weight:700; }
 /* STORY OVERLAY */
@@ -226,6 +226,21 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
 .obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
+.shabbat-card { margin:0 16px 12px; padding:16px 20px; border-radius:var(--radius); background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color:#fff; position:relative; overflow:hidden; }
+.shabbat-card::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; background:radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%); border-radius:50%; }
+.shabbat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+.shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; }
+.shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.5); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
+.shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.12); padding:3px 8px; border-radius:20px; white-space:nowrap; }
+.shabbat-times-row { display:flex; align-items:center; gap:0; }
+.shabbat-time-block { flex:1; display:flex; align-items:center; gap:10px; }
+.shabbat-time-icon { font-size:18px; }
+.shabbat-time-detail {}
+.shabbat-time-label { font-size:10px; color:rgba(255,255,255,0.45); letter-spacing:0.5px; text-transform:uppercase; }
+.shabbat-time-val { font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:0.5px; }
+.shabbat-time-val.candles { color:#f9ce34; }
+.shabbat-time-val.havdalah { color:#c084fc; }
+.shabbat-sep { width:1px; height:32px; background:rgba(255,255,255,0.12); margin:0 6px; }
 .obj-list { padding:0 8px 4px; }
 .obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
 .obj-item:active { background:var(--gray-6); }
@@ -681,6 +696,32 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div id="panel-menu">
     <div class="home-date-line" id="home-date-line"></div>
     <div class="obj-story-bar" id="obj-story-bar"></div>
+    <div class="shabbat-card" id="shabbat-card" style="display:none">
+      <div class="shabbat-top">
+        <div>
+          <div class="shabbat-parasha" id="shabbat-parasha"></div>
+          <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
+        </div>
+        <div class="shabbat-badge" id="shabbat-badge">🕯️ Chabbat</div>
+      </div>
+      <div class="shabbat-times-row">
+        <div class="shabbat-time-block">
+          <div class="shabbat-time-icon">🕯️</div>
+          <div class="shabbat-time-detail">
+            <div class="shabbat-time-label">Allumage</div>
+            <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
+          </div>
+        </div>
+        <div class="shabbat-sep"></div>
+        <div class="shabbat-time-block">
+          <div class="shabbat-time-icon">🌙</div>
+          <div class="shabbat-time-detail">
+            <div class="shabbat-time-label">Havdalah</div>
+            <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="home-big-cards">
       <div class="big-card" onclick="switchTab('sub-objectifs')">
         <div class="big-card-icon">🕎</div>
@@ -4881,6 +4922,7 @@ function showHome() {
   renderObjStoryBar();
   loadHayomYom();
   loadRambam();
+  loadShabbatTimes();
   updateBigObjSub();
   cleanOldObjectives();
   updateBirthdaySub();
@@ -7435,7 +7477,7 @@ function getCurrentItemIndex() {
 function renderObjStoryBar() {
   var state = getObjState();
   var currentIdx = getCurrentPeriodIndex();
-  // HOME: 3 period circles
+  // HOME: 3 period circles + HYY after Matin + Rambam after Après-midi
   var html3 = '';
   DAILY_PERIODS.forEach(function(p, i) {
     var total = p.items.length;
@@ -7448,6 +7490,20 @@ function renderObjStoryBar() {
     html3 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + p.emoji + '</div></div>';
     html3 += '<span class="os-label">' + p.label + ' ' + done + '/' + total + '</span>';
     html3 += '</div>';
+    // Insert HYY story after Matin (index 0)
+    if (i === 0) {
+      html3 += '<div class="os-item" onclick="openTextStory(\'hyy\')">';
+      html3 += '<div class="os-ring" style="background:linear-gradient(135deg, #f9ce34, #ee2a7b)"><div class="os-circle">📜</div></div>';
+      html3 += '<span class="os-label">Hayom Yom</span>';
+      html3 += '</div>';
+    }
+    // Insert Rambam story after Après-midi (index 1)
+    if (i === 1) {
+      html3 += '<div class="os-item" onclick="openTextStory(\'rambam\')">';
+      html3 += '<div class="os-ring" style="background:linear-gradient(135deg, #6228d7, #ee2a7b)"><div class="os-circle">📚</div></div>';
+      html3 += '<span class="os-label">Rambam</span>';
+      html3 += '</div>';
+    }
   });
   var bar = document.getElementById('obj-story-bar');
   if (bar) bar.innerHTML = html3;
@@ -7475,12 +7531,60 @@ function renderObjStoryBar() {
   }
 }
 
+// ---- TEXT STORY (HYY / Rambam) ----
+var _textStoryTimer = null;
+
+function openTextStory(type) {
+  _storyMode = 'text';
+  var overlay = document.getElementById('obj-story-overlay');
+  overlay.style.display = 'flex';
+
+  // Hide tap zones for text stories, enable content interaction
+  var tapL = overlay.querySelector('.os-tap-left');
+  var tapR = overlay.querySelector('.os-tap-right');
+  var content = document.getElementById('os-content');
+  if (tapL) tapL.style.display = 'none';
+  if (tapR) tapR.style.display = 'none';
+  if (content) content.style.pointerEvents = 'auto';
+
+  // No progress bar - text stories stay open
+  document.getElementById('os-progress').innerHTML = '';
+
+  var html = '';
+  if (type === 'hyy') {
+    overlay.style.background = 'linear-gradient(160deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%)';
+    var dateEl = document.getElementById('hyy-date');
+    var textEl = document.getElementById('hyy-text');
+    var heDate = dateEl ? dateEl.textContent : '';
+    var text = textEl ? (textEl.innerText || textEl.textContent || '') : '';
+    text = text.replace('Chargement…', '').replace('Lire la suite ▾', '').trim();
+    html += '<div class="os-emoji">📜</div>';
+    html += '<div class="os-name" style="color:#f9ce34;font-size:22px;">Hayom Yom</div>';
+    if (heDate) html += '<div class="os-time-badge" style="color:rgba(255,255,255,0.6)">' + heDate + '</div>';
+    html += '<div style="color:#fff;font-size:15px;line-height:1.8;padding:16px 4px 0;text-align:left;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">' + (text || '<em style="color:rgba(255,255,255,0.4)">Texte non disponible</em>') + '</div>';
+  } else if (type === 'rambam') {
+    overlay.style.background = 'linear-gradient(160deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%)';
+    var titleEl = document.getElementById('rambam-date');
+    var textEl2 = document.getElementById('rambam-text');
+    var title = titleEl ? titleEl.textContent : '';
+    var text2 = textEl2 ? (textEl2.innerText || textEl2.textContent || '') : '';
+    text2 = text2.replace('Chargement…', '').replace('Lire la suite ▾', '').trim();
+    html += '<div class="os-emoji">📚</div>';
+    html += '<div class="os-name" style="color:#c084fc;font-size:22px;">Rambam</div>';
+    if (title) html += '<div class="os-time-badge" style="color:rgba(255,255,255,0.6)">' + title + '</div>';
+    html += '<div style="color:#fff;font-size:15px;line-height:1.8;padding:16px 4px 0;text-align:left;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">' + (text2 || '<em style="color:rgba(255,255,255,0.4)">Texte non disponible</em>') + '</div>';
+  }
+
+  document.getElementById('os-content').innerHTML = html;
+}
+
 // ---- ITEM STORY (13 individual) ----
 var _itemStoryIdx = 0;
 var _itemStoryTimer = null;
 var _storyMode = 'period'; // 'period' or 'item'
 
 function storyNav(dir) {
+  if (_storyMode === 'text') { closeObjStory(); return; }
   if (_storyMode === 'item') { dir === 'next' ? itemStoryNext() : itemStoryPrev(); }
   else { dir === 'next' ? objStoryNext() : objStoryPrev(); }
 }
@@ -7575,6 +7679,14 @@ function closeObjStory() {
   overlay.style.display = 'none';
   if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
   if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
+  if (_textStoryTimer) { clearTimeout(_textStoryTimer); _textStoryTimer = null; }
+  // Restore tap zones and pointer-events
+  var tapL = overlay.querySelector('.os-tap-left');
+  var tapR = overlay.querySelector('.os-tap-right');
+  var content = document.getElementById('os-content');
+  if (tapL) tapL.style.display = '';
+  if (tapR) tapR.style.display = '';
+  if (content) content.style.pointerEvents = '';
   renderObjStoryBar();
   updateBigObjSub();
   var objList = document.getElementById('obj-list');
@@ -8337,6 +8449,133 @@ function gregToHebrew(gy,gm,gd){
 
 // HaYom Yom: month index mapping for Sefaria-Export dataset
 // text[0]=Tishrei, text[1]=Cheshvan, ..., text[4]=Shevat, text[5]=Adar/AdarI, text[6]=AdarII, text[7]=Nisan, ..., text[12]=Elul
+// ====== SHABBAT TIMES (Hebcal API) ======
+var _shabbatDefaultLat = 48.8566;
+var _shabbatDefaultLng = 2.3522;
+var _shabbatDefaultTz = 'Europe/Paris';
+var _shabbatDefaultCity = 'Paris';
+
+var _frenchMonths = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+function loadShabbatTimes() {
+  var cacheKey = 'tehilim_shabbat_' + new Date().toISOString().slice(0,10);
+  // Check cache first
+  try {
+    var cached = JSON.parse(localStorage.getItem(cacheKey));
+    if (cached) { renderShabbatCard(cached); return; }
+  } catch(e) {}
+
+  // Try geolocation, fallback to Paris
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(pos) {
+        _fetchShabbatTimes(pos.coords.latitude, pos.coords.longitude, null, cacheKey);
+      },
+      function() {
+        _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
+      },
+      { timeout: 5000 }
+    );
+  } else {
+    _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
+  }
+}
+
+function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
+  // Detect timezone
+  var tzid = _shabbatDefaultTz;
+  try { tzid = Intl.DateTimeFormat().resolvedOptions().timeZone || _shabbatDefaultTz; } catch(e) {}
+
+  var url = 'https://www.hebcal.com/shabbat?cfg=json&geo=pos&latitude=' + lat.toFixed(4) + '&longitude=' + lng.toFixed(4) + '&tzid=' + encodeURIComponent(tzid) + '&M=on&b=18';
+  console.log('Shabbat: fetching', url);
+
+  fetch(url)
+    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data) {
+      var result = _parseShabbatData(data, cityName);
+      if (result) {
+        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+        renderShabbatCard(result);
+      }
+    })
+    .catch(function(err) {
+      console.log('Shabbat: API error:', err.message);
+    });
+}
+
+function _parseShabbatData(data, cityName) {
+  var items = data.items || [];
+  var candleDate = null, candleTime = '', havdalahTime = '', parasha = '', parashaHe = '';
+
+  for (var i = 0; i < items.length; i++) {
+    var it = items[i];
+    if (it.category === 'candles') {
+      candleTime = _formatHebcalTime(it.date);
+      candleDate = new Date(it.date);
+    } else if (it.category === 'havdalah') {
+      havdalahTime = _formatHebcalTime(it.date);
+    } else if (it.category === 'parashat') {
+      parasha = (it.title || '').replace('Parashat ', '');
+      parashaHe = it.hebrew || '';
+    }
+  }
+
+  if (!candleTime) return null;
+
+  // Build date strings
+  var friday = candleDate ? candleDate : new Date();
+  var saturday = new Date(friday);
+  saturday.setDate(saturday.getDate() + 1);
+
+  var dateStr = 'Vendredi ' + friday.getDate() + ' ' + _frenchMonths[friday.getMonth()] +
+    ' - Samedi ' + saturday.getDate() + ' ' + _frenchMonths[saturday.getMonth()];
+
+  var location = cityName || (data.location ? (data.location.city || data.location.title || _shabbatDefaultCity) : _shabbatDefaultCity);
+
+  return {
+    date: dateStr,
+    parasha: parasha,
+    parashaHe: parashaHe,
+    candles: candleTime,
+    havdalah: havdalahTime,
+    location: location
+  };
+}
+
+function _formatHebcalTime(isoStr) {
+  try {
+    var d = new Date(isoStr);
+    var h = d.getHours();
+    var m = d.getMinutes();
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  } catch(e) { return ''; }
+}
+
+function renderShabbatCard(data) {
+  var card = document.getElementById('shabbat-card');
+  if (!card || !data) return;
+  var parashaEl = document.getElementById('shabbat-parasha');
+  var parashaHeEl = document.getElementById('shabbat-parasha-he');
+  var badgeEl = document.getElementById('shabbat-badge');
+  if (data.parasha) {
+    parashaEl.textContent = data.parasha;
+    parashaHeEl.textContent = data.parashaHe || '';
+  } else {
+    parashaEl.textContent = 'Chabbat';
+    parashaHeEl.textContent = 'שבת';
+  }
+  // Smart badge: show relative day info
+  var now = new Date();
+  var day = now.getDay(); // 0=Sun
+  if (day === 5) { badgeEl.textContent = '🕯️ Ce soir'; }
+  else if (day === 6) { badgeEl.textContent = '✨ Chabbat Chalom'; }
+  else if (day === 4) { badgeEl.textContent = '🕯️ Demain soir'; }
+  else { badgeEl.textContent = '🕯️ Chabbat'; }
+  document.getElementById('shabbat-candles').textContent = data.candles || '--:--';
+  document.getElementById('shabbat-havdalah').textContent = data.havdalah || '--:--';
+  card.style.display = '';
+}
+
 function loadHayomYom() {
   var d = new Date();
   var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
