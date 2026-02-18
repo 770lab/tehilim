@@ -1,5870 +1,3630 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Chab'app</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,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">
-<link rel="apple-touch-icon" href="data:image/png;base64,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">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-:root {
-  --bg: #fafafa; --white: #ffffff; --black: #000000;
-  --gray-1: #262626; --gray-2: #555555; --gray-3: #8e8e8e; --gray-4: #c7c7c7; --gray-5: #dbdbdb; --gray-6: #efefef;
-  
-  --radius: 12px; --radius-sm: 8px;
-  --font: system-ui, -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-}
-body { font-family: var(--font); background: var(--bg); color: var(--gray-1); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-
-/* SPLASH */
-#splash {
-  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
-  background:var(--white); cursor:pointer; position:fixed; top:0; left:0; right:0; bottom:0; z-index:999;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-#splash.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-.splash-bh { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
-.splash-content { text-align:center; padding:18vh 30px 0; max-width:440px; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-.splash-icon { margin-bottom:12px; opacity:0; animation:scSubIn 0.5s ease 0s forwards; }
-.splash-icon .icon-770 { width:120px; height:auto; color:var(--black); }
-.splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
-/* CHABAD ANIMATED TITLE */
-.splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-top:0; margin-bottom:16px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:flex-end; justify-content:center; overflow:visible; line-height:1; }
-.sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; line-height:1; }
-.sc-apos { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.6s ease 3.2s forwards; line-height:1; }
-.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:2; line-height:1; }
-.sc-letter-d2 { display:inline-block; opacity:0; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:1; line-height:1; }
-@keyframes scFadeIn { from { opacity:0; transform:translateY(-0.23em); } to { opacity:1; transform:translateY(0); } }
-@keyframes scInsert { to { max-width:0.6em; opacity:1; letter-spacing:2px; } }
-@keyframes scD1 {
-  0%   { opacity:0; transform:translateY(-0.23em) rotate(0deg); }
-  8%   { opacity:1; transform:translateY(0) rotate(0deg); }
-  50%  { opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { transform:translateY(0.23em) rotate(180deg); opacity:1; }
-  100% { transform:translateY(0.23em) rotate(180deg); opacity:1; }
-}
-@keyframes scD2 {
-  0%   { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
-  28%  { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
-  30%  { margin-left:-0.62em; opacity:1; transform:translateY(0) rotate(0deg); }
-  46%  { margin-left:0; opacity:1; transform:translateY(0) rotate(0deg); }
-  50%  { margin-left:0; opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { margin-left:0; opacity:1; transform:translateY(0.23em) rotate(180deg); }
-  100% { margin-left:0; opacity:1; transform:translateY(0.23em) rotate(180deg); }
-}
-.splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 3.8s forwards; direction:rtl; }
-@keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-.splash-divider { display:flex; align-items:center; gap:16px; justify-content:center; margin-bottom:28px; opacity:0; animation:scSubIn 0.6s ease 4.2s forwards; }
-.splash-divider-line { flex:1; max-width:60px; height:1px; background:var(--gray-5); }
-.splash-divider-star { color:var(--gray-4); font-size:8px; }
-.splash-quote { font-style:italic; color:var(--gray-2); font-size:16px; line-height:1.7; border:none; margin:0 0 14px; padding:0 10px; min-height:80px; display:flex; align-items:center; justify-content:center; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; opacity:0; animation:scSubIn 0.8s ease 4.6s forwards; }
-.splash-source { color:var(--gray-3); font-size:11px; letter-spacing:1.5px; font-weight:600; transition: opacity 0.6s ease; opacity:0; animation:scSubIn 0.6s ease 4.8s forwards; }
-.splash-dots { display:flex; gap:6px; justify-content:center; margin-top:16px; cursor:pointer; padding:8px 0; opacity:0; animation:scSubIn 0.5s ease 5s forwards; }
-.splash-dot { height:6px; border-radius:3px; transition: all 0.4s ease; cursor:pointer; }
-.splash-tap { color:var(--gray-4); font-size:11px; margin-top:32px; letter-spacing:2px; opacity:0; animation: scSubIn 0.5s ease 5.2s forwards; }
-.splash-footer { position:absolute; bottom:32px; left:0; right:0; text-align:center; opacity:0; animation:scSubIn 0.5s ease 5.2s forwards; }
-.footer-logo-wrap { display:inline-flex; align-items:center; gap:6px; opacity:0.35; transition:opacity 0.3s; }
-.footer-logo-wrap:hover { opacity:0.55; }
-.footer-logo-icon { width:28px; height:18px; }
-.footer-logo-text { font-size:11px; font-weight:500; letter-spacing:1.5px; color:var(--black); font-family:var(--font); text-transform:uppercase; }
-.patakh-tab { padding:8px 14px; border:1px solid var(--gray-5); border-radius:20px; background:var(--white); font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap; color:var(--gray-2); transition:all 0.15s; }
-.patakh-tab.active { background:var(--black); color:var(--white); border-color:var(--black); }
-.patakh-he { direction:rtl; text-align:right; font-family:'Noto Serif Hebrew',serif; font-size:20px; line-height:2; color:var(--black); margin-bottom:12px; }
-.patakh-ph { font-size:14px; line-height:1.8; color:var(--gray-2); font-style:italic; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--gray-6); }
-@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
-
-/* HOME */
-#home { display:none; min-height:100vh; min-height:100dvh; background:var(--bg); padding:0 0 0; opacity:0; transition: opacity 0.6s ease; position:relative; }
-#home.visible { opacity:1; }
-#home > .insta-bottom-nav { position:sticky; bottom:0; }
-.home-header { background:var(--white); padding:48px 16px 8px; position:relative; }
-.bh-mark { position:absolute; top:16px; right:16px; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; }
-.home-header-top { text-align:center; }
-.app-footer { text-align:center; padding:40px 16px 32px; }
-.home-greeting { font-family:var(--font); font-size:28px; font-weight:800; color:var(--black); letter-spacing:1px; text-align:center; }
-.home-badge { background:var(--gray-6); border:none; border-radius:20px; padding:6px 14px; font-size:12px; color:var(--gray-2); text-align:center; font-weight:500; }
-
-/* PROGRESS */
-.progress-section { padding:16px; }
-.progress-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-.progress-label { font-size:12px; color:var(--gray-3); font-weight:600; }
-.progress-pct { font-size:14px; color:var(--black); font-weight:700; }
-.progress-track { height:2px; background:var(--gray-6); border-radius:2px; overflow:hidden; margin-bottom:6px; }
-.progress-fill { height:100%; background:var(--black); border-radius:2px; transition: width 0.6s cubic-bezier(0.4,0,0.2,1); }
-.progress-detail { font-size:11px; color:var(--gray-3); }
-
-/* COMPLETE / RECAP */
-.complete-card { margin:0 16px 12px; padding:16px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); text-align:center; }
-.complete-icon { font-size:24px; display:block; margin-bottom:4px; }
-.complete-text { font-size:14px; color:var(--black); font-weight:600; }
-.recap-card { margin:0 16px 12px; padding:12px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); display:flex; align-items:center; gap:12px; }
-.recap-icon { font-size:20px; }
-.recap-title { font-size:13px; font-weight:600; color:var(--gray-1); display:block; }
-.recap-sub { font-size:11px; color:var(--gray-3); }
-
-/* NOTIFICATION */
-.notif { position:fixed; top:16px; left:16px; right:16px; z-index:50; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); padding:12px 16px; box-shadow:0 4px 24px rgba(0,0,0,0.12); display:flex; align-items:center; gap:12px; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); opacity:0; transform:translateY(-20px); }
-.notif.show { opacity:1; transform:translateY(0); }
-.notif-icon { font-size:18px; }
-.notif-title { font-size:12px; font-weight:600; color:var(--gray-1); display:block; }
-.notif-text { font-size:12px; color:var(--gray-3); }
-.notif-close { background:none; border:none; font-size:16px; color:var(--gray-3); cursor:pointer; margin-left:auto; padding:4px; }
-
-/* PSALMS LIST */
-.psalms-list { padding:0 16px; }
-.section-title { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--gray-3); font-weight:700; margin-bottom:10px; display:block; }
-.psalm-card {
-  width:100%; display:flex; align-items:center; justify-content:space-between;
-  padding:14px 16px; margin-bottom:4px; border-radius:var(--radius); border:1px solid var(--gray-5);
-  background:var(--white); cursor:pointer; font-family:inherit; font-size:inherit; transition: all 0.15s ease;
-}
-.psalm-card:active { background:var(--gray-6); }
-.psalm-card.read { border-color:var(--black); }
-.psalm-card-left { display:flex; align-items:center; gap:12px; }
-.psalm-card-num { width:36px; height:36px; border-radius:50%; background:var(--gray-6); color:var(--gray-1); font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; }
-.psalm-card-num.done { background:var(--black); color:var(--white); }
-.psalm-card-title { font-size:14px; font-weight:600; color:var(--gray-1); display:block; }
-.psalm-card-verses { font-size:11px; color:var(--gray-3); }
-.psalm-card-arrow { font-size:16px; color:var(--gray-4); }
-.unavailable-card { opacity:0.5; cursor:default; pointer-events:none; }
-.unavailable-num { background:var(--gray-5) !important; color:var(--gray-3) !important; }
-
-/* HOME BIG CARDS */
-.home-date-line { font-size:12px; color:var(--gray-3); text-align:center; padding:6px 16px 0; font-weight:500; }
-.home-big-cards { padding:8px 16px 0; display:flex; flex-direction:column; gap:10px; }
-.big-card { display:flex; align-items:center; gap:14px; padding:18px 16px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; border-left:3px solid #ccc; }
-.big-card:active { transform:scale(0.98); background:var(--gray-6); }
-.big-card-icon { width:48px; height:48px; flex-shrink:0; border-radius:14px; display:flex; align-items:center; justify-content:center; animation:iconFloat 3s ease-in-out infinite; overflow:hidden; }
-.big-card-icon svg { width:36px; height:36px; }
-.big-card-info { flex:1; min-width:0; }
-.big-card-title { font-size:17px; font-weight:700; color:var(--black); }
-.big-card-sub { font-size:12px; color:var(--gray-3); margin-top:2px; }
-.big-card-arrow { font-size:24px; color:var(--gray-4); font-weight:300; flex-shrink:0; }
-.home-big-cards > :nth-child(1) { border-left-color:#6228d7; }
-.home-big-cards > :nth-child(2) { border-left-color:#8b2fb8; }
-.home-big-cards > :nth-child(3) { border-left-color:#b43599; }
-.home-big-cards > :nth-child(4) { border-left-color:#ee2a7b; }
-.home-big-cards > :nth-child(5) { border-left-color:#f26a57; }
-.home-big-cards > :nth-child(6) { border-left-color:#f59c42; }
-.home-big-cards > :nth-child(7) { border-left-color:#f9ce34; }
-
-/* HAYOM YOM CARD */
-.hyy-card { padding:20px 18px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; border-left:3px solid #ccc; }
-.hyy-card:active { transform:scale(0.98); background:var(--gray-6); }
-.hyy-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-.hyy-icon { width:30px; height:30px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; animation:iconPulse 2.5s ease-in-out infinite; flex-shrink:0; }
-.hyy-icon svg { width:18px; height:18px; }
-.hyy-title { font-size:14px; font-weight:700; color:var(--black); flex:1; }
-.hyy-date { font-size:11px; color:var(--gray-3); font-weight:600; }
-.hyy-text { font-family:'EB Garamond',Georgia,serif; font-size:15px; line-height:1.7; color:var(--gray-1); max-height:120px; overflow:hidden; transition:max-height 0.4s ease; position:relative; }
-.hyy-text.expanded { max-height:2000px; }
-.hyy-expand { font-size:11px; color:var(--gray-3); font-weight:600; margin-top:8px; text-align:right; }
-.hyy-loading { font-size:13px; color:var(--gray-3); font-style:italic; }
-.hyy-link { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:12px; padding-top:10px; border-top:1px solid var(--gray-6); font-size:11px; color:var(--gray-3); font-weight:600; letter-spacing:0.5px; }
-.sub-panel-header { font-size:20px; font-weight:800; color:var(--black); text-align:center; padding:8px 16px 12px; }
-/* Club section */
-.club-section { padding:0 0 24px; }
-.club-story { padding:20px 20px 24px; text-align:center; }
-.club-story-title { font-size:18px; font-weight:800; color:var(--black); margin-bottom:12px; letter-spacing:0.5px; }
-.club-story-text { font-size:14px; line-height:1.7; color:var(--gray-2); margin-bottom:0; font-family:'EB Garamond',Georgia,serif; }
-.club-story-tagline { font-size:12px; font-weight:700; color:var(--gray-3); letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
-.club-divider { width:40px; height:2px; background:var(--black); margin:16px auto; border-radius:1px; }
-.club-products-title { font-size:14px; font-weight:700; color:var(--black); text-transform:uppercase; letter-spacing:1.5px; padding:0 20px 12px; }
-.club-products { display:flex; gap:12px; padding:0 20px 20px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; scroll-snap-type:x mandatory; }
-.club-products::-webkit-scrollbar { display:none; }
-.club-product-card { flex:0 0 160px; scroll-snap-align:start; border-radius:var(--radius); overflow:hidden; background:var(--white); border:1px solid var(--gray-6); cursor:pointer; -webkit-tap-highlight-color:transparent; transition:transform 0.2s; }
-.club-product-card:active { transform:scale(0.97); }
-.club-product-img { width:100%; aspect-ratio:1; object-fit:cover; background:var(--gray-6); display:block; }
-.club-product-info { padding:10px 12px; }
-.club-product-name { font-size:12px; font-weight:700; color:var(--black); line-height:1.3; margin-bottom:4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.club-product-price { font-size:13px; font-weight:800; color:var(--black); }
-.club-product-collection { font-size:10px; color:var(--gray-3); font-weight:600; margin-bottom:2px; }
-.club-cta { display:block; margin:0 20px 20px; padding:14px; text-align:center; background:var(--black); color:var(--white); font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; border-radius:var(--radius); text-decoration:none; transition:opacity 0.2s; }
-.club-cta:active { opacity:0.85; }
-.club-maasser { background:var(--gray-6); border-radius:var(--radius); margin:0 20px 20px; padding:16px; text-align:center; }
-.club-maasser-emoji { font-size:24px; margin-bottom:6px; }
-.club-maasser-text { font-size:12px; color:var(--gray-2); line-height:1.6; }
-.club-hero { text-align:center; padding:28px 20px 20px; }
-.club-hero-emoji { font-size:48px; margin-bottom:8px; }
-.club-hero-title { font-size:22px; font-weight:800; color:var(--black); margin-bottom:4px; }
-.club-hero-sub { font-size:13px; color:var(--gray-3); }
-.club-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; padding:0 16px 16px; }
-.obj-story-bar { display:flex; align-items:center; gap:10px; padding:12px 16px 8px; justify-content:center; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-.obj-story-bar-scroll { justify-content:flex-start; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; gap:12px; }
-.obj-story-bar-scroll::-webkit-scrollbar { display:none; }
-.obj-story-bar-scroll .os-ring { width:56px; height:56px; }
-.obj-story-bar-scroll .os-circle { font-size:22px; }
-.obj-story-bar::-webkit-scrollbar { display:none; }
-.os-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
-.os-ring { width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
-.os-item.done .os-ring { background:#dbdbdb !important; }
-.os-item.current .os-ring { animation:storyPulse 2s ease-in-out infinite; }
-@keyframes storyPulse { 0%,100% { box-shadow:0 0 0 0 rgba(238,42,123,0.4); } 50% { box-shadow:0 0 0 8px rgba(238,42,123,0); } }
-.os-circle { width:100%; height:100%; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:24px; }
-.os-label { font-size:10px; color:var(--gray-3); font-weight:600; white-space:nowrap; text-align:center; font-family:var(--font); }
-.os-item.current .os-label { color:var(--black); font-weight:700; }
-/* STORY OVERLAY */
-#obj-story-overlay { position:fixed; top:0; left:0; right:0; bottom:0; z-index:9999; display:none; flex-direction:column; max-width:520px; margin:0 auto; }
-#obj-story-overlay[style*="flex"] { display:flex !important; }
-.os-progress { display:flex; gap:3px; padding:12px 8px 0; flex-shrink:0; position:absolute; top:0; left:0; right:0; z-index:10; }
-.os-prog-seg { flex:1; height:2.5px; border-radius:2px; background:rgba(255,255,255,0.3); overflow:hidden; }
-.os-prog-fill { height:100%; border-radius:2px; background:rgba(255,255,255,0.9); width:0%; transition:width 0.3s; }
-.os-close { position:absolute; top:24px; right:16px; z-index:20; background:none; border:none; color:white; font-size:22px; cursor:pointer; width:40px; height:40px; display:flex; align-items:center; justify-content:center; text-shadow:0 1px 4px rgba(0,0,0,0.3); }
-.os-content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:50px 20px 30px; text-align:center; transition:opacity 0.3s; overflow-y:auto; position:relative; z-index:6; pointer-events:none; }
-.os-emoji { font-size:52px; margin-bottom:10px; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.25)); animation:iconBounce 2s ease-in-out infinite; }
-.os-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:26px; font-weight:700; margin-bottom:6px; direction:rtl; text-shadow:0 2px 8px rgba(0,0,0,0.1); }
-.os-name { font-size:16px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; opacity:0.9; }
-.os-msg { font-size:14px; line-height:1.6; max-width:320px; opacity:0.85; font-family:'EB Garamond',Georgia,serif; margin-bottom:20px; }
-.os-check-btn { padding:14px 40px; border-radius:50px; border:2px solid rgba(255,255,255,0.8); background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); transition:all 0.3s; display:flex; align-items:center; gap:10px; pointer-events:auto; position:relative; z-index:10; }
-.os-check-btn:active { transform:scale(0.95); }
-.os-check-btn.checked { background:rgba(255,255,255,0.95); border-color:transparent; }
-.os-time-badge { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; opacity:0.6; margin-bottom:20px; }
-.os-tap-left { position:absolute; left:0; top:40px; bottom:0; width:25%; z-index:5; }
-.os-tap-right { position:absolute; right:0; top:40px; bottom:0; width:75%; z-index:5; }
-
-/* DAILY OBJECTIVES */
-.daily-objectives { margin:12px 16px 0; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; }
-.obj-header { display:flex; align-items:center; justify-content:space-between; padding:14px 16px 8px; }
-.obj-title { font-size:14px; font-weight:700; color:var(--black); }
-.obj-counter { font-size:12px; font-weight:700; color:var(--gray-3); background:var(--gray-6); padding:3px 10px; border-radius:20px; transition:all 0.3s; }
-.obj-counter.done { background:#dcfce7; color:#16a34a; }
-.obj-progress-bar { height:3px; background:var(--gray-6); margin:0 16px 6px; border-radius:2px; overflow:hidden; }
-.obj-progress-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:2px; transition:width 0.4s cubic-bezier(0.4,0,0.2,1); width:0%; }
-.obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
-.obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
-.obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
-.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:200px; }
-.shabbat-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:opacity 0.8s ease; opacity:0; filter:blur(1px); }
-.shabbat-bg.loaded { opacity:1; }
-.shabbat-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,30,0.3) 0%, rgba(10,10,30,0.5) 50%, rgba(10,10,30,0.7) 100%); }
-.shabbat-content { position:relative; z-index:1; padding:18px 20px 16px; }
-.shabbat-city { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.95); }
-.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; }
-.shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
-.shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
-.shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap; animation:iconPulse 3s ease-in-out infinite; backdrop-filter:blur(6px); }
-.shabbat-times-row { display:flex; align-items:center; justify-content:center; gap:0; }
-.shabbat-time-block { flex:1; display:flex; align-items:center; gap:10px; justify-content:center; }
-.shabbat-time-icon { flex-shrink:0; }
-.shabbat-time-icon svg { display:block; }
-.shabbat-time-icon.candle-icon { filter:drop-shadow(0 0 10px rgba(249,206,52,0.5)); animation:candleGlow 2s ease-in-out infinite alternate; }
-.shabbat-time-icon.moon-icon { filter:drop-shadow(0 0 6px rgba(192,132,252,0.3)); }
-@keyframes candleGlow { from { filter:drop-shadow(0 0 8px rgba(249,206,52,0.3)); } to { filter:drop-shadow(0 0 16px rgba(249,206,52,0.6)); } }
-.shabbat-time-icon.candle-icon svg { width:30px; height:52px; }
-.shabbat-time-icon.moon-icon svg { width:42px; height:42px; border-radius:8px; }
-.shabbat-time-detail {}
-.shabbat-time-label { font-size:10px; color:rgba(255,255,255,0.9); letter-spacing:0.5px; text-transform:uppercase; }
-.shabbat-time-val { font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:0.5px; }
-.shabbat-time-val.candles { color:#f9ce34; text-shadow:0 0 12px rgba(249,206,52,0.3); }
-.shabbat-time-val.havdalah { color:#c084fc; text-shadow:0 0 12px rgba(192,132,252,0.3); }
-.shabbat-time-date { font-size:11px; color:rgba(255,255,255,0.85); margin-top:2px; font-weight:500; }
-.shabbat-time-hedate { font-size:10px; color:rgba(255,255,255,0.65); margin-top:1px; font-style:italic; }
-.shabbat-sep { width:1px; height:60px; background:rgba(255,255,255,0.15); margin:0 12px; flex-shrink:0; }
-.obj-list { padding:0 8px 4px; }
-.obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
-.obj-item:active { background:var(--gray-6); }
-.obj-checkbox { width:22px; height:22px; border-radius:50%; border:2px solid var(--gray-4); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all 0.25s; }
-.obj-item.checked .obj-checkbox { border-color:#16a34a; background:#16a34a; }
-.obj-check-svg { width:12px; height:12px; opacity:0; transform:scale(0); transition:all 0.25s; }
-.obj-item.checked .obj-check-svg { opacity:1; transform:scale(1); }
-.obj-emoji { font-size:18px; flex-shrink:0; width:26px; text-align:center; }
-.obj-label { font-size:13px; color:var(--gray-1); font-weight:500; flex:1; }
-.obj-item.checked .obj-label { color:var(--gray-3); text-decoration:line-through; text-decoration-color:var(--gray-4); }
-.obj-time { font-size:10px; color:var(--gray-4); font-weight:600; flex-shrink:0; }
-.obj-reset-wrap { text-align:center; padding:4px 0 10px; }
-.obj-reset-btn { background:none; border:none; color:var(--gray-4); font-size:11px; cursor:pointer; font-family:var(--font); font-weight:600; padding:4px 12px; }
-.obj-period-header { display:flex; align-items:center; gap:8px; padding:10px 12px 4px; cursor:pointer; }
-.obj-period-emoji { font-size:16px; }
-.obj-period-name { font-size:12px; font-weight:700; color:var(--gray-2); text-transform:uppercase; letter-spacing:1px; flex:1; }
-.obj-period-count { font-size:11px; font-weight:600; color:var(--gray-4); background:var(--gray-6); padding:2px 8px; border-radius:12px; }
-/* Story checklist inside overlay */
-.os-checklist { width:100%; max-width:320px; display:flex; flex-direction:column; gap:6px; margin-bottom:20px; pointer-events:auto; position:relative; z-index:10; }
-.os-check-row { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; background:rgba(255,255,255,0.12); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); cursor:pointer; transition:all 0.2s; }
-.os-check-row:active { transform:scale(0.97); }
-.os-check-row.checked { background:rgba(255,255,255,0.25); }
-.os-check-box { font-size:18px; width:24px; text-align:center; flex-shrink:0; }
-.os-check-emoji { font-size:18px; flex-shrink:0; }
-.os-check-label { font-size:14px; font-weight:600; flex:1; }
-.obj-complete-msg { text-align:center; padding:8px 16px 12px; font-size:12px; font-weight:600; color:#16a34a; display:none; }
-.obj-complete-msg.show { display:block; animation:objFadeIn 0.5s ease; }
-.obj-complete-quote { display:none; padding:12px 16px; text-align:center; }
-.obj-complete-quote.show { display:block; animation:objFadeIn 0.6s ease; }
-.obj-cq-text { font-style:italic; font-size:13px; color:var(--gray-1); line-height:1.6; margin-bottom:6px; font-family:'EB Garamond',Georgia,serif; }
-.obj-cq-source { font-size:10px; color:var(--gray-3); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
-.obj-cq-bravo { font-size:13px; font-weight:600; color:#16a34a; margin-bottom:8px; }
-@keyframes objFadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
-@keyframes iconFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
-@keyframes iconPulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.08); } }
-@keyframes iconBounce { 0%,100% { transform:translateY(0) scale(1); } 25% { transform:translateY(-6px) scale(1.05); } 75% { transform:translateY(2px) scale(0.98); } }
-@keyframes iconGlow { 0% { filter:drop-shadow(0 0 4px rgba(255,200,50,0.2)); } 100% { filter:drop-shadow(0 0 12px rgba(255,200,50,0.6)); } }
-@keyframes shareRotate { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
-
-/* DAILY QUOTE */
-.don-card { border-radius:var(--radius); cursor:pointer; overflow:hidden; transition:transform 0.15s; display:block; }
-.don-card:active { transform:scale(0.98); }
-.don-card-inner { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; padding:22px 12px; }
-.don-card-icon { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; animation:iconFloat 2.5s ease-in-out infinite; }
-.don-card-icon svg { width:24px; height:24px; }
-.don-card-text { }
-.don-card-title { font-size:15px; font-weight:700; color:#fff; margin-bottom:2px; }
-.don-card-sub { font-size:10px; color:rgba(255,255,255,0.7); }
-.don-amount-btn { padding:14px 8px; border:1px solid var(--gray-5); border-radius:var(--radius); background:var(--white); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); color:var(--black); transition:all 0.15s; }
-.don-amount-btn:active { transform:scale(0.95); }
-.don-amount-btn.selected { background:#1a6b3c; color:#fff; border-color:#1a6b3c; }
-.don-amount-btn.don-custom { font-size:13px; color:var(--gray-3); }
-.don-campaign-card { display:flex; align-items:center; padding:18px 20px; border-radius:var(--radius); background:linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #7c3aed 100%); cursor:pointer; transition:transform 0.15s; }
-.don-campaign-card:active { transform:scale(0.98); }
-.daily-quote { margin:20px 16px 24px; padding:20px; text-align:center; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); }
-.quote-decor { font-size:16px; margin-bottom:10px; background:linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:iconPulse 3s ease-in-out infinite; }
-.quote-text { font-style:italic; color:var(--gray-2); font-size:17px; line-height:1.7; margin-bottom:10px; min-height:50px; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; }
-.quote-source { font-size:11px; color:var(--gray-3); font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition: opacity 0.6s ease; }
-.quote-dots { display:flex; gap:5px; justify-content:center; margin-top:10px; cursor:pointer; padding:8px 0; }
-.quote-dot { height:4px; border-radius:2px; transition: all 0.4s ease; cursor:pointer; }
-
-/* READING */
-#home, #reading { max-width:520px; margin:0 auto; }
-#reading { position:fixed; top:0; left:0; right:0; bottom:0; background:var(--bg); overflow:hidden; flex-direction:column; z-index:100; max-width:520px; margin:0 auto; }
-@media(min-width:521px) {
-  #home, #reading { box-shadow:0 0 30px rgba(0,0,0,0.08); border-left:1px solid var(--gray-5); border-right:1px solid var(--gray-5); }
-  body { background:#f0f0f0; }
-}
-.reading-header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--gray-5); background:var(--white); position:relative; z-index:50; flex-shrink:0; }
-.back-btn { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:12px 16px 12px 0; min-height:44px; min-width:70px; }
-.next-btn { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:12px 0 12px 16px; min-height:44px; min-width:70px; text-align:right; }
-.reading-chapter { font-size:13px; font-weight:700; color:var(--black); text-align:center; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:var(--font); }
-.reading-progress-bar { padding:0 16px; display:flex; align-items:center; gap:8px; padding-top:8px; flex-shrink:0; }
-.reading-prog-track { flex:1; height:1px; background:var(--gray-5); border-radius:1px; overflow:hidden; }
-.reading-prog-fill { height:100%; background:var(--black); border-radius:1px; transition: width 0.3s ease; }
-.reading-prog-text { font-size:11px; color:var(--gray-3); white-space:nowrap; }
-/* STORY BAR */
-.story-bar { display:flex; align-items:center; gap:10px; padding:8px 14px 6px; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; background:var(--white); border-bottom:1px solid var(--gray-5); flex-shrink:0; scrollbar-width:none; }
-.story-bar::-webkit-scrollbar { display:none; }
-.story-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
-.story-circle { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:16px; font-weight:700; color:var(--gray-1); background:var(--white); direction:rtl; transition:all 0.2s; }
-.story-ring { width:62px; height:62px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; padding:2px; animation:shimmer 8s linear infinite; }
-.story-item.read .story-ring { background:#dbdbdb; }
-.story-item.active .story-circle { color:var(--black); font-weight:800; }
-.story-item.read .story-circle { color:var(--gray-4); }
-.story-label { font-size:10px; color:var(--gray-3); font-weight:600; white-space:nowrap; max-width:62px; overflow:hidden; text-overflow:ellipsis; text-align:center; font-family:var(--font); }
-.story-circle-group { font-family:'Noto Serif Hebrew',serif; font-size:13px; direction:rtl; }
-
-/* Calendar */
-.cal-header { text-align:center; padding:16px 0 12px; }
-.cal-month-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:28px; font-weight:700; color:var(--black); }
-.cal-month-name { font-size:14px; color:var(--gray-3); margin-top:2px; }
-.cal-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; padding:0 12px 20px; }
-.cal-day { display:flex; flex-direction:column; align-items:center; gap:4px; padding:10px 4px; border-radius:14px; cursor:pointer; transition:all 0.2s; background:var(--white); border:1.5px solid var(--gray-5); }
-.cal-day:active { transform:scale(0.95); }
-.cal-day.today { border:2.5px solid transparent; background-image:linear-gradient(var(--white),var(--white)),conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); background-origin:border-box; background-clip:padding-box, border-box; position:relative; }
-.cal-day.today .cal-day-inner { background:transparent; border-radius:12px; padding:8px 4px; width:100%; display:flex; flex-direction:column; align-items:center; gap:4px; }
-.cal-day:not(.today) .cal-day-inner { display:flex; flex-direction:column; align-items:center; gap:4px; }
-.cal-day-num { font-family:'Noto Serif Hebrew',serif; font-size:18px; font-weight:700; color:var(--black); }
-.cal-day-label { font-size:9px; color:var(--gray-3); font-weight:600; text-align:center; line-height:1.2; }
-.cal-day.today .cal-day-label { color:var(--gray-1); font-weight:700; }
-.cal-day.today .cal-day-num { color:var(--black); }
-.cal-day.done { background:#f0faf0; border-color:#c3e6c3; }
-.cal-day.done .cal-day-check { font-size:10px; color:#27ae60; line-height:1; }
-.cal-day.done.today { }
-
-/* Calendar progress banner */
-.cal-progress-banner { margin:0 16px 12px; padding:14px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); display:flex; align-items:center; gap:12px; }
-.cal-progress-banner.done { background:linear-gradient(135deg, #f9fafb, #f0fdf4); border-color:#bbf7d0; }
-.cal-progress-banner.perso { background:linear-gradient(135deg, #fffbeb, #fef3c7); border-color:#fcd34d; cursor:pointer; }
-.cal-progress-banner.perso:active { opacity:0.8; }
-.cal-progress-emoji { font-size:28px; flex-shrink:0; }
-.cal-progress-msg { font-size:13px; color:var(--gray-2); line-height:1.4; flex:1; }
-.cal-progress-msg strong { color:var(--black); }
-.cal-progress-info { flex:1; }
-.cal-progress-bar-wrap { display:flex; align-items:center; gap:8px; margin-top:6px; }
-.cal-progress-bar-bg { flex:1; height:5px; border-radius:3px; background:var(--gray-5); overflow:hidden; }
-.cal-progress-bar-fill { height:100%; border-radius:3px; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7); }
-.cal-progress-pct { font-size:11px; font-weight:600; color:var(--gray-2); }
-.cal-progress-go { flex-shrink:0; padding:8px 14px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); }
-.cal-progress-go:active { opacity:0.8; }
-.cal-progress-arrow { font-size:16px; color:var(--gray-4); flex-shrink:0; }
-
-/* Completion card */
-.cal-completion-card { margin:0 16px 16px; padding:24px 20px; border-radius:16px; background:linear-gradient(135deg, #0f0f0f, #1a1a2e); text-align:center; position:relative; overflow:hidden; }
-.cal-completion-card::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:conic-gradient(from 210deg, rgba(249,206,52,0.1), rgba(238,42,123,0.1), rgba(98,40,215,0.1), rgba(238,42,123,0.1), rgba(249,206,52,0.1)); animation:shimmer 4s linear infinite; }
-@keyframes shimmer { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
-.cal-completion-emoji { font-size:36px; position:relative; z-index:1; margin-bottom:10px; }
-.cal-completion-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:15px; color:rgba(255,255,255,0.7); direction:rtl; position:relative; z-index:1; margin-bottom:12px; line-height:1.6; }
-.cal-completion-text { font-size:13px; color:rgba(255,255,255,0.9); position:relative; z-index:1; line-height:1.6; margin-bottom:14px; }
-.cal-completion-text strong { color:#f9ce34; }
-.cal-completion-footer { font-size:11px; color:rgba(255,255,255,0.4); position:relative; z-index:1; font-family:'Noto Serif Hebrew',serif; }
-.story-item.active .story-label { color:var(--black); }
-@keyframes storySpinIn { 0% { transform:scale(0) rotate(0deg); opacity:0; } 50% { transform:scale(0.8) rotate(180deg); opacity:0.7; } 100% { transform:scale(1) rotate(360deg); opacity:1; } }
-.story-item.anim-in { animation: storySpinIn 0.5s ease forwards; opacity:0; }
-.reading-body { flex:1; overflow-y:scroll; scroll-snap-type:y mandatory; -webkit-overflow-scrolling:touch; min-height:0; }
-/* FLOATING BOTTOM BAR */
-.reading-bottom-bar { display:none; }
-/* PERSISTENT INSTA NAV */
-.insta-bottom-nav { display:flex; align-items:center; justify-content:space-around; padding:6px 0 max(6px, env(safe-area-inset-bottom)); background:var(--white); border-top:1px solid var(--gray-5); flex-shrink:0; position:sticky; bottom:0; z-index:200; }
-#reading .insta-bottom-nav { position:relative; }
-.insta-nav-item { display:flex; flex-direction:column; align-items:center; gap:1px; background:none; border:none; cursor:pointer; color:var(--gray-3); padding:6px 12px; -webkit-tap-highlight-color:transparent; transition:color 0.15s; }
-.insta-nav-item:active { transform:scale(0.92); }
-.insta-nav-item svg { width:24px; height:24px; }
-.insta-nav-item span { font-size:9px; font-weight:600; letter-spacing:0.2px; font-family:var(--font); }
-.insta-nav-item.active { color:var(--black); }
-.insta-nav-item.active svg { stroke-width:2.2; }
-.insta-nav-center { position:relative; display:flex; flex-direction:column; align-items:center; gap:1px; background:none; border:none; cursor:pointer; padding:6px 12px; -webkit-tap-highlight-color:transparent; }
-.insta-nav-center-ring { width:50px; height:50px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; margin-top:-22px; box-shadow:0 2px 12px rgba(98,40,215,0.25); animation:shimmer 6s linear infinite; }
-.insta-nav-center-inner { width:44px; height:44px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:22px; }
-.insta-nav-center span { font-size:9px; font-weight:600; letter-spacing:0.2px; font-family:var(--font); color:var(--gray-3); margin-top:2px; }
-.insta-nav-center.active span { color:var(--black); }
-/* SHARE BTN next to heart */
-.insta-share-btn { background:none; border:none; cursor:pointer; padding:6px; display:flex; align-items:center; transition:transform 0.2s, filter 0.2s; border-radius:50%; position:relative; }
-.insta-share-btn:hover { filter:brightness(1.2); }
-.insta-share-btn:active { transform:scale(1.3) rotate(15deg); filter:brightness(1.4); }
-.insta-share-btn svg { width:22px; height:22px; fill:none; stroke:url(#shareGrad); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 1px 4px rgba(98,40,215,0.3)); }
-/* INSTA POST CARD */
-.insta-post { background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; }
-
-/* READING MODE TOGGLE */
-.reading-toggle { display:flex; background:var(--gray-6); border-radius:8px; padding:3px; margin:0 16px 16px; position:relative; }
-.reading-toggle-btn { flex:1; padding:8px 4px; text-align:center; font-size:12px; font-weight:600; color:var(--gray-3); background:none; border:none; cursor:pointer; border-radius:6px; transition:all 0.25s ease; z-index:1; position:relative; font-family:var(--font); }
-.reading-toggle-btn.active { color:var(--black); }
-.reading-toggle-slider { position:absolute; top:3px; bottom:3px; left:3px; width:calc(33.333% - 2px); background:var(--white); border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.1); transition:transform 0.25s ease; }
-.reading-toggle[data-mode="phonetique"] .reading-toggle-slider { transform:translateX(100%); }
-.reading-toggle[data-mode="francais"] .reading-toggle-slider { transform:translateX(200%); }
-.insta-post-header { display:flex; align-items:center; gap:10px; padding:12px 14px; flex-shrink:0; }
-.insta-post-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #fcaf45); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.insta-post-avatar-inner { width:34px; height:34px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:15px; font-weight:700; color:var(--black); direction:rtl; }
-.insta-post-user { font-size:13px; font-weight:700; color:var(--black); }
-.insta-post-location { font-size:11px; color:var(--gray-3); }
-.insta-post-content { padding:0 16px 20px; }
-.insta-post-divider { border:none; border-top:1px solid var(--gray-5); margin:0; flex-shrink:0; }
-.psalm-header-reading { text-align:center; margin-bottom:24px; }
-.psalm-num-hebrew-big { font-family:'Noto Serif Hebrew',serif; font-size:38px; font-weight:700; color:var(--black); display:block; line-height:1.2; direction:rtl; }
-.psalm-num-sub { font-size:13px; color:var(--gray-3); display:block; margin-top:6px; font-family:var(--font); }
-.psalm-section-label { display:block; font-size:11px; color:var(--gray-3); margin-top:4px; font-weight:600; letter-spacing:0.5px; }
-.verse-block { margin-bottom:24px; padding-left:28px; position:relative; }
-.verse-num { position:absolute; left:0; top:5px; font-size:12px; color:var(--gray-3); font-weight:600; width:22px; text-align:center; font-family:'Noto Serif Hebrew',serif; direction:rtl; }
-.hebrew-text { font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-hebrew, 21px); line-height:2; direction:rtl; text-align:right; color:var(--black); margin-bottom:6px; }
-.french-text { font-size:var(--fs-french, 20px); line-height:1.7; color:var(--gray-1); font-family:'EB Garamond',Georgia,serif; }
-.phonetic-text { font-size:var(--fs-phonetic, 20px); line-height:1.8; color:var(--gray-1); font-family:'EB Garamond',Georgia,serif; margin-top:4px; direction:ltr; text-align:left; letter-spacing:0.2px; }
-/* Sefer style - continuous Hebrew */
-.sefer-text { font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-sefer, 22px); line-height:2.2; direction:rtl; text-align:justify; color:var(--black); padding:0 4px; }
-.sefer-verse-num { font-size:calc(var(--fs-sefer, 22px) - 6px); font-weight:700; color:var(--black); font-family:'Noto Serif Hebrew',serif; margin:0 2px; }
-/* FONT SIZE CONTROL */
-.font-size-bar { display:flex; align-items:center; justify-content:center; gap:16px; padding:6px 16px 14px; }
-.font-size-btn { width:36px; height:36px; border-radius:50%; border:1.5px solid var(--gray-4); background:var(--white); display:flex; align-items:center; justify-content:center; cursor:pointer; font-family:var(--font); font-weight:700; color:var(--gray-1); transition:all 0.15s; }
-.font-size-btn:active { background:var(--gray-6); transform:scale(0.92); }
-.font-size-label { font-size:12px; color:var(--gray-3); font-weight:600; letter-spacing:0.3px; font-family:var(--font); min-width:30px; text-align:center; }
-/* INSTA ACTION BAR */
-.insta-post-footer { flex-shrink:0; background:var(--white); }
-.insta-actions { padding:10px 14px 4px; display:flex; align-items:center; gap:14px; border-top:1px solid var(--gray-5); }
-/* SNAP SCROLL */
-.snap-section { scroll-snap-align:start; scroll-snap-stop:always; display:flex; flex-direction:column; overflow:hidden; }
-.snap-section .insta-post { flex:1; display:flex; flex-direction:column; border-radius:0; border-left:none; border-right:none; margin:0; overflow:hidden; }
-.snap-section .insta-post-content { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; min-height:0; }
-.insta-heart-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; transition:transform 0.15s; }
-.insta-heart-btn:active { transform:scale(1.3); }
-.insta-heart-btn svg { width:26px; height:26px; transition:all 0.2s; }
-.insta-heart-btn.liked svg { fill:#ed4956; stroke:#ed4956; }
-.insta-nav-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; }
-.insta-nav-btn svg { width:24px; height:24px; stroke:var(--gray-1); fill:none; stroke-width:1.5; }
-.insta-bookmark { margin-left:auto; }
-.insta-likes { padding:4px 14px 6px; font-size:13px; font-weight:700; color:var(--black); cursor:pointer; display:inline-block; }
-.insta-timestamp { padding:0 14px 12px; font-size:10px; color:var(--gray-3); text-transform:uppercase; letter-spacing:0.5px; }
-/* READING HISTORY POPUP */
-.history-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:200; display:flex; align-items:flex-end; justify-content:center; }
-.history-popup { background:var(--white); border-radius:20px 20px 0 0; width:100%; max-width:500px; max-height:60vh; overflow-y:auto; animation:slideUp 0.3s ease; }
-@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
-.history-header { display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid var(--gray-6); position:sticky; top:0; background:var(--white); border-radius:20px 20px 0 0; }
-.history-title { font-size:15px; font-weight:700; color:var(--black); }
-.history-close { background:none; border:none; font-size:18px; color:var(--gray-3); cursor:pointer; padding:4px 8px; }
-.history-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--gray-6); }
-.history-item-info { display:flex; align-items:center; gap:10px; }
-.history-item-icon { font-size:16px; }
-.history-item-date { font-size:13px; color:var(--gray-1); }
-.history-item-time { font-size:11px; color:var(--gray-3); display:block; }
-.history-item-remove { background:none; border:none; font-size:11px; color:#ed4956; cursor:pointer; padding:6px 10px; font-weight:600; }
-.history-empty { padding:32px 16px; text-align:center; color:var(--gray-3); font-size:13px; }
-.nav-buttons { display:flex; justify-content:center; gap:8px; margin:12px 16px; }
-.nav-btn { background:var(--white); border:1px solid var(--gray-5); color:var(--gray-1); padding:10px 22px; border-radius:var(--radius-sm); font-size:13px; cursor:pointer; font-weight:600; transition:all 0.15s; }
-.nav-btn:active { background:var(--gray-6); }
-
-/* MENU CARDS */
-.menu-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; padding:0 16px 8px; }
-#panel-menu { }
-.menu-card { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 10px; border-radius:var(--radius); border:1px solid var(--gray-5); background:var(--white); cursor:pointer; font-family:inherit; text-align:center; transition:all 0.15s ease; gap:8px; min-height:100px; }
-.menu-card:active { background:var(--gray-6); transform:scale(0.97); }
-.menu-card-icon { font-size:28px; }
-.menu-card-title { font-size:13px; font-weight:700; color:var(--black); display:block; text-align:center; line-height:1.3; }
-.menu-card-sub { font-size:10px; color:var(--gray-3); display:block; margin-top:2px; line-height:1.3; text-align:center; }
-.menu-card-arrow { display:none; }
-.card-jour { }
-.card-perek { }
-.menu-card.coming-soon { opacity:0.5; }
-.menu-card.coming-soon .menu-card-title::after { content:' · Bientôt'; font-weight:400; font-size:9px; color:var(--gray-4); }
-
-/* Chains */
-.chain-header { padding:16px; text-align:center; }
-.chain-title { font-size:20px; font-weight:700; color:var(--black); margin:0 0 6px; font-family:var(--font); }
-.chain-desc { font-size:12px; color:var(--gray-3); margin:0; line-height:1.5; }
-.chain-create-btn { display:block; width:calc(100% - 32px); margin:0 16px 16px; padding:14px; border-radius:var(--radius); border:2px dashed var(--gray-4); background:transparent; font-size:14px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); transition:all 0.15s; }
-.chain-create-btn:active { background:var(--gray-6); }
-.chain-form-card { margin:0 16px 16px; padding:16px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); }
-.chain-form-group { margin-bottom:14px; }
-.chain-label { font-size:12px; font-weight:600; color:var(--gray-2); display:block; margin-bottom:6px; }
-.chain-type-btns { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-.chain-type-btn { padding:10px 6px; border-radius:10px; border:1.5px solid var(--gray-5); background:var(--white); font-size:11px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); transition:all 0.15s; }
-.chain-type-btn.active { border-color:var(--black); background:var(--black); color:var(--white); }
-.chain-input { width:100%; padding:10px 12px; border-radius:10px; border:1.5px solid var(--gray-5); font-size:14px; font-family:var(--font); color:var(--black); outline:none; box-sizing:border-box; }
-.chain-input:focus { border-color:var(--gray-2); }
-.chain-name-row { display:flex; gap:8px; align-items:center; }
-.chain-name-half { flex:1; min-width:0; }
-.chain-form-actions { display:flex; gap:8px; }
-.chain-cancel-btn { flex:1; padding:12px; border-radius:10px; border:1px solid var(--gray-5); background:var(--white); font-size:13px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); }
-.chain-submit-btn { flex:2; padding:12px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:13px; font-weight:700; cursor:pointer; font-family:var(--font); }
-.chain-submit-btn:active { opacity:0.8; }
-
-.chain-card { margin:0 16px 10px; padding:14px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); cursor:pointer; transition:all 0.15s; }
-.chain-card:active { background:var(--gray-6); }
-.chain-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px; }
-.chain-card-type { font-size:10px; font-weight:600; color:var(--white); background:var(--black); padding:3px 8px; border-radius:6px; }
-.chain-card-type.refoua { background:#e74c3c; }
-.chain-card-type.mariage { background:#9b59b6; }
-.chain-card-type.memoire { background:#2c3e50; }
-.chain-card-type.autre { background:#27ae60; }
-.chain-card-date { font-size:10px; color:var(--gray-4); }
-.chain-card-name { font-size:16px; font-weight:700; color:var(--black); margin-bottom:4px; direction:auto; }
-.chain-card-descr { font-size:12px; color:var(--gray-3); margin-bottom:10px; }
-.chain-card-progress { display:flex; align-items:center; gap:8px; }
-.chain-progress-bar { flex:1; height:6px; border-radius:3px; background:var(--gray-5); overflow:hidden; }
-.chain-progress-fill { height:100%; border-radius:3px; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7); transition:width 0.3s; }
-.chain-progress-text { font-size:11px; font-weight:600; color:var(--gray-2); white-space:nowrap; }
-
-/* Chain detail */
-.chain-detail-header { text-align:center; padding:20px 16px; }
-.chain-detail-type { font-size:11px; font-weight:600; color:var(--white); display:inline-block; padding:4px 12px; border-radius:8px; margin-bottom:8px; }
-.chain-detail-name { font-size:22px; font-weight:700; color:var(--black); direction:auto; margin-bottom:4px; }
-.chain-detail-desc { font-size:13px; color:var(--gray-3); }
-.chain-wheel { display:flex; justify-content:center; padding:10px 0 20px; }
-.chain-wheel-ring { width:160px; height:160px; border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; }
-.chain-wheel-inner { width:130px; height:130px; border-radius:50%; background:var(--white); display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.chain-wheel-count { font-size:32px; font-weight:700; color:var(--black); }
-.chain-wheel-label { font-size:11px; color:var(--gray-3); }
-.chain-wheel-cycle { font-size:10px; color:var(--gray-4); margin-top:2px; }
-.chain-next-section { padding:0 16px 16px; text-align:center; }
-.chain-next-btn { display:block; width:100%; padding:16px; border-radius:var(--radius); border:none; background:var(--black); color:var(--white); font-size:15px; font-weight:700; cursor:pointer; font-family:var(--font); }
-.chain-next-btn:active { opacity:0.8; }
-.chain-psalms-grid { display:grid; grid-template-columns:repeat(10, 1fr); gap:3px; padding:0 16px 20px; }
-.chain-psalm-cell { width:100%; aspect-ratio:1; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; background:var(--gray-5); color:var(--gray-3); }
-.chain-psalm-cell.read { background:#27ae60; color:var(--white); }
-.chain-psalm-cell.assigned { background:#f39c12; color:var(--white); }
-.chain-psalm-cell.current { background:var(--black); color:var(--white); }
-.chain-stat-pill { background:var(--gray-6); padding:6px 12px; border-radius:20px; font-size:11px; font-weight:600; color:var(--gray-2); }
-.chain-share-section { padding:0 16px 20px; display:flex; gap:8px; }
-.chain-share-btn { flex:1; padding:12px; border-radius:10px; border:1px solid var(--gray-5); background:var(--white); font-size:12px; font-weight:600; color:var(--gray-2); cursor:pointer; font-family:var(--font); text-align:center; }
-.chain-share-btn.whatsapp { background:#25D366; color:white; border-color:#25D366; }
-.chain-share-btn:active { opacity:0.8; }
-.chain-share-top { font-size:12px; font-weight:600; color:var(--gray-2); background:none; border:1px solid var(--gray-5); border-radius:8px; padding:6px 12px; cursor:pointer; font-family:var(--font); }
-.chain-delete-btn { display:block; margin:0 auto 20px; padding:10px 20px; border:none; background:none; color:#e74c3c; font-size:12px; font-weight:600; cursor:pointer; font-family:var(--font); }
-.chain-empty { text-align:center; padding:40px 16px; color:var(--gray-3); font-size:14px; }
-
-/* T119 by name */
-.t119-header { padding:16px; text-align:center; }
-.t119-title { font-size:20px; font-weight:700; color:var(--black); margin:0 0 6px; font-family:var(--font); }
-.t119-desc { font-size:12px; color:var(--gray-3); margin:0; line-height:1.5; }
-.t119-input-section { padding:0 16px; }
-.t119-fullname-row { display:flex; gap:8px; align-items:flex-end; margin-bottom:8px; }
-.t119-field { flex:1; min-width:0; }
-.t119-name-label { font-size:11px; font-weight:600; color:var(--gray-3); display:block; margin-bottom:4px; }
-.t119-input-half { width:100%; padding:12px 10px; font-size:14px; text-align:center; }
-.t119-clear-wrap { text-align:center; margin-bottom:6px; }
-.t119-clear-btn { background:none; border:none; color:var(--gray-3); font-size:11px; font-weight:600; cursor:pointer; padding:4px 12px; font-family:var(--font); }
-/* Sliding Ben/Bat toggle */
-.t119-benbat-slider, .chain-benbat-slider { flex-shrink:0; cursor:pointer; -webkit-tap-highlight-color:transparent; padding-bottom:1px; }
-.bb-slider-track { position:relative; display:flex; width:52px; height:32px; background:var(--gray-6); border-radius:16px; border:1.5px solid var(--gray-5); overflow:hidden; }
-.bb-slider-option { flex:1; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:13px; font-weight:700; color:var(--gray-3); position:relative; z-index:2; transition:color 0.25s; pointer-events:none; }
-.bb-slider-option.active { color:var(--white); }
-.bb-slider-thumb { position:absolute; top:1px; left:1px; width:calc(50% - 1px); height:calc(100% - 2px); background:var(--black); border-radius:14px; transition:transform 0.25s cubic-bezier(0.4,0,0.2,1); z-index:1; }
-.bb-slider-track.bat .bb-slider-thumb { transform:translateX(100%); }
-.bb-slider-track.bat [data-bb="bat"] { color:var(--white); }
-.bb-slider-track.bat [data-bb="ben"] { color:var(--gray-3); }
-.bb-slider-track:not(.bat) [data-bb="ben"] { color:var(--white); }
-/* Keyboard hint */
-.t119-kbd-hint { text-align:center; font-size:12px; color:var(--gray-3); margin-bottom:10px; padding:8px 12px; background:var(--gray-6); border-radius:10px; line-height:1.4; }
-.t119-input-wrap { position:relative; margin-bottom:8px; }
-.t119-input { width:100%; padding:14px 40px 14px 14px; border-radius:12px; border:1.5px solid var(--gray-5); font-size:16px; font-family:var(--font); color:var(--black); outline:none; box-sizing:border-box; text-align:center; }
-.t119-input:focus { border-color:var(--gray-2); }
-.t119-clear { position:absolute; right:10px; top:50%; transform:translateY(-50%); background:var(--gray-5); border:none; border-radius:50%; width:24px; height:24px; font-size:12px; cursor:pointer; color:var(--gray-2); display:flex; align-items:center; justify-content:center; }
-.t119-hebrew-preview { text-align:center; font-family:'Noto Serif Hebrew',serif; font-size:28px; font-weight:700; color:var(--black); direction:rtl; min-height:40px; margin-bottom:10px; }
-.t119-keyboard { display:flex; flex-direction:column; gap:4px; margin-bottom:8px; }
-.t119-kb-row { display:flex; justify-content:center; gap:3px; }
-.t119-kb-row button { width:30px; height:36px; border-radius:6px; border:1px solid var(--gray-5); background:var(--white); font-family:'Noto Serif Hebrew',serif; font-size:15px; cursor:pointer; color:var(--black); transition:all 0.1s; }
-.t119-kb-row button:active { background:var(--gray-6); transform:scale(0.95); }
-.t119-kb-space { width:120px !important; font-family:var(--font) !important; font-size:11px !important; }
-.t119-kb-del { width:50px !important; font-size:16px !important; }
-.t119-convert-hint { text-align:center; font-size:10px; color:var(--gray-4); margin-bottom:16px; }
-.t119-suggestions { margin:0 0 10px; max-height:200px; overflow-y:auto; border-radius:12px; background:var(--white); border:1.5px solid var(--gray-5); display:none; }
-.t119-suggestions.active { display:block; }
-.t119-sug-item { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; cursor:pointer; transition:background 0.1s; border-bottom:1px solid var(--gray-6); }
-.t119-sug-item:last-child { border-bottom:none; }
-.t119-sug-item:active { background:var(--gray-6); }
-.t119-sug-heb { font-family:'Noto Serif Hebrew',serif; font-size:20px; font-weight:700; color:var(--black); direction:rtl; }
-.t119-sug-lat { font-size:13px; color:var(--gray-3); font-family:var(--font); }
-.t119-sug-gender { font-size:10px; margin-left:6px; }
-.t119-sug-header { padding:8px 14px 4px; font-size:10px; font-weight:700; color:var(--gray-4); text-transform:uppercase; letter-spacing:0.5px; background:var(--gray-6); }
-.t119-dict-toggle { display:flex; align-items:center; justify-content:center; gap:6px; padding:6px; margin:0 0 8px; font-size:11px; color:var(--gray-3); cursor:pointer; background:none; border:none; width:100%; font-family:var(--font); }
-.t119-dict-toggle:active { color:var(--black); }
-.t119-kbd-collapsed { display:none; }
-
-.t119-letter-section { margin:0 16px 16px; padding:16px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); }
-.t119-letter-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--gray-5); }
-.t119-letter-circle { width:44px; height:44px; border-radius:50%; background:var(--black); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; flex-shrink:0; }
-.t119-letter-info { }
-.t119-letter-name { font-size:15px; font-weight:700; color:var(--black); }
-.t119-letter-range { font-size:11px; color:var(--gray-3); }
-.t119-verse { direction:rtl; font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-hebrew, 20px); line-height:2; color:var(--black); padding:4px 0; text-align:justify; }
-.t119-verse-num { font-size:calc(var(--fs-hebrew, 20px) - 4px); font-weight:700; color:var(--gray-3); margin:0 4px; }
-.t119-read-btn { display:block; width:100%; margin:16px 0 0; padding:12px; border-radius:10px; border:none; background:var(--black); color:var(--white); font-size:13px; font-weight:700; cursor:pointer; font-family:var(--font); }
-.t119-read-btn:active { opacity:0.8; }
-
-/* Cemetery */
-.cem-header { padding:20px 16px 12px; text-align:center; }
-.cem-icon { font-size:36px; margin-bottom:8px; }
-.cem-title { font-size:20px; font-weight:700; color:var(--black); margin:0 0 8px; font-family:var(--font); }
-.cem-desc { font-size:12px; color:var(--gray-3); margin:0; line-height:1.6; padding:0 10px; }
-.cem-section-title { margin:20px 16px 10px; padding:12px 16px; border-radius:var(--radius); background:var(--black); color:var(--white); font-size:13px; font-weight:700; text-align:center; font-family:var(--font); }
-.cem-psalm-card { margin:0 16px 12px; padding:16px; border-radius:var(--radius); background:var(--white); border:1px solid var(--gray-5); }
-.cem-psalm-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--gray-5); cursor:pointer; }
-.cem-psalm-num { font-family:'Noto Serif Hebrew',serif; font-size:18px; font-weight:700; color:var(--black); }
-.cem-psalm-toggle { font-size:14px; color:var(--gray-3); transition:transform 0.2s; }
-.cem-psalm-toggle.open { transform:rotate(180deg); }
-.cem-psalm-body { display:none; }
-.cem-psalm-body.open { display:block; }
-.cem-verse { direction:rtl; font-family:'Noto Serif Hebrew',serif; font-size:var(--fs-hebrew, 20px); line-height:2; color:var(--black); padding:3px 0; text-align:justify; }
-.cem-verse-num { font-size:calc(var(--fs-hebrew, 20px) - 4px); font-weight:700; color:var(--gray-3); margin:0 4px; }
-.cem-119-letter { display:flex; align-items:center; gap:10px; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--gray-5); }
-.cem-119-circle { width:40px; height:40px; border-radius:50%; background:var(--black); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:20px; font-weight:700; flex-shrink:0; }
-.cem-119-info { font-size:13px; font-weight:700; color:var(--black); }
-.cem-119-range { font-size:11px; color:var(--gray-3); font-weight:400; }
-.cem-neshama-word { text-align:center; margin:16px 0 6px; font-family:'Noto Serif Hebrew',serif; font-size:36px; font-weight:700; color:var(--black); direction:rtl; letter-spacing:8px; }
-.cem-name-section { padding:12px 0 8px; }
-.panel-back-wrap { padding:12px 16px 0; display:flex; justify-content:space-between; align-items:center; }
-.panel-back { background:none; border:none; color:var(--black); font-size:14px; font-weight:600; cursor:pointer; padding:8px 12px 8px 0; min-height:44px; }
-.day-badge-wrap { padding:0 16px 0; }
-
-/* PEREK */
-.perek-search-wrap { padding:12px 16px 8px; }
-.perek-search { width:100%; padding:10px 14px; border-radius:var(--radius-sm); border:none; background:var(--gray-6); font-size:14px; font-family:var(--font); color:var(--gray-1); outline:none; transition:all 0.15s; }
-.perek-search:focus { background:var(--white); box-shadow:0 0 0 1px var(--gray-5); }
-.perek-search::placeholder { color:var(--gray-3); }
-.perek-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; padding:0 16px 12px; }
-.perek-cell { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px 4px; border-radius:var(--radius-sm); border:1px solid var(--gray-5); background:var(--white); cursor:pointer; font-family:inherit; transition:all 0.1s ease; gap:1px; min-height:60px; }
-.perek-cell .perek-num { font-size:16px; font-weight:700; color:var(--gray-1); line-height:1; }
-.perek-cell .perek-heb { font-family:'Noto Serif Hebrew',serif; font-size:11px; color:var(--gray-3); direction:rtl; line-height:1.2; }
-.perek-cell .perek-name { font-size:7px; color:var(--gray-4); letter-spacing:0.3px; line-height:1; text-align:center; }
-.perek-cell:active { background:var(--gray-6); }
-.perek-cell.available { }
-.perek-cell.available .perek-num { color:var(--black); }
-.perek-cell.unavailable { opacity:0.25; cursor:default; }
-.perek-cell.unavailable:active { background:var(--white); }
-.perek-cell.perek-read { background:var(--black); border-color:var(--black); position:relative; }
-.perek-cell.perek-read .perek-num { color:var(--white); }
-.perek-cell.perek-read .perek-heb { color:rgba(255,255,255,0.5); }
-.perek-cell.perek-read .perek-name { color:rgba(255,255,255,0.4); }
-.perek-check { position:absolute; top:3px; right:5px; font-size:8px; color:var(--white); font-weight:700; }
-.perek-day-header { grid-column:1/-1; font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--gray-3); font-weight:700; padding:8px 0 2px; }
-
-/* BIRTHDAY */
-.card-birthday { }
-.bday-section { padding:20px 16px; }
-.bday-title { font-size:18px; font-weight:700; color:var(--black); margin-bottom:4px; }
-.bday-desc { font-size:13px; color:var(--gray-3); margin-bottom:20px; line-height:1.5; }
-.bday-form { display:flex; flex-direction:column; gap:12px; }
-.bday-save { background:var(--black); color:var(--white); border:none; padding:14px; border-radius:var(--radius-sm); font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font); transition:opacity 0.15s; margin-top:4px; }
-.bday-save:active { opacity:0.8; }
-.bday-date-input { width:100%; padding:14px; border-radius:var(--radius-sm); border:1px solid var(--gray-5); background:var(--white); font-size:16px; font-family:var(--font); color:var(--gray-1); appearance:none; -webkit-appearance:none; }
-.bday-date-input:focus { border-color:var(--gray-1); outline:none; }
-.bday-hebrew-preview { text-align:center; padding:16px; background:var(--gray-6); border-radius:var(--radius); display:none; }
-.bday-hebrew-preview:not(:empty) { display:block; }
-.bday-preview-heb { display:block; font-family:'Noto Serif Hebrew',serif; font-size:22px; font-weight:700; color:var(--black); direction:rtl; margin-bottom:4px; }
-.bday-preview-latin { display:block; font-size:13px; color:var(--gray-3); }
-.bday-result { margin-top:24px; padding:20px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); text-align:center; }
-.bday-result-tehilim { font-size:48px; font-weight:700; color:var(--black); font-family:'Noto Serif Hebrew',serif; direction:rtl; margin-bottom:4px; }
-.bday-result-chapter { font-size:20px; font-weight:700; color:var(--black); margin-bottom:2px; }
-.bday-result-sub { font-size:13px; color:var(--gray-3); margin-bottom:16px; }
-.bday-result-info { font-size:12px; color:var(--gray-3); line-height:1.5; margin-top:12px; padding-top:12px; border-top:1px solid var(--gray-6); }
-.bday-read-btn { display:inline-block; background:linear-gradient(135deg, #833ab4, #c13584, #e1306c, #fd1d1d, #f56040, #fcaf45); color:var(--white); border:none; padding:12px 28px; border-radius:var(--radius-sm); font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font); margin-top:12px; }
-.bday-countdown { margin-top:16px; padding:16px; background:var(--gray-6); border-radius:var(--radius); text-align:center; }
-.bday-countdown-num { font-size:32px; font-weight:700; color:var(--black); display:block; margin-bottom:6px; }
-.bday-countdown-label { font-size:13px; color:var(--gray-3); display:block; line-height:1.4; }
-.bday-reset { background:none; border:none; color:var(--gray-3); font-size:12px; cursor:pointer; font-family:var(--font); margin-top:16px; text-decoration:underline; }
-
-/* BIRTHDAY POPUP */
-.bday-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:200; display:flex; align-items:center; justify-content:center; padding:20px; }
-.bday-popup { background:var(--white); border-radius:20px; max-width:360px; width:100%; padding:32px 24px; text-align:center; animation:bdayIn 0.4s ease; }
-@keyframes bdayIn { from { transform:scale(0.8); opacity:0; } to { transform:scale(1); opacity:1; } }
-.bday-popup-emoji { font-size:48px; margin-bottom:12px; }
-.bday-popup-title { font-family:'Noto Serif Hebrew',serif; font-size:26px; font-weight:700; color:var(--black); direction:rtl; margin-bottom:8px; }
-.bday-popup-msg { font-size:14px; color:var(--gray-2); line-height:1.7; margin-bottom:8px; font-style:italic; font-family:'EB Garamond',Georgia,serif; }
-.bday-popup-highlight { font-size:15px; color:var(--black); font-weight:600; margin-bottom:4px; }
-.bday-close { background:var(--black); color:var(--white); border:none; padding:12px 32px; border-radius:var(--radius-sm); font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font); margin-top:16px; }
-</style>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>
-<body>
-<svg width="0" height="0" style="position:absolute;">
-  <defs>
-    <linearGradient id="shareGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f9ce34"/>
-      <stop offset="50%" stop-color="#ee2a7b"/>
-      <stop offset="100%" stop-color="#6228d7"/>
-    </linearGradient>
-  </defs>
-</svg>
-
-<!-- SPLASH SCREEN -->
-<div id="splash" onclick="skipSplash()">
-  <div class="splash-bh">ב״ה</div>
-  <div class="splash-content" id="splash-content">
-<div class="splash-icon"><img src="data:image/png;base64,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" alt="770 Lab" style="width:180px;height:auto;opacity:0;animation:scFadeIn 0.6s ease 0s forwards;"></div>
-    <h1 class="splash-title-chabad" id="splash-title-chabad">
-      <span class="sc-static" style="animation-delay:0.1s">C</span><span class="sc-static" style="animation-delay:0.15s">h</span><span class="sc-static" style="animation-delay:0.2s">a</span><span class="sc-static" style="animation-delay:0.25s">b</span><span class="sc-apos">'</span><span class="sc-static" style="animation-delay:0.3s">a</span><span class="sc-letter-d" id="sc-d1">d</span><span class="sc-letter-d2" id="sc-d2">d</span>
-    </h1>
-    <p class="splash-subtitle" id="splash-sub" style="direction:ltr;font-family:var(--font);font-size:11px;letter-spacing:2px;">MACHIA'H ARRIVE, SOYONS PRÊT À L'ACCUEILLIR</p>
-    <p class="splash-tap">Appuyez pour commencer</p>
-  </div>
-  <p class="splash-footer"><img src="data:image/png;base64,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" alt="770 Lab" style="height:40px;width:auto;"></p>
-</div>
-
-<!-- NOTIFICATION -->
-
-
-<!-- HOME SCREEN -->
-<div id="home">
-  <div class="home-header">
-    <div class="bh-mark">ב״ה</div>
-    <div class="home-header-top">
-      <span class="home-greeting">Chab'app</span>
-    </div>
-  </div>
-
-  <!-- HOME: 3 BIG CARDS -->
-  <div id="panel-menu">
-    <div class="home-date-line" id="home-date-line"></div>
-    <div class="obj-story-bar" id="obj-story-bar"></div>
-    <div class="shabbat-card" id="shabbat-card" style="display:none;background:#1a1a2e;">
-      <div class="shabbat-bg" id="shabbat-bg"></div>
-      <div class="shabbat-overlay"></div>
-      <div class="shabbat-content">
-        <div class="shabbat-top">
-          <div>
-            <div class="shabbat-parasha" id="shabbat-parasha"></div>
-            <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
-          </div>
-          <div class="shabbat-city" id="shabbat-city">🇫🇷 Paris</div>
-        </div>
-        <div class="shabbat-times-row">
-          <div class="shabbat-time-block">
-            <div class="shabbat-time-icon candle-icon"><svg viewBox="0 0 40 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="flameOuter" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#fff8e1"/><stop offset="30%" stop-color="#ffe082"/><stop offset="60%" stop-color="#ffb300"/><stop offset="100%" stop-color="#e65100" stop-opacity="0.4"/></radialGradient>
-                <radialGradient id="flameInner" cx="50%" cy="40%" r="45%"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#fff9c4"/><stop offset="100%" stop-color="#ffcc02" stop-opacity="0.6"/></radialGradient>
-                <radialGradient id="flameCore" cx="50%" cy="50%" r="40%"><stop offset="0%" stop-color="#e3f2fd" stop-opacity="0.9"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.3"/></radialGradient>
-                <radialGradient id="glowR" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffb300" stop-opacity="0.25"/><stop offset="100%" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
-                <linearGradient id="waxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff8e1"/><stop offset="100%" stop-color="#f5f0e0"/></linearGradient>
-              </defs>
-              <!-- Glow halo -->
-              <ellipse cx="20" cy="22" rx="18" ry="16" fill="url(#glowR)"><animate attributeName="rx" values="18;20;17;19;18" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;1;0.6;0.9;0.7" dur="3s" repeatCount="indefinite"/></ellipse>
-              <!-- Candle body -->
-              <rect x="15" y="38" width="10" height="28" rx="2" fill="url(#waxG)" opacity="0.9"/>
-              <rect x="16" y="38" width="3" height="28" rx="1" fill="rgba(255,255,255,0.15)"/>
-              <!-- Wick -->
-              <line x1="20" y1="38" x2="20" y2="33" stroke="#555" stroke-width="1" stroke-linecap="round"/>
-              <!-- Outer flame -->
-              <ellipse cx="20" cy="24" rx="5" ry="11" fill="url(#flameOuter)" opacity="0.85">
-                <animate attributeName="ry" values="11;12;10.5;11.5;10;11" dur="0.8s" repeatCount="indefinite"/>
-                <animate attributeName="rx" values="5;4.5;5.5;4.8;5.2;5" dur="1.1s" repeatCount="indefinite"/>
-                <animate attributeName="cx" values="20;19.5;20.5;20;19.8;20.2;20" dur="1.4s" repeatCount="indefinite"/>
-              </ellipse>
-              <!-- Middle flame -->
-              <ellipse cx="20" cy="26" rx="3.2" ry="8" fill="url(#flameInner)" opacity="0.9">
-                <animate attributeName="ry" values="8;8.5;7.5;8.2;7.8;8" dur="0.7s" repeatCount="indefinite"/>
-                <animate attributeName="rx" values="3.2;2.8;3.5;3;3.3;3.2" dur="0.9s" repeatCount="indefinite"/>
-                <animate attributeName="cx" values="20;20.3;19.7;20.1;19.9;20" dur="1.2s" repeatCount="indefinite"/>
-              </ellipse>
-              <!-- Core flame (blue-white) -->
-              <ellipse cx="20" cy="30" rx="1.8" ry="4.5" fill="url(#flameCore)" opacity="0.8">
-                <animate attributeName="ry" values="4.5;5;4;4.8;4.2;4.5" dur="0.6s" repeatCount="indefinite"/>
-              </ellipse>
-              <!-- Tiny sparks -->
-              <circle cx="17" cy="16" r="0.4" fill="#ffe082" opacity="0"><animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/><animate attributeName="cy" values="16;12" dur="2.5s" repeatCount="indefinite"/></circle>
-              <circle cx="23" cy="18" r="0.3" fill="#ffcc02" opacity="0"><animate attributeName="opacity" values="0;0.6;0" dur="3.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="18;13" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
-            </svg></div>
-            <div class="shabbat-time-detail">
-              <div class="shabbat-time-label">Allumage</div>
-              <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
-              <div class="shabbat-time-date" id="shabbat-candles-date"></div>
-              <div class="shabbat-time-hedate" id="shabbat-candles-hedate"></div>
-            </div>
-          </div>
-          <div class="shabbat-sep"></div>
-          <div class="shabbat-time-block">
-            <div class="shabbat-time-icon moon-icon"><svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0d1b2a"><animate attributeName="stop-color" values="#1b2838;#0d1b2a;#1b2838" dur="6s" repeatCount="indefinite"/></stop>
-                  <stop offset="40%" stop-color="#1b2838"/>
-                  <stop offset="70%" stop-color="#415a77"><animate attributeName="stop-color" values="#415a77;#2c3e6b;#415a77" dur="8s" repeatCount="indefinite"/></stop>
-                  <stop offset="100%" stop-color="#e07040" stop-opacity="0.4"><animate attributeName="stop-opacity" values="0.4;0.2;0.4" dur="5s" repeatCount="indefinite"/></stop>
-                </linearGradient>
-                <radialGradient id="moonG2" cx="40%" cy="35%" r="55%"><stop offset="0%" stop-color="#f5f0ff"/><stop offset="100%" stop-color="#d4b8ff"/></radialGradient>
-                <radialGradient id="moonGlow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c084fc" stop-opacity="0.3"/><stop offset="100%" stop-color="#c084fc" stop-opacity="0"/></radialGradient>
-              </defs>
-              <!-- Sky -->
-              <rect x="0" y="0" width="50" height="50" rx="8" fill="url(#skyG)"/>
-              <!-- Horizon glow -->
-              <ellipse cx="25" cy="48" rx="28" ry="8" fill="#e07040" opacity="0.12"><animate attributeName="opacity" values="0.12;0.18;0.1;0.15;0.12" dur="5s" repeatCount="indefinite"/></ellipse>
-              <!-- Moon glow -->
-              <circle cx="16" cy="15" r="8" fill="url(#moonGlow2)"><animate attributeName="r" values="8;9;7.5;8.5;8" dur="4s" repeatCount="indefinite"/></circle>
-              <!-- Crescent moon -->
-              <path d="M21 15a7 7 0 11-7.5-6.9 5.5 5.5 0 007.5 6.9z" fill="url(#moonG2)">
-                <animate attributeName="opacity" values="0.9;1;0.85;1;0.9" dur="4s" repeatCount="indefinite"/>
-              </path>
-              <!-- Stars layer 1 - bright -->
-              <circle cx="32" cy="10" r="0.7" fill="#fff"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
-              <circle cx="40" cy="18" r="0.5" fill="#fff"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" begin="0.5s" repeatCount="indefinite"/></circle>
-              <circle cx="36" cy="28" r="0.6" fill="#fff"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" begin="1s" repeatCount="indefinite"/></circle>
-              <!-- Stars layer 2 - subtle -->
-              <circle cx="27" cy="6" r="0.4" fill="#e0d4ff"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.5s" begin="0.3s" repeatCount="indefinite"/></circle>
-              <circle cx="44" cy="8" r="0.35" fill="#e0d4ff"><animate attributeName="opacity" values="0.1;0.6;0.1" dur="4s" begin="1.5s" repeatCount="indefinite"/></circle>
-              <circle cx="8" cy="30" r="0.4" fill="#e0d4ff"><animate attributeName="opacity" values="0.15;0.65;0.15" dur="3.2s" begin="0.7s" repeatCount="indefinite"/></circle>
-              <circle cx="22" cy="35" r="0.35" fill="#fff"><animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.6s" begin="2s" repeatCount="indefinite"/></circle>
-              <!-- Stars layer 3 - twinkling cross stars -->
-              <g transform="translate(38,5)" opacity="0.6"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" begin="0.4s" repeatCount="indefinite"/>
-                <line x1="0" y1="-1.2" x2="0" y2="1.2" stroke="#fff" stroke-width="0.4"/>
-                <line x1="-1.2" y1="0" x2="1.2" y2="0" stroke="#fff" stroke-width="0.4"/>
-              </g>
-              <g transform="translate(10,12)" opacity="0.5"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.8s" begin="1.2s" repeatCount="indefinite"/>
-                <line x1="0" y1="-1" x2="0" y2="1" stroke="#fff" stroke-width="0.3"/>
-                <line x1="-1" y1="0" x2="1" y2="0" stroke="#fff" stroke-width="0.3"/>
-              </g>
-              <!-- Silhouette horizon -->
-              <path d="M0 44 Q5 41 10 43 Q15 40 20 42 Q25 39 30 41 Q35 40 40 42 Q45 41 50 43 L50 50 L0 50 Z" fill="#0a0f1a" opacity="0.7"/>
-            </svg></div>
-            <div class="shabbat-time-detail">
-              <div class="shabbat-time-label">Havdalah</div>
-              <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
-              <div class="shabbat-time-date" id="shabbat-havdalah-date"></div>
-              <div class="shabbat-time-hedate" id="shabbat-havdalah-hedate"></div>
-            </div>
-          </div>
-        </div>
-        <button class="insta-share-btn" onclick="shareShabbat(event)" style="position:absolute;bottom:12px;right:14px;padding:6px;"><svg viewBox="0 0 24 24" style="stroke:#fff;width:20px;height:20px;opacity:0.7;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-      </div>
-    </div>
-    <div class="home-big-cards">
-      <div class="big-card" onclick="switchTab('sub-objectifs')">
-        <div class="big-card-icon" style="animation-delay:0s;background:none;box-shadow:none;padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" alt="Objectifs"></div>
-        <div class="big-card-info">
-          <div class="big-card-title">Objectifs du jour</div>
-          <div class="big-card-sub" id="big-obj-sub">0/13 accomplis</div>
-          <div class="obj-progress-home"><div class="obj-progress-home-fill" id="obj-progress-home-fill"></div></div>
-          <div class="obj-progress-home-pct" id="obj-progress-home-pct">0%</div>
-        </div>
-        <div class="big-card-arrow">›</div>
-      </div>
-      <!-- HAYOM YOM CARD -->
-      <div class="hyy-card" id="hyy-card" onclick="toggleHyy(event)">
-        <div class="hyy-header">
-          <span class="hyy-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H8a3 3 0 00-3 3v12a3 3 0 003 3h10"/><path d="M18 3v18c1.5 0 3-1 3-3V6c0-2-1.5-3-3-3z"/><line x1="9" y1="8" x2="15" y2="8" opacity="0.6"/><line x1="9" y1="11" x2="14" y2="11" opacity="0.6"/><line x1="9" y1="14" x2="12" y2="14" opacity="0.6"/></svg></span>
-          <span class="hyy-title">Hayom Yom</span>
-          <span class="hyy-date" id="hyy-date"></span>
-          <button class="insta-share-btn" onclick="shareHyy(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-        </div>
-        <div class="hyy-text" id="hyy-text"><span class="hyy-loading">Chargement…</span></div>
-        <div class="hyy-expand" id="hyy-expand" style="display:none">Lire la suite ▾</div>
-      </div>
-      <div class="big-card" onclick="switchTab('sub-tehilim')">
-        <div class="big-card-icon" style="animation-delay:0.3s;background:linear-gradient(135deg,#8b2fb8,#c084fc);box-shadow:0 3px 12px rgba(139,47,184,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7c3-2 6-1.5 11 1v18c-5-2.5-8-3-11-1V7z"/><path d="M27 7c-3-2-6-1.5-11 1v18c5-2.5 8-3 11-1V7z"/><line x1="9" y1="12" x2="13" y2="13.5" stroke-width="0.8" opacity="0.6"/><line x1="9" y1="15" x2="13" y2="16.5" stroke-width="0.8" opacity="0.6"/><line x1="9" y1="18" x2="13" y2="19.5" stroke-width="0.8" opacity="0.6"/><line x1="19" y1="13.5" x2="23" y2="12" stroke-width="0.8" opacity="0.6"/><line x1="19" y1="16.5" x2="23" y2="15" stroke-width="0.8" opacity="0.6"/></svg></div>
-        <div class="big-card-info">
-          <div class="big-card-title">Tehilim</div>
-          <div class="big-card-sub" id="big-teh-sub">Lire les Tehilim</div>
-        </div>
-        <div class="big-card-arrow">›</div>
-      </div>
-      <div class="hyy-card" id="rambam-card" onclick="openRambam(event)">
-        <div class="hyy-header">
-          <span class="hyy-icon" style="background:linear-gradient(135deg,#6228d7,#8b5cf6);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5a3 3 0 013 3v13c-1.5-1-3.5-1.5-8-1V4z"/><path d="M20 4h-5a3 3 0 00-3 3v13c1.5-1 3.5-1.5 8-1V4z"/></svg></span>
-          <span class="hyy-title">Rambam</span>
-          <span class="hyy-date" id="rambam-date"></span>
-          <button class="insta-share-btn" onclick="shareRambam(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-        </div>
-        <div class="hyy-text" id="rambam-text"><span class="hyy-loading">Chargement…</span></div>
-        <div class="hyy-expand" id="rambam-expand" style="display:none">Lire la suite ▾</div>
-      </div>
-      <div class="big-card" onclick="switchTab('sub-club')">
-        <div class="big-card-icon" style="animation-delay:0.6s;background:linear-gradient(135deg,#ee2a7b,#f472b6);box-shadow:0 3px 12px rgba(238,42,123,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="3.5"/><path d="M10 24c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="8" cy="13" r="2.5" opacity="0.7"/><path d="M4 24c0-2.5 1.8-4.5 4-4.5" opacity="0.7"/><circle cx="24" cy="13" r="2.5" opacity="0.7"/><path d="M28 24c0-2.5-1.8-4.5-4-4.5" opacity="0.7"/></svg></div>
-        <div class="big-card-info">
-          <div class="big-card-title">Chabad Club</div>
-          <div class="big-card-sub">Éclaire le monde</div>
-        </div>
-        <div class="big-card-arrow">›</div>
-      </div>
-      <div class="big-card" onclick="openBethChabad()">
-        <div class="big-card-icon" style="animation-delay:0.9s;background:linear-gradient(135deg,#f59e0b,#fbbf24);box-shadow:0 3px 12px rgba(245,158,11,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26V14l10-8 10 8v12H6z"/><rect x="13" y="19" width="6" height="7" rx="0.5"/><path d="M16 6v-2"/><circle cx="16" cy="3" r="1" fill="#fff" stroke="none"/><rect x="9" y="16" width="3" height="3" rx="0.5" opacity="0.7"/><rect x="20" y="16" width="3" height="3" rx="0.5" opacity="0.7"/></svg></div>
-        <div class="big-card-info">
-          <div class="big-card-title">Beth Chabad</div>
-          <div class="big-card-sub">Trouver un Beth Chabad près de moi</div>
-        </div>
-        <div class="big-card-arrow">›</div>
-      </div>
-      <div class="big-card" onclick="switchTab('sub-sidour')">
-        <div class="big-card-icon" style="animation-delay:1.2s;background:linear-gradient(135deg,#0ea5e9,#38bdf8);box-shadow:0 3px 12px rgba(14,165,233,0.3);"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Tallit drape --><path d="M10 14c1-4 5-7 12-7s11 3 12 7v20c0 1-1 2-2 2H12c-1 0-2-1-2-2V14z" fill="rgba(255,255,255,0.95)"/><path d="M10 16h24" stroke="rgba(14,165,233,0.4)" stroke-width="1.2"/><path d="M10 18.5h24" stroke="rgba(14,165,233,0.25)" stroke-width="0.6"/><path d="M10 32h24" stroke="rgba(14,165,233,0.4)" stroke-width="1.2"/><path d="M10 34.5h24" stroke="rgba(14,165,233,0.25)" stroke-width="0.6"/><path d="M14 16v-2.5" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><path d="M30 16v-2.5" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><path d="M14 32v4" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><path d="M30 32v4" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><!-- Head --><ellipse cx="22" cy="14" rx="4" ry="4.5" fill="rgba(210,180,140,0.9)"/><!-- Beard --><path d="M19 16c0 3 2 5 3 5.5 1-0.5 3-2.5 3-5.5" fill="rgba(80,50,20,0.5)"/><!-- Body under tallit --><path d="M16 20v16h12V20" fill="rgba(240,240,240,0.3)"/><!-- Arms forward holding siddur --><path d="M16 22c-1 2-1 5 2 6h8c3-1 3-4 2-6" fill="rgba(210,180,140,0.7)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><!-- Siddur (book) --><rect x="18" y="24" width="8" height="6" rx="0.5" fill="rgba(14,165,233,0.6)" stroke="#fff" stroke-width="0.5"/><line x1="22" y1="24" x2="22" y2="30" stroke="#fff" stroke-width="0.3" opacity="0.6"/><line x1="19.5" y1="26" x2="21" y2="26" stroke="#fff" stroke-width="0.3" opacity="0.4"/><line x1="19.5" y1="27.5" x2="21" y2="27.5" stroke="#fff" stroke-width="0.3" opacity="0.4"/><line x1="23" y1="26" x2="24.5" y2="26" stroke="#fff" stroke-width="0.3" opacity="0.4"/><line x1="23" y1="27.5" x2="24.5" y2="27.5" stroke="#fff" stroke-width="0.3" opacity="0.4"/><!-- Tallit fringe (tzitzit) --><line x1="11" y1="36" x2="11" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="12" y1="36" x2="12" y2="41" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="13" y1="36" x2="13" y2="39" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="31" y1="36" x2="31" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="32" y1="36" x2="32" y2="41" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="33" y1="36" x2="33" y2="39" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/></svg></div>
-        <div class="big-card-info">
-          <div class="big-card-title">Sidour</div>
-          <div class="big-card-sub">Patakh Eliyahou · Tehilat Hachem</div>
-        </div>
-        <div class="big-card-arrow">›</div>
-      </div>
-    </div>
-    <!-- DONATION BLOCKS -->
-    <div style="display:flex;gap:10px;margin:12px 16px 0;">
-      <div class="don-card" onclick="switchTab('sub-don')" style="flex:1;margin:0;background:linear-gradient(135deg, #6228d7, #ee2a7b, #f9ce34);">
-        <div class="don-card-inner">
-          <div class="don-card-icon" style="animation-delay:0s"><svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
-          <div class="don-card-text">
-            <div class="don-card-title">Faire un don</div>
-            <div class="don-card-sub">Soutenez les Beth Chabad</div>
-          </div>
-        </div>
-      </div>
-      <a class="don-card" href="https://www.allodons.fr/" target="_blank" rel="noopener" style="flex:1;margin:0;text-decoration:none;background:linear-gradient(135deg, #6228d7, #ee2a7b, #f9ce34);">
-        <div class="don-card-inner">
-          <div class="don-card-icon" style="animation-delay:0.5s"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M7 21v-3a5 5 0 0110 0v3"/><path d="M17 10l2 2 4-4" stroke-width="2"/></svg></div>
-          <div class="don-card-text">
-            <div class="don-card-title">Rejoignez une campagne</div>
-            <div class="don-card-sub">Campagnes AlloDons ↗</div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="daily-quote">
-      <div class="quote-decor">✦</div>
-      <p class="quote-text" id="home-quote"></p>
-      <p class="quote-source" id="home-source"></p>
-      <div class="quote-dots" id="home-dots"></div>
-      <button class="insta-share-btn" onclick="shareQuote()" style="margin:10px auto 0;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: OBJECTIFS -->
-  <div id="panel-sub-objectifs" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div class="obj-story-bar obj-story-bar-scroll" id="obj-story-bar-sub"></div>
-    <div class="daily-objectives">
-      <div class="obj-header">
-        <span class="obj-title">🕎 Mes objectifs du jour</span>
-        <span class="obj-counter" id="obj-counter">0/13</span>
-      </div>
-      <div class="obj-progress-bar"><div class="obj-progress-fill" id="obj-progress-fill"></div></div>
-      <div class="obj-list" id="obj-list"></div>
-      <div class="obj-complete-quote" id="obj-complete-quote"></div>
-      <div class="obj-reset-wrap"><button class="obj-reset-btn" onclick="resetObjectives()">↺ Réinitialiser</button></div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: TEHILIM -->
-  <div id="panel-sub-tehilim" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div class="sub-panel-header">📖 Tehilim</div>
-    <div class="menu-cards">
-      <button class="menu-card card-jour" onclick="openJourReading()">
-        <span class="menu-card-icon">📅</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Tehilim du jour</span>
-          <span class="menu-card-sub" id="menu-jour-sub"></span>
-        </div>
-      </button>
-      <button class="menu-card card-perek" onclick="switchTab('perek')">
-        <span class="menu-card-icon">📖</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Tehilim par Perek</span>
-          <span class="menu-card-sub">150 chapitres</span>
-        </div>
-      </button>
-      <button class="menu-card" onclick="switchTab('birthday')">
-        <span class="menu-card-icon">🎂</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Mon Tehilim</span>
-          <span class="menu-card-sub">Chapitre personnel</span>
-        </div>
-      </button>
-      <button class="menu-card" onclick="switchTab('t119')">
-        <span class="menu-card-icon">🔤</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Tehilim 119 par nom</span>
-          <span class="menu-card-sub">Prière personnalisée</span>
-        </div>
-      </button>
-      <button class="menu-card" onclick="switchTab('cemetery')">
-        <span class="menu-card-icon">🪦</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Tehilim au cimetière</span>
-          <span class="menu-card-sub">7 Psaumes + Psaume 119 נשמה</span>
-        </div>
-      </button>
-      <button class="menu-card" onclick="switchTab('chains')">
-        <span class="menu-card-icon">🙏</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Demandes personnelles</span>
-          <span class="menu-card-sub">Chaînes de Tehilim</span>
-        </div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">🩺</span>
-        <div class="menu-card-content"><span class="menu-card-title">Réfoua Chéléma</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">✡️</span>
-        <div class="menu-card-content"><span class="menu-card-title">Pour le peuple juif</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">💍</span>
-        <div class="menu-card-content"><span class="menu-card-title">Pour les occasions</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">🕎</span>
-        <div class="menu-card-content"><span class="menu-card-title">Pour les fêtes</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">🍽️</span>
-        <div class="menu-card-content"><span class="menu-card-title">Jours de jeûne</span></div>
-      </button>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: BETH CHABAD -->
-  <div id="panel-sub-beth" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div style="padding:0 16px 16px;">
-      <div style="font-size:16px;font-weight:800;color:var(--black);margin-bottom:2px;">🕍 Trouver un Beth Chabad</div>
-      <div style="font-size:11px;color:var(--gray-3);margin-bottom:12px;" id="beth-location-info">Localisation en cours…</div>
-      <div id="beth-map-container" style="width:100%;height:50vh;border-radius:var(--radius);overflow:hidden;background:var(--gray-6);position:relative;">
-        <div id="beth-map" style="width:100%;height:100%;"></div>
-        <div id="beth-map-loading" style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:var(--gray-6);z-index:10;">
-          <div style="text-align:center;color:var(--gray-3);">
-            <div style="font-size:32px;margin-bottom:12px;">📍</div>
-            <div style="font-size:13px;font-weight:600;">Géolocalisation en cours…</div>
-          </div>
-        </div>
-      </div>
-      <div id="beth-results" style="margin-top:12px;"></div>
-      <div style="display:flex;gap:10px;margin-top:12px;">
-        <button onclick="refreshBethMap()" style="flex:1;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">📍 Actualiser</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: SIDOUR -->
-  <div id="panel-sub-sidour" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div style="padding:0 16px 16px;">
-      <div style="font-size:18px;font-weight:800;color:var(--black);margin-bottom:4px;">🕯️ Sidour</div>
-      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Livres de prières</div>
-
-      <!-- Patakh Eliyahou -->
-      <div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:16px;margin-bottom:12px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <span style="font-size:24px;">📕</span>
-          <div>
-            <div style="font-size:15px;font-weight:700;color:var(--black);">Patakh Eliyahou</div>
-            <div style="font-size:11px;color:var(--gray-3);">Rite Séfarade · Hébreu & Phonétique</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <button onclick="switchTab('sub-sidour-patakh')" style="padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;cursor:pointer;text-align:left;">🔤 Prières en hébreu & phonétique</button>
-          <a href="https://www.770live.com/en770/siddur/siddur.htm" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">🌐 Sidour en ligne (770live) ↗</a>
-        </div>
-      </div>
-
-      <!-- Tehilat Hachem -->
-      <div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:16px;margin-bottom:12px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <span style="font-size:24px;">📗</span>
-          <div>
-            <div style="font-size:15px;font-weight:700;color:var(--black);">Tehilat Hachem</div>
-            <div style="font-size:11px;color:var(--gray-3);">Nousakh Ha-Arizal · Chabad-Loubavitch</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <a href="https://www.sefaria.org/Siddur_Tehilat_Hashem" target="_blank" style="display:block;padding:12px;border:1px solid var(--gray-5);border-radius:var(--radius);background:var(--white);font-size:13px;font-weight:600;text-decoration:none;color:var(--black);">📚 Siddur Sefaria (Hébreu) ↗</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: SIDOUR PATAKH ELIYAHOU (Prayers) -->
-  <div id="panel-sub-sidour-patakh" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('sub-sidour')">← Sidour</button></div>
-    <div style="padding:0 16px 16px;">
-      <div style="font-size:16px;font-weight:800;color:var(--black);margin-bottom:2px;">📕 Patakh Eliyahou</div>
-      <div style="font-size:11px;color:var(--gray-3);margin-bottom:16px;">Prières en hébreu & phonétique</div>
-      <div id="patakh-tabs" style="display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;">
-        <button class="patakh-tab active" onclick="showPatakh('shaharit')">Cha'harit</button>
-        <button class="patakh-tab" onclick="showPatakh('minha')">Min'ha</button>
-        <button class="patakh-tab" onclick="showPatakh('arvit')">Arvit</button>
-        <button class="patakh-tab" onclick="showPatakh('shema')">Chéma</button>
-        <button class="patakh-tab" onclick="showPatakh('birkat')">Birkat</button>
-      </div>
-      <div id="patakh-content" style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:16px;max-height:60vh;overflow-y:auto;"></div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: ÉTUDES -->
-  <div id="panel-sub-etudes" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div style="padding:0 16px 16px;">
-      <div style="font-size:18px;font-weight:800;color:var(--black);margin-bottom:4px;">📖 Études du jour</div>
-      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Hayom Yom & Rambam quotidiens</div>
-
-      <!-- HYY Card (mirror) -->
-      <div class="hyy-card" style="margin-bottom:12px;">
-        <div class="hyy-header">
-          <span class="hyy-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H8a3 3 0 00-3 3v12a3 3 0 003 3h10"/><path d="M18 3v18c1.5 0 3-1 3-3V6c0-2-1.5-3-3-3z"/><line x1="9" y1="8" x2="15" y2="8" opacity="0.6"/><line x1="9" y1="11" x2="14" y2="11" opacity="0.6"/><line x1="9" y1="14" x2="12" y2="14" opacity="0.6"/></svg></span>
-          <span class="hyy-title">Hayom Yom</span>
-          <span class="hyy-date" id="etudes-hyy-date"></span>
-          <button class="insta-share-btn" onclick="shareHyy(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-        </div>
-        <div class="hyy-text" id="etudes-hyy-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
-      </div>
-
-      <!-- Rambam Card (mirror) -->
-      <div class="hyy-card">
-        <div class="hyy-header">
-          <span class="hyy-icon" style="background:linear-gradient(135deg,#6228d7,#8b5cf6);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5a3 3 0 013 3v13c-1.5-1-3.5-1.5-8-1V4z"/><path d="M20 4h-5a3 3 0 00-3 3v13c1.5-1 3.5-1.5 8-1V4z"/></svg></span>
-          <span class="hyy-title">Rambam</span>
-          <span class="hyy-date" id="etudes-rambam-date"></span>
-          <button class="insta-share-btn" onclick="shareRambam(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-        </div>
-        <div class="hyy-text" id="etudes-rambam-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: DONS -->
-  <div id="panel-sub-don" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div style="padding:0 16px 16px;">
-      <div style="font-size:18px;font-weight:800;color:var(--black);margin-bottom:4px;">💝 Tsédaka</div>
-      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Soutenez les Beth Chabad du monde entier</div>
-
-      <!-- BLOC 1: FAIRE UN DON -->
-      <div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:20px;margin-bottom:16px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-          <span style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1a6b3c,#2d8f5e);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
-          <div>
-            <div style="font-size:16px;font-weight:700;color:var(--black);">Faire un don</div>
-            <div style="font-size:11px;color:var(--gray-3);">Don direct · Reçu fiscal immédiat</div>
-          </div>
-        </div>
-        <p style="font-size:13px;line-height:1.7;color:var(--gray-2);margin:0 0 16px;">
-          Votre don est reversé directement aux Beth Chabad partenaires. Chaque contribution fait une réelle différence.
-        </p>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
-          <button class="don-amount-btn" onclick="selectDonAmount(18,this)">18 €<span style="display:block;font-size:9px;font-weight:400;color:var(--gray-3);margin-top:2px;">'Haï</span></button>
-          <button class="don-amount-btn" onclick="selectDonAmount(36,this)">36 €<span style="display:block;font-size:9px;font-weight:400;color:var(--gray-3);margin-top:2px;">Double 'Haï</span></button>
-          <button class="don-amount-btn" onclick="selectDonAmount(72,this)">72 €<span style="display:block;font-size:9px;font-weight:400;color:var(--gray-3);margin-top:2px;">'Hessed</span></button>
-          <button class="don-amount-btn" onclick="selectDonAmount(180,this)">180 €</button>
-          <button class="don-amount-btn" onclick="selectDonAmount(360,this)">360 €</button>
-          <button class="don-amount-btn don-custom" onclick="promptDonAmount(this)">Autre</button>
-        </div>
-        <button style="width:100%;padding:14px;border:none;border-radius:var(--radius);background:linear-gradient(135deg, #1a6b3c, #2d8f5e);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);letter-spacing:0.5px;" onclick="submitDonation()">Faire un don</button>
-        <div style="text-align:center;font-size:10px;color:var(--gray-4);margin-top:8px;">🔒 Paiement sécurisé · Reçu fiscal disponible</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SUB-PANEL: CHABAP CLUB -->
-  <div id="panel-sub-club" style="display:none">
-    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
-    <div class="sub-panel-header">🤝 Chabad Club</div>
-
-    <!-- NOTRE HISTOIRE -->
-    <div class="club-story">
-      <div class="club-story-tagline">Portez fièrement · Soutenez puissamment</div>
-      <div class="club-story-title">Notre Histoire</div>
-      <p class="club-story-text">
-        Depuis 1951, dans la célèbre synagogue 770 à Crown Heights, l'influence du Rabbi de Loubavitch se propage dans le monde entier et le mouvement Chabad connaît une expansion sans fin.
-      </p>
-      <div class="club-divider"></div>
-      <p class="club-story-text">
-        Nous souhaitons rendre hommage à cet endroit magique qui continue d'influencer le monde grâce au mérite de notre Rabbi. En achetant un produit Chabad Club, vous devenez un membre actif de la communauté&nbsp;: le Maasser de votre commande est reversé aux Beth Chabad.
-      </p>
-    </div>
-
-    <!-- 3 PRODUITS -->
-    <div class="club-products-title">🛍️ Nos produits</div>
-    <div class="club-products">
-      <a class="club-product-card" href="https://chabadclub.org/products/sweatshirt-chabad-club-770-olive" target="_blank" rel="noopener">
-        <img class="club-product-img" src="https://chabadclub.org/cdn/shop/files/SweatshirtChabadClub770OliveRecto.png?v=1769600050&width=400" alt="Sweatshirt 770 Olive" loading="lazy">
-        <div class="club-product-info">
-          <div class="club-product-collection">From Crown Heights to the World</div>
-          <div class="club-product-name">Sweatshirt Chabad Club 770 Olive</div>
-          <div class="club-product-price">120,00 €</div>
-        </div>
-      </a>
-      <a class="club-product-card" href="https://chabadclub.org/products/gilet-a-capuche-chabad-club-770-ecru" target="_blank" rel="noopener">
-        <img class="club-product-img" src="https://chabadclub.org/cdn/shop/files/CHABAD_CLUB_GILET_SYNA_ECRU_RECTO.png?v=1767189371&width=400" alt="Gilet 770 Écru" loading="lazy">
-        <div class="club-product-info">
-          <div class="club-product-collection">From Crown Heights to the World</div>
-          <div class="club-product-name">Gilet à capuche Chabad Club 770 Écru</div>
-          <div class="club-product-price">120,00 €</div>
-        </div>
-      </a>
-      <a class="club-product-card" href="https://chabadclub.org/products/t-shirt-coupe-normale-dollar-khaki-vintage" target="_blank" rel="noopener">
-        <img class="club-product-img" src="https://chabadclub.org/cdn/shop/files/CHABAD_CLUB_TSHIRT_DOLLAR_KHAKI_VINTAGE_RECTO.png?v=1745267646&width=400" alt="T-Shirt Dollar Khaki" loading="lazy">
-        <div class="club-product-info">
-          <div class="club-product-collection">In God We Trust</div>
-          <div class="club-product-name">T-Shirt Dollar Khaki Vintage</div>
-          <div class="club-product-price">60,00 €</div>
-        </div>
-      </a>
-    </div>
-    <a class="club-cta" href="https://chabadclub.org" target="_blank" rel="noopener">Voir toute la boutique →</a>
-
-    <div class="club-maasser">
-      <div class="club-maasser-emoji">🤲</div>
-      <div class="club-maasser-text"><strong>Le Maasser</strong> de chaque commande est reversé aux Beth Chabad pour faire perdurer les actions menées par le Rabbi depuis 1951.</div>
-    </div>
-
-    <!-- FONCTIONNALITES EXISTANTES -->
-    <div class="club-products-title" style="margin-top:8px;">⚡ Fonctionnalités</div>
-    <div class="club-cards">
-      <button class="menu-card" onclick="switchTab('chains')">
-        <span class="menu-card-icon">🔗</span>
-        <div class="menu-card-content">
-          <span class="menu-card-title">Chaînes de Tehilim</span>
-          <span class="menu-card-sub">Priez ensemble</span>
-        </div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">📊</span>
-        <div class="menu-card-content"><span class="menu-card-title">Classement</span><span class="menu-card-sub">Top lecteurs</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">🎯</span>
-        <div class="menu-card-content"><span class="menu-card-title">Défis</span><span class="menu-card-sub">Défis communautaires</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">📰</span>
-        <div class="menu-card-content"><span class="menu-card-title">Actualités</span><span class="menu-card-sub">Torah & Halacha</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">🗓️</span>
-        <div class="menu-card-content"><span class="menu-card-title">Événements</span><span class="menu-card-sub">Cours & Chabbat</span></div>
-      </button>
-      <button class="menu-card coming-soon">
-        <span class="menu-card-icon">💬</span>
-        <div class="menu-card-content"><span class="menu-card-title">Communauté</span><span class="menu-card-sub">Entraide & partage</span></div>
-      </button>
-    </div>
-  </div>
-
-  <!-- PANEL: TEHILIM DU JOUR -->
-  <div id="panel-jour" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
-    </div>
-    <div class="day-badge-wrap">
-      <div class="home-badge" id="home-badge"></div>
-    </div>
-    <div class="progress-section">
-      <div class="progress-header">
-        <span class="progress-label">Progression du jour</span>
-        <span class="progress-pct" id="progress-pct">0%</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-      <span class="progress-detail" id="progress-detail"></span>
-    </div>
-    <div id="complete-card"></div>
-    <div id="recap-card"></div>
-    <div class="psalms-list" id="psalms-list"></div>
-  </div>
-
-  <!-- PANEL: PAR PEREK -->
-  <div id="panel-perek" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
-    </div>
-    <div class="progress-section" id="perek-progress">
-      <div class="progress-header">
-        <span class="progress-label">Progression globale</span>
-        <span class="progress-pct" id="perek-progress-pct">0%</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="perek-progress-fill"></div></div>
-      <span class="progress-detail" id="perek-progress-detail"></span>
-    </div>
-    <div class="perek-search-wrap">
-      <input type="text" class="perek-search" id="perek-search" placeholder="🔍  Rechercher un chapitre..." oninput="filterPerek()">
-    </div>
-    <div class="psalms-list" id="perek-list"></div>
-  </div>
-
-  <!-- PANEL: MON TEHILIM (BIRTHDAY) -->
-  <div id="panel-birthday" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
-    </div>
-    <div id="birthday-content"></div>
-  </div>
-
-  <!-- PANEL: CHAINES DE TEHILIM -->
-  <div id="panel-chains" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
-    </div>
-    <div class="chain-header">
-      <h2 class="chain-title">Chaînes de Tehilim</h2>
-      <p class="chain-desc">Créez une chaîne de lecture collaborative. Partagez le lien et chaque participant reçoit un psaume différent à lire.</p>
-    </div>
-    <div id="chain-create-section">
-      <button class="chain-create-btn" onclick="showChainForm()">+ Créer une nouvelle chaîne</button>
-    </div>
-    <div id="chain-form" style="display:none">
-      <div class="chain-form-card">
-        <div class="chain-form-group">
-          <label class="chain-label">Type de demande</label>
-          <div class="chain-type-btns" id="chain-type-btns">
-            <button class="chain-type-btn active" data-type="refoua" onclick="selectChainType(this)">🩺 Réfoua Chéléma</button>
-            <button class="chain-type-btn" data-type="mariage" onclick="selectChainType(this)">💍 Mariage</button>
-            <button class="chain-type-btn" data-type="memoire" onclick="selectChainType(this)">🕯️ À la mémoire</button>
-            <button class="chain-type-btn" data-type="autre" onclick="selectChainType(this)">✨ Autre</button>
-          </div>
-        </div>
-        <div class="chain-form-group">
-          <label class="chain-label">Nom complet</label>
-          <div class="chain-name-row">
-            <input type="text" class="chain-input chain-name-half" id="chain-firstname" placeholder="Prénom" dir="auto">
-            <div class="t119-benbat-slider chain-benbat-slider" onclick="toggleBenBat('chain')">
-              <div class="bb-slider-track">
-                <span class="bb-slider-option" data-bb="ben">בן</span>
-                <span class="bb-slider-option" data-bb="bat">בת</span>
-                <div class="bb-slider-thumb"></div>
-              </div>
-            </div>
-            <input type="text" class="chain-input chain-name-half" id="chain-mothername" placeholder="Mère" dir="auto">
-          </div>
-        </div>
-        <div class="chain-form-group">
-          <label class="chain-label">Description (optionnel)</label>
-          <input type="text" class="chain-input" id="chain-desc-input" placeholder="Brève description..." dir="auto">
-        </div>
-        <div class="chain-form-actions">
-          <button class="chain-cancel-btn" onclick="hideChainForm()">Annuler</button>
-          <button class="chain-submit-btn" onclick="createChain()">Créer la chaîne</button>
-        </div>
-      </div>
-    </div>
-    <div id="chain-list"></div>
-  </div>
-
-  <!-- CHAIN DETAIL VIEW -->
-  <div id="panel-chain-detail" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="backToChains()">← Retour</button>
-      <button class="chain-share-top" onclick="shareChain()" style="display:flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>
-    </div>
-    <div id="chain-detail-content"></div>
-  </div>
-
-  <!-- PANEL: TEHILIM 119 PAR NOM -->
-  <div id="panel-t119" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
-    </div>
-    <div class="t119-header">
-      <h2 class="t119-title">Tehilim 119 par nom</h2>
-      <p class="t119-desc">Entrez le prénom de la personne et celui de sa mère. Les sections du Psaume 119 correspondant aux lettres seront affichées.</p>
-    </div>
-    <div class="t119-input-section">
-      <div class="t119-fullname-row">
-        <div class="t119-field">
-          <label class="t119-name-label">Prénom</label>
-          <input type="text" class="t119-input t119-input-half" id="t119-input" placeholder="David, יעקב..." dir="auto" oninput="onT119Input()" autocomplete="off">
-          <div class="t119-suggestions" id="t119-suggestions"></div>
-        </div>
-        <div class="t119-benbat-slider" onclick="toggleBenBat('t119')">
-          <div class="bb-slider-track">
-            <span class="bb-slider-option" data-bb="ben">בן</span>
-            <span class="bb-slider-option" data-bb="bat">בת</span>
-            <div class="bb-slider-thumb"></div>
-          </div>
-        </div>
-        <div class="t119-field">
-          <label class="t119-name-label">Mère</label>
-          <input type="text" class="t119-input t119-input-half" id="t119-mother-input" placeholder="Sarah, רחל..." dir="auto" oninput="onT119Input()" autocomplete="off">
-          <div class="t119-suggestions" id="t119-mother-suggestions"></div>
-        </div>
-      </div>
-      <div class="t119-hebrew-preview" id="t119-hebrew-preview"></div>
-      <div class="t119-clear-wrap"><button class="t119-clear-btn" onclick="clearT119()" id="t119-clear" style="display:none">✕ Effacer</button></div>
-      <div id="t119-kbd-wrap">
-      <div class="t119-kbd-hint">✍️ Vous pouvez aussi écrire directement en français dans les cases ci-dessus</div>
-      <div class="t119-keyboard" id="t119-keyboard">
-        <div class="t119-kb-row">
-          <button onclick="t119AddLetter('א')">א</button>
-          <button onclick="t119AddLetter('ב')">ב</button>
-          <button onclick="t119AddLetter('ג')">ג</button>
-          <button onclick="t119AddLetter('ד')">ד</button>
-          <button onclick="t119AddLetter('ה')">ה</button>
-          <button onclick="t119AddLetter('ו')">ו</button>
-          <button onclick="t119AddLetter('ז')">ז</button>
-          <button onclick="t119AddLetter('ח')">ח</button>
-          <button onclick="t119AddLetter('ט')">ט</button>
-          <button onclick="t119AddLetter('י')">י</button>
-          <button onclick="t119AddLetter('כ')">כ</button>
-        </div>
-        <div class="t119-kb-row">
-          <button onclick="t119AddLetter('ל')">ל</button>
-          <button onclick="t119AddLetter('מ')">מ</button>
-          <button onclick="t119AddLetter('נ')">נ</button>
-          <button onclick="t119AddLetter('ס')">ס</button>
-          <button onclick="t119AddLetter('ע')">ע</button>
-          <button onclick="t119AddLetter('פ')">פ</button>
-          <button onclick="t119AddLetter('צ')">צ</button>
-          <button onclick="t119AddLetter('ק')">ק</button>
-          <button onclick="t119AddLetter('ר')">ר</button>
-          <button onclick="t119AddLetter('ש')">ש</button>
-          <button onclick="t119AddLetter('ת')">ת</button>
-        </div>
-        <div class="t119-kb-row">
-          <button class="t119-kb-space" onclick="t119AddLetter(' ')">Espace</button>
-          <button class="t119-kb-del" onclick="t119Backspace()">⌫</button>
-        </div>
-      </div>
-      <div class="t119-convert-hint">💡 Tapez en français : sh→שׁ, ts→צ, kh→ח, th→ת etc.</div>
-      </div>
-    </div>
-    <div id="t119-results"></div>
-  </div>
-
-  <!-- PANEL: TEHILIM AU CIMETIERE -->
-  <div id="panel-cemetery" style="display:none">
-    <div class="panel-back-wrap">
-      <button class="panel-back" onclick="switchTab('menu')">← Menu</button>
-    </div>
-    <div class="cem-header">
-      <div class="cem-icon">🕯️</div>
-      <h2 class="cem-title">Tehilim au cimetière</h2>
-      <p class="cem-desc">Psaumes traditionnels récités lors d'une visite au cimetière, suivis des sections du Psaume 119 correspondant au nom du défunt et au mot <strong>נשמה</strong> (Néchama – âme).</p>
-    </div>
-    <div id="cemetery-content"></div>
-    <div class="cem-section-title" id="cem-name-title">🔤 Psaume 119 · Nom du défunt</div>
-    <div class="cem-name-section">
-      <div class="t119-input-wrap" style="margin:0 16px">
-        <input type="text" class="t119-input" id="cem-name-input" placeholder="Nom du défunt (ex: david, sarah...)" dir="auto" oninput="onCemNameInput()" autocomplete="off">
-        <button class="t119-clear" onclick="clearCemName()" id="cem-name-clear" style="display:none">✕</button>
-      </div>
-      <div class="t119-suggestions" id="cem-suggestions"></div>
-      <div class="t119-hebrew-preview" id="cem-hebrew-preview"></div>
-      <div id="cem-kbd-wrap">
-      <div class="t119-keyboard" id="cem-keyboard">
-        <div class="t119-kb-row">
-          <button onclick="cemAddLetter('א')">א</button>
-          <button onclick="cemAddLetter('ב')">ב</button>
-          <button onclick="cemAddLetter('ג')">ג</button>
-          <button onclick="cemAddLetter('ד')">ד</button>
-          <button onclick="cemAddLetter('ה')">ה</button>
-          <button onclick="cemAddLetter('ו')">ו</button>
-          <button onclick="cemAddLetter('ז')">ז</button>
-          <button onclick="cemAddLetter('ח')">ח</button>
-          <button onclick="cemAddLetter('ט')">ט</button>
-        </div>
-        <div class="t119-kb-row">
-          <button onclick="cemAddLetter('י')">י</button>
-          <button onclick="cemAddLetter('כ')">כ</button>
-          <button onclick="cemAddLetter('ל')">ל</button>
-          <button onclick="cemAddLetter('מ')">מ</button>
-          <button onclick="cemAddLetter('נ')">נ</button>
-          <button onclick="cemAddLetter('ס')">ס</button>
-          <button onclick="cemAddLetter('ע')">ע</button>
-          <button onclick="cemAddLetter('פ')">פ</button>
-          <button onclick="cemAddLetter('צ')">צ</button>
-        </div>
-        <div class="t119-kb-row">
-          <button onclick="cemAddLetter('ק')">ק</button>
-          <button onclick="cemAddLetter('ר')">ר</button>
-          <button onclick="cemAddLetter('ש')">ש</button>
-          <button onclick="cemAddLetter('ת')">ת</button>
-        </div>
-        <div class="t119-kb-row">
-          <button class="t119-kb-space" onclick="cemAddLetter(' ')">Espace</button>
-          <button class="t119-kb-del" onclick="cemBackspace()">⌫</button>
-        </div>
-      </div>
-      <div class="t119-convert-hint">💡 Tapez en français ou en hébreu</div>
-      </div>
-    </div>
-    <div id="cem-name-results"></div>
-    <div id="cem-neshama-section"></div>
-  </div>
-
-  <!-- BIRTHDAY POPUP -->
-  <div id="birthday-popup" class="bday-overlay" style="display:none" onclick="if(event.target===this)closeBdayPopup()">
-    <div class="bday-popup">
-      <div class="bday-popup-inner" id="bday-popup-inner"></div>
-      <button class="bday-close" onclick="closeBdayPopup()">Fermer</button>
-    </div>
-  </div>
-
-  <div class="app-footer"><span class="footer-logo-wrap"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAABQCAYAAAAwa2i1AAAdKUlEQVR42u1debQcZZX/VXW/JclLAiEbhCXMDAlLRrZEhkRWkSgch7DLqAeCyOYwxAVRRECcjHhAnAFlVIRBYFgGGCKyxAFyAggBBAGJJAECJKxZIHkkJO+97q6aP+691u2Pr7bu6u73Xuqe06ffq6qu+uqr+7vbd+8toLnUxt+fArAKwAcAvsjbigAcbJkk83IsgDcBvARgqrEvp5wGBBX5+wQA7wPw1ecc3ldoEdidFl5X5uV4ACU1JxsAfN6Yu5xyGhAg/0cAPczIFQAef/sALuJjXP40iwrqb7fJIJfrXaLmpKLmpAxgdm7x5NTfyVFA+qpiXt/49PH3DU0GnVxjSAjwG3ldAe1lEfNSMoRgIQd7Tv2NNDP/xGDcdYqZNxlg/y2AUQ0GndamZwJYAeAFANOaYCrLPbUDuIfvuZe/1/O3B+BtY9/VlrHnlFPLQS7f1xgMezGAsxTQ7wBwoiEI/ghgdIPAroHyHUODrgMFCoHGBMFEgIwD8KQh4E4HcLkC+jFK28vc3W7MbU45tYwEmF0AFjCDbubvC3jf1xS45vG2owBsZCb3ASwHsE/GGtZVYL9ZAa2iTOeS8osLDQD5RABL1bV6AXyB9/1MzctRvO2HBtjvYUHRaMsjp5ximXlHAI8ZWvpMBR4N9PsUoKYDeFftex/A/hlpWLlGJ4BbDW2qPwL4uep39WpPGfveAF5TWrsXwGeVENJAP1qN+UQel4xtCYDtc7Dn1EqQ7678S1kmOk6BDADOVvuv420SENsNwBsKdCUAX1bXcOoY21gAzxgCaJMlXiDa8yqLNVDrtQ83rvW6chOGWDT6LGPOZrEPLxbPWwAOysGeUytA/ilDI68AMEMdU7QA/Ty1XzTYNgDuN7TutxXgnBrGtiuAPxta+2h2HWQsZwC4wnA3fgNgaA2mvF4jnw1aVpTrPgtgZ8u82IBejBCiG0FLlvUIwZxySgWkY1G9BvwXANsapqsN6BcY+wRMWwO419CwV6bUsHLOf0AQ6fcAfAjgJN43X43lFN52pSFkngawXQrtqQN+5xn3MF9p6aLxHQZ0/T2ZTXdtlfyzmrsc7DllSlpjXcAAF2A8CmC8BRg2oH/XcpwG8c8Ns/o+ZeoWEoD8eADdSgCtArCn+v0DaiynK6CcwRpY7ulFtgriwK7Hfo1hHdwJoAPV+QVJga7vdwSAhXxcjyEE8+W3nDIFuQDiXw2GuwPhS0BJgQ4DDF83NOxD7G+H/U62nWRovhcATOF9HfytgX6a4RfP5BiD7H8b0TnoBTWmWwyQ/4R/40TMSxzQ9TWGgZbb9DWuU88lB3tOdZGrGPAmA+S3Kx/ajdCySYBugv1sZug+FczaxfitPv7HxtieYE0oYClEAF37xVP5WjpSHqVtxwBYZFz7xxYBWSvQTRBfZVxrIYCtaogp5JTTx5h5KIDfGdrkEgVwJ8acTgp083eHojpyvRLAAbyvXY3vcsMvvskAuf6+PwTo+nsCKIlHrIOycaxo9ykAnjcCfrMT+M9pgW4KtW8ZlstTAHZIEVPIKaePgXwcgui1AGlOwmBQrUDXpvIMAK8qDVtCUOVl84t/GaIJ5X5+HwF0/fc4FbjrVcJNaDfQkpcUp6wDVeolubdagG6CfTaPS2IR7wLYK9fsOdViru+kQO6xGa2Z2UnI0LUAXR+zAyiqrzXsN1Gd7WYKIDdEcP0mBuimgLjZECRXsaBZj2CNe7UK+LWluK+0QDeF4P6oriNYw3GG3GfPKRHIHVDq5iuKiVYBOCKleWgD+ndSnkMAOhxBUYinzldh8J8ZY2XI9S5OAHSZB5f3/QjhFWfPAtgjBcizALo+bprxnHwEuQy5Zs8pFlh3K225XAXC2pE8icUG9FtSMKFE1NvV+W5moPcgWCM/KAHQZCwXJgS6GUyTJUXJ3vNAAb+R6tpuE4Gujx3DMQXx2S/N/fVcW8eRz9/jmZkLoCKMV3h7n9KotdDwFMeKFu1jwJVBS299DKxuAJ8D8AgzdSnBObdJeX0B8b+BkoT6eB7Xg7LUuvkYAX8zqcxjW8NuSxFBzUBOOdAT0To+XuqmXdaci0BppGNQW0umSkJN7oCi/T8ALVeNUNs8Hs8rAB5nYVROCNo9Uo5XhI3L972K/+5hvx0AjgQlDelltWaRZzyHVrXJyqkfUTGhMPAALGZt6TOQPFBEezIf9zaoKq2YAGQ21yDumDKfX7qtTGbz1jfux02pSct1AKoT1clBFTbd/4cF0AGgIpo7+B4qTXqufs7aOdWq0W1a4UPFvENqZLKNKY7dXYFzhsUi8Gswl+vRdl6INq2oce3UAq2eU041A91GpzDo3gRwPjNzHNCKxnWfQ3zNtwDoP9jfLKK66q0WkjVox5iPWs/ns4Zfz/PishvxM6Xto8YSlsqbC4icWgZ00drSRGE1KADkRGh08RXLypcFKGdblsTcCKC7oKyz53jbnSFaNel9lxFEzYU28f+1+rUylt+DgnSvsu/uRsyLiyAXwHQpZIxugvtxkVev5dQgjd7BzNUdAw4RACVQSeU3lZl9FqgGfJwCdBLN11XHPXt8vZ8C+CSCVYPzeTyyLFUraIbxbztiziFjGQPKsjuR//d4Tr7HLpEXcx75TaWOmENOWzgJsC5XYJUA3AjWXAsjBIfkv49CUF+u+7oLyF4DsG/EeSRoJ33opHptBwT578/G+MNy3mkI+raJwNHJL/N4vGH5AbKtHdRcQ1JOZalwCqrbV0cVpuyKoGjGR3Wve5+tmJ1D5kXGNwVUvnsdgn5yB6pzzKnTzUGMlVbrJ4vzxAn1gvqkbVqS5p6znrOsf1s30HuUOR0F0HmoTh3VH8kdXwfKwLNVv9ULdJmEsexm6Iov/ZFt98cIryig78KAvTEEYK4ay1vGHOiPzNXTCBJwHMucPKJ+cxdvO6gJQO+PZNb6I4QnB3NKsGvGd7J68JWICa2A8q2PYmbu5CDVDwCsZVP+VN63FYBvAPgXBEt4WZEs0Z0KaiXdy6b1/4E6rY4GpePux/s+B6qWW4D0S2MbEKy1hzGjx67CBDWW/wWtvY8EZd4dzBbTNA7wXYvq5Utfme7yd2cTGWoIak+r9VhAtyHoDVALbVJ84ihrEaw0Ris3rAxgmYoRpV2KddgtixtHFACH1nBfQkMTCqiN6rcuAK/REl4kyld4sttAxSiHseaUfW2gBpA+qIlikR9WVHAv7TgqfJ0v8TnbGcQz1XEPgta9J/Exp/Ixac2hbfha5Zig3aFqLPeAMu30WBYw2H3QyyivDWGmr7CJXwGlFwONXUsXgNwKKqTxkFxDyrGLAXyan8dlPPZahMbBoNZaIow7QanMp4CSoUzBt5Ln9nIGfRIhLnw4mq2roUp4yPfhoMYmtvPJcSPY6hweEXeRebiCxyiCvcAu8k4x8SPpEjyfXbm1AJxGA10YfU9lOl+vNJhI36sZ6A5r9aGgNfosI8giaLZR572Q/5bOLx+Batel1fPfG/eRRqMnYdxeNZbr+Xh5Jn2gNlqH8P+TmUE2KMbRqx8fslu1oglAFxqtXKi0NEYFLsfWMYY2db/SZ3C68dw14HZkwXgCqHXYbSksNhfUO7A9YhxRgmI8WxlJhOJUy7bxCedqHAvA00HtxF9ttJ8i539HTfhY9besLw81hENfg8bjGw+0qKSjo8xRoVIN5wfHAHoRX72mBcF2yopxjDiEAL8S43O6aG6FmqxO2Kr4wj76RRlQgcdSinOYH5kDAXlJuTNmkErGMJwtkv1SWhN9qK6Y9IxxRFm22yqeD7sXc8XHt1zb/H3F2FZh/vsbCQg3Gugyec/xwKV89EAeSA+D4Xtq0j7g47LW5gW+3nIE0f5rQNF1GcvObPYJoP5YYyyjI8b/c5RGlyj7+QD+jsfRw9ryXMVIS9hvK1iYygvRYI0mX82l7eNHRIYLxvijPk6C85ykQK4DlwJs7cfrOIckNCWdt3oi3cNCzgHjfhwAn7DEv6LmoGAEIzv4t9MBHNlo010G+StQnrrDgab5HJHuZn99H2XO38S/S5szn5Qx/4sFTQ9oWUqKctpA69jjEVSk/dICpCTUzQxXiPFxfw5K5e1l3+txUNmuNPSYyH+3I3jJYn+iYQaTpSEJiLXXcQ4tNCU3w7Xst/G5xIGmcqzgQTSuHkHG+AkjTmHuDxPecbSSz7FDCM/PbDTQpax1KYDvc0TZY0CfYZiAHaBGjUlSRmsdiwvgvwH8E4DPMIgmIXg5hAindhZOz9f48OPWayUifxsHA0/mbWMRLIXJce2gLjb3NWhe6qFnldZ1LT7pcA6I2UzRv/D3u6AXToaZzz4rgg5jm8PC+m0WknsY7qIcs5mDUlNB/f094xif4yAPovFZhSXLPWzkgNlEY562ZX5YHTIuOdbjQOAKUM+IzxpzKXGJWEqyjv6MMclhJvy3YF9H93mQHRESLouEGTF1hgD4teEXlZV/cxGCN8ekSZjpUmPdAOqKG2b6a7Pt3yN8tsvUOZ2QcTgcB1mhnsEBaP06+g8t/rf50ok4cO2A6pdvaj9f8jeOsMQK5DqXKOB0G26FHH+vJWZim+dxPBabj75vxDlk202GKyHtvp5DdRKZ/D3RMMeXhxw3iY8717j3v75MpVkPXvK1r2CzfRaoceF41poPsMbS2qBRPqVI+dMYiLM4brCZffY7QUsojRwHDP91Dqi09QhmGI998rvYtehvmtwmrGxxitkWBSD5DA+qfb5lbtqYYU9lF6GsBJUc/yiClZoweo1/9yF/Rliu19ak+eqyPP+VAF5mPOglO1Fmb6R4DmE5FH3NlPBixi/mT5jU9GtkrLQAc5nZHmU3YoMy4RsRH4iK0hdAbaieCNEGcSAvtCAQh5Bos/i+nwElA2kzUgT+Q6A17DABJoHbIoJXSruWGIc09pwScf/t/Cyjkk38BgtD4f0JFivmIw76fkHxpszZjkrpJA2M2qit2aach6DHXEU9eD8BM8tvsmjR5KvJH6Mmv4vdgEpGAE5j8RRQnfqrl03iBF9ZBTBbTWJSnhEx5mtjzHZ51oeCagG0Xy0887Ay3csJnkUrm3Hodmw213hInefXufw2etfN6CaSvu9Lmkv2KMCWE2qskgosZFGcAIuwKSObtNtiDaa/VJ718SdOoLnK3/wa6H3p77WYoWVM24Mi2VoTC1hfZlfNSfDcTw7RVA5oFWIgddIZoUxr3bfhZXZfbVbtvgnjGO/zXO4fImCedjN6uH2IToMUzTMKwC/YH90zJoBnmoKj2X+eDGrM+H5GkrqXAyxZJprUUhcux38JwDnK7wxrVe2x73otaKViMWhJzm2hBpNrf5F99LIav6cAuhnxS4/jQPUGeq1crLAXOdYzEIp05P4nGNaj0EYE2YxOyHxGndcFrSrMA/UqFP6Q3BEfwK31TpRUXe0Cejf6HxDkeJu93EqgaLaYdHuBWkNF5bRL4GY8B+v2AbUuvhj9u0e5LjdNAnrxw88BLaUBlMJ4gtL25pxMAi3P7c0P+UxQo8q2FgbuZGnSDMIJ060BBUCjtLk0BTmRhZ0Owoky+QUrlyEYOPX3YdZZp7LMTBDvYdx3GB0Zcr0yaOVjcb0dZjaC1qSHAHgMQdMG15A4YnZPTeHHiiafBlq+2weUu3uxklhJtWtUS6YO9s2zAIdeA+1CkJ0U1zhC9u2tfM5DmAkqxlxWQCsGz/PxFwI4GkE3Wq9FjCyC95NsdZl+tdQ5rIE9u08LiyIoH900Z4ugdeVbEpr+/YFkDqZYhDZAS2ZLYe9E1JVCwJYNkBdAjVXmAii6GdzEvQzGJaDlqbkI1u/a+KKSVzwDtFz0awDHKNPOD5Hq+3PQZRyossss00wCvIrFwrBp3yx8fi0Al/E9nqwebiFC2jug5cflfI/fAEVkC6juvHsaz8N61pxzEeS5ey1mav0SDM/Q5n2gvOuovoJyr1NBWWQeqiP2YItgPbIvY240FUMU3HvGfi3cRiLZ0p9rzLnw/RxQOXjZzeDBFgC8xJL8flAd9S2gSqISg3Qhm2I3gtJPv4ogM8oLGfSp/DsfwPGgWu1CSpD7LCy+bARCGsnoYK11GPvNN4Cy8fSyiQ3oLs+jRJJ/F8IYx/K2I/jcbRbTrxV+qLS6PsIQaiLEnmHNlaSB6HGWIJxOOml0jkMjaLeQ7cMR9F2U5y08uhNby3FtzSTN11X/u8zzFwGYkUUwTph3I/sKV4AKDO5js34Rm90XKe0mrxo2TWphgk5Qx9c+tgLmpfQ9RTMcBlqbvhFBb3UnJFCYtRn7Fqgy6jqeh0dAZa9RzR5dBCWQYWbbJh7vajS3V3wSs/1oDjhV8PEI8l0xASYRFl08X45FWCxDEKH2BhjQR4UoNJ1ZaRPsHTFKxWfBOJsVhbZQhTfmZNlhRgZ+Hpvx17E2FRPzBmVuVWIksvhjC1grSpZUWl9ZVwAdyiDabAC7j7dlWcknGloy8F7gINsiBG9xsZnaulOMF2OmtSFZh9hmBpqOgz2BpgxqrIEYs70MSt3d1vDx5e/fIkikGShBuLA1dOHBty2+uyi8rUEVjWsQnezzFCuWNexKewavTMuaucUvv559zAoo4+cGxZiSTfV5NkPbLCa1AH0F0pUQmoz3B1AfugKbz72W88lLG70GML9opatZ2/VyzGF3w/+sh4H6Q7DJY0Y+ENU5FcK8T4JaX0fFEeR+jreY7fK7uwagNpexTgxxHYczDy4Oea5JBNowFaisGCY8AOyUFdB1swRf+ZtS3FEwGPtclvB3gspGbeazB1o792oEegGUPig15d8OOVeBhY0fcV/1gLHC5tc8UCllAc3t69YMoDugqqnhIWb7AwnN9mEI1s5Nbb4cwJ8S+vj9cY58gy8cUJHNMwzm7hDBt1uC2JIEnF9HdQeij0UCs5DoZvRviLqGuZ58sALdTATr7K6ahJK6Sa8OAeTG+DofsdYvhgTzgPoj2iJle1Hba6P6u2nqK7PdN4Soh6CAJcodqYCWFMcbQUsB+iIEvdMqA2RuhIe2QfCacb303MYxrRJbQxpDMo8jsxhIMSWzhkniNlDRQLfxgGCRZAAttc3iv+9WD9ALMXuyMG9tFVIOqKJpNfuF5vFdPEfrUX+k18Pge5OKDqDtZwmguaDqrBdjnqfMycwIt2RhAs2WJG7TSq1u0lBQbkjUcdunxKif9OJhNDKEeXcHRUJfBmVyJQmaLVN/L0V9b0WpV9qOAJUD9hmm+r4cVHwFQc61m6HgqWW8BcT3J2sF805TbpZpti9BkAwSZ/FMt/ClBN6eiBAWSdosR81bVp2GzY/cxySEv3FHXr0Vdg87J3wOBVAmYYftftwUzNkWsu9SBvtY9re3TiBBO0L+bgW1IUhD1Pf1fZamo0ER82HILrGmFtLvYXPQP6LtMheHWQAnfPNIDK8JCCcoV81MAFkJqisPs9L+HMFz2lXqzMCyjdOmOuAs121HeP6E/rtWgdPD153MVoLJp4kSZuQHa0P2P44gYWMxgg6ufgLhkYU0jWtqHyXFHcNH18cuQNCpYxFPZisSNQTU4wFcCXoRRh/Sd6htBAmj7mkBmqMstiRWwe5K65nP7mUEPfhs87/ecn0575mguoqL2Fe2Ceu1GcxFBwO6k7/b+X5cUDdWGy/KG1XkYxu/bjke1u1oN1C+yVzDOpa5XJJGkhVDtOFP2beayf7GR01mtrg3ZLQnMN3HgLrPOspEv4qZZCKookyXszY72AXQ0tJ0dpPOArWOamUEWuaqE0Eet/m6qDJo9SWJeT3N8O31vS8N0die0ujdCLrHOIZb8VyIFSvnf7gOP15+M0+5f6LZi6AXanQa19MBxofVmM5m89tPYHXrNmLzQ/aJZfFUGqAPi7iYpO9t6GeBIjCjHZRAY4YFmkpKY7Sq9LPMVkcFlHvwGvpH9Nnn2I3prgkjv4egFVLc3O0Sse/FiOsXWCPfA0p1LhlupmcIcNOiKymg1CM0x4VsH25xe2V+5rPrK3SSArqjgnHbgTLnnJhnYd6jxAruTuPnbYzxc4H+WTq6lfFg0zCxTFSxHwisPgQNOFy0PiAnvLODoUk1qD9A9bp6mG8LUAZYmPm/MkJYyHV/BFq+LBoC0BbT8JUrcBUoq6zeIhmzx32fOt9eFi0sLkmRzf7OEMHdiWTVmuY9Cp+8BGCBWwPDRZmX/anQQMayI4KlLb9GYdQf7kuXqvandfixbHFIJ13997IELo9s71IBx7L6u4etmbDnIBp7Cajhha+snbLlI4Knnc3tC1KCvBxxXtvLJ2SMtt9sQpD51sOWi3QZqvB3GUG/di/i+noconz7QAVkPUmAHiaVmsnc9dBSZrSb2LwqY2CvZfcXYarrCSSNWIJKooVGJbQKxoWcR4Jbb8bcuwjyu0BJN39C0IfA/BTY1bwUlG6rX9+UxIoZieqirLCPzMEEjq2I5tbfbRYzX/9WgnrSl320ZY5s91cGBclngpYlC8WEN+eB1pM/3SRGkzeMLlZjSOuPih90Nku2s/h8p7MkT1Py2p+pVSWbogDuYR/ZVoTyRozvK+PeBCr+0W8n9ZUG3ZhAyEk23aMcgDuEldOu6phuUIOUx9itSDp/sn896C2tbQlcQZmDJ0Hpu6Ms13lUmdkAveDkdiOu4DBoAerO1BVybTl3Lyjte5nGThrfc30LGHhjHZpdghN9DPbHQOv8vwKV0LZyeaqQ0fy4iqGanUjjqWDnSzVaIbJ9A6jasV6qqDl5GEE0PewZpF273gxqMZ2WFiecy4dijrstJX/8dVWmmBAwEv1rVcAni/PcCnqZ44QWmsACxg9RfydbsXCGIHiPWauCclEllEktsWKMX5xGADkR86v7+dVCaQOz+iWRtmdo1gZEHVdMcc0qIVZMKBkAqnUdyH5tAdG9yppBHTyfh4MirvUE14aCCiJmgZJ7TkP1+9abqdmzCA6WM37ejVp6bKS7V2nUtd1+coPNoEodbkAWYJB2SqtA9elXorZ+dWL2T+e4w7agaLO8f8xFTjnVAXQnn666/dkXQYGiuwF8neMGO6Z8FmKRvAFa/y2Bgkyvt9AlyWkQAT2n+s1JF7RUdAxoKWgGqEoujSYWofEqgO+CIsCXg9I8B1pn1JxyoA9azS659wvZneit8VwOaFkKoOWtRjS5zCkHek51+uvDUF8jCp3l15ab7DkNZKAPVubNqp2UP8jnKactBOiFQTz3OThz2uKB7rDvug//XxmEc9+es19OWzrQdV/3wRpLeEMJtZxy2mJN9yKCqqXBBAZ/EFspOeVAT01l0EvmBps/K0Lrb3NfPafBBHSnBq0s7ZOkqZ7XQkA2ivpy9supmUCPA7sfsc1PcGxJgTWuM6z5gsFSDWNIMi4/5m/fGE/cd5Ixmcc4CceYZI5tc5j0WQ4UCy+nOv1gL0aD2aqrdB8ux7Jd01hU97MKe8eZrqnWL4nT73Wzjcu1nMs83vxfj9O1bJeXJbSr8ejz2poNwnJc0vmMmsskc2ybw7D9UU0g8vTZQUoOqKXxnAiwC9OORtDtcwWC1rbyJs0RoMIKqXIbCupeuQ7A+6h+CWMnqA+WA0rf/MBgOJd92D4EjQGdEM1UBLVkliU53UjQ/M1EPn65OmeBXQR5SZ1nbPdAXVdtXT0cjiPIm2JfTyA4ZR625jl9B9QiW7ZvB+oi8pqaSx9UpdYFitaXedtwPn41gtdGyfFDeI59nuN1EQJIrK2rAfwn+l9fupwyAHoeDMpJaC2of1uecTcITfe5oHeZt4X4aD6oQ6W8jL0LwcsHS6yt17F26gH1xiqCGiuIZpgEarpQYu39AW8fzpptFT7eJUXM0PGswdr53B4fv9biW7Yj6MUu24fxuEqo7mm2FV/b4bEtVYy9FWvZdlAzwHd4frZHdc+ujTwWeXdbD99HJ5+jDdWvnNrElk6F51NeDd1ucT08PtebfHxFzcFItkrG8hy2R2jqbtj7lZkmew+CGvmB+GrinCLo/wF/w7w2SR5QqAAAAABJRU5ErkJggg==" alt="770 Lab" style="height:22px;width:auto;opacity:0.4;"></span></div>
-  <div class="insta-bottom-nav" id="home-nav">
-    <button class="insta-nav-item active" onclick="switchTab('menu')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
-    <button class="insta-nav-item" onclick="switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="6" rx="2.5" ry="3"/><path d="M7 10c1-1 3-1.5 5-1.5s4 .5 5 1.5"/><path d="M7 10v11H17V10"/><path d="M7 10.5c-.5.5-1 1.5-1 3" opacity="0.5"/><path d="M17 10.5c.5.5 1 1.5 1 3" opacity="0.5"/><rect x="10" y="14" width="4" height="3" rx="0.5" opacity="0.5"/></svg><span>Prières</span></button>
-    <button class="insta-nav-center" onclick="switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner"><svg viewBox="0 0 28 28" width="22" height="22" fill="none" stroke="#6228d7" stroke-width="1.3" stroke-linecap="round"><line x1="14" y1="7" x2="14" y2="22"/><line x1="7" y1="22" x2="21" y2="22"/><path d="M7 12c0-3.5 3.5-5 7-5s7 1.5 7 5"/><line x1="7" y1="12" x2="7" y2="9"/><line x1="10.5" y1="9.5" x2="10.5" y2="7"/><line x1="14" y1="7" x2="14" y2="4.5"/><line x1="17.5" y1="9.5" x2="17.5" y2="7"/><line x1="21" y1="12" x2="21" y2="9"/><circle cx="7" cy="8" r="1" fill="#f9ce34" stroke="none"/><circle cx="10.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="14" cy="3.5" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="17.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="21" cy="8" r="1" fill="#f9ce34" stroke="none"/></svg></div></div><span>Objectifs</span></button>
-    <button class="insta-nav-item" onclick="switchTab('sub-tehilim')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Tehilim</span></button>
-    <button class="insta-nav-item" onclick="switchTab('sub-etudes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Études</span></button>
-  </div>
-</div>
-
-<!-- READING SCREEN -->
-<div id="reading" style="display:none">
-  <div class="reading-header">
-    <button class="back-btn" onclick="goHome()">← Retour</button>
-    <span class="reading-chapter" id="reading-chapter"></span>
-    <span style="min-width:70px"></span>
-  </div>
-  <div class="story-bar" id="story-bar"></div>
-  <div class="reading-body" id="reading-body"></div>
-  <div class="reading-bottom-bar"></div>
-  <div class="insta-bottom-nav">
-    <button class="insta-nav-item" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
-    <button class="insta-nav-item" onclick="goHome();switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="6" rx="2.5" ry="3"/><path d="M7 10c1-1 3-1.5 5-1.5s4 .5 5 1.5"/><path d="M7 10v11H17V10"/><path d="M7 10.5c-.5.5-1 1.5-1 3" opacity="0.5"/><path d="M17 10.5c.5.5 1 1.5 1 3" opacity="0.5"/><rect x="10" y="14" width="4" height="3" rx="0.5" opacity="0.5"/></svg><span>Prières</span></button>
-    <button class="insta-nav-center" onclick="goHome();switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner"><svg viewBox="0 0 28 28" width="22" height="22" fill="none" stroke="#6228d7" stroke-width="1.3" stroke-linecap="round"><line x1="14" y1="7" x2="14" y2="22"/><line x1="7" y1="22" x2="21" y2="22"/><path d="M7 12c0-3.5 3.5-5 7-5s7 1.5 7 5"/><line x1="7" y1="12" x2="7" y2="9"/><line x1="10.5" y1="9.5" x2="10.5" y2="7"/><line x1="14" y1="7" x2="14" y2="4.5"/><line x1="17.5" y1="9.5" x2="17.5" y2="7"/><line x1="21" y1="12" x2="21" y2="9"/><circle cx="7" cy="8" r="1" fill="#f9ce34" stroke="none"/><circle cx="10.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="14" cy="3.5" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="17.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="21" cy="8" r="1" fill="#f9ce34" stroke="none"/></svg></div></div><span>Objectifs</span></button>
-    <button class="insta-nav-item" onclick="goHome();switchTab('sub-tehilim')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Tehilim</span></button>
-    <button class="insta-nav-item" onclick="goHome();switchTab('sub-etudes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Études</span></button>
-  </div>
-</div>
-
-<!-- STORY OVERLAY -->
-<div id="obj-story-overlay" style="display:none">
-  <div class="os-progress" id="os-progress"></div>
-  <button class="os-close" onclick="closeObjStory()">✕</button>
-  <div class="os-content" id="os-content"></div>
-  <div class="os-tap-left" onclick="storyNav('prev')"></div>
-  <div class="os-tap-right" onclick="storyNav('next')"></div>
-</div>
-
-<script src="tehilim-data.js"></script>
-<script>
-
-const QUOTES = [
-  { text: "Celui qui récite les Tehilim chaque jour, c'est comme s'il avait accompli toute la Torah.", source: "Midrash Chocher Tov" },
-  { text: "Les Tehilim brisent toutes les barrières et s'élèvent de niveau en niveau sans obstacle.", source: "Rabbi Na'hman de Breslev" },
-  { text: "Le Livre des Tehilim est le remède pour toutes les souffrances.", source: "Le Baal Chem Tov" },
-  { text: "David, roi d'Israël, a composé les Tehilim en incluant en eux les prières de chaque juif, en tout temps et en tout lieu.", source: "Le Sfat Emet" },
-  { text: "Celui qui dit des Tehilim repousse les forces du mal et fait descendre la bénédiction sur le monde.", source: "Le Zohar HaKadoch" },
-  { text: "Si les gens connaissaient la puissance des Tehilim, ils les réciteraient à chaque instant.", source: "Rabbi Yéhouda HéH'assid" },
-  { text: "Les portes des larmes ne sont jamais fermées, et les Tehilim sont la clé de toutes les autres portes.", source: "Le Rabbi de Loubavitch" },
-  { text: "Chaque mot des Tehilim possède le pouvoir d'éveiller la miséricorde divine.", source: "Le 'Hafets 'Haïm" },
-  { text: "Heureux celui qui dit des Tehilim avec ferveur, car Hachem compte chacun de ses mots comme des pierres précieuses.", source: "Midrach Rabba" },
-  { text: "La récitation des Tehilim a le pouvoir de transformer un décret sévère en miséricorde.", source: "Le Ben Ich 'Haï" },
-  { text: "Quand un homme ne sait pas quoi dire à Hachem, qu'il ouvre le livre des Tehilim.", source: "Rabbi Yéhiel Mikhal de Zlotchov" },
-  { text: "Les Tehilim sont l'échelle par laquelle on s'élève vers le Créateur.", source: "Le Maguid de Mézéritch" },
-  { text: "Dix formes de louanges ont été utilisées pour composer les Tehilim, et la plus grande de toutes est Halelou-ya.", source: "Talmud Pessa'him 117a" },
-  { text: "La lecture des Tehilim est agréable à Hachem à toute heure du jour et de la nuit.", source: "Le Chla HaKadoch" },
-  { text: "Celui qui récite le livre entier des Tehilim chaque mois mérite de recevoir la face de la Chékhina.", source: "Séfer Hassidim" },
-  { text: "Les Tehilim sont le bouclier d'Israël : ils protègent aussi bien l'individu que la communauté.", source: "Le Rav Ovadia Yossef" },
-  { text: "Quiconque dit des Tehilim est considéré comme s'il avait accompli toutes les supplications du monde.", source: "Yalkout Chimoni" },
-  { text: "Le roi David a demandé à Hachem que la récitation des Tehilim soit considérée comme l'étude de Néguayim et Ohalot.", source: "Talmud Ménah'ot 4a" },
-  { text: "Avec les Tehilim, on peut obtenir tout ce dont on a besoin, que ce soit sur le plan matériel ou spirituel.", source: "Rabbi Israël de Rouzhin" },
-  { text: "Les Tehilim ont été composés avec Roua'h HaKodech pour toutes les générations et toutes les situations.", source: "Le Rambam" },
-];
-
-const COMPLETION_QUOTES = [
-  { text: "Chaque bonne action que tu accomplis rapproche la venue du Machia'h. Tu as fait ta part aujourd'hui !", source: "Le Rabbi de Loubavitch" },
-  { text: "Sois une « Dougma 'Haya » — un exemple vivant. Les gens sont plus touchés par ce que tu fais que par ce que tu dis.", source: "Le Rabbi de Loubavitch" },
-  { text: "L'éducation d'un enfant est la plus grande des mitsvot, car elle contient en elle toutes les autres.", source: "Le Rabbi de Loubavitch" },
-  { text: "Nous sommes la dernière génération de l'exil et la première de la délivrance !", source: "Le Rabbi de Loubavitch" },
-  { text: "Une bougie allume une autre bougie sans perdre de sa propre lumière. Transmets la Torah avec joie.", source: "Le Rabbi de Loubavitch" },
-  { text: "Le monde tient sur trois piliers : la Torah, la prière et les actes de bonté. Tu les as accomplis aujourd'hui.", source: "Pirké Avot 1:2" },
-  { text: "Ne dis pas « quand j'aurai du temps libre j'étudierai », car peut-être n'auras-tu jamais de temps libre.", source: "Hillel, Pirké Avot 2:4" },
-  { text: "Un seul acte, une seule parole, une seule pensée peut faire pencher la balance du monde entier vers le mérite.", source: "Rambam, Hilkhot Téchouva 3:4" },
-  { text: "Éduquer un enfant selon sa voie, même quand il vieillira, il ne s'en écartera pas.", source: "Michlé (Proverbes) 22:6" },
-  { text: "Le Machia'h attend à la porte. Chaque mitsva est une clé qui ouvre un verrou de plus.", source: "Le Rabbi de Loubavitch" },
-  { text: "L'exemple est la plus puissante des leçons. Sois la lumière que tu veux voir dans le monde.", source: "Le Baal Chem Tov" },
-  { text: "Toute la Torah se résume en une phrase : ce qui t'est odieux, ne le fais pas à ton prochain. Le reste est commentaire — va et étudie !", source: "Hillel, Talmud Chabbat 31a" },
-  { text: "Quand une personne s'améliore, elle améliore le monde entier.", source: "Le Rabbi de Loubavitch" },
-  { text: "Le but de l'étude n'est pas l'étude elle-même, mais l'action qui en découle.", source: "Talmud Kiddouchin 40b" },
-  { text: "Les enfants sont les garants de la Torah. Sans eux, la Torah nous serait reprise.", source: "Midrash Chir HaChirim Rabba" },
-  { text: "Le Machia'h viendra dans une génération qui sera soit entièrement méritante, soit entièrement… courageuse dans le repentir.", source: "Talmud Sanhédrin 98a" },
-  { text: "Fais une mitsva de plus, et tu auras peut-être fait pencher le monde entier vers la délivrance.", source: "Le Rabbi de Loubavitch" },
-  { text: "L'obscurité n'est pas chassée par un bâton, mais par la lumière. Allume ta lumière intérieure.", source: "Le Rabbi de Loubavitch" },
-  { text: "Le plus grand cadeau que l'on puisse faire à ses enfants, c'est leur transmettre l'amour de la Torah.", source: "Rav Chimchon Raphaël Hirsch" },
-  { text: "Vis de telle manière que les gens veulent connaître ta Torah.", source: "Le Rabbi de Loubavitch" },
-];
-
-const DAILY_SCHEDULE = {
-  1: [1, 9], 2: [10, 17], 3: [18, 22], 4: [23, 28], 5: [29, 34],
-  6: [35, 38], 7: [39, 43], 8: [44, 48], 9: [49, 54], 10: [55, 59],
-  11: [60, 65], 12: [66, 68], 13: [69, 71], 14: [72, 76], 15: [77, 78],
-  16: [79, 82], 17: [83, 87], 18: [88, 89], 19: [90, 96], 20: [97, 103],
-  21: [104, 105], 22: [106, 107], 23: [108, 112], 24: [113, 118],
-  25: [119, 119, "aleph-lamed"], 26: [119, 119, "mem-tav"], 27: [120, 134], 28: [135, 139], 29: [140, 144], 30: [145, 150]
-};
-
-const REMINDERS = [
-  "Avez-vous lu les Tehilim du jour ?",
-  "Avez-vous pris le temps de faire du bien à votre âme ?",
-  "Un moment de Tehilim illumine toute la journée.",
-  "Chaque mot de Tehilim est une prière qui monte au ciel.",
-  "N'oubliez pas : les Tehilim sont la clé de toutes les portes.",
-];
-
-// --- Hebrew Calendar Converter ---
-function hebrewElapsedDays(year) {
-  const monthsElapsed = Math.floor((235 * year - 234) / 19);
-  const partsElapsed = 12084 + 13753 * monthsElapsed;
-  let day = monthsElapsed * 29 + Math.floor(partsElapsed / 25920);
-  if (3 * (day + 1) % 7 < 3) day++;
-  return day;
-}
-
-function hebrewYearLength(year) {
-  return hebrewElapsedDays(year + 1) - hebrewElapsedDays(year);
-}
-
-function isHebrewLeapYear(year) {
-  return ((7 * year + 1) % 19) < 7;
-}
-
-function hebrewMonthsInYear(year) {
-  return isHebrewLeapYear(year) ? 13 : 12;
-}
-
-function hebrewMonthLength(year, month) {
-  const yearLen = hebrewYearLength(year);
-  if (month === 2) return (yearLen % 10 === 5) ? 30 : 29; // Cheshvan
-  if (month === 3) return (yearLen % 10 === 3) ? 29 : 30; // Kislev
-  if (month === 6 && !isHebrewLeapYear(year)) return 0; // Adar I in non-leap
-  if (month === 6) return 30; // Adar I in leap
-  if ([1, 5, 8, 10, 12].includes(month)) return 30; // Tishri, Shevat, Nisan, Sivan, Av
-  return 29; // Tevet, Adar, Iyar, Tamouz, Eloul
-}
-
-const HEBREW_MONTH_NAMES = [
-  "", "Tishri", "Heshvan", "Kislev", "Tevet", "Shevat",
-  "Adar I", "Adar", "Nissan", "Iyar", "Sivan",
-  "Tamouz", "Av", "Eloul"
-];
-
-function getHebrewMonthName(year, month) {
-  if (month === 7 && !isHebrewLeapYear(year)) return "Adar";
-  if (month === 7 && isHebrewLeapYear(year)) return "Adar II";
-  return HEBREW_MONTH_NAMES[month] || "";
-}
-
-function gregorianToJD(year, month, day) {
-  const a = Math.floor((14 - month) / 12);
-  const y = year + 4800 - a;
-  const m = month + 12 * a - 3;
-  return day + Math.floor((153 * m + 2) / 5) + 365 * y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
-}
-
-function hebrewToJD(year, month, day) {
-  let jd = hebrewElapsedDays(year) + 347997;
-  for (let m = 1; m < month; m++) {
-    jd += hebrewMonthLength(year, m);
-  }
-  return jd + day;
-}
-
-function jdToHebrew(jd) {
-  let year = Math.floor((jd - 347997) / 366);
-  let ySafety = 0;
-  while (hebrewToJD(year + 1, 1, 1) <= jd && ySafety < 100) { year++; ySafety++; }
-  let month = 1;
-  let safety = 0;
-  while (safety < 15) {
-    safety++;
-    const mLen = hebrewMonthLength(year, month);
-    if (mLen === 0) { month++; continue; }
-    if (jd <= hebrewToJD(year, month, mLen)) break;
-    month++;
-  }
-  const day = jd - hebrewToJD(year, month, 0);
-  return { year, month, day };
-}
-
-function getHebrewDate(date) {
-  const jd = gregorianToJD(date.getFullYear(), date.getMonth() + 1, date.getDate());
-  const heb = jdToHebrew(jd);
-  return {
-    day: heb.day,
-    month: heb.month,
-    year: heb.year,
-    monthName: getHebrewMonthName(heb.year, heb.month),
-  };
-}
-
-
-function getDayOfMonth() {
-  const heb = getHebrewDate(new Date());
-  return Math.min(heb.day, 29);
-}
-
-
-
-
-// Quote display durations based on word count (2.5 words/sec + 2.5s buffer)
-// Reading speed: ~150 wpm on screen (French) = 2.5 words/sec
-// Formula: 1s notice + (wordCount / 2.5)s reading + 2s absorb
-function getQuoteDuration(q) {
-  const totalWords = q.text.split(/\s+/).length + q.source.split(/\s+/).length;
-  return Math.round(1000 + (totalWords / 2.5) * 1000);
-}
-
-// Hebrew numeral conversion (number → Hebrew letters)
-function toHebrewNumeral(n) {
-  const ones = ['','א','ב','ג','ד','ה','ו','ז','ח','ט'];
-  const tens = ['','י','כ','ל','מ','נ','ס','ע','פ','צ'];
-  const hundreds = ['','ק','ר','ש','ת'];
-  if (n === 15) return 'טו';
-  if (n === 16) return 'טז';
-  let s = '';
-  if (n >= 100) { s += hundreds[Math.floor(n/100)]; n %= 100; }
-  if (n >= 10) { s += tens[Math.floor(n/10)]; n %= 10; }
-  if (n > 0) s += ones[n];
-  return s;
-}
-
-function toHebrewYear(y) {
-  var n = y % 1000; // drop the thousands
-  var ones = ['','א','ב','ג','ד','ה','ו','ז','ח','ט'];
-  var tens = ['','י','כ','ל','מ','נ','ס','ע','פ','צ'];
-  var s = '';
-  while (n >= 400) { s += 'ת'; n -= 400; }
-  if (n >= 100) { s += ['','ק','ר','ש'][Math.floor(n/100)]; n %= 100; }
-  if (n === 15) { s += 'טו'; }
-  else if (n === 16) { s += 'טז'; }
-  else {
-    if (n >= 10) { s += tens[Math.floor(n/10)]; n %= 10; }
-    if (n > 0) s += ones[n];
-  }
-  // Add gershayim before last letter
-  if (s.length > 1) {
-    s = s.slice(0, -1) + '"' + s.slice(-1);
-  }
-  return s;
-}
-
-// Transliterated Hebrew letter name for a chapter number
-function hebrewLetterName(n) {
-  // Build from components
-  const onesN = ['','Aleph','Beth','Guimel','Daleth','Hé','Vav','Zayin','Heth','Teth'];
-  const tensN = ['','Youd','Kaf','Lamed','Mem','Noun','Samekh','Ayin','Pé','Tsadi'];
-  const hundredsN = ['','Kouf','Rech','Chin','Tav'];
-  if (n === 15) return 'Teth-Vav';
-  if (n === 16) return 'Teth-Zayin';
-  const parts = [];
-  if (n >= 100) { parts.push(hundredsN[Math.floor(n/100)]); n %= 100; }
-  if (n >= 10) { parts.push(tensN[Math.floor(n/10)]); n %= 10; }
-  if (n > 0) parts.push(onesN[n]);
-  return parts.join('-');
-}
-
-// ====== APP STATE ======
-let currentScreen = "splash";
-let currentPsalm = 0;
-let readPsalms = new Set();
-let quoteIndex = 0;
-let quoteFade = true;
-let availablePsalms = [];
-let activeTab = "jour";
-let browseSource = "jour"; // tracks which tab opened the reading screen
-let currentJourDay = 1; // which day of the month is being viewed in jour mode
-let quoteTimer = null;
-
-// ====== INIT ======
-function init() {
-  try {
-    const hebrewDate = getHebrewDate(new Date());
-    const dayOfMonth = Math.min(hebrewDate.day, 30);
-    window._hebrewDay = dayOfMonth;
-    currentJourDay = dayOfMonth;
-    const todaySchedule = DAILY_SCHEDULE[dayOfMonth] || [1, 9];
-    const todayRange = [todaySchedule[0], todaySchedule[1]];
-    const todaySection = todaySchedule[2] || null;
-
-    let todayPsalms = TEHILIM.filter(p => p.number >= todayRange[0] && p.number <= todayRange[1]);
-
-    if (todaySection === "aleph-lamed") {
-      todayPsalms = todayPsalms.map(p => {
-        if (p.number === 119) return { ...p, verses: p.verses.slice(0, 96), sectionLabel: "Aleph (א) à Lamed (ל)" };
-        return p;
-      });
-    } else if (todaySection === "mem-tav") {
-      todayPsalms = todayPsalms.map(p => {
-        if (p.number === 119) return { ...p, verses: p.verses.slice(96), sectionLabel: "Mem (מ) à Tav (ת)" };
-        return p;
-      });
-    }
-
-    availablePsalms = todayPsalms;
-
-    // Store today's expected range for display even if not all available
-    window._todayRange = todayRange;
-    window._todayExpectedCount = todayRange[1] - todayRange[0] + 1;
-
-    // Badge text
-    let badgeText = "Jour " + dayOfMonth + " du mois hébraïque — ";
-    if (todaySection === "aleph-lamed") {
-      badgeText += "Chapitre 119 · Aleph (א) à Lamed (ל)";
-    } else if (todaySection === "mem-tav") {
-      badgeText += "Chapitre 119 · Mem (מ) à Tav (ת)";
-    } else if (todayRange[0] === todayRange[1]) {
-      badgeText += "Chapitre " + todayRange[0];
-    } else {
-      badgeText += "Chapitres " + todayRange[0] + " à " + todayRange[1];
-    }
-
-    // Set dates
-    var dateLineEl = document.getElementById("home-date-line");
-    if (dateLineEl) dateLineEl.textContent = hebrewDate.day + " " + hebrewDate.monthName + " " + hebrewDate.year + " — " + new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
-    document.getElementById("home-badge").textContent = badgeText;
-    document.getElementById("menu-jour-sub").textContent = badgeText;
-    var bigTeh = document.getElementById("big-teh-sub"); if (bigTeh) bigTeh.textContent = badgeText;
-
-    // Init quotes
-    updateQuote();
-    scheduleNextQuote();
-
-    // Auto transition - wait for first quote to be read
-    const firstDuration = getQuoteDuration(QUOTES[0]);
-    window._splashTimer = setTimeout(() => {
-      document.getElementById("splash").classList.add("hidden");
-      showHome();
-    }, firstDuration + 1500);
-
-    // T119 keyboard targets active field
-    document.getElementById('t119-input').addEventListener('focus', function() { _t119ActiveField = 't119-input'; });
-    document.getElementById('t119-mother-input').addEventListener('focus', function() { _t119ActiveField = 't119-mother-input'; });
-
-  } catch(e) {
-    document.body.innerHTML = '<div style="padding:40px;color:#000;background:#fafafa;min-height:100vh;font-family:serif"><h2>Erreur</h2><p>'+e.message+'</p></div>';
-  }
-}
-
-function skipSplash() {
-  if (window._splashTimer) { clearTimeout(window._splashTimer); window._splashTimer = null; }
-  document.getElementById("splash").classList.add("hidden");
-  showHome();
-}
-
-function showHome() {
-  if (window._homeShown) return;
-  window._homeShown = true;
-  document.getElementById("home").style.display = "block";
-  document.getElementById("reading").style.display = "none";
-  switchTab("menu");
-  setTimeout(() => document.getElementById("home").classList.add("visible"), 50);
-  renderHome();
-  renderObjStoryBar();
-  loadHayomYom();
-  loadRambam();
-  loadShabbatTimes();
-  updateBigObjSub();
-  cleanOldObjectives();
-  updateBirthdaySub();
-  setTimeout(checkBirthdayPopup, 1000);
-  setTimeout(checkSharedChain, 500);
-  // autoShowObjStory disabled — user taps the glowing ring instead
-  currentScreen = "home";
-}
-
-function goHome() {
-  if (browseSource === "perek" && window._savedAvailable) {
-    availablePsalms = window._savedAvailable;
-    window._savedAvailable = null;
-  }
-  document.getElementById("reading").style.display = "none";
-  document.getElementById("home").style.display = "block";
-  window.scrollTo(0, 0);
-  document.getElementById("reading").scrollTop = 0;
-  if (browseSource === "perek") {
-    switchTab("perek");
-  } else if (browseSource === "jour") {
-    switchTab("jour");
-    renderJourCalendar();
-  } else if (browseSource === "chain") {
-    if (currentChainId) {
-      openChainDetail(currentChainId);
-    } else {
-      switchTab("chains");
-    }
-  } else {
-    switchTab("menu");
-  }
-  currentScreen = "home";
-}
-
-
-function switchTab(tab) {
-  activeTab = tab;
-  var panels = ["menu","sub-objectifs","sub-tehilim","sub-club","sub-beth","sub-sidour","sub-sidour-patakh","sub-etudes","sub-don","jour","perek","birthday","chains","chain-detail","t119","cemetery"];
-  panels.forEach(function(p) {
-    var el = document.getElementById("panel-" + p);
-    if (el) el.style.display = p === tab ? "block" : "none";
-  });
-  if (tab === "perek") renderPerek();
-  if (tab === "jour") renderHome();
-  if (tab === "birthday") renderBirthday();
-  if (tab === "chains") renderChainList();
-  if (tab === "cemetery") renderCemetery();
-  if (tab === "sub-objectifs") { renderObjectives(); renderObjStoryBar(); }
-  if (tab === "sub-etudes") { syncEtudesPanel(); }
-  if (tab === "sub-sidour-patakh") { showPatakhDirect('shaharit'); }
-  if (tab === "menu") { renderObjStoryBar(); updateBigObjSub(); }
-  window.scrollTo(0, 0);
-  document.getElementById("reading").scrollTop = 0;
-  updateHomeNav(tab);
-}
-
-function updateBigObjSub() {
-  var state = getObjState();
-  var n = countAllChecked(state);
-  var el = document.getElementById("big-obj-sub");
-  if (el) el.textContent = n + "/" + TOTAL_OBJ + " accomplis";
-}
-
-function renderPerek(filter) {
-  const list = document.getElementById("perek-list");
-  const search = (filter || "").trim().toLowerCase();
-  // Update progress
-  const totalAvailable = TEHILIM.length;
-  const totalRead = TEHILIM.filter(p => readPsalms.has(p.number)).length;
-  const pct = totalAvailable > 0 ? Math.round((totalRead / totalAvailable) * 100) : 0;
-  document.getElementById("perek-progress-pct").textContent = pct + "%";
-  document.getElementById("perek-progress-fill").style.width = pct + "%";
-  document.getElementById("perek-progress-detail").textContent = totalRead + " sur " + totalAvailable + " chapitre" + (totalAvailable > 1 ? "s" : "") + " lu" + (totalRead > 1 ? "s" : "");
-  let html = '<div class="perek-grid">';
-  let count = 0;
-  for (let n = 1; n <= 150; n++) {
-    const name = hebrewLetterName(n);
-    if (search && !String(n).includes(search) && !name.toLowerCase().includes(search)) continue;
-    const psalm = TEHILIM.find(p => p.number === n);
-    const isRead = readPsalms.has(n);
-    const readClass = isRead ? ' perek-read' : '';
-    const checkMark = isRead ? '<span class="perek-check">✓</span>' : '';
-    const inner = checkMark + '<span class="perek-num">' + n + '</span><span class="perek-heb">' + toHebrewNumeral(n) + '</span><span class="perek-name">' + name + '</span>';
-    if (psalm) {
-      html += '<button class="perek-cell available' + readClass + '" onclick="openPerek(' + n + ')">' + inner + '</button>';
-    } else {
-      html += '<div class="perek-cell unavailable">' + inner + '</div>';
-    }
-    count++;
-  }
-  html += '</div>';
-  if (count === 0) html = '<p style="text-align:center;color:var(--text-light);padding:40px 20px;">Aucun chapitre trouvé</p>';
-  list.innerHTML = html;
-}
-
-function filterPerek() {
-  renderPerek(document.getElementById("perek-search").value);
-}
-
-function openPerek(num) {
-  const psalm = TEHILIM.find(p => p.number === num);
-  if (!psalm) return;
-  browseSource = "perek";
-  window._savedAvailable = availablePsalms;
-  availablePsalms = TEHILIM.slice().sort((a,b) => a.number - b.number);
-  currentPsalm = availablePsalms.findIndex(p => p.number === num);
-  currentScreen = "reading";
-  document.getElementById("home").style.display = "none";
-  document.getElementById("reading").style.display = "flex";
-  window.scrollTo(0, 0);
-  document.getElementById("reading").scrollTop = 0;
-  
-  // Start with ALL groups collapsed
-  storyExpandedGroup = -999;
-  renderReading();
-  
-  // After 3 seconds, expand the group containing the current psalm with animation
-  setTimeout(function() {
-    var currentNum = availablePsalms[currentPsalm] ? availablePsalms[currentPsalm].number : 1;
-    if (currentNum <= 10) storyExpandedGroup = 0;
-    else storyExpandedGroup = Math.floor((currentNum - 1) / 10) * 10 + 1;
-    renderStoryBar(true);
-  }, 3000);
-}
-
-function renderHome() {
-  const expectedCount = window._todayExpectedCount || availablePsalms.length;
-  const progress = expectedCount > 0 ? Math.round((readPsalms.size / expectedCount) * 100) : 0;
-  document.getElementById("progress-pct").textContent = progress + "%";
-  document.getElementById("progress-fill").style.width = progress + "%";
-  document.getElementById("progress-detail").textContent = readPsalms.size + " sur " + expectedCount + " chapitre" + (expectedCount > 1 ? "s" : "") + " lu" + (readPsalms.size > 1 ? "s" : "");
-
-  // Complete card
-  const cc = document.getElementById("complete-card");
-  if (progress === 100) {
-    cc.innerHTML = '<div class="complete-card"><span class="complete-icon">🌟</span><span class="complete-text">Kol HaKavod ! Vous avez terminé les Tehilim du jour !</span></div>';
-  } else { cc.innerHTML = ""; }
-
-  // Recap card
-  const rc = document.getElementById("recap-card");
-  const totalExpected = window._todayExpectedCount || availablePsalms.length;
-  const unread = availablePsalms.filter(p => !readPsalms.has(p.number));
-  const missingCount = totalExpected - availablePsalms.length;
-  const totalUnread = unread.length + missingCount;
-  if (totalUnread > 0 && readPsalms.size > 0 && progress < 100) {
-    rc.innerHTML = '<div class="recap-card"><span class="recap-icon">📖</span><div><span class="recap-title">Rattraper votre retard</span><span class="recap-sub">Il vous reste ' + totalUnread + ' chapitre' + (totalUnread > 1 ? 's' : '') + ' à lire aujourd\'hui</span></div></div>';
-  } else { rc.innerHTML = ""; }
-
-  // Psalm list - show full expected range
-  const list = document.getElementById("psalms-list");
-  let html = '<span class="section-title">Chapitres du jour</span>';
-  const range0 = window._todayRange ? window._todayRange[0] : 1;
-  const range1 = window._todayRange ? window._todayRange[1] : 1;
-  for (let num = range0; num <= range1; num++) {
-    const psalm = availablePsalms.find(p => p.number === num);
-    const isRead = readPsalms.has(num);
-    if (psalm) {
-      const label = psalm.sectionLabel ? " · " + psalm.sectionLabel : "";
-      const idx = availablePsalms.indexOf(psalm);
-      html += '<button class="psalm-card' + (isRead ? ' read' : '') + '" onclick="openPsalm(' + idx + ')">';
-      html += '<div class="psalm-card-left"><div class="psalm-card-num' + (isRead ? ' done' : '') + '">' + (isRead ? "✓" : psalm.number) + '</div>';
-      html += '<div><span class="psalm-card-title">Tehilim ' + psalm.number + label + '</span>';
-      const pTitle = PSALM_TITLES[psalm.number] || '';
-      html += '<span class="psalm-card-verses">' + pTitle + ' · ' + psalm.verses.length + ' verset' + (psalm.verses.length > 1 ? 's' : '') + '</span></div></div>';
-      html += '<span class="psalm-card-arrow">›</span></button>';
-    } else {
-      const pTitle = PSALM_TITLES[num] || '';
-      html += '<div class="psalm-card unavailable-card">';
-      html += '<div class="psalm-card-left"><div class="psalm-card-num unavailable-num">' + num + '</div>';
-      html += '<div><span class="psalm-card-title">Tehilim ' + num + '</span>';
-      html += '<span class="psalm-card-verses">' + pTitle + ' · Bientôt disponible</span></div></div>';
-      html += '<span class="psalm-card-arrow" style="opacity:0.3">🔒</span></div>';
-    }
-  }
-  list.innerHTML = html;
-}
-
-function openJourReading() {
-  switchTab('jour');
-  renderJourCalendar();
-}
-
-function renderJourCalendar() {
-  var heb = getHebrewDate(new Date());
-  var todayDay = heb.day;
-  var monthLen = hebrewMonthLength(heb.year, heb.month);
-  var maxDays = Math.min(monthLen, 30);
-  
-  var HEBREW_MONTH_HEB = {
-    1: 'תִּשְׁרֵי', 2: 'חֶשְׁוָן', 3: 'כִּסְלֵו', 4: 'טֵבֵת', 5: 'שְׁבָט',
-    6: 'אֲדָר א׳', 7: 'אֲדָר', 8: 'נִיסָן', 9: 'אִיָּר', 10: 'סִיוָן',
-    11: 'תַּמּוּז', 12: 'אָב', 13: 'אֱלוּל'
-  };
-  
-  var monthHeb = HEBREW_MONTH_HEB[heb.month] || '';
-  var monthLatin = getHebrewMonthName(heb.year, heb.month);
-  var yearHeb = toHebrewYear(heb.year);
-  
-  var html = '';
-  
-  // Today's progress banner
-  var todaySchedule = DAILY_SCHEDULE[todayDay];
-  if (todaySchedule) {
-    var todayStart = todaySchedule[0];
-    var todayEnd = todaySchedule[1];
-    var todayTotal = todayEnd - todayStart + 1;
-    if (todaySchedule[2]) todayTotal = 1; // psalm 119 counts as 1
-    var todayRead = 0;
-    for (var p = todayStart; p <= todayEnd; p++) {
-      if (readPsalms.has(p)) todayRead++;
-    }
-    if (todaySchedule[2]) todayRead = readPsalms.has(119) ? 1 : 0;
-    var todayPct = Math.round((todayRead / todayTotal) * 100);
-    var allDone = todayRead >= todayTotal;
-    
-    if (allDone) {
-      html += '<div class="cal-progress-banner done">';
-      html += '<div class="cal-progress-emoji">🌟</div>';
-      html += '<div class="cal-progress-msg"><strong>Kol HaKavod !</strong><br>Tu as terminé les Tehilim du jour</div>';
-      html += '</div>';
-      
-      // Check personal tehilim
-      var bday = getBirthday();
-      if (bday) {
-        var age = calcHebrewAge(bday.month, bday.day, bday.year);
-        var persoChap = age + 1;
-        if (!readPsalms.has(persoChap)) {
-          html += '<div class="cal-progress-banner perso" onclick="openPersoTehilim(' + persoChap + ')">';
-          html += '<div class="cal-progress-emoji">📖</div>';
-          html += '<div class="cal-progress-msg">As-tu lu ton Tehilim personnel ?<br><strong>Chapitre ' + persoChap + '</strong></div>';
-          html += '<div class="cal-progress-arrow">→</div>';
-          html += '</div>';
-        } else {
-          // Both done! Show Mashiach message
-          html += getCompletionMessage();
-        }
-      }
-    } else {
-      html += '<div class="cal-progress-banner">';
-      html += '<div class="cal-progress-info">';
-      html += '<div class="cal-progress-msg"><strong>Jour ' + todayDay + '</strong> · ' + todayRead + '/' + todayTotal + ' chapitres lus</div>';
-      html += '<div class="cal-progress-bar-wrap"><div class="cal-progress-bar-bg"><div class="cal-progress-bar-fill" style="width:' + todayPct + '%"></div></div><span class="cal-progress-pct">' + todayPct + '%</span></div>';
-      html += '</div>';
-      html += '<button class="cal-progress-go" onclick="openDayReading(' + todayDay + ')">Continuer →</button>';
-      html += '</div>';
-    }
-  }
-  
-  html += '<div class="cal-header">';
-  html += '<div class="cal-month-hebrew">' + monthHeb + ' ' + yearHeb + '</div>';
-  html += '<div class="cal-month-name">' + monthLatin + ' ' + heb.year + '</div>';
-  html += '</div>';
-  html += '<div class="cal-grid">';
-  
-  for (var d = 1; d <= maxDays; d++) {
-    var isToday = (d === todayDay);
-    var schedule = DAILY_SCHEDULE[d];
-    var rangeLabel = '';
-    if (schedule) {
-      if (schedule[2]) rangeLabel = 'Ch. 119';
-      else if (schedule[0] === schedule[1]) rangeLabel = 'Ch. ' + schedule[0];
-      else rangeLabel = schedule[0] + '–' + schedule[1];
-    }
-    // Check if day is fully read
-    var dayDone = false;
-    if (schedule) {
-      dayDone = true;
-      if (schedule[2]) {
-        dayDone = readPsalms.has(119);
-      } else {
-        for (var pp = schedule[0]; pp <= schedule[1]; pp++) {
-          if (!readPsalms.has(pp)) { dayDone = false; break; }
-        }
-      }
-    }
-    var cls = 'cal-day';
-    if (isToday) cls += ' today';
-    if (dayDone) cls += ' done';
-    html += '<div class="' + cls + '" onclick="openDayReading(' + d + ')">';
-    html += '<div class="cal-day-inner">';
-    if (dayDone) html += '<div class="cal-day-check">✓</div>';
-    html += '<div class="cal-day-num">' + toHebrewNumeral(d) + '</div>';
-    html += '<div class="cal-day-label">' + rangeLabel + '</div>';
-    html += '</div></div>';
-  }
-  
-  html += '</div>';
-  
-  var container = document.getElementById("jour-calendar");
-  if (!container) {
-    var panel = document.getElementById("panel-jour");
-    var calDiv = document.createElement("div");
-    calDiv.id = "jour-calendar";
-    panel.insertBefore(calDiv, panel.children[1]);
-    container = calDiv;
-  }
-  container.innerHTML = html;
-  
-  // Hide old content
-  document.getElementById("home-badge").parentElement.style.display = "none";
-  document.querySelector("#panel-jour .progress-section").style.display = "none";
-  var completeCard = document.getElementById("complete-card");
-  if (completeCard) completeCard.style.display = "none";
-  var recapCard = document.getElementById("recap-card");
-  if (recapCard) recapCard.style.display = "none";
-  var psalmsList = document.getElementById("psalms-list");
-  if (psalmsList) psalmsList.style.display = "none";
-}
-
-function openPersoTehilim(chap) {
-  var psalmData = TEHILIM.find(function(p) { return p.number === chap; });
-  if (!psalmData) { alert('Chapitre ' + chap + ' bientôt disponible !'); return; }
-  browseSource = 'birthday';
-  availablePsalms = [psalmData];
-  currentPsalm = 0;
-  currentScreen = 'reading';
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('reading').style.display = 'flex';
-  window.scrollTo(0, 0);
-  document.getElementById('reading').scrollTop = 0;
-  renderReading();
-}
-
-var COMPLETION_MESSAGES = [
+// Tehilim data — 150 Psaumes (hébreu + phonétique)
+const TEHILIM = [
   {
-    emoji: '👑',
-    hebrew: 'כָּל יִשְׂרָאֵל יֵשׁ לָהֶם חֵלֶק לָעוֹלָם הַבָּא',
-    text: 'Chaque mot de Tehilim que tu prononces <strong>brise un voile</strong> entre ce monde et la Guéoula. Aujourd\'hui, tu as fait ta part pour rapprocher la venue du <strong>Machia\'h</strong>.'
+    number: 1,
+    verses: [
+      { hebrew: "אַשְׁרֵי הָאִישׁ אֲשֶׁר לֹא הָלַךְ בַּעֲצַת רְשָׁעִים וּבְדֶרֶךְ חַטָּאִים לֹא עָמַד וּבְמוֹשַׁב לֵצִים לֹא יָשָׁב:", french: "Heureux l'homme qui ne suit point les conseils des méchants, qui ne se tient pas dans la voie des pécheurs, et ne prend point place dans la société des railleurs," },
+      { hebrew: "כִּי אִם בְּתוֹרַת יהוה חֶפְצוֹ וּבְתוֹרָתוֹ יֶהְגֶּה יוֹמָם וָלָיְלָה:", french: "mais qui trouve son plaisir dans la Loi de l'Éternel, et médite cette Loi jour et nuit !" },
+      { hebrew: "וְהָיָה כְּעֵץ שָׁתוּל עַל פַּלְגֵי מָיִם אֲשֶׁר פִּרְיוֹ יִתֵּן בְּעִתּוֹ וְעָלֵהוּ לֹא יִבּוֹל וְכֹל אֲשֶׁר יַעֲשֶׂה יַצְלִיחַ:", french: "Il sera comme un arbre planté auprès des cours d'eau, qui donne ses fruits en leur saison, et dont les feuilles ne se flétrissent point : tout ce qu'il fera réussira." },
+      { hebrew: "לֹא כֵן הָרְשָׁעִים כִּי אִם כַּמֹּץ אֲשֶׁר תִּדְּפֶנּוּ רוּחַ:", french: "Tels ne sont pas les méchants, mais plutôt comme le chaume que pourchasse le vent." },
+      { hebrew: "עַל כֵּן לֹא יָקֻמוּ רְשָׁעִים בַּמִּשְׁפָּט וְחַטָּאִים בַּעֲדַת צַדִּיקִים:", french: "C'est pourquoi les méchants ne subsistent pas au jour du jugement, ni les pécheurs dans l'assemblée des justes." },
+      { hebrew: "כִּי יוֹדֵעַ יהוה דֶּרֶךְ צַדִּיקִים וְדֶרֶךְ רְשָׁעִים תֹּאבֵד:", french: "Car l'Éternel connaît la voie des justes, et la voie des méchants mène à la ruine." },
+    ]
   },
   {
-    emoji: '🕊️',
-    hebrew: 'אֲנִי מַאֲמִין בֶּאֱמוּנָה שְׁלֵמָה בְּבִיאַת הַמָּשִׁיחַ',
-    text: 'Le Rabbi de Loubavitch enseigne que <strong>chaque chapitre de Tehilim</strong> a le pouvoir de transformer le monde. Aujourd\'hui, tu as planté des graines de <strong>Guéoula</strong>.'
+    number: 2,
+    verses: [
+      { hebrew: "לָמָּה רָגְשׁוּ גוֹיִם וּלְאֻמִּים יֶהְגּוּ רִיק:", french: "Pourquoi les nations sont-elles en émoi, et les peuples méditent-ils de vaines choses ?" },
+      { hebrew: "יִתְיַצְּבוּ מַלְכֵי אֶרֶץ וְרוֹזְנִים נוֹסְדוּ יָחַד עַל יהוה וְעַל מְשִׁיחוֹ:", french: "Les rois de la terre se soulèvent, et les princes se concertent contre l'Éternel et contre son Oint." },
+      { hebrew: "נְנַתְּקָה אֶת מוֹסְרוֹתֵימוֹ וְנַשְׁלִיכָה מִמֶּנּוּ עֲבֹתֵימוֹ:", french: "Brisons leurs liens, et rejetons loin de nous leurs chaînes !" },
+      { hebrew: "יוֹשֵׁב בַּשָּׁמַיִם יִשְׂחָק אֲדֹנָי יִלְעַג לָמוֹ:", french: "Celui qui réside dans les cieux rit, le Seigneur se moque d'eux." },
+      { hebrew: "אָז יְדַבֵּר אֵלֵימוֹ בְאַפּוֹ וּבַחֲרוֹנוֹ יְבַהֲלֵמוֹ:", french: "Alors il leur parle dans sa colère, et dans son courroux il les épouvante." },
+      { hebrew: "וַאֲנִי נָסַכְתִּי מַלְכִּי עַל צִיּוֹן הַר קָדְשִׁי:", french: "Et moi, j'ai sacré mon roi sur Sion, ma montagne sainte." },
+      { hebrew: "אֲסַפְּרָה אֶל חֹק יהוה אָמַר אֵלַי בְּנִי אַתָּה אֲנִי הַיּוֹם יְלִדְתִּיךָ:", french: "Je publierai le décret : l'Éternel m'a dit : Tu es mon fils, je t'ai engendré aujourd'hui." },
+      { hebrew: "שְׁאַל מִמֶּנִּי וְאֶתְּנָה גוֹיִם נַחֲלָתֶךָ וַאֲחֻזָּתְךָ אַפְסֵי אָרֶץ:", french: "Demande-moi et je te donnerai les nations pour héritage, et pour domaine les extrémités de la terre." },
+      { hebrew: "תְּרֹעֵם בְּשֵׁבֶט בַּרְזֶל כִּכְלִי יוֹצֵר תְּנַפְּצֵם:", french: "Tu les briseras avec un sceptre de fer, tu les mettras en pièces comme un vase de potier." },
+      { hebrew: "וְעַתָּה מְלָכִים הַשְׂכִּילוּ הִוָּסְרוּ שֹׁפְטֵי אָרֶץ:", french: "Et maintenant, rois, soyez sages ; recevez instruction, juges de la terre." },
+      { hebrew: "עִבְדוּ אֶת יהוה בְּיִרְאָה וְגִילוּ בִּרְעָדָה:", french: "Servez l'Éternel avec crainte, et réjouissez-vous avec tremblement." },
+      { hebrew: "נַשְּׁקוּ בַר פֶּן יֶאֱנַף וְתֹאבְדוּ דֶרֶךְ כִּי יִבְעַר כִּמְעַט אַפּוֹ אַשְׁרֵי כָּל חוֹסֵי בוֹ:", french: "Rendez hommage au fils, de peur qu'il ne se courrouce et que vous ne périssiez dans votre voie, car sa colère est prompte à s'enflammer. Heureux tous ceux qui se réfugient en lui !" },
+    ]
   },
   {
-    emoji: '✨',
-    hebrew: 'בְּזָכוּת הַתְּהִלִּים יָבוֹא מָשִׁיחַ צִדְקֵנוּ',
-    text: 'Le Ba\'al Shem Tov a dit : <strong>Les Tehilim peuvent tout.</strong> Ta lecture d\'aujourd\'hui a ouvert des portes dans le Ciel. Demain, continue — <strong>Machia\'h arrive</strong>.'
+    number: 3,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד בְּבָרְחוֹ מִפְּנֵי אַבְשָׁלוֹם בְּנוֹ:", french: "Psaume de David, quand il fuyait devant Absalom, son fils." },
+      { hebrew: "יהוה מָה רַבּוּ צָרָי רַבִּים קָמִים עָלָי:", french: "Éternel, que mes adversaires sont nombreux ! Nombreux sont ceux qui s'élèvent contre moi." },
+      { hebrew: "רַבִּים אֹמְרִים לְנַפְשִׁי אֵין יְשׁוּעָתָה לוֹ בֵאלֹהִים סֶלָה:", french: "Nombreux sont ceux qui disent de moi : Point de salut pour lui auprès de Dieu ! Sélah." },
+      { hebrew: "וְאַתָּה יהוה מָגֵן בַּעֲדִי כְּבוֹדִי וּמֵרִים רֹאשִׁי:", french: "Mais toi, Éternel, tu es un bouclier pour moi, tu es ma gloire, et tu relèves ma tête." },
+      { hebrew: "קוֹלִי אֶל יהוה אֶקְרָא וַיַּעֲנֵנִי מֵהַר קָדְשׁוֹ סֶלָה:", french: "De ma voix je crie à l'Éternel, et il me répond de sa montagne sainte. Sélah." },
+      { hebrew: "אֲנִי שָׁכַבְתִּי וָאִישָׁנָה הֱקִיצוֹתִי כִּי יהוה יִסְמְכֵנִי:", french: "Je me couche et je m'endors ; je me réveille, car l'Éternel me soutient." },
+      { hebrew: "לֹא אִירָא מֵרִבְבוֹת עָם אֲשֶׁר סָבִיב שָׁתוּ עָלָי:", french: "Je ne crains pas les myriades de gens qui m'assiègent de toutes parts." },
+      { hebrew: "קוּמָה יהוה הוֹשִׁיעֵנִי אֱלֹהַי כִּי הִכִּיתָ אֶת כָּל אֹיְבַי לֶחִי שִׁנֵּי רְשָׁעִים שִׁבַּרְתָּ:", french: "Lève-toi, Éternel ! Sauve-moi, mon Dieu ! Car tu frappes tous mes ennemis à la joue, tu brises les dents des méchants." },
+      { hebrew: "לַיהוה הַיְשׁוּעָה עַל עַמְּךָ בִרְכָתֶךָ סֶלָה:", french: "À l'Éternel appartient le salut : que ta bénédiction soit sur ton peuple ! Sélah." },
+    ]
   },
   {
-    emoji: '🔥',
-    hebrew: 'עוֹד מְעַט וְנִזְכֶּה לִגְאֻלָּה שְׁלֵמָה',
-    text: 'Chaque Tehilim est une <strong>prière qui monte directement</strong> devant le Trône Céleste. Le mérite de ta lecture protège tout le <strong>Klal Israël</strong>.'
+    number: 4,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינוֹת מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres, avec accompagnement d'instruments à cordes. Psaume de David." },
+      { hebrew: "בְּקָרְאִי עֲנֵנִי ׀ אֱלֹהֵי צִדְקִי בַּצָּר הִרְחַבְתָּ לִּי חָנֵּנִי וּשְׁמַע תְּפִלָּתִֽי׃", french: "Quand j'appelle, réponds-moi, Dieu de mon salut ! Dans la détresse tu me mets au large ; sois-moi favorable, écoute ma prière." },
+      { hebrew: "בְּנֵי אִישׁ עַד־מֶה כְבוֹדִי לִכְלִמָּה תֶּאֱהָבוּן רִיק תְּבַקְשׁוּ כָזָב סֶֽלָה׃", french: "Fils des hommes, jusqu'à quand mon honneur sera-t-il avili ? Jusqu'à quand aimerez-vous les choses vaines, rechercherez-vous le mensonge ? Sélah !" },
+      { hebrew: "וּדְעוּ כִּֽי־הִפְלָה יְהֹוָה חָסִיד לוֹ יְהֹוָה יִשְׁמַע בְּקָרְאִי אֵלָֽיו׃", french: "Sachez bien que l'Éternel distingue celui qui lui est fidèle, il entend quand je l'invoque." },
+      { hebrew: "רִגְזוּ וְֽאַל־תֶּחֱטָאוּ אִמְרוּ בִלְבַבְכֶם עַֽל־מִשְׁכַּבְכֶם וְדֹמּוּ סֶֽלָה׃", french: "Tremblez et ne péchez point ; rentrez en vous-mêmes sur votre couche, et gardez le silence ! Sélah !" },
+      { hebrew: "זִבְחוּ זִבְחֵי־צֶדֶק וּבִטְחוּ אֶל־יְהֹוָֽה׃", french: "Immolez de pieux sacrifices, et mettez votre confiance en l'Éternel." },
+      { hebrew: "רַבִּים אֹמְרִים מִֽי־יַרְאֵנוּ טוֹב נְֽסָה־עָלֵינוּ אוֹר פָּנֶיךָ יְהֹוָֽה׃", french: "Beaucoup disent : « Qui nous fera voir le bonheur ? » Fais lever sur nous la lumière de ta face, ô Seigneur !" },
+      { hebrew: "נָתַתָּה שִׂמְחָה בְלִבִּי מֵעֵת דְּגָנָם וְתִירוֹשָׁם רָֽבּוּ׃", french: "Tu me mets plus de joie au cœur qu'à eux, au temps où abondent leur blé et leur vin." },
+      { hebrew: "בְּשָׁלוֹם יַחְדָּו אֶשְׁכְּבָה וְאִישָׁן כִּֽי־אַתָּה יְהֹוָה לְבָדָד לָבֶטַח תּוֹשִׁיבֵֽנִי׃", french: "En paix, je me couche et m'endors aussitôt ; car toi, ô Seigneur, même dans l'isolement, tu me fais demeurer en sécurité." },
+    ]
   },
   {
-    emoji: '💎',
-    hebrew: 'גָּדוֹל הַמַּעֲשֶׂה יוֹתֵר מִן הַמְּדַבֵּר',
-    text: 'Tu ne l\'as peut-être pas senti, mais tes Tehilim ont <strong>ébranlé des mondes</strong> aujourd\'hui. Le Zohar dit que la voix de celui qui lit les Tehilim est <strong>la plus douce devant Hachem</strong>.'
+    number: 5,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אֶֽל־הַנְּחִילוֹת מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres. Pour les flûtes. Psaume de David." },
+      { hebrew: "אֲמָרַי הַאֲזִינָה ׀ יְהֹוָה בִּינָה הֲגִיגִֽי׃", french: "Prête l'oreille à mes paroles, ô Éternel, sois attentif à mes soupirs !" },
+      { hebrew: "הַקְשִׁיבָה ׀ לְקוֹל שַׁוְעִי מַלְכִּי וֵאלֹהָי כִּֽי־אֵלֶיךָ אֶתְפַּלָּֽל׃", french: "Écoute mes cris suppliants, mon roi et mon Dieu, car c'est toi que j'invoque." },
+      { hebrew: "יְֽהֹוָה בֹּקֶר תִּשְׁמַע קוֹלִי בֹּקֶר אֶעֱרָךְ־לְךָ וַאֲצַפֶּֽה׃", french: "Seigneur, au matin entends ma voix, au matin je me présente à toi et suis dans l'attente." },
+      { hebrew: "כִּי ׀ לֹא אֵֽל־חָפֵץ־רֶשַׁע ׀ אָתָּה לֹא יְגֻרְךָ רָֽע׃", french: "Certes tu n'es point un Dieu qui prenne plaisir au mal, le méchant ne trouve point accès auprès de toi." },
+      { hebrew: "לֹֽא־יִתְיַצְּבוּ הוֹלְלִים לְנֶגֶד עֵינֶיךָ שָׂנֵאתָ כָּל־פֹּעֲלֵי אָֽוֶן׃", french: "Les fanfarons ne peuvent se maintenir sous ton regard, tu détestes tous les artisans d'iniquité." },
+      { hebrew: "תְּאַבֵּד דֹּבְרֵי כָזָב אִישׁ־דָּמִים וּמִרְמָה יְתָעֵב ׀ יְהֹוָֽה׃", french: "Tu perds ceux qui profèrent le mensonge. L'homme de sang et de fourberie, l'Éternel l'a en horreur." },
+      { hebrew: "וַאֲנִי בְּרֹב חַסְדְּךָ אָבוֹא בֵיתֶךָ אֶשְׁתַּחֲוֶה אֶל־הֵֽיכַל־קָדְשְׁךָ בְּיִרְאָתֶֽךָ׃", french: "Mais moi, grâce à ton immense bonté, j'entre dans ta maison, je me prosterne dans ton saint temple, pénétré de ta crainte." },
+      { hebrew: "יְהֹוָה ׀ נְחֵנִי בְצִדְקָתֶךָ לְמַעַן שׁוֹרְרָי הַיְשַׁר לְפָנַי דַּרְכֶּֽךָ׃", french: "Éternel, dirige-moi dans ta justice à cause de mes adversaires, rends ton chemin uni devant moi." },
+      { hebrew: "כִּי אֵין בְּפִיהוּ נְכוֹנָה קִרְבָּם הַוּוֹת קֶֽבֶר־פָּתוּחַ גְּרֹנָם לְשׁוֹנָם יַחֲלִיקֽוּן׃", french: "Car dans leur bouche il n'y a point de droiture ; leur cœur ne rêve que ruines. Leur gosier est un sépulcre béant, ils rendent doucereuse leur langue." },
+      { hebrew: "הַאֲשִׁימֵם ׀ אֱֽלֹהִים יִפְּלוּ מִֽמֹּעֲצוֹתֵיהֶם בְּרֹב פִּשְׁעֵיהֶם הַדִּיחֵמוֹ כִּי־מָרוּ בָֽךְ׃", french: "Condamne-les, ô Dieu ! Qu'ils tombent du haut de leurs projets ! Repousse-les pour leurs nombreux péchés, car ils se sont insurgés contre toi." },
+      { hebrew: "וְיִשְׂמְחוּ כָל־חוֹסֵי בָךְ לְעוֹלָם יְרַנֵּנוּ וְתָסֵךְ עָלֵימוֹ וְֽיַעְלְצוּ בְךָ אֹהֲבֵי שְׁמֶֽךָ׃", french: "Alors se réjouiront tous ceux qui s'abritent en toi, ils jubileront à jamais, car ils ont ta protection ; et ils triompheront en toi, ceux qui aiment ton nom." },
+      { hebrew: "כִּֽי־אַתָּה תְּבָרֵךְ צַדִּיק יְהֹוָה כַּצִּנָּה רָצוֹן תַּעְטְרֶֽנּוּ׃", french: "Car toi, ô Seigneur, tu bénis le juste, tu l'entoures de ta bienveillance comme d'un bouclier." },
+    ]
   },
   {
-    emoji: '🌅',
-    hebrew: 'הַבּוֹטֵחַ בַּיהוה חֶסֶד יְסוֹבְבֶנּוּ',
-    text: 'Aujourd\'hui tu as choisi de <strong>te connecter à Hachem</strong> par les mots du Roi David. Ce mérite t\'accompagnera et celui de tes proches. <strong>Bientôt la Guéoula !</strong>'
-  }
-];
-
-function getCompletionMessage() {
-  var dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-  var msg = COMPLETION_MESSAGES[dayOfYear % COMPLETION_MESSAGES.length];
-  var h = '<div class="cal-completion-card">';
-  h += '<div class="cal-completion-emoji">' + msg.emoji + '</div>';
-  h += '<div class="cal-completion-hebrew">' + msg.hebrew + '</div>';
-  h += '<div class="cal-completion-text">' + msg.text + '</div>';
-  h += '<div class="cal-completion-footer">Rendez-vous demain בעזרת ה׳</div>';
-  h += '</div>';
-  return h;
-}
-
-function openDayReading(day) {
-  currentJourDay = day;
-  browseSource = "jour";
-  var psalms = getPsalmsForDay(day);
-  availablePsalms = psalms;
-  currentPsalm = 0;
-  currentScreen = "reading";
-  document.getElementById("home").style.display = "none";
-  document.getElementById("reading").style.display = "flex";
-  window.scrollTo(0, 0);
-  document.getElementById("reading").scrollTop = 0;
-  renderReading();
-}
-
-function openPsalm(index) {
-  currentPsalm = index;
-  browseSource = "jour";
-  currentJourDay = window._hebrewDay || 1;
-  currentScreen = "reading";
-  document.getElementById("home").style.display = "none";
-  document.getElementById("reading").style.display = "flex";
-  window.scrollTo(0, 0);
-  document.getElementById("reading").scrollTop = 0;
-  renderReading();
-}
-
-const PSALM_TITLES = [
-  "",
-  "Pour prévenir une fausse couche",
-  "Contre une tempête en mer",
-  "En toute occasion",
-  "En toute occasion",
-  "Contre un mauvais esprit",
-  "Pour ceux qui souffrent des yeux",
-  "Pour écarter ses ennemis",
-  "Pour plaire",
-  "Pour un garçon malade",
-  "Pour conjurer la haine",
-  "Pour détruire ses ennemis",
-  "Contre la faiblesse",
-  "Pour échapper à une mort violente",
-  "Contre la peur",
-  "Pour tuer un démon",
-  "Pour découvrir un voleur",
-  "À lire en route",
-  "Pour échapper à des rois méchants",
-  "Pour la sagesse",
-  "Bon pour un jugement",
-  "Avant d\'aller devant une autorité",
-  "Contre tout chagrin",
-  "Pour comprendre un rêve",
-  "Pour être sauvé d\'une inondation",
-  "Pour conjurer le malheur",
-  "Contre le danger et le malheur",
-  "Contre les bêtes sauvages",
-  "Pour qu\'une prière soit acceptée",
-  "Contre le mauvais esprit",
-  "Contre toutes les mauvaises choses",
-  "Contre le mauvais œil",
-  "Pour demander miséricorde",
-  "Pour une mère qui a perdu ses enfants",
-  "Pendant la route",
-  "Contre ses rivaux",
-  "Pour annihiler les méchants",
-  "Pour une location",
-  "Contre les mauvais conseils",
-  "Pour celui qui jeûne",
-  "Pour échapper à un mauvais esprit",
-  "Pour ne pas perdre son emploi",
-  "Avant de construire une maison",
-  "Avant de construire une maison",
-  "Pour échapper à un mauvais esprit",
-  "Pour celui qui a une épouse méchante",
-  "Si un homme haït sa femme",
-  "Pour faire pénitence",
-  "Pour faire peur à ses ennemis",
-  "Contre la fièvre",
-  "Pour échapper aux brigands",
-  "Pour un débauché",
-  "Contre la tentation de la médisance",
-  "Pour faire peur à ses ennemis",
-  "Pour se venger de ses ennemis",
-  "Pour toutes les mauvaises choses",
-  "Pour un détenu",
-  "Pour la réussite",
-  "Contre un chien méchant",
-  "Contre le mauvais penchant",
-  "Pour aller en guerre",
-  "Pour celui qui a peur de rester à la maison",
-  "Après les prières de Min\'ha et \'Arvit",
-  "Pour réussir dans les affaires",
-  "Avant de traverser une rivière",
-  "Pour obtenir quelque chose de quelqu\'un",
-  "Pour un possédé du démon",
-  "Contre une fièvre persistante",
-  "Contre le mauvais esprit",
-  "Pour un homme cupide et débauché",
-  "En temps de guerre",
-  "Pour plaire",
-  "Pour trouver grâce",
-  "Pour conjurer la haine",
-  "Si vous craignez des ennemis",
-  "Pour éliminer l\'orgueil",
-  "Pour échapper à l\'eau et au feu",
-  "Pour échapper à l\'eau et au feu",
-  "Pour trouver grâce devant les autorités",
-  "Pour vaincre des ennemis",
-  "Pour se protéger de l\'idolâtrie",
-  "Pour se protéger de l\'idolâtrie",
-  "Pour celui qui perd ses membres",
-  "En cas de guerre",
-  "Pour un malade qui maigrit",
-  "Pour contenter un ami",
-  "Pour échapper à un mauvais sort",
-  "Pour sauver la ville",
-  "Pour sauver la ville",
-  "Pour celui qui perd ses membres",
-  "Pour échapper à un lion",
-  "Contre un mauvais esprit",
-  "Pour assister à de grands miracles",
-  "Pour gagner un procès",
-  "Si votre ennemi vous poursuit",
-  "Pour ne pas être trompé par les gens",
-  "Pour réjouir sa famille",
-  "Pour réjouir sa famille",
-  "Pour faire la paix avec son prochain",
-  "Pour avoir la foi",
-  "Pour vaincre son ennemi",
-  "Contre un mauvais esprit",
-  "Pour une femme stérile",
-  "Pour une femme stérile",
-  "Pour éloigner une chose nuisible",
-  "Maladie qui récidive une quatrième fois",
-  "Maladie qui récidive une troisième fois",
-  "Contre une maladie persistante",
-  "Pour la réussite",
-  "Si votre ennemi vous poursuit",
-  "Pour faire la paix avec son ennemi",
-  "Pour se faire des amis",
-  "Pour devenir fort et puissant",
-  "Contre l\'hérésie",
-  "Avant d\'acheter et de vendre",
-  "Avant de discuter avec ses pareils",
-  "Pour échapper à une mort violente",
-  "Si on vous a dénoncé à tort",
-  "Avant de répondre à un mécréant",
-  "Avant d\'accomplir une mitsva",
-  "Pour faire la paix",
-  "Pour sortir seul la nuit",
-  "Avant de rencontrer un homme important",
-  "Pour un esclave en fuite",
-  "Pour une traversée en bateau",
-  "Contre les ennemis",
-  "Pour une femme qui a perdu ses enfants",
-  "Pour un bébé qui vient de naître",
-  "Pour une femme enceinte",
-  "Pour une mitsva",
-  "Avant une traversée en bateau",
-  "Contre l\'orgueilleux",
-  "Pour tenir ses serments",
-  "Pour inspirer l\'amitié",
-  "À dire avant l\'étude",
-  "Contre les pensées hérétiques",
-  "Pour avouer ses fautes",
-  "Pour conjurer la haine",
-  "Pour lutter contre l\'orgueil",
-  "Pour ramener l\'amour entre mari et femme",
-  "Contre la haine entre mari et femme",
-  "Contre les douleurs du cœur",
-  "Pour ceux qui souffrent des cuisses",
-  "Pour ceux qui souffrent des bras",
-  "Pour celui qui s\'est brisé une main",
-  "Contre la peur",
-  "Pour se protéger des coups d\'épée",
-  "Contre la morsure du serpent",
-  "Contre un incendie",
-  "Contre la propagation d\'un incendie",
-  "Pour louer Hachem dans toutes Ses actions",
-];
-
-var readingMode = "hebrew"; // hebrew | phonetique | francais
-
-// Font size levels: 0=smallest, 3=default, 6=biggest
-var fontSizeLevel = parseInt(localStorage.getItem("tehilim_fontsize") || "3");
-const FONT_SIZES = {
-  // [hebrew, french, phonetic, sefer] per level
-  0: [17, 16, 15, 18],
-  1: [18, 17, 16, 19],
-  2: [20, 19, 18, 21],
-  3: [21, 20, 19, 22],  // default
-  4: [23, 22, 21, 24],
-  5: [25, 24, 23, 26],
-  6: [28, 27, 26, 29],
-};
-
-function applyFontSize() {
-  const sizes = FONT_SIZES[fontSizeLevel] || FONT_SIZES[3];
-  document.documentElement.style.setProperty('--fs-hebrew', sizes[0] + 'px');
-  document.documentElement.style.setProperty('--fs-french', sizes[1] + 'px');
-  document.documentElement.style.setProperty('--fs-phonetic', sizes[2] + 'px');
-  document.documentElement.style.setProperty('--fs-sefer', sizes[3] + 'px');
-  // Update all labels
-  document.querySelectorAll('[id^="fs-label-"]').forEach(el => {
-    el.textContent = fontSizeLevel;
-  });
-}
-
-function changeFontSize(delta) {
-  fontSizeLevel = Math.max(0, Math.min(6, fontSizeLevel + delta));
-  localStorage.setItem("tehilim_fontsize", fontSizeLevel);
-  applyFontSize();
-}
-
-function setReadingMode(mode) {
-  readingMode = mode;
-  renderReading();
-}
-
-// French Chabad-style Hebrew to phonetic transliteration
-function transliterate(heb) {
-  const map = {
-    'א':'', 'בּ':'b', 'ב':'v', 'גּ':'g', 'ג':'g', 'דּ':'d', 'ד':'d',
-    'ה':'h', 'ו':'v', 'ז':'z', 'ח':'\u2019h', 'ט':'t', 'י':'y',
-    'כּ':'k', 'כ':'kh', 'ך':'kh', 'ל':'l', 'מ':'m', 'ם':'m',
-    'נ':'n', 'ן':'n', 'ס':'s', 'ע':'\u2019', 'פּ':'p', 'פ':'f', 'ף':'f',
-    'צ':'ts', 'ץ':'ts', 'ק':'k', 'ר':'r', 'שׁ':'ch', 'שׂ':'s', 'ש':'ch',
-    'תּ':'t', 'ת':'t',
-    'ַ':'a', 'ָ':'a', 'ֶ':'é', 'ֵ':'é', 'ִ':'i', 'ֹ':'o', 'ֻ':'ou', 'ּ':'',
-    'וֹ':'o', 'וּ':'ou', 'ְ':'e', 'ֲ':'a', 'ֳ':'o', 'ֱ':'é',
-    ':':'', '׃':'', '־':'-'
-  };
-  let result = '';
-  let i = 0;
-  const s = heb;
-  while (i < s.length) {
-    // Try 2-char match first
-    if (i + 1 < s.length && map[s[i] + s[i+1]] !== undefined) {
-      result += map[s[i] + s[i+1]];
-      i += 2;
-    } else if (map[s[i]] !== undefined) {
-      result += map[s[i]];
-      i++;
-    } else if (s[i] === ' ') {
-      result += ' ';
-      i++;
-    } else {
-      i++; // skip unknown
-    }
-  }
-  // Clean up: remove double spaces, trim, fix apostrophe spacing
-  result = result.replace(/\s+/g, ' ').trim();
-  // Clean leading apostrophe after space (keep attached to next letter)
-  result = result.replace(/ \u2019 /g, ' \u2019');
-  return result;
-}
-
-function getReadHistory(num) {
-  try { return JSON.parse(localStorage.getItem("tehilim_history_" + num)) || []; } catch(e) { return []; }
-}
-function saveReadHistory(num, history) {
-  localStorage.setItem("tehilim_history_" + num, JSON.stringify(history));
-}
-
-function renderReading() {
-  let allHtml = '';
-  
-  if (availablePsalms.length === 0) {
-    var schedule = DAILY_SCHEDULE[currentJourDay];
-    var rangeText = schedule ? (schedule[0] + ' à ' + schedule[1]) : '';
-    allHtml = '<div class="snap-section" data-idx="0" style="display:flex;align-items:center;justify-content:center;text-align:center;padding:40px">' +
-      '<div><div style="font-size:48px;margin-bottom:16px">🔒</div>' +
-      '<div style="font-size:18px;font-weight:700;margin-bottom:8px">Bientôt disponible</div>' +
-      '<div style="font-size:14px;color:var(--gray-3)">Les psaumes ' + rangeText + ' seront ajoutés prochainement</div></div></div>';
-    const body = document.getElementById("reading-body");
-    body.innerHTML = allHtml;
-    renderStoryBar();
-    requestAnimationFrame(function() {
-      var bh = body.clientHeight;
-      body.querySelectorAll('.snap-section').forEach(function(s) { s.style.height = bh + 'px'; });
-    });
-    updateReadingHeader();
-    return;
-  }
-  
-  availablePsalms.forEach((psalm, idx) => {
-    const isRead = readPsalms.has(psalm.number);
-    const label = psalm.sectionLabel ? " · " + psalm.sectionLabel : "";
-    const history = getReadHistory(psalm.number);
-    const readCount = history.length;
-    const heartSVG = isRead
-      ? '<svg viewBox="0 0 24 24" fill="#ed4956" stroke="#ed4956" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
-      : '<svg viewBox="0 0 24 24" fill="none" stroke="var(--gray-1)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-
-    allHtml += '<div class="snap-section" data-idx="' + idx + '">';
-    allHtml += '<div class="insta-post">';
-    
-    // Header
-    allHtml += '<div class="insta-post-header">';
-    allHtml += '<div class="insta-post-avatar"><div class="insta-post-avatar-inner">' + toHebrewNumeral(psalm.number) + '</div></div>';
-    allHtml += '<div><div class="insta-post-user">' + (PSALM_TITLES[psalm.number] || 'Tehilim ' + psalm.number) + '</div>';
-    allHtml += '<div class="insta-post-location">' + psalm.verses.length + ' versets / ' + psalm.verses.length + ' passouk' + label + '</div></div></div>';
-
-    // Content
-    allHtml += '<hr class="insta-post-divider">';
-    allHtml += '<div class="insta-post-content">';
-    
-    var titleBig;
-    if (readingMode === 'hebrew') titleBig = 'פרק ' + toHebrewNumeral(psalm.number);
-    else if (readingMode === 'phonetique') titleBig = 'Perek ' + hebrewLetterName(psalm.number);
-    else titleBig = 'Chapitre ' + psalm.number;
-    
-    allHtml += '<div class="psalm-header-reading" style="padding-top:16px;"><span class="psalm-num-hebrew-big" style="' + (readingMode !== 'hebrew' ? 'font-family:var(--font);direction:ltr;' : '') + '">' + titleBig + '</span>';
-    if (psalm.sectionLabel) allHtml += '<span class="psalm-section-label">' + psalm.sectionLabel + '</span>';
-    allHtml += '</div>';
-
-    // Mode toggle
-    allHtml += '<div class="reading-toggle" data-mode="' + readingMode + '">';
-    allHtml += '<div class="reading-toggle-slider"></div>';
-    allHtml += '<button class="reading-toggle-btn' + (readingMode === 'hebrew' ? ' active' : '') + '" onclick="setReadingMode(\'hebrew\')">עברית</button>';
-    allHtml += '<button class="reading-toggle-btn' + (readingMode === 'phonetique' ? ' active' : '') + '" onclick="setReadingMode(\'phonetique\')">Phonétique</button>';
-    allHtml += '<button class="reading-toggle-btn' + (readingMode === 'francais' ? ' active' : '') + '" onclick="setReadingMode(\'francais\')">Français</button>';
-    allHtml += '</div>';
-
-    // Font size control
-    allHtml += '<div class="font-size-bar">';
-    allHtml += '<button class="font-size-btn" onclick="changeFontSize(-1)" aria-label="Réduire">A−</button>';
-    allHtml += '<span class="font-size-label" id="fs-label-' + idx + '">' + fontSizeLevel + '</span>';
-    allHtml += '<button class="font-size-btn" onclick="changeFontSize(1)" aria-label="Agrandir">A+</button>';
-    allHtml += '</div>';
-
-    if (readingMode === 'hebrew') {
-      allHtml += '<div class="sefer-text">';
-      psalm.verses.forEach((v, i) => {
-        allHtml += '<span class="sefer-verse-num">' + toHebrewNumeral(i + 1) + '</span> ' + v.hebrew + ' ';
-      });
-      allHtml += '</div>';
-    } else if (readingMode === 'phonetique') {
-      psalm.verses.forEach((v, i) => {
-        allHtml += '<div class="verse-block"><span class="verse-num">' + toHebrewNumeral(i + 1) + '</span>';
-        allHtml += '<p class="hebrew-text">' + v.hebrew + '</p>';
-        allHtml += '<p class="phonetic-text">' + transliterate(v.hebrew) + '</p></div>';
-      });
-    } else {
-      psalm.verses.forEach((v, i) => {
-        allHtml += '<div class="verse-block"><span class="verse-num">' + toHebrewNumeral(i + 1) + '</span>';
-        allHtml += '<p class="french-text">' + v.french + '</p></div>';
-      });
-    }
-    allHtml += '</div>'; // close content
-
-    // Post footer (always visible, not scrollable)
-    allHtml += '<div class="insta-post-footer">';
-    allHtml += '<div class="insta-actions">';
-    allHtml += '<button class="insta-heart-btn' + (isRead ? ' liked' : '') + '" onclick="toggleHeart(' + psalm.number + ')">' + heartSVG + '</button>';
-    allHtml += '<button class="insta-share-btn" onclick="sharePsalm(' + psalm.number + ')"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>';
-    if (idx < availablePsalms.length - 1) {
-      allHtml += '<button class="insta-nav-btn" onclick="nextPsalm()" title="Suivant"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>';
-    }
-    allHtml += '</div>';
-    if (readCount > 0) {
-      allHtml += '<div class="insta-likes" onclick="showHistory(' + psalm.number + ')">' + readCount + ' lecture' + (readCount > 1 ? 's' : '') + '</div>';
-    }
-    if (history.length > 0) {
-      const last = new Date(history[history.length - 1]);
-      allHtml += '<div class="insta-timestamp">Dernière lecture · ' + formatTimestamp(last) + '</div>';
-    }
-    allHtml += '</div>'; // close post footer
-
-    allHtml += '</div>'; // close insta-post
-    allHtml += '</div>'; // close snap-section
-  });
-
-  const body = document.getElementById("reading-body");
-  body.innerHTML = allHtml;
-  applyFontSize();
-  renderStoryBar();
-  
-  // Set snap section heights to match reading-body
-  // Scroll to current psalm (within reading-body only)
-  requestAnimationFrame(function() {
-    var bh = body.clientHeight;
-    body.querySelectorAll('.snap-section').forEach(function(s) { s.style.height = bh + 'px'; });
-    var target = body.querySelector('[data-idx="' + currentPsalm + '"]');
-    if (target) body.scrollTop = target.offsetTop;
-    window.scrollTo(0, 0);
-  });
-  
-  updateReadingHeader();
-  
-  // Listen for snap scroll to update header
-  if (!body._snapListener) {
-    let scrollTimer;
-    body.addEventListener('scroll', function() {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function() {
-        if (window._storyJumping) return;
-        const sections = body.querySelectorAll('.snap-section');
-        const bodyTop = body.scrollTop;
-        const bodyH = body.clientHeight;
-        let closest = 0, minDist = Infinity;
-        sections.forEach(function(s, i) {
-          var dist = Math.abs(s.offsetTop - bodyTop);
-          if (dist < minDist) { minDist = dist; closest = i; }
-        });
-        if (closest !== currentPsalm) {
-          currentPsalm = closest;
-          storyExpandedGroup = -1;
-          updateReadingHeader();
-        }
-      }, 80);
-    }, { passive: true });
-    body._snapListener = true;
-  }
-}
-
-function updateReadingHeader() {
-  const psalm = availablePsalms[currentPsalm];
-  if (!psalm) return;
-  const label = psalm.sectionLabel ? " · " + psalm.sectionLabel : "";
-  if (browseSource === 'perek') {
-    document.getElementById("reading-chapter").textContent = "Tehilim par Perek";
-  } else if (browseSource === 'birthday') {
-    document.getElementById("reading-chapter").textContent = "Mon Tehilim";
-  } else if (browseSource === 'chain') {
-    var chains = getChains();
-    var ch = chains.find(function(c) { return c.id === currentChainId; });
-    document.getElementById("reading-chapter").textContent = ch ? "Chaîne · " + ch.name : "Chaîne de Tehilim";
-  } else {
-    var schedule = DAILY_SCHEDULE[currentJourDay];
-    var rangeText = "";
-    if (schedule) {
-      if (schedule[2]) rangeText = "Ch. 119";
-      else if (schedule[0] === schedule[1]) rangeText = "Ch. " + schedule[0];
-      else rangeText = "Ch. " + schedule[0] + "–" + schedule[1];
-    }
-    var todayDay = window._hebrewDay || 1;
-    var prefix = (currentJourDay === todayDay) ? "Aujourd'hui · " : "";
-    document.getElementById("reading-chapter").textContent = prefix + "Jour " + currentJourDay + " · " + rangeText;
-  }
-  updateFloatingHeart();
-  updateStoryBar();
-}
-
-var storyExpandedGroup = -1; // which decade is expanded (-1 = 1-10 by default)
-
-function getPsalmsForDay(day) {
-  var schedule = DAILY_SCHEDULE[day] || [1, 9];
-  var range = [schedule[0], schedule[1]];
-  var section = schedule[2] || null;
-  var psalms = TEHILIM.filter(function(p) { return p.number >= range[0] && p.number <= range[1]; });
-  if (section === "aleph-lamed") {
-    psalms = psalms.map(function(p) {
-      if (p.number === 119) return Object.assign({}, p, { verses: p.verses.slice(0, 96), sectionLabel: "Aleph (א) à Lamed (ל)" });
-      return p;
-    });
-  } else if (section === "mem-tav") {
-    psalms = psalms.map(function(p) {
-      if (p.number === 119) return Object.assign({}, p, { verses: p.verses.slice(96), sectionLabel: "Mem (מ) à Tav (ת)" });
-      return p;
-    });
-  }
-  return psalms;
-}
-
-function switchToDay(day) {
-  currentJourDay = day;
-  var psalms = getPsalmsForDay(day);
-  availablePsalms = psalms;
-  currentPsalm = 0;
-  storyExpandedGroup = -1;
-  renderReading();
-  updateReadingHeader();
-  var body = document.getElementById("reading-body");
-  body.scrollTop = 0;
-}
-
-function renderStoryBar(animate) {
-  var bar = document.getElementById("story-bar");
-  if (!bar) return;
-  var html = '';
-  
-  if (browseSource === "jour") {
-    // Day mode: show 30 day circles
-    var todayDay = window._hebrewDay || 1;
-    for (var d = 1; d <= 30; d++) {
-      var isActive = (d === currentJourDay);
-      var isToday = (d === todayDay);
-      var cls = 'story-item';
-      if (isActive) cls += ' active';
-      else if (!isToday) cls += ' read';
-      html += '<div class="' + cls + '" onclick="switchToDay(' + d + ')">';
-      html += '<div class="story-ring"><div class="story-circle">' + toHebrewNumeral(d) + '</div></div>';
-      html += '<div class="story-label">Jour ' + d + '</div>';
-      html += '</div>';
-    }
-    bar.innerHTML = html;
-    var activeItem = bar.querySelector('.story-item.active');
-    if (activeItem) {
-      activeItem.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
-    }
-    return;
-  }
-  
-  // Perek mode: expandable groups
-  var currentNum = availablePsalms[currentPsalm] ? availablePsalms[currentPsalm].number : 0;
-  
-  // Determine which group the current psalm belongs to
-  var currentGroup;
-  if (currentNum <= 10) currentGroup = 0;
-  else currentGroup = Math.floor((currentNum - 1) / 10) * 10 + 1; // 11,21,31...
-  
-  // Auto-expand the group containing current psalm
-  if (storyExpandedGroup === -1) {
-    storyExpandedGroup = currentGroup;
-  }
-  
-  // Build all groups: 1-10, 11-20, 21-30, ...
-  var decades = [];
-  // First group: 1-10
-  decades.push({ start: 1, end: 10 });
-  for (var d = 11; d <= 150; d += 10) {
-    decades.push({ start: d, end: Math.min(d + 9, 150) });
-  }
-  
-  var animIdx = 0;
-  
-  decades.forEach(function(dec) {
-    // Check if any psalms exist in this range
-    var psalmsInRange = [];
-    availablePsalms.forEach(function(p, idx) {
-      if (p.number >= dec.start && p.number <= dec.end) {
-        psalmsInRange.push({ psalm: p, idx: idx });
-      }
-    });
-    if (psalmsInRange.length === 0) return;
-    
-    var isExpanded = (storyExpandedGroup === dec.start) || (dec.start === 1 && storyExpandedGroup === 0);
-    
-    if (isExpanded) {
-      // Show individual circles
-      psalmsInRange.forEach(function(item) {
-        var isActive = (item.psalm.number === currentNum);
-        var isRead = readPsalms.has(item.psalm.number);
-        var cls = 'story-item' + (isActive ? ' active' : '') + (isRead ? ' read' : '');
-        if (animate) cls += ' anim-in';
-        var style = animate ? ' style="animation-delay:' + (animIdx * 80) + 'ms"' : '';
-        html += '<div class="' + cls + '"' + style + ' onclick="jumpToStory(' + item.idx + ')">';
-        html += '<div class="story-ring"><div class="story-circle">' + toHebrewNumeral(item.psalm.number) + '</div></div>';
-        html += '<div class="story-label">' + item.psalm.number + '</div>';
-        html += '</div>';
-        animIdx++;
-      });
-    } else {
-      // Show collapsed group circle
-      var allRead = true;
-      var someActive = false;
-      var firstIdx = psalmsInRange[0].idx;
-      psalmsInRange.forEach(function(item) {
-        if (!readPsalms.has(item.psalm.number)) allRead = false;
-        if (item.psalm.number === currentNum) someActive = true;
-      });
-      var cls = 'story-item' + (someActive ? ' active' : '') + (allRead ? ' read' : '');
-      var hebrewLabel = toHebrewNumeral(dec.start) + '‑' + toHebrewNumeral(dec.end);
-      html += '<div class="' + cls + '" onclick="expandStoryGroup(' + dec.start + ')">';
-      html += '<div class="story-ring"><div class="story-circle story-circle-group">' + hebrewLabel + '</div></div>';
-      html += '<div class="story-label">' + dec.start + '-' + dec.end + '</div>';
-      html += '</div>';
-    }
-  });
-  
-  bar.innerHTML = html;
-  if (!animate) {
-    var activeItem = bar.querySelector('.story-item.active');
-    if (activeItem) {
-      activeItem.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
-    }
-  }
-}
-
-function expandStoryGroup(start) {
-  if (start >= 1 && start <= 10) storyExpandedGroup = 0;
-  else storyExpandedGroup = start;
-  
-  // Jump to first psalm of this group
-  var targetIdx = -1;
-  for (var i = 0; i < availablePsalms.length; i++) {
-    if (availablePsalms[i].number >= start) { targetIdx = i; break; }
-  }
-  if (targetIdx >= 0) {
-    currentPsalm = targetIdx;
-    var body = document.getElementById("reading-body");
-    var target = body.querySelector('[data-idx="' + targetIdx + '"]');
-    if (target) body.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-  }
-  
-  renderStoryBar(true);
-  updateReadingHeader();
-  setTimeout(function() {
-    var bar = document.getElementById("story-bar");
-    var firstAnim = bar.querySelector('.story-item.anim-in');
-    if (firstAnim) firstAnim.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'start' });
-  }, 100);
-}
-
-function updateStoryBar() {
-  renderStoryBar();
-}
-
-function jumpToStory(idx) {
-  if (idx < 0 || idx >= availablePsalms.length) return;
-  window._storyJumping = true;
-  currentPsalm = idx;
-  storyExpandedGroup = -1;
-  var body = document.getElementById("reading-body");
-  var target = body.querySelector('[data-idx="' + idx + '"]');
-  if (target) {
-    body.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-  }
-  updateReadingHeader();
-  setTimeout(function() { window._storyJumping = false; }, 600);
-}
-
-function updateFloatingHeart() {
-  const psalm = availablePsalms[currentPsalm];
-  if (!psalm) return;
-  const btn = document.getElementById("floating-heart");
-  if (!btn) return;
-  if (readPsalms.has(psalm.number)) {
-    btn.classList.add("liked");
-  } else {
-    btn.classList.remove("liked");
-  }
-}
-
-function toggleCurrentHeart() {
-  const psalm = availablePsalms[currentPsalm];
-  if (!psalm) return;
-  toggleHeart(psalm.number);
-  updateFloatingHeart();
-}
-
-function formatTimestamp(d) {
-  const months = ["jan","fév","mar","avr","mai","juin","juil","aoû","sep","oct","nov","déc"];
-  return d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear() + " à " + String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
-}
-
-function toggleHeart(num) {
-  if (readPsalms.has(num)) {
-    // Show history so they can remove readings
-    showHistory(num);
-  } else {
-    markRead(num);
-  }
-}
-
-function showHistory(num) {
-  const history = getReadHistory(num);
-  let html = '<div class="history-overlay" onclick="if(event.target===this)closeHistory()">';
-  html += '<div class="history-popup">';
-  html += '<div class="history-header"><span class="history-title">❤️ ' + history.length + ' lecture' + (history.length > 1 ? 's' : '') + ' · Chapitre ' + num + '</span>';
-  html += '<button class="history-close" onclick="closeHistory()">✕</button></div>';
-  if (history.length === 0) {
-    html += '<div class="history-empty">Aucune lecture enregistrée</div>';
-  } else {
-    history.slice().reverse().forEach((ts, i) => {
-      const d = new Date(ts);
-      const idx = history.length - 1 - i;
-      html += '<div class="history-item"><div class="history-item-info"><span class="history-item-icon">❤️</span><div><span class="history-item-date">' + formatTimestamp(d) + '</span></div></div>';
-      html += '<button class="history-item-remove" onclick="removeReading(' + num + ',' + idx + ')">Supprimer</button></div>';
-    });
-  }
-  html += '</div></div>';
-  document.getElementById("reading-body").insertAdjacentHTML("beforeend", html);
-}
-
-function closeHistory() {
-  const overlay = document.querySelector(".history-overlay");
-  if (overlay) overlay.remove();
-}
-
-function removeReading(num, index) {
-  const history = getReadHistory(num);
-  history.splice(index, 1);
-  saveReadHistory(num, history);
-  if (history.length === 0) {
-    readPsalms.delete(num);
-  }
-  closeHistory();
-  updateFloatingHeart();
-  renderReading();
-}
-
-function markRead(num) {
-  readPsalms.add(num);
-  const history = getReadHistory(num);
-  history.push(new Date().toISOString());
-  saveReadHistory(num, history);
-
-  // Update heart in-place (no full re-render to avoid scroll jump)
-  var section = document.querySelector('[data-idx="' + currentPsalm + '"]');
-  if (section) {
-    var heartBtn = section.querySelector('.insta-heart-btn');
-    if (heartBtn) {
-      heartBtn.classList.add('liked');
-      heartBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="#ed4956" stroke="#ed4956" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-    }
-    var footer = section.querySelector('.insta-post-footer');
-    if (footer) {
-      var likesEl = footer.querySelector('.insta-likes');
-      var readCount = history.length;
-      if (likesEl) {
-        likesEl.textContent = readCount + ' lecture' + (readCount > 1 ? 's' : '');
-      } else {
-        var actions = footer.querySelector('.insta-actions');
-        if (actions) {
-          var div = document.createElement('div');
-          div.className = 'insta-likes';
-          div.textContent = readCount + ' lecture' + (readCount > 1 ? 's' : '');
-          div.onclick = function() { showHistory(num); };
-          actions.insertAdjacentElement('afterend', div);
-        }
-      }
-      // Update timestamp
-      var tsEl = footer.querySelector('.insta-timestamp');
-      var now = new Date();
-      var tsText = 'Dernière lecture · ' + formatTimestamp(now);
-      if (tsEl) {
-        tsEl.textContent = tsText;
-      } else {
-        var ts = document.createElement('div');
-        ts.className = 'insta-timestamp';
-        ts.textContent = tsText;
-        footer.appendChild(ts);
-      }
-    }
-  }
-  updateStoryBar();
-
-  if (browseSource === "jour") {
-    const allRead = availablePsalms.every(p => readPsalms.has(p.number));
-    if (allRead) {
-      setTimeout(() => goHome(), 800);
-      return;
-    }
-  }
-  if (browseSource === "birthday") {
-    // Personal tehilim read - go back to jour calendar to show completion message
-    setTimeout(function() {
-      browseSource = "jour";
-      document.getElementById("reading").style.display = "none";
-      document.getElementById("home").style.display = "block";
-      switchTab("jour");
-      renderJourCalendar();
-      window.scrollTo(0, 0);
-      currentScreen = "home";
-    }, 800);
-    return;
-  }
-  if (browseSource === "chain") {
-    // Complete reading via API
-    if (CHAIN_API_URL) {
-      chainApi({
-        action: 'completeReading',
-        chainId: currentChainId,
-        psalmNumber: num,
-        userId: getChainUserId(),
-        userName: getChainUserName() || 'Anonyme'
-      }, function(result) {
-        if (result.success) {
-          _myAssignment = result.nextAssigned;
-          if (result.cycleComplete) {
-            // Cycle complete!
-            setTimeout(function() {
-              document.getElementById("reading").style.display = "none";
-              document.getElementById("home").style.display = "block";
-              currentScreen = "home";
-              openChainDetail(currentChainId);
-              setTimeout(function() {
-                alert('🎉 Mazal Tov ! Le cycle ' + (result.currentCycle) + ' est terminé ! Un nouveau cycle commence.');
-              }, 500);
-            }, 800);
-          } else if (result.nextAssigned) {
-            // Auto-load next assigned psalm
-            setTimeout(function() {
-              var nextPsalmData = TEHILIM.find(function(p) { return p.number === result.nextAssigned; });
-              if (nextPsalmData) {
-                window._chainPsalmNum = result.nextAssigned;
-                availablePsalms = [nextPsalmData];
-                currentPsalm = 0;
-                window.scrollTo(0, 0);
-                document.getElementById('reading').scrollTop = 0;
-                renderReading();
-              } else {
-                document.getElementById("reading").style.display = "none";
-                document.getElementById("home").style.display = "block";
-                currentScreen = "home";
-                openChainDetail(currentChainId);
-              }
-            }, 800);
-          } else {
-            // All psalms assigned, go back
-            setTimeout(function() {
-              document.getElementById("reading").style.display = "none";
-              document.getElementById("home").style.display = "block";
-              currentScreen = "home";
-              openChainDetail(currentChainId);
-            }, 800);
-          }
-        }
-      });
-    } else {
-      // Offline fallback
-      var chains = getChains();
-      var cidx = chains.findIndex(function(c) { return c.id === currentChainId; });
-      if (cidx !== -1) {
-        var chain = chains[cidx];
-        if ((chain.psalmsRead || []).indexOf(num) === -1) {
-          if (!chain.psalmsRead) chain.psalmsRead = [];
-          chain.psalmsRead.push(num);
-        }
-        chains[cidx] = chain;
-        saveChains(chains);
-      }
-      setTimeout(function() {
-        document.getElementById("reading").style.display = "none";
-        document.getElementById("home").style.display = "block";
-        currentScreen = "home";
-        openChainDetail(currentChainId);
-      }, 800);
-    }
-    return;
-  }
-  // Auto-advance to next psalm after a short pause
-  if (currentPsalm < availablePsalms.length - 1) {
-    setTimeout(function() { nextPsalm(); }, 700);
-  }
-}
-
-function unmarkRead(num) {
-  readPsalms.delete(num);
-  renderReading();
-}
-
-function prevPsalm() {
-  if (currentPsalm > 0) {
-    currentPsalm--;
-    scrollToCurrentPsalm();
-  }
-}
-function nextPsalm() {
-  if (currentPsalm < availablePsalms.length - 1) {
-    currentPsalm++;
-    scrollToCurrentPsalm();
-  }
-}
-
-function scrollToCurrentPsalm() {
-  const body = document.getElementById("reading-body");
-  const target = body.querySelector('[data-idx="' + currentPsalm + '"]');
-  if (target) body.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-  storyExpandedGroup = -1;
-  updateReadingHeader();
-}
-
-// Snap scroll handles psalm navigation natively
-
-function dismissNotif() {
-  const n = document.getElementById("notif");
-  n.classList.remove("show");
-}
-
-// ====== QUOTES ======
-function updateQuote() {
-  const q = QUOTES[quoteIndex];
-  var sq = document.getElementById("splash-quote"); if (sq) sq.textContent = "« " + q.text + " »";
-  var ss = document.getElementById("splash-source"); if (ss) ss.textContent = "— " + q.source;
-  var hq = document.getElementById("home-quote"); if (hq) hq.textContent = "« " + q.text + " »";
-  var hs = document.getElementById("home-source"); if (hs) hs.textContent = "— " + q.source;
-  renderDots();
-}
-
-function renderDots() {
-  ["splash-dots", "home-dots"].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    let html = "";
-    QUOTES.forEach((_, i) => {
-      const w = i === quoteIndex ? 18 : 6;
-      const bg = i === quoteIndex ? "var(--black)" : "var(--gray-5)";
-      html += '<div class="' + (id === "splash-dots" ? "splash-dot" : "quote-dot") + '" data-qi="' + i + '" style="width:' + w + 'px;background:' + bg + '"></div>';
-    });
-    el.innerHTML = html;
-    el.onclick = function(e) {
-      var dot = e.target.closest('[data-qi]');
-      var idx = dot ? parseInt(dot.getAttribute('data-qi')) : -1;
-      if (idx >= 0 && idx !== quoteIndex) {
-        jumpToQuote(idx);
-      } else {
-        jumpToQuote((quoteIndex + 1) % QUOTES.length);
-      }
-    };
-  });
-}
-
-function jumpToQuote(idx) {
-  if (quoteTimer) clearTimeout(quoteTimer);
-  ["splash-quote", "splash-source", "home-quote", "home-source"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.style.opacity = "0"; el.style.transform = "translateY(8px)"; }
-  });
-  setTimeout(() => {
-    quoteIndex = idx;
-    updateQuote();
-    ["splash-quote", "splash-source", "home-quote", "home-source"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }
-    });
-    scheduleNextQuote();
-  }, 400);
-}
-
-function scheduleNextQuote() {
-  if (quoteTimer) clearTimeout(quoteTimer);
-  const duration = getQuoteDuration(QUOTES[quoteIndex]);
-  quoteTimer = setTimeout(cycleQuote, duration);
-}
-
-function cycleQuote() {
-  quoteFade = false;
-  ["splash-quote", "splash-source", "home-quote", "home-source"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) { el.style.opacity = "0"; el.style.transform = "translateY(8px)"; }
-  });
-  setTimeout(() => {
-    quoteIndex = (quoteIndex + 1) % QUOTES.length;
-    updateQuote();
-    ["splash-quote", "splash-source", "home-quote", "home-source"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.style.opacity = "1"; el.style.transform = "translateY(0)"; }
-    });
-    quoteFade = true;
-    scheduleNextQuote();
-  }, 600);
-}
-
-// ====== BIRTHDAY / MON TEHILIM ======
-const HEBREW_MONTHS_LIST = [
-  { value: 1, name: "Tishri", heb: "תשרי" },
-  { value: 2, name: "Heshvan", heb: "חשוון" },
-  { value: 3, name: "Kislev", heb: "כסלו" },
-  { value: 4, name: "Tevet", heb: "טבת" },
-  { value: 5, name: "Shevat", heb: "שבט" },
-  { value: 6, name: "Adar I", heb: "אדר א׳" },
-  { value: 7, name: "Adar", heb: "אדר" },
-  { value: 8, name: "Nissan", heb: "ניסן" },
-  { value: 9, name: "Iyar", heb: "אייר" },
-  { value: 10, name: "Sivan", heb: "סיוון" },
-  { value: 11, name: "Tamouz", heb: "תמוז" },
-  { value: 12, name: "Av", heb: "אב" },
-  { value: 13, name: "Eloul", heb: "אלול" }
-];
-
-function getBirthday() {
-  try { return JSON.parse(localStorage.getItem("tehilim_birthday")); } catch(e) { return null; }
-}
-
-function saveBirthday(month, day, year) {
-  localStorage.setItem("tehilim_birthday", JSON.stringify({ month, day, year }));
-}
-
-function clearBirthday() {
-  localStorage.removeItem("tehilim_birthday");
-  renderBirthday();
-  updateBirthdaySub();
-}
-
-function calcHebrewAge(birthMonth, birthDay, birthYear) {
-  const today = getHebrewDate(new Date());
-  let age = today.year - birthYear;
-  // If birthday hasn't happened yet this year
-  if (today.month < birthMonth || (today.month === birthMonth && today.day < birthDay)) {
-    age--;
-  }
-  return age;
-}
-
-function daysUntilHebrewBirthday(birthMonth, birthDay) {
-  const today = getHebrewDate(new Date());
-  const thisYear = today.year;
-  // Try this year's birthday
-  let bdayJD = hebrewToJD(thisYear, birthMonth, Math.min(birthDay, hebrewMonthLength(thisYear, birthMonth) || 29));
-  const todayJD = hebrewToJD(thisYear, today.month, today.day);
-  if (bdayJD < todayJD) {
-    // Birthday already passed, try next year
-    const nextYear = thisYear + 1;
-    const mLen = hebrewMonthLength(nextYear, birthMonth);
-    if (mLen === 0) {
-      // Month doesn't exist next year (Adar I in non-leap), use Adar
-      bdayJD = hebrewToJD(nextYear, 7, Math.min(birthDay, hebrewMonthLength(nextYear, 7)));
-    } else {
-      bdayJD = hebrewToJD(nextYear, birthMonth, Math.min(birthDay, mLen));
-    }
-  }
-  return bdayJD - todayJD;
-}
-
-function renderBirthday() {
-  const container = document.getElementById("birthday-content");
-  const bday = getBirthday();
-
-  if (!bday) {
-    container.innerHTML = '<div class="bday-section">' +
-      '<div class="bday-title">Mon Tehilim personnel</div>' +
-      '<div class="bday-desc">Selon la tradition juive, chaque personne a un chapitre de Tehilim qui lui correspond : son âge + 1. Entre ta date de naissance pour découvrir le tien.</div>' +
-      '<div class="bday-form">' +
-        '<input type="date" class="bday-date-input" id="bday-greg-date" onchange="onGregDateChange()">' +
-        '<div class="bday-hebrew-preview" id="bday-hebrew-preview"></div>' +
-        '<button class="bday-save" id="bday-save-btn" onclick="onSaveBirthday()" style="display:none">Découvrir mon Tehilim</button>' +
-      '</div>' +
-    '</div>';
-  } else {
-    // Show result
-    const age = calcHebrewAge(bday.month, bday.day, bday.year);
-    const tehilimNum = age + 1;
-    const daysUntil = daysUntilHebrewBirthday(bday.month, bday.day);
-    const monthInfo = HEBREW_MONTHS_LIST.find(m => m.value === bday.month);
-    const monthName = monthInfo ? monthInfo.name : "";
-    const monthHeb = monthInfo ? monthInfo.heb : "";
-
-    let countdownHtml = "";
-    if (daysUntil === 0) {
-      countdownHtml = '<div class="bday-countdown" style="background:var(--black);"><span class="bday-countdown-num" style="color:var(--white);">🎂 היום!</span><span class="bday-countdown-label" style="color:var(--gray-2);">Joyeux anniversaire ! Aujourd\'hui tu commences le chapitre ' + tehilimNum + '</span></div>';
-    } else {
-      countdownHtml = '<div class="bday-countdown"><span class="bday-countdown-num">' + daysUntil + '</span><span class="bday-countdown-label">jour' + (daysUntil > 1 ? 's' : '') + ' avant ton prochain anniversaire hébraïque</span></div>';
-    }
-
-    let readBtn = "";
-    if (TEHILIM.find(p => p.number === tehilimNum)) {
-      readBtn = '<button class="bday-read-btn" onclick="openPerek(' + tehilimNum + ')">Lire le chapitre ' + tehilimNum + '</button>';
-    } else {
-      readBtn = '<div style="font-size:12px;color:var(--gray-3);margin-top:8px;">Ce chapitre sera bientôt disponible</div>';
-    }
-
-    container.innerHTML = '<div class="bday-section">' +
-      '<div class="bday-result">' +
-        '<div class="bday-result-tehilim">פרק ' + toHebrewNumeral(tehilimNum) + '</div>' +
-        '<div class="bday-result-chapter">Chapitre ' + tehilimNum + '</div>' +
-        '<div class="bday-result-sub">Ton Tehilim personnel</div>' +
-        readBtn +
-        '<div class="bday-result-info">Tu as ' + age + ' ans · Né(e) le ' + bday.day + ' ' + monthName + ' (' + monthHeb + ') ' + bday.year + '<br>' +
-        'Âge (' + age + ') + 1 = Chapitre ' + tehilimNum + '</div>' +
-      '</div>' +
-      countdownHtml +
-      '<div style="text-align:center"><button class="bday-reset" onclick="clearBirthday()">Modifier ma date de naissance</button></div>' +
-    '</div>';
-  }
-}
-
-function onGregDateChange() {
-  const input = document.getElementById("bday-greg-date");
-  const preview = document.getElementById("bday-hebrew-preview");
-  const saveBtn = document.getElementById("bday-save-btn");
-  if (!input.value) { preview.innerHTML = ""; saveBtn.style.display = "none"; return; }
-  const parts = input.value.split("-");
-  const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-  const heb = getHebrewDate(d);
-  const monthInfo = HEBREW_MONTHS_LIST.find(m => m.value === heb.month);
-  const monthName = monthInfo ? monthInfo.name : "";
-  const monthHeb = monthInfo ? monthInfo.heb : "";
-  preview.innerHTML = '<span class="bday-preview-heb">' + heb.day + ' ' + monthHeb + ' ' + heb.year + '</span>' +
-    '<span class="bday-preview-latin">' + heb.day + ' ' + monthName + ' ' + heb.year + '</span>';
-  saveBtn.style.display = "block";
-  // Store temp data
-  window._bdayTemp = { month: heb.month, day: heb.day, year: heb.year };
-}
-
-function onSaveBirthday() {
-  if (!window._bdayTemp) return;
-  saveBirthday(window._bdayTemp.month, window._bdayTemp.day, window._bdayTemp.year);
-  window._bdayTemp = null;
-  renderBirthday();
-  updateBirthdaySub();
-}
-
-function updateBirthdaySub() {
-  const el = document.getElementById("menu-birthday-sub");
-  if (!el) return;
-  const bday = getBirthday();
-  if (bday) {
-    const age = calcHebrewAge(bday.month, bday.day, bday.year);
-    el.textContent = "Chapitre " + (age + 1) + " · " + age + " ans";
-  } else {
-    el.textContent = "Quel est ton chapitre personnel ?";
-  }
-}
-
-function checkBirthdayPopup() {
-  const bday = getBirthday();
-  if (!bday) return;
-
-  const daysUntil = daysUntilHebrewBirthday(bday.month, bday.day);
-  const age = calcHebrewAge(bday.month, bday.day, bday.year);
-  const tehilimNum = age + 1;
-  const lastPopup = localStorage.getItem("tehilim_bday_popup_shown");
-  const today = new Date().toDateString();
-  if (lastPopup === today) return; // Already shown today
-
-  let popupHtml = "";
-  let shouldShow = false;
-
-  if (daysUntil === 0) {
-    // Birthday today!
-    shouldShow = true;
-    const nextAge = age; // They just turned this age
-    popupHtml = '<div class="bday-popup-emoji">🎂✡️🎂</div>' +
-      '<div class="bday-popup-title">!היום יום הולדת</div>' +
-      '<div class="bday-popup-highlight">Mazal Tov ! Tu as ' + nextAge + ' ans aujourd\'hui !</div>' +
-      '<div class="bday-popup-msg">« Le jour où tu es né(e), le monde entier ne pouvait plus continuer à exister sans toi. Il y a ' + nextAge + ' ans, des lumières uniques ont brillé pour ta venue au monde — et aujourd\'hui, elles brillent encore plus fort. »</div>' +
-      '<div class="bday-popup-highlight">Aujourd\'hui tu commences le chapitre ' + tehilimNum + ' des Tehilim.</div>' +
-      '<div class="bday-popup-msg">Un nouveau chapitre, de nouvelles hauteurs spirituelles. Que cette année soit remplie de bénédictions, de réussite et de joie !</div>';
-  } else if (daysUntil === 30) {
-    shouldShow = true;
-    popupHtml = '<div class="bday-popup-emoji">📅</div>' +
-      '<div class="bday-popup-title">תזכורת</div>' +
-      '<div class="bday-popup-highlight">Dans 1 mois, c\'est ton anniversaire hébraïque !</div>' +
-      '<div class="bday-popup-msg">Prépare-toi spirituellement. Bientôt tu entameras le chapitre ' + (age + 2) + ' des Tehilim.</div>';
-  } else if (daysUntil === 14) {
-    shouldShow = true;
-    popupHtml = '<div class="bday-popup-emoji">🕯️</div>' +
-      '<div class="bday-popup-title">תזכורת</div>' +
-      '<div class="bday-popup-highlight">Dans 2 semaines, c\'est ton anniversaire hébraïque !</div>' +
-      '<div class="bday-popup-msg">Le Rebbe enseigne que les jours avant l\'anniversaire sont propices à l\'introspection et aux bonnes résolutions.</div>';
-  } else if (daysUntil === 7) {
-    shouldShow = true;
-    popupHtml = '<div class="bday-popup-emoji">⭐</div>' +
-      '<div class="bday-popup-title">תזכורת</div>' +
-      '<div class="bday-popup-highlight">Dans 1 semaine, c\'est ton anniversaire hébraïque !</div>' +
-      '<div class="bday-popup-msg">C\'est le moment de finir le chapitre ' + tehilimNum + ' et de te préparer pour le chapitre ' + (age + 2) + ' qui t\'attend.</div>';
-  }
-
-  if (shouldShow) {
-    document.getElementById("bday-popup-inner").innerHTML = popupHtml;
-    document.getElementById("birthday-popup").style.display = "flex";
-    localStorage.setItem("tehilim_bday_popup_shown", today);
-  }
-}
-
-function closeBdayPopup() {
-  document.getElementById("birthday-popup").style.display = "none";
-}
-
-// ====== TEHILIM AU CIMETIERE ======
-var CEMETERY_PSALMS = [33, 16, 17, 72, 91, 104, 130];
-var NESHAMA_LETTERS = [
-  { letter: 'נ', name: 'Noun', start: 105, end: 112 },
-  { letter: 'ש', name: 'Chin', start: 161, end: 168 },
-  { letter: 'מ', name: 'Mem', start: 97, end: 104 },
-  { letter: 'ה', name: 'Hé', start: 33, end: 40 }
-];
-var cemCardModes = {}; // per-card mode tracking
-
-function cemToggleHtml(cardId, currentMode) {
-  var modes = ['hebrew','phonetique','francais'];
-  var labels = ['עברית','Phonétique','Français'];
-  var h = '<div class="reading-toggle" data-mode="' + currentMode + '" style="margin:8px 0 12px">';
-  h += '<div class="reading-toggle-slider"></div>';
-  for (var i = 0; i < 3; i++) {
-    h += '<button class="reading-toggle-btn' + (currentMode === modes[i] ? ' active' : '') + '" onclick="setCemCardMode(\'' + cardId + '\',\'' + modes[i] + '\')">' + labels[i] + '</button>';
-  }
-  h += '</div>';
-  return h;
-}
-
-function setCemCardMode(cardId, mode) {
-  cemCardModes[cardId] = mode;
-  var bodyEl = document.getElementById(cardId);
-  if (!bodyEl) return;
-  // Determine what kind of card this is and re-render its content
-  var data = bodyEl.getAttribute('data-cem');
-  if (!data) return;
-  var parsed = JSON.parse(data);
-  var html = cemToggleHtml(cardId, mode);
-  if (parsed.type === 'psalm') {
-    var psalm = TEHILIM.find(function(p) { return p.number === parsed.num; });
-    if (psalm) html += cemRenderVerses(psalm.verses, 1, mode);
-  } else if (parsed.type === '119section') {
-    var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
-    if (psalm119) {
-      var sv = [];
-      for (var v = parsed.start - 1; v < parsed.end && v < psalm119.verses.length; v++) {
-        sv.push(psalm119.verses[v]);
-      }
-      html += cemRenderVerses(sv, parsed.start, mode);
-    }
-  }
-  bodyEl.innerHTML = html;
-  // Make sure body is open
-  if (!bodyEl.classList.contains('open')) bodyEl.classList.add('open');
-}
-
-function cemRenderVerses(verses, startIndex, mode) {
-  var html = '';
-  if (mode === 'hebrew') {
-    verses.forEach(function(v, i) {
-      html += '<div class="cem-verse"><span class="cem-verse-num">' + toHebrewNumeral(startIndex + i) + '</span> ' + v.hebrew + '</div>';
-    });
-  } else if (mode === 'phonetique') {
-    verses.forEach(function(v, i) {
-      html += '<div class="verse-block" style="margin:0 0 16px;padding-left:28px;position:relative"><span class="verse-num">' + toHebrewNumeral(startIndex + i) + '</span>';
-      html += '<p class="hebrew-text">' + v.hebrew + '</p>';
-      html += '<p class="phonetic-text">' + transliterate(v.hebrew) + '</p></div>';
-    });
-  } else {
-    verses.forEach(function(v, i) {
-      var frText = v.french || '<em style="color:var(--gray-4)">Traduction à venir</em>';
-      html += '<div class="verse-block" style="margin:0 0 16px;padding-left:28px;position:relative"><span class="verse-num">' + toHebrewNumeral(startIndex + i) + '</span>';
-      html += '<p class="french-text">' + frText + '</p></div>';
-    });
-  }
-  return html;
-}
-
-function renderCemetery() {
-  var container = document.getElementById('cemetery-content');
-  if (!container.innerHTML) {
-    var html = '';
-    html += '<div class="cem-section-title">📖 Les 7 Psaumes</div>';
-    CEMETERY_PSALMS.forEach(function(num) {
-      var psalm = TEHILIM.find(function(p) { return p.number === num; });
-      if (!psalm) return;
-      var id = 'cem-psalm-' + num;
-      var mode = cemCardModes[id] || 'hebrew';
-      html += '<div class="cem-psalm-card">';
-      html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
-      html += '<span class="cem-psalm-num">פרק ' + toHebrewNumeral(num) + ' · Psaume ' + num + '</span>';
-      html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
-      html += '</div>';
-      html += '<div class="cem-psalm-body" id="' + id + '" data-cem=\'' + JSON.stringify({type:'psalm',num:num}) + '\'>';
-      html += cemToggleHtml(id, mode);
-      html += cemRenderVerses(psalm.verses, 1, mode);
-      html += '</div></div>';
-    });
-    container.innerHTML = html;
-    toggleCemPsalm('cem-psalm-33');
-  }
-  renderCemNeshama();
-}
-
-function renderCemNeshama() {
-  var container = document.getElementById('cem-neshama-section');
-  if (container.innerHTML) return;
-  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
-  if (!psalm119) return;
-  
-  var html = '<div class="cem-section-title">✡ Psaume 119 · נשמה</div>';
-  html += '<div class="cem-neshama-word">נ ש מ ה</div>';
-  html += '<div style="text-align:center;font-size:12px;color:var(--gray-3);margin-bottom:16px">Néchama · L\'âme</div>';
-  
-  NESHAMA_LETTERS.forEach(function(info) {
-    var id = 'cem-nesh-' + info.letter;
-    var mode = cemCardModes[id] || 'hebrew';
-    html += '<div class="cem-psalm-card">';
-    html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
-    html += '<div style="display:flex;align-items:center;gap:10px">';
-    html += '<div class="cem-119-circle">' + info.letter + '</div>';
-    html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + '<div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
-    html += '</div>';
-    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
-    html += '</div>';
-    html += '<div class="cem-psalm-body" id="' + id + '" data-cem=\'' + JSON.stringify({type:'119section',start:info.start,end:info.end}) + '\'>';
-    html += cemToggleHtml(id, mode);
-    var sectionVerses = [];
-    for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
-      sectionVerses.push(psalm119.verses[v]);
-    }
-    html += cemRenderVerses(sectionVerses, info.start, mode);
-    html += '</div></div>';
-  });
-  
-  container.innerHTML = html;
-}
-
-// Cemetery name input handlers
-function cemAddLetter(l) {
-  var input = document.getElementById('cem-name-input');
-  input.value += l;
-  onCemNameInput();
-}
-function cemBackspace() {
-  var input = document.getElementById('cem-name-input');
-  input.value = input.value.slice(0, -1);
-  onCemNameInput();
-}
-function clearCemName() {
-  document.getElementById('cem-name-input').value = '';
-  document.getElementById('cem-suggestions').classList.remove('active');
-  document.getElementById('cem-suggestions').innerHTML = '';
-  document.getElementById('cem-hebrew-preview').textContent = '';
-  document.getElementById('cem-name-results').innerHTML = '';
-  document.getElementById('cem-name-clear').style.display = 'none';
-}
-
-function selectCemName(hebrew) {
-  document.getElementById('cem-name-input').value = hebrew;
-  document.getElementById('cem-suggestions').classList.remove('active');
-  document.getElementById('cem-suggestions').innerHTML = '';
-  document.getElementById('cem-hebrew-preview').textContent = hebrew;
-  document.getElementById('cem-name-clear').style.display = 'flex';
-  var letters = extractHebrewLetters(hebrew);
-  renderCemNameResults(letters, hebrew);
-}
-
-function renderCemSuggestions(query) {
-  var container = document.getElementById('cem-suggestions');
-  if (!query || query.length < 1) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-  var results = searchNames(query);
-  if (results.length === 0) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-  var genderIcon = { M: '👨', F: '👩', U: '' };
-  var html = '';
-  results.forEach(function(r) {
-    html += '<div class="t119-sug-item" onclick="selectCemName(\'' + r.hebrew.replace(/'/g, "\\'") + '\')">';
-    html += '<span class="t119-sug-heb">' + r.hebrew + '</span>';
-    html += '<span class="t119-sug-lat">' + r.latin + '<span class="t119-sug-gender">' + (genderIcon[r.gender] || '') + '</span></span>';
-    html += '</div>';
-  });
-  container.innerHTML = html;
-  container.classList.add('active');
-}
-
-function onCemNameInput() {
-  var val = document.getElementById('cem-name-input').value;
-  var clearBtn = document.getElementById('cem-name-clear');
-  clearBtn.style.display = val.length > 0 ? 'flex' : 'none';
-  
-  var isHebrew = val.length > 0 && val.charCodeAt(0) >= 0x0590 && val.charCodeAt(0) <= 0x05FF;
-  
-  if (isHebrew) {
-    document.getElementById('cem-hebrew-preview').textContent = val;
-    document.getElementById('cem-suggestions').classList.remove('active');
-    document.getElementById('cem-suggestions').innerHTML = '';
-    var letters = extractHebrewLetters(val);
-    renderCemNameResults(letters, val);
-  } else {
-    renderCemSuggestions(val);
-    var hebrew = frenchToHebrew(val);
-    document.getElementById('cem-hebrew-preview').textContent = hebrew;
-    var letters = extractHebrewLetters(hebrew);
-    renderCemNameResults(letters, hebrew);
-  }
-}
-
-function renderCemNameResults(letters, hebrewName) {
-  var container = document.getElementById('cem-name-results');
-  if (letters.length === 0) {
-    container.innerHTML = '';
-    return;
-  }
-  
-  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
-  if (!psalm119) {
-    container.innerHTML = '';
-    return;
-  }
-  
-  var html = '<div style="text-align:center;padding:8px 16px 12px;font-size:13px;color:var(--gray-2)">';
-  html += '<strong>' + letters.length + ' section' + (letters.length > 1 ? 's' : '') + '</strong> pour <span style="font-family:Noto Serif Hebrew,serif;font-size:16px;font-weight:700">' + hebrewName.trim() + '</span>';
-  html += '</div>';
-  
-  letters.forEach(function(info, idx) {
-    var id = 'cem-name-119-' + idx;
-    var mode = cemCardModes[id] || 'hebrew';
-    html += '<div class="cem-psalm-card">';
-    html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
-    html += '<div style="display:flex;align-items:center;gap:10px">';
-    html += '<div class="cem-119-circle">' + info.letter + '</div>';
-    html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + ' <span style="font-size:11px;color:var(--gray-3);font-weight:400">(lettre ' + (idx + 1) + ')</span><div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
-    html += '</div>';
-    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
-    html += '</div>';
-    html += '<div class="cem-psalm-body open" id="' + id + '" data-cem=\'' + JSON.stringify({type:'119section',start:info.start,end:info.end}) + '\'>';
-    html += cemToggleHtml(id, mode);
-    var sectionVerses = [];
-    for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
-      sectionVerses.push(psalm119.verses[v]);
-    }
-    html += cemRenderVerses(sectionVerses, info.start, mode);
-    html += '</div></div>';
-  });
-  
-  container.innerHTML = html;
-}
-
-function toggleCemPsalm(id) {
-  var body = document.getElementById(id);
-  var toggle = document.getElementById(id + '-toggle');
-  if (!body) return;
-  var isOpen = body.classList.contains('open');
-  body.classList.toggle('open');
-  if (toggle) toggle.classList.toggle('open');
-}
-
-// ====== TEHILIM 119 PAR NOM ======
-
-// Dictionary of ~400 Hebrew first names: [french/latin variants, hebrew, gender M/F/U]
-
-var t119KbdVisible = false;
-function toggleT119Keyboard() {
-  t119KbdVisible = !t119KbdVisible;
-  var wrap = document.getElementById('t119-kbd-wrap');
-  var txt = document.getElementById('t119-kbd-toggle-text');
-  wrap.style.display = t119KbdVisible ? 'block' : 'none';
-  txt.textContent = t119KbdVisible ? '⌨️ Masquer le clavier' : '⌨️ Clavier hébreu';
-}
-
-function searchNames(query) {
-  if (!query || query.length < 1) return [];
-  var lower = query.toLowerCase().replace(/[''`]/g, "'");
-  var results = [];
-  var seen = {};
-  for (var i = 0; i < HEBREW_NAMES.length; i++) {
-    var entry = HEBREW_NAMES[i];
-    var variants = entry[0];
-    var hebrew = entry[1];
-    if (seen[hebrew]) continue;
-    for (var j = 0; j < variants.length; j++) {
-      if (variants[j].indexOf(lower) === 0 || (lower.length >= 2 && variants[j].indexOf(lower) !== -1)) {
-        results.push({ latin: variants[0], hebrew: hebrew, gender: entry[2], match: variants[j] });
-        seen[hebrew] = true;
-        break;
-      }
-    }
-    // Also check if hebrew input matches
-    if (!seen[hebrew]) {
-      var hebrewInput = frenchToHebrew(query);
-      if (hebrew.indexOf(hebrewInput) === 0 && hebrewInput.length > 0) {
-        results.push({ latin: variants[0], hebrew: hebrew, gender: entry[2], match: variants[0] });
-        seen[hebrew] = true;
-      }
-    }
-  }
-  // Sort: exact start matches first, then by length
-  results.sort(function(a, b) {
-    var aStart = a.match.indexOf(lower) === 0 ? 0 : 1;
-    var bStart = b.match.indexOf(lower) === 0 ? 0 : 1;
-    if (aStart !== bStart) return aStart - bStart;
-    return a.hebrew.length - b.hebrew.length;
-  });
-  return results.slice(0, 8);
-}
-
-function selectT119Name(hebrew) {
-  document.getElementById('t119-input').value = hebrew;
-  document.getElementById('t119-suggestions').classList.remove('active');
-  document.getElementById('t119-suggestions').innerHTML = '';
-  document.getElementById('t119-clear').style.display = 'inline-block';
-  onT119Input();
-}
-
-function renderT119Suggestions(query) {
-  var container = document.getElementById('t119-suggestions');
-  if (!query || query.length < 1) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-  var results = searchNames(query);
-  if (results.length === 0) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-  var genderIcon = { M: '👨', F: '👩', U: '' };
-  var html = '';
-  results.forEach(function(r) {
-    html += '<div class="t119-sug-item" onclick="selectT119Name(\'' + r.hebrew.replace(/'/g, "\\'") + '\')">';
-    html += '<span class="t119-sug-heb">' + r.hebrew + '</span>';
-    html += '<span class="t119-sug-lat">' + r.latin + '<span class="t119-sug-gender">' + (genderIcon[r.gender] || '') + '</span></span>';
-    html += '</div>';
-  });
-  container.innerHTML = html;
-  container.classList.add('active');
-}
-
-var HEBREW_LETTERS_119 = [
-  { letter: 'א', name: 'Aleph', start: 1, end: 8 },
-  { letter: 'ב', name: 'Beth', start: 9, end: 16 },
-  { letter: 'ג', name: 'Guimel', start: 17, end: 24 },
-  { letter: 'ד', name: 'Daleth', start: 25, end: 32 },
-  { letter: 'ה', name: 'Hé', start: 33, end: 40 },
-  { letter: 'ו', name: 'Vav', start: 41, end: 48 },
-  { letter: 'ז', name: 'Zayin', start: 49, end: 56 },
-  { letter: 'ח', name: 'Heth', start: 57, end: 64 },
-  { letter: 'ט', name: 'Teth', start: 65, end: 72 },
-  { letter: 'י', name: 'Youd', start: 73, end: 80 },
-  { letter: 'כ', name: 'Kaf', start: 81, end: 88 },
-  { letter: 'ל', name: 'Lamed', start: 89, end: 96 },
-  { letter: 'מ', name: 'Mem', start: 97, end: 104 },
-  { letter: 'נ', name: 'Noun', start: 105, end: 112 },
-  { letter: 'ס', name: 'Samekh', start: 113, end: 120 },
-  { letter: 'ע', name: 'Ayin', start: 121, end: 128 },
-  { letter: 'פ', name: 'Pé', start: 129, end: 136 },
-  { letter: 'צ', name: 'Tsadi', start: 137, end: 144 },
-  { letter: 'ק', name: 'Kouf', start: 145, end: 152 },
-  { letter: 'ר', name: 'Rech', start: 153, end: 160 },
-  { letter: 'ש', name: 'Chin', start: 161, end: 168 },
-  { letter: 'ת', name: 'Tav', start: 169, end: 176 }
-];
-
-// French → Hebrew transliteration map (digraphs first)
-var FR_HEB_DIGRAPHS = [
-  ['sh', 'ש'], ['ch', 'ש'], ['ts', 'צ'], ['tz', 'צ'], ['kh', 'ח'],
-  ['th', 'ת'], ['ph', 'פ'], ['dj', 'ג'], ['ou', 'ו'], ['gn', 'ג']
-];
-var FR_HEB_MAP = {
-  'a': 'א', 'b': 'ב', 'c': 'כ', 'd': 'ד', 'e': 'א', 'f': 'פ',
-  'g': 'ג', 'h': 'ה', 'i': 'י', 'j': 'ג', 'k': 'כ', 'l': 'ל',
-  'm': 'מ', 'n': 'נ', 'o': 'ע', 'p': 'פ', 'q': 'ק', 'r': 'ר',
-  's': 'ס', 't': 'ת', 'u': 'ו', 'v': 'ו', 'w': 'ו', 'x': 'כ',
-  'y': 'י', 'z': 'ז'
-};
-
-function frenchToHebrew(text) {
-  var result = '';
-  var lower = text.toLowerCase();
-  var i = 0;
-  while (i < lower.length) {
-    if (lower[i] === ' ') { result += ' '; i++; continue; }
-    // Check if already Hebrew
-    var code = lower.charCodeAt(i);
-    if (code >= 0x0590 && code <= 0x05FF) { result += lower[i]; i++; continue; }
-    // Check digraphs
-    var found = false;
-    if (i < lower.length - 1) {
-      var di = lower.substr(i, 2);
-      for (var d = 0; d < FR_HEB_DIGRAPHS.length; d++) {
-        if (di === FR_HEB_DIGRAPHS[d][0]) {
-          result += FR_HEB_DIGRAPHS[d][1];
-          i += 2;
-          found = true;
-          break;
-        }
-      }
-    }
-    if (found) continue;
-    // Single char
-    var mapped = FR_HEB_MAP[lower[i]];
-    if (mapped) result += mapped;
-    i++;
-  }
-  return result;
-}
-
-function extractHebrewLetters(text) {
-  var letters = [];
-  for (var i = 0; i < text.length; i++) {
-    var c = text[i];
-    // Normalize final letters to regular
-    if (c === 'ך') c = 'כ';
-    if (c === 'ם') c = 'מ';
-    if (c === 'ן') c = 'נ';
-    if (c === 'ף') c = 'פ';
-    if (c === 'ץ') c = 'צ';
-    // Check if it's a valid Hebrew letter in our list
-    var found = HEBREW_LETTERS_119.find(function(l) { return l.letter === c; });
-    if (found) {
-      letters.push(found);
-    }
-  }
-  return letters;
-}
-
-function t119AddLetter(l) {
-  var input = document.getElementById(_t119ActiveField);
-  input.value += l;
-  onT119Input();
-}
-function t119Backspace() {
-  var input = document.getElementById(_t119ActiveField);
-  input.value = input.value.slice(0, -1);
-  onT119Input();
-}
-function clearT119() {
-  document.getElementById('t119-input').value = '';
-  document.getElementById('t119-mother-input').value = '';
-  document.getElementById('t119-suggestions').classList.remove('active');
-  document.getElementById('t119-suggestions').innerHTML = '';
-  document.getElementById('t119-mother-suggestions').classList.remove('active');
-  document.getElementById('t119-mother-suggestions').innerHTML = '';
-  onT119Input();
-}
-
-function toggleBenBat(ctx) {
-  var selector = ctx === 'chain' ? '.chain-benbat-slider .bb-slider-track' : '.t119-benbat-slider .bb-slider-track';
-  var track = document.querySelector(selector);
-  if (!track) return;
-  track.classList.toggle('bat');
-  if (ctx === 't119') onT119Input();
-}
-
-function getT119BenBat() {
-  var track = document.querySelector('.t119-benbat-slider .bb-slider-track');
-  return track && track.classList.contains('bat') ? 'bat' : 'ben';
-}
-
-function getChainBenBat() {
-  var track = document.querySelector('.chain-benbat-slider .bb-slider-track');
-  return track && track.classList.contains('bat') ? 'bat' : 'ben';
-}
-
-function onT119Input() {
-  var val = document.getElementById('t119-input').value;
-  var motherVal = document.getElementById('t119-mother-input').value;
-  var clearBtn = document.getElementById('t119-clear');
-  clearBtn.style.display = (val.length > 0 || motherVal.length > 0) ? 'inline-block' : 'none';
-  
-  // Show suggestions for active field
-  var isHebrew = val.length > 0 && val.charCodeAt(0) >= 0x0590 && val.charCodeAt(0) <= 0x05FF;
-  var isMotherHebrew = motherVal.length > 0 && motherVal.charCodeAt(0) >= 0x0590 && motherVal.charCodeAt(0) <= 0x05FF;
-  
-  // Suggestions for person name
-  if (!isHebrew && val.length > 0) {
-    renderT119Suggestions(val);
-  } else {
-    document.getElementById('t119-suggestions').classList.remove('active');
-    document.getElementById('t119-suggestions').innerHTML = '';
-  }
-  
-  // Suggestions for mother name
-  if (!isMotherHebrew && motherVal.length > 0) {
-    renderT119MotherSuggestions(motherVal);
-  } else {
-    document.getElementById('t119-mother-suggestions').classList.remove('active');
-    document.getElementById('t119-mother-suggestions').innerHTML = '';
-  }
-  
-  // Get hebrew for both names
-  var hebrewPerson = isHebrew ? val : frenchToHebrew(val);
-  var hebrewMother = isMotherHebrew ? motherVal : frenchToHebrew(motherVal);
-  
-  // Build preview
-  var bb = getT119BenBat();
-  var bbHeb = bb === 'bat' ? 'בת' : 'בן';
-  var preview = '';
-  if (hebrewPerson) preview = hebrewPerson;
-  if (hebrewPerson && hebrewMother) preview += ' ' + bbHeb + ' ' + hebrewMother;
-  else if (hebrewMother) preview = bbHeb + ' ' + hebrewMother;
-  document.getElementById('t119-hebrew-preview').textContent = preview;
-  
-  // Combine all letters for T119 results
-  var allLetters = [];
-  if (hebrewPerson) allLetters = allLetters.concat(extractHebrewLetters(hebrewPerson));
-  if (hebrewMother) allLetters = allLetters.concat(extractHebrewLetters(hebrewMother));
-  
-  renderT119Results(allLetters, preview);
-}
-
-function renderT119MotherSuggestions(query) {
-  var container = document.getElementById('t119-mother-suggestions');
-  if (!query || query.length < 1) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-  var results = searchNames(query);
-  if (results.length === 0) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-  var html = '';
-  results.slice(0, 5).forEach(function(r) {
-    html += '<div class="t119-sug-item" onclick="selectT119MotherSuggestion(\'' + r.hebrew.replace(/'/g,"\\'") + '\')">';
-    html += '<span class="t119-sug-hebrew">' + r.hebrew + '</span>';
-    html += '<span class="t119-sug-latin">' + r.latin + '</span>';
-    if (r.gender) html += '<span class="t119-sug-gender">' + (r.gender === 'M' ? '♂' : '♀') + '</span>';
-    html += '</div>';
-  });
-  container.innerHTML = html;
-  container.classList.add('active');
-}
-
-function selectT119MotherSuggestion(hebrew) {
-  document.getElementById('t119-mother-input').value = hebrew;
-  document.getElementById('t119-mother-suggestions').classList.remove('active');
-  document.getElementById('t119-mother-suggestions').innerHTML = '';
-  onT119Input();
-}
-
-function renderT119Results(letters, hebrewName) {
-  var container = document.getElementById('t119-results');
-  if (letters.length === 0) {
-    container.innerHTML = '';
-    return;
-  }
-  
-  var psalm119 = TEHILIM.find(function(p) { return p.number === 119; });
-  if (!psalm119) {
-    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--gray-3)">Psaume 119 bientôt disponible</div>';
-    return;
-  }
-  
-  var html = '<div style="text-align:center;padding:8px 16px 12px;font-size:13px;color:var(--gray-2)">';
-  html += '<strong>' + letters.length + ' section' + (letters.length > 1 ? 's' : '') + '</strong> pour <span style="font-family:Noto Serif Hebrew,serif;font-size:16px;font-weight:700">' + hebrewName.trim() + '</span>';
-  html += '</div>';
-  
-  letters.forEach(function(info, idx) {
-    html += '<div class="t119-letter-section">';
-    html += '<div class="t119-letter-header">';
-    html += '<div class="t119-letter-circle">' + info.letter + '</div>';
-    html += '<div class="t119-letter-info"><div class="t119-letter-name">' + info.name + ' · ' + info.letter + ' <span style="font-size:11px;color:var(--gray-3);font-weight:400">(lettre ' + (idx + 1) + ')</span></div>';
-    html += '<div class="t119-letter-range">Versets ' + info.start + '–' + info.end + '</div></div></div>';
-    
-    // Show verses
-    for (var v = info.start - 1; v < info.end && v < psalm119.verses.length; v++) {
-      var verse = psalm119.verses[v];
-      html += '<div class="t119-verse"><span class="t119-verse-num">' + toHebrewNumeral(v + 1) + '</span> ' + verse.hebrew + '</div>';
-    }
-    html += '</div>';
-  });
-  
-  container.innerHTML = html;
-}
-
-// ====== 10 OBJECTIFS QUOTIDIENS ======
-var DAILY_PERIODS = [
-  { id: 'matin', emoji: '🌅', label: 'Matin', hebrew: 'שַׁחֲרִית', h0: 5, h1: 12,
-    bg: 'linear-gradient(135deg,#667eea,#764ba2)', dark: true,
-    msg: 'Le matin est le fondement de la journée. Commence par remercier Hachem, donner la Tsédaka et prier avec ferveur.',
-    items: [
-      { id: 'modeh', emoji: '🌅', label: 'Modé Ani' },
-      { id: 'brakhot', emoji: '🙌', label: 'Brakhot du matin' },
-      { id: 'tsedaka_am', emoji: '🪙', label: 'Tsédaka' },
-      { id: 'tefila', emoji: '🙏', label: 'Cha\'harit' },
-      { id: 'tehilim', emoji: '📖', label: 'Tehilim du jour' },
-      { id: 'etude_am', emoji: '📚', label: 'Étude de Torah' }
+    number: 6,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינוֹת עַֽל־הַשְּׁמִינִית מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres, avec les instruments à cordes, à l'octave. Psaume de David." },
+      { hebrew: "יְֽהֹוָה אַל־בְּאַפְּךָ תוֹכִיחֵנִי וְֽאַל־בַּחֲמָתְךָ תְיַסְּרֵֽנִי׃", french: "Seigneur, ne me réprimande pas dans ta colère, ne me châtie pas dans ton courroux." },
+      { hebrew: "חָנֵּנִי יְהֹוָה כִּי אֻמְלַל־אָנִי רְפָאֵנִי יְהֹוָה כִּי נִבְהֲלוּ עֲצָמָֽי׃", french: "Aie pitié de moi, Seigneur, car je suis abattu ; guéris-moi, Éternel, car mes membres sont en désarroi," },
+      { hebrew: "וְנַפְשִׁי נִבְהֲלָה מְאֹד וְאַתָּה יְהֹוָה עַד־מָתָֽי׃", french: "mon âme est bien troublée : et toi, ô Éternel, jusques à quand ?" },
+      { hebrew: "שׁוּבָה יְהֹוָה חַלְּצָה נַפְשִׁי הוֹשִׁיעֵנִי לְמַעַן חַסְדֶּֽךָ׃", french: "Daigne de nouveau, Seigneur, délivrer mon âme, viens à mon secours en raison de ta bonté ;" },
+      { hebrew: "כִּי אֵין בַּמָּוֶת זִכְרֶךָ בִּשְׁאוֹל מִי יֽוֹדֶה־לָּֽךְ׃", french: "car dans la mort ton souvenir est effacé ; dans le Cheol, qui te rend hommage ?" },
+      { hebrew: "יָגַעְתִּי ׀ בְּֽאַנְחָתִי אַשְׂחֶה בְכָל־לַיְלָה מִטָּתִי בְּדִמְעָתִי עַרְשִׂי אַמְסֶֽה׃", french: "Je me suis exténué en gémissements ; chaque nuit je baigne mon lit de larmes ; de mes pleurs j'inonde ma couche." },
+      { hebrew: "עָשְׁשָׁה מִכַּעַס עֵינִי עָתְקָה בְּכָל־צוֹרְרָֽי׃", french: "Ma vue s'éteint de chagrin, elle vieillit à cause de tous mes ennemis." },
+      { hebrew: "סוּרוּ מִמֶּנִּי כָּל־פֹּעֲלֵי אָוֶן כִּֽי־שָׁמַע יְהֹוָה קוֹל בִּכְיִֽי׃", french: "Loin de moi, vous tous, artisans d'iniquité ! Car l'Éternel entend le bruit de mes sanglots." },
+      { hebrew: "שָׁמַע יְהֹוָה תְּחִנָּתִי יְהֹוָה תְּֽפִלָּתִי יִקָּֽח׃", french: "L'Éternel exauce ma supplication, l'Éternel accueille ma prière." },
+      { hebrew: "יֵבֹשׁוּ ׀ וְיִבָּהֲלוּ מְאֹד כָּל־אֹיְבָי יָשֻׁבוּ יֵבֹשׁוּ רָֽגַע׃", french: "Qu'ils soient confus, effarés, tous mes ennemis ! Qu'ils lâchent pied, couverts soudain de honte !" },
     ]
   },
-  { id: 'aprem', emoji: '🌤️', label: 'Après-midi', hebrew: 'מִנְחָה', h0: 12, h1: 19,
-    bg: 'linear-gradient(135deg,#f6d365,#fda085)', dark: false,
-    msg: 'Min\'ha est la prière la plus précieuse : elle interrompt nos occupations pour se tourner vers Hachem.',
-    items: [
-      { id: 'casher', emoji: '🥩', label: 'Manger Casher' },
-      { id: 'tsedaka_pm', emoji: '🪙', label: 'Tsédaka' },
-      { id: 'minha', emoji: '🙏', label: 'Min\'ha' }
+  {
+    number: 7,
+    verses: [
+      { hebrew: "שִׁגָּיוֹן לְדָוִד אֲשֶׁר־שָׁר לַֽיהֹוָה עַל־דִּבְרֵי־כוּשׁ בֶּן־יְמִינִֽי׃", french: "Chigayon de David, qu'il chanta à l'Éternel à propos de Couchi, le Benjamite." },
+      { hebrew: "יְהֹוָה אֱלֹהַי בְּךָ חָסִיתִי הוֹשִׁיעֵנִי מִכָּל־רֹדְפַי וְהַצִּילֵֽנִי׃", french: "Éternel, mon Dieu, en toi je m'abrite ; assiste-moi contre tous mes persécuteurs, délivre-moi." },
+      { hebrew: "פֶּן־יִטְרֹף כְּאַרְיֵה נַפְשִׁי פֹּרֵק וְאֵין מַצִּֽיל׃", french: "Sans cela, on déchirerait, tel un lion, ma personne, on me mettrait en pièces, et nul ne me sauverait." },
+      { hebrew: "יְהֹוָה אֱלֹהַי אִם־עָשִׂיתִי זֹאת אִֽם־יֶשׁ־עָוֶל בְּכַפָּֽי׃", french: "Éternel, mon Dieu, si j'ai agi de la sorte, s'il y a de l'iniquité en mes mains :" },
+      { hebrew: "אִם־גָּמַלְתִּי שֽׁוֹלְמִי רָע וָאֲחַלְּצָה צֽוֹרְרִי רֵיקָֽם׃", french: "si j'ai rendu la pareille à qui m'a fait du mal, et dépouillé qui m'a pris en haine sans motif," },
+      { hebrew: "יִרַדֹּֽף־אוֹיֵב ׀ נַפְשִׁי וְיַשֵּׂג וְיִרְמֹס לָאָרֶץ חַיָּי וּכְבוֹדִי ׀ לֶעָפָר יַשְׁכֵּן סֶֽלָה׃", french: "que l'ennemi se mette à ma poursuite et m'atteigne ! Qu'il broie ma vie sur le sol, et traîne mon honneur dans la poussière ! Sélah !" },
+      { hebrew: "קוּמָה יְהֹוָה ׀ בְּאַפֶּךָ הִנָּשֵׂא בְּעַבְרוֹת צוֹרְרָי וְעוּרָה אֵלַי מִשְׁפָּט צִוִּֽיתָ׃", french: "Lève-toi, Seigneur, dans ta colère, oppose-toi à la fureur de mes adversaires, et, en ma faveur, exerce la justice que tu as proclamée." },
+      { hebrew: "וַעֲדַת לְאֻמִּים תְּסֽוֹבְבֶךָּ וְעָלֶיהָ לַמָּרוֹם שֽׁוּבָה׃", french: "Que l'assemblée des peuples se groupe autour de toi ! T'élevant au-dessus d'elle, regagne ta sublime résidence." },
+      { hebrew: "יְהֹוָה יָדִין עַמִּים שָׁפְטֵנִי יְהֹוָה כְּצִדְקִי וּכְתֻמִּי עָלָֽי׃", french: "Seigneur, qui juges les nations, rends-moi justice, selon ma vertu et ma droiture." },
+      { hebrew: "יִגְמָר־נָא רַע ׀ רְשָׁעִים וּתְכוֹנֵן צַדִּיק וּבֹחֵן לִבּוֹת וּכְלָיוֹת אֱלֹהִים צַדִּֽיק׃", french: "Que la méchanceté des impies ait donc un terme ! Affermis le juste, ô toi qui sondes cœurs et reins, Dieu équitable !" },
+      { hebrew: "מָגִנִּי עַל־אֱלֹהִים מוֹשִׁיעַ יִשְׁרֵי־לֵֽב׃", french: "Ma sauvegarde est en Dieu : il secourt les cœurs droits." },
+      { hebrew: "אֱלֹהִים שׁוֹפֵט צַדִּיק וְאֵל זֹעֵם בְּכָל־יֽוֹם׃", french: "Dieu est un juge équitable, le Tout-Puissant fait sentir sa colère tous les jours :" },
+      { hebrew: "אִם־לֹא יָשׁוּב חַרְבּוֹ יִלְטוֹשׁ קַשְׁתּוֹ דָרַךְ וַֽיְכוֹנְנֶֽהָ׃", french: "si l'on ne s'amende pas, il aiguise son glaive, il bande son arc et l'ajuste." },
+      { hebrew: "וְלוֹ הֵכִין כְּלֵי־מָוֶת חִצָּיו לְֽדֹלְקִים יִפְעָֽל׃", french: "Il s'arme d'engins meurtriers, de ses flèches il fait des brandons." },
+      { hebrew: "הִנֵּה יְחַבֶּל־אָוֶן וְהָרָה עָמָל וְיָלַד שָֽׁקֶר׃", french: "Voyez, le méchant ourdit l'iniquité, il conçoit le mal et enfante le mensonge ;" },
+      { hebrew: "בּוֹר כָּרָה וַֽיַּחְפְּרֵהוּ וַיִּפֹּל בְּשַׁחַת יִפְעָֽל׃", french: "il a creusé une fosse et l'a rendue profonde, mais il glisse dans le précipice qu'il a préparé." },
+      { hebrew: "יָשׁוּב עֲמָלוֹ בְרֹאשׁוֹ וְעַל קָדְקֳדוֹ חֲמָסוֹ יֵרֵֽד׃", french: "Son injustice lui retombe sur la tête, et sur son crâne sa cruauté s'abat." },
+      { hebrew: "אוֹדֶה יְהֹוָה כְּצִדְקוֹ וַאֲזַמְּרָה שֵֽׁם־יְהֹוָה עֶלְיֽוֹן׃", french: "Je rendrai grâce à l'Éternel pour sa justice, et je chanterai le nom du Seigneur, du Très-Haut." },
     ]
   },
-  { id: 'soir', emoji: '🌙', label: 'Soir', hebrew: 'עַרְבִית', h0: 19, h1: 5,
-    bg: 'linear-gradient(135deg,#0c3483,#a2b6df)', dark: true,
-    msg: 'Le soir clôture la journée dans la sainteté. Prie, étudie, et transmets l\'amour de la Torah à tes proches.',
-    items: [
-      { id: 'arvit', emoji: '🌙', label: 'Arvit' },
-      { id: 'etude_pm', emoji: '📚', label: 'Étude de Torah' },
-      { id: 'famille', emoji: '👨‍👩‍👧‍👦', label: 'Temps en famille' },
-      { id: 'transmission', emoji: '💡', label: 'Dougma \'Haya' }
+  {
+    number: 8,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַֽל־הַגִּתִּית מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres. Sur la Ghitit. Psaume de David." },
+      { hebrew: "יְהֹוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָרֶץ אֲשֶׁר תְּנָה הוֹדְךָ עַל־הַשָּׁמָֽיִם׃", french: "Éternel, notre Seigneur ! Que ton nom est glorieux par toute la terre ! Car tu as répandu ta majesté sur les cieux." },
+      { hebrew: "מִפִּי עוֹלְלִים ׀ וְֽיֹנְקִים יִסַּדְתָּ עֹז לְמַעַן צוֹרְרֶיךָ לְהַשְׁבִּית אוֹיֵב וּמִתְנַקֵּֽם׃", french: "Par la bouche des enfants et des nourrissons tu as fondé ta puissance. En dépit de tes détracteurs, tu réduis à l'impuissance ennemis et adversaires rancuniers." },
+      { hebrew: "כִּֽי־אֶרְאֶה שָׁמֶיךָ מַעֲשֵׂה אֶצְבְּעֹתֶיךָ יָרֵחַ וְכוֹכָבִים אֲשֶׁר כּוֹנָֽנְתָּה׃", french: "Lorsque je contemple tes cieux, œuvre de ta main, la lune et les étoiles que tu as formées…" },
+      { hebrew: "מָה־אֱנוֹשׁ כִּֽי־תִזְכְּרֶנּוּ וּבֶן־אָדָם כִּי תִפְקְדֶֽנּוּ׃", french: "Qu'est donc l'homme, que tu penses à lui ? Le fils d'Adam, que tu le protèges ?" },
+      { hebrew: "וַתְּחַסְּרֵהוּ מְּעַט מֵאֱלֹהִים וְכָבוֹד וְהָדָר תְּעַטְּרֵֽהוּ׃", french: "Pourtant tu l'as fait presque l'égal des êtres divins ; tu l'as couronné de gloire et de magnificence !" },
+      { hebrew: "תַּמְשִׁילֵהוּ בְּמַעֲשֵׂי יָדֶיךָ כֹּל שַׁתָּה תַֽחַת־רַגְלָֽיו׃", french: "Tu lui as donné l'empire sur les œuvres de tes mains, et mis tout à ses pieds :" },
+      { hebrew: "צֹנֶה וַאֲלָפִים כֻּלָּם וְגַם בַּהֲמוֹת שָׂדָֽי׃", french: "brebis et taureaux, tous ensemble, et aussi les bêtes des champs," },
+      { hebrew: "צִפּוֹר שָׁמַיִם וּדְגֵי הַיָּם עֹבֵר אָרְחוֹת יַמִּֽים׃", french: "oiseaux du ciel et poissons de la mer, ce qui parcourt les routes des océans." },
+      { hebrew: "יְהֹוָה אֲדֹנֵינוּ מָה־אַדִּיר שִׁמְךָ בְּכָל־הָאָֽרֶץ׃", french: "Éternel, notre Seigneur ! Que ton nom est glorieux par toute la terre !" },
     ]
-  }
+  },
+  {
+    number: 9,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל־מוּת לַבֵּן מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres. Sur Mout-Labbén. Psaume de David." },
+      { hebrew: "אוֹדֶה יְהֹוָה בְּכָל־לִבִּי אֲסַפְּרָה כָּל־נִפְלְאוֹתֶֽיךָ׃", french: "Je rends grâce à l'Éternel de tout mon cœur, je veux proclamer toutes tes merveilles," },
+      { hebrew: "אֶשְׂמְחָה וְאֶעֶלְצָה בָךְ אֲזַמְּרָה שִׁמְךָ עֶלְיֽוֹן׃", french: "je veux me réjouir et exulter en toi, chanter ton nom, Dieu suprême," },
+      { hebrew: "בְּשׁוּב־אוֹיְבַי אָחוֹר יִכָּשְׁלוּ וְיֹאבְדוּ מִפָּנֶֽיךָ׃", french: "alors que mes ennemis lâchent pied et reculent, qu'ils trébuchent et périssent sous tes coups." },
+      { hebrew: "כִּֽי־עָשִׂיתָ מִשְׁפָּטִי וְדִינִי יָשַׁבְתָּ לְכִסֵּא שׁוֹפֵט צֶֽדֶק׃", french: "Oui, tu as fait triompher mon droit, ma cause, pris place sur ton trône en juge équitable." },
+      { hebrew: "גָּעַרְתָּ גוֹיִם אִבַּדְתָּ רָשָׁע שְׁמָם מָחִיתָ לְעוֹלָם וָעֶֽד׃", french: "Tu as réprimandé les peuples, perdu l'impie : leur nom, tu l'as effacé à tout jamais." },
+      { hebrew: "הָֽאוֹיֵב ׀ תַּמּוּ חֳרָבוֹת לָנֶצַח וְעָרִים נָתַשְׁתָּ אָבַד זִכְרָם הֵֽמָּה׃", french: "Ô l'ennemi ! C'en est fini pour toujours des ruines ; plus de villes démolies par toi ! C'est leur souvenir à eux qui disparaît." },
+      { hebrew: "וַֽיהֹוָה לְעוֹלָם יֵשֵׁב כּוֹנֵן לַמִּשְׁפָּט כִּסְאֽוֹ׃", french: "Mais le Seigneur demeure éternellement, il a établi son trône pour la justice." },
+      { hebrew: "וְהוּא יִשְׁפֹּֽט־תֵּבֵל בְּצֶדֶק יָדִין לְאֻמִּים בְּמֵישָׁרִֽים׃", french: "Oui, c'est lui qui juge le monde avec équité, il prononce sur les nations avec droiture." },
+      { hebrew: "וִיהִי יְהֹוָה מִשְׂגָּב לַדָּךְ מִשְׂגָּב לְעִתּוֹת בַּצָּרָֽה׃", french: "Que l'Éternel soit donc un abri pour l'opprimé, un abri dans les temps de détresse !" },
+      { hebrew: "וְיִבְטְחוּ בְךָ יוֹדְעֵי שְׁמֶךָ כִּי לֹֽא־עָזַבְתָּ דֹרְשֶׁיךָ יְהֹוָֽה׃", french: "Ainsi se confient en toi ceux qui connaissent ton nom ; car tu ne délaisses point, ô Seigneur, ceux qui te recherchent." },
+      { hebrew: "זַמְּרוּ לַיהֹוָה יֹשֵׁב צִיּוֹן הַגִּידוּ בָעַמִּים עֲלִֽילוֹתָֽיו׃", french: "Célébrez l'Éternel qui siège à Sion ; proclamez parmi les peuples ses hauts faits." },
+      { hebrew: "כִּֽי־דֹרֵשׁ דָּמִים אוֹתָם זָכָר לֹֽא־שָׁכַח צַעֲקַת עֲנָוִֽים׃", french: "Car il demande compte du sang versé, il en conserve le souvenir, il n'oublie point le cri des humbles." },
+      { hebrew: "חָֽנְנֵנִי יְהֹוָה רְאֵה עָנְיִי מִשֹּׂנְאָי מְרוֹמְמִי מִשַּׁעֲרֵי מָֽוֶת׃", french: "Sois-moi propice, Seigneur ! Vois quelle est ma misère du fait de mes ennemis, toi qui me retires des portes de la mort ;" },
+      { hebrew: "לְמַעַן אֲסַפְּרָה כָּֽל־תְּהִלָּתֶיךָ בְּשַׁעֲרֵי בַת־צִיּוֹן אָגִילָה בִּישׁוּעָתֶֽךָ׃", french: "afin que je puisse proclamer tes louanges aux portes de la fille de Sion et me réjouir de ton secours." },
+      { hebrew: "טָבְעוּ גוֹיִם בְּשַׁחַת עָשׂוּ בְּרֶֽשֶׁת־זוּ טָמָנוּ נִלְכְּדָה רַגְלָֽם׃", french: "Que les peuples s'enfoncent dans la fosse qu'ils ont creusée, que leur pied s'embarrasse dans le filet qu'ils ont dissimulé !" },
+      { hebrew: "נוֹדַע ׀ יְהֹוָה מִשְׁפָּט עָשָׂה בְּפֹעַל כַּפָּיו נוֹקֵשׁ רָשָׁע הִגָּיוֹן סֶֽלָה׃", french: "L'Éternel s'est manifesté, il a exercé la justice ; le méchant est pris au piège par ses propres œuvres. Higayon, Sélah !" },
+      { hebrew: "יָשׁוּבוּ רְשָׁעִים לִשְׁאוֹלָה כָּל־גּוֹיִם שְׁכֵחֵי אֱלֹהִֽים׃", french: "Qu'ils rentrent dans le Cheol, les impies ! Tous les peuples oublieux de Dieu !" },
+      { hebrew: "כִּי לֹא לָנֶצַח יִשָּׁכַח אֶבְיוֹן תִּקְוַת עֲנִיִּים תֹּאבַד לָעַֽד׃", french: "Car le pauvre n'est pas oublié sans retour, l'espoir des humbles n'est pas perdu à jamais." },
+      { hebrew: "קוּמָה יְהֹוָה אַל־יָעֹז אֱנוֹשׁ יִשָּׁפְטוּ גוֹיִם עַל־פָּנֶֽיךָ׃", french: "Lève-toi, Seigneur ! Que le mortel ne triomphe pas ! Que les peuples soient appelés en jugement devant toi !" },
+      { hebrew: "שִׁיתָה יְהֹוָה ׀ מוֹרָה לָהֶם יֵדְעוּ גוֹיִם אֱנוֹשׁ הֵמָּה סֶּֽלָה׃", french: "Inspire-leur, ô Éternel, la terreur : que les peuples sachent qu'ils sont de faibles mortels ! Sélah !" },
+    ]
+  },
+  {
+    number: 10,
+    verses: [
+      { hebrew: "לָמָה יְהֹוָה תַּעֲמֹד בְּרָחוֹק תַּעְלִים לְעִתּוֹת בַּצָּרָֽה׃", french: "Pourquoi, ô Éternel, te tiens-tu éloigné ? Te dérobes-tu au temps de la détresse ?" },
+      { hebrew: "בְּגַאֲוַת רָשָׁע יִדְלַק עָנִי יִתָּפְשׂוּ ׀ בִּמְזִמּוֹת זוּ חָשָֽׁבוּ׃", french: "Dans son arrogance, le méchant persécute le pauvre : qu'il tombe victime des mauvais desseins qu'il médite !" },
+      { hebrew: "כִּֽי־הִלֵּל רָשָׁע עַל־תַּאֲוַת נַפְשׁוֹ וּבֹצֵעַ בֵּרֵךְ נִאֵץ ׀ יְהֹוָֽה׃", french: "Car il se glorifie, le méchant, des passions de son âme ; le spoliateur blasphème, outrage l'Éternel." },
+      { hebrew: "רָשָׁע כְּגֹבַהּ אַפּוֹ בַּל־יִדְרֹשׁ אֵין אֱלֹהִים כָּל־מְזִמּוֹתָֽיו׃", french: "Avec son caractère hautain, le méchant ne s'inquiète de rien : « Il n'est point de Dieu ! » Voilà le fond de sa pensée." },
+      { hebrew: "יָחִילוּ דְרָכָו ׀ בְּכָל־עֵת מָרוֹם מִשְׁפָּטֶיךָ מִנֶּגְדּוֹ כָּל־צוֹרְרָיו יָפִיחַ בָּהֶֽם׃", french: "Ses voies sont prospères en tout temps, tes jugements passent au-dessus de sa tête ; tous ses adversaires, il les renverse d'un souffle." },
+      { hebrew: "אָמַר בְּלִבּוֹ בַּל־אֶמּוֹט לְדֹר וָדֹר אֲשֶׁר לֹֽא־בְרָֽע׃", french: "Il dit en son cœur : « Je ne chancellerai point ; jamais, au grand jamais, je ne serai dans l'adversité. »" },
+      { hebrew: "אָלָה ׀ פִּיהוּ מָלֵא וּמִרְמוֹת וָתֹךְ תַּחַת לְשׁוֹנוֹ עָמָל וָאָֽוֶן׃", french: "Sa bouche est pleine de parjure, de perfidie et de violence ; sa langue est au service du mal et de l'iniquité." },
+      { hebrew: "יֵשֵׁב ׀ בְּמַאְרַב חֲצֵרִים בַּֽמִּסְתָּרִים יַהֲרֹג נָקִי עֵינָיו לְֽחֵלְכָה יִצְפֹּֽנוּ׃", french: "Il se met en embuscade dans les villages ; à la dérobée, il fait périr l'innocent, ses yeux guettent le malheureux." },
+      { hebrew: "יֶאֱרֹב בַּמִּסְתָּר ׀ כְּאַרְיֵה בְסֻכֹּה יֶאֱרֹב לַחֲטוֹף עָנִי יַחְטֹף עָנִי בְּמָשְׁכוֹ בְרִשְׁתּֽוֹ׃", french: "Comme le lion dans le fourré, il dresse de secrètes embûches ; il les dresse pour s'emparer du pauvre, il s'empare du pauvre en l'attirant dans son filet." },
+      { hebrew: "יִדְכֶּה יָשֹׁחַ וְנָפַל בַּעֲצוּמָיו חֵל כָּאִֽים׃", french: "Il s'accroupit, se tapit, et les malheureux tombent dans ses griffes." },
+      { hebrew: "אָמַר בְּלִבּוֹ שָׁכַֽח אֵל הִסְתִּיר פָּנָיו בַּל־רָאָה לָנֶֽצַח׃", french: "Il dit en son cœur : « Dieu est sujet à l'oubli, il dérobe sa face ; jamais il ne voit rien. »" },
+      { hebrew: "קוּמָה יְהֹוָה אֵל נְשָׂא יָדֶךָ אַל־תִּשְׁכַּח עֲנָוִֽים׃", french: "Ah ! Seigneur, lève-toi ! Dieu puissant, brandis ta main, n'oublie point les humbles." },
+      { hebrew: "עַל־מֶה ׀ נִאֵץ רָשָׁע ׀ אֱלֹהִים אָמַר בְּלִבּוֹ לֹא תִדְרֹֽשׁ׃", french: "Pourquoi l'impie outragerait-il Dieu, dirait-il en son cœur que tu ne demandes aucun compte ?" },
+      { hebrew: "רָאִתָה כִּי־אַתָּה ׀ עָמָל וָכַעַס ׀ תַּבִּיט לָתֵת בְּיָדֶךָ עָלֶיךָ יַעֲזֹב חֵלֵכָה יָתוֹם אַתָּה ׀ הָיִיתָ עוֹזֵֽר׃", french: "Tu vois tout : tu regardes misères et chagrins, pour les protéger de ta main. À toi s'abandonne le malheureux, l'orphelin, tu lui prêtes assistance." },
+      { hebrew: "שְׁבֹר זְרוֹעַ רָשָׁע וָרָע תִּֽדְרוֹשׁ־רִשְׁעוֹ בַל־תִּמְצָֽא׃", french: "Brise le bras de l'impie, le méchant… châtie sa perversité, pour qu'il n'en soit plus trouvé trace." },
+      { hebrew: "יְהֹוָה מֶלֶךְ עוֹלָם וָעֶד אָבְדוּ גוֹיִם מֵאַרְצֽוֹ׃", french: "L'Éternel est roi à tout jamais : les peuples disparaissent de son pays." },
+      { hebrew: "תַּאֲוַת עֲנָוִים שָׁמַעְתָּ יְהֹוָה תָּכִין לִבָּם תַּקְשִׁיב אָזְנֶֽךָ׃", french: "Tu entends le souhait des humbles, Éternel, tu affermis leur cœur, tu leur prêtes l'oreille," },
+      { hebrew: "לִשְׁפֹּט יָתוֹם וָדָךְ בַּל־יוֹסִיף עוֹד לַעֲרֹץ אֱנוֹשׁ מִן־הָאָֽרֶץ׃", french: "en vue de rendre justice à l'orphelin, à l'opprimé, pour que nul mortel n'agisse plus tyranniquement sur terre." },
+    ]
+  },
+  {
+    number: 11,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד בַּֽיהֹוָה ׀ חָסִיתִי אֵיךְ תֹּאמְרוּ לְנַפְשִׁי נוּדִי הַרְכֶם צִפּֽוֹר׃", french: "Au chef des chantres ; de David. L'Éternel est mon abri : comment me dites-vous : « Fuis vers la montagne comme un oiseau ? »" },
+      { hebrew: "כִּי הִנֵּה הָרְשָׁעִים יִדְרְכוּן קֶשֶׁת כּוֹנְנוּ חִצָּם עַל־יֶתֶר לִירוֹת בְּמוֹ־אֹפֶל לְיִשְׁרֵי־לֵֽב׃", french: "Car voici que les méchants bandent leur arc, fixent leur flèche sur la corde," },
+      { hebrew: "כִּי הַשָּׁתוֹת יֵהָרֵסוּן צַדִּיק מַה־פָּעָֽל׃", french: "pour la lancer, dans les ténèbres, contre les cœurs droits. Si les fondements sont renversés, que peut faire le juste ?" },
+      { hebrew: "יְהֹוָה ׀ בְּֽהֵיכַל קָדְשׁוֹ יְהֹוָה בַּשָּׁמַיִם כִּסְאוֹ עֵינָיו יֶחֱזוּ עַפְעַפָּיו יִבְחֲנוּ בְּנֵי אָדָֽם׃", french: "L'Éternel, dans son saint palais, l'Éternel, dont le trône est aux cieux, ses yeux regardent, ses paupières distinguent les fils d'Adam." },
+      { hebrew: "יְהֹוָה צַדִּיק יִבְחָן וְרָשָׁע וְאֹהֵב חָמָס שָֽׂנְאָה נַפְשֽׁוֹ׃", french: "L'Éternel éprouve le juste, mais le méchant et le partisan de la violence, il les hait de toute son âme." },
+      { hebrew: "יַמְטֵר עַל־רְשָׁעִים פַּחִים אֵשׁ וְגָפְרִית וְרוּחַ זִלְעָפוֹת מְנָת כּוֹסָֽם׃", french: "Il fait pleuvoir sur les impies des charbons ardents : le feu, le soufre et un vent brûlant sont le lot qui leur échoit en partage." },
+      { hebrew: "כִּֽי־צַדִּיק יְהֹוָה צְדָקוֹת אָהֵב יָשָׁר יֶחֱזוּ פָנֵֽימוֹ׃", french: "Car l'Éternel est juste, il aime ce qui est juste : quiconque est droit contemplera sa face." },
+    ]
+  },
+  {
+    number: 12,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַֽל־הַשְּׁמִינִית מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres, à l'octave. Psaume de David." },
+      { hebrew: "הוֹשִׁיעָה יְהֹוָה כִּֽי־גָמַר חָסִיד כִּי־פַסּוּ אֱמוּנִים מִבְּנֵי אָדָֽם׃", french: "Au secours, Seigneur, car il n'est plus d'homme pieux ! Car la loyauté est bannie des fils d'Adam." },
+      { hebrew: "שָׁוְא ׀ יְֽדַבְּרוּ אִישׁ אֶת־רֵעֵהוּ שְׂפַת חֲלָקוֹת בְּלֵב וָלֵב יְדַבֵּֽרוּ׃", french: "On se parle avec fausseté l'un à l'autre, on parle d'une langue mielleuse, d'un cœur plein de duplicité." },
+      { hebrew: "יַכְרֵת יְהֹוָה כָּל־שִׂפְתֵי חֲלָקוֹת לָשׁוֹן מְדַבֶּרֶת גְּדֹלֽוֹת׃", french: "Que l'Éternel supprime toutes les langues mielleuses, les lèvres qui s'expriment avec arrogance," },
+      { hebrew: "אֲשֶׁר אָמְרוּ ׀ לִלְשֹׁנֵנוּ נַגְבִּיר שְׂפָתֵינוּ אִתָּנוּ מִי אָדוֹן לָֽנוּ׃", french: "ceux qui disent : « Par notre langue nous triomphons, nos lèvres sont notre force : qui serait notre maître ? »" },
+      { hebrew: "מִשֹּׁד עֲנִיִּים מֵאֶנְקַת אֶבְיוֹנִים עַתָּה אָקוּם יֹאמַר יְהֹוָה אָשִׁית בְּיֵשַׁע יָפִיחַֽ־לֽוֹ׃", french: "Devant l'oppression des humbles, les plaintes des pauvres. « À cette heure je me lève, dit le Seigneur, j'apporte le salut à celui qu'on entoure de pièges. »" },
+      { hebrew: "אִמְרוֹת יְהֹוָה אֲמָרוֹת טְהֹרוֹת כֶּסֶף צָרוּף בַּעֲלִיל לָאָרֶץ מְזֻקָּק שִׁבְעָתָֽיִם׃", french: "Les paroles de l'Éternel sont des paroles pures ; c'est de l'argent raffiné au creuset dans le sol, et qui est sept fois épuré." },
+      { hebrew: "אַתָּֽה־יְהֹוָה תִּשְׁמְרֵם תִּצְּרֶנּוּ ׀ מִן־הַדּוֹר זוּ לְעוֹלָֽם׃", french: "Toi, ô Seigneur, tu les protèges, tu les défends à jamais contre cette engeance." },
+      { hebrew: "סָבִיב רְשָׁעִים יִתְהַלָּכוּן כְּרֻם זֻלּוּת לִבְנֵי אָדָֽם׃", french: "Les méchants rôdent aux alentours, quand la vilenie domine parmi les hommes." },
+    ]
+  },
+  {
+    number: 13,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִֽד׃", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "עַד־אָנָה יְהֹוָה תִּשְׁכָּחֵנִי נֶצַח עַד־אָנָה ׀ תַּסְתִּיר אֶת־פָּנֶיךָ מִמֶּֽנִּי׃", french: "Jusqu'à quand, ô Seigneur, m'oublieras-tu avec persistance ? Jusqu'à quand me déroberas-tu ta face ?" },
+      { hebrew: "עַד־אָנָה אָשִׁית עֵצוֹת בְּנַפְשִׁי יָגוֹן בִּלְבָבִי יוֹמָם עַד־אָנָה ׀ יָרוּם אֹיְבִי עָלָֽי׃", french: "Jusqu'à quand agiterai-je des projets en mon âme ? La douleur étreindra-t-elle mon cœur chaque jour ? Jusqu'à quand mon ennemi triomphera-t-il de moi ?" },
+      { hebrew: "הַבִּיטָֽה עֲנֵנִי יְהֹוָה אֱלֹהָי הָאִירָה עֵינַי פֶּן־אִישַׁן הַמָּֽוֶת׃", french: "Regarde de grâce, exauce-moi, Éternel, mon Dieu. Éclaire mes yeux, pour que je ne m'endorme pas dans la mort," },
+      { hebrew: "פֶּן־יֹאמַר אֹיְבִי יְכָלְתִּיו צָרַי יָגִילוּ כִּי אֶמּֽוֹט׃", french: "pour que mon ennemi ne puisse dire : « J'en suis venu à bout ! » Et que mes adversaires ne se réjouissent en me voyant tomber !" },
+      { hebrew: "וַאֲנִי ׀ בְּחַסְדְּךָ בָטַחְתִּי יָגֵל לִבִּי בִּישׁוּעָתֶךָ אָשִׁירָה לַֽיהֹוָה כִּי גָמַל עָלָֽי׃", french: "Or moi, j'ai confiance en ta bonté, mon cœur est joyeux de ton secours : je veux chanter l'Éternel, car il me comble de bienfaits." },
+    ]
+  },
+  {
+    number: 14,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד אָמַר נָבָל בְּלִבּוֹ אֵין אֱלֹהִים הִשְׁחִיתוּ הִתְעִיבוּ עֲלִילָה אֵין עֹשֵׂה טוֹב:", french: "Au chef des chantres. De David. L'insensé dit en son cœur : Il n'y a point de Dieu ! Ils se sont corrompus, ils ont commis des actions abominables ; il n'en est aucun qui fasse le bien." },
+      { hebrew: "יהוה מִשָּׁמַיִם הִשְׁקִיף עַל בְּנֵי אָדָם לִרְאוֹת הֲיֵשׁ מַשְׂכִּיל דֹּרֵשׁ אֶת אֱלֹהִים:", french: "L'Éternel, du haut des cieux, regarde les fils de l'homme, pour voir s'il en est un qui soit intelligent, qui cherche Dieu." },
+      { hebrew: "הַכֹּל סָר יַחְדָּו נֶאֱלָחוּ אֵין עֹשֵׂה טוֹב אֵין גַּם אֶחָד:", french: "Tous se sont égarés, ensemble ils se sont corrompus ; il n'en est aucun qui fasse le bien, pas même un seul." },
+      { hebrew: "הֲלֹא יָדְעוּ כָּל פֹּעֲלֵי אָוֶן אֹכְלֵי עַמִּי אָכְלוּ לֶחֶם יהוה לֹא קָרָאוּ:", french: "Sont-ils dénués de sens, tous ces artisans d'iniquité, qui dévorent mon peuple comme on mange du pain, et n'invoquent point l'Éternel ?" },
+      { hebrew: "שָׁם פָּחֲדוּ פָחַד כִּי אֱלֹהִים בְּדוֹר צַדִּיק:", french: "Là ils ont été saisis de frayeur, car Dieu est avec la race des justes." },
+      { hebrew: "עֲצַת עָנִי תָבִישׁוּ כִּי יהוה מַחְסֵהוּ:", french: "Vous voudriez couvrir de honte le dessein du malheureux, mais l'Éternel est son refuge." },
+      { hebrew: "מִי יִתֵּן מִצִּיּוֹן יְשׁוּעַת יִשְׂרָאֵל בְּשׁוּב יהוה שְׁבוּת עַמּוֹ יָגֵל יַעֲקֹב יִשְׂמַח יִשְׂרָאֵל:", french: "Oh ! qui fera partir de Sion la délivrance d'Israël ? Quand l'Éternel ramènera les captifs de son peuple, Jacob sera dans l'allégresse, Israël se réjouira." },
+    ]
+  },
+  {
+    number: 15,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד יהוה מִי יָגוּר בְּאָהֳלֶךָ מִי יִשְׁכֹּן בְּהַר קָדְשֶׁךָ:", french: "Psaume de David. Éternel, qui séjournera dans ta tente ? Qui demeurera sur ta montagne sainte ?" },
+      { hebrew: "הוֹלֵךְ תָּמִים וּפֹעֵל צֶדֶק וְדֹבֵר אֱמֶת בִּלְבָבוֹ:", french: "Celui qui marche dans l'intégrité, qui pratique la justice et qui dit la vérité selon son cœur." },
+      { hebrew: "לֹא רָגַל עַל לְשֹׁנוֹ לֹא עָשָׂה לְרֵעֵהוּ רָעָה וְחֶרְפָּה לֹא נָשָׂא עַל קְרֹבוֹ:", french: "Il ne calomnie point avec sa langue, il ne fait point de mal à son prochain, et il ne lance point l'opprobre contre son voisin." },
+      { hebrew: "נִבְזֶה בְּעֵינָיו נִמְאָס וְאֶת יִרְאֵי יהוה יְכַבֵּד נִשְׁבַּע לְהָרַע וְלֹא יָמִר:", french: "Il regarde avec dédain celui qui est méprisable, mais il honore ceux qui craignent l'Éternel ; il ne se rétracte point quand il a juré à son détriment." },
+      { hebrew: "כַּסְפּוֹ לֹא נָתַן בְּנֶשֶׁךְ וְשֹׁחַד עַל נָקִי לֹא לָקָח עֹשֵׂה אֵלֶּה לֹא יִמּוֹט לְעוֹלָם:", french: "Il n'a point mis son argent à intérêt, et n'a point accepté de don contre l'innocent. Celui qui agit ainsi ne chancellera jamais." },
+    ]
+  },
+  {
+    number: 16,
+    verses: [
+      { hebrew: "מִכְתָּם לְדָוִד שָׁמְרֵנִי אֵל כִּי חָסִיתִי בָךְ:", french: "Hymne de David. Garde-moi, ô Dieu, car je cherche en toi mon refuge." },
+      { hebrew: "אָמַרְתְּ לַיהוה אֲדֹנָי אָתָּה טוֹבָתִי בַּל עָלֶיךָ:", french: "Je dis à l'Éternel : Tu es mon Seigneur, mon bonheur n'est point au-dessus de toi." },
+      { hebrew: "לִקְדוֹשִׁים אֲשֶׁר בָּאָרֶץ הֵמָּה וְאַדִּירֵי כָּל חֶפְצִי בָם:", french: "Les saints qui sont sur la terre sont les hommes illustres en qui est tout mon plaisir." },
+      { hebrew: "יִרְבּוּ עַצְּבוֹתָם אַחֵר מָהָרוּ בַּל אַסִּיךְ נִסְכֵּיהֶם מִדָּם וּבַל אֶשָּׂא אֶת שְׁמוֹתָם עַל שְׂפָתָי:", french: "Les douleurs de ceux qui se hâtent après un autre dieu se multiplieront ; je ne répandrai pas leurs libations de sang, et mes lèvres ne prononceront pas leurs noms." },
+      { hebrew: "יהוה מְנָת חֶלְקִי וְכוֹסִי אַתָּה תּוֹמִיךְ גּוֹרָלִי:", french: "L'Éternel est mon partage et mon calice ; c'est toi qui maintiens mon lot." },
+      { hebrew: "חֲבָלִים נָפְלוּ לִי בַּנְּעִמִים אַף נַחֲלָת שָׁפְרָה עָלָי:", french: "Un héritage délicieux m'est échu, une belle possession m'est accordée." },
+      { hebrew: "אֲבָרֵךְ אֶת יהוה אֲשֶׁר יְעָצָנִי אַף לֵילוֹת יִסְּרוּנִי כִלְיוֹתָי:", french: "Je bénis l'Éternel qui me conseille ; même la nuit, mes reins m'instruisent." },
+      { hebrew: "שִׁוִּיתִי יהוה לְנֶגְדִּי תָמִיד כִּי מִימִינִי בַּל אֶמּוֹט:", french: "J'ai constamment l'Éternel sous mes yeux ; quand il est à ma droite, je ne chancelle pas." },
+      { hebrew: "לָכֵן שָׂמַח לִבִּי וַיָּגֶל כְּבוֹדִי אַף בְּשָׂרִי יִשְׁכֹּן לָבֶטַח:", french: "Aussi mon cœur se réjouit et mon âme est dans l'allégresse ; même ma chair reposera en sécurité." },
+      { hebrew: "כִּי לֹא תַעֲזֹב נַפְשִׁי לִשְׁאוֹל לֹא תִתֵּן חֲסִידְךָ לִרְאוֹת שָׁחַת:", french: "Car tu ne livreras pas mon âme au séjour des morts, tu ne permettras pas que ton bien-aimé voie la corruption." },
+      { hebrew: "תּוֹדִיעֵנִי אֹרַח חַיִּים שֹׂבַע שְׂמָחוֹת אֶת פָּנֶיךָ נְעִמוֹת בִּימִינְךָ נֶצַח:", french: "Tu me feras connaître le sentier de la vie ; il y a d'abondantes joies devant ta face, des délices éternelles à ta droite." },
+    ]
+  },
+  {
+    number: 17,
+    verses: [
+      { hebrew: "תְּפִלָּה לְדָוִד שִׁמְעָה יהוה צֶדֶק הַקְשִׁיבָה רִנָּתִי הַאֲזִינָה תְפִלָּתִי בְּלֹא שִׂפְתֵי מִרְמָה:", french: "Prière de David. Éternel, entends la droiture, sois attentif à mes cris, prête l'oreille à ma prière faite avec des lèvres sans tromperie." },
+      { hebrew: "מִלְּפָנֶיךָ מִשְׁפָּטִי יֵצֵא עֵינֶיךָ תֶּחֱזֶינָה מֵישָׁרִים:", french: "Que mon droit sorte de devant ta face, que tes yeux voient la droiture." },
+      { hebrew: "בָּחַנְתָּ לִבִּי פָּקַדְתָּ לַּיְלָה צְרַפְתַּנִי בַל תִּמְצָא זַמֹּתִי בַּל יַעֲבָר פִּי:", french: "Si tu sondes mon cœur, si tu le visites la nuit, si tu m'éprouves, tu ne trouveras rien ; ma pensée n'est pas autre que ce qui sort de ma bouche." },
+      { hebrew: "לִפְעֻלּוֹת אָדָם בִּדְבַר שְׂפָתֶיךָ אֲנִי שָׁמַרְתִּי אֹרְחוֹת פָּרִיץ:", french: "À l'encontre des actions des hommes, par la parole de tes lèvres, je me suis gardé des sentiers des violents." },
+      { hebrew: "תָּמֹךְ אֲשֻׁרַי בְּמַעְגְּלוֹתֶיךָ בַּל נָמוֹטּוּ פְעָמָי:", french: "Mes pas sont demeurés fermes dans tes sentiers, mes pieds n'ont point chancelé." },
+      { hebrew: "אֲנִי קְרָאתִיךָ כִי תַעֲנֵנִי אֵל הַט אָזְנְךָ לִי שְׁמַע אִמְרָתִי:", french: "Je t'invoque, car tu m'exauces, ô Dieu ! Incline vers moi ton oreille, écoute ma parole." },
+      { hebrew: "הַפְלֵה חֲסָדֶיךָ מוֹשִׁיעַ חוֹסִים מִמִּתְקוֹמְמִים בִּימִינֶךָ:", french: "Signale ta bonté, toi qui sauves ceux qui cherchent un refuge, et qui par ta droite les délivres de leurs adversaires." },
+      { hebrew: "שָׁמְרֵנִי כְּאִישׁוֹן בַּת עָיִן בְּצֵל כְּנָפֶיךָ תַּסְתִּירֵנִי:", french: "Garde-moi comme la prunelle de l'œil ; protège-moi à l'ombre de tes ailes." },
+      { hebrew: "מִפְּנֵי רְשָׁעִים זוּ שַׁדּוּנִי אֹיְבַי בְּנֶפֶשׁ יַקִּיפוּ עָלָי:", french: "Contre les méchants qui me dépouillent, contre mes ennemis acharnés qui m'environnent." },
+      { hebrew: "חֶלְבָּמוֹ סָגְרוּ פִּימוֹ דִּבְּרוּ בְגֵאוּת:", french: "Ils ferment leurs cœurs, ils parlent avec arrogance." },
+      { hebrew: "אַשֻּׁרֵינוּ עַתָּה סְבָבוּנוּ עֵינֵיהֶם יָשִׁיתוּ לִנְטוֹת בָּאָרֶץ:", french: "Ils sont sur nos pas, déjà ils nous entourent, ils fixent les yeux pour nous renverser à terre." },
+      { hebrew: "דִּמְיֹנוֹ כְּאַרְיֵה יִכְסוֹף לִטְרוֹף וְכִכְפִיר יֹשֵׁב בְּמִסְתָּרִים:", french: "On dirait un lion avide de déchirer, un lionceau aux aguets dans son repaire." },
+      { hebrew: "קוּמָה יהוה קַדְּמָה פָנָיו הַכְרִיעֵהוּ פַּלְּטָה נַפְשִׁי מֵרָשָׁע חַרְבֶּךָ:", french: "Lève-toi, Éternel, marche à sa rencontre, terrasse-le ! Délivre-moi du méchant par ton épée !" },
+      { hebrew: "מִמְתִים יָדְךָ יהוה מִמְתִים מֵחֶלֶד חֶלְקָם בַּחַיִּים וּצְפוּנְךָ תְּמַלֵּא בִטְנָם יִשְׂבְּעוּ בָנִים וְהִנִּיחוּ יִתְרָם לְעוֹלְלֵיהֶם:", french: "Que par ta main, Éternel, ils périssent, ces gens dont le partage est dans la vie ; remplis leur ventre de tes trésors, qu'ils en rassasient leurs enfants et laissent le reste à leurs petits." },
+      { hebrew: "אֲנִי בְּצֶדֶק אֶחֱזֶה פָנֶיךָ אֶשְׂבְּעָה בְהָקִיץ תְּמוּנָתֶךָ:", french: "Pour moi, dans mon innocence, je verrai ta face ; dès le réveil, je me rassasierai de ton image." },
+    ]
+  },
+  {
+    number: 18,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְעֶבֶד יהוה לְדָוִד אֲשֶׁר דִּבֶּר לַיהוה אֶת דִּבְרֵי הַשִּׁירָה הַזֹּאת בְּיוֹם הִצִּיל יהוה אוֹתוֹ מִכַּף כָּל אֹיְבָיו וּמִיַּד שָׁאוּל:", french: "Au chef des chantres. Du serviteur de l'Éternel, de David, qui adressa à l'Éternel les paroles de ce cantique, lorsque l'Éternel l'eut délivré de la main de tous ses ennemis et de la main de Saül." },
+      { hebrew: "וַיֹּאמַר אֶרְחָמְךָ יהוה חִזְקִי:", french: "Il dit : Je t'aime, ô Éternel, ma force !" },
+      { hebrew: "יהוה סַלְעִי וּמְצוּדָתִי וּמְפַלְטִי אֵלִי צוּרִי אֶחֱסֶה בּוֹ מָגִנִּי וְקֶרֶן יִשְׁעִי מִשְׂגַּבִּי:", french: "L'Éternel est mon rocher, ma forteresse, mon libérateur ; mon Dieu est mon roc où je trouve un abri, mon bouclier, la force qui me sauve, ma haute retraite." },
+      { hebrew: "מְהֻלָּל אֶקְרָא יהוה וּמִן אֹיְבַי אִוָּשֵׁעַ:", french: "Je m'écrie : Loué soit l'Éternel ! Et je suis délivré de mes ennemis." },
+      { hebrew: "אֲפָפוּנִי חֶבְלֵי מָוֶת וְנַחֲלֵי בְלִיַּעַל יְבַעֲתוּנִי:", french: "Les liens de la mort m'avaient environné, et les torrents de la destruction m'avaient épouvanté." },
+      { hebrew: "חֶבְלֵי שְׁאוֹל סְבָבוּנִי קִדְּמוּנִי מוֹקְשֵׁי מָוֶת:", french: "Les liens du séjour des morts m'avaient enlacé, les filets de la mort m'avaient surpris." },
+      { hebrew: "בַּצַּר לִי אֶקְרָא יהוה וְאֶל אֱלֹהַי אֲשַׁוֵּעַ יִשְׁמַע מֵהֵיכָלוֹ קוֹלִי וְשַׁוְעָתִי לְפָנָיו תָּבוֹא בְאָזְנָיו:", french: "Dans ma détresse, j'ai invoqué l'Éternel, j'ai crié à mon Dieu ; de son palais il a entendu ma voix, et mon cri est parvenu devant lui à ses oreilles." },
+      { hebrew: "וַתִּגְעַשׁ וַתִּרְעַשׁ הָאָרֶץ וּמוֹסְדֵי הָרִים יִרְגָּזוּ וַיִּתְגָּעֲשׁוּ כִּי חָרָה לוֹ:", french: "La terre fut ébranlée et trembla, les fondements des montagnes frémirent et furent ébranlés, parce qu'il était en courroux." },
+      { hebrew: "עָלָה עָשָׁן בְּאַפּוֹ וְאֵשׁ מִפִּיו תֹּאכֵל גֶּחָלִים בָּעֲרוּ מִמֶּנּוּ:", french: "Il s'élevait de la fumée dans ses narines, et un feu dévorant sortait de sa bouche : il en jaillissait des charbons embrasés." },
+      { hebrew: "וַיֵּט שָׁמַיִם וַיֵּרַד וַעֲרָפֶל תַּחַת רַגְלָיו:", french: "Il abaissa les cieux, et il descendit : il y avait une épaisse nuée sous ses pieds." },
+      { hebrew: "וַיִּרְכַּב עַל כְּרוּב וַיָּעֹף וַיֵּדֶא עַל כַּנְפֵי רוּחַ:", french: "Il était monté sur un chérubin, et il volait, il planait sur les ailes du vent." },
+      { hebrew: "יָשֶׁת חֹשֶׁךְ סִתְרוֹ סְבִיבוֹתָיו סֻכָּתוֹ חֶשְׁכַת מַיִם עָבֵי שְׁחָקִים:", french: "Il faisait des ténèbres sa retraite, sa tente autour de lui : les eaux obscures et les sombres nuages." },
+      { hebrew: "מִנֹּגַהּ נֶגְדּוֹ עָבָיו עָבְרוּ בָּרָד וְגַחֲלֵי אֵשׁ:", french: "De la splendeur qui le précédait, ses nuées se dissipèrent, avec grêle et charbons de feu." },
+      { hebrew: "וַיַּרְעֵם בַּשָּׁמַיִם יהוה וְעֶלְיוֹן יִתֵּן קֹלוֹ בָּרָד וְגַחֲלֵי אֵשׁ:", french: "L'Éternel tonna dans les cieux, le Très-Haut fit retentir sa voix, avec la grêle et les charbons de feu." },
+      { hebrew: "וַיִּשְׁלַח חִצָּיו וַיְפִיצֵם וּבְרָקִים רָב וַיְהֻמֵּם:", french: "Il lança ses flèches et les dispersa, il multiplia les éclairs et les mit en déroute." },
+      { hebrew: "וַיֵּרָאוּ אֲפִיקֵי מַיִם וַיִּגָּלוּ מוֹסְדוֹת תֵּבֵל מִגַּעֲרָתְךָ יהוה מִנִּשְׁמַת רוּחַ אַפֶּךָ:", french: "Le lit des eaux apparut, les fondements du monde furent découverts, par ta menace, ô Éternel, par le souffle de tes narines." },
+      { hebrew: "יִשְׁלַח מִמָּרוֹם יִקָּחֵנִי יַמְשֵׁנִי מִמַּיִם רַבִּים:", french: "Il étendit sa main d'en haut, il me saisit, il me retira des grandes eaux." },
+      { hebrew: "יַצִּילֵנִי מֵאֹיְבִי עָז וּמִשֹּׂנְאַי כִּי אָמְצוּ מִמֶּנִּי:", french: "Il me délivra de mon adversaire puissant, de mes ennemis qui étaient plus forts que moi." },
+      { hebrew: "יְקַדְּמוּנִי בְיוֹם אֵידִי וַיְהִי יהוה לְמִשְׁעָן לִי:", french: "Ils m'avaient surpris au jour de ma détresse ; mais l'Éternel fut mon appui." },
+      { hebrew: "וַיּוֹצִיאֵנִי לַמֶּרְחָב יְחַלְּצֵנִי כִּי חָפֵץ בִּי:", french: "Il m'a mis au large, il m'a sauvé, parce qu'il m'aime." },
+      { hebrew: "יִגְמְלֵנִי יהוה כְּצִדְקִי כְּבֹר יָדַי יָשִׁיב לִי:", french: "L'Éternel m'a traité selon ma justice, il m'a rendu selon la pureté de mes mains." },
+      { hebrew: "כִּי שָׁמַרְתִּי דַּרְכֵי יהוה וְלֹא רָשַׁעְתִּי מֵאֱלֹהָי:", french: "Car j'ai observé les voies de l'Éternel, et je n'ai pas été coupable envers mon Dieu." },
+      { hebrew: "כִּי כָל מִשְׁפָּטָיו לְנֶגְדִּי וְחֻקֹּתָיו לֹא אָסִיר מֶנִּי:", french: "Toutes ses ordonnances ont été devant moi, et je ne me suis point écarté de ses lois." },
+      { hebrew: "וָאֱהִי תָמִים עִמּוֹ וָאֶשְׁתַּמֵּר מֵעֲוֹנִי:", french: "J'ai été sans reproche envers lui, et je me suis tenu en garde contre mon iniquité." },
+      { hebrew: "וַיָּשֶׁב יהוה לִי כְצִדְקִי כְּבֹר יָדַי לְנֶגֶד עֵינָיו:", french: "L'Éternel m'a rendu selon ma justice, selon la pureté de mes mains devant ses yeux." },
+      { hebrew: "עִם חָסִיד תִּתְחַסָּד עִם גְּבַר תָּמִים תִּתַּמָּם:", french: "Avec celui qui est bon, tu te montres bon ; avec l'homme droit, tu agis avec droiture." },
+      { hebrew: "עִם נָבָר תִּתְבָּרָר וְעִם עִקֵּשׁ תִּתְפַּתָּל:", french: "Avec celui qui est pur, tu te montres pur ; et avec le pervers, tu agis selon sa perversité." },
+      { hebrew: "כִּי אַתָּה עַם עָנִי תוֹשִׁיעַ וְעֵינַיִם רָמוֹת תַּשְׁפִּיל:", french: "Tu sauves le peuple affligé, et tu abaisses les regards hautains." },
+      { hebrew: "כִּי אַתָּה תָּאִיר נֵרִי יהוה אֱלֹהַי יַגִּיהַּ חָשְׁכִּי:", french: "Oui, tu fais briller ma lumière ; l'Éternel, mon Dieu, éclaire mes ténèbres." },
+      { hebrew: "כִּי בְךָ אָרֻץ גְּדוּד וּבֵאלֹהַי אֲדַלֶּג שׁוּר:", french: "Avec toi, je me précipite sur une troupe en armes ; avec mon Dieu, je franchis une muraille." },
+      { hebrew: "הָאֵל תָּמִים דַּרְכּוֹ אִמְרַת יהוה צְרוּפָה מָגֵן הוּא לְכֹל הַחוֹסִים בּוֹ:", french: "Les voies de Dieu sont parfaites, la parole de l'Éternel est éprouvée ; il est un bouclier pour tous ceux qui se confient en lui." },
+      { hebrew: "כִּי מִי אֱלוֹהַּ מִבַּלְעֲדֵי יהוה וּמִי צוּר זוּלָתִי אֱלֹהֵינוּ:", french: "Car qui est Dieu, si ce n'est l'Éternel ? Et qui est un rocher, si ce n'est notre Dieu ?" },
+      { hebrew: "הָאֵל הַמְאַזְּרֵנִי חָיִל וַיִּתֵּן תָּמִים דַּרְכִּי:", french: "C'est Dieu qui me ceint de force, et qui me conduit dans la voie droite." },
+      { hebrew: "מְשַׁוֶּה רַגְלַי כָּאַיָּלוֹת וְעַל בָּמֹתַי יַעֲמִידֵנִי:", french: "Il rend mes pieds semblables à ceux des biches, et il me place sur mes lieux élevés." },
+      { hebrew: "מְלַמֵּד יָדַי לַמִּלְחָמָה וְנִחֲתָה קֶשֶׁת נְחוּשָׁה זְרוֹעֹתָי:", french: "Il exerce mes mains au combat, et mes bras tendent l'arc d'airain." },
+      { hebrew: "וַתִּתֶּן לִי מָגֵן יִשְׁעֶךָ וִימִינְךָ תִסְעָדֵנִי וְעַנְוָתְךָ תַרְבֵּנִי:", french: "Tu me donnes le bouclier de ton salut, ta droite me soutient, et ta bonté me rend grand." },
+      { hebrew: "תַּרְחִיב צַעֲדִי תַחְתָּי וְלֹא מָעֲדוּ קַרְסֻלָּי:", french: "Tu élargis le chemin sous mes pas, et mes pieds ne chancellent point." },
+      { hebrew: "אֶרְדּוֹף אוֹיְבַי וְאַשִּׂיגֵם וְלֹא אָשׁוּב עַד כַּלּוֹתָם:", french: "Je poursuis mes ennemis, je les atteins, et je ne reviens pas avant de les avoir anéantis." },
+      { hebrew: "אֶמְחָצֵם וְלֹא יֻכְלוּ קוּם יִפְּלוּ תַּחַת רַגְלָי:", french: "Je les brise, et ils ne peuvent se relever ; ils tombent sous mes pieds." },
+      { hebrew: "וַתְּאַזְּרֵנִי חַיִל לַמִּלְחָמָה תַּכְרִיעַ קָמַי תַּחְתָּי:", french: "Tu me ceins de force pour le combat, tu fais plier sous moi mes adversaires." },
+      { hebrew: "וְאֹיְבַי נָתַתָּה לִּי עֹרֶף וּמְשַׂנְאַי אַצְמִיתֵם:", french: "Tu fais tourner le dos à mes ennemis devant moi, et j'extermine ceux qui me haïssent." },
+      { hebrew: "יְשַׁוְּעוּ וְאֵין מוֹשִׁיעַ עַל יהוה וְלֹא עָנָם:", french: "Ils crient, et personne pour les sauver ! Ils crient à l'Éternel, et il ne leur répond pas." },
+      { hebrew: "וְאֶשְׁחָקֵם כְּעָפָר עַל פְּנֵי רוּחַ כְּטִיט חוּצוֹת אֲרִיקֵם:", french: "Je les broie comme la poussière qu'emporte le vent, je les foule comme la boue des rues." },
+      { hebrew: "תְּפַלְּטֵנִי מֵרִיבֵי עָם תְּשִׂימֵנִי לְרֹאשׁ גּוֹיִם עַם לֹא יָדַעְתִּי יַעַבְדוּנִי:", french: "Tu me délivres des dissensions du peuple ; tu m'établis chef des nations ; un peuple que je ne connaissais pas m'est assujetti." },
+      { hebrew: "לְשֵׁמַע אֹזֶן יִשָּׁמְעוּ לִי בְּנֵי נֵכָר יְכַחֲשׁוּ לִי:", french: "Au premier bruit, ils m'obéissent ; les fils de l'étranger me flattent." },
+      { hebrew: "בְּנֵי נֵכָר יִבֹּלוּ וְיַחְרְגוּ מִמִּסְגְּרוֹתֵיהֶם:", french: "Les fils de l'étranger perdent courage, ils tremblent hors de leurs forteresses." },
+      { hebrew: "חַי יהוה וּבָרוּךְ צוּרִי וְיָרוּם אֱלוֹהֵי יִשְׁעִי:", french: "Vive l'Éternel ! Béni soit mon rocher ! Que le Dieu de mon salut soit exalté !" },
+      { hebrew: "הָאֵל הַנּוֹתֵן נְקָמוֹת לִי וַיַּדְבֵּר עַמִּים תַּחְתָּי:", french: "Dieu, qui m'accorde la vengeance, et qui m'assujettit les peuples." },
+      { hebrew: "מְפַלְּטִי מֵאֹיְבָי אַף מִן קָמַי תְּרוֹמְמֵנִי מֵאִישׁ חָמָס תַּצִּילֵנִי:", french: "Tu me délivres de mes ennemis ; tu m'élèves au-dessus de mes adversaires, tu me sauves de l'homme violent." },
+      { hebrew: "עַל כֵּן אוֹדְךָ בַגּוֹיִם יהוה וּלְשִׁמְךָ אֲזַמֵּרָה:", french: "C'est pourquoi je te louerai parmi les nations, ô Éternel, et je chanterai à la gloire de ton nom." },
+      { hebrew: "מַגְדִּל יְשׁוּעוֹת מַלְכּוֹ וְעֹשֶׂה חֶסֶד לִמְשִׁיחוֹ לְדָוִד וּלְזַרְעוֹ עַד עוֹלָם:", french: "Il accorde de grandes délivrances à son roi, et il fait miséricorde à son oint, à David et à sa postérité, pour toujours." },
+    ]
+  },
+  {
+    number: 19,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "הַשָּׁמַיִם מְסַפְּרִים כְּבוֹד אֵל וּמַעֲשֵׂה יָדָיו מַגִּיד הָרָקִיעַ:", french: "Les cieux racontent la gloire de Dieu, et l'étendue manifeste l'œuvre de ses mains." },
+      { hebrew: "יוֹם לְיוֹם יַבִּיעַ אֹמֶר וְלַיְלָה לְּלַיְלָה יְחַוֶּה דָּעַת:", french: "Le jour en instruit un autre jour, la nuit en donne connaissance à une autre nuit." },
+      { hebrew: "אֵין אֹמֶר וְאֵין דְּבָרִים בְּלִי נִשְׁמָע קוֹלָם:", french: "Ce n'est pas un langage, ce ne sont pas des paroles dont le son ne soit point entendu." },
+      { hebrew: "בְּכָל הָאָרֶץ יָצָא קַוָּם וּבִקְצֵה תֵבֵל מִלֵּיהֶם לַשֶּׁמֶשׁ שָׂם אֹהֶל בָּהֶם:", french: "Leur retentissement parcourt toute la terre, leurs accents vont aux extrémités du monde, où il a dressé une tente pour le soleil." },
+      { hebrew: "וְהוּא כְּחָתָן יֹצֵא מֵחֻפָּתוֹ יָשִׂישׂ כְּגִבּוֹר לָרוּץ אֹרַח:", french: "Et le soleil, semblable à un époux qui sort de sa chambre, s'élance dans la carrière avec la joie d'un héros." },
+      { hebrew: "מִקְצֵה הַשָּׁמַיִם מוֹצָאוֹ וּתְקוּפָתוֹ עַל קְצוֹתָם וְאֵין נִסְתָּר מֵחַמָּתוֹ:", french: "Il part d'une extrémité des cieux, et achève sa course à l'autre extrémité ; rien ne se dérobe à sa chaleur." },
+      { hebrew: "תּוֹרַת יהוה תְּמִימָה מְשִׁיבַת נָפֶשׁ עֵדוּת יהוה נֶאֱמָנָה מַחְכִּימַת פֶּתִי:", french: "La loi de l'Éternel est parfaite, elle restaure l'âme ; le témoignage de l'Éternel est véritable, il rend sage l'ignorant." },
+      { hebrew: "פִּקּוּדֵי יהוה יְשָׁרִים מְשַׂמְּחֵי לֵב מִצְוַת יהוה בָּרָה מְאִירַת עֵינָיִם:", french: "Les ordonnances de l'Éternel sont droites, elles réjouissent le cœur ; les commandements de l'Éternel sont purs, ils éclairent les yeux." },
+      { hebrew: "יִרְאַת יהוה טְהוֹרָה עוֹמֶדֶת לָעַד מִשְׁפְּטֵי יהוה אֱמֶת צָדְקוּ יַחְדָּו:", french: "La crainte de l'Éternel est pure, elle subsiste à toujours ; les jugements de l'Éternel sont vrais, ils sont tous justes." },
+      { hebrew: "הַנֶּחֱמָדִים מִזָּהָב וּמִפַּז רָב וּמְתוּקִים מִדְּבַשׁ וְנֹפֶת צוּפִים:", french: "Ils sont plus précieux que l'or, que beaucoup d'or fin ; ils sont plus doux que le miel, que celui qui coule des rayons." },
+      { hebrew: "גַּם עַבְדְּךָ נִזְהָר בָּהֶם בְּשָׁמְרָם עֵקֶב רָב:", french: "Ton serviteur aussi en est averti ; pour qui les observe, la récompense est grande." },
+      { hebrew: "שְׁגִיאוֹת מִי יָבִין מִנִּסְתָּרוֹת נַקֵּנִי:", french: "Qui connaît ses égarements ? Pardonne-moi ceux que j'ignore." },
+      { hebrew: "גַּם מִזֵּדִים חֲשֹׂךְ עַבְדֶּךָ אַל יִמְשְׁלוּ בִי אָז אֵיתָם וְנִקֵּיתִי מִפֶּשַׁע רָב:", french: "Préserve aussi ton serviteur des orgueilleux ; qu'ils ne dominent point sur moi ! Alors je serai intègre, innocent de grands péchés." },
+      { hebrew: "יִהְיוּ לְרָצוֹן אִמְרֵי פִי וְהֶגְיוֹן לִבִּי לְפָנֶיךָ יהוה צוּרִי וְגֹאֲלִי:", french: "Reçois favorablement les paroles de ma bouche et les sentiments de mon cœur, ô Éternel, mon rocher et mon rédempteur !" },
+    ]
+  },
+  {
+    number: 20,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "יַעַנְךָ יהוה בְּיוֹם צָרָה יְשַׂגֶּבְךָ שֵׁם אֱלֹהֵי יַעֲקֹב:", french: "Que l'Éternel t'exauce au jour de la détresse, que le nom du Dieu de Jacob te protège !" },
+      { hebrew: "יִשְׁלַח עֶזְרְךָ מִקֹּדֶשׁ וּמִצִּיּוֹן יִסְעָדֶךָּ:", french: "Que du sanctuaire il t'envoie du secours, que de Sion il te soutienne !" },
+      { hebrew: "יִזְכֹּר כָּל מִנְחֹתֶךָ וְעוֹלָתְךָ יְדַשְּׁנֶה סֶלָה:", french: "Qu'il se souvienne de toutes tes offrandes et qu'il agrée ton holocauste ! Sélah !" },
+      { hebrew: "יִתֶּן לְךָ כִלְבָבֶךָ וְכָל עֲצָתְךָ יְמַלֵּא:", french: "Qu'il te donne ce que ton cœur désire, et qu'il accomplisse tous tes desseins !" },
+      { hebrew: "נְרַנְּנָה בִּישׁוּעָתֶךָ וּבְשֵׁם אֱלֹהֵינוּ נִדְגֹּל יְמַלֵּא יהוה כָּל מִשְׁאֲלוֹתֶיךָ:", french: "Nous nous réjouirons de ton salut, et nous lèverons l'étendard au nom de notre Dieu. Que l'Éternel exauce tous tes vœux !" },
+      { hebrew: "עַתָּה יָדַעְתִּי כִּי הוֹשִׁיעַ יהוה מְשִׁיחוֹ יַעֲנֵהוּ מִשְּׁמֵי קָדְשׁוֹ בִּגְבוּרוֹת יֵשַׁע יְמִינוֹ:", french: "Je sais que l'Éternel sauve son oint ; il l'exaucera des cieux, de sa sainte demeure, par le secours puissant de sa droite." },
+      { hebrew: "אֵלֶּה בָרֶכֶב וְאֵלֶּה בַסּוּסִים וַאֲנַחְנוּ בְּשֵׁם יהוה אֱלֹהֵינוּ נַזְכִּיר:", french: "Ceux-ci s'appuient sur leurs chars, ceux-là sur leurs chevaux ; nous, nous invoquons le nom de l'Éternel, notre Dieu." },
+      { hebrew: "הֵמָּה כָּרְעוּ וְנָפָלוּ וַאֲנַחְנוּ קַּמְנוּ וַנִּתְעוֹדָד:", french: "Eux, ils plient et ils tombent ; nous, nous tenons ferme et restons debout." },
+      { hebrew: "יהוה הוֹשִׁיעָה הַמֶּלֶךְ יַעֲנֵנוּ בְיוֹם קָרְאֵנוּ:", french: "Éternel, sauve le roi ! Qu'il nous exauce, quand nous l'invoquons !" },
+    ]
+  },
+  {
+    number: 21,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "יהוה בְּעָזְּךָ יִשְׂמַח מֶלֶךְ וּבִישׁוּעָתְךָ מַה יָּגֶל מְאֹד:", french: "Éternel, le roi se réjouit de ta protection ; oh ! combien ton secours le remplit d'allégresse !" },
+      { hebrew: "תַּאֲוַת לִבּוֹ נָתַתָּה לּוֹ וַאֲרֶשֶׁת שְׂפָתָיו בַּל מָנַעְתָּ סֶּלָה:", french: "Tu lui as donné le désir de son cœur, et tu n'as pas refusé la demande de ses lèvres. Sélah !" },
+      { hebrew: "כִּי תְקַדְּמֶנּוּ בִּרְכוֹת טוֹב תָּשִׁית לְרֹאשׁוֹ עֲטֶרֶת פָּז:", french: "Car tu l'as prévenu par les bénédictions de ta grâce, tu as mis sur sa tête une couronne d'or pur." },
+      { hebrew: "חַיִּים שָׁאַל מִמְּךָ נָתַתָּה לּוֹ אֹרֶךְ יָמִים עוֹלָם וָעֶד:", french: "Il te demandait la vie, tu la lui as donnée, une longue suite de jours, pour l'éternité." },
+      { hebrew: "גָּדוֹל כְּבוֹדוֹ בִּישׁוּעָתֶךָ הוֹד וְהָדָר תְּשַׁוֶּה עָלָיו:", french: "Sa gloire est grande à cause de ton secours ; tu places sur lui la majesté et la magnificence." },
+      { hebrew: "כִּי תְשִׁיתֵהוּ בְרָכוֹת לָעַד תְּחַדֵּהוּ בְשִׂמְחָה אֶת פָּנֶיךָ:", french: "Tu le rends à jamais un objet de bénédictions, tu le combles de joie devant ta face." },
+      { hebrew: "כִּי הַמֶּלֶךְ בֹּטֵחַ בַּיהוה וּבְחֶסֶד עֶלְיוֹן בַּל יִמּוֹט:", french: "Le roi se confie en l'Éternel, et par la grâce du Très-Haut, il ne chancelle pas." },
+      { hebrew: "תִּמְצָא יָדְךָ לְכָל אֹיְבֶיךָ יְמִינְךָ תִּמְצָא שֹׂנְאֶיךָ:", french: "Ta main trouvera tous tes ennemis, ta droite trouvera ceux qui te haïssent." },
+      { hebrew: "תְּשִׁיתֵמוֹ כְּתַנּוּר אֵשׁ לְעֵת פָּנֶיךָ יהוה בְּאַפּוֹ יְבַלְּעֵם וְתֹאכְלֵם אֵשׁ:", french: "Tu les rendras semblables à une fournaise ardente, au jour où tu te montreras ; l'Éternel les engloutira dans sa colère, et le feu les dévorera." },
+      { hebrew: "פִּרְיָמוֹ מֵאֶרֶץ תְּאַבֵּד וְזַרְעָם מִבְּנֵי אָדָם:", french: "Tu feras disparaître leur postérité de la terre, et leur race du milieu des fils de l'homme." },
+      { hebrew: "כִּי נָטוּ עָלֶיךָ רָעָה חָשְׁבוּ מְזִמָּה בַּל יוּכָלוּ:", french: "Car ils ont voulu te faire du mal, ils ont conçu de mauvais desseins, mais ils ne réussiront pas." },
+      { hebrew: "כִּי תְשִׁיתֵמוֹ שֶׁכֶם בְּמֵיתָרֶיךָ תְּכוֹנֵן עַל פְּנֵיהֶם:", french: "Car tu leur feras tourner le dos ; avec ton arc, tu tireras sur eux." },
+      { hebrew: "רוּמָה יהוה בְּעֻזֶּךָ נָשִׁירָה וּנְזַמְּרָה גְּבוּרָתֶךָ:", french: "Lève-toi, Éternel, par ta force ! Nous chanterons, nous célébrerons ta puissance." },
+    ]
+  },
+  {
+    number: 22,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל אַיֶּלֶת הַשַּׁחַר מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Sur la biche de l'aurore. Psaume de David." },
+      { hebrew: "אֵלִי אֵלִי לָמָה עֲזַבְתָּנִי רָחוֹק מִישׁוּעָתִי דִּבְרֵי שַׁאֲגָתִי:", french: "Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné, et t'éloignes-tu sans me secourir, sans écouter mes plaintes ?" },
+      { hebrew: "אֱלֹהַי אֶקְרָא יוֹמָם וְלֹא תַעֲנֶה וְלַיְלָה וְלֹא דוּמִיָּה לִי:", french: "Mon Dieu, je crie le jour, et tu ne réponds pas ; la nuit, et je n'ai point de repos." },
+      { hebrew: "וְאַתָּה קָדוֹשׁ יוֹשֵׁב תְּהִלּוֹת יִשְׂרָאֵל:", french: "Pourtant tu es le Saint, tu sièges au milieu des louanges d'Israël." },
+      { hebrew: "בְּךָ בָּטְחוּ אֲבֹתֵינוּ בָּטְחוּ וַתְּפַלְּטֵמוֹ:", french: "En toi se confiaient nos pères ; ils se confiaient, et tu les délivrais." },
+      { hebrew: "אֵלֶיךָ זָעֲקוּ וְנִמְלָטוּ בְּךָ בָטְחוּ וְלֹא בוֹשׁוּ:", french: "Ils criaient à toi et ils étaient sauvés ; ils se confiaient en toi et n'étaient point confus." },
+      { hebrew: "וְאָנֹכִי תוֹלַעַת וְלֹא אִישׁ חֶרְפַּת אָדָם וּבְזוּי עָם:", french: "Et moi, je suis un ver et non un homme, l'opprobre des hommes et le méprisé du peuple." },
+      { hebrew: "כָּל רֹאַי יַלְעִגוּ לִי יַפְטִירוּ בְשָׂפָה יָנִיעוּ רֹאשׁ:", french: "Tous ceux qui me voient se moquent de moi, ils ouvrent la bouche, secouent la tête." },
+      { hebrew: "גֹּל אֶל יהוה יְפַלְּטֵהוּ יַצִּילֵהוּ כִּי חָפֵץ בּוֹ:", french: "Recommande-toi à l'Éternel ! L'Éternel le sauvera, il le délivrera, puisqu'il l'aime !" },
+      { hebrew: "כִּי אַתָּה גֹחִי מִבָּטֶן מַבְטִיחִי עַל שְׁדֵי אִמִּי:", french: "Oui, tu m'as fait sortir du sein maternel, tu m'as mis en sûreté sur les mamelles de ma mère." },
+      { hebrew: "עָלֶיךָ הָשְׁלַכְתִּי מֵרָחֶם מִבֶּטֶן אִמִּי אֵלִי אָתָּה:", french: "Dès le sein maternel j'ai été sous ta garde, dès le ventre de ma mère tu as été mon Dieu." },
+      { hebrew: "אַל תִּרְחַק מִמֶּנִּי כִּי צָרָה קְרוֹבָה כִּי אֵין עוֹזֵר:", french: "Ne t'éloigne pas de moi, quand la détresse est proche, quand personne ne vient à mon secours !" },
+      { hebrew: "סְבָבוּנִי פָּרִים רַבִּים אַבִּירֵי בָשָׁן כִּתְּרוּנִי:", french: "De nombreux taureaux sont autour de moi, des taureaux de Basan m'environnent." },
+      { hebrew: "פָּצוּ עָלַי פִּיהֶם אַרְיֵה טֹרֵף וְשֹׁאֵג:", french: "Ils ouvrent contre moi leur gueule, semblables au lion qui déchire et rugit." },
+      { hebrew: "כַּמַּיִם נִשְׁפַּכְתִּי וְהִתְפָּרְדוּ כָּל עַצְמוֹתָי הָיָה לִבִּי כַּדּוֹנָג נָמֵס בְּתוֹךְ מֵעָי:", french: "Je suis comme de l'eau qui s'écoule, et tous mes os se séparent ; mon cœur est comme de la cire, il se fond dans mes entrailles." },
+      { hebrew: "יָבֵשׁ כַּחֶרֶשׂ כֹּחִי וּלְשׁוֹנִי מֻדְבָּק מַלְקוֹחָי וְלַעֲפַר מָוֶת תִּשְׁפְּתֵנִי:", french: "Ma force se dessèche comme l'argile, et ma langue s'attache à mon palais ; tu me réduis à la poussière de la mort." },
+      { hebrew: "כִּי סְבָבוּנִי כְּלָבִים עֲדַת מְרֵעִים הִקִּיפוּנִי כָּאֲרִי יָדַי וְרַגְלָי:", french: "Car des chiens m'environnent, une bande de scélérats rôdent autour de moi ; ils ont percé mes mains et mes pieds." },
+      { hebrew: "אֲסַפֵּר כָּל עַצְמוֹתָי הֵמָּה יַבִּיטוּ יִרְאוּ בִי:", french: "Je pourrais compter tous mes os. Eux, ils observent, ils me regardent." },
+      { hebrew: "יְחַלְּקוּ בְגָדַי לָהֶם וְעַל לְבוּשִׁי יַפִּילוּ גוֹרָל:", french: "Ils se partagent mes vêtements, ils tirent au sort ma tunique." },
+      { hebrew: "וְאַתָּה יהוה אַל תִּרְחָק אֱיָלוּתִי לְעֶזְרָתִי חוּשָׁה:", french: "Et toi, Éternel, ne t'éloigne pas ! Toi qui es ma force, viens en hâte à mon secours !" },
+      { hebrew: "הַצִּילָה מֵחֶרֶב נַפְשִׁי מִיַּד כֶּלֶב יְחִידָתִי:", french: "Protège mon âme contre le glaive, ma vie contre le pouvoir des chiens !" },
+      { hebrew: "הוֹשִׁיעֵנִי מִפִּי אַרְיֵה וּמִקַּרְנֵי רֵמִים עֲנִיתָנִי:", french: "Sauve-moi de la gueule du lion, délivre-moi des cornes du buffle !" },
+      { hebrew: "אֲסַפְּרָה שִׁמְךָ לְאֶחָי בְּתוֹךְ קָהָל אֲהַלְלֶךָּ:", french: "Je publierai ton nom parmi mes frères, je te célébrerai au milieu de l'assemblée." },
+      { hebrew: "יִרְאֵי יהוה הַלְלוּהוּ כָּל זֶרַע יַעֲקֹב כַּבְּדוּהוּ וְגוּרוּ מִמֶּנּוּ כָּל זֶרַע יִשְׂרָאֵל:", french: "Vous qui craignez l'Éternel, louez-le ! Vous tous, postérité de Jacob, glorifiez-le ! Tremblez devant lui, vous tous, postérité d'Israël !" },
+      { hebrew: "כִּי לֹא בָזָה וְלֹא שִׁקַּץ עֱנוּת עָנִי וְלֹא הִסְתִּיר פָּנָיו מִמֶּנּוּ וּבְשַׁוְּעוֹ אֵלָיו שָׁמֵעַ:", french: "Car il n'a ni méprisé ni dédaigné l'affliction de l'affligé, et il ne lui a point caché sa face ; mais il l'a exaucé quand il a crié à lui." },
+      { hebrew: "מֵאִתְּךָ תְהִלָּתִי בְּקָהָל רָב נְדָרַי אֲשַׁלֵּם נֶגֶד יְרֵאָיו:", french: "Tu seras dans la grande assemblée l'objet de mes louanges ; j'accomplirai mes vœux en présence de ceux qui le craignent." },
+      { hebrew: "יֹאכְלוּ עֲנָוִים וְיִשְׂבָּעוּ יְהַלְלוּ יהוה דֹּרְשָׁיו יְחִי לְבַבְכֶם לָעַד:", french: "Les malheureux mangeront et se rassasieront, ceux qui cherchent l'Éternel le célébreront. Que votre cœur vive à toujours !" },
+      { hebrew: "יִזְכְּרוּ וְיָשֻׁבוּ אֶל יהוה כָּל אַפְסֵי אָרֶץ וְיִשְׁתַּחֲווּ לְפָנֶיךָ כָּל מִשְׁפְּחוֹת גּוֹיִם:", french: "Toutes les extrémités de la terre penseront à l'Éternel et se tourneront vers lui ; toutes les familles des nations se prosterneront devant ta face." },
+      { hebrew: "כִּי לַיהוה הַמְּלוּכָה וּמֹשֵׁל בַּגּוֹיִם:", french: "Car à l'Éternel appartient le règne : il domine sur les nations." },
+      { hebrew: "אָכְלוּ וַיִּשְׁתַּחֲווּ כָּל דִּשְׁנֵי אֶרֶץ לְפָנָיו יִכְרְעוּ כָּל יוֹרְדֵי עָפָר וְנַפְשׁוֹ לֹא חִיָּה:", french: "Tous les puissants de la terre mangeront et se prosterneront aussi ; devant lui s'inclineront tous ceux qui descendent dans la poussière, ceux qui ne peuvent conserver leur vie." },
+      { hebrew: "זֶרַע יַעַבְדֶנּוּ יְסֻפַּר לַאדֹנָי לַדּוֹר:", french: "La postérité le servira ; on parlera du Seigneur à la génération future." },
+      { hebrew: "יָבֹאוּ וְיַגִּידוּ צִדְקָתוֹ לְעַם נוֹלָד כִּי עָשָׂה:", french: "Ils viendront et publieront sa justice, ils annonceront au peuple qui naîtra ce que Dieu a fait." },
+    ]
+  },
+  {
+    number: 23,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד יהוה רֹעִי לֹא אֶחְסָר:", french: "Psaume de David. L'Éternel est mon berger : je ne manquerai de rien." },
+      { hebrew: "בִּנְאוֹת דֶּשֶׁא יַרְבִּיצֵנִי עַל מֵי מְנֻחוֹת יְנַהֲלֵנִי:", french: "Il me fait reposer dans de verts pâturages, il me dirige près des eaux paisibles." },
+      { hebrew: "נַפְשִׁי יְשׁוֹבֵב יַנְחֵנִי בְמַעְגְּלֵי צֶדֶק לְמַעַן שְׁמוֹ:", french: "Il restaure mon âme, il me conduit dans les sentiers de la justice, à cause de son nom." },
+      { hebrew: "גַּם כִּי אֵלֵךְ בְּגֵיא צַלְמָוֶת לֹא אִירָא רָע כִּי אַתָּה עִמָּדִי שִׁבְטְךָ וּמִשְׁעַנְתֶּךָ הֵמָּה יְנַחֲמֻנִי:", french: "Quand je marche dans la vallée de l'ombre de la mort, je ne crains aucun mal, car tu es avec moi : ta houlette et ton bâton me rassurent." },
+      { hebrew: "תַּעֲרֹךְ לְפָנַי שֻׁלְחָן נֶגֶד צֹרְרָי דִּשַּׁנְתָּ בַשֶּׁמֶן רֹאשִׁי כּוֹסִי רְוָיָה:", french: "Tu dresses devant moi une table, en face de mes adversaires ; tu oins d'huile ma tête, et ma coupe déborde." },
+      { hebrew: "אַךְ טוֹב וָחֶסֶד יִרְדְּפוּנִי כָּל יְמֵי חַיָּי וְשַׁבְתִּי בְּבֵית יהוה לְאֹרֶךְ יָמִים:", french: "Oui, le bonheur et la grâce m'accompagneront tous les jours de ma vie, et j'habiterai dans la maison de l'Éternel jusqu'à la fin de mes jours." },
+    ]
+  },
+  {
+    number: 24,
+    verses: [
+      { hebrew: "לְדָוִד מִזְמוֹר לַיהוה הָאָרֶץ וּמְלוֹאָהּ תֵּבֵל וְיֹשְׁבֵי בָהּ:", french: "De David. Psaume. À l'Éternel la terre et ce qu'elle renferme, le monde et ceux qui l'habitent !" },
+      { hebrew: "כִּי הוּא עַל יַמִּים יְסָדָהּ וְעַל נְהָרוֹת יְכוֹנְנֶהָ:", french: "Car il l'a fondée sur les mers, et il l'a affermie sur les fleuves." },
+      { hebrew: "מִי יַעֲלֶה בְהַר יהוה וּמִי יָקוּם בִּמְקוֹם קָדְשׁוֹ:", french: "Qui pourra monter à la montagne de l'Éternel ? Qui s'élèvera jusqu'à son lieu saint ?" },
+      { hebrew: "נְקִי כַפַּיִם וּבַר לֵבָב אֲשֶׁר לֹא נָשָׂא לַשָּׁוְא נַפְשִׁי וְלֹא נִשְׁבַּע לְמִרְמָה:", french: "Celui qui a les mains innocentes et le cœur pur ; celui qui ne livre pas son âme au mensonge, et qui ne jure pas pour tromper." },
+      { hebrew: "יִשָּׂא בְרָכָה מֵאֵת יהוה וּצְדָקָה מֵאֱלֹהֵי יִשְׁעוֹ:", french: "Il obtiendra la bénédiction de l'Éternel, la miséricorde du Dieu de son salut." },
+      { hebrew: "זֶה דּוֹר דֹּרְשָׁיו מְבַקְשֵׁי פָנֶיךָ יַעֲקֹב סֶלָה:", french: "Voilà la génération de ceux qui le cherchent, de ceux qui cherchent ta face, de Jacob ! Sélah !" },
+      { hebrew: "שְׂאוּ שְׁעָרִים רָאשֵׁיכֶם וְהִנָּשְׂאוּ פִּתְחֵי עוֹלָם וְיָבוֹא מֶלֶךְ הַכָּבוֹד:", french: "Portes, élevez vos linteaux ; élevez-vous, portes éternelles ! Que le roi de gloire fasse son entrée !" },
+      { hebrew: "מִי זֶה מֶלֶךְ הַכָּבוֹד יהוה עִזּוּז וְגִבּוֹר יהוה גִּבּוֹר מִלְחָמָה:", french: "Qui est ce roi de gloire ? L'Éternel fort et puissant, l'Éternel puissant dans les combats." },
+      { hebrew: "שְׂאוּ שְׁעָרִים רָאשֵׁיכֶם וּשְׂאוּ פִּתְחֵי עוֹלָם וְיָבֹא מֶלֶךְ הַכָּבוֹד:", french: "Portes, élevez vos linteaux ; élevez-les, portes éternelles ! Que le roi de gloire fasse son entrée !" },
+      { hebrew: "מִי הוּא זֶה מֶלֶךְ הַכָּבוֹד יהוה צְבָאוֹת הוּא מֶלֶךְ הַכָּבוֹד סֶלָה:", french: "Qui est ce roi de gloire ? L'Éternel des armées : voilà le roi de gloire ! Sélah !" },
+    ]
+  },
+  {
+    number: 25,
+    verses: [
+      { hebrew: "לְדָוִד אֵלֶיךָ יהוה נַפְשִׁי אֶשָּׂא:", french: "De David. Vers toi, ô Éternel, j'élève mon âme." },
+      { hebrew: "אֱלֹהַי בְּךָ בָטַחְתִּי אַל אֵבוֹשָׁה אַל יַעַלְצוּ אוֹיְבַי לִי:", french: "Mon Dieu, en toi je me confie : que je ne sois pas couvert de honte ! Que mes ennemis ne se réjouissent pas à mon sujet !" },
+      { hebrew: "גַּם כָּל קֹוֶיךָ לֹא יֵבֹשׁוּ יֵבֹשׁוּ הַבּוֹגְדִים רֵיקָם:", french: "Tous ceux qui espèrent en toi ne seront point confus ; ceux qui agissent perfidement sans motif seront confus." },
+      { hebrew: "דְּרָכֶיךָ יהוה הוֹדִיעֵנִי אֹרְחוֹתֶיךָ לַמְּדֵנִי:", french: "Éternel, fais-moi connaître tes voies, enseigne-moi tes sentiers." },
+      { hebrew: "הַדְרִיכֵנִי בַאֲמִתֶּךָ וְלַמְּדֵנִי כִּי אַתָּה אֱלֹהֵי יִשְׁעִי אוֹתְךָ קִוִּיתִי כָּל הַיּוֹם:", french: "Conduis-moi dans ta vérité, et instruis-moi ; car tu es le Dieu de mon salut, tu es toujours mon espérance." },
+      { hebrew: "זְכֹר רַחֲמֶיךָ יהוה וַחֲסָדֶיךָ כִּי מֵעוֹלָם הֵמָּה:", french: "Souviens-toi de ta miséricorde, ô Éternel, et de ta bonté, car elles sont de toute éternité." },
+      { hebrew: "חַטֹּאות נְעוּרַי וּפְשָׁעַי אַל תִּזְכֹּר כְּחַסְדְּךָ זְכָר לִי אַתָּה לְמַעַן טוּבְךָ יהוה:", french: "Ne te souviens pas des péchés de ma jeunesse ni de mes transgressions ; souviens-toi de moi selon ta miséricorde, à cause de ta bonté, ô Éternel !" },
+      { hebrew: "טוֹב וְיָשָׁר יהוה עַל כֵּן יוֹרֶה חַטָּאִים בַּדָּרֶךְ:", french: "L'Éternel est bon et droit : c'est pourquoi il montre aux pécheurs la voie." },
+      { hebrew: "יַדְרֵךְ עֲנָוִים בַּמִּשְׁפָּט וִילַמֵּד עֲנָוִים דַּרְכּוֹ:", french: "Il conduit les humbles dans la justice, il enseigne aux humbles sa voie." },
+      { hebrew: "כָּל אָרְחוֹת יהוה חֶסֶד וֶאֱמֶת לְנֹצְרֵי בְרִיתוֹ וְעֵדֹתָיו:", french: "Tous les sentiers de l'Éternel sont miséricorde et fidélité, pour ceux qui gardent son alliance et ses commandements." },
+      { hebrew: "לְמַעַן שִׁמְךָ יהוה וְסָלַחְתָּ לַעֲוֹנִי כִּי רַב הוּא:", french: "C'est à cause de ton nom, ô Éternel, que tu pardonneras mon iniquité, car elle est grande." },
+      { hebrew: "מִי זֶה הָאִישׁ יְרֵא יהוה יוֹרֶנּוּ בְּדֶרֶךְ יִבְחָר:", french: "Quel est l'homme qui craint l'Éternel ? L'Éternel lui montre la voie qu'il doit choisir." },
+      { hebrew: "נַפְשׁוֹ בְּטוֹב תָּלִין וְזַרְעוֹ יִירַשׁ אָרֶץ:", french: "Son âme reposera dans le bonheur, et sa postérité possédera le pays." },
+      { hebrew: "סוֹד יהוה לִירֵאָיו וּבְרִיתוֹ לְהוֹדִיעָם:", french: "Le conseil de l'Éternel est pour ceux qui le craignent, et son alliance leur donne instruction." },
+      { hebrew: "עֵינַי תָּמִיד אֶל יהוה כִּי הוּא יוֹצִיא מֵרֶשֶׁת רַגְלָי:", french: "Je tourne constamment les yeux vers l'Éternel, car il fera sortir mes pieds du filet." },
+      { hebrew: "פְּנֵה אֵלַי וְחָנֵּנִי כִּי יָחִיד וְעָנִי אָנִי:", french: "Regarde-moi et aie pitié de moi, car je suis abandonné et malheureux." },
+      { hebrew: "צָרוֹת לְבָבִי הִרְחִיבוּ מִמְּצוּקוֹתַי הוֹצִיאֵנִי:", french: "Les angoisses de mon cœur augmentent ; tire-moi de ma détresse." },
+      { hebrew: "רְאֵה עָנְיִי וַעֲמָלִי וְשָׂא לְכָל חַטֹּאותָי:", french: "Vois ma misère et ma peine, et pardonne tous mes péchés." },
+      { hebrew: "רְאֵה אוֹיְבַי כִּי רָבּוּ וְשִׂנְאַת חָמָס שְׂנֵאוּנִי:", french: "Vois combien mes ennemis sont nombreux, et de quelle haine violente ils me poursuivent." },
+      { hebrew: "שָׁמְרָה נַפְשִׁי וְהַצִּילֵנִי אַל אֵבוֹשׁ כִּי חָסִיתִי בָךְ:", french: "Garde mon âme et sauve-moi ! Que je ne sois pas confus, quand je cherche en toi mon refuge." },
+      { hebrew: "תֹּם וָיֹשֶׁר יִצְּרוּנִי כִּי קִוִּיתִיךָ:", french: "Que l'innocence et la droiture me protègent, quand je mets en toi mon espérance !" },
+      { hebrew: "פְּדֵה אֱלֹהִים אֶת יִשְׂרָאֵל מִכֹּל צָרוֹתָיו:", french: "Ô Dieu, délivre Israël de toutes ses détresses !" },
+    ]
+  },
+  {
+    number: 26,
+    verses: [
+      { hebrew: "לְדָוִד שָׁפְטֵנִי יהוה כִּי אֲנִי בְּתֻמִּי הָלַכְתִּי וּבַיהוה בָּטַחְתִּי לֹא אֶמְעָד:", french: "De David. Rends-moi justice, ô Éternel, car je marche dans l'intégrité, je me confie en l'Éternel, je ne chancelle pas." },
+      { hebrew: "בְּחָנֵנִי יהוה וְנַסֵּנִי צָרְפָה כִלְיוֹתַי וְלִבִּי:", french: "Sonde-moi, ô Éternel, éprouve-moi, passe au creuset mes reins et mon cœur." },
+      { hebrew: "כִּי חַסְדְּךָ לְנֶגֶד עֵינָי וְהִתְהַלַּכְתִּי בַּאֲמִתֶּךָ:", french: "Car ta bonté est devant mes yeux, et je marche dans ta vérité." },
+      { hebrew: "לֹא יָשַׁבְתִּי עִם מְתֵי שָׁוְא וְעִם נַעֲלָמִים לֹא אָבוֹא:", french: "Je ne m'assieds pas avec les hommes faux, je ne vais pas avec les gens dissimulés." },
+      { hebrew: "שָׂנֵאתִי קְהַל מְרֵעִים וְעִם רְשָׁעִים לֹא אֵשֵׁב:", french: "Je hais l'assemblée de ceux qui font le mal, je ne m'assieds pas avec les méchants." },
+      { hebrew: "אֶרְחַץ בְּנִקָּיוֹן כַּפָּי וַאֲסֹבְבָה אֶת מִזְבַּחֲךָ יהוה:", french: "Je lave mes mains dans l'innocence, et je fais le tour de ton autel, ô Éternel !" },
+      { hebrew: "לַשְׁמִעַ בְּקוֹל תּוֹדָה וּלְסַפֵּר כָּל נִפְלְאוֹתֶיךָ:", french: "Pour éclater en actions de grâces, et raconter toutes tes merveilles." },
+      { hebrew: "יהוה אָהַבְתִּי מְעוֹן בֵּיתֶךָ וּמְקוֹם מִשְׁכַּן כְּבוֹדֶךָ:", french: "Éternel, j'aime le séjour de ta maison, le lieu où ta gloire habite." },
+      { hebrew: "אַל תֶּאֱסֹף עִם חַטָּאִים נַפְשִׁי וְעִם אַנְשֵׁי דָמִים חַיָּי:", french: "N'enlève pas mon âme avec les pécheurs, ma vie avec les hommes de sang." },
+      { hebrew: "אֲשֶׁר בִּידֵיהֶם זִמָּה וִימִינָם מָלְאָה שֹׁחַד:", french: "Dont les mains sont pleines de crimes, et dont la droite est pleine de présents." },
+      { hebrew: "וַאֲנִי בְּתֻמִּי אֵלֵךְ פְּדֵנִי וְחָנֵּנִי:", french: "Moi, je marche dans l'intégrité ; délivre-moi et aie pitié de moi !" },
+      { hebrew: "רַגְלִי עָמְדָה בְמִישׁוֹר בְּמַקְהֵלִים אֲבָרֵךְ יהוה:", french: "Mon pied est ferme dans la droiture ; je bénirai l'Éternel dans les assemblées." },
+    ]
+  },
+  {
+    number: 27,
+    verses: [
+      { hebrew: "לְדָוִד יהוה אוֹרִי וְיִשְׁעִי מִמִּי אִירָא יהוה מָעוֹז חַיַּי מִמִּי אֶפְחָד:", french: "De David. L'Éternel est ma lumière et mon salut : de qui aurais-je crainte ? L'Éternel est le soutien de ma vie : de qui aurais-je peur ?" },
+      { hebrew: "בִּקְרֹב עָלַי מְרֵעִים לֶאֱכֹל אֶת בְּשָׂרִי צָרַי וְאֹיְבַי לִי הֵמָּה כָשְׁלוּ וְנָפָלוּ:", french: "Quand des méchants s'avancent contre moi, pour dévorer ma chair, ce sont mes persécuteurs et mes ennemis qui chancellent et qui tombent." },
+      { hebrew: "אִם תַּחֲנֶה עָלַי מַחֲנֶה לֹא יִירָא לִבִּי אִם תָּקוּם עָלַי מִלְחָמָה בְּזֹאת אֲנִי בוֹטֵחַ:", french: "Si une armée se campait contre moi, mon cœur n'aurait aucune crainte ; si une guerre s'élevait contre moi, je serais malgré cela plein de confiance." },
+      { hebrew: "אַחַת שָׁאַלְתִּי מֵאֵת יהוה אוֹתָהּ אֲבַקֵּשׁ שִׁבְתִּי בְּבֵית יהוה כָּל יְמֵי חַיַּי לַחֲזוֹת בְּנֹעַם יהוה וּלְבַקֵּר בְּהֵיכָלוֹ:", french: "Je demande à l'Éternel une chose, que je désire ardemment : je voudrais habiter toute ma vie dans la maison de l'Éternel, pour contempler la magnificence de l'Éternel et pour admirer son temple." },
+      { hebrew: "כִּי יִצְפְּנֵנִי בְּסֻכֹּה בְּיוֹם רָעָה יַסְתִּרֵנִי בְּסֵתֶר אָהֳלוֹ בְּצוּר יְרוֹמְמֵנִי:", french: "Car il me protégera dans son tabernacle au jour du malheur, il me cachera sous l'abri de sa tente ; il m'élèvera sur un rocher." },
+      { hebrew: "וְעַתָּה יָרוּם רֹאשִׁי עַל אֹיְבַי סְבִיבוֹתַי וְאֶזְבְּחָה בְאָהֳלוֹ זִבְחֵי תְרוּעָה אָשִׁירָה וַאֲזַמְּרָה לַיהוה:", french: "Et déjà ma tête s'élève sur mes ennemis qui m'entourent ; j'offrirai des sacrifices dans sa tente, au son de la trompette ; je chanterai, je célébrerai l'Éternel." },
+      { hebrew: "שְׁמַע יהוה קוֹלִי אֶקְרָא וְחָנֵּנִי וַעֲנֵנִי:", french: "Éternel, écoute ma voix, je t'invoque : aie pitié de moi et exauce-moi !" },
+      { hebrew: "לְךָ אָמַר לִבִּי בַּקְּשׁוּ פָנָי אֶת פָּנֶיךָ יהוה אֲבַקֵּשׁ:", french: "Mon cœur dit de ta part : Cherchez ma face ! Je cherche ta face, ô Éternel !" },
+      { hebrew: "אַל תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי אַל תַּט בְּאַף עַבְדֶּךָ עֶזְרָתִי הָיִיתָ אַל תִּטְּשֵׁנִי וְאַל תַּעַזְבֵנִי אֱלֹהֵי יִשְׁעִי:", french: "Ne me cache pas ta face, ne repousse pas avec colère ton serviteur ! Tu es mon secours, ne me laisse pas, ne m'abandonne pas, Dieu de mon salut !" },
+      { hebrew: "כִּי אָבִי וְאִמִּי עֲזָבוּנִי וַיהוה יַאַסְפֵנִי:", french: "Car mon père et ma mère m'abandonnent, mais l'Éternel me recueillera." },
+      { hebrew: "הוֹרֵנִי יהוה דַּרְכֶּךָ וּנְחֵנִי בְּאֹרַח מִישׁוֹר לְמַעַן שׁוֹרְרָי:", french: "Éternel, enseigne-moi ta voie, conduis-moi dans le sentier de la droiture, à cause de mes ennemis." },
+      { hebrew: "אַל תִּתְּנֵנִי בְּנֶפֶשׁ צָרָי כִּי קָמוּ בִי עֵדֵי שֶׁקֶר וִיפֵחַ חָמָס:", french: "Ne me livre pas au bon plaisir de mes adversaires, car il s'élève contre moi de faux témoins et des gens qui ne respirent que la violence." },
+      { hebrew: "לוּלֵא הֶאֱמַנְתִּי לִרְאוֹת בְּטוּב יהוה בְּאֶרֶץ חַיִּים:", french: "Oh ! si je n'étais pas sûr de voir la bonté de l'Éternel sur la terre des vivants !..." },
+      { hebrew: "קַוֵּה אֶל יהוה חֲזַק וְיַאֲמֵץ לִבֶּךָ וְקַוֵּה אֶל יהוה:", french: "Espère en l'Éternel ! Fortifie-toi et que ton cœur s'affermisse ! Espère en l'Éternel !" },
+    ]
+  },
+  {
+    number: 28,
+    verses: [
+      { hebrew: "לְדָוִד אֵלֶיךָ יהוה אֶקְרָא צוּרִי אַל תֶּחֱרַשׁ מִמֶּנִּי פֶּן תֶּחֱשֶׁה מִמֶּנִּי וְנִמְשַׁלְתִּי עִם יוֹרְדֵי בוֹר:", french: "De David. Éternel, c'est à toi que je crie. Mon rocher, ne reste pas sourd à ma voix, de peur que, si tu t'éloignes sans me répondre, je ne sois semblable à ceux qui descendent dans la fosse." },
+      { hebrew: "שְׁמַע קוֹל תַּחֲנוּנַי בְּשַׁוְּעִי אֵלֶיךָ בְּנָשְׂאִי יָדַי אֶל דְּבִיר קָדְשֶׁךָ:", french: "Écoute la voix de mes supplications, quand je crie à toi, quand j'élève mes mains vers ton très saint sanctuaire." },
+      { hebrew: "אַל תִּמְשְׁכֵנִי עִם רְשָׁעִים וְעִם פֹּעֲלֵי אָוֶן דֹּבְרֵי שָׁלוֹם עִם רֵעֵיהֶם וְרָעָה בִּלְבָבָם:", french: "Ne m'entraîne pas avec les méchants et avec ceux qui font l'iniquité, qui parlent de paix avec leur prochain, et qui ont la malice dans le cœur." },
+      { hebrew: "תֶּן לָהֶם כְּפָעֳלָם וּכְרֹעַ מַעַלְלֵיהֶם כְּמַעֲשֵׂה יְדֵיהֶם תֵּן לָהֶם הָשֵׁב גְּמוּלָם לָהֶם:", french: "Rends-leur selon leurs œuvres et selon la malice de leurs actions, rends-leur selon l'ouvrage de leurs mains, donne-leur leur salaire." },
+      { hebrew: "כִּי לֹא יָבִינוּ אֶל פְּעֻלֹּת יהוה וְאֶל מַעֲשֵׂה יָדָיו יֶהֶרְסֵם וְלֹא יִבְנֵם:", french: "Car ils ne prennent point garde aux œuvres de l'Éternel, à l'ouvrage de ses mains. Qu'il les renverse et ne les relève pas !" },
+      { hebrew: "בָּרוּךְ יהוה כִּי שָׁמַע קוֹל תַּחֲנוּנָי:", french: "Béni soit l'Éternel ! Car il exauce la voix de mes supplications." },
+      { hebrew: "יהוה עֻזִּי וּמָגִנִּי בּוֹ בָטַח לִבִּי וְנֶעֱזָרְתִּי וַיַּעֲלֹז לִבִּי וּמִשִּׁירִי אֲהוֹדֶנּוּ:", french: "L'Éternel est ma force et mon bouclier ; en lui mon cœur se confie, et je suis secouru ; aussi mon cœur est dans la joie, et je le loue par mes chants." },
+      { hebrew: "יהוה עֹז לָמוֹ וּמָעוֹז יְשׁוּעוֹת מְשִׁיחוֹ הוּא:", french: "L'Éternel est la force de son peuple, il est le rocher des délivrances de son oint." },
+      { hebrew: "הוֹשִׁיעָה אֶת עַמֶּךָ וּבָרֵךְ אֶת נַחֲלָתֶךָ וּרְעֵם וְנַשְּׂאֵם עַד הָעוֹלָם:", french: "Sauve ton peuple et bénis ton héritage ! Sois leur berger et soutiens-les à jamais !" },
+    ]
+  },
+  {
+    number: 29,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד הָבוּ לַיהוה בְּנֵי אֵלִים הָבוּ לַיהוה כָּבוֹד וָעֹז:", french: "Psaume de David. Fils de Dieu, rendez à l'Éternel, rendez à l'Éternel gloire et honneur !" },
+      { hebrew: "הָבוּ לַיהוה כְּבוֹד שְׁמוֹ הִשְׁתַּחֲווּ לַיהוה בְּהַדְרַת קֹדֶשׁ:", french: "Rendez à l'Éternel gloire pour son nom ! Prosternez-vous devant l'Éternel avec des ornements sacrés !" },
+      { hebrew: "קוֹל יהוה עַל הַמָּיִם אֵל הַכָּבוֹד הִרְעִים יהוה עַל מַיִם רַבִּים:", french: "La voix de l'Éternel retentit sur les eaux, le Dieu de gloire fait gronder le tonnerre ; l'Éternel est sur les grandes eaux." },
+      { hebrew: "קוֹל יהוה בַּכֹּחַ קוֹל יהוה בֶּהָדָר:", french: "La voix de l'Éternel est puissante, la voix de l'Éternel est majestueuse." },
+      { hebrew: "קוֹל יהוה שֹׁבֵר אֲרָזִים וַיְשַׁבֵּר יהוה אֶת אַרְזֵי הַלְּבָנוֹן:", french: "La voix de l'Éternel brise les cèdres ; l'Éternel brise les cèdres du Liban." },
+      { hebrew: "וַיַּרְקִידֵם כְּמוֹ עֵגֶל לְבָנוֹן וְשִׂרְיֹן כְּמוֹ בֶן רְאֵמִים:", french: "Il les fait bondir comme un veau, le Liban et le Sirion comme un jeune buffle." },
+      { hebrew: "קוֹל יהוה חֹצֵב לַהֲבוֹת אֵשׁ:", french: "La voix de l'Éternel fait jaillir des flammes de feu." },
+      { hebrew: "קוֹל יהוה יָחִיל מִדְבָּר יָחִיל יהוה מִדְבַּר קָדֵשׁ:", french: "La voix de l'Éternel fait trembler le désert ; l'Éternel fait trembler le désert de Kadès." },
+      { hebrew: "קוֹל יהוה יְחוֹלֵל אַיָּלוֹת וַיֶּחֱשֹׂף יְעָרוֹת וּבְהֵיכָלוֹ כֻּלּוֹ אֹמֵר כָּבוֹד:", french: "La voix de l'Éternel fait enfanter les biches, elle dépouille les forêts. Dans son palais, tout s'écrie : Gloire !" },
+      { hebrew: "יהוה לַמַּבּוּל יָשָׁב וַיֵּשֶׁב יהוה מֶלֶךְ לְעוֹלָם:", french: "L'Éternel était sur son trône lors du déluge ; l'Éternel sur son trône règne éternellement." },
+      { hebrew: "יהוה עֹז לְעַמּוֹ יִתֵּן יהוה יְבָרֵךְ אֶת עַמּוֹ בַשָּׁלוֹם:", french: "L'Éternel donnera la force à son peuple ; l'Éternel bénira son peuple par la paix." },
+    ]
+  },
+  {
+    number: 30,
+    verses: [
+      { hebrew: "מִזְמוֹר שִׁיר חֲנֻכַּת הַבַּיִת לְדָוִד:", french: "Psaume. Cantique pour l'inauguration de la Maison. De David." },
+      { hebrew: "אֲרוֹמִמְךָ יהוה כִּי דִלִּיתָנִי וְלֹא שִׂמַּחְתָּ אֹיְבַי לִי:", french: "Je T'exalte, Éternel, car Tu m'as relevé, et Tu n'as pas réjoui mes ennemis à mon sujet." },
+      { hebrew: "יהוה אֱלֹהָי שִׁוַּעְתִּי אֵלֶיךָ וַתִּרְפָּאֵנִי:", french: "Éternel, mon Dieu, j'ai crié vers Toi, et Tu m'as guéri." },
+      { hebrew: "יהוה הֶעֱלִיתָ מִן שְׁאוֹל נַפְשִׁי חִיִּיתַנִי מִיָּרְדִי בוֹר:", french: "Éternel, Tu as fait remonter mon âme du séjour des morts, Tu m'as fait revivre d'entre ceux qui descendent dans la fosse." },
+      { hebrew: "זַמְּרוּ לַיהוה חֲסִידָיו וְהוֹדוּ לְזֵכֶר קָדְשׁוֹ:", french: "Chantez à l'Éternel, vous Ses fidèles, et célébrez Sa sainte mémoire !" },
+      { hebrew: "כִּי רֶגַע בְּאַפּוֹ חַיִּים בִּרְצוֹנוֹ בָּעֶרֶב יָלִין בֶּכִי וְלַבֹּקֶר רִנָּה:", french: "Car Sa colère ne dure qu'un instant, Sa faveur toute la vie ; le soir les pleurs s'installent, et le matin c'est la joie." },
+      { hebrew: "וַאֲנִי אָמַרְתִּי בְשַׁלְוִי בַּל אֶמּוֹט לְעוֹלָם:", french: "Et moi, dans ma tranquillité, je disais : Jamais je ne chancellerai !" },
+      { hebrew: "יהוה בִּרְצוֹנְךָ הֶעֱמַדְתָּה לְהַרְרִי עֹז הִסְתַּרְתָּ פָנֶיךָ הָיִיתִי נִבְהָל:", french: "Éternel, dans Ta bienveillance, Tu avais affermi ma montagne ; Tu as caché Ta face, et je fus épouvanté." },
+      { hebrew: "אֵלֶיךָ יהוה אֶקְרָא וְאֶל אֲדֹנָי אֶתְחַנָּן:", french: "Vers Toi, Éternel, j'ai crié, et devant le Seigneur j'ai supplié." },
+      { hebrew: "מַה בֶּצַע בְּדָמִי בְּרִדְתִּי אֶל שָׁחַת הֲיוֹדְךָ עָפָר הֲיַגִּיד אֲמִתֶּךָ:", french: "Quel profit y a-t-il dans mon sang, si je descends dans la fosse ? La poussière Te rendra-t-elle grâce ? Proclamera-t-elle Ta vérité ?" },
+      { hebrew: "שְׁמַע יהוה וְחָנֵּנִי יהוה הֱיֵה עֹזֵר לִי:", french: "Écoute, Éternel, et aie pitié de moi ! Éternel, sois mon aide !" },
+      { hebrew: "הָפַכְתָּ מִסְפְּדִי לְמָחוֹל לִי פִּתַּחְתָּ שַׂקִּי וַתְּאַזְּרֵנִי שִׂמְחָה:", french: "Tu as changé mon deuil en allégresse, Tu as défait mon cilice et Tu m'as ceint de joie." },
+      { hebrew: "לְמַעַן יְזַמֶּרְךָ כָבוֹד וְלֹא יִדֹּם יהוה אֱלֹהַי לְעוֹלָם אוֹדֶךָּ:", french: "Afin que mon âme Te chante et ne se taise pas. Éternel, mon Dieu, à jamais je Te rendrai grâce !" },
+    ]
+  },
+  {
+    number: 31,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "בְּךָ יהוה חָסִיתִי אַל אֵבוֹשָׁה לְעוֹלָם בְּצִדְקָתְךָ פַּלְּטֵנִי:", french: "En Toi, Éternel, j'ai cherché un refuge ; que jamais je ne sois confondu ! Dans Ta justice, délivre-moi !" },
+      { hebrew: "הַטֵּה אֵלַי אָזְנְךָ מְהֵרָה הַצִּילֵנִי הֱיֵה לִי לְצוּר מָעוֹז לְבֵית מְצוּדוֹת לְהוֹשִׁיעֵנִי:", french: "Incline vers moi Ton oreille, hâte-Toi de me délivrer ! Sois pour moi un rocher de refuge, une maison forte pour me sauver !" },
+      { hebrew: "כִּי סַלְעִי וּמְצוּדָתִי אָתָּה וּלְמַעַן שִׁמְךָ תַּנְחֵנִי וּתְנַהֲלֵנִי:", french: "Car Tu es mon rocher et ma forteresse ; à cause de Ton nom, conduis-moi et dirige-moi !" },
+      { hebrew: "תּוֹצִיאֵנִי מֵרֶשֶׁת זוּ טָמְנוּ לִי כִּי אַתָּה מָעוּזִּי:", french: "Tire-moi du filet qu'ils m'ont tendu, car Tu es ma forteresse." },
+      { hebrew: "בְּיָדְךָ אַפְקִיד רוּחִי פָּדִיתָה אוֹתִי יהוה אֵל אֱמֶת:", french: "En Ta main je remets mon esprit ; Tu m'as racheté, Éternel, Dieu de vérité." },
+      { hebrew: "שָׂנֵאתִי הַשֹּׁמְרִים הַבְלֵי שָׁוְא וַאֲנִי אֶל יהוה בָּטָחְתִּי:", french: "Je hais ceux qui s'attachent à de vaines idoles ; moi, je me confie en l'Éternel." },
+      { hebrew: "אָגִילָה וְאֶשְׂמְחָה בְּחַסְדֶּךָ אֲשֶׁר רָאִיתָ אֶת עָנְיִי יָדַעְתָּ בְּצָרוֹת נַפְשִׁי:", french: "Je serai dans l'allégresse et la joie à cause de Ta bonté, car Tu as vu ma misère, Tu as connu les détresses de mon âme." },
+      { hebrew: "וְלֹא הִסְגַּרְתַּנִי בְּיַד אוֹיֵב הֶעֱמַדְתָּ בַמֶּרְחָב רַגְלָי:", french: "Tu ne m'as pas livré aux mains de l'ennemi, Tu as mis mes pieds au large." },
+      { hebrew: "חָנֵּנִי יהוה כִּי צַר לִי עָשְׁשָׁה בְכַעַס עֵינִי נַפְשִׁי וּבִטְנִי:", french: "Aie pitié de moi, Éternel, car je suis dans la détresse ; le chagrin consume mes yeux, mon âme et mon corps." },
+      { hebrew: "כִּי כָלוּ בְיָגוֹן חַיַּי וּשְׁנוֹתַי בַּאֲנָחָה כָּשַׁל בַּעֲוֹנִי כֹחִי וַעֲצָמַי עָשֵׁשׁוּ:", french: "Car ma vie s'épuise dans la douleur, et mes années dans les soupirs ; ma force chancelle à cause de mon iniquité, et mes os dépérissent." },
+      { hebrew: "מִכָּל צֹרְרַי הָיִיתִי חֶרְפָּה וְלִשְׁכֵנַי מְאֹד וּפַחַד לִמְיֻדָּעָי רֹאַי בַּחוּץ נָדְדוּ מִמֶּנִּי:", french: "De tous mes oppresseurs, je suis un objet d'opprobre, surtout pour mes voisins ; un sujet d'effroi pour mes intimes ; ceux qui me voient dehors fuient loin de moi." },
+      { hebrew: "נִשְׁכַּחְתִּי כְּמֵת מִלֵּב הָיִיתִי כִּכְלִי אֹבֵד:", french: "Je suis oublié des cœurs comme un mort, je suis pareil à un objet perdu." },
+      { hebrew: "כִּי שָׁמַעְתִּי דִּבַּת רַבִּים מָגוֹר מִסָּבִיב בְּהִוָּסְדָם יַחַד עָלַי לָקַחַת נַפְשִׁי זָמָמוּ:", french: "Car j'entends les calomnies de la multitude, l'épouvante m'environne ; ils se concertent contre moi, ils complotent de m'ôter la vie." },
+      { hebrew: "וַאֲנִי עָלֶיךָ בָטַחְתִּי יהוה אָמַרְתִּי אֱלֹהַי אָתָּה:", french: "Mais moi, je me confie en Toi, Éternel ! Je dis : Tu es mon Dieu !" },
+      { hebrew: "בְּיָדְךָ עִתֹּתָי הַצִּילֵנִי מִיַּד אוֹיְבַי וּמֵרֹדְפָי:", french: "Mes destinées sont dans Ta main ; délivre-moi de la main de mes ennemis et de mes persécuteurs !" },
+      { hebrew: "הָאִירָה פָנֶיךָ עַל עַבְדֶּךָ הוֹשִׁיעֵנִי בְחַסְדֶּךָ:", french: "Fais briller Ta face sur Ton serviteur, sauve-moi par Ta bonté !" },
+      { hebrew: "יהוה אַל אֵבוֹשָׁה כִּי קְרָאתִיךָ יֵבֹשׁוּ רְשָׁעִים יִדְּמוּ לִשְׁאוֹל:", french: "Éternel, que je ne sois pas confondu, car je T'invoque ; que les méchants soient confondus, réduits au silence dans le séjour des morts !" },
+      { hebrew: "תֵּאָלַמְנָה שִׂפְתֵי שָׁקֶר הַדֹּבְרוֹת עַל צַדִּיק עָתָק בְּגַאֲוָה וָבוּז:", french: "Qu'elles deviennent muettes, les lèvres menteuses qui parlent du juste avec arrogance, avec orgueil et mépris !" },
+      { hebrew: "מָה רַב טוּבְךָ אֲשֶׁר צָפַנְתָּ לִירֵאֶיךָ פָּעַלְתָּ לַחוֹסִים בָּךְ נֶגֶד בְּנֵי אָדָם:", french: "Combien est grande Ta bonté, que Tu réserves à ceux qui Te craignent, que Tu témoignes à ceux qui se réfugient en Toi devant les fils de l'homme !" },
+      { hebrew: "תַּסְתִּירֵם בְּסֵתֶר פָּנֶיךָ מֵרֻכְסֵי אִישׁ תִּצְפְּנֵם בְּסֻכָּה מֵרִיב לְשׁוֹנוֹת:", french: "Tu les caches à l'abri de Ta face, loin des complots des hommes ; Tu les protèges sous Ta tente, loin de la querelle des langues." },
+      { hebrew: "בָּרוּךְ יהוה כִּי הִפְלִיא חַסְדּוֹ לִי בְּעִיר מָצוֹר:", french: "Béni soit l'Éternel, car Il m'a accordé une merveilleuse bonté dans une ville assiégée !" },
+      { hebrew: "וַאֲנִי אָמַרְתִּי בְחָפְזִי נִגְרַזְתִּי מִנֶּגֶד עֵינֶיךָ אָכֵן שָׁמַעְתָּ קוֹל תַּחֲנוּנַי בְּשַׁוְּעִי אֵלֶיךָ:", french: "Et moi, dans ma précipitation, je disais : Je suis chassé de devant Tes yeux ! Mais Tu as entendu la voix de mes supplications quand j'ai crié vers Toi." },
+      { hebrew: "אֶהֱבוּ אֶת יהוה כָּל חֲסִידָיו אֱמוּנִים נֹצֵר יהוה וּמְשַׁלֵּם עַל יֶתֶר עֹשֵׂה גַאֲוָה:", french: "Aimez l'Éternel, vous tous Ses fidèles ! L'Éternel garde les croyants et rétribue abondamment celui qui agit avec orgueil." },
+      { hebrew: "חִזְקוּ וְיַאֲמֵץ לְבַבְכֶם כָּל הַמְיַחֲלִים לַיהוה:", french: "Fortifiez-vous et que votre cœur soit ferme, vous tous qui espérez en l'Éternel !" },
+    ]
+  },
+  {
+    number: 32,
+    verses: [
+      { hebrew: "לְדָוִד מַשְׂכִּיל אַשְׁרֵי נְשׂוּי פֶּשַׁע כְּסוּי חֲטָאָה:", french: "De David. Maskil. Heureux celui dont la transgression est remise, dont le péché est pardonné !" },
+      { hebrew: "אַשְׁרֵי אָדָם לֹא יַחְשֹׁב יהוה לוֹ עָוֹן וְאֵין בְּרוּחוֹ רְמִיָּה:", french: "Heureux l'homme à qui l'Éternel n'impute pas l'iniquité, et dans l'esprit duquel il n'y a pas de tromperie !" },
+      { hebrew: "כִּי הֶחֱרַשְׁתִּי בָּלוּ עֲצָמַי בְּשַׁאֲגָתִי כָּל הַיּוֹם:", french: "Quand je me taisais, mes os se consumaient, je gémissais tout le jour." },
+      { hebrew: "כִּי יוֹמָם וָלַיְלָה תִּכְבַּד עָלַי יָדֶךָ נֶהְפַּךְ לְשַׁדִּי בְּחַרְבֹנֵי קַיִץ סֶלָה:", french: "Car jour et nuit Ta main pesait sur moi, ma sève se changeait en sécheresse d'été. Sélah." },
+      { hebrew: "חַטָּאתִי אוֹדִיעֲךָ וַעֲוֹנִי לֹא כִסִּיתִי אָמַרְתִּי אוֹדֶה עֲלֵי פְשָׁעַי לַיהוה וְאַתָּה נָשָׂאתָ עֲוֹן חַטָּאתִי סֶלָה:", french: "Je T'ai fait connaître mon péché, je n'ai pas caché mon iniquité ; j'ai dit : J'avouerai mes transgressions à l'Éternel ! Et Toi, Tu as pardonné l'iniquité de mon péché. Sélah." },
+      { hebrew: "עַל זֹאת יִתְפַּלֵּל כָּל חָסִיד אֵלֶיךָ לְעֵת מְצֹא רַק לְשֵׁטֶף מַיִם רַבִּים אֵלָיו לֹא יַגִּיעוּ:", french: "C'est pourquoi tout fidèle Te prie au temps convenable ; même si de grandes eaux débordent, elles ne l'atteindront pas." },
+      { hebrew: "אַתָּה סֵתֶר לִי מִצַּר תִּצְּרֵנִי רָנֵּי פַלֵּט תְּסוֹבְבֵנִי סֶלָה:", french: "Tu es un abri pour moi, Tu me préserves de la détresse, Tu m'entoures de chants de délivrance. Sélah." },
+      { hebrew: "אַשְׂכִּילְךָ וְאוֹרְךָ בְּדֶרֶךְ זוּ תֵלֵךְ אִיעֲצָה עָלֶיךָ עֵינִי:", french: "Je t'instruirai et te montrerai la voie que tu dois suivre ; je te conseillerai, j'aurai le regard sur toi." },
+      { hebrew: "אַל תִּהְיוּ כְּסוּס כְּפֶרֶד אֵין הָבִין בְּמֶתֶג וָרֶסֶן עֶדְיוֹ לִבְלוֹם בַּל קְרֹב אֵלֶיךָ:", french: "Ne soyez pas comme un cheval, comme un mulet sans intelligence, dont il faut serrer la bouche avec le mors et la bride, pour qu'ils ne s'approchent pas de toi." },
+      { hebrew: "רַבִּים מַכְאוֹבִים לָרָשָׁע וְהַבּוֹטֵחַ בַּיהוה חֶסֶד יְסוֹבְבֶנּוּ:", french: "Nombreuses sont les douleurs du méchant, mais celui qui se confie en l'Éternel, la grâce l'environne." },
+      { hebrew: "שִׂמְחוּ בַיהוה וְגִילוּ צַדִּיקִים וְהַרְנִינוּ כָּל יִשְׁרֵי לֵב:", french: "Réjouissez-vous en l'Éternel et exultez, justes ! Poussez des cris de joie, vous tous qui avez le cœur droit !" },
+    ]
+  },
+  {
+    number: 33,
+    verses: [
+      { hebrew: "רַנְּנוּ צַדִּיקִים בַּיהוה לַיְשָׁרִים נָאוָה תְהִלָּה:", french: "Justes, réjouissez-vous en l'Éternel ! La louange sied aux hommes droits." },
+      { hebrew: "הוֹדוּ לַיהוה בְּכִנּוֹר בְּנֵבֶל עָשׂוֹר זַמְּרוּ לוֹ:", french: "Célébrez l'Éternel avec la harpe, chantez-Le avec le luth à dix cordes !" },
+      { hebrew: "שִׁירוּ לוֹ שִׁיר חָדָשׁ הֵיטִיבוּ נַגֵּן בִּתְרוּעָה:", french: "Chantez-Lui un cantique nouveau, faites retentir vos instruments avec éclat !" },
+      { hebrew: "כִּי יָשָׁר דְּבַר יהוה וְכָל מַעֲשֵׂהוּ בֶּאֱמוּנָה:", french: "Car la parole de l'Éternel est droite, et toute Son œuvre est faite avec fidélité." },
+      { hebrew: "אֹהֵב צְדָקָה וּמִשְׁפָּט חֶסֶד יהוה מָלְאָה הָאָרֶץ:", french: "Il aime la justice et le droit ; la terre est pleine de la bonté de l'Éternel." },
+      { hebrew: "בִּדְבַר יהוה שָׁמַיִם נַעֲשׂוּ וּבְרוּחַ פִּיו כָּל צְבָאָם:", french: "Par la parole de l'Éternel les cieux ont été faits, et par le souffle de Sa bouche toute leur armée." },
+      { hebrew: "כֹּנֵס כַּנֵּד מֵי הַיָּם נֹתֵן בְּאֹצָרוֹת תְּהוֹמוֹת:", french: "Il amasse les eaux de la mer comme un monceau, Il met les abîmes dans des réservoirs." },
+      { hebrew: "יִירְאוּ מֵיהוה כָּל הָאָרֶץ מִמֶּנּוּ יָגוּרוּ כָּל יֹשְׁבֵי תֵבֵל:", french: "Que toute la terre craigne l'Éternel ! Que tous les habitants du monde tremblent devant Lui !" },
+      { hebrew: "כִּי הוּא אָמַר וַיֶּהִי הוּא צִוָּה וַיַּעֲמֹד:", french: "Car Il dit, et la chose arrive ; Il ordonne, et elle existe." },
+      { hebrew: "יהוה הֵפִיר עֲצַת גּוֹיִם הֵנִיא מַחְשְׁבוֹת עַמִּים:", french: "L'Éternel renverse les desseins des nations, Il anéantit les projets des peuples." },
+      { hebrew: "עֲצַת יהוה לְעוֹלָם תַּעֲמֹד מַחְשְׁבוֹת לִבּוֹ לְדֹר וָדֹר:", french: "Le dessein de l'Éternel subsiste à jamais, les projets de Son cœur de génération en génération." },
+      { hebrew: "אַשְׁרֵי הַגּוֹי אֲשֶׁר יהוה אֱלֹהָיו הָעָם בָּחַר לְנַחֲלָה לוֹ:", french: "Heureuse la nation dont l'Éternel est le Dieu ! Heureux le peuple qu'Il a choisi pour Son héritage !" },
+      { hebrew: "מִשָּׁמַיִם הִבִּיט יהוה רָאָה אֶת כָּל בְּנֵי הָאָדָם:", french: "Du haut des cieux l'Éternel regarde, Il voit tous les fils de l'homme." },
+      { hebrew: "מִמְּכוֹן שִׁבְתּוֹ הִשְׁגִּיחַ אֶל כָּל יֹשְׁבֵי הָאָרֶץ:", french: "Du lieu de Sa demeure Il observe tous les habitants de la terre." },
+      { hebrew: "הַיֹּצֵר יַחַד לִבָּם הַמֵּבִין אֶל כָּל מַעֲשֵׂיהֶם:", french: "Lui qui forme leur cœur à tous, qui est attentif à toutes leurs actions." },
+      { hebrew: "אֵין הַמֶּלֶךְ נוֹשָׁע בְּרָב חָיִל גִּבּוֹר לֹא יִנָּצֵל בְּרָב כֹּחַ:", french: "Ce n'est pas une grande armée qui sauve le roi, ce n'est pas une grande force qui délivre le héros." },
+      { hebrew: "שֶׁקֶר הַסּוּס לִתְשׁוּעָה וּבְרֹב חֵילוֹ לֹא יְמַלֵּט:", french: "Le cheval est impuissant pour assurer le salut, et toute sa vigueur ne procure pas la délivrance." },
+      { hebrew: "הִנֵּה עֵין יהוה אֶל יְרֵאָיו לַמְיַחֲלִים לְחַסְדּוֹ:", french: "Voici, l'œil de l'Éternel est sur ceux qui Le craignent, sur ceux qui espèrent en Sa bonté," },
+      { hebrew: "לְהַצִּיל מִמָּוֶת נַפְשָׁם וּלְחַיּוֹתָם בָּרָעָב:", french: "pour délivrer leur âme de la mort et les faire vivre dans la famine." },
+      { hebrew: "נַפְשֵׁנוּ חִכְּתָה לַיהוה עֶזְרֵנוּ וּמָגִנֵּנוּ הוּא:", french: "Notre âme espère en l'Éternel ; Il est notre secours et notre bouclier." },
+      { hebrew: "כִּי בוֹ יִשְׂמַח לִבֵּנוּ כִּי בְשֵׁם קָדְשׁוֹ בָטָחְנוּ:", french: "Car en Lui notre cœur se réjouit, car nous avons confiance en Son saint nom." },
+      { hebrew: "יְהִי חַסְדְּךָ יהוה עָלֵינוּ כַּאֲשֶׁר יִחַלְנוּ לָךְ:", french: "Que Ta grâce soit sur nous, Éternel, comme nous espérons en Toi !" },
+    ]
+  },
+  {
+    number: 34,
+    verses: [
+      { hebrew: "לְדָוִד בְּשַׁנּוֹתוֹ אֶת טַעְמוֹ לִפְנֵי אֲבִימֶלֶךְ וַיְגָרֲשֵׁהוּ וַיֵּלַךְ:", french: "De David, lorsqu'il se montra comme fou devant Abimélekh, qui le chassa, et il s'en alla." },
+      { hebrew: "אֲבָרְכָה אֶת יהוה בְּכָל עֵת תָּמִיד תְּהִלָּתוֹ בְּפִי:", french: "Je bénirai l'Éternel en tout temps ; Sa louange sera toujours dans ma bouche." },
+      { hebrew: "בַּיהוה תִּתְהַלֵּל נַפְשִׁי יִשְׁמְעוּ עֲנָוִים וְיִשְׂמָחוּ:", french: "Mon âme se glorifie en l'Éternel ; que les humbles l'entendent et se réjouissent !" },
+      { hebrew: "גַּדְּלוּ לַיהוה אִתִּי וּנְרוֹמְמָה שְׁמוֹ יַחְדָּו:", french: "Exaltez l'Éternel avec moi, et élevons ensemble Son nom !" },
+      { hebrew: "דָּרַשְׁתִּי אֶת יהוה וְעָנָנִי וּמִכָּל מְגוּרוֹתַי הִצִּילָנִי:", french: "J'ai cherché l'Éternel, et Il m'a répondu ; Il m'a délivré de toutes mes frayeurs." },
+      { hebrew: "הִבִּיטוּ אֵלָיו וְנָהָרוּ וּפְנֵיהֶם אַל יֶחְפָּרוּ:", french: "Quand on tourne vers Lui les regards, on est rayonnant de joie, et le visage ne se couvre pas de honte." },
+      { hebrew: "זֶה עָנִי קָרָא וַיהוה שָׁמֵעַ וּמִכָּל צָרוֹתָיו הוֹשִׁיעוֹ:", french: "Quand un malheureux crie, l'Éternel entend, et Il le sauve de toutes ses détresses." },
+      { hebrew: "חֹנֶה מַלְאַךְ יהוה סָבִיב לִירֵאָיו וַיְחַלְּצֵם:", french: "L'ange de l'Éternel campe autour de ceux qui Le craignent, et Il les délivre." },
+      { hebrew: "טַעֲמוּ וּרְאוּ כִּי טוֹב יהוה אַשְׁרֵי הַגֶּבֶר יֶחֱסֶה בּוֹ:", french: "Goûtez et voyez combien l'Éternel est bon ! Heureux l'homme qui cherche en Lui son refuge !" },
+      { hebrew: "יְראוּ אֶת יהוה קְדֹשָׁיו כִּי אֵין מַחְסוֹר לִירֵאָיו:", french: "Craignez l'Éternel, vous Ses saints ! Car rien ne manque à ceux qui Le craignent." },
+      { hebrew: "כְּפִירִים רָשׁוּ וְרָעֵבוּ וְדֹרְשֵׁי יהוה לֹא יַחְסְרוּ כָל טוֹב:", french: "Les lionceaux éprouvent la disette et la faim, mais ceux qui cherchent l'Éternel ne sont privés d'aucun bien." },
+      { hebrew: "לְכוּ בָנִים שִׁמְעוּ לִי יִרְאַת יהוה אֲלַמֶּדְכֶם:", french: "Venez, mes fils, écoutez-moi ! Je vous enseignerai la crainte de l'Éternel." },
+      { hebrew: "מִי הָאִישׁ הֶחָפֵץ חַיִּים אֹהֵב יָמִים לִרְאוֹת טוֹב:", french: "Quel est l'homme qui aime la vie, qui désire des jours pour voir le bonheur ?" },
+      { hebrew: "נְצֹר לְשׁוֹנְךָ מֵרָע וּשְׂפָתֶיךָ מִדַּבֵּר מִרְמָה:", french: "Préserve ta langue du mal, et tes lèvres des paroles trompeuses !" },
+      { hebrew: "סוּר מֵרָע וַעֲשֵׂה טוֹב בַּקֵּשׁ שָׁלוֹם וְרָדְפֵהוּ:", french: "Éloigne-toi du mal et fais le bien, recherche la paix et poursuis-la !" },
+      { hebrew: "עֵינֵי יהוה אֶל צַדִּיקִים וְאָזְנָיו אֶל שַׁוְעָתָם:", french: "Les yeux de l'Éternel sont sur les justes, et Ses oreilles sont attentives à leurs cris." },
+      { hebrew: "פְּנֵי יהוה בְּעֹשֵׂי רָע לְהַכְרִית מֵאֶרֶץ זִכְרָם:", french: "La face de l'Éternel est contre ceux qui font le mal, pour retrancher de la terre leur souvenir." },
+      { hebrew: "צָעֲקוּ וַיהוה שָׁמֵעַ וּמִכָּל צָרוֹתָם הִצִּילָם:", french: "Quand les justes crient, l'Éternel entend, et Il les délivre de toutes leurs détresses." },
+      { hebrew: "קָרוֹב יהוה לְנִשְׁבְּרֵי לֵב וְאֶת דַּכְּאֵי רוּחַ יוֹשִׁיעַ:", french: "L'Éternel est près de ceux qui ont le cœur brisé, et Il sauve ceux qui ont l'esprit abattu." },
+      { hebrew: "רַבּוֹת רָעוֹת צַדִּיק וּמִכֻּלָּם יַצִּילֶנּוּ יהוה:", french: "Le juste a beaucoup de maux, mais l'Éternel le délivre de tous." },
+      { hebrew: "שֹׁמֵר כָּל עַצְמוֹתָיו אַחַת מֵהֵנָּה לֹא נִשְׁבָּרָה:", french: "Il garde tous ses os, aucun d'eux n'est brisé." },
+      { hebrew: "תְּמוֹתֵת רָשָׁע רָעָה וְשֹׂנְאֵי צַדִּיק יֶאְשָׁמוּ:", french: "La méchanceté tue le méchant, et les ennemis du juste seront châtiés." },
+      { hebrew: "פּוֹדֶה יהוה נֶפֶשׁ עֲבָדָיו וְלֹא יֶאְשְׁמוּ כָּל הַחֹסִים בּוֹ:", french: "L'Éternel délivre l'âme de Ses serviteurs, et aucun de ceux qui se réfugient en Lui ne sera châtié." },
+    ]
+  },
+  {
+    number: 35,
+    verses: [
+      { hebrew: "לְדָוִד רִיבָה יהוה אֶת יְרִיבַי לְחַם אֶת לֹחֲמָי:", french: "De David. Éternel, défends ma cause contre mes adversaires, combats ceux qui me combattent !" },
+      { hebrew: "הַחֲזֵק מָגֵן וְצִנָּה וְקוּמָה בְּעֶזְרָתִי:", french: "Saisis le bouclier et le pavois, et lève-Toi pour me secourir !" },
+      { hebrew: "וְהָרֵק חֲנִית וּסְגֹר לִקְרַאת רֹדְפָי אֱמֹר לְנַפְשִׁי יְשֻׁעָתֵךְ אָנִי:", french: "Brandis la lance et barre le chemin à mes persécuteurs ! Dis à mon âme : C'est Moi ton salut !" },
+      { hebrew: "יֵבֹשׁוּ וְיִכָּלְמוּ מְבַקְשֵׁי נַפְשִׁי יִסֹּגוּ אָחוֹר וְיַחְפְּרוּ חֹשְׁבֵי רָעָתִי:", french: "Qu'ils soient honteux et confondus, ceux qui en veulent à ma vie ! Qu'ils reculent et rougissent, ceux qui méditent ma perte !" },
+      { hebrew: "יִהְיוּ כְּמֹץ לִפְנֵי רוּחַ וּמַלְאַךְ יהוה דּוֹחֶה:", french: "Qu'ils soient comme la paille au vent, et que l'ange de l'Éternel les repousse !" },
+      { hebrew: "יְהִי דַרְכָּם חֹשֶׁךְ וַחֲלַקְלַקּוֹת וּמַלְאַךְ יהוה רֹדְפָם:", french: "Que leur chemin soit ténébreux et glissant, et que l'ange de l'Éternel les poursuive !" },
+      { hebrew: "כִּי חִנָּם טָמְנוּ לִי שַׁחַת רִשְׁתָּם חִנָּם חָפְרוּ לְנַפְשִׁי:", french: "Car sans raison ils m'ont tendu leur filet sur une fosse, sans raison ils l'ont creusé pour mon âme." },
+      { hebrew: "תְּבוֹאֵהוּ שׁוֹאָה לֹא יֵדַע וְרִשְׁתּוֹ אֲשֶׁר טָמַן תִּלְכְּדוֹ בְּשׁוֹאָה יִפָּל בָּהּ:", french: "Que la ruine les atteigne à l'improviste, que le filet qu'ils ont tendu les prenne, et qu'ils tombent eux-mêmes dans la fosse !" },
+      { hebrew: "וְנַפְשִׁי תָּגִיל בַּיהוה תָּשִׂישׂ בִּישׁוּעָתוֹ:", french: "Et mon âme se réjouira en l'Éternel, elle sera dans l'allégresse à cause de Son salut." },
+      { hebrew: "כָּל עַצְמוֹתַי תֹּאמַרְנָה יהוה מִי כָמוֹךָ מַצִּיל עָנִי מֵחָזָק מִמֶּנּוּ וְעָנִי וְאֶבְיוֹן מִגֹּזְלוֹ:", french: "Tous mes os diront : Éternel, qui est semblable à Toi, qui délivres le malheureux de celui qui est plus fort que lui, le pauvre de celui qui le dépouille ?" },
+      { hebrew: "יְקוּמוּן עֵדֵי חָמָס אֲשֶׁר לֹא יָדַעְתִּי יִשְׁאָלוּנִי:", french: "De faux témoins se lèvent, ils me demandent ce que j'ignore." },
+      { hebrew: "יְשַׁלְּמוּנִי רָעָה תַּחַת טוֹבָה שְׁכוֹל לְנַפְשִׁי:", french: "Ils me rendent le mal pour le bien, c'est le deuil pour mon âme." },
+      { hebrew: "וַאֲנִי בַּחֲלוֹתָם לְבוּשִׁי שָׂק עִנֵּיתִי בַצּוֹם נַפְשִׁי וּתְפִלָּתִי עַל חֵיקִי תָשׁוּב:", french: "Et moi, quand ils étaient malades, je revêtais un cilice, j'humiliais mon âme par le jeûne, et ma prière revenait sur mon sein." },
+      { hebrew: "כְּרֵעַ כְּאָח לִי הִתְהַלָּכְתִּי כַּאֲבֵל אֵם קֹדֵר שַׁחוֹתִי:", french: "Comme pour un ami, un frère, j'allais et venais ; comme en deuil d'une mère, je me courbais tristement." },
+      { hebrew: "וּבְצַלְעִי שָׂמְחוּ וְנֶאֱסָפוּ עָלַי נֵכִים וְלֹא יָדַעְתִּי קָרְעוּ וְלֹא דָמּוּ:", french: "Mais lorsque je chancelais, ils se réjouissaient et s'assemblaient ; des misérables que je ne connaissais pas s'attroupaient contre moi, ils me déchiraient sans relâche." },
+      { hebrew: "בְּחַנְפֵי לַעֲגֵי מָעוֹג חָרֹק עָלַי שִׁנֵּימוֹ:", french: "Avec des railleries impies et moqueuses, ils grinçaient des dents contre moi." },
+      { hebrew: "אֲדֹנָי כַּמָּה תִרְאֶה הָשִׁיבָה נַפְשִׁי מִשֹּׁאֵיהֶם מִכְּפִירִים יְחִידָתִי:", french: "Seigneur, jusques à quand verras-Tu cela ? Délivre mon âme de leur fureur, ma vie des lionceaux !" },
+      { hebrew: "אוֹדְךָ בְּקָהָל רָב בְּעַם עָצוּם אֲהַלְלֶךָּ:", french: "Je Te célébrerai dans la grande assemblée, je Te louerai au milieu d'un peuple nombreux." },
+      { hebrew: "אַל יִשְׂמְחוּ לִי אֹיְבַי שֶׁקֶר שֹׂנְאַי חִנָּם יִקְרְצוּ עָיִן:", french: "Que ceux qui sont à tort mes ennemis ne se réjouissent pas à mon sujet, que ceux qui me haïssent sans cause ne clignent pas de l'œil !" },
+      { hebrew: "כִּי לֹא שָׁלוֹם יְדַבֵּרוּ וְעַל רִגְעֵי אֶרֶץ דִּבְרֵי מִרְמוֹת יַחֲשׁוֹבוּן:", french: "Car ce n'est pas de paix qu'ils parlent, et contre les gens paisibles du pays ils forment des desseins trompeurs." },
+      { hebrew: "וַיַּרְחִיבוּ עָלַי פִּיהֶם אָמְרוּ הֶאָח הֶאָח רָאֲתָה עֵינֵינוּ:", french: "Ils ouvrent contre moi leur bouche, ils disent : Ha ! ha ! nos yeux ont vu !" },
+      { hebrew: "רָאִיתָה יהוה אַל תֶּחֱרַשׁ אֲדֹנָי אַל תִּרְחַק מִמֶּנִּי:", french: "Tu vois, Éternel ! Ne Te tais pas ! Seigneur, ne T'éloigne pas de moi !" },
+      { hebrew: "הָעִירָה וְהָקִיצָה לְמִשְׁפָּטִי אֱלֹהַי וַאדֹנָי לְרִיבִי:", french: "Réveille-Toi, lève-Toi pour me faire justice ! Mon Dieu et mon Seigneur, défends ma cause !" },
+      { hebrew: "שָׁפְטֵנִי כְצִדְקְךָ יהוה אֱלֹהָי וְאַל יִשְׂמְחוּ לִי:", french: "Juge-moi selon Ta justice, Éternel mon Dieu, et qu'ils ne se réjouissent pas à mon sujet !" },
+      { hebrew: "אַל יֹאמְרוּ בְלִבָּם הֶאָח נַפְשֵׁנוּ אַל יֹאמְרוּ בִּלַּעֲנוּהוּ:", french: "Qu'ils ne disent pas dans leur cœur : Ha ! c'est ce que nous voulions ! Qu'ils ne disent pas : Nous l'avons englouti !" },
+      { hebrew: "יֵבֹשׁוּ וְיַחְפְּרוּ יַחְדָּו שְׂמֵחֵי רָעָתִי יִלְבְּשׁוּ בֹשֶׁת וּכְלִמָּה הַמַּגְדִּילִים עָלָי:", french: "Qu'ils soient honteux et confondus, tous ceux qui se réjouissent de mon malheur ! Qu'ils soient revêtus de honte et d'opprobre, ceux qui s'élèvent contre moi !" },
+      { hebrew: "יָרֹנּוּ וְיִשְׂמְחוּ חֲפֵצֵי צִדְקִי וְיֹאמְרוּ תָמִיד יִגְדַּל יהוה הֶחָפֵץ שְׁלוֹם עַבְדּוֹ:", french: "Qu'ils chantent de joie et se réjouissent, ceux qui prennent plaisir à ma justice ! Qu'ils disent sans cesse : Que l'Éternel soit exalté, Lui qui veut la paix de Son serviteur !" },
+      { hebrew: "וּלְשׁוֹנִי תֶּהְגֶּה צִדְקֶךָ כָּל הַיּוֹם תְּהִלָּתֶךָ:", french: "Et ma langue proclamera Ta justice, elle Te louera tout le jour." },
+    ]
+  },
+  {
+    number: 36,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְעֶבֶד יהוה לְדָוִד:", french: "Au chef des chantres. Du serviteur de l'Éternel, de David." },
+      { hebrew: "נְאֻם פֶּשַׁע לָרָשָׁע בְּקֶרֶב לִבִּי אֵין פַּחַד אֱלֹהִים לְנֶגֶד עֵינָיו:", french: "Le péché parle au méchant au fond de son cœur ; la crainte de Dieu n'est pas devant ses yeux." },
+      { hebrew: "כִּי הֶחֱלִיק אֵלָיו בְּעֵינָיו לִמְצֹא עֲוֹנוֹ לִשְׂנֹא:", french: "Car il se flatte à ses propres yeux pour que son iniquité se trouve et soit haïe." },
+      { hebrew: "דִּבְרֵי פִיו אָוֶן וּמִרְמָה חָדַל לְהַשְׂכִּיל לְהֵיטִיב:", french: "Les paroles de sa bouche sont iniquité et tromperie ; il a cessé d'être sage et de faire le bien." },
+      { hebrew: "אָוֶן יַחְשֹׁב עַל מִשְׁכָּבוֹ יִתְיַצֵּב עַל דֶּרֶךְ לֹא טוֹב רָע לֹא יִמְאָס:", french: "Il médite l'iniquité sur sa couche, il se tient sur un chemin qui n'est pas bon, il ne repousse pas le mal." },
+      { hebrew: "יהוה בְּהַשָּׁמַיִם חַסְדֶּךָ אֱמוּנָתְךָ עַד שְׁחָקִים:", french: "Éternel, Ta bonté atteint jusqu'aux cieux, Ta fidélité jusqu'aux nues." },
+      { hebrew: "צִדְקָתְךָ כְּהַרְרֵי אֵל מִשְׁפָּטֶךָ תְּהוֹם רַבָּה אָדָם וּבְהֵמָה תוֹשִׁיעַ יהוה:", french: "Ta justice est comme les montagnes de Dieu, Tes jugements sont un grand abîme. Éternel, Tu sauves les hommes et les bêtes !" },
+      { hebrew: "מַה יָּקָר חַסְדְּךָ אֱלֹהִים וּבְנֵי אָדָם בְּצֵל כְּנָפֶיךָ יֶחֱסָיוּן:", french: "Combien est précieuse Ta bonté, ô Dieu ! Les fils de l'homme se réfugient à l'ombre de Tes ailes." },
+      { hebrew: "יִרְוְיֻן מִדֶּשֶׁן בֵּיתֶךָ וְנַחַל עֲדָנֶיךָ תַשְׁקֵם:", french: "Ils se rassasient de l'abondance de Ta maison, et Tu les abreuves au torrent de Tes délices." },
+      { hebrew: "כִּי עִמְּךָ מְקוֹר חַיִּים בְּאוֹרְךָ נִרְאֶה אוֹר:", french: "Car auprès de Toi est la source de la vie ; c'est par Ta lumière que nous voyons la lumière." },
+      { hebrew: "מְשֹׁךְ חַסְדְּךָ לְיֹדְעֶיךָ וְצִדְקָתְךָ לְיִשְׁרֵי לֵב:", french: "Étends Ta bonté sur ceux qui Te connaissent, et Ta justice sur ceux qui ont le cœur droit !" },
+      { hebrew: "אַל תְּבוֹאֵנִי רֶגֶל גַּאֲוָה וְיַד רְשָׁעִים אַל תְּנִדֵנִי:", french: "Que le pied de l'orgueilleux ne m'atteigne pas, et que la main des méchants ne me fasse pas fuir !" },
+      { hebrew: "שָׁם נָפְלוּ פֹּעֲלֵי אָוֶן דֹּחוּ וְלֹא יָכְלוּ קוּם:", french: "C'est là que tombent ceux qui font le mal ; ils sont renversés et ne peuvent se relever." },
+    ]
+  },
+  {
+    number: 37,
+    verses: [
+      { hebrew: "לְדָוִד אַל תִּתְחַר בַּמְּרֵעִים אַל תְּקַנֵּא בְּעֹשֵׂי עַוְלָה:", french: "De David. Ne t'irrite pas contre les méchants, ne porte pas envie à ceux qui font le mal !" },
+      { hebrew: "כִּי כֶחָצִיר מְהֵרָה יִמָּלוּ וּכְיֶרֶק דֶּשֶׁא יִבּוֹלוּן:", french: "Car ils se fanent vite comme l'herbe, et se flétrissent comme le gazon vert." },
+      { hebrew: "בְּטַח בַּיהוה וַעֲשֵׂה טוֹב שְׁכָן אֶרֶץ וּרְעֵה אֱמוּנָה:", french: "Confie-toi en l'Éternel et fais le bien ; habite le pays et nourris-toi de fidélité." },
+      { hebrew: "וְהִתְעַנַּג עַל יהוה וְיִתֶּן לְךָ מִשְׁאֲלֹת לִבֶּךָ:", french: "Fais de l'Éternel tes délices, et Il te donnera ce que ton cœur désire." },
+      { hebrew: "גּוֹל עַל יהוה דַּרְכֶּךָ וּבְטַח עָלָיו וְהוּא יַעֲשֶׂה:", french: "Remets ton sort à l'Éternel, mets en Lui ta confiance, et Il agira." },
+      { hebrew: "וְהוֹצִיא כָאוֹר צִדְקֶךָ וּמִשְׁפָּטֶךָ כַּצָּהֳרָיִם:", french: "Il fera paraître ta justice comme la lumière, et ton droit comme le soleil en plein midi." },
+      { hebrew: "דּוֹם לַיהוה וְהִתְחוֹלֵל לוֹ אַל תִּתְחַר בְּמַצְלִיחַ דַּרְכּוֹ בְּאִישׁ עֹשֶׂה מְזִמּוֹת:", french: "Garde le silence devant l'Éternel, et espère en Lui ; ne t'irrite pas contre celui qui réussit, contre l'homme qui use d'artifices." },
+      { hebrew: "הֶרֶף מֵאַף וַעֲזֹב חֵמָה אַל תִּתְחַר אַךְ לְהָרֵעַ:", french: "Cesse de t'irriter, abandonne la colère ; ne t'échauffe pas, ce serait mal faire." },
+      { hebrew: "כִּי מְרֵעִים יִכָּרֵתוּן וְקוֹיֵ יהוה הֵמָּה יִירְשׁוּ אָרֶץ:", french: "Car les méchants seront retranchés, et ceux qui espèrent en l'Éternel posséderont le pays." },
+      { hebrew: "וְעוֹד מְעַט וְאֵין רָשָׁע וְהִתְבּוֹנַנְתָּ עַל מְקוֹמוֹ וְאֵינֶנּוּ:", french: "Encore un peu de temps et le méchant n'est plus ; tu regardes le lieu où il était, et il a disparu." },
+      { hebrew: "וַעֲנָוִים יִירְשׁוּ אָרֶץ וְהִתְעַנְּגוּ עַל רֹב שָׁלוֹם:", french: "Les humbles posséderont le pays, et ils jouiront d'une grande paix." },
+      { hebrew: "זֹמֵם רָשָׁע לַצַּדִּיק וְחֹרֵק עָלָיו שִׁנָּיו:", french: "Le méchant forme des projets contre le juste et grince des dents contre lui." },
+      { hebrew: "אֲדֹנָי יִשְׂחַק לוֹ כִּי רָאָה כִּי יָבֹא יוֹמוֹ:", french: "Le Seigneur rit de lui, car Il voit que son jour arrive." },
+      { hebrew: "חֶרֶב פָּתְחוּ רְשָׁעִים וְדָרְכוּ קַשְׁתָּם לְהַפִּיל עָנִי וְאֶבְיוֹן לִטְבוֹחַ יִשְׁרֵי דָרֶךְ:", french: "Les méchants tirent l'épée et tendent leur arc, pour faire tomber le malheureux et l'indigent, pour égorger ceux dont la voie est droite." },
+      { hebrew: "חַרְבָּם תָּבוֹא בְלִבָּם וְקַשְׁתוֹתָם תִּשָּׁבַרְנָה:", french: "Leur épée entrera dans leur propre cœur, et leurs arcs se briseront." },
+      { hebrew: "טוֹב מְעַט לַצַּדִּיק מֵהֲמוֹן רְשָׁעִים רַבִּים:", french: "Mieux vaut le peu du juste que l'abondance de beaucoup de méchants." },
+      { hebrew: "כִּי זְרוֹעוֹת רְשָׁעִים תִּשָּׁבַרְנָה וְסוֹמֵךְ צַדִּיקִים יהוה:", french: "Car les bras des méchants seront brisés, mais l'Éternel soutient les justes." },
+      { hebrew: "יוֹדֵעַ יהוה יְמֵי תְמִימִם וְנַחֲלָתָם לְעוֹלָם תִּהְיֶה:", french: "L'Éternel connaît les jours des hommes intègres, et leur héritage durera toujours." },
+      { hebrew: "לֹא יֵבֹשׁוּ בְּעֵת רָעָה וּבִימֵי רְעָבוֹן יִשְׂבָּעוּ:", french: "Ils ne seront pas confondus au temps du malheur, et aux jours de la famine ils seront rassasiés." },
+      { hebrew: "כִּי רְשָׁעִים יֹאבֵדוּ וְאֹיְבֵי יהוה כִּיקַר כָּרִים כָּלוּ בֶעָשָׁן כָּלוּ:", french: "Car les méchants périront, et les ennemis de l'Éternel, comme la parure des prés, s'évanouiront ; ils s'évanouiront en fumée." },
+      { hebrew: "לֹוֶה רָשָׁע וְלֹא יְשַׁלֵּם וְצַדִּיק חוֹנֵן וְנוֹתֵן:", french: "Le méchant emprunte et ne rend pas, mais le juste est compatissant et il donne." },
+      { hebrew: "כִּי מְבֹרָכָיו יִירְשׁוּ אָרֶץ וּמְקֻלָּלָיו יִכָּרֵתוּ:", french: "Car ceux qu'Il bénit posséderont le pays, et ceux qu'Il maudit seront retranchés." },
+      { hebrew: "מֵיהוה מִצְעֲדֵי גֶבֶר כּוֹנָנוּ וְדַרְכּוֹ יֶחְפָּץ:", french: "L'Éternel affermit les pas de l'homme, et Il prend plaisir à sa voie." },
+      { hebrew: "כִּי יִפֹּל לֹא יוּטָל כִּי יהוה סוֹמֵךְ יָדוֹ:", french: "S'il tombe, il n'est pas terrassé, car l'Éternel soutient sa main." },
+      { hebrew: "נַעַר הָיִיתִי גַּם זָקַנְתִּי וְלֹא רָאִיתִי צַדִּיק נֶעֱזָב וְזַרְעוֹ מְבַקֶּשׁ לָחֶם:", french: "J'ai été jeune, j'ai aussi vieilli, et je n'ai pas vu le juste abandonné, ni sa postérité mendiant son pain." },
+      { hebrew: "כָּל הַיּוֹם חוֹנֵן וּמַלְוֶה וְזַרְעוֹ לִבְרָכָה:", french: "Tout le jour il est compatissant et il prête, et sa postérité est bénie." },
+      { hebrew: "סוּר מֵרָע וַעֲשֵׂה טוֹב וּשְׁכֹן לְעוֹלָם:", french: "Éloigne-toi du mal et fais le bien, et tu auras une demeure pour toujours." },
+      { hebrew: "כִּי יהוה אֹהֵב מִשְׁפָּט וְלֹא יַעֲזֹב אֶת חֲסִידָיו לְעוֹלָם נִשְׁמָרוּ וְזֶרַע רְשָׁעִים נִכְרָת:", french: "Car l'Éternel aime la justice, et Il n'abandonne pas Ses fidèles ; ils sont gardés pour toujours, mais la postérité des méchants est retranchée." },
+      { hebrew: "צַדִּיקִים יִירְשׁוּ אָרֶץ וְיִשְׁכְּנוּ לָעַד עָלֶיהָ:", french: "Les justes posséderont le pays et y demeureront à jamais." },
+      { hebrew: "פִּי צַדִּיק יֶהְגֶּה חָכְמָה וּלְשׁוֹנוֹ תְּדַבֵּר מִשְׁפָּט:", french: "La bouche du juste médite la sagesse, et sa langue prononce la justice." },
+      { hebrew: "תּוֹרַת אֱלֹהָיו בְּלִבּוֹ לֹא תִמְעַד אֲשֻׁרָיו:", french: "La loi de son Dieu est dans son cœur, ses pas ne chancellent pas." },
+      { hebrew: "צוֹפֶה רָשָׁע לַצַּדִּיק וּמְבַקֵּשׁ לַהֲמִיתוֹ:", french: "Le méchant épie le juste et cherche à le faire mourir." },
+      { hebrew: "יהוה לֹא יַעַזְבֶנּוּ בְיָדוֹ וְלֹא יַרְשִׁיעֶנּוּ בְּהִשָּׁפְטוֹ:", french: "L'Éternel ne le laissera pas entre ses mains et ne le condamnera pas quand il sera jugé." },
+      { hebrew: "קַוֵּה אֶל יהוה וּשְׁמֹר דַּרְכּוֹ וִירוֹמִמְךָ לָרֶשֶׁת אָרֶץ בְּהִכָּרֵת רְשָׁעִים תִּרְאֶה:", french: "Espère en l'Éternel et garde Sa voie ; Il t'élèvera pour posséder le pays, et tu verras les méchants retranchés." },
+      { hebrew: "רָאִיתִי רָשָׁע עָרִיץ וּמִתְעָרֶה כְּאֶזְרָח רַעֲנָן:", french: "J'ai vu le méchant dans toute sa puissance ; il s'étendait comme un arbre verdoyant." },
+      { hebrew: "וַיַּעֲבֹר וְהִנֵּה אֵינֶנּוּ וָאֲבַקְשֵׁהוּ וְלֹא נִמְצָא:", french: "Il a passé, et voici il n'est plus ; je le cherche, et il ne se trouve pas." },
+      { hebrew: "שְׁמָר תָּם וּרְאֵה יָשָׁר כִּי אַחֲרִית לְאִישׁ שָׁלוֹם:", french: "Observe l'homme intègre et regarde l'homme droit, car il y a une postérité pour l'homme de paix." },
+      { hebrew: "וּפֹשְׁעִים נִשְׁמְדוּ יַחְדָּו אַחֲרִית רְשָׁעִים נִכְרָתָה:", french: "Mais les transgresseurs seront tous détruits, l'avenir des méchants est retranché." },
+      { hebrew: "וּתְשׁוּעַת צַדִּיקִים מֵיהוה מָעוּזָם בְּעֵת צָרָה:", french: "Le salut des justes vient de l'Éternel ; Il est leur forteresse au temps de la détresse." },
+      { hebrew: "וַיַּעְזְרֵם יהוה וַיְפַלְּטֵם יְפַלְּטֵם מֵרְשָׁעִים וְיוֹשִׁיעֵם כִּי חָסוּ בוֹ:", french: "L'Éternel les secourt et les délivre ; Il les délivre des méchants et les sauve, parce qu'ils cherchent en Lui leur refuge." },
+    ]
+  },
+  {
+    number: 38,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד לְהַזְכִּיר:", french: "Psaume de David. Pour la commémoration." },
+      { hebrew: "יהוה אַל בְּקֶצְפְּךָ תוֹכִיחֵנִי וּבַחֲמָתְךָ תְיַסְּרֵנִי:", french: "Éternel, ne me châtie pas dans Ta colère, et ne me punis pas dans Ta fureur !" },
+      { hebrew: "כִּי חִצֶּיךָ נִחֲתוּ בִי וַתִּנְחַת עָלַי יָדֶךָ:", french: "Car Tes flèches m'ont pénétré, et Ta main s'est appesantie sur moi." },
+      { hebrew: "אֵין מְתֹם בִּבְשָׂרִי מִפְּנֵי זַעְמֶךָ אֵין שָׁלוֹם בַּעֲצָמַי מִפְּנֵי חַטָּאתִי:", french: "Il n'y a rien de sain dans ma chair à cause de Ta colère, il n'y a plus de repos dans mes os à cause de mon péché." },
+      { hebrew: "כִּי עֲוֹנֹתַי עָבְרוּ רֹאשִׁי כְּמַשָּׂא כָבֵד יִכְבְּדוּ מִמֶּנִּי:", french: "Car mes iniquités s'élèvent au-dessus de ma tête, comme un lourd fardeau elles sont trop pesantes pour moi." },
+      { hebrew: "הִבְאִישׁוּ נָמַקּוּ חַבּוּרֹתַי מִפְּנֵי אִוַּלְתִּי:", french: "Mes plaies sont infectes et purulentes, à cause de ma folie." },
+      { hebrew: "נַעֲוֵיתִי שַׁחֹתִי עַד מְאֹד כָּל הַיּוֹם קֹדֵר הִלָּכְתִּי:", french: "Je suis courbé, je suis abattu à l'excès ; tout le jour je marche dans la tristesse." },
+      { hebrew: "כִּי כְסָלַי מָלְאוּ נִקְלֶה וְאֵין מְתֹם בִּבְשָׂרִי:", french: "Car mes reins sont pleins d'inflammation, et il n'y a rien de sain dans ma chair." },
+      { hebrew: "נְפוּגוֹתִי וְנִדְכֵּיתִי עַד מְאֹד שָׁאַגְתִּי מִנַּהֲמַת לִבִּי:", french: "Je suis épuisé et brisé à l'extrême, je gémis à cause du trouble de mon cœur." },
+      { hebrew: "אֲדֹנָי נֶגְדְּךָ כָל תַּאֲוָתִי וְאַנְחָתִי מִמְּךָ לֹא נִסְתָּרָה:", french: "Seigneur, tout mon désir est devant Toi, et mon soupir ne T'est pas caché." },
+      { hebrew: "לִבִּי סְחַרְחַר עֲזָבַנִי כֹחִי וְאוֹר עֵינַי גַּם הֵם אֵין אִתִּי:", french: "Mon cœur est agité, ma force m'abandonne, et la lumière de mes yeux, elle aussi, n'est plus avec moi." },
+      { hebrew: "אֹהֲבַי וְרֵעַי מִנֶּגֶד נִגְעִי יַעֲמֹדוּ וּקְרוֹבַי מֵרָחֹק עָמָדוּ:", french: "Mes amis et mes proches se tiennent à distance de ma plaie, et mes parents se tiennent loin de moi." },
+      { hebrew: "וַיְנַקְשׁוּ מְבַקְשֵׁי נַפְשִׁי וְדֹרְשֵׁי רָעָתִי דִּבְּרוּ הַוּוֹת וּמִרְמוֹת כָּל הַיּוֹם יֶהְגּוּ:", french: "Ceux qui en veulent à ma vie me tendent des pièges ; ceux qui cherchent mon malheur profèrent des méchancetés et méditent des tromperies tout le jour." },
+      { hebrew: "וַאֲנִי כְחֵרֵשׁ לֹא אֶשְׁמָע וּכְאִלֵּם לֹא יִפְתַּח פִּיו:", french: "Et moi, comme un sourd, je n'entends pas ; comme un muet, je n'ouvre pas la bouche." },
+      { hebrew: "וָאֱהִי כְּאִישׁ אֲשֶׁר לֹא שֹׁמֵעַ וְאֵין בְּפִיו תּוֹכָחוֹת:", french: "Je suis comme un homme qui n'entend pas, et dans la bouche duquel il n'y a pas de réplique." },
+      { hebrew: "כִּי לְךָ יהוה הוֹחָלְתִּי אַתָּה תַעֲנֶה אֲדֹנָי אֱלֹהָי:", french: "Car c'est en Toi, Éternel, que j'espère ; Tu répondras, Seigneur mon Dieu !" },
+      { hebrew: "כִּי אָמַרְתִּי פֶּן יִשְׂמְחוּ לִי בְּמוֹט רַגְלִי עָלַי הִגְדִּילוּ:", french: "Car j'ai dit : Qu'ils ne se réjouissent pas à mon sujet ! Quand mon pied chancelle, qu'ils ne s'élèvent pas contre moi !" },
+      { hebrew: "כִּי אֲנִי לְצֶלַע נָכוֹן וּמַכְאוֹבִי נֶגְדִּי תָמִיד:", french: "Car je suis prêt à tomber, et ma douleur est toujours devant moi." },
+      { hebrew: "כִּי עֲוֹנִי אַגִּיד אֶדְאַג מֵחַטָּאתִי:", french: "Car je déclare mon iniquité, je suis dans l'inquiétude à cause de mon péché." },
+      { hebrew: "וְאֹיְבַי חַיִּים עָצֵמוּ וְרַבּוּ שֹׂנְאַי שָׁקֶר:", french: "Mes ennemis sont vigoureux et puissants, et ceux qui me haïssent sans cause sont nombreux." },
+      { hebrew: "וּמְשַׁלְּמֵי רָעָה תַּחַת טוֹבָה יִשְׂטְנוּנִי תַּחַת רָדְפִי טוֹב:", french: "Ceux qui rendent le mal pour le bien me sont hostiles, parce que je cherche le bien." },
+      { hebrew: "אַל תַּעַזְבֵנִי יהוה אֱלֹהַי אַל תִּרְחַק מִמֶּנִּי:", french: "Ne m'abandonne pas, Éternel ! Mon Dieu, ne T'éloigne pas de moi !" },
+      { hebrew: "חוּשָׁה לְעֶזְרָתִי אֲדֹנָי תְּשׁוּעָתִי:", french: "Hâte-Toi de me secourir, Seigneur, mon salut !" },
+    ]
+  },
+  {
+    number: 39,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לִידוּתוּן מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Pour Yedoutoun. Psaume de David." },
+      { hebrew: "אָמַרְתִּי אֶשְׁמְרָה דְרָכַי מֵחֲטוֹא בִלְשׁוֹנִי אֶשְׁמְרָה לְפִי מַחְסוֹם בְּעֹד רָשָׁע לְנֶגְדִּי:", french: "J'ai dit : Je veillerai sur mes voies, de peur de pécher par ma langue ; je garderai un frein à ma bouche, tant que le méchant est devant moi." },
+      { hebrew: "נֶאֱלַמְתִּי דוּמִיָּה הֶחֱשֵׁיתִי מִטּוֹב וּכְאֵבִי נֶעְכָּר:", french: "Je suis resté muet, dans le silence ; je me suis tu, même loin du bonheur, et ma douleur s'est ravivée." },
+      { hebrew: "חַם לִבִּי בְּקִרְבִּי בַּהֲגִיגִי תִבְעַר אֵשׁ דִּבַּרְתִּי בִּלְשׁוֹנִי:", french: "Mon cœur brûlait au-dedans de moi ; un feu s'est allumé dans ma méditation, et j'ai parlé avec ma langue :" },
+      { hebrew: "הוֹדִיעֵנִי יהוה קִצִּי וּמִדַּת יָמַי מַה הִיא אֵדְעָה מֶה חָדֵל אָנִי:", french: "Éternel, fais-moi connaître ma fin, et quelle est la mesure de mes jours ; que je sache combien je suis fragile !" },
+      { hebrew: "הִנֵּה טְפָחוֹת נָתַתָּה יָמַי וְחֶלְדִּי כְאַיִן נֶגְדֶּךָ אַךְ כָּל הֶבֶל כָּל אָדָם נִצָּב סֶלָה:", french: "Voici, Tu as donné à mes jours la longueur de quelques palmes, et ma durée est comme un rien devant Toi. Oui, tout homme debout n'est que vanité. Sélah." },
+      { hebrew: "אַךְ בְּצֶלֶם יִתְהַלֶּךְ אִישׁ אַךְ הֶבֶל יֶהֱמָיוּן יִצְבֹּר וְלֹא יֵדַע מִי אֹסְפָם:", french: "Oui, l'homme se promène comme une ombre, il s'agite en vain ; il amasse, et ne sait qui recueillera." },
+      { hebrew: "וְעַתָּה מַה קִּוִּיתִי אֲדֹנָי תּוֹחַלְתִּי לְךָ הִיא:", french: "Et maintenant, qu'est-ce que j'attends, Seigneur ? Mon espérance est en Toi." },
+      { hebrew: "מִכָּל פְּשָׁעַי הַצִּילֵנִי חֶרְפַּת נָבָל אַל תְּשִׂימֵנִי:", french: "Délivre-moi de toutes mes transgressions ! Ne me rends pas l'opprobre de l'insensé !" },
+      { hebrew: "נֶאֱלַמְתִּי לֹא אֶפְתַּח פִּי כִּי אַתָּה עָשִׂיתָ:", french: "Je reste muet, je n'ouvre pas la bouche, car c'est Toi qui l'as fait." },
+      { hebrew: "הָסֵר מֵעָלַי נִגְעֶךָ מִתִּגְרַת יָדְךָ אֲנִי כָלִיתִי:", french: "Détourne de moi Tes coups ! Je succombe sous l'attaque de Ta main." },
+      { hebrew: "בְּתוֹכָחוֹת עַל עָוֹן יִסַּרְתָּ אִישׁ וַתֶּמֶס כָּעָשׁ חֲמוּדוֹ אַךְ הֶבֶל כָּל אָדָם סֶלָה:", french: "Tu châties l'homme en le reprenant à cause de son iniquité, et Tu détruis comme la teigne ce qu'il a de précieux. Oui, tout homme n'est que vanité. Sélah." },
+      { hebrew: "שִׁמְעָה תְפִלָּתִי יהוה וְשַׁוְעָתִי הַאֲזִינָה אֶל דִּמְעָתִי אַל תֶּחֱרַשׁ כִּי גֵר אָנֹכִי עִמָּךְ תּוֹשָׁב כְּכָל אֲבוֹתָי:", french: "Écoute ma prière, Éternel, et prête l'oreille à mes cris ! Ne sois pas insensible à mes larmes ! Car je suis un étranger chez Toi, un habitant comme tous mes pères." },
+      { hebrew: "הָשַׁע מִמֶּנִּי וְאַבְלִיגָה בְּטֶרֶם אֵלֵךְ וְאֵינֶנִּי:", french: "Détourne de moi le regard, que je reprenne des forces, avant que je m'en aille et que je ne sois plus !" },
+    ]
+  },
+  {
+    number: 40,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד מִזְמוֹר:", french: "Au chef des chantres. De David. Psaume." },
+      { hebrew: "קַוֹּה קִוִּיתִי יהוה וַיֵּט אֵלַי וַיִּשְׁמַע שַׁוְעָתִי:", french: "J'ai espéré en l'Éternel, et Il s'est penché vers moi et Il a entendu mon cri." },
+      { hebrew: "וַיַּעֲלֵנִי מִבּוֹר שָׁאוֹן מִטִּיט הַיָּוֵן וַיָּקֶם עַל סֶלַע רַגְלַי כּוֹנֵן אֲשֻׁרָי:", french: "Il m'a retiré de la fosse de destruction, de la fange boueuse ; Il a dressé mes pieds sur le roc, Il a affermi mes pas." },
+      { hebrew: "וַיִּתֵּן בְּפִי שִׁיר חָדָשׁ תְּהִלָּה לֵאלֹהֵינוּ יִרְאוּ רַבִּים וְיִירָאוּ וְיִבְטְחוּ בַּיהוה:", french: "Il a mis dans ma bouche un cantique nouveau, une louange à notre Dieu ; beaucoup verront et craindront, et se confieront en l'Éternel." },
+      { hebrew: "אַשְׁרֵי הַגֶּבֶר אֲשֶׁר שָׂם יהוה מִבְטַחוֹ וְלֹא פָנָה אֶל רְהָבִים וְשָׂטֵי כָזָב:", french: "Heureux l'homme qui place en l'Éternel sa confiance, et qui ne se tourne pas vers les arrogants ni vers ceux qui se livrent au mensonge." },
+      { hebrew: "רַבּוֹת עָשִׂיתָ אַתָּה יהוה אֱלֹהַי נִפְלְאֹתֶיךָ וּמַחְשְׁבֹתֶיךָ אֵלֵינוּ אֵין עֲרֹךְ אֵלֶיךָ אַגִּידָה וַאֲדַבֵּרָה עָצְמוּ מִסַּפֵּר:", french: "Tu as fait beaucoup de choses, Toi, Éternel mon Dieu ! Tes merveilles et Tes pensées envers nous, nul n'est comparable à Toi ; je voudrais les publier et les proclamer, mais elles sont trop nombreuses pour être racontées." },
+      { hebrew: "זֶבַח וּמִנְחָה לֹא חָפַצְתָּ אָזְנַיִם כָּרִיתָ לִּי עוֹלָה וַחֲטָאָה לֹא שָׁאָלְתָּ:", french: "Tu ne désires ni sacrifice ni offrande — Tu m'as ouvert les oreilles — Tu ne demandes ni holocauste ni expiation." },
+      { hebrew: "אָז אָמַרְתִּי הִנֵּה בָאתִי בִּמְגִלַּת סֵפֶר כָּתוּב עָלָי:", french: "Alors j'ai dit : Voici, je viens ; dans le rouleau du livre il est écrit pour moi." },
+      { hebrew: "לַעֲשׂוֹת רְצוֹנְךָ אֱלֹהַי חָפָצְתִּי וְתוֹרָתְךָ בְּתוֹךְ מֵעָי:", french: "Je veux faire Ta volonté, mon Dieu, et Ta loi est au fond de mon cœur." },
+      { hebrew: "בִּשַּׂרְתִּי צֶדֶק בְּקָהָל רָב הִנֵּה שְׂפָתַי לֹא אֶכְלָא יהוה אַתָּה יָדָעְתָּ:", french: "J'ai annoncé la justice dans la grande assemblée ; voici, je ne ferme pas mes lèvres, Éternel, Tu le sais." },
+      { hebrew: "צִדְקָתְךָ לֹא כִסִּיתִי בְּתוֹךְ לִבִּי אֱמוּנָתְךָ וּתְשׁוּעָתְךָ אָמָרְתִּי לֹא כִחַדְתִּי חַסְדְּךָ וַאֲמִתְּךָ לְקָהָל רָב:", french: "Je n'ai pas caché Ta justice au fond de mon cœur, j'ai proclamé Ta fidélité et Ton salut ; je n'ai pas dissimulé Ta bonté et Ta vérité devant la grande assemblée." },
+      { hebrew: "אַתָּה יהוה לֹא תִכְלָא רַחֲמֶיךָ מִמֶּנִּי חַסְדְּךָ וַאֲמִתְּךָ תָּמִיד יִצְּרוּנִי:", french: "Toi, Éternel, Tu ne me refuseras pas Tes compassions ; Ta bonté et Ta vérité me garderont toujours." },
+      { hebrew: "כִּי אָפְפוּ עָלַי רָעוֹת עַד אֵין מִסְפָּר הִשִּׂיגוּנִי עֲוֹנֹתַי וְלֹא יָכֹלְתִּי לִרְאוֹת עָצְמוּ מִשַּׂעֲרוֹת רֹאשִׁי וְלִבִּי עֲזָבָנִי:", french: "Car des maux sans nombre m'ont enveloppé ; mes iniquités m'ont atteint et je ne peux plus voir ; elles sont plus nombreuses que les cheveux de ma tête, et mon cœur m'a abandonné." },
+      { hebrew: "רְצֵה יהוה לְהַצִּילֵנִי יהוה לְעֶזְרָתִי חוּשָׁה:", french: "Daigne, Éternel, me délivrer ! Éternel, hâte-Toi de me secourir !" },
+      { hebrew: "יֵבֹשׁוּ וְיַחְפְּרוּ יַחַד מְבַקְשֵׁי נַפְשִׁי לִסְפּוֹתָהּ יִסֹּגוּ אָחוֹר וְיִכָּלְמוּ חֲפֵצֵי רָעָתִי:", french: "Qu'ils soient honteux et confondus, tous ensemble, ceux qui cherchent à m'ôter la vie ; qu'ils reculent et soient couverts d'opprobre, ceux qui désirent mon malheur !" },
+      { hebrew: "יָשֹׁמּוּ עַל עֵקֶב בָּשְׁתָּם הָאֹמְרִים לִי הֶאָח הֶאָח:", french: "Qu'ils soient frappés de stupeur par leur honte, ceux qui me disent : Ha ! Ha !" },
+      { hebrew: "יָשִׂישׂוּ וְיִשְׂמְחוּ בְּךָ כָּל מְבַקְשֶׁיךָ יֹאמְרוּ תָמִיד יִגְדַּל יהוה אֹהֲבֵי תְּשׁוּעָתֶךָ:", french: "Qu'ils soient dans la joie et se réjouissent en Toi, tous ceux qui Te cherchent ! Que ceux qui aiment Ton salut disent sans cesse : L'Éternel est grand !" },
+      { hebrew: "וַאֲנִי עָנִי וְאֶבְיוֹן אֲדֹנָי יַחֲשָׁב לִי עֶזְרָתִי וּמְפַלְטִי אַתָּה אֱלֹהַי אַל תְּאַחַר:", french: "Et moi, je suis pauvre et indigent ; le Seigneur pense à moi. Tu es mon aide et mon libérateur ; mon Dieu, ne tarde pas !" },
+    ]
+  },
+  {
+    number: 41,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "אַשְׁרֵי מַשְׂכִּיל אֶל דָּל בְּיוֹם רָעָה יְמַלְּטֵהוּ יהוה:", french: "Heureux celui qui s'intéresse au pauvre ! Au jour du malheur, l'Éternel le délivre." },
+      { hebrew: "יהוה יִשְׁמְרֵהוּ וִיחַיֵּהוּ וְאֻשַּׁר בָּאָרֶץ וְאַל תִּתְּנֵהוּ בְּנֶפֶשׁ אֹיְבָיו:", french: "L'Éternel le gardera et le fera vivre ; il sera heureux sur la terre, et Tu ne le livreras pas à la merci de ses ennemis." },
+      { hebrew: "יהוה יִסְעָדֶנּוּ עַל עֶרֶשׂ דְּוָי כָּל מִשְׁכָּבוֹ הָפַכְתָּ בְחָלְיוֹ:", french: "L'Éternel le soutiendra sur son lit de douleur ; Tu transformeras toute sa couche dans sa maladie." },
+      { hebrew: "אֲנִי אָמַרְתִּי יהוה חָנֵּנִי רְפָאָה נַפְשִׁי כִּי חָטָאתִי לָךְ:", french: "Moi j'ai dit : Éternel, aie pitié de moi ! Guéris mon âme, car j'ai péché contre Toi." },
+      { hebrew: "אוֹיְבַי יֹאמְרוּ רַע לִי מָתַי יָמוּת וְאָבַד שְׁמוֹ:", french: "Mes ennemis disent méchamment de moi : Quand mourra-t-il ? Quand périra son nom ?" },
+      { hebrew: "וְאִם בָּא לִרְאוֹת שָׁוְא יְדַבֵּר לִבּוֹ יִקְבָּץ אָוֶן לוֹ יֵצֵא לַחוּץ יְדַבֵּר:", french: "Si quelqu'un vient me voir, il dit des faussetés ; son cœur amasse l'iniquité, il sort et il en parle." },
+      { hebrew: "יַחַד עָלַי יִתְלַחֲשׁוּ כָּל שֹׂנְאָי עָלַי יַחְשְׁבוּ רָעָה לִי:", french: "Tous ceux qui me haïssent chuchotent ensemble contre moi ; ils méditent le mal contre moi." },
+      { hebrew: "דְּבַר בְּלִיַּעַל יָצוּק בּוֹ וַאֲשֶׁר שָׁכַב לֹא יוֹסִיף לָקוּם:", french: "Un mal funeste, disent-ils, s'est répandu en lui ; le voilà couché, il ne se relèvera plus !" },
+      { hebrew: "גַּם אִישׁ שְׁלוֹמִי אֲשֶׁר בָּטַחְתִּי בוֹ אוֹכֵל לַחְמִי הִגְדִּיל עָלַי עָקֵב:", french: "Même l'homme avec qui j'étais en paix, en qui j'avais confiance, qui mangeait mon pain, a levé le talon contre moi." },
+      { hebrew: "וְאַתָּה יהוה חָנֵּנִי וַהֲקִימֵנִי וַאֲשַׁלְּמָה לָהֶם:", french: "Mais Toi, Éternel, aie pitié de moi et relève-moi, et je leur rendrai !" },
+      { hebrew: "בְּזֹאת יָדַעְתִּי כִּי חָפַצְתָּ בִּי כִּי לֹא יָרִיעַ אֹיְבִי עָלָי:", french: "Par ceci je sais que Tu m'aimes : c'est que mon ennemi ne triomphera pas de moi." },
+      { hebrew: "וַאֲנִי בְּתֻמִּי תָּמַכְתָּ בִּי וַתַּצִּיבֵנִי לְפָנֶיךָ לְעוֹלָם:", french: "Et moi, dans mon intégrité, Tu me soutiens, et Tu m'établis devant Ta face pour toujours." },
+      { hebrew: "בָּרוּךְ יהוה אֱלֹהֵי יִשְׂרָאֵל מֵהָעוֹלָם וְעַד הָעוֹלָם אָמֵן וְאָמֵן:", french: "Béni soit l'Éternel, Dieu d'Israël, d'éternité en éternité ! Amen et amen !" },
+    ]
+  },
+  {
+    number: 42,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מַשְׂכִּיל לִבְנֵי קֹרַח:", french: "Au chef des chantres. Cantique des fils de Coré." },
+      { hebrew: "כְּאַיָּל תַּעֲרֹג עַל אֲפִיקֵי מָיִם כֵּן נַפְשִׁי תַעֲרֹג אֵלֶיךָ אֱלֹהִים:", french: "Comme une biche soupire après des courants d'eau, ainsi mon âme soupire après Toi, ô Dieu !" },
+      { hebrew: "צָמְאָה נַפְשִׁי לֵאלֹהִים לְאֵל חָי מָתַי אָבוֹא וְאֵרָאֶה פְּנֵי אֱלֹהִים:", french: "Mon âme a soif de Dieu, du Dieu vivant : quand irai-je et paraîtrai-je devant la face de Dieu ?" },
+      { hebrew: "הָיְתָה לִּי דִמְעָתִי לֶחֶם יוֹמָם וָלָיְלָה בֶּאֱמֹר אֵלַי כָּל הַיּוֹם אַיֵּה אֱלֹהֶיךָ:", french: "Mes larmes sont ma nourriture jour et nuit, quand on me dit tout le jour : Où est ton Dieu ?" },
+      { hebrew: "אֵלֶּה אֶזְכְּרָה וְאֶשְׁפְּכָה עָלַי נַפְשִׁי כִּי אֶעֱבֹר בַּסָּךְ אֶדַּדֵּם עַד בֵּית אֱלֹהִים בְּקוֹל רִנָּה וְתוֹדָה הָמוֹן חוֹגֵג:", french: "Je me souviens, et je répands mon âme en moi-même : je franchissais la foule, je m'avançais vers la maison de Dieu, au milieu des cris de joie et de louange d'une multitude en fête." },
+      { hebrew: "מַה תִּשְׁתּוֹחֲחִי נַפְשִׁי וַתֶּהֱמִי עָלָי הוֹחִילִי לֵאלֹהִים כִּי עוֹד אוֹדֶנּוּ יְשׁוּעוֹת פָּנָיו:", french: "Pourquoi es-tu abattue, mon âme, et gémis-tu en moi ? Espère en Dieu, car je Le louerai encore ; Il est mon salut et mon Dieu." },
+      { hebrew: "אֱלֹהַי עָלַי נַפְשִׁי תִשְׁתּוֹחָח עַל כֵּן אֶזְכָּרְךָ מֵאֶרֶץ יַרְדֵּן וְחֶרְמוֹנִים מֵהַר מִצְעָר:", french: "Mon Dieu, mon âme est abattue en moi ; c'est pourquoi je me souviens de Toi depuis le pays du Jourdain, depuis les monts Hermon, depuis la montagne de Mitsar." },
+      { hebrew: "תְּהוֹם אֶל תְּהוֹם קוֹרֵא לְקוֹל צִנּוֹרֶיךָ כָּל מִשְׁבָּרֶיךָ וְגַלֶּיךָ עָלַי עָבָרוּ:", french: "L'abîme appelle l'abîme au bruit de tes cascades ; toutes Tes vagues et Tes flots ont passé sur moi." },
+      { hebrew: "יוֹמָם יְצַוֶּה יהוה חַסְדּוֹ וּבַלַּיְלָה שִׁירֹה עִמִּי תְּפִלָּה לְאֵל חַיָּי:", french: "Le jour, l'Éternel m'accordera Sa grâce ; la nuit, Son cantique sera avec moi, une prière au Dieu de ma vie." },
+      { hebrew: "אוֹמְרָה לְאֵל סַלְעִי לָמָה שְׁכַחְתָּנִי לָמָּה קֹדֵר אֵלֵךְ בְּלַחַץ אוֹיֵב:", french: "Je dis à Dieu, mon rocher : Pourquoi m'as-Tu oublié ? Pourquoi dois-je marcher dans la tristesse, sous l'oppression de l'ennemi ?" },
+      { hebrew: "בְּרֶצַח בְּעַצְמוֹתַי חֵרְפוּנִי צוֹרְרָי בְּאָמְרָם אֵלַי כָּל הַיּוֹם אַיֵּה אֱלֹהֶיךָ:", french: "Mes os se brisent quand mes adversaires m'outragent, en me disant tout le jour : Où est ton Dieu ?" },
+      { hebrew: "מַה תִּשְׁתּוֹחֲחִי נַפְשִׁי וּמַה תֶּהֱמִי עָלָי הוֹחִילִי לֵאלֹהִים כִּי עוֹד אוֹדֶנּוּ יְשׁוּעֹת פָּנַי וֵאלֹהָי:", french: "Pourquoi es-tu abattue, mon âme, et pourquoi gémis-tu en moi ? Espère en Dieu, car je Le louerai encore ; Il est le salut de ma face et mon Dieu." },
+    ]
+  },
+  {
+    number: 43,
+    verses: [
+      { hebrew: "שָׁפְטֵנִי אֱלֹהִים וְרִיבָה רִיבִי מִגּוֹי לֹא חָסִיד מֵאִישׁ מִרְמָה וְעַוְלָה תְפַלְּטֵנִי:", french: "Fais-moi justice, ô Dieu, et défends ma cause contre une nation impie ! Délivre-moi de l'homme trompeur et inique !" },
+      { hebrew: "כִּי אַתָּה אֱלֹהֵי מָעוּזִּי לָמָה זְנַחְתָּנִי לָמָּה קֹדֵר אֶתְהַלֵּךְ בְּלַחַץ אוֹיֵב:", french: "Car Tu es le Dieu de ma force ; pourquoi me repousses-Tu ? Pourquoi dois-je marcher dans la tristesse, sous l'oppression de l'ennemi ?" },
+      { hebrew: "שְׁלַח אוֹרְךָ וַאֲמִתְּךָ הֵמָּה יַנְחוּנִי יְבִיאוּנִי אֶל הַר קָדְשְׁךָ וְאֶל מִשְׁכְּנוֹתֶיךָ:", french: "Envoie Ta lumière et Ta vérité : elles me guideront, elles me conduiront à Ta montagne sainte et à Tes demeures." },
+      { hebrew: "וְאָבוֹאָה אֶל מִזְבַּח אֱלֹהִים אֶל אֵל שִׂמְחַת גִּילִי וְאוֹדְךָ בְכִנּוֹר אֱלֹהִים אֱלֹהָי:", french: "J'irai à l'autel de Dieu, au Dieu de ma joie et de mon allégresse, et je Te célébrerai sur la harpe, ô Dieu, mon Dieu !" },
+      { hebrew: "מַה תִּשְׁתּוֹחֲחִי נַפְשִׁי וּמַה תֶּהֱמִי עָלָי הוֹחִילִי לֵאלֹהִים כִּי עוֹד אוֹדֶנּוּ יְשׁוּעֹת פָּנַי וֵאלֹהָי:", french: "Pourquoi es-tu abattue, mon âme, et pourquoi gémis-tu en moi ? Espère en Dieu, car je Le louerai encore ; Il est le salut de ma face et mon Dieu." },
+    ]
+  },
+  {
+    number: 44,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לִבְנֵי קֹרַח מַשְׂכִּיל:", french: "Au chef des chantres. Des fils de Coré. Cantique." },
+      { hebrew: "אֱלֹהִים בְּאָזְנֵינוּ שָׁמַעְנוּ אֲבוֹתֵינוּ סִפְּרוּ לָנוּ פֹּעַל פָּעַלְתָּ בִימֵיהֶם בִּימֵי קֶדֶם:", french: "Ô Dieu, nous avons entendu de nos oreilles, nos pères nous ont raconté l'œuvre que Tu as accomplie de leur temps, aux jours d'autrefois." },
+      { hebrew: "אַתָּה יָדְךָ גּוֹיִם הוֹרַשְׁתָּ וַתִּטָּעֵם תָּרַע לְאֻמִּים וַתְּשַׁלְּחֵם:", french: "Tu as, de Ta main, dépossédé des nations pour les établir, Tu as frappé des peuples et Tu les as chassés." },
+      { hebrew: "כִּי לֹא בְחַרְבָּם יָרְשׁוּ אָרֶץ וּזְרוֹעָם לֹא הוֹשִׁיעָה לָמוֹ כִּי יְמִינְךָ וּזְרוֹעֲךָ וְאוֹר פָּנֶיךָ כִּי רְצִיתָם:", french: "Car ce n'est pas par leur épée qu'ils ont conquis le pays, et ce n'est pas leur bras qui les a sauvés, mais c'est Ta droite et Ton bras et la lumière de Ta face, car Tu les aimais." },
+      { hebrew: "אַתָּה הוּא מַלְכִּי אֱלֹהִים צַוֵּה יְשׁוּעוֹת יַעֲקֹב:", french: "Tu es mon Roi, ô Dieu ! Ordonne la délivrance de Jacob !" },
+      { hebrew: "בְּךָ צָרֵינוּ נְנַגֵּחַ בְּשִׁמְךָ נָבוּס קָמֵינוּ:", french: "Par Toi nous renversons nos adversaires, par Ton nom nous foulons ceux qui s'élèvent contre nous." },
+      { hebrew: "כִּי לֹא בְקַשְׁתִּי אֶבְטָח וְחַרְבִּי לֹא תוֹשִׁיעֵנִי:", french: "Car ce n'est pas en mon arc que je me confie, et ce n'est pas mon épée qui me sauvera." },
+      { hebrew: "כִּי הוֹשַׁעְתָּנוּ מִצָּרֵינוּ וּמְשַׂנְאֵינוּ הֱבִישׁוֹתָ:", french: "Car Tu nous as délivrés de nos adversaires, et Tu as couvert de honte ceux qui nous haïssent." },
+      { hebrew: "בֵּאלֹהִים הִלַּלְנוּ כָל הַיּוֹם וְשִׁמְךָ לְעוֹלָם נוֹדֶה סֶלָה:", french: "En Dieu nous nous glorifions tout le jour, et nous célébrons Ton nom à jamais. Sélah." },
+      { hebrew: "אַף זָנַחְתָּ וַתַּכְלִימֵנוּ וְלֹא תֵצֵא בְּצִבְאוֹתֵינוּ:", french: "Et pourtant Tu nous repousses et Tu nous couvres de honte, et Tu ne sors plus avec nos armées." },
+      { hebrew: "תְּשִׁיבֵנוּ אָחוֹר מִנִּי צָר וּמְשַׂנְאֵינוּ שָׁסוּ לָמוֹ:", french: "Tu nous fais reculer devant l'adversaire, et ceux qui nous haïssent nous dépouillent." },
+      { hebrew: "תִּתְּנֵנוּ כְצֹאן מַאֲכָל וּבַגּוֹיִם זֵרִיתָנוּ:", french: "Tu nous livres comme des brebis à dévorer, et Tu nous disperses parmi les nations." },
+      { hebrew: "תִּמְכֹּר עַמְּךָ בְלֹא הוֹן וְלֹא רִבִּיתָ בִּמְחִירֵיהֶם:", french: "Tu vends Ton peuple pour un rien, et Tu n'as pas exigé un prix élevé." },
+      { hebrew: "תְּשִׂימֵנוּ חֶרְפָּה לִשְׁכֵנֵינוּ לַעַג וָקֶלֶס לִסְבִיבוֹתֵינוּ:", french: "Tu fais de nous l'opprobre de nos voisins, la moquerie et la risée de ceux qui nous entourent." },
+      { hebrew: "תְּשִׂימֵנוּ מָשָׁל בַּגּוֹיִם מְנוֹד רֹאשׁ בַּלְאֻמִּים:", french: "Tu fais de nous un objet de sarcasme parmi les nations, un sujet de hochements de tête parmi les peuples." },
+      { hebrew: "כָּל הַיּוֹם כְּלִמָּתִי נֶגְדִּי וּבֹשֶׁת פָּנַי כִּסָּתְנִי:", french: "Tout le jour ma honte est devant moi, et la confusion couvre mon visage," },
+      { hebrew: "מִקּוֹל מְחָרֵף וּמְגַדֵּף מִפְּנֵי אוֹיֵב וּמִתְנַקֵּם:", french: "à la voix de celui qui insulte et outrage, à l'aspect de l'ennemi et du vindicatif." },
+      { hebrew: "כָּל זֹאת בָּאַתְנוּ וְלֹא שְׁכַחֲנוּךָ וְלֹא שִׁקַּרְנוּ בִּבְרִיתֶךָ:", french: "Tout cela nous est arrivé, et nous ne T'avons pas oublié, et nous n'avons pas trahi Ton alliance." },
+      { hebrew: "לֹא נָסוֹג אָחוֹר לִבֵּנוּ וַתֵּט אֲשֻׁרֵינוּ מִנִּי אָרְחֶךָ:", french: "Notre cœur ne s'est pas détourné, et nos pas ne se sont pas éloignés de Ton sentier," },
+      { hebrew: "כִּי דִכִּיתָנוּ בִּמְקוֹם תַּנִּים וַתְּכַס עָלֵינוּ בְצַלְמָוֶת:", french: "quand Tu nous as écrasés dans un lieu de chacals, et couverts de l'ombre de la mort." },
+      { hebrew: "אִם שָׁכַחְנוּ שֵׁם אֱלֹהֵינוּ וַנִּפְרֹשׂ כַּפֵּינוּ לְאֵל זָר:", french: "Si nous avions oublié le nom de notre Dieu, et étendu nos mains vers un dieu étranger," },
+      { hebrew: "הֲלֹא אֱלֹהִים יַחֲקָר זֹאת כִּי הוּא יֹדֵעַ תַּעֲלֻמוֹת לֵב:", french: "Dieu ne l'aurait-Il pas découvert ? Car Il connaît les secrets du cœur." },
+      { hebrew: "כִּי עָלֶיךָ הֹרַגְנוּ כָל הַיּוֹם נֶחְשַׁבְנוּ כְּצֹאן טִבְחָה:", french: "Car c'est pour Toi qu'on nous égorge tous les jours, qu'on nous regarde comme des brebis destinées à la boucherie." },
+      { hebrew: "עוּרָה לָמָּה תִישַׁן אֲדֹנָי הָקִיצָה אַל תִּזְנַח לָנֶצַח:", french: "Réveille-Toi ! Pourquoi dors-Tu, Seigneur ? Lève-Toi ! Ne nous repousse pas pour toujours !" },
+      { hebrew: "לָמָּה פָנֶיךָ תַסְתִּיר תִּשְׁכַּח עָנְיֵנוּ וְלַחֲצֵנוּ:", french: "Pourquoi caches-Tu Ta face ? Pourquoi oublies-Tu notre misère et notre oppression ?" },
+      { hebrew: "כִּי שָׁחָה לֶעָפָר נַפְשֵׁנוּ דָּבְקָה לָאָרֶץ בִּטְנֵנוּ:", french: "Car notre âme est abattue dans la poussière, notre corps est collé à la terre." },
+      { hebrew: "קוּמָה עֶזְרָתָה לָּנוּ וּפְדֵנוּ לְמַעַן חַסְדֶּךָ:", french: "Lève-Toi, viens à notre secours, et délivre-nous à cause de Ta bonté !" },
+    ]
+  },
+  {
+    number: 45,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל שֹׁשַׁנִּים לִבְנֵי קֹרַח מַשְׂכִּיל שִׁיר יְדִידֹת:", french: "Au chef des chantres. Sur les lis. Des fils de Coré. Cantique. Chant d'amour." },
+      { hebrew: "רָחַשׁ לִבִּי דָּבָר טוֹב אֹמֵר אָנִי מַעֲשַׂי לְמֶלֶךְ לְשׁוֹנִי עֵט סוֹפֵר מָהִיר:", french: "Mon cœur déborde de belles paroles. Je dis : Mon œuvre est pour un roi ! Ma langue est comme la plume d'un écrivain habile." },
+      { hebrew: "יָפְיָפִיתָ מִבְּנֵי אָדָם הוּצַק חֵן בְּשִׂפְתוֹתֶיךָ עַל כֵּן בֵּרַכְךָ אֱלֹהִים לְעוֹלָם:", french: "Tu es le plus beau des fils de l'homme, la grâce est répandue sur tes lèvres ; c'est pourquoi Dieu t'a béni pour toujours." },
+      { hebrew: "חֲגוֹר חַרְבְּךָ עַל יָרֵךְ גִּבּוֹר הוֹדְךָ וַהֲדָרֶךָ:", french: "Ceins ton épée à ton côté, vaillant guerrier, dans ta splendeur et ta majesté !" },
+      { hebrew: "וַהֲדָרְךָ צְלַח רְכַב עַל דְּבַר אֱמֶת וְעַנְוָה צֶדֶק וְתוֹרְךָ נוֹרָאוֹת יְמִינֶךָ:", french: "Et dans ta majesté, avance, monte sur le char, pour la cause de la vérité, de la douceur et de la justice ! Et ta droite te montrera des choses redoutables." },
+      { hebrew: "חִצֶּיךָ שְׁנוּנִים עַמִּים תַּחְתֶּיךָ יִפְּלוּ בְּלֵב אוֹיְבֵי הַמֶּלֶךְ:", french: "Tes flèches sont aiguës, des peuples tomberont sous toi ; elles perceront le cœur des ennemis du roi." },
+      { hebrew: "כִּסְאֲךָ אֱלֹהִים עוֹלָם וָעֶד שֵׁבֶט מִישֹׁר שֵׁבֶט מַלְכוּתֶךָ:", french: "Ton trône, ô Dieu, est éternel ; le sceptre de ton règne est un sceptre de droiture." },
+      { hebrew: "אָהַבְתָּ צֶּדֶק וַתִּשְׂנָא רֶשַׁע עַל כֵּן מְשָׁחֲךָ אֱלֹהִים אֱלֹהֶיךָ שֶׁמֶן שָׂשׂוֹן מֵחֲבֵרֶיךָ:", french: "Tu aimes la justice et tu hais la méchanceté ; c'est pourquoi Dieu, ton Dieu, t'a oint d'une huile de joie, par-dessus tes compagnons." },
+      { hebrew: "מֹר וַאֲהָלוֹת קְצִיעוֹת כָּל בִּגְדֹתֶיךָ מִן הֵיכְלֵי שֵׁן מִנִּי שִׂמְּחוּךָ:", french: "La myrrhe, l'aloès et la casse parfument tous tes vêtements ; depuis les palais d'ivoire, les instruments à cordes te réjouissent." },
+      { hebrew: "בְּנוֹת מְלָכִים בְּיִקְּרוֹתֶיךָ נִצְּבָה שֵׁגַל לִימִינְךָ בְּכֶתֶם אוֹפִיר:", french: "Des filles de rois sont parmi tes bien-aimées ; la reine est à ta droite, parée d'or d'Ophir." },
+      { hebrew: "שִׁמְעִי בַת וּרְאִי וְהַטִּי אָזְנֵךְ וְשִׁכְחִי עַמֵּךְ וּבֵית אָבִיךְ:", french: "Écoute, ma fille, et vois, et prête l'oreille ; oublie ton peuple et la maison de ton père." },
+      { hebrew: "וְיִתְאָו הַמֶּלֶךְ יָפְיֵךְ כִּי הוּא אֲדֹנַיִךְ וְהִשְׁתַּחֲוִי לוֹ:", french: "Le roi désirera ta beauté, car il est ton seigneur ; prosterne-toi devant lui." },
+      { hebrew: "וּבַת צֹר בְּמִנְחָה פָּנַיִךְ יְחַלּוּ עֲשִׁירֵי עָם:", french: "Et la fille de Tyr, les plus riches du peuple rechercheront ta faveur avec des présents." },
+      { hebrew: "כָּל כְּבוּדָּה בַת מֶלֶךְ פְּנִימָה מִמִּשְׁבְּצוֹת זָהָב לְבוּשָׁהּ:", french: "Toute resplendissante est la fille du roi dans l'intérieur ; son vêtement est tissu d'or." },
+      { hebrew: "לִרְקָמוֹת תּוּבַל לַמֶּלֶךְ בְּתוּלוֹת אַחֲרֶיהָ רֵעוֹתֶיהָ מוּבָאוֹת לָךְ:", french: "Elle est amenée au roi, vêtue de broderies ; les vierges, ses compagnes, qui la suivent, sont présentées devant toi." },
+      { hebrew: "תּוּבַלְנָה בִּשְׂמָחֹת וָגִיל תְּבֹאֶינָה בְּהֵיכַל מֶלֶךְ:", french: "Elles sont amenées avec joie et allégresse, elles entrent dans le palais du roi." },
+      { hebrew: "תַּחַת אֲבֹתֶיךָ יִהְיוּ בָנֶיךָ תְּשִׁיתֵמוֹ לְשָׂרִים בְּכָל הָאָרֶץ:", french: "Tes fils prendront la place de tes pères ; tu les établiras princes dans tout le pays." },
+      { hebrew: "אַזְכִּירָה שִׁמְךָ בְּכָל דֹּר וָדֹר עַל כֵּן עַמִּים יְהוֹדוּךָ לְעֹלָם וָעֶד:", french: "Je rappellerai ton nom de génération en génération ; c'est pourquoi les peuples te loueront à jamais et à perpétuité." },
+    ]
+  },
+  {
+    number: 46,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לִבְנֵי קֹרַח עַל עֲלָמוֹת שִׁיר:", french: "Au chef des chantres. Des fils de Coré. Sur Alamoth. Cantique." },
+      { hebrew: "אֱלֹהִים לָנוּ מַחֲסֶה וָעֹז עֶזְרָה בְצָרוֹת נִמְצָא מְאֹד:", french: "Dieu est pour nous un refuge et un appui, un secours dans les détresses, toujours offert." },
+      { hebrew: "עַל כֵּן לֹא נִירָא בְּהָמִיר אָרֶץ וּבְמוֹט הָרִים בְּלֵב יַמִּים:", french: "C'est pourquoi nous sommes sans crainte quand la terre est bouleversée, et que les montagnes chancellent au cœur des mers," },
+      { hebrew: "יֶהֱמוּ יֶחְמְרוּ מֵימָיו יִרְעֲשׁוּ הָרִים בְּגַאֲוָתוֹ סֶלָה:", french: "quand leurs eaux mugissent et bouillonnent, et que les montagnes tremblent par leur soulèvement. Sélah." },
+      { hebrew: "נָהָר פְּלָגָיו יְשַׂמְּחוּ עִיר אֱלֹהִים קְדֹשׁ מִשְׁכְּנֵי עֶלְיוֹן:", french: "Il est un fleuve dont les bras réjouissent la cité de Dieu, le sanctuaire des demeures du Très-Haut." },
+      { hebrew: "אֱלֹהִים בְּקִרְבָּהּ בַּל תִּמּוֹט יַעְזְרֶהָ אֱלֹהִים לִפְנוֹת בֹּקֶר:", french: "Dieu est au milieu d'elle, elle n'est pas ébranlée ; Dieu la secourt dès l'aube du matin." },
+      { hebrew: "הָמוּ גוֹיִם מָטוּ מַמְלָכוֹת נָתַן בְּקוֹלוֹ תָּמוּג אָרֶץ:", french: "Des nations s'agitent, des royaumes s'ébranlent ; Il fait entendre Sa voix, la terre se fond." },
+      { hebrew: "יהוה צְבָאוֹת עִמָּנוּ מִשְׂגָּב לָנוּ אֱלֹהֵי יַעֲקֹב סֶלָה:", french: "L'Éternel des armées est avec nous ; le Dieu de Jacob est notre citadelle. Sélah." },
+      { hebrew: "לְכוּ חֲזוּ מִפְעֲלוֹת יהוה אֲשֶׁר שָׂם שַׁמּוֹת בָּאָרֶץ:", french: "Venez, contemplez les œuvres de l'Éternel, les ravages qu'Il a opérés sur la terre !" },
+      { hebrew: "מַשְׁבִּית מִלְחָמוֹת עַד קְצֵה הָאָרֶץ קֶשֶׁת יְשַׁבֵּר וְקִצֵּץ חֲנִית עֲגָלוֹת יִשְׂרֹף בָּאֵשׁ:", french: "Il fait cesser les guerres jusqu'aux extrémités de la terre ; Il brise l'arc et rompt la lance, Il consume les chariots par le feu." },
+      { hebrew: "הַרְפּוּ וּדְעוּ כִּי אָנֹכִי אֱלֹהִים אָרוּם בַּגּוֹיִם אָרוּם בָּאָרֶץ:", french: "Arrêtez, et sachez que je suis Dieu : je domine sur les nations, je domine sur la terre." },
+      { hebrew: "יהוה צְבָאוֹת עִמָּנוּ מִשְׂגָּב לָנוּ אֱלֹהֵי יַעֲקֹב סֶלָה:", french: "L'Éternel des armées est avec nous ; le Dieu de Jacob est notre citadelle. Sélah." },
+    ]
+  },
+  {
+    number: 47,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לִבְנֵי קֹרַח מִזְמוֹר:", french: "Au chef des chantres. Des fils de Coré. Psaume." },
+      { hebrew: "כָּל הָעַמִּים תִּקְעוּ כָף הָרִיעוּ לֵאלֹהִים בְּקוֹל רִנָּה:", french: "Vous tous, peuples, battez des mains ! Poussez vers Dieu des cris de joie !" },
+      { hebrew: "כִּי יהוה עֶלְיוֹן נוֹרָא מֶלֶךְ גָּדוֹל עַל כָּל הָאָרֶץ:", french: "Car l'Éternel, le Très-Haut, est redoutable, grand Roi sur toute la terre." },
+      { hebrew: "יַדְבֵּר עַמִּים תַּחְתֵּינוּ וּלְאֻמִּים תַּחַת רַגְלֵינוּ:", french: "Il nous soumet des peuples, Il met des nations sous nos pieds." },
+      { hebrew: "יִבְחַר לָנוּ אֶת נַחֲלָתֵנוּ אֶת גְּאוֹן יַעֲקֹב אֲשֶׁר אָהֵב סֶלָה:", french: "Il choisit pour nous notre héritage, la fierté de Jacob qu'Il aime. Sélah." },
+      { hebrew: "עָלָה אֱלֹהִים בִּתְרוּעָה יהוה בְּקוֹל שׁוֹפָר:", french: "Dieu s'élève au milieu des acclamations, l'Éternel au son du chofar." },
+      { hebrew: "זַמְּרוּ אֱלֹהִים זַמֵּרוּ זַמְּרוּ לְמַלְכֵּנוּ זַמֵּרוּ:", french: "Chantez à Dieu, chantez ! Chantez à notre Roi, chantez !" },
+      { hebrew: "כִּי מֶלֶךְ כָּל הָאָרֶץ אֱלֹהִים זַמְּרוּ מַשְׂכִּיל:", french: "Car Dieu est Roi de toute la terre ; chantez un cantique !" },
+      { hebrew: "מָלַךְ אֱלֹהִים עַל גּוֹיִם אֱלֹהִים יָשַׁב עַל כִּסֵּא קָדְשׁוֹ:", french: "Dieu règne sur les nations, Dieu est assis sur Son trône saint." },
+      { hebrew: "נְדִיבֵי עַמִּים נֶאֱסָפוּ עַם אֱלֹהֵי אַבְרָהָם כִּי לֵאלֹהִים מָגִנֵּי אֶרֶץ מְאֹד נַעֲלָה:", french: "Les princes des peuples se rassemblent avec le peuple du Dieu d'Abraham ; car à Dieu sont les boucliers de la terre ; Il est souverainement élevé." },
+    ]
+  },
+  {
+    number: 48,
+    verses: [
+      { hebrew: "שִׁיר מִזְמוֹר לִבְנֵי קֹרַח:", french: "Cantique. Psaume des fils de Coré." },
+      { hebrew: "גָּדוֹל יהוה וּמְהֻלָּל מְאֹד בְּעִיר אֱלֹהֵינוּ הַר קָדְשׁוֹ:", french: "L'Éternel est grand et très digne de louange, dans la ville de notre Dieu, sur Sa montagne sainte." },
+      { hebrew: "יְפֵה נוֹף מְשׂוֹשׂ כָּל הָאָרֶץ הַר צִיּוֹן יַרְכְּתֵי צָפוֹן קִרְיַת מֶלֶךְ רָב:", french: "Belle est la colline, joie de toute la terre, le mont Sion, au flanc nord, cité du grand Roi." },
+      { hebrew: "אֱלֹהִים בְּאַרְמְנוֹתֶיהָ נוֹדַע לְמִשְׂגָּב:", french: "Dieu, dans ses palais, est reconnu comme une forteresse." },
+      { hebrew: "כִּי הִנֵּה הַמְּלָכִים נוֹעֲדוּ עָבְרוּ יַחְדָּו:", french: "Car voici, les rois se sont assemblés, ils ont marché ensemble." },
+      { hebrew: "הֵמָּה רָאוּ כֵּן תָּמָהוּ נִבְהֲלוּ נֶחְפָּזוּ:", french: "Ils ont vu, alors ils ont été stupéfaits, épouvantés, mis en fuite." },
+      { hebrew: "רְעָדָה אֲחָזָתַם שָׁם חִיל כַּיּוֹלֵדָה:", french: "Un tremblement les a saisis là, une angoisse comme celle d'une femme en travail." },
+      { hebrew: "בְּרוּחַ קָדִים תְּשַׁבֵּר אֳנִיּוֹת תַּרְשִׁישׁ:", french: "Par le vent d'orient, Tu brises les navires de Tarsis." },
+      { hebrew: "כַּאֲשֶׁר שָׁמַעְנוּ כֵּן רָאִינוּ בְּעִיר יהוה צְבָאוֹת בְּעִיר אֱלֹהֵינוּ אֱלֹהִים יְכוֹנְנֶהָ עַד עוֹלָם סֶלָה:", french: "Ce que nous avions entendu, nous l'avons vu dans la ville de l'Éternel des armées, dans la ville de notre Dieu ; Dieu la fera subsister à jamais. Sélah." },
+      { hebrew: "דִּמִּינוּ אֱלֹהִים חַסְדֶּךָ בְּקֶרֶב הֵיכָלֶךָ:", french: "Nous pensons, ô Dieu, à Ta bonté au milieu de Ton temple." },
+      { hebrew: "כְּשִׁמְךָ אֱלֹהִים כֵּן תְּהִלָּתְךָ עַל קַצְוֵי אֶרֶץ צֶדֶק מָלְאָה יְמִינֶךָ:", french: "Comme Ton nom, ô Dieu, ainsi Ta louange s'étend jusqu'aux extrémités de la terre ; Ta droite est pleine de justice." },
+      { hebrew: "יִשְׂמַח הַר צִיּוֹן תָּגֵלְנָה בְּנוֹת יְהוּדָה לְמַעַן מִשְׁפָּטֶיךָ:", french: "Que le mont Sion se réjouisse, que les filles de Juda soient dans l'allégresse, à cause de Tes jugements !" },
+      { hebrew: "סֹבּוּ צִיּוֹן וְהַקִּיפוּהָ סִפְרוּ מִגְדָּלֶיהָ:", french: "Parcourez Sion, faites-en le tour, comptez ses tours." },
+      { hebrew: "שִׁיתוּ לִבְּכֶם לְחֵילָה פַּסְּגוּ אַרְמְנוֹתֶיהָ לְמַעַן תְּסַפְּרוּ לְדוֹר אַחֲרוֹן:", french: "Considérez ses remparts, examinez ses palais, afin que vous le racontiez à la génération future." },
+      { hebrew: "כִּי זֶה אֱלֹהִים אֱלֹהֵינוּ עוֹלָם וָעֶד הוּא יְנַהֲגֵנוּ עַל מוּת:", french: "Car ce Dieu est notre Dieu, à tout jamais ; Il sera notre guide jusqu'à la mort." },
+    ]
+  },
+  {
+    number: 49,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לִבְנֵי קֹרַח מִזְמוֹר:", french: "Au chef des chantres. Des fils de Coré. Psaume." },
+      { hebrew: "שִׁמְעוּ זֹאת כָּל הָעַמִּים הַאֲזִינוּ כָּל יֹשְׁבֵי חָלֶד:", french: "Écoutez ceci, vous tous les peuples, prêtez l'oreille, vous tous, habitants du monde," },
+      { hebrew: "גַּם בְּנֵי אָדָם גַּם בְּנֵי אִישׁ יַחַד עָשִׁיר וְאֶבְיוֹן:", french: "aussi bien les fils du peuple que les fils des grands, riches et pauvres ensemble." },
+      { hebrew: "פִּי יְדַבֵּר חָכְמוֹת וְהָגוּת לִבִּי תְבוּנוֹת:", french: "Ma bouche va dire des paroles sages, et mon cœur a des pensées pleines de sens." },
+      { hebrew: "אַטֶּה לְמָשָׁל אָזְנִי אֶפְתַּח בְּכִנּוֹר חִידָתִי:", french: "Je prête l'oreille à un proverbe, j'expose mon énigme au son de la harpe." },
+      { hebrew: "לָמָּה אִירָא בִּימֵי רָע עֲוֹן עֲקֵבַי יְסוּבֵּנִי:", french: "Pourquoi craindrais-je aux jours du malheur, quand l'iniquité de mes adversaires m'entoure ?" },
+      { hebrew: "הַבֹּטְחִים עַל חֵילָם וּבְרֹב עָשְׁרָם יִתְהַלָּלוּ:", french: "Ils se confient en leurs biens et se glorifient de leur grande richesse." },
+      { hebrew: "אָח לֹא פָדֹה יִפְדֶּה אִישׁ לֹא יִתֵּן לֵאלֹהִים כָּפְרוֹ:", french: "Un frère ne peut nullement racheter un homme, il ne peut donner à Dieu sa rançon." },
+      { hebrew: "וְיֵקַר פִּדְיוֹן נַפְשָׁם וְחָדַל לְעוֹלָם:", french: "Le rachat de leur âme est si cher qu'il n'aura jamais lieu." },
+      { hebrew: "וִיחִי עוֹד לָנֶצַח לֹא יִרְאֶה הַשָּׁחַת:", french: "Vivrait-il encore éternellement, ne verrait-il pas la fosse ?" },
+      { hebrew: "כִּי יִרְאֶה חֲכָמִים יָמוּתוּ יַחַד כְּסִיל וָבַעַר יֹאבֵדוּ וְעָזְבוּ לַאֲחֵרִים חֵילָם:", french: "Car il verra que les sages meurent, que l'insensé et le sot périssent également, et laissent à d'autres leurs biens." },
+      { hebrew: "קִרְבָּם בָּתֵּימוֹ לְעוֹלָם מִשְׁכְּנֹתָם לְדֹר וָדֹר קָרְאוּ בִשְׁמוֹתָם עֲלֵי אֲדָמוֹת:", french: "Ils pensent que leurs maisons seront éternelles, que leurs demeures dureront de génération en génération ; ils donnent leurs noms à des terres." },
+      { hebrew: "וְאָדָם בִּיקָר בַּל יָלִין נִמְשַׁל כַּבְּהֵמוֹת נִדְמוּ:", french: "Mais l'homme dans les honneurs ne demeure pas, il est semblable aux bêtes qui périssent." },
+      { hebrew: "זֶה דַרְכָּם כֵּסֶל לָמוֹ וְאַחֲרֵיהֶם בְּפִיהֶם יִרְצוּ סֶלָה:", french: "Telle est leur voie, leur folie, et ceux qui les suivent se plaisent à leurs discours. Sélah." },
+      { hebrew: "כַּצֹּאן לִשְׁאוֹל שַׁתּוּ מָוֶת יִרְעֵם וַיִּרְדּוּ בָם יְשָׁרִים לַבֹּקֶר וְצוּרָם לְבַלּוֹת שְׁאוֹל מִזְּבֻל לוֹ:", french: "Comme un troupeau, ils sont destinés au séjour des morts, la mort les paît ; les hommes droits domineront sur eux le matin, et leur forme se consumera dans le séjour des morts, loin de leur demeure." },
+      { hebrew: "אַךְ אֱלֹהִים יִפְדֶּה נַפְשִׁי מִיַּד שְׁאוֹל כִּי יִקָּחֵנִי סֶלָה:", french: "Mais Dieu rachètera mon âme du séjour des morts, car Il me prendra. Sélah." },
+      { hebrew: "אַל תִּירָא כִּי יַעֲשִׁר אִישׁ כִּי יִרְבֶּה כְּבוֹד בֵּיתוֹ:", french: "Ne crains pas quand un homme s'enrichit, quand la gloire de sa maison s'accroît." },
+      { hebrew: "כִּי לֹא בְמוֹתוֹ יִקַּח הַכֹּל לֹא יֵרֵד אַחֲרָיו כְּבוֹדוֹ:", french: "Car il n'emportera rien en mourant, sa gloire ne descendra pas après lui." },
+      { hebrew: "כִּי נַפְשׁוֹ בְּחַיָּיו יְבָרֵךְ וְיוֹדוּךָ כִּי תֵיטִיב לָךְ:", french: "Car de son vivant il se félicite lui-même : On te louera, parce que tu te traites bien !" },
+      { hebrew: "תָּבוֹא עַד דּוֹר אֲבוֹתָיו עַד נֵצַח לֹא יִרְאוּ אוֹר:", french: "Il ira rejoindre la génération de ses pères, qui jamais ne reverront la lumière." },
+      { hebrew: "אָדָם בִּיקָר וְלֹא יָבִין נִמְשַׁל כַּבְּהֵמוֹת נִדְמוּ:", french: "L'homme qui est dans les honneurs et qui n'a pas d'intelligence, est semblable aux bêtes qui périssent." },
+    ]
+  },
+  {
+    number: 50,
+    verses: [
+      { hebrew: "מִזְמוֹר לְאָסָף אֵל אֱלֹהִים יהוה דִּבֶּר וַיִּקְרָא אָרֶץ מִמִּזְרַח שֶׁמֶשׁ עַד מְבוֹאוֹ:", french: "Psaume d'Assaph. Dieu, l'Éternel Dieu, parle et convoque la terre, du lever du soleil jusqu'à son couchant." },
+      { hebrew: "מִצִּיּוֹן מִכְלַל יֹפִי אֱלֹהִים הוֹפִיעַ:", french: "De Sion, beauté parfaite, Dieu resplendit." },
+      { hebrew: "יָבֹא אֱלֹהֵינוּ וְאַל יֶחֱרַשׁ אֵשׁ לְפָנָיו תֹּאכֵל וּסְבִיבָיו נִשְׂעֲרָה מְאֹד:", french: "Notre Dieu vient et ne Se tait pas ; un feu dévorant Le précède, et autour de Lui une violente tempête." },
+      { hebrew: "יִקְרָא אֶל הַשָּׁמַיִם מֵעָל וְאֶל הָאָרֶץ לָדִין עַמּוֹ:", french: "Il crie vers les cieux en haut et vers la terre, pour juger Son peuple." },
+      { hebrew: "אִסְפוּ לִי חֲסִידָי כֹּרְתֵי בְרִיתִי עֲלֵי זָבַח:", french: "Rassemblez-Moi Mes fidèles, qui ont fait alliance avec Moi par le sacrifice !" },
+      { hebrew: "וַיַּגִּידוּ שָׁמַיִם צִדְקוֹ כִּי אֱלֹהִים שֹׁפֵט הוּא סֶלָה:", french: "Et les cieux proclament Sa justice, car c'est Dieu qui est juge. Sélah." },
+      { hebrew: "שִׁמְעָה עַמִּי וַאֲדַבֵּרָה יִשְׂרָאֵל וְאָעִידָה בָּךְ אֱלֹהִים אֱלֹהֶיךָ אָנֹכִי:", french: "Écoute, Mon peuple, et Je parlerai ; Israël, et Je témoignerai contre toi : Je suis Dieu, ton Dieu !" },
+      { hebrew: "לֹא עַל זְבָחֶיךָ אוֹכִיחֶךָ וְעוֹלֹתֶיךָ לְנֶגְדִּי תָמִיד:", french: "Ce n'est pas pour tes sacrifices que Je te reprends ; tes holocaustes sont constamment devant Moi." },
+      { hebrew: "לֹא אֶקַּח מִבֵּיתְךָ פָר מִמִּכְלְאֹתֶיךָ עַתּוּדִים:", french: "Je ne prendrai pas de taureau dans ta maison, ni de boucs dans tes enclos." },
+      { hebrew: "כִּי לִי כָל חַיְתוֹ יָעַר בְּהֵמוֹת בְּהַרְרֵי אָלֶף:", french: "Car tous les animaux de la forêt sont à Moi, les bêtes des montagnes par milliers." },
+      { hebrew: "יָדַעְתִּי כָּל עוֹף הָרִים וְזִיז שָׂדַי עִמָּדִי:", french: "Je connais tous les oiseaux des montagnes, et les bêtes des champs sont à Moi." },
+      { hebrew: "אִם אֶרְעַב לֹא אֹמַר לָךְ כִּי לִי תֵבֵל וּמְלֹאָהּ:", french: "Si J'avais faim, Je ne te le dirais pas, car le monde est à Moi et tout ce qu'il renferme." },
+      { hebrew: "הַאוֹכַל בְּשַׂר אַבִּירִים וְדַם עַתּוּדִים אֶשְׁתֶּה:", french: "Est-ce que Je mange la chair des taureaux ? Est-ce que Je bois le sang des boucs ?" },
+      { hebrew: "זְבַח לֵאלֹהִים תּוֹדָה וְשַׁלֵּם לְעֶלְיוֹן נְדָרֶיךָ:", french: "Offre pour sacrifice à Dieu des actions de grâce, et accomplis tes vœux envers le Très-Haut." },
+      { hebrew: "וּקְרָאֵנִי בְּיוֹם צָרָה אֲחַלֶּצְךָ וּתְכַבְּדֵנִי:", french: "Et invoque-Moi au jour de la détresse ; Je te délivrerai, et tu Me glorifieras." },
+      { hebrew: "וְלָרָשָׁע אָמַר אֱלֹהִים מַה לְּךָ לְסַפֵּר חֻקָּי וַתִּשָּׂא בְרִיתִי עֲלֵי פִיךָ:", french: "Et au méchant, Dieu dit : Quoi ! Tu récites Mes lois et tu portes Mon alliance à ta bouche," },
+      { hebrew: "וְאַתָּה שָׂנֵאתָ מוּסָר וַתַּשְׁלֵךְ דְּבָרַי אַחֲרֶיךָ:", french: "toi qui hais la correction et qui jettes Mes paroles derrière toi !" },
+      { hebrew: "אִם רָאִיתָ גַנָּב וַתִּרֶץ עִמּוֹ וְעִם מְנָאֲפִים חֶלְקֶךָ:", french: "Si tu vois un voleur, tu te plais avec lui, et ta part est avec les adultères." },
+      { hebrew: "פִּיךָ שָׁלַחְתָּ בְרָעָה וּלְשׁוֹנְךָ תַּצְמִיד מִרְמָה:", french: "Tu livres ta bouche au mal, et ta langue est un tissu de tromperies." },
+      { hebrew: "תֵּשֵׁב בְּאָחִיךָ תְדַבֵּר בְּבֶן אִמְּךָ תִּתֶּן דֹּפִי:", french: "Tu t'assieds et tu parles contre ton frère, tu diffames le fils de ta mère." },
+      { hebrew: "אֵלֶּה עָשִׂיתָ וְהֶחֱרַשְׁתִּי דִּמִּיתָ הֱיוֹת אֶהְיֶה כָמוֹךָ אוֹכִיחֲךָ וְאֶעֶרְכָה לְעֵינֶיךָ:", french: "Voilà ce que tu as fait et Je Me suis tu ; tu t'es imaginé que Je te ressemblais ; Je vais te reprendre et tout mettre sous tes yeux." },
+      { hebrew: "בִּינוּ נָא זֹאת שֹׁכְחֵי אֱלוֹהַּ פֶּן אֶטְרֹף וְאֵין מַצִּיל:", french: "Comprenez donc ceci, vous qui oubliez Dieu, de peur que Je ne déchire, sans que personne ne délivre !" },
+      { hebrew: "זֹבֵחַ תּוֹדָה יְכַבְּדָנְנִי וְשָׂם דֶּרֶךְ אַרְאֶנּוּ בְּיֵשַׁע אֱלֹהִים:", french: "Celui qui offre pour sacrifice des actions de grâce Me glorifie, et à celui qui veille sur sa voie, Je ferai voir le salut de Dieu." },
+    ]
+  },
+  {
+    number: 51,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "בְּבוֹא אֵלָיו נָתָן הַנָּבִיא כַּאֲשֶׁר בָּא אֶל בַּת שָׁבַע:", french: "Lorsque Nathan le prophète vint à lui, après qu'il fut allé vers Bath-Chéba." },
+      { hebrew: "חָנֵּנִי אֱלֹהִים כְּחַסְדֶּךָ כְּרֹב רַחֲמֶיךָ מְחֵה פְשָׁעָי:", french: "Aie pitié de moi, ô Dieu, selon Ta bonté ; selon Ta grande miséricorde, efface mes transgressions !" },
+      { hebrew: "הֶרֶב כַּבְּסֵנִי מֵעֲוֹנִי וּמֵחַטָּאתִי טַהֲרֵנִי:", french: "Lave-moi complètement de mon iniquité, et purifie-moi de mon péché !" },
+      { hebrew: "כִּי פְשָׁעַי אֲנִי אֵדָע וְחַטָּאתִי נֶגְדִּי תָמִיד:", french: "Car je reconnais mes transgressions, et mon péché est constamment devant moi." },
+      { hebrew: "לְךָ לְבַדְּךָ חָטָאתִי וְהָרַע בְּעֵינֶיךָ עָשִׂיתִי לְמַעַן תִּצְדַּק בְּדָבְרֶךָ תִּזְכֶּה בְשָׁפְטֶךָ:", french: "Contre Toi seul j'ai péché, et j'ai fait ce qui est mal à Tes yeux, afin que Tu sois juste dans Tes paroles et irréprochable dans Tes jugements." },
+      { hebrew: "הֵן בְּעָוֹן חוֹלָלְתִּי וּבְחֵטְא יֶחֱמַתְנִי אִמִּי:", french: "Voici, je suis né dans l'iniquité, et ma mère m'a conçu dans le péché." },
+      { hebrew: "הֵן אֱמֶת חָפַצְתָּ בַטֻּחוֹת וּבְסָתֻם חָכְמָה תוֹדִיעֵנִי:", french: "Voici, Tu veux la vérité dans le fond du cœur ; fais-moi donc connaître la sagesse dans le secret de mon âme." },
+      { hebrew: "תְּחַטְּאֵנִי בְאֵזוֹב וְאֶטְהָר תְּכַבְּסֵנִי וּמִשֶּׁלֶג אַלְבִּין:", french: "Purifie-moi avec l'hysope, et je serai pur ; lave-moi, et je serai plus blanc que la neige." },
+      { hebrew: "תַּשְׁמִיעֵנִי שָׂשׂוֹן וְשִׂמְחָה תָּגֵלְנָה עֲצָמוֹת דִּכִּיתָ:", french: "Fais-moi entendre la joie et l'allégresse, et les os que Tu as brisés se réjouiront." },
+      { hebrew: "הַסְתֵּר פָּנֶיךָ מֵחֲטָאָי וְכָל עֲוֹנֹתַי מְחֵה:", french: "Détourne Ta face de mes péchés, et efface toutes mes iniquités !" },
+      { hebrew: "לֵב טָהוֹר בְּרָא לִי אֱלֹהִים וְרוּחַ נָכוֹן חַדֵּשׁ בְּקִרְבִּי:", french: "Crée en moi un cœur pur, ô Dieu, et renouvelle en moi un esprit bien disposé." },
+      { hebrew: "אַל תַּשְׁלִיכֵנִי מִלְּפָנֶיךָ וְרוּחַ קָדְשְׁךָ אַל תִּקַּח מִמֶּנִּי:", french: "Ne me rejette pas loin de Ta face, et ne me retire pas Ton esprit saint." },
+      { hebrew: "הָשִׁיבָה לִּי שְׂשׂוֹן יִשְׁעֶךָ וְרוּחַ נְדִיבָה תִסְמְכֵנִי:", french: "Rends-moi la joie de Ton salut, et qu'un esprit de bonne volonté me soutienne !" },
+      { hebrew: "אֲלַמְּדָה פֹשְׁעִים דְּרָכֶיךָ וְחַטָּאִים אֵלֶיךָ יָשׁוּבוּ:", french: "J'enseignerai Tes voies aux transgresseurs, et les pécheurs reviendront à Toi." },
+      { hebrew: "הַצִּילֵנִי מִדָּמִים אֱלֹהִים אֱלֹהֵי תְּשׁוּעָתִי תְּרַנֵּן לְשׁוֹנִי צִדְקָתֶךָ:", french: "Délivre-moi du sang versé, ô Dieu, Dieu de mon salut ! Et ma langue célébrera Ta justice." },
+      { hebrew: "אֲדֹנָי שְׂפָתַי תִּפְתָּח וּפִי יַגִּיד תְּהִלָּתֶךָ:", french: "Seigneur, ouvre mes lèvres, et ma bouche publiera Ta louange." },
+      { hebrew: "כִּי לֹא תַחְפֹּץ זֶבַח וְאֶתֵּנָה עוֹלָה לֹא תִרְצֶה:", french: "Car Tu ne désires pas de sacrifice, je T'en offrirais ; Tu ne prends pas plaisir à l'holocauste." },
+      { hebrew: "זִבְחֵי אֱלֹהִים רוּחַ נִשְׁבָּרָה לֵב נִשְׁבָּר וְנִדְכֶּה אֱלֹהִים לֹא תִבְזֶה:", french: "Les sacrifices de Dieu, c'est un esprit brisé ; un cœur brisé et contrit, ô Dieu, Tu ne le méprises pas." },
+      { hebrew: "הֵיטִיבָה בִרְצוֹנְךָ אֶת צִיּוֹן תִּבְנֶה חוֹמוֹת יְרוּשָׁלָיִם:", french: "Fais du bien à Sion dans Ta bienveillance, bâtis les murs de Jérusalem !" },
+      { hebrew: "אָז תַּחְפֹּץ זִבְחֵי צֶדֶק עוֹלָה וְכָלִיל אָז יַעֲלוּ עַל מִזְבַּחֲךָ פָרִים:", french: "Alors Tu agréeras les sacrifices de justice, les holocaustes et les offrandes entières ; alors on offrira des taureaux sur Ton autel." },
+    ]
+  },
+  {
+    number: 52,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מַשְׂכִּיל לְדָוִד:", french: "Au chef des chantres. Cantique de David." },
+      { hebrew: "בְּבוֹא דּוֹאֵג הָאֲדֹמִי וַיַּגֵּד לְשָׁאוּל וַיֹּאמֶר לוֹ בָּא דָוִד אֶל בֵּית אֲחִימֶלֶךְ:", french: "Lorsque Doëg l'Édomite vint informer Saül et lui dit : David s'est rendu dans la maison d'Ahimélec." },
+      { hebrew: "מַה תִּתְהַלֵּל בְּרָעָה הַגִּבּוֹר חֶסֶד אֵל כָּל הַיּוֹם:", french: "Pourquoi te glorifies-tu dans le mal, tyran ? La bonté de Dieu subsiste tout le jour." },
+      { hebrew: "הַוּוֹת תַּחְשֹׁב לְשׁוֹנֶךָ כְּתַעַר מְלֻטָּשׁ עֹשֵׂה רְמִיָּה:", french: "Ta langue médite la malice, comme un rasoir aiguisé, artisan de tromperie." },
+      { hebrew: "אָהַבְתָּ רָע מִטּוֹב שֶׁקֶר מִדַּבֵּר צֶדֶק סֶלָה:", french: "Tu aimes le mal plus que le bien, le mensonge plus que la justice. Sélah." },
+      { hebrew: "אָהַבְתָּ כָל דִּבְרֵי בָלַע לְשׁוֹן מִרְמָה:", french: "Tu aimes toutes les paroles de destruction, langue trompeuse !" },
+      { hebrew: "גַּם אֵל יִתָּצְךָ לָנֶצַח יַחְתְּךָ וְיִסָּחֲךָ מֵאֹהֶל וְשֵׁרֶשְׁךָ מֵאֶרֶץ חַיִּים סֶלָה:", french: "Aussi Dieu t'abattra pour toujours ; Il t'enlèvera et t'arrachera de ta tente, et te déracinera de la terre des vivants. Sélah." },
+      { hebrew: "וְיִרְאוּ צַדִּיקִים וְיִירָאוּ וְעָלָיו יִשְׂחָקוּ:", french: "Les justes verront et craindront, et ils riront de lui :" },
+      { hebrew: "הִנֵּה הַגֶּבֶר לֹא יָשִׂים אֱלֹהִים מָעוּזּוֹ וַיִּבְטַח בְּרֹב עָשְׁרוֹ יָעֹז בְּהַוָּתוֹ:", french: "Voilà l'homme qui ne prenait pas Dieu pour forteresse, mais qui se confiait dans ses grandes richesses et se fortifiait dans sa malice !" },
+      { hebrew: "וַאֲנִי כְּזַיִת רַעֲנָן בְּבֵית אֱלֹהִים בָּטַחְתִּי בְחֶסֶד אֱלֹהִים עוֹלָם וָעֶד:", french: "Et moi, je suis comme un olivier verdoyant dans la maison de Dieu ; je me confie dans la bonté de Dieu, à tout jamais." },
+      { hebrew: "אוֹדְךָ לְעוֹלָם כִּי עָשִׂיתָ וַאֲקַוֶּה שִׁמְךָ כִּי טוֹב נֶגֶד חֲסִידֶיךָ:", french: "Je Te célébrerai toujours pour ce que Tu as fait, et j'espérerai en Ton nom, car il est bon, devant Tes fidèles." },
+    ]
+  },
+  {
+    number: 53,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל מָחֲלַת מַשְׂכִּיל לְדָוִד:", french: "Au chef des chantres. Sur la flûte. Cantique de David." },
+      { hebrew: "אָמַר נָבָל בְּלִבּוֹ אֵין אֱלֹהִים הִשְׁחִיתוּ וְהִתְעִיבוּ עָוֶל אֵין עֹשֵׂה טוֹב:", french: "L'insensé dit en son cœur : Il n'y a point de Dieu ! Ils se sont corrompus, ils ont commis des iniquités abominables ; il n'en est aucun qui fasse le bien." },
+      { hebrew: "אֱלֹהִים מִשָּׁמַיִם הִשְׁקִיף עַל בְּנֵי אָדָם לִרְאוֹת הֲיֵשׁ מַשְׂכִּיל דֹּרֵשׁ אֶת אֱלֹהִים:", french: "Du haut des cieux, Dieu regarde les fils de l'homme, pour voir s'il y a quelqu'un qui soit intelligent, qui cherche Dieu." },
+      { hebrew: "כֻּלּוֹ סָג יַחְדָּו נֶאֱלָחוּ אֵין עֹשֵׂה טוֹב אֵין גַּם אֶחָד:", french: "Tous se sont égarés, ensemble ils se sont corrompus ; il n'en est aucun qui fasse le bien, pas même un seul." },
+      { hebrew: "הֲלֹא יָדְעוּ פֹּעֲלֵי אָוֶן אֹכְלֵי עַמִּי אָכְלוּ לֶחֶם אֱלֹהִים לֹא קָרָאוּ:", french: "N'ont-ils pas de connaissance, ceux qui commettent l'iniquité, qui dévorent mon peuple comme on mange du pain ? Ils n'invoquent pas Dieu." },
+      { hebrew: "שָׁם פָּחֲדוּ פַחַד לֹא הָיָה פָחַד כִּי אֱלֹהִים פִּזַּר עַצְמוֹת חֹנָךְ הֱבִשֹׁתָה כִּי אֱלֹהִים מְאָסָם:", french: "Alors ils ont été saisis d'épouvante, sans qu'il y eût sujet d'épouvante, car Dieu a dispersé les os de celui qui t'assiégeait ; tu les as couverts de honte, car Dieu les a rejetés." },
+      { hebrew: "מִי יִתֵּן מִצִּיּוֹן יְשֻׁעוֹת יִשְׂרָאֵל בְּשׁוּב אֱלֹהִים שְׁבוּת עַמּוֹ יָגֵל יַעֲקֹב יִשְׂמַח יִשְׂרָאֵל:", french: "Oh ! Qui donnera de Sion la délivrance d'Israël ? Quand Dieu ramènera les captifs de Son peuple, Jacob sera dans l'allégresse, Israël se réjouira." },
+    ]
+  },
+  {
+    number: 54,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינֹת מַשְׂכִּיל לְדָוִד:", french: "Au chef des chantres. Avec les instruments à cordes. Cantique de David." },
+      { hebrew: "בְּבוֹא הַזִּיפִים וַיֹּאמְרוּ לְשָׁאוּל הֲלֹא דָוִד מִסְתַּתֵּר עִמָּנוּ:", french: "Lorsque les Ziphiens vinrent dire à Saül : David n'est-il pas caché parmi nous ?" },
+      { hebrew: "אֱלֹהִים בְּשִׁמְךָ הוֹשִׁיעֵנִי וּבִגְבוּרָתְךָ תְדִינֵנִי:", french: "Ô Dieu, sauve-moi par Ton nom, et rends-moi justice par Ta puissance !" },
+      { hebrew: "אֱלֹהִים שְׁמַע תְּפִלָּתִי הַאֲזִינָה לְאִמְרֵי פִי:", french: "Ô Dieu, écoute ma prière, prête l'oreille aux paroles de ma bouche !" },
+      { hebrew: "כִּי זָרִים קָמוּ עָלַי וְעָרִיצִים בִּקְשׁוּ נַפְשִׁי לֹא שָׂמוּ אֱלֹהִים לְנֶגְדָּם סֶלָה:", french: "Car des étrangers se sont levés contre moi, des hommes violents en veulent à ma vie ; ils ne placent pas Dieu devant eux. Sélah." },
+      { hebrew: "הִנֵּה אֱלֹהִים עֹזֵר לִי אֲדֹנָי בְּסֹמְכֵי נַפְשִׁי:", french: "Voici, Dieu est mon secours, le Seigneur est le soutien de mon âme." },
+      { hebrew: "יָשִׁיב הָרַע לְשֹׁרְרָי בַּאֲמִתְּךָ הַצְמִיתֵם:", french: "Le mal retombera sur mes adversaires ; détruis-les dans Ta fidélité !" },
+      { hebrew: "בִּנְדָבָה אֶזְבְּחָה לָּךְ אוֹדֶה שִּׁמְךָ יהוה כִּי טוֹב:", french: "De bon cœur je T'offrirai des sacrifices ; je célébrerai Ton nom, Éternel, car il est bon." },
+      { hebrew: "כִּי מִכָּל צָרָה הִצִּילָנִי וּבְאֹיְבַי רָאֲתָה עֵינִי:", french: "Car Il m'a délivré de toute détresse, et mes yeux se sont réjouis à la vue de mes ennemis." },
+    ]
+  },
+  {
+    number: 55,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינֹת מַשְׂכִּיל לְדָוִד:", french: "Au chef des chantres. Avec les instruments à cordes. Cantique de David." },
+      { hebrew: "הַאֲזִינָה אֱלֹהִים תְּפִלָּתִי וְאַל תִּתְעַלַּם מִתְּחִנָּתִי:", french: "Ô Dieu, prête l'oreille à ma prière, et ne Te dérobe pas à ma supplication !" },
+      { hebrew: "הַקְשִׁיבָה לִּי וַעֲנֵנִי אָרִיד בְּשִׂיחִי וְאָהִימָה:", french: "Écoute-moi et réponds-moi ! J'erre çà et là dans mon trouble, et je gémis," },
+      { hebrew: "מִקּוֹל אוֹיֵב מִפְּנֵי עָקַת רָשָׁע כִּי יָמִיטוּ עָלַי אָוֶן וּבְאַף יִשְׂטְמוּנִי:", french: "à cause de la voix de l'ennemi, à cause de l'oppression du méchant ; car ils font tomber sur moi le malheur, et dans leur colère ils m'en veulent." },
+      { hebrew: "לִבִּי יָחִיל בְּקִרְבִּי וְאֵימוֹת מָוֶת נָפְלוּ עָלָי:", french: "Mon cœur tremble dans mon sein, et les terreurs de la mort m'assaillent." },
+      { hebrew: "יִרְאָה וָרַעַד יָבֹא בִי וַתְּכַסֵּנִי פַּלָּצוּת:", french: "La crainte et le tremblement m'envahissent, et le frisson me couvre." },
+      { hebrew: "וָאֹמַר מִי יִתֶּן לִי אֵבֶר כַּיּוֹנָה אָעוּפָה וְאֶשְׁכֹּנָה:", french: "Je dis : Oh ! Si j'avais les ailes de la colombe, je m'envolerais et je me reposerais !" },
+      { hebrew: "הִנֵּה אַרְחִיק נְדֹד אָלִין בַּמִּדְבָּר סֶלָה:", french: "Voici, je m'enfuirais bien loin, j'habiterais dans le désert. Sélah." },
+      { hebrew: "אָחִישָׁה מִפְלָט לִי מֵרוּחַ סֹעָה מִסָּעַר:", french: "Je me hâterais de chercher un refuge contre le vent impétueux, contre la tempête." },
+      { hebrew: "בַּלַּע אֲדֹנָי פַּלַּג לְשׁוֹנָם כִּי רָאִיתִי חָמָס וְרִיב בָּעִיר:", french: "Détruis, Seigneur, divise leurs langues ! Car je vois la violence et la querelle dans la ville." },
+      { hebrew: "יוֹמָם וָלַיְלָה יְסוֹבְבֻהָ עַל חוֹמֹתֶיהָ וְאָוֶן וְעָמָל בְּקִרְבָּהּ:", french: "Jour et nuit elles circulent sur ses murailles ; l'iniquité et la méchanceté sont en son sein." },
+      { hebrew: "הַוּוֹת בְּקִרְבָּהּ וְלֹא יָמִישׁ מֵרְחֹבָהּ תֹּךְ וּמִרְמָה:", french: "La malice est en son sein, et l'oppression et la fraude ne quittent pas ses places." },
+      { hebrew: "כִּי לֹא אוֹיֵב יְחָרְפֵנִי וְאֶשָּׂא לֹא מְשַׂנְאִי עָלַי הִגְדִּיל וְאֶסָּתֵר מִמֶּנּוּ:", french: "Car ce n'est pas un ennemi qui m'outrage, je le supporterais ; ce n'est pas celui qui me hait qui s'élève contre moi, je me cacherais de lui." },
+      { hebrew: "וְאַתָּה אֱנוֹשׁ כְּעֶרְכִּי אַלּוּפִי וּמְיֻדָּעִי:", french: "Mais c'est toi, un homme de mon rang, mon compagnon et mon ami intime !" },
+      { hebrew: "אֲשֶׁר יַחְדָּו נַמְתִּיק סוֹד בְּבֵית אֱלֹהִים נְהַלֵּךְ בְּרָגֶשׁ:", french: "Ensemble nous échangions de douces confidences, nous marchions avec la foule dans la maison de Dieu !" },
+      { hebrew: "יַשִּׁימָוֶת עָלֵימוֹ יֵרְדוּ שְׁאוֹל חַיִּים כִּי רָעוֹת בִּמְגוּרָם בְּקִרְבָּם:", french: "Que la mort les surprenne, qu'ils descendent vivants au séjour des morts ! Car la méchanceté est dans leur demeure, dans leur cœur." },
+      { hebrew: "אֲנִי אֶל אֱלֹהִים אֶקְרָא וַיהוה יוֹשִׁיעֵנִי:", french: "Moi, j'invoque Dieu, et l'Éternel me sauvera." },
+      { hebrew: "עֶרֶב וָבֹקֶר וְצָהֳרַיִם אָשִׂיחָה וְאֶהֱמֶה וַיִּשְׁמַע קוֹלִי:", french: "Le soir, le matin et à midi, je soupire et je gémis, et Il entend ma voix." },
+      { hebrew: "פָּדָה בְשָׁלוֹם נַפְשִׁי מִקְּרָב לִי כִּי בְרַבִּים הָיוּ עִמָּדִי:", french: "Il délivre mon âme en paix du combat livré contre moi, car ils sont nombreux contre moi." },
+      { hebrew: "יִשְׁמַע אֵל וְיַעֲנֵם וְיֹשֵׁב קֶדֶם סֶלָה אֲשֶׁר אֵין חֲלִיפוֹת לָמוֹ וְלֹא יָרְאוּ אֱלֹהִים:", french: "Dieu entendra et les humiliera, Lui qui siège dès l'éternité. Sélah. Car il n'y a point de changement en eux, et ils ne craignent pas Dieu." },
+      { hebrew: "שָׁלַח יָדָיו בִּשְׁלֹמָיו חִלֵּל בְּרִיתוֹ:", french: "Il porte les mains sur ceux qui étaient en paix avec lui, il viole son alliance." },
+      { hebrew: "חָלְקוּ מַחְמָאֹת פִּיו וּקְרָב לִבּוֹ רַכּוּ דְבָרָיו מִשֶּׁמֶן וְהֵמָּה פְתִחוֹת:", french: "Sa bouche est plus douce que la crème, mais la guerre est dans son cœur ; ses paroles sont plus onctueuses que l'huile, mais ce sont des épées nues." },
+      { hebrew: "הַשְׁלֵךְ עַל יהוה יְהָבְךָ וְהוּא יְכַלְכְּלֶךָ לֹא יִתֵּן לְעוֹלָם מוֹט לַצַּדִּיק:", french: "Remets ton sort à l'Éternel, et Il te soutiendra ; Il ne laissera jamais chanceler le juste." },
+      { hebrew: "וְאַתָּה אֱלֹהִים תּוֹרִדֵם לִבְאֵר שַׁחַת אַנְשֵׁי דָמִים וּמִרְמָה לֹא יֶחֱצוּ יְמֵיהֶם וַאֲנִי אֶבְטַח בָּךְ:", french: "Et Toi, ô Dieu, Tu les feras descendre dans la fosse de destruction ; les hommes de sang et de fraude n'atteindront pas la moitié de leurs jours. Et moi, je me confie en Toi." },
+    ]
+  },
+  {
+    number: 56,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל יוֹנַת אֵלֶם רְחֹקִים לְדָוִד מִכְתָּם בֶּאֱחֹז אוֹתוֹ פְלִשְׁתִּים בְּגַת:", french: "Au chef des chantres. Sur « la colombe muette de ceux qui sont au loin ». De David. Hymne, lorsque les Philistins le saisirent à Gath." },
+      { hebrew: "חָנֵּנִי אֱלֹהִים כִּי שְׁאָפַנִי אֱנוֹשׁ כָּל הַיּוֹם לֹחֵם יִלְחָצֵנִי:", french: "Aie pitié de moi, ô Dieu ! Car des hommes me harcèlent ; tout le jour ils me combattent et m'oppriment." },
+      { hebrew: "שָׁאֲפוּ שׁוֹרְרַי כָּל הַיּוֹם כִּי רַבִּים לֹחֲמִים לִי מָרוֹם:", french: "Tout le jour mes adversaires me harcèlent, car ils sont nombreux ceux qui me combattent, ô Très-Haut !" },
+      { hebrew: "יוֹם אִירָא אֲנִי אֵלֶיךָ אֶבְטָח:", french: "Au jour où je suis dans la crainte, je me confie en Toi." },
+      { hebrew: "בֵּאלֹהִים אֲהַלֵּל דְּבָרוֹ בֵּאלֹהִים בָּטַחְתִּי לֹא אִירָא מַה יַּעֲשֶׂה בָשָׂר לִי:", french: "En Dieu, dont je loue la parole, en Dieu je me confie, je ne crains rien : que peut me faire la chair ?" },
+      { hebrew: "כָּל הַיּוֹם דְּבָרַי יְעַצֵּבוּ עָלַי כָּל מַחְשְׁבֹתָם לָרָע:", french: "Tout le jour ils portent atteinte à mes intérêts ; toutes leurs pensées sont dirigées contre moi pour me faire du mal." },
+      { hebrew: "יָגוּרוּ יִצְפּוֹנוּ הֵמָּה עֲקֵבַי יִשְׁמֹרוּ כַּאֲשֶׁר קִוּוּ נַפְשִׁי:", french: "Ils se rassemblent, ils se cachent, ils observent mes pas, parce qu'ils en veulent à ma vie." },
+      { hebrew: "עַל אָוֶן פַּלֶּט לָמוֹ בְּאַף עַמִּים הוֹרֵד אֱלֹהִים:", french: "Leur échapperont-ils par l'iniquité ? Dans Ta colère, ô Dieu, abats les peuples !" },
+      { hebrew: "נֹדִי סָפַרְתָּה אָתָּה שִׂימָה דִמְעָתִי בְנֹאדֶךָ הֲלֹא בְּסִפְרָתֶךָ:", french: "Tu comptes les pas de ma vie errante ; recueille mes larmes dans Ton outre : ne sont-elles pas dans Ton livre ?" },
+      { hebrew: "אָז יָשׁוּבוּ אוֹיְבַי אָחוֹר בְּיוֹם אֶקְרָא זֶה יָדַעְתִּי כִּי אֱלֹהִים לִי:", french: "Alors mes ennemis reculeront, le jour où je T'invoquerai ; je sais que Dieu est pour moi." },
+      { hebrew: "בֵּאלֹהִים אֲהַלֵּל דָּבָר בַּיהוה אֲהַלֵּל דָּבָר:", french: "En Dieu, dont je loue la parole, en l'Éternel, dont je loue la parole," },
+      { hebrew: "בֵּאלֹהִים בָּטַחְתִּי לֹא אִירָא מַה יַּעֲשֶׂה אָדָם לִי:", french: "en Dieu je me confie, je ne crains rien : que peut me faire l'homme ?" },
+      { hebrew: "עָלַי אֱלֹהִים נְדָרֶיךָ אֲשַׁלֵּם תּוֹדֹת לָךְ:", french: "Ô Dieu, les vœux que je T'ai faits m'obligent ; je T'offrirai des actions de grâce." },
+      { hebrew: "כִּי הִצַּלְתָּ נַפְשִׁי מִמָּוֶת הֲלֹא רַגְלַי מִדֶּחִי לְהִתְהַלֵּךְ לִפְנֵי אֱלֹהִים בְּאוֹר הַחַיִּים:", french: "Car Tu as délivré mon âme de la mort, Tu as préservé mes pieds de la chute, afin que je marche devant Dieu, dans la lumière des vivants." },
+    ]
+  },
+  {
+    number: 57,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אַל תַּשְׁחֵת לְדָוִד מִכְתָּם בְּבָרְחוֹ מִפְּנֵי שָׁאוּל בַּמְּעָרָה:", french: "Au chef des chantres. « Ne détruis pas. » De David. Hymne, lorsqu'il fuyait devant Saül, dans la caverne." },
+      { hebrew: "חָנֵּנִי אֱלֹהִים חָנֵּנִי כִּי בְךָ חָסָיָה נַפְשִׁי וּבְצֵל כְּנָפֶיךָ אֶחְסֶה עַד יַעֲבֹר הַוּוֹת:", french: "Aie pitié de moi, ô Dieu, aie pitié de moi ! Car en Toi mon âme cherche un refuge ; je m'abrite à l'ombre de Tes ailes, jusqu'à ce que le malheur soit passé." },
+      { hebrew: "אֶקְרָא לֵאלֹהִים עֶלְיוֹן לָאֵל גֹּמֵר עָלָי:", french: "Je crie vers le Dieu Très-Haut, vers le Dieu qui agit en ma faveur." },
+      { hebrew: "יִשְׁלַח מִשָּׁמַיִם וְיוֹשִׁיעֵנִי חֵרֵף שֹׁאֲפִי סֶלָה יִשְׁלַח אֱלֹהִים חַסְדּוֹ וַאֲמִתּוֹ:", french: "Il enverra du ciel et me sauvera, Il confondra celui qui me harcèle. Sélah. Dieu enverra Sa bonté et Sa vérité." },
+      { hebrew: "נַפְשִׁי בְּתוֹךְ לְבָאִם אֶשְׁכְּבָה לֹהֲטִים בְּנֵי אָדָם שִׁנֵּיהֶם חֲנִית וְחִצִּים וּלְשׁוֹנָם חֶרֶב חַדָּה:", french: "Mon âme est parmi des lions ; je suis couché au milieu de gens qui crachent le feu, de fils d'homme dont les dents sont des lances et des flèches, et dont la langue est une épée tranchante." },
+      { hebrew: "רוּמָה עַל הַשָּׁמַיִם אֱלֹהִים עַל כָּל הָאָרֶץ כְּבוֹדֶךָ:", french: "Élève-Toi sur les cieux, ô Dieu ! Que Ta gloire soit sur toute la terre !" },
+      { hebrew: "רֶשֶׁת הֵכִינוּ לִפְעָמַי כָּפַף נַפְשִׁי כָּרוּ לְפָנַי שִׁיחָה נָפְלוּ בְתוֹכָהּ סֶלָה:", french: "Ils ont tendu un filet sous mes pas, mon âme était courbée ; ils ont creusé une fosse devant moi, ils y sont tombés. Sélah." },
+      { hebrew: "נָכוֹן לִבִּי אֱלֹהִים נָכוֹן לִבִּי אָשִׁירָה וַאֲזַמֵּרָה:", french: "Mon cœur est affermi, ô Dieu, mon cœur est affermi ; je chanterai et je ferai de la musique." },
+      { hebrew: "עוּרָה כְבוֹדִי עוּרָה הַנֵּבֶל וְכִנּוֹר אָעִירָה שָּׁחַר:", french: "Réveille-toi, ma gloire ! Réveillez-vous, luth et harpe ! Je réveillerai l'aurore." },
+      { hebrew: "אוֹדְךָ בָעַמִּים אֲדֹנָי אֲזַמֶּרְךָ בַּלְאֻמִּים:", french: "Je Te louerai parmi les peuples, Seigneur ! Je Te chanterai parmi les nations." },
+      { hebrew: "כִּי גָדֹל עַד שָׁמַיִם חַסְדֶּךָ וְעַד שְׁחָקִים אֲמִתֶּךָ:", french: "Car Ta bonté s'élève jusqu'aux cieux, et Ta fidélité jusqu'aux nues." },
+      { hebrew: "רוּמָה עַל שָׁמַיִם אֱלֹהִים עַל כָּל הָאָרֶץ כְּבוֹדֶךָ:", french: "Élève-Toi sur les cieux, ô Dieu ! Que Ta gloire soit sur toute la terre !" },
+    ]
+  },
+  {
+    number: 58,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אַל תַּשְׁחֵת לְדָוִד מִכְתָּם:", french: "Au chef des chantres. « Ne détruis pas. » De David. Hymne." },
+      { hebrew: "הַאֻמְנָם אֵלֶם צֶדֶק תְּדַבֵּרוּן מֵישָׁרִים תִּשְׁפְּטוּ בְּנֵי אָדָם:", french: "Est-ce vraiment en silence que vous rendez la justice ? Jugez-vous avec droiture, fils des hommes ?" },
+      { hebrew: "אַף בְּלֵב עוֹלֹת תִּפְעָלוּן בָּאָרֶץ חֲמַס יְדֵיכֶם תְּפַלֵּסוּן:", french: "Loin de là ! Dans le cœur, vous commettez des iniquités ; dans le pays, vos mains pèsent la violence." },
+      { hebrew: "זֹרוּ רְשָׁעִים מֵרָחֶם תָּעוּ מִבֶּטֶן דֹּבְרֵי כָזָב:", french: "Les méchants sont pervertis dès le sein maternel, les menteurs s'égarent dès leur naissance." },
+      { hebrew: "חֲמַת לָמוֹ כִּדְמוּת חֲמַת נָחָשׁ כְּמוֹ פֶתֶן חֵרֵשׁ יַאְטֵם אָזְנוֹ:", french: "Ils ont un venin pareil au venin du serpent, du cobra sourd qui ferme son oreille," },
+      { hebrew: "אֲשֶׁר לֹא יִשְׁמַע לְקוֹל מְלַחֲשִׁים חוֹבֵר חֲבָרִים מְחֻכָּם:", french: "qui n'entend pas la voix des enchanteurs, du charmeur le plus habile." },
+      { hebrew: "אֱלֹהִים הֲרָס שִׁנֵּימוֹ בְּפִימוֹ מַלְתְּעוֹת כְּפִירִים נְתֹץ יהוה:", french: "Ô Dieu, brise-leur les dents dans la bouche ! Éternel, arrache les crocs des lionceaux !" },
+      { hebrew: "יִמָּאֲסוּ כְמוֹ מַיִם יִתְהַלְּכוּ לָמוֹ יִדְרֹךְ חִצָּו כְּמוֹ יִתְמֹלָלוּ:", french: "Qu'ils se dissipent comme des eaux qui s'écoulent ! Qu'il bande ses flèches, et qu'elles soient comme émoussées !" },
+      { hebrew: "כְּמוֹ שַׁבְּלוּל תֶּמֶס יַהֲלֹךְ נֵפֶל אֵשֶׁת בַּל חָזוּ שָׁמֶשׁ:", french: "Qu'ils soient comme la limace qui se fond en avançant, comme l'avorton d'une femme, qui ne voit pas le soleil !" },
+      { hebrew: "בְּטֶרֶם יָבִינוּ סִּירֹתֵיכֶם אָטָד כְּמוֹ חַי כְּמוֹ חָרוֹן יִשְׂעָרֶנּוּ:", french: "Avant que vos chaudrons sentent l'épine, verte ou enflammée, le tourbillon l'emportera." },
+      { hebrew: "יִשְׂמַח צַדִּיק כִּי חָזָה נָקָם פְּעָמָיו יִרְחַץ בְּדַם הָרָשָׁע:", french: "Le juste se réjouira en voyant la vengeance ; il lavera ses pieds dans le sang du méchant." },
+      { hebrew: "וְיֹאמַר אָדָם אַךְ פְּרִי לַצַּדִּיק אַךְ יֵשׁ אֱלֹהִים שֹׁפְטִים בָּאָרֶץ:", french: "Et les hommes diront : Oui, il y a une récompense pour le juste ; oui, il y a un Dieu qui juge sur la terre." },
+    ]
+  },
+  {
+    number: 59,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אַל תַּשְׁחֵת לְדָוִד מִכְתָּם בִּשְׁלֹחַ שָׁאוּל וַיִּשְׁמְרוּ אֶת הַבַּיִת לַהֲמִיתוֹ:", french: "Au chef des chantres. « Ne détruis pas. » De David. Hymne, lorsque Saül envoya garder sa maison pour le faire mourir." },
+      { hebrew: "הַצִּילֵנִי מֵאֹיְבַי אֱלֹהָי מִמִּתְקוֹמְמַי תְּשַׂגְּבֵנִי:", french: "Délivre-moi de mes ennemis, mon Dieu ! Protège-moi contre mes agresseurs !" },
+      { hebrew: "הַצִּילֵנִי מִפֹּעֲלֵי אָוֶן וּמֵאַנְשֵׁי דָמִים הוֹשִׁיעֵנִי:", french: "Délivre-moi de ceux qui commettent l'iniquité, et sauve-moi des hommes de sang !" },
+      { hebrew: "כִּי הִנֵּה אָרְבוּ לְנַפְשִׁי יָגוּרוּ עָלַי עַזִּים לֹא פִשְׁעִי וְלֹא חַטָּאתִי יהוה:", french: "Car voici, ils dressent des embûches contre ma vie ; des hommes puissants s'assemblent contre moi, sans que j'aie commis de faute ni de péché, Éternel !" },
+      { hebrew: "בְּלִי עָוֹן יְרוּצוּן וְיִכּוֹנָנוּ עוּרָה לִקְרָאתִי וּרְאֵה:", french: "Sans que j'aie commis d'iniquité, ils courent et se préparent ; réveille-Toi, viens à ma rencontre, et regarde !" },
+      { hebrew: "וְאַתָּה יהוה אֱלֹהִים צְבָאוֹת אֱלֹהֵי יִשְׂרָאֵל הָקִיצָה לִפְקֹד כָּל הַגּוֹיִם אַל תָּחֹן כָּל בֹּגְדֵי אָוֶן סֶלָה:", french: "Toi, Éternel, Dieu des armées, Dieu d'Israël, lève-Toi pour punir toutes les nations ! N'aie pitié d'aucun de ces perfides ! Sélah." },
+      { hebrew: "יָשׁוּבוּ לָעֶרֶב יֶהֱמוּ כַכָּלֶב וִיסוֹבְבוּ עִיר:", french: "Ils reviennent le soir, ils hurlent comme des chiens, ils rôdent autour de la ville." },
+      { hebrew: "הִנֵּה יַבִּיעוּן בְּפִיהֶם חֲרָבוֹת בְּשִׂפְתוֹתֵיהֶם כִּי מִי שֹׁמֵעַ:", french: "Voici, de leur bouche ils répandent le mal, des épées sont sur leurs lèvres ; car, disent-ils, qui entend ?" },
+      { hebrew: "וְאַתָּה יהוה תִּשְׂחַק לָמוֹ תִּלְעַג לְכָל גּוֹיִם:", french: "Et Toi, Éternel, Tu Te ris d'eux, Tu Te moques de toutes les nations." },
+      { hebrew: "עֻזּוֹ אֵלֶיךָ אֶשְׁמֹרָה כִּי אֱלֹהִים מִשְׂגַּבִּי:", french: "Ô ma Force, c'est vers Toi que je regarde, car Dieu est ma citadelle." },
+      { hebrew: "אֱלֹהֵי חַסְדִּי יְקַדְּמֵנִי אֱלֹהִים יַרְאֵנִי בְשֹׁרְרָי:", french: "Le Dieu de ma grâce viendra au-devant de moi ; Dieu me fera regarder mes ennemis avec joie." },
+      { hebrew: "אַל תַּהַרְגֵם פֶּן יִשְׁכְּחוּ עַמִּי הֲנִיעֵמוֹ בְחֵילְךָ וְהוֹרִידֵמוֹ מָגִנֵּנוּ אֲדֹנָי:", french: "Ne les tue pas, de peur que mon peuple n'oublie ! Fais-les errer par Ta puissance, et abats-les, Seigneur, notre bouclier !" },
+      { hebrew: "חַטַּאת פִּימוֹ דְּבַר שְׂפָתֵימוֹ וְיִלָּכְדוּ בִגְאוֹנָם וּמֵאָלָה וּמִכַּחַשׁ יְסַפֵּרוּ:", french: "Le péché de leur bouche, la parole de leurs lèvres, qu'ils soient pris dans leur orgueil ! Ils ne profèrent que malédictions et mensonges." },
+      { hebrew: "כַּלֵּה בְחֵמָה כַּלֵּה וְאֵינֵמוֹ וְיֵדְעוּ כִּי אֱלֹהִים מֹשֵׁל בְּיַעֲקֹב לְאַפְסֵי הָאָרֶץ סֶלָה:", french: "Consume-les dans Ta fureur, consume-les, et qu'ils ne soient plus ! Qu'ils sachent que Dieu domine en Jacob, jusqu'aux extrémités de la terre ! Sélah." },
+      { hebrew: "וְיָשׁוּבוּ לָעֶרֶב יֶהֱמוּ כַכָּלֶב וִיסוֹבְבוּ עִיר:", french: "Ils reviennent le soir, ils hurlent comme des chiens, ils rôdent autour de la ville." },
+      { hebrew: "הֵמָּה יְנִיעוּן לֶאֱכֹל אִם לֹא יִשְׂבְּעוּ וַיָּלִינוּ:", french: "Ils errent çà et là pour trouver à manger, et si leur faim n'est pas satisfaite, ils passent la nuit." },
+      { hebrew: "וַאֲנִי אָשִׁיר עֻזֶּךָ וַאֲרַנֵּן לַבֹּקֶר חַסְדֶּךָ כִּי הָיִיתָ מִשְׂגָּב לִי וּמָנוֹס בְּיוֹם צַר לִי:", french: "Et moi, je chanterai Ta force ; le matin, je célébrerai Ta bonté. Car Tu es pour moi une citadelle, un refuge au jour de ma détresse." },
+      { hebrew: "עֻזִּי אֵלֶיךָ אֲזַמֵּרָה כִּי אֱלֹהִים מִשְׂגַּבִּי אֱלֹהֵי חַסְדִּי:", french: "Ô ma Force, c'est à Toi que je chanterai, car Dieu est ma citadelle, le Dieu de ma grâce." },
+    ]
+  },
+  {
+    number: 60,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל שׁוּשַׁן עֵדוּת מִכְתָּם לְדָוִד לְלַמֵּד:", french: "Au chef des chantres. Sur « le lis du témoignage ». Hymne de David, pour enseigner." },
+      { hebrew: "בְּהַצּוֹתוֹ אֶת אֲרַם נַהֲרַיִם וְאֶת אֲרַם צוֹבָה וַיָּשָׁב יוֹאָב וַיַּךְ אֶת אֱדוֹם בְּגֵיא מֶלַח שְׁנֵים עָשָׂר אָלֶף:", french: "Lorsqu'il fit la guerre à la Syrie de Mésopotamie et à la Syrie de Tsoba, et que Joab revint et battit douze mille Édomites dans la vallée du Sel." },
+      { hebrew: "אֱלֹהִים זְנַחְתָּנוּ פְרַצְתָּנוּ אָנַפְתָּ תְּשׁוֹבֵב לָנוּ:", french: "Ô Dieu, Tu nous as repoussés, Tu nous as dispersés, Tu T'es irrité : relève-nous !" },
+      { hebrew: "הִרְעַשְׁתָּה אֶרֶץ פְּצַמְתָּהּ רְפָה שְׁבָרֶיהָ כִי מָטָה:", french: "Tu as ébranlé la terre, Tu l'as fendue : répare ses brèches, car elle chancelle !" },
+      { hebrew: "הִרְאִיתָ עַמְּךָ קָשָׁה הִשְׁקִיתָנוּ יַיִן תַּרְעֵלָה:", french: "Tu as fait voir à Ton peuple des choses dures, Tu nous as abreuvés d'un vin d'étourdissement." },
+      { hebrew: "נָתַתָּה לִּירֵאֶיךָ נֵּס לְהִתְנוֹסֵס מִפְּנֵי קֹשֶׁט סֶלָה:", french: "Tu as donné à ceux qui Te craignent une bannière, pour qu'elle s'élève en faveur de la vérité. Sélah." },
+      { hebrew: "לְמַעַן יֵחָלְצוּן יְדִידֶיךָ הוֹשִׁיעָה יְמִינְךָ וַעֲנֵנִי:", french: "Afin que Tes bien-aimés soient délivrés, sauve par Ta droite et exauce-nous !" },
+      { hebrew: "אֱלֹהִים דִּבֶּר בְּקָדְשׁוֹ אֶעְלֹזָה אֲחַלְּקָה שְׁכֶם וְעֵמֶק סֻכּוֹת אֲמַדֵּד:", french: "Dieu a parlé dans Sa sainteté : Je triompherai, je partagerai Sichem, je mesurerai la vallée de Souccoth." },
+      { hebrew: "לִי גִלְעָד וְלִי מְנַשֶּׁה וְאֶפְרַיִם מָעוֹז רֹאשִׁי יְהוּדָה מְחֹקְקִי:", french: "Galaad est à Moi, Manassé est à Moi ; Éphraïm est le rempart de Ma tête, Juda est Mon législateur." },
+      { hebrew: "מוֹאָב סִיר רַחְצִי עַל אֱדוֹם אַשְׁלִיךְ נַעֲלִי עָלַי פְּלֶשֶׁת הִתְרוֹעָעִי:", french: "Moab est le bassin où Je Me lave ; je jette Mon soulier sur Édom ; pousse des cris vers Moi, Philistie !" },
+      { hebrew: "מִי יֹבִלֵנִי עִיר מָצוֹר מִי נָחַנִי עַד אֱדוֹם:", french: "Qui me conduira dans la ville forte ? Qui me mènera jusqu'en Édom ?" },
+      { hebrew: "הֲלֹא אַתָּה אֱלֹהִים זְנַחְתָּנוּ וְלֹא תֵצֵא אֱלֹהִים בְּצִבְאוֹתֵינוּ:", french: "N'est-ce pas Toi, ô Dieu, qui nous avais repoussés, et qui ne sortais plus avec nos armées ?" },
+      { hebrew: "הָבָה לָּנוּ עֶזְרָת מִצָּר וְשָׁוְא תְּשׁוּעַת אָדָם:", french: "Donne-nous du secours contre l'adversaire ! Le secours de l'homme est vain." },
+      { hebrew: "בֵּאלֹהִים נַעֲשֶׂה חָיִל וְהוּא יָבוּס צָרֵינוּ:", french: "Avec Dieu, nous ferons des exploits ; c'est Lui qui écrasera nos adversaires." },
+    ]
+  },
+  {
+    number: 61,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל נְגִינַת לְדָוִד:", french: "Au chef des chantres. Sur les instruments à cordes. De David." },
+      { hebrew: "שִׁמְעָה אֱלֹהִים רִנָּתִי הַקְשִׁיבָה תְּפִלָּתִי:", french: "Ô Dieu, écoute mes cris, sois attentif à ma prière !" },
+      { hebrew: "מִקְצֵה הָאָרֶץ אֵלֶיךָ אֶקְרָא בַּעֲטֹף לִבִּי בְּצוּר יָרוּם מִמֶּנִּי תַנְחֵנִי:", french: "Des extrémités de la terre je crie vers Toi, le cœur abattu ; conduis-moi sur le rocher qui est trop élevé pour moi." },
+      { hebrew: "כִּי הָיִיתָ מַחְסֶה לִי מִגְדַּל עֹז מִפְּנֵי אוֹיֵב:", french: "Car Tu es pour moi un refuge, une tour forte en face de l'ennemi." },
+      { hebrew: "אָגוּרָה בְאָהָלְךָ עוֹלָמִים אֶחֱסֶה בְסֵתֶר כְּנָפֶיךָ סֶלָה:", french: "Je veux demeurer éternellement dans Ta tente, me réfugier à l'abri de Tes ailes. Sélah." },
+      { hebrew: "כִּי אַתָּה אֱלֹהִים שָׁמַעְתָּ לִנְדָרָי נָתַתָּ יְרֻשַּׁת יִרְאֵי שְׁמֶךָ:", french: "Car Toi, ô Dieu, Tu exauces mes vœux, Tu me donnes l'héritage de ceux qui craignent Ton nom." },
+      { hebrew: "יָמִים עַל יְמֵי מֶלֶךְ תּוֹסִיף שְׁנוֹתָיו כְּמוֹ דֹר וָדֹר:", french: "Tu ajouteras des jours aux jours du roi, ses années dureront de génération en génération." },
+      { hebrew: "יֵשֵׁב עוֹלָם לִפְנֵי אֱלֹהִים חֶסֶד וֶאֱמֶת מַן יִנְצְרֻהוּ:", french: "Il siégera toujours devant Dieu ; ordonne que la bonté et la vérité le gardent !" },
+      { hebrew: "כֵּן אֲזַמְּרָה שִׁמְךָ לָעַד לְשַׁלְּמִי נְדָרַי יוֹם יוֹם:", french: "Alors je chanterai à jamais Ton nom, en accomplissant mes vœux chaque jour." },
+    ]
+  },
+  {
+    number: 62,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל יְדוּתוּן מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. D'après Yedoutoun. Psaume de David." },
+      { hebrew: "אַךְ אֶל אֱלֹהִים דּוּמִיָּה נַפְשִׁי מִמֶּנּוּ יְשׁוּעָתִי:", french: "Oui, c'est en Dieu que mon âme se confie en silence ; de Lui vient mon salut." },
+      { hebrew: "אַךְ הוּא צוּרִי וִישׁוּעָתִי מִשְׂגַּבִּי לֹא אֶמּוֹט רַבָּה:", french: "Oui, c'est Lui qui est mon rocher et mon salut, ma citadelle : je ne chancellerai guère." },
+      { hebrew: "עַד אָנָה תְּהוֹתְתוּ עַל אִישׁ תְּרָצְּחוּ כֻלְּכֶם כְּקִיר נָטוּי גָּדֵר הַדְּחוּיָה:", french: "Jusques à quand vous jetterez-vous sur un homme, vous briserez-vous tous ensemble, comme un mur qui penche, comme une clôture qu'on renverse ?" },
+      { hebrew: "אַךְ מִשְּׂאֵתוֹ יָעֲצוּ לְהַדִּיחַ יִרְצוּ כָזָב בְּפִיו יְבָרֵכוּ וּבְקִרְבָּם יְקַלְלוּ סֶלָה:", french: "Ils ne pensent qu'à le précipiter de son élévation ; ils prennent plaisir au mensonge ; ils bénissent de la bouche, mais au-dedans ils maudissent. Sélah." },
+      { hebrew: "אַךְ לֵאלֹהִים דּוֹמִּי נַפְשִׁי כִּי מִמֶּנּוּ תִּקְוָתִי:", french: "Oui, mon âme, confie-toi en silence à Dieu ! Car de Lui vient mon espérance." },
+      { hebrew: "אַךְ הוּא צוּרִי וִישׁוּעָתִי מִשְׂגַּבִּי לֹא אֶמּוֹט:", french: "Oui, c'est Lui qui est mon rocher et mon salut, ma citadelle : je ne chancellerai pas." },
+      { hebrew: "עַל אֱלֹהִים יִשְׁעִי וּכְבוֹדִי צוּר עֻזִּי מַחְסִי בֵּאלֹהִים:", french: "Sur Dieu reposent mon salut et ma gloire ; le rocher de ma force, mon refuge, est en Dieu." },
+      { hebrew: "בִּטְחוּ בוֹ בְכָל עֵת עָם שִׁפְכוּ לְפָנָיו לְבַבְכֶם אֱלֹהִים מַחֲסֶה לָנוּ סֶלָה:", french: "En tout temps, peuples, confiez-vous en Lui, répandez vos cœurs devant Lui ! Dieu est notre refuge. Sélah." },
+      { hebrew: "אַךְ הֶבֶל בְּנֵי אָדָם כָּזָב בְּנֵי אִישׁ בְּמֹאזְנַיִם לַעֲלוֹת הֵמָּה מֵהֶבֶל יָחַד:", french: "Oui, vanité, les fils de l'homme ! Mensonge, les fils de l'homme ! Dans une balance ils monteraient, ensemble ils seraient plus légers que la vanité." },
+      { hebrew: "אַל תִּבְטְחוּ בְעֹשֶׁק וּבְגָזֵל אַל תֶּהְבָּלוּ חַיִל כִּי יָנוּב אַל תָּשִׁיתוּ לֵב:", french: "Ne vous confiez pas dans l'oppression, et ne mettez pas un vain espoir dans la rapine ; quand les richesses s'accroissent, n'y attachez pas votre cœur." },
+      { hebrew: "אַחַת דִּבֶּר אֱלֹהִים שְׁתַּיִם זוּ שָׁמָעְתִּי כִּי עֹז לֵאלֹהִים:", french: "Dieu a parlé une fois, deux fois j'ai entendu ceci : c'est que la force est à Dieu." },
+      { hebrew: "וּלְךָ אֲדֹנָי חָסֶד כִּי אַתָּה תְשַׁלֵּם לְאִישׁ כְּמַעֲשֵׂהוּ:", french: "À Toi aussi, Seigneur, la bonté ; car Tu rends à chacun selon ses œuvres." },
+    ]
+  },
+  {
+    number: 63,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד בִּהְיוֹתוֹ בְּמִדְבַּר יְהוּדָה:", french: "Psaume de David. Lorsqu'il était dans le désert de Juda." },
+      { hebrew: "אֱלֹהִים אֵלִי אַתָּה אֲשַׁחֲרֶךָּ צָמְאָה לְךָ נַפְשִׁי כָּמַהּ לְךָ בְשָׂרִי בְּאֶרֶץ צִיָּה וְעָיֵף בְּלִי מָיִם:", french: "Ô Dieu, Tu es mon Dieu, je Te cherche dès l'aube ; mon âme a soif de Toi, ma chair languit après Toi, dans une terre aride, desséchée, sans eau." },
+      { hebrew: "כֵּן בַּקֹּדֶשׁ חֲזִיתִיךָ לִרְאוֹת עֻזְּךָ וּכְבוֹדֶךָ:", french: "Ainsi je Te contemple dans le sanctuaire, pour voir Ta puissance et Ta gloire." },
+      { hebrew: "כִּי טוֹב חַסְדְּךָ מֵחַיִּים שְׂפָתַי יְשַׁבְּחוּנְךָ:", french: "Car Ta bonté vaut mieux que la vie ; mes lèvres Te célébreront." },
+      { hebrew: "כֵּן אֲבָרֶכְךָ בְחַיָּי בְּשִׁמְךָ אֶשָּׂא כַפָּי:", french: "Ainsi je Te bénirai toute ma vie, j'élèverai mes mains en Ton nom." },
+      { hebrew: "כְּמוֹ חֵלֶב וָדֶשֶׁן תִּשְׂבַּע נַפְשִׁי וְשִׂפְתֵי רְנָנוֹת יְהַלֶּל פִּי:", french: "Mon âme sera rassasiée comme de graisse et de moelle, et ma bouche Te louera avec des lèvres joyeuses." },
+      { hebrew: "אִם זְכַרְתִּיךָ עַל יְצוּעָי בְּאַשְׁמֻרוֹת אֶהְגֶּה בָּךְ:", french: "Lorsque je me souviens de Toi sur ma couche, je médite sur Toi pendant les veilles de la nuit." },
+      { hebrew: "כִּי הָיִיתָ עֶזְרָתָה לִּי וּבְצֵל כְּנָפֶיךָ אֲרַנֵּן:", french: "Car Tu es mon secours, et je suis dans l'allégresse à l'ombre de Tes ailes." },
+      { hebrew: "דָּבְקָה נַפְשִׁי אַחֲרֶיךָ בִּי תָּמְכָה יְמִינֶךָ:", french: "Mon âme est attachée à Toi ; Ta droite me soutient." },
+      { hebrew: "וְהֵמָּה לְשׁוֹאָה יְבַקְשׁוּ נַפְשִׁי יָבֹאוּ בְּתַחְתִּיּוֹת הָאָרֶץ:", french: "Mais ceux qui en veulent à ma vie pour la détruire entreront dans les profondeurs de la terre." },
+      { hebrew: "יַגִּירֻהוּ עַל יְדֵי חָרֶב מְנָת שׁוּעָלִים יִהְיוּ:", french: "On les livrera au glaive, ils seront la proie des renards." },
+      { hebrew: "וְהַמֶּלֶךְ יִשְׂמַח בֵּאלֹהִים יִתְהַלֵּל כָּל הַנִּשְׁבָּע בּוֹ כִּי יִסָּכֵר פִּי דוֹבְרֵי שָׁקֶר:", french: "Et le roi se réjouira en Dieu ; quiconque jure par Lui se glorifiera, car la bouche des menteurs sera fermée." },
+    ]
+  },
+  {
+    number: 64,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "שְׁמַע אֱלֹהִים קוֹלִי בְשִׂיחִי מִפַּחַד אוֹיֵב תִּנְצֹר חַיָּי:", french: "Ô Dieu, écoute ma voix quand je me plains ! Préserve ma vie de la frayeur de l'ennemi !" },
+      { hebrew: "תַּסְתִּירֵנִי מִסּוֹד מְרֵעִים מֵרִגְשַׁת פֹּעֲלֵי אָוֶן:", french: "Cache-moi loin du complot des méchants, loin de la bande tumultueuse de ceux qui font le mal," },
+      { hebrew: "אֲשֶׁר שָׁנְנוּ כַחֶרֶב לְשׁוֹנָם דָּרְכוּ חִצָּם דָּבָר מָר:", french: "qui aiguisent leur langue comme un glaive, qui lancent comme des flèches des paroles amères," },
+      { hebrew: "לִירוֹת בַּמִּסְתָּרִים תָּם פִּתְאֹם יֹרֻהוּ וְלֹא יִירָאוּ:", french: "pour tirer en secret sur l'innocent ; ils tirent sur lui à l'improviste et sans crainte." },
+      { hebrew: "יְחַזְּקוּ לָמוֹ דָּבָר רָע יְסַפְּרוּ לִטְמוֹן מוֹקְשִׁים אָמְרוּ מִי יִרְאֶה לָּמוֹ:", french: "Ils se fortifient dans leur méchanceté, ils concertent la pose de pièges, ils disent : Qui les verra ?" },
+      { hebrew: "יַחְפְּשׂוּ עוֹלֹת תַּמְנוּ חֵפֶשׂ מְחֻפָּשׂ וְקֶרֶב אִישׁ וְלֵב עָמֹק:", french: "Ils méditent des crimes : Nous voilà prêts, le plan est bien conçu ! L'intérieur de l'homme et le cœur sont un abîme." },
+      { hebrew: "וַיֹּרֵם אֱלֹהִים חֵץ פִּתְאוֹם הָיוּ מַכּוֹתָם:", french: "Dieu lance contre eux une flèche ; soudain ils sont frappés." },
+      { hebrew: "וַיַּכְשִׁילוּהוּ עָלֵימוֹ לְשׁוֹנָם יִתְנֹדְדוּ כָּל רֹאֶה בָם:", french: "Leur propre langue cause leur chute ; tous ceux qui les voient hochent la tête." },
+      { hebrew: "וַיִּירְאוּ כָּל אָדָם וַיַּגִּידוּ פֹּעַל אֱלֹהִים וּמַעֲשֵׂהוּ הִשְׂכִּילוּ:", french: "Tous les hommes sont saisis de crainte, ils publient l'œuvre de Dieu et comprennent ce qu'Il a fait." },
+      { hebrew: "יִשְׂמַח צַדִּיק בַּיהוה וְחָסָה בוֹ וְיִתְהַלְלוּ כָּל יִשְׁרֵי לֵב:", french: "Le juste se réjouit en l'Éternel et se réfugie en Lui ; tous ceux qui ont le cœur droit se glorifient." },
+    ]
+  },
+  {
+    number: 65,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד שִׁיר:", french: "Au chef des chantres. Psaume de David. Cantique." },
+      { hebrew: "לְךָ דֻמִיָּה תְהִלָּה אֱלֹהִים בְּצִיּוֹן וּלְךָ יְשֻׁלַּם נֶדֶר:", french: "Avec confiance, ô Dieu, on Te loue dans Sion, et l'on s'acquitte des vœux envers Toi." },
+      { hebrew: "שֹׁמֵעַ תְּפִלָּה עָדֶיךָ כָּל בָּשָׂר יָבֹאוּ:", french: "Toi qui écoutes la prière, toute chair vient à Toi." },
+      { hebrew: "דִּבְרֵי עֲוֹנֹת גָּבְרוּ מֶנִּי פְּשָׁעֵינוּ אַתָּה תְכַפְּרֵם:", french: "Les paroles d'iniquité m'accablent ; Tu pardonnes nos transgressions." },
+      { hebrew: "אַשְׁרֵי תִּבְחַר וּתְקָרֵב יִשְׁכֹּן חֲצֵרֶיךָ נִשְׂבְּעָה בְּטוּב בֵּיתֶךָ קְדֹשׁ הֵיכָלֶךָ:", french: "Heureux celui que Tu choisis et que Tu fais approcher, pour qu'il demeure dans Tes parvis ! Nous nous rassasierons des biens de Ta maison, de la sainteté de Ton temple." },
+      { hebrew: "נוֹרָאוֹת בְּצֶדֶק תַּעֲנֵנוּ אֱלֹהֵי יִשְׁעֵנוּ מִבְטָח כָּל קַצְוֵי אֶרֶץ וְיָם רְחֹקִים:", french: "Tu nous exauces par des prodiges de justice, Dieu de notre salut, espoir de toutes les extrémités de la terre et des mers lointaines !" },
+      { hebrew: "מֵכִין הָרִים בְּכֹחוֹ נֶאְזָר בִּגְבוּרָה:", french: "Il affermit les montagnes par Sa force, Il est ceint de puissance." },
+      { hebrew: "מַשְׁבִּיחַ שְׁאוֹן יַמִּים שְׁאוֹן גַּלֵּיהֶם וַהֲמוֹן לְאֻמִּים:", french: "Il apaise le mugissement des mers, le mugissement de leurs flots, et le tumulte des peuples." },
+      { hebrew: "וַיִּירְאוּ יֹשְׁבֵי קְצָוֹת מֵאוֹתֹתֶיךָ מוֹצָאֵי בֹקֶר וָעֶרֶב תַּרְנִין:", french: "Les habitants des extrémités sont effrayés par Tes prodiges ; Tu remplis de joie l'orient et l'occident." },
+      { hebrew: "פָּקַדְתָּ הָאָרֶץ וַתְּשֹׁקְקֶהָ רַבַּת תַּעְשְׁרֶנָּה פֶּלֶג אֱלֹהִים מָלֵא מָיִם תָּכִין דְּגָנָם כִּי כֵן תְּכִינֶהָ:", french: "Tu visites la terre et Tu l'arroses, Tu la combles de richesses ; le ruisseau de Dieu est plein d'eau. Tu prépares le blé, quand Tu la prépares ainsi." },
+      { hebrew: "תְּלָמֶיהָ רַוֵּה נַחֵת גְּדוּדֶיהָ בִּרְבִיבִים תְּמֹגְגֶנָּה צִמְחָהּ תְּבָרֵךְ:", french: "Tu arroses ses sillons, Tu aplanis ses mottes, Tu la détrempes par des ondées, Tu bénis ses germes." },
+      { hebrew: "עִטַּרְתָּ שְׁנַת טוֹבָתֶךָ וּמַעְגָּלֶיךָ יִרְעֲפוּן דָּשֶׁן:", french: "Tu couronnes l'année de Tes bienfaits, et Tes traces ruissellent de graisse." },
+      { hebrew: "יִרְעֲפוּ נְאוֹת מִדְבָּר וְגִיל גְּבָעוֹת תַּחְגֹּרְנָה:", french: "Les pâturages du désert ruissellent, et les collines sont ceintes d'allégresse." },
+      { hebrew: "לָבְשׁוּ כָרִים הַצֹּאן וַעֲמָקִים יַעַטְפוּ בָר יִתְרוֹעֲעוּ אַף יָשִׁירוּ:", french: "Les prairies se couvrent de troupeaux, et les vallées se revêtent de blé ; elles poussent des cris de joie et chantent." },
+    ]
+  },
+  {
+    number: 66,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ שִׁיר מִזְמוֹר הָרִיעוּ לֵאלֹהִים כָּל הָאָרֶץ:", french: "Au chef des chantres. Cantique. Psaume. Poussez vers Dieu des cris de joie, toute la terre !" },
+      { hebrew: "זַמְּרוּ כְבוֹד שְׁמוֹ שִׂימוּ כָבוֹד תְּהִלָּתוֹ:", french: "Chantez la gloire de Son nom, célébrez Sa louange glorieusement !" },
+      { hebrew: "אִמְרוּ לֵאלֹהִים מַה נּוֹרָא מַעֲשֶׂיךָ בְּרֹב עֻזְּךָ יְכַחֲשׁוּ לְךָ אֹיְבֶיךָ:", french: "Dites à Dieu : Que Tes œuvres sont redoutables ! Par la grandeur de Ta force, Tes ennemis Te flattent." },
+      { hebrew: "כָּל הָאָרֶץ יִשְׁתַּחֲווּ לְךָ וִיזַמְּרוּ לָךְ יְזַמְּרוּ שִׁמְךָ סֶלָה:", french: "Toute la terre se prosterne devant Toi et chante pour Toi ; elle chante Ton nom. Sélah." },
+      { hebrew: "לְכוּ וּרְאוּ מִפְעֲלוֹת אֱלֹהִים נוֹרָא עֲלִילָה עַל בְּנֵי אָדָם:", french: "Venez et voyez les œuvres de Dieu ! Il est redoutable dans Ses actes envers les fils de l'homme." },
+      { hebrew: "הָפַךְ יָם לְיַבָּשָׁה בַּנָּהָר יַעַבְרוּ בְרָגֶל שָׁם נִשְׂמְחָה בּוֹ:", french: "Il changea la mer en terre sèche, ils traversèrent le fleuve à pied ; là nous nous réjouîmes en Lui." },
+      { hebrew: "מֹשֵׁל בִּגְבוּרָתוֹ עוֹלָם עֵינָיו בַּגּוֹיִם תִּצְפֶּינָה הַסּוֹרְרִים אַל יָרוּמוּ לָמוֹ סֶלָה:", french: "Il domine éternellement par Sa puissance, Ses yeux observent les nations ; que les rebelles ne s'élèvent pas ! Sélah." },
+      { hebrew: "בָּרֲכוּ עַמִּים אֱלֹהֵינוּ וְהַשְׁמִיעוּ קוֹל תְּהִלָּתוֹ:", french: "Peuples, bénissez notre Dieu, faites retentir Sa louange !" },
+      { hebrew: "הַשָּׂם נַפְשֵׁנוּ בַּחַיִּים וְלֹא נָתַן לַמּוֹט רַגְלֵנוּ:", french: "C'est Lui qui nous a gardés en vie, et qui n'a pas laissé nos pieds chanceler." },
+      { hebrew: "כִּי בְחַנְתָּנוּ אֱלֹהִים צְרַפְתָּנוּ כִּצְרָף כָּסֶף:", french: "Car Tu nous as éprouvés, ô Dieu, Tu nous as passés au creuset comme on passe l'argent." },
+      { hebrew: "הֲבֵאתָנוּ בַמְּצוּדָה שַׂמְתָּ מוּעָקָה בְמָתְנֵינוּ:", french: "Tu nous as amenés dans le filet, Tu as mis sur nos reins un fardeau." },
+      { hebrew: "הִרְכַּבְתָּ אֱנוֹשׁ לְרֹאשֵׁנוּ בָּאנוּ בָאֵשׁ וּבַמַּיִם וַתּוֹצִיאֵנוּ לָרְוָיָה:", french: "Tu as fait monter des hommes sur nos têtes ; nous sommes entrés dans le feu et dans l'eau, mais Tu nous en as fait sortir pour nous donner l'abondance." },
+      { hebrew: "אָבוֹא בֵיתְךָ בְעוֹלוֹת אֲשַׁלֵּם לְךָ נְדָרָי:", french: "J'entrerai dans Ta maison avec des holocaustes, je m'acquitterai envers Toi de mes vœux," },
+      { hebrew: "אֲשֶׁר פָּצוּ שְׂפָתָי וְדִבֶּר פִּי בַּצַּר לִי:", french: "que mes lèvres ont proférés et que ma bouche a prononcés quand j'étais dans la détresse." },
+      { hebrew: "עֹלוֹת מֵחִים אַעֲלֶה לָּךְ עִם קְטֹרֶת אֵילִים אֶעֱשֶׂה בָקָר עִם עַתּוּדִים סֶלָה:", french: "Je T'offrirai des holocaustes de bêtes grasses, avec le parfum des béliers ; je sacrifierai des bœufs et des boucs. Sélah." },
+      { hebrew: "לְכוּ שִׁמְעוּ וַאֲסַפְּרָה כָּל יִרְאֵי אֱלֹהִים אֲשֶׁר עָשָׂה לְנַפְשִׁי:", french: "Venez, écoutez, vous tous qui craignez Dieu, et je raconterai ce qu'Il a fait à mon âme !" },
+      { hebrew: "אֵלָיו פִּי קָרָאתִי וְרוֹמַם תַּחַת לְשׁוֹנִי:", french: "J'ai crié vers Lui de ma bouche, et la louange était sous ma langue." },
+      { hebrew: "אָוֶן אִם רָאִיתִי בְלִבִּי לֹא יִשְׁמַע אֲדֹנָי:", french: "Si j'avais eu de l'iniquité dans mon cœur, le Seigneur ne m'aurait pas écouté." },
+      { hebrew: "אָכֵן שָׁמַע אֱלֹהִים הִקְשִׁיב בְּקוֹל תְּפִלָּתִי:", french: "Mais Dieu m'a entendu, Il a été attentif à la voix de ma prière." },
+      { hebrew: "בָּרוּךְ אֱלֹהִים אֲשֶׁר לֹא הֵסִיר תְּפִלָּתִי וְחַסְדּוֹ מֵאִתִּי:", french: "Béni soit Dieu, qui n'a pas rejeté ma prière, ni retiré de moi Sa bonté !" },
+    ]
+  },
+  {
+    number: 67,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינֹת מִזְמוֹר שִׁיר:", french: "Au chef des chantres. Avec les instruments à cordes. Psaume. Cantique." },
+      { hebrew: "אֱלֹהִים יְחָנֵּנוּ וִיבָרְכֵנוּ יָאֵר פָּנָיו אִתָּנוּ סֶלָה:", french: "Que Dieu nous fasse grâce et nous bénisse, qu'Il fasse luire Sa face sur nous ! Sélah." },
+      { hebrew: "לָדַעַת בָּאָרֶץ דַּרְכֶּךָ בְּכָל גּוֹיִם יְשׁוּעָתֶךָ:", french: "Afin que l'on connaisse sur la terre Ta voie, et parmi toutes les nations Ton salut !" },
+      { hebrew: "יוֹדוּךָ עַמִּים אֱלֹהִים יוֹדוּךָ עַמִּים כֻּלָּם:", french: "Les peuples Te louent, ô Dieu ! Tous les peuples Te louent." },
+      { hebrew: "יִשְׂמְחוּ וִירַנְּנוּ לְאֻמִּים כִּי תִשְׁפֹּט עַמִּים מִישׁוֹר וּלְאֻמִּים בָּאָרֶץ תַּנְחֵם סֶלָה:", french: "Les nations se réjouissent et sont dans l'allégresse, car Tu juges les peuples avec droiture, et Tu conduis les nations sur la terre. Sélah." },
+      { hebrew: "יוֹדוּךָ עַמִּים אֱלֹהִים יוֹדוּךָ עַמִּים כֻּלָּם:", french: "Les peuples Te louent, ô Dieu ! Tous les peuples Te louent." },
+      { hebrew: "אֶרֶץ נָתְנָה יְבוּלָהּ יְבָרְכֵנוּ אֱלֹהִים אֱלֹהֵינוּ:", french: "La terre donne ses produits ; Dieu, notre Dieu, nous bénit." },
+      { hebrew: "יְבָרְכֵנוּ אֱלֹהִים וְיִירְאוּ אוֹתוֹ כָּל אַפְסֵי אָרֶץ:", french: "Dieu nous bénit, et toutes les extrémités de la terre Le craignent." },
+    ]
+  },
+  {
+    number: 68,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד מִזְמוֹר שִׁיר:", french: "Au chef des chantres. De David. Psaume. Cantique." },
+      { hebrew: "יָקוּם אֱלֹהִים יָפוּצוּ אוֹיְבָיו וְיָנוּסוּ מְשַׂנְאָיו מִפָּנָיו:", french: "Dieu Se lève, Ses ennemis se dispersent, et Ses adversaires fuient devant Sa face." },
+      { hebrew: "כְּהִנְדֹּף עָשָׁן תִּנְדֹּף כְּהִמֵּס דּוֹנַג מִפְּנֵי אֵשׁ יֹאבְדוּ רְשָׁעִים מִפְּנֵי אֱלֹהִים:", french: "Comme la fumée se dissipe, Tu les dissipes ; comme la cire fond au feu, les méchants périssent devant Dieu." },
+      { hebrew: "וְצַדִּיקִים יִשְׂמְחוּ יַעַלְצוּ לִפְנֵי אֱלֹהִים וְיָשִׂישׂוּ בְשִׂמְחָה:", french: "Et les justes se réjouissent, ils exultent devant Dieu, ils sont transportés de joie." },
+      { hebrew: "שִׁירוּ לֵאלֹהִים זַמְּרוּ שְׁמוֹ סֹלּוּ לָרֹכֵב בָּעֲרָבוֹת בְּיָהּ שְׁמוֹ וְעִלְזוּ לְפָנָיו:", french: "Chantez à Dieu, célébrez Son nom ! Frayez le chemin à Celui qui chevauche les nuées ; Son nom est l'Éternel. Réjouissez-vous devant Lui !" },
+      { hebrew: "אֲבִי יְתוֹמִים וְדַיַּן אַלְמָנוֹת אֱלֹהִים בִּמְעוֹן קָדְשׁוֹ:", french: "Le père des orphelins, le défenseur des veuves, c'est Dieu dans Sa demeure sainte." },
+      { hebrew: "אֱלֹהִים מוֹשִׁיב יְחִידִים בַּיְתָה מוֹצִיא אֲסִירִים בַּכּוֹשָׁרוֹת אַךְ סוֹרֲרִים שָׁכְנוּ צְחִיחָה:", french: "Dieu donne une famille à ceux qui sont seuls, Il délivre les captifs et les rend heureux ; seuls les rebelles habitent des lieux arides." },
+      { hebrew: "אֱלֹהִים בְּצֵאתְךָ לִפְנֵי עַמֶּךָ בְּצַעְדְּךָ בִישִׁימוֹן סֶלָה:", french: "Ô Dieu, quand Tu sortis à la tête de Ton peuple, quand Tu marchas dans le désert. Sélah." },
+      { hebrew: "אֶרֶץ רָעָשָׁה אַף שָׁמַיִם נָטְפוּ מִפְּנֵי אֱלֹהִים זֶה סִינַי מִפְּנֵי אֱלֹהִים אֱלֹהֵי יִשְׂרָאֵל:", french: "La terre trembla, les cieux se fondirent devant Dieu, le Sinaï trembla devant Dieu, le Dieu d'Israël." },
+      { hebrew: "גֶּשֶׁם נְדָבוֹת תָּנִיף אֱלֹהִים נַחֲלָתְךָ וְנִלְאָה אַתָּה כוֹנַנְתָּהּ:", french: "Tu fis tomber une pluie bienfaisante, ô Dieu ! Tu raffermis Ton héritage épuisé." },
+      { hebrew: "חַיָּתְךָ יָשְׁבוּ בָהּ תָּכִין בְּטוֹבָתְךָ לֶעָנִי אֱלֹהִים:", french: "Ton troupeau y établit sa demeure ; dans Ta bonté, ô Dieu, Tu pourvois aux besoins du pauvre." },
+      { hebrew: "אֲדֹנָי יִתֶּן אֹמֶר הַמְבַשְּׂרוֹת צָבָא רָב:", french: "Le Seigneur donne la parole ; les messagères de bonnes nouvelles sont une grande armée." },
+      { hebrew: "מַלְכֵי צְבָאוֹת יִדֹּדוּן יִדֹּדוּן וּנְוַת בַּיִת תְּחַלֵּק שָׁלָל:", french: "Les rois des armées fuient, ils fuient, et celle qui reste à la maison partage le butin." },
+      { hebrew: "אִם תִּשְׁכְּבוּן בֵּין שְׁפַתָּיִם כַּנְפֵי יוֹנָה נֶחְפָּה בַכֶּסֶף וְאֶבְרוֹתֶיהָ בִּירַקְרַק חָרוּץ:", french: "Quand vous êtes couchés au milieu des étables, les ailes de la colombe sont couvertes d'argent, et son plumage est d'un jaune d'or." },
+      { hebrew: "בְּפָרֵשׂ שַׁדַּי מְלָכִים בָּהּ תַּשְׁלֵג בְּצַלְמוֹן:", french: "Quand le Tout-Puissant dispersa les rois sur cette terre, il neigea sur le Tsalmon." },
+      { hebrew: "הַר אֱלֹהִים הַר בָּשָׁן הַר גַּבְנֻנִּים הַר בָּשָׁן:", french: "Montagne de Dieu, montagne de Basan ! Montagne aux nombreux sommets, montagne de Basan !" },
+      { hebrew: "לָמָּה תְּרַצְּדוּן הָרִים גַּבְנֻנִּים הָהָר חָמַד אֱלֹהִים לְשִׁבְתּוֹ אַף יהוה יִשְׁכֹּן לָנֶצַח:", french: "Pourquoi, montagnes aux nombreux sommets, regardez-vous avec envie la montagne que Dieu a choisie pour résidence ? L'Éternel y habitera pour toujours." },
+      { hebrew: "רֶכֶב אֱלֹהִים רִבֹּתַיִם אַלְפֵי שִׁנְאָן אֲדֹנָי בָם סִינַי בַּקֹּדֶשׁ:", french: "Les chars de Dieu se comptent par vingt mille, par milliers et milliers ; le Seigneur est au milieu d'eux, le Sinaï est dans le sanctuaire." },
+      { hebrew: "עָלִיתָ לַמָּרוֹם שָׁבִיתָ שֶּׁבִי לָקַחְתָּ מַתָּנוֹת בָּאָדָם וְאַף סוֹרְרִים לִשְׁכֹּן יָהּ אֱלֹהִים:", french: "Tu es monté en haut, Tu as emmené des captifs, Tu as pris des dons parmi les hommes ; les rebelles eux-mêmes habiteront près de l'Éternel Dieu." },
+      { hebrew: "בָּרוּךְ אֲדֹנָי יוֹם יוֹם יַעֲמָס לָנוּ הָאֵל יְשׁוּעָתֵנוּ סֶלָה:", french: "Béni soit le Seigneur ! Jour après jour Il nous comble ; ce Dieu est notre salut. Sélah." },
+      { hebrew: "הָאֵל לָנוּ אֵל לְמוֹשָׁעוֹת וְלֵיהוִה אֲדֹנָי לַמָּוֶת תּוֹצָאוֹת:", french: "Dieu est pour nous le Dieu des délivrances, et c'est l'Éternel, le Seigneur, qui peut délivrer de la mort." },
+      { hebrew: "אַךְ אֱלֹהִים יִמְחַץ רֹאשׁ אֹיְבָיו קָדְקֹד שֵׂעָר מִתְהַלֵּךְ בַּאֲשָׁמָיו:", french: "Oui, Dieu écrasera la tête de Ses ennemis, le crâne chevelu de celui qui marche dans ses péchés." },
+      { hebrew: "אָמַר אֲדֹנָי מִבָּשָׁן אָשִׁיב אָשִׁיב מִמְּצֻלוֹת יָם:", french: "Le Seigneur dit : Je les ramènerai de Basan, Je les ramènerai des profondeurs de la mer," },
+      { hebrew: "לְמַעַן תִּמְחַץ רַגְלְךָ בְּדָם לְשׁוֹן כְּלָבֶיךָ מֵאֹיְבִים מִנֵּהוּ:", french: "afin que tu trempes ton pied dans le sang, et que la langue de tes chiens ait sa part des ennemis." },
+      { hebrew: "רָאוּ הֲלִיכוֹתֶיךָ אֱלֹהִים הֲלִיכוֹת אֵלִי מַלְכִּי בַקֹּדֶשׁ:", french: "Ils ont vu Tes marches, ô Dieu, les marches de mon Dieu, de mon Roi, dans le sanctuaire." },
+      { hebrew: "קִדְּמוּ שָׁרִים אַחַר נֹגְנִים בְּתוֹךְ עֲלָמוֹת תּוֹפֵפוֹת:", french: "En tête marchent les chantres, puis les musiciens, au milieu de jeunes filles battant du tambourin." },
+      { hebrew: "בְּמַקְהֵלוֹת בָּרְכוּ אֱלֹהִים אֲדֹנָי מִמְּקוֹר יִשְׂרָאֵל:", french: "Bénissez Dieu dans les assemblées, bénissez le Seigneur, vous qui êtes de la source d'Israël !" },
+      { hebrew: "שָׁם בִּנְיָמִן צָעִיר רֹדֵם שָׂרֵי יְהוּדָה רִגְמָתָם שָׂרֵי זְבוּלֻן שָׂרֵי נַפְתָּלִי:", french: "Là sont Benjamin, le plus petit, qui domine, les princes de Juda et leur troupe, les princes de Zabulon, les princes de Nephtali." },
+      { hebrew: "צִוָּה אֱלֹהֶיךָ עֻזֶּךָ עוּזָּה אֱלֹהִים זוּ פָּעַלְתָּ לָּנוּ:", french: "Ton Dieu a ordonné que tu sois puissant ; affermis, ô Dieu, ce que Tu as fait pour nous !" },
+      { hebrew: "מֵהֵיכָלֶךָ עַל יְרוּשָׁלִָם לְךָ יוֹבִילוּ מְלָכִים שָׁי:", french: "De Ton temple, sur Jérusalem, des rois T'apporteront des présents." },
+      { hebrew: "גְּעַר חַיַּת קָנֶה עֲדַת אַבִּירִים בְּעֶגְלֵי עַמִּים מִתְרַפֵּס בְּרַצֵּי כָסֶף בִּזַּר עַמִּים קְרָבוֹת יֶחְפָּצוּ:", french: "Menace la bête des roseaux, la troupe des taureaux avec les veaux des peuples, qui se prosternent avec des lingots d'argent ! Disperse les peuples qui aiment la guerre !" },
+      { hebrew: "יֶאֱתָיוּ חַשְׁמַנִּים מִנִּי מִצְרָיִם כּוּשׁ תָּרִיץ יָדָיו לֵאלֹהִים:", french: "Des grands viendront d'Égypte ; l'Éthiopie tendra les mains vers Dieu." },
+      { hebrew: "מַמְלְכוֹת הָאָרֶץ שִׁירוּ לֵאלֹהִים זַמְּרוּ אֲדֹנָי סֶלָה:", french: "Royaumes de la terre, chantez à Dieu ! Chantez au Seigneur ! Sélah." },
+      { hebrew: "לָרֹכֵב בִּשְׁמֵי שְׁמֵי קֶדֶם הֵן יִתֵּן בְּקוֹלוֹ קוֹל עֹז:", french: "À Celui qui chevauche les cieux des cieux éternels ! Voici, Il fait retentir Sa voix, une voix puissante." },
+      { hebrew: "תְּנוּ עֹז לֵאלֹהִים עַל יִשְׂרָאֵל גַּאֲוָתוֹ וְעֻזּוֹ בַּשְּׁחָקִים:", french: "Rendez gloire à Dieu ! Sa majesté est sur Israël, et Sa puissance est dans les cieux." },
+      { hebrew: "נוֹרָא אֱלֹהִים מִמִּקְדָּשֶׁיךָ אֵל יִשְׂרָאֵל הוּא נֹתֵן עֹז וְתַעֲצֻמוֹת לָעָם בָּרוּךְ אֱלֹהִים:", french: "Que Tu es redoutable, ô Dieu, depuis Tes sanctuaires ! Le Dieu d'Israël donne force et puissance au peuple. Béni soit Dieu !" },
+    ]
+  },
+  {
+    number: 69,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל שׁוֹשַׁנִּים לְדָוִד:", french: "Au chef des chantres. Sur les lis. De David." },
+      { hebrew: "הוֹשִׁיעֵנִי אֱלֹהִים כִּי בָאוּ מַיִם עַד נָפֶשׁ:", french: "Sauve-moi, ô Dieu, car les eaux menacent ma vie." },
+      { hebrew: "טָבַעְתִּי בִּיוֵן מְצוּלָה וְאֵין מָעֳמָד בָּאתִי בְמַעֲמַקֵּי מַיִם וְשִׁבֹּלֶת שְׁטָפָתְנִי:", french: "J'enfonce dans la fange du gouffre et il n'y a pas de point d'appui ; je suis entré dans les profondeurs des eaux et le courant m'emporte." },
+      { hebrew: "יָגַעְתִּי בְקָרְאִי נִחַר גְּרוֹנִי כָּלוּ עֵינַי מְיַחֵל לֵאלֹהָי:", french: "Je m'épuise à crier, mon gosier est desséché ; mes yeux se consument à attendre mon Dieu." },
+      { hebrew: "רַבּוּ מִשַּׂעֲרוֹת רֹאשִׁי שֹׂנְאַי חִנָּם עָצְמוּ מַצְמִיתַי אֹיְבַי שֶׁקֶר אֲשֶׁר לֹא גָזַלְתִּי אָז אָשִׁיב:", french: "Ils sont plus nombreux que les cheveux de ma tête, ceux qui me haïssent sans cause ; ils sont puissants, ceux qui veulent me détruire, mes ennemis injustes ; ce que je n'ai pas dérobé, je dois le rendre." },
+      { hebrew: "אֱלֹהִים אַתָּה יָדַעְתָּ לְאִוַּלְתִּי וְאַשְׁמוֹתַי מִמְּךָ לֹא נִכְחָדוּ:", french: "Ô Dieu, Tu connais ma folie, et mes fautes ne Te sont pas cachées." },
+      { hebrew: "אַל יֵבֹשׁוּ בִי קוֹוֶיךָ אֲדֹנָי יהוה צְבָאוֹת אַל יִכָּלְמוּ בִי מְבַקְשֶׁיךָ אֱלֹהֵי יִשְׂרָאֵל:", french: "Que ceux qui espèrent en Toi ne soient pas confus à cause de moi, Seigneur, Éternel des armées ! Que ceux qui Te cherchent ne soient pas déshonorés à cause de moi, ô Dieu d'Israël !" },
+      { hebrew: "כִּי עָלֶיךָ נָשָׂאתִי חֶרְפָּה כִּסְּתָה כְלִמָּה פָנָי:", french: "Car c'est pour Toi que je porte l'opprobre, que la honte couvre mon visage." },
+      { hebrew: "מוּזָר הָיִיתִי לְאֶחָי וְנָכְרִי לִבְנֵי אִמִּי:", french: "Je suis devenu un étranger pour mes frères, un inconnu pour les fils de ma mère." },
+      { hebrew: "כִּי קִנְאַת בֵּיתְךָ אֲכָלָתְנִי וְחֶרְפּוֹת חוֹרְפֶיךָ נָפְלוּ עָלָי:", french: "Car le zèle de Ta maison me dévore, et les outrages de ceux qui T'insultent retombent sur moi." },
+      { hebrew: "וָאֶבְכֶּה בַצּוֹם נַפְשִׁי וַתְּהִי לַחֲרָפוֹת לִי:", french: "Je verse des larmes et je jeûne, et c'est pour moi un sujet d'opprobre." },
+      { hebrew: "וָאֶתְּנָה לְבוּשִׁי שָׂק וָאֱהִי לָהֶם לְמָשָׁל:", french: "Je prends un sac pour vêtement, et je suis pour eux un objet de raillerie." },
+      { hebrew: "יָשִׂיחוּ בִי יֹשְׁבֵי שָׁעַר וּנְגִינוֹת שׁוֹתֵי שֵׁכָר:", french: "Ceux qui sont assis à la porte parlent de moi, et je suis le sujet des chansons des buveurs." },
+      { hebrew: "וַאֲנִי תְפִלָּתִי לְךָ יהוה עֵת רָצוֹן אֱלֹהִים בְּרָב חַסְדֶּךָ עֲנֵנִי בֶּאֱמֶת יִשְׁעֶךָ:", french: "Mais moi, je T'adresse ma prière, ô Éternel ! Que le temps soit favorable, ô Dieu, par Ta grande bonté ; réponds-moi avec la vérité de Ton salut !" },
+      { hebrew: "הַצִּילֵנִי מִטִּיט וְאַל אֶטְבָּעָה אִנָּצְלָה מִשֹּׂנְאַי וּמִמַּעֲמַקֵּי מָיִם:", french: "Délivre-moi de la fange, que je n'enfonce pas ! Que je sois délivré de ceux qui me haïssent et des profondeurs des eaux !" },
+      { hebrew: "אַל תִּשְׁטְפֵנִי שִׁבֹּלֶת מַיִם וְאַל תִּבְלָעֵנִי מְצוּלָה וְאַל תֶּאְטַר עָלַי בְּאֵר פִּיהָ:", french: "Que le courant des eaux ne m'emporte pas, que l'abîme ne m'engloutisse pas, et que la fosse ne ferme pas sa bouche sur moi !" },
+      { hebrew: "עֲנֵנִי יהוה כִּי טוֹב חַסְדֶּךָ כְּרֹב רַחֲמֶיךָ פְּנֵה אֵלָי:", french: "Réponds-moi, Éternel, car Ta bonté est grande ; dans Ta grande miséricorde, tourne-Toi vers moi !" },
+      { hebrew: "וְאַל תַּסְתֵּר פָּנֶיךָ מֵעַבְדֶּךָ כִּי צַר לִי מַהֵר עֲנֵנִי:", french: "Ne cache pas Ta face à Ton serviteur, car je suis dans la détresse ; hâte-Toi de me répondre !" },
+      { hebrew: "קָרְבָה אֶל נַפְשִׁי גְאָלָהּ לְמַעַן אֹיְבַי פְּדֵנִי:", french: "Approche-Toi de mon âme, délivre-la ! À cause de mes ennemis, rachète-moi !" },
+      { hebrew: "אַתָּה יָדַעְתָּ חֶרְפָּתִי וּבָשְׁתִּי וּכְלִמָּתִי נֶגְדְּךָ כָּל צוֹרְרָי:", french: "Tu connais mon opprobre, ma honte et ma confusion ; tous mes adversaires sont devant Toi." },
+      { hebrew: "חֶרְפָּה שָׁבְרָה לִבִּי וָאָנוּשָׁה וָאֲקַוֶּה לָנוּד וָאַיִן וְלַמְנַחֲמִים וְלֹא מָצָאתִי:", french: "L'opprobre me brise le cœur et je suis malade ; j'attends de la compassion, mais en vain, des consolateurs, et je n'en trouve pas." },
+      { hebrew: "וַיִּתְּנוּ בְּבָרוּתִי רֹאשׁ וְלִצְמָאִי יַשְׁקוּנִי חֹמֶץ:", french: "Ils mettent du poison dans ma nourriture, et pour ma soif ils me donnent du vinaigre à boire." },
+      { hebrew: "יְהִי שֻׁלְחָנָם לִפְנֵיהֶם לְפָח וְלִשְׁלוֹמִים לְמוֹקֵשׁ:", french: "Que leur table devant eux soit un piège, et un filet pour ceux qui sont en paix !" },
+      { hebrew: "תֶּחְשַׁכְנָה עֵינֵיהֶם מֵרְאוֹת וּמָתְנֵיהֶם תָּמִיד הַמְעַד:", french: "Que leurs yeux s'obscurcissent pour ne plus voir, et fais continuellement chanceler leurs reins !" },
+      { hebrew: "שְׁפָךְ עֲלֵיהֶם זַעְמֶךָ וַחֲרוֹן אַפְּךָ יַשִּׂיגֵם:", french: "Répands sur eux Ta fureur, et que l'ardeur de Ta colère les atteigne !" },
+      { hebrew: "תְּהִי טִירָתָם נְשַׁמָּה בְּאָהֳלֵיהֶם אַל יְהִי יֹשֵׁב:", french: "Que leur demeure soit dévastée, qu'il n'y ait plus d'habitant dans leurs tentes !" },
+      { hebrew: "כִּי אַתָּה אֲשֶׁר הִכִּיתָ רְדָפוּ וְאֶל מַכְאוֹב חֲלָלֶיךָ יְסַפֵּרוּ:", french: "Car ils persécutent celui que Tu as frappé, et ils racontent les souffrances de ceux que Tu as blessés." },
+      { hebrew: "תְּנָה עָוֹן עַל עֲוֹנָם וְאַל יָבֹאוּ בְּצִדְקָתֶךָ:", french: "Ajoute des iniquités à leurs iniquités, et qu'ils n'aient pas accès à Ta justice !" },
+      { hebrew: "יִמָּחוּ מִסֵּפֶר חַיִּים וְעִם צַדִּיקִים אַל יִכָּתֵבוּ:", french: "Qu'ils soient effacés du livre de vie, et qu'ils ne soient pas inscrits avec les justes !" },
+      { hebrew: "וַאֲנִי עָנִי וְכוֹאֵב יְשׁוּעָתְךָ אֱלֹהִים תְּשַׂגְּבֵנִי:", french: "Et moi, je suis malheureux et souffrant : que Ton secours, ô Dieu, me protège !" },
+      { hebrew: "אֲהַלְלָה שֵׁם אֱלֹהִים בְּשִׁיר וַאֲגַדְּלֶנּוּ בְתוֹדָה:", french: "Je célébrerai le nom de Dieu par des cantiques, je L'exalterai par des louanges." },
+      { hebrew: "וְתִיטַב לַיהוה מִשּׁוֹר פָּר מַקְרִן מַפְרִיס:", french: "Cela sera plus agréable à l'Éternel qu'un taureau avec des cornes et des sabots." },
+      { hebrew: "רָאוּ עֲנָוִים יִשְׂמָחוּ דֹּרְשֵׁי אֱלֹהִים וִיחִי לְבַבְכֶם:", french: "Les humbles le verront et se réjouiront ; vous qui cherchez Dieu, que votre cœur vive !" },
+      { hebrew: "כִּי שֹׁמֵעַ אֶל אֶבְיוֹנִים יהוה וְאֶת אֲסִירָיו לֹא בָזָה:", french: "Car l'Éternel écoute les pauvres, et Il ne méprise pas Ses captifs." },
+      { hebrew: "יְהַלְלוּהוּ שָׁמַיִם וָאָרֶץ יַמִּים וְכָל רֹמֵשׂ בָּם:", french: "Que les cieux et la terre Le louent, les mers et tout ce qui s'y meut !" },
+      { hebrew: "כִּי אֱלֹהִים יוֹשִׁיעַ צִיּוֹן וְיִבְנֶה עָרֵי יְהוּדָה וְיָשְׁבוּ שָׁם וִירֵשׁוּהָ:", french: "Car Dieu sauvera Sion et rebâtira les villes de Juda ; ils y habiteront et la posséderont." },
+      { hebrew: "וְזֶרַע עֲבָדָיו יִנְחָלוּהָ וְאֹהֲבֵי שְׁמוֹ יִשְׁכְּנוּ בָהּ:", french: "La postérité de Ses serviteurs en héritera, et ceux qui aiment Son nom y demeureront." },
+    ]
+  },
+  {
+    number: 70,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד לְהַזְכִּיר:", french: "Au chef des chantres. De David. Pour commémorer." },
+      { hebrew: "אֱלֹהִים לְהַצִּילֵנִי יהוה לְעֶזְרָתִי חוּשָׁה:", french: "Ô Dieu, viens me délivrer ! Éternel, hâte-Toi de me secourir !" },
+      { hebrew: "יֵבֹשׁוּ וְיַחְפְּרוּ מְבַקְשֵׁי נַפְשִׁי יִסֹּגוּ אָחוֹר וְיִכָּלְמוּ חֲפֵצֵי רָעָתִי:", french: "Qu'ils soient honteux et confondus, ceux qui cherchent ma vie ! Qu'ils reculent et soient couverts d'opprobre, ceux qui désirent mon malheur !" },
+      { hebrew: "יָשׁוּבוּ עַל עֵקֶב בָּשְׁתָּם הָאֹמְרִים הֶאָח הֶאָח:", french: "Qu'ils se retirent à cause de leur honte, ceux qui disent : Ha ! Ha !" },
+      { hebrew: "יָשִׂישׂוּ וְיִשְׂמְחוּ בְּךָ כָּל מְבַקְשֶׁיךָ וְיֹאמְרוּ תָמִיד יִגְדַּל אֱלֹהִים אֹהֲבֵי יְשׁוּעָתֶךָ:", french: "Qu'ils soient dans la joie et se réjouissent en Toi, tous ceux qui Te cherchent ! Que ceux qui aiment Ton salut disent sans cesse : Que Dieu est grand !" },
+      { hebrew: "וַאֲנִי עָנִי וְאֶבְיוֹן אֱלֹהִים חוּשָׁה לִּי עֶזְרִי וּמְפַלְטִי אַתָּה יהוה אַל תְּאַחַר:", french: "Et moi, je suis pauvre et indigent ; ô Dieu, hâte-Toi vers moi ! Tu es mon aide et mon libérateur ; Éternel, ne tarde pas !" },
+    ]
+  },
+  {
+    number: 71,
+    verses: [
+      { hebrew: "בְּךָ יהוה חָסִיתִי אַל אֵבוֹשָׁה לְעוֹלָם:", french: "En Toi, Éternel, je me réfugie ; que jamais je ne sois confondu !" },
+      { hebrew: "בְּצִדְקָתְךָ תַּצִּילֵנִי וּתְפַלְּטֵנִי הַטֵּה אֵלַי אָזְנְךָ וְהוֹשִׁיעֵנִי:", french: "Par Ta justice, délivre-moi et sauve-moi ! Incline vers moi Ton oreille et sauve-moi !" },
+      { hebrew: "הֱיֵה לִי לְצוּר מָעוֹן לָבוֹא תָּמִיד צִוִּיתָ לְהוֹשִׁיעֵנִי כִּי סַלְעִי וּמְצוּדָתִי אָתָּה:", french: "Sois pour moi un rocher, une demeure où je puisse toujours me retirer ; Tu as ordonné de me sauver, car Tu es mon roc et ma forteresse." },
+      { hebrew: "אֱלֹהַי פַּלְּטֵנִי מִיַּד רָשָׁע מִכַּף מְעַוֵּל וְחוֹמֵץ:", french: "Mon Dieu, délivre-moi de la main du méchant, de la main de l'homme inique et violent !" },
+      { hebrew: "כִּי אַתָּה תִקְוָתִי אֲדֹנָי יהוה מִבְטַחִי מִנְּעוּרָי:", french: "Car Tu es mon espérance, Seigneur Éternel, ma confiance dès ma jeunesse." },
+      { hebrew: "עָלֶיךָ נִסְמַכְתִּי מִבֶּטֶן מִמְּעֵי אִמִּי אַתָּה גוֹזִי בְּךָ תְהִלָּתִי תָמִיד:", french: "Sur Toi je m'appuie depuis ma naissance ; c'est Toi qui m'as tiré du sein de ma mère ; Tu es sans cesse l'objet de mes louanges." },
+      { hebrew: "כְּמוֹפֵת הָיִיתִי לְרַבִּים וְאַתָּה מַחֲסִי עֹז:", french: "J'ai été pour beaucoup comme un prodige, mais Tu es mon puissant refuge." },
+      { hebrew: "יִמָּלֵא פִי תְּהִלָּתֶךָ כָּל הַיּוֹם תִּפְאַרְתֶּךָ:", french: "Que ma bouche soit remplie de Tes louanges, de Ta gloire tout le jour !" },
+      { hebrew: "אַל תַּשְׁלִיכֵנִי לְעֵת זִקְנָה כִּכְלוֹת כֹּחִי אַל תַּעַזְבֵנִי:", french: "Ne me rejette pas au temps de la vieillesse ; quand mes forces s'épuisent, ne m'abandonne pas !" },
+      { hebrew: "כִּי אָמְרוּ אוֹיְבַי לִי וְשֹׁמְרֵי נַפְשִׁי נוֹעֲצוּ יַחְדָּו:", french: "Car mes ennemis parlent de moi, et ceux qui guettent ma vie se consultent entre eux." },
+      { hebrew: "לֵאמֹר אֱלֹהִים עֲזָבוֹ רִדְפוּ וְתִפְשׂוּהוּ כִּי אֵין מַצִּיל:", french: "Disant : Dieu l'a abandonné ; poursuivez-le et saisissez-le, car il n'y a personne pour le délivrer." },
+      { hebrew: "אֱלֹהִים אַל תִּרְחַק מִמֶּנִּי אֱלֹהַי לְעֶזְרָתִי חוּשָׁה:", french: "Ô Dieu, ne T'éloigne pas de moi ! Mon Dieu, hâte-Toi de me secourir !" },
+      { hebrew: "יֵבֹשׁוּ יִכְלוּ שֹׂטְנֵי נַפְשִׁי יַעֲטוּ חֶרְפָּה וּכְלִמָּה מְבַקְשֵׁי רָעָתִי:", french: "Qu'ils soient confondus et anéantis, ceux qui en veulent à ma vie ! Qu'ils soient couverts d'opprobre et de honte, ceux qui cherchent mon malheur !" },
+      { hebrew: "וַאֲנִי תָּמִיד אֲיַחֵל וְהוֹסַפְתִּי עַל כָּל תְּהִלָּתֶךָ:", french: "Et moi, j'espérerai toujours, et je Te louerai de plus en plus." },
+      { hebrew: "פִּי יְסַפֵּר צִדְקָתְךָ כָּל הַיּוֹם תְּשׁוּעָתֶךָ כִּי לֹא יָדַעְתִּי סְפֹרוֹת:", french: "Ma bouche publiera Ta justice, tout le jour Ton salut, car je n'en connais pas le nombre." },
+      { hebrew: "אָבוֹא בִּגְבֻרוֹת אֲדֹנָי יהוה אַזְכִּיר צִדְקָתְךָ לְבַדֶּךָ:", french: "Je dirai les hauts faits du Seigneur, de l'Éternel ; je rappellerai Ta justice, la Tienne seule." },
+      { hebrew: "אֱלֹהִים לִמַּדְתַּנִי מִנְּעוּרָי וְעַד הֵנָּה אַגִּיד נִפְלְאוֹתֶיךָ:", french: "Ô Dieu, Tu m'as instruit dès ma jeunesse, et jusqu'à présent j'annonce Tes merveilles." },
+      { hebrew: "וְגַם עַד זִקְנָה וְשֵׂיבָה אֱלֹהִים אַל תַּעַזְבֵנִי עַד אַגִּיד זְרוֹעֲךָ לְדוֹר לְכָל יָבוֹא גְּבוּרָתֶךָ:", french: "Et même dans la vieillesse et les cheveux blancs, ô Dieu, ne m'abandonne pas, jusqu'à ce que j'annonce Ton bras à cette génération, Ta puissance à tous ceux qui viendront." },
+      { hebrew: "וְצִדְקָתְךָ אֱלֹהִים עַד מָרוֹם אֲשֶׁר עָשִׂיתָ גְדֹלוֹת אֱלֹהִים מִי כָמוֹךָ:", french: "Et Ta justice, ô Dieu, atteint les hauteurs ; Toi qui as fait de grandes choses, ô Dieu, qui est semblable à Toi ?" },
+      { hebrew: "אֲשֶׁר הִרְאִיתָנוּ צָרוֹת רַבּוֹת וְרָעוֹת תָּשׁוּב תְּחַיֵּינוּ וּמִתְּהֹמוֹת הָאָרֶץ תָּשׁוּב תַּעֲלֵנוּ:", french: "Toi qui nous as fait éprouver bien des détresses et des malheurs, Tu nous rendras la vie, et Tu nous feras remonter des abîmes de la terre." },
+      { hebrew: "תֶּרֶב גְּדֻלָּתִי וְתִסֹּב תְּנַחֲמֵנִי:", french: "Tu augmenteras ma grandeur, et Tu reviendras me consoler." },
+      { hebrew: "גַּם אֲנִי אוֹדְךָ בִכְלִי נֶבֶל אֲמִתְּךָ אֱלֹהָי אֲזַמְּרָה לְךָ בְכִנּוֹר קְדוֹשׁ יִשְׂרָאֵל:", french: "Et moi aussi, je Te louerai avec le luth, je chanterai Ta fidélité, mon Dieu ! Je Te célébrerai avec la harpe, Saint d'Israël !" },
+      { hebrew: "תְּרַנֵּנָּה שְׂפָתַי כִּי אֲזַמְּרָה לָּךְ וְנַפְשִׁי אֲשֶׁר פָּדִיתָ:", french: "Mes lèvres exulteront quand je Te chanterai, ainsi que mon âme que Tu as rachetée." },
+      { hebrew: "גַּם לְשׁוֹנִי כָּל הַיּוֹם תֶּהְגֶּה צִדְקָתֶךָ כִּי בֹשׁוּ כִי חָפְרוּ מְבַקְשֵׁי רָעָתִי:", french: "Ma langue aussi, tout le jour, proclamera Ta justice, car ils seront honteux et confondus, ceux qui cherchent mon malheur." },
+    ]
+  },
+  {
+    number: 72,
+    verses: [
+      { hebrew: "לִשְׁלֹמֹה אֱלֹהִים מִשְׁפָּטֶיךָ לְמֶלֶךְ תֵּן וְצִדְקָתְךָ לְבֶן מֶלֶךְ:", french: "De Salomon. Ô Dieu, donne Tes jugements au roi, et Ta justice au fils du roi !" },
+      { hebrew: "יָדִין עַמְּךָ בְצֶדֶק וַעֲנִיֶּיךָ בְמִשְׁפָּט:", french: "Il jugera Ton peuple avec justice, et Tes malheureux avec équité." },
+      { hebrew: "יִשְׂאוּ הָרִים שָׁלוֹם לָעָם וּגְבָעוֹת בִּצְדָקָה:", french: "Les montagnes porteront la paix pour le peuple, et les collines aussi, par la justice." },
+      { hebrew: "יִשְׁפֹּט עֲנִיֵּי עָם יוֹשִׁיעַ לִבְנֵי אֶבְיוֹן וִידַכֵּא עוֹשֵׁק:", french: "Il fera droit aux malheureux du peuple, il sauvera les fils du pauvre, et il écrasera l'oppresseur." },
+      { hebrew: "יִירָאוּךָ עִם שָׁמֶשׁ וְלִפְנֵי יָרֵחַ דּוֹר דּוֹרִים:", french: "On Te craindra tant que durera le soleil, tant que paraîtra la lune, de génération en génération." },
+      { hebrew: "יֵרֵד כְּמָטָר עַל גֵּז כִּרְבִיבִים זַרְזִיף אָרֶץ:", french: "Il descendra comme la pluie sur un terrain fauché, comme les ondées qui arrosent la terre." },
+      { hebrew: "יִפְרַח בְּיָמָיו צַדִּיק וְרֹב שָׁלוֹם עַד בְּלִי יָרֵחַ:", french: "En ses jours le juste fleurira, et la paix sera grande jusqu'à ce qu'il n'y ait plus de lune." },
+      { hebrew: "וְיֵרְדְּ מִיָּם עַד יָם וּמִנָּהָר עַד אַפְסֵי אָרֶץ:", french: "Il dominera d'une mer à l'autre, et du fleuve jusqu'aux extrémités de la terre." },
+      { hebrew: "לְפָנָיו יִכְרְעוּ צִיִּים וְאֹיְבָיו עָפָר יְלַחֵכוּ:", french: "Devant lui, les habitants du désert se prosterneront, et ses ennemis lécheront la poussière." },
+      { hebrew: "מַלְכֵי תַרְשִׁישׁ וְאִיִּים מִנְחָה יָשִׁיבוּ מַלְכֵי שְׁבָא וּסְבָא אֶשְׁכָּר יַקְרִיבוּ:", french: "Les rois de Tarsis et des îles offriront des présents, les rois de Saba et de Seba paieront tribut." },
+      { hebrew: "וְיִשְׁתַּחֲווּ לוֹ כָל מְלָכִים כָּל גּוֹיִם יַעַבְדוּהוּ:", french: "Tous les rois se prosterneront devant lui, toutes les nations le serviront." },
+      { hebrew: "כִּי יַצִּיל אֶבְיוֹן מְשַׁוֵּעַ וְעָנִי וְאֵין עֹזֵר לוֹ:", french: "Car il délivrera le pauvre qui crie, et le malheureux qui n'a point d'aide." },
+      { hebrew: "יָחֹס עַל דַּל וְאֶבְיוֹן וְנַפְשׁוֹת אֶבְיוֹנִים יוֹשִׁיעַ:", french: "Il aura pitié du faible et du pauvre, et il sauvera la vie des pauvres." },
+      { hebrew: "מִתּוֹךְ וּמֵחָמָס יִגְאַל נַפְשָׁם וְיֵיקַר דָּמָם בְּעֵינָיו:", french: "Il les affranchira de l'oppression et de la violence, et leur sang sera précieux à ses yeux." },
+      { hebrew: "וִיחִי וְיִתֶּן לוֹ מִזְּהַב שְׁבָא וְיִתְפַּלֵּל בַּעֲדוֹ תָמִיד כָּל הַיּוֹם יְבָרְכֶנְהוּ:", french: "Il vivra et on lui donnera de l'or de Saba, on priera pour lui sans cesse, on le bénira tout le jour." },
+      { hebrew: "יְהִי פִסַּת בַּר בָּאָרֶץ בְּרֹאשׁ הָרִים יִרְעַשׁ כַּלְּבָנוֹן פִּרְיוֹ וְיָצִיצוּ מֵעִיר כְּעֵשֶׂב הָאָרֶץ:", french: "Les blés abonderont dans le pays, au sommet des montagnes ; leurs épis onduleront comme le Liban, et les habitants des villes fleuriront comme l'herbe de la terre." },
+      { hebrew: "יְהִי שְׁמוֹ לְעוֹלָם לִפְנֵי שֶׁמֶשׁ יִנּוֹן שְׁמוֹ וְיִתְבָּרְכוּ בוֹ כָּל גּוֹיִם יְאַשְּׁרוּהוּ:", french: "Son nom subsistera à jamais ; tant que le soleil durera, son nom se perpétuera ; par lui on se bénira mutuellement, toutes les nations le diront heureux." },
+      { hebrew: "בָּרוּךְ יהוה אֱלֹהִים אֱלֹהֵי יִשְׂרָאֵל עֹשֵׂה נִפְלָאוֹת לְבַדּוֹ:", french: "Béni soit l'Éternel Dieu, le Dieu d'Israël, qui seul fait des prodiges !" },
+      { hebrew: "וּבָרוּךְ שֵׁם כְּבוֹדוֹ לְעוֹלָם וְיִמָּלֵא כְבוֹדוֹ אֶת כָּל הָאָרֶץ אָמֵן וְאָמֵן:", french: "Béni soit à jamais Son nom glorieux ! Que toute la terre soit remplie de Sa gloire ! Amen et amen !" },
+      { hebrew: "כָּלּוּ תְפִלּוֹת דָּוִד בֶּן יִשָׁי:", french: "Fin des prières de David, fils de Jessé." },
+    ]
+  },
+  {
+    number: 73,
+    verses: [
+      { hebrew: "מִזְמוֹר לְאָסָף אַךְ טוֹב לְיִשְׂרָאֵל אֱלֹהִים לְבָרֵי לֵבָב:", french: "Psaume d'Assaph. Oui, Dieu est bon pour Israël, pour ceux qui ont le cœur pur." },
+      { hebrew: "וַאֲנִי כִּמְעַט נָטָיוּ רַגְלָי כְּאַיִן שֻׁפְּכוּ אֲשֻׁרָי:", french: "Et moi, peu s'en est fallu que mes pieds ne glissent, que mes pas ne chancellent." },
+      { hebrew: "כִּי קִנֵּאתִי בַּהוֹלְלִים שְׁלוֹם רְשָׁעִים אֶרְאֶה:", french: "Car je portais envie aux insensés, en voyant la prospérité des méchants." },
+      { hebrew: "כִּי אֵין חַרְצֻבּוֹת לְמוֹתָם וּבָרִיא אוּלָם:", french: "Car il n'y a pas de souffrances pour eux jusqu'à leur mort, et leur corps est vigoureux." },
+      { hebrew: "בַּעֲמַל אֱנוֹשׁ אֵינֵמוֹ וְעִם אָדָם לֹא יְנֻגָּעוּ:", french: "Ils n'ont point part aux peines des humains, et ils ne sont pas frappés comme les autres hommes." },
+      { hebrew: "לָכֵן עֲנָקַתְמוֹ גַאֲוָה יַעֲטָף שִׁית חָמָס לָמוֹ:", french: "Aussi l'orgueil leur sert de collier, la violence les enveloppe comme un vêtement." },
+      { hebrew: "יָצָא מֵחֵלֶב עֵינֵמוֹ עָבְרוּ מַשְׂכִּיּוֹת לֵבָב:", french: "Leurs yeux sortent de la graisse ; les pensées de leur cœur débordent." },
+      { hebrew: "יָמִיקוּ וִידַבְּרוּ בְרָע עֹשֶׁק מִמָּרוֹם יְדַבֵּרוּ:", french: "Ils raillent et parlent méchamment d'opprimer ; ils parlent de haut." },
+      { hebrew: "שַׁתּוּ בַשָּׁמַיִם פִּיהֶם וּלְשׁוֹנָם תִּהֲלַךְ בָּאָרֶץ:", french: "Ils élèvent leur bouche jusqu'aux cieux, et leur langue se promène sur la terre." },
+      { hebrew: "לָכֵן יָשׁוּב עַמּוֹ הֲלֹם וּמֵי מָלֵא יִמָּצוּ לָמוֹ:", french: "C'est pourquoi Son peuple se tourne de leur côté, et ils trouvent des eaux en abondance." },
+      { hebrew: "וְאָמְרוּ אֵיכָה יָדַע אֵל וְיֵשׁ דֵּעָה בְעֶלְיוֹן:", french: "Et ils disent : Comment Dieu saurait-Il ? Le Très-Haut a-t-Il la connaissance ?" },
+      { hebrew: "הִנֵּה אֵלֶּה רְשָׁעִים וְשַׁלְוֵי עוֹלָם הִשְׂגּוּ חָיִל:", french: "Voilà, tels sont les méchants : toujours heureux, ils accroissent leur richesse." },
+      { hebrew: "אַךְ רִיק זִכִּיתִי לְבָבִי וָאֶרְחַץ בְּנִקָּיוֹן כַּפָּי:", french: "C'est donc en vain que j'ai purifié mon cœur et que j'ai lavé mes mains dans l'innocence !" },
+      { hebrew: "וָאֱהִי נָגוּעַ כָּל הַיּוֹם וְתוֹכַחְתִּי לַבְּקָרִים:", french: "Et j'étais frappé chaque jour, et mon châtiment revenait chaque matin." },
+      { hebrew: "אִם אָמַרְתִּי אֲסַפְּרָה כְמוֹ הִנֵּה דוֹר בָּנֶיךָ בָגָדְתִּי:", french: "Si je disais : Je veux parler ainsi, voici, je trahirais la génération de Tes enfants." },
+      { hebrew: "וָאֲחַשְּׁבָה לָדַעַת זֹאת עָמָל הוּא בְעֵינָי:", french: "J'ai réfléchi pour comprendre cela, mais c'était pénible à mes yeux," },
+      { hebrew: "עַד אָבוֹא אֶל מִקְדְּשֵׁי אֵל אָבִינָה לְאַחֲרִיתָם:", french: "jusqu'à ce que je sois entré dans les sanctuaires de Dieu, et que j'aie compris leur fin." },
+      { hebrew: "אַךְ בַּחֲלָקוֹת תָּשִׁית לָמוֹ הִפַּלְתָּם לְמַשּׁוּאוֹת:", french: "Oui, Tu les places sur des pentes glissantes, Tu les fais tomber dans la ruine." },
+      { hebrew: "אֵיךְ הָיוּ לְשַׁמָּה כְרָגַע סָפוּ תַמּוּ מִן בַּלָּהוֹת:", french: "Comment, en un instant, sont-ils détruits ! Ils périssent, ils disparaissent par la terreur !" },
+      { hebrew: "כַּחֲלוֹם מֵהָקִיץ אֲדֹנָי בָּעִיר צַלְמָם תִּבְזֶה:", french: "Comme un songe au réveil, Seigneur, à Ton réveil, Tu mépriseras leur image." },
+      { hebrew: "כִּי יִתְחַמֵּץ לְבָבִי וְכִלְיוֹתַי אֶשְׁתּוֹנָן:", french: "Quand mon cœur s'aigrissait et que mes reins étaient percés," },
+      { hebrew: "וַאֲנִי בַעַר וְלֹא אֵדָע בְּהֵמוֹת הָיִיתִי עִמָּךְ:", french: "j'étais stupide et ignorant, j'étais comme une bête devant Toi." },
+      { hebrew: "וַאֲנִי תָמִיד עִמָּךְ אָחַזְתָּ בְיַד יְמִינִי:", french: "Et moi, je suis toujours avec Toi ; Tu m'as saisi la main droite." },
+      { hebrew: "בַּעֲצָתְךָ תַנְחֵנִי וְאַחַר כָּבוֹד תִּקָּחֵנִי:", french: "Tu me conduiras par Ton conseil, et après Tu me recevras dans la gloire." },
+      { hebrew: "מִי לִי בַשָּׁמָיִם וְעִמְּךָ לֹא חָפַצְתִּי בָאָרֶץ:", french: "Qui ai-je au ciel ? Et sur la terre, je ne désire rien qu'être avec Toi." },
+      { hebrew: "כָּלָה שְׁאֵרִי וּלְבָבִי צוּר לְבָבִי וְחֶלְקִי אֱלֹהִים לְעוֹלָם:", french: "Ma chair et mon cœur défaillent ; Dieu est le rocher de mon cœur et mon partage pour toujours." },
+      { hebrew: "כִּי הִנֵּה רְחֵקֶיךָ יֹאבֵדוּ הִצְמַתָּה כָּל זוֹנֶה מִמֶּךָ:", french: "Car voici, ceux qui s'éloignent de Toi périront ; Tu anéantis tous ceux qui Te sont infidèles." },
+      { hebrew: "וַאֲנִי קִרְבַת אֱלֹהִים לִי טוֹב שַׁתִּי בַּאדֹנָי יהוה מַחְסִי לְסַפֵּר כָּל מַלְאֲכוֹתֶיךָ:", french: "Et moi, m'approcher de Dieu, c'est mon bien ; je place mon refuge dans le Seigneur, l'Éternel, afin de raconter toutes Tes œuvres." },
+    ]
+  },
+  {
+    number: 74,
+    verses: [
+      { hebrew: "מַשְׂכִּיל לְאָסָף לָמָה אֱלֹהִים זָנַחְתָּ לָנֶצַח יֶעְשַׁן אַפְּךָ בְּצֹאן מַרְעִיתֶךָ:", french: "Cantique d'Assaph. Pourquoi, ô Dieu, nous repousses-Tu pour toujours ? Pourquoi Ta colère fume-t-elle contre les brebis de Ton pâturage ?" },
+      { hebrew: "זְכֹר עֲדָתְךָ קָנִיתָ קֶדֶם גָּאַלְתָּ שֵׁבֶט נַחֲלָתֶךָ הַר צִיּוֹן זֶה שָׁכַנְתָּ בּוֹ:", french: "Souviens-Toi de Ton assemblée que Tu as acquise autrefois, que Tu as rachetée comme la tribu de Ton héritage, de la montagne de Sion où Tu as établi Ta demeure." },
+      { hebrew: "הָרִימָה פְעָמֶיךָ לְמַשֻּׁאוֹת נֶצַח כָּל הֵרַע אוֹיֵב בַּקֹּדֶשׁ:", french: "Porte Tes pas vers ces ruines éternelles ! L'ennemi a tout ravagé dans le sanctuaire." },
+      { hebrew: "שָׁאֲגוּ צֹרְרֶיךָ בְּקֶרֶב מוֹעֲדֶךָ שָׂמוּ אוֹתֹתָם אֹתוֹת:", french: "Tes adversaires ont rugi au milieu de Ton lieu saint ; ils ont établi pour signes leurs signes." },
+      { hebrew: "יִוָּדַע כְּמֵבִיא לְמַעְלָה בִּסְבָךְ עֵץ קַרְדֻּמּוֹת:", french: "On les a vus, pareils à celui qui lève la cognée dans une épaisse forêt." },
+      { hebrew: "וְעַתָּה פִּתּוּחֶיהָ יַחַד בְּכַשִּׁיל וְכֵילַפּוֹת יַהֲלֹמוּן:", french: "Et maintenant, ses sculptures, ils les brisent avec la hache et le marteau." },
+      { hebrew: "שִׁלְחוּ בָאֵשׁ מִקְדָּשֶׁךָ לָאָרֶץ חִלְּלוּ מִשְׁכַּן שְׁמֶךָ:", french: "Ils ont livré au feu Ton sanctuaire, ils ont profané la demeure de Ton nom jusqu'à terre." },
+      { hebrew: "אָמְרוּ בְלִבָּם נִינָם יָחַד שָׂרְפוּ כָל מוֹעֲדֵי אֵל בָּאָרֶץ:", french: "Ils ont dit dans leur cœur : Détruisons-les tous ! Ils ont brûlé tous les lieux saints de Dieu dans le pays." },
+      { hebrew: "אוֹתֹתֵינוּ לֹא רָאִינוּ אֵין עוֹד נָבִיא וְלֹא אִתָּנוּ יֹדֵעַ עַד מָה:", french: "Nous ne voyons plus nos signes ; il n'y a plus de prophète, et personne parmi nous ne sait jusqu'à quand." },
+      { hebrew: "עַד מָתַי אֱלֹהִים יְחָרֶף צָר יְנָאֵץ אוֹיֵב שִׁמְךָ לָנֶצַח:", french: "Jusqu'à quand, ô Dieu, l'adversaire outragera-t-il ? L'ennemi méprisera-t-il Ton nom pour toujours ?" },
+      { hebrew: "לָמָה תָשִׁיב יָדְךָ וִימִינֶךָ מִקֶּרֶב חֵיקְךָ כַלֵּה:", french: "Pourquoi retires-Tu Ta main et Ta droite ? Sors-la du milieu de Ton sein ! Détruis !" },
+      { hebrew: "וֵאלֹהִים מַלְכִּי מִקֶּדֶם פֹּעֵל יְשׁוּעוֹת בְּקֶרֶב הָאָרֶץ:", french: "Dieu est mon Roi dès les temps anciens, Lui qui opère des délivrances au milieu de la terre." },
+      { hebrew: "אַתָּה פוֹרַרְתָּ בְעָזְּךָ יָם שִׁבַּרְתָּ רָאשֵׁי תַנִּינִים עַל הַמָּיִם:", french: "Tu as fendu la mer par Ta puissance, Tu as brisé les têtes des monstres sur les eaux." },
+      { hebrew: "אַתָּה רִצַּצְתָּ רָאשֵׁי לִוְיָתָן תִּתְּנֶנּוּ מַאֲכָל לְעָם לְצִיִּים:", french: "Tu as écrasé les têtes du Léviathan, Tu l'as donné en pâture au peuple du désert." },
+      { hebrew: "אַתָּה בָקַעְתָּ מַעְיָן וָנָחַל אַתָּה הוֹבַשְׁתָּ נַהֲרוֹת אֵיתָן:", french: "Tu as fait jaillir la source et le torrent, Tu as mis à sec des fleuves intarissables." },
+      { hebrew: "לְךָ יוֹם אַף לְךָ לָיְלָה אַתָּה הֲכִינוֹתָ מָאוֹר וָשָׁמֶשׁ:", french: "À Toi est le jour, à Toi aussi la nuit ; Tu as établi la lumière et le soleil." },
+      { hebrew: "אַתָּה הִצַּבְתָּ כָּל גְּבוּלוֹת אָרֶץ קַיִץ וָחֹרֶף אַתָּה יְצַרְתָּם:", french: "Tu as fixé toutes les limites de la terre ; l'été et l'hiver, Tu les as formés." },
+      { hebrew: "זְכָר זֹאת אוֹיֵב חֵרֵף יהוה וְעַם נָבָל נִאֲצוּ שְׁמֶךָ:", french: "Souviens-Toi : l'ennemi outrage l'Éternel, et un peuple insensé méprise Ton nom." },
+      { hebrew: "אַל תִּתֵּן לְחַיַּת נֶפֶשׁ תּוֹרֶךָ חַיַּת עֲנִיֶּיךָ אַל תִּשְׁכַּח לָנֶצַח:", french: "Ne livre pas aux bêtes l'âme de Ta tourterelle ; n'oublie pas à jamais la vie de Tes malheureux !" },
+      { hebrew: "הַבֵּט לַבְּרִית כִּי מָלְאוּ מַחֲשַׁכֵּי אֶרֶץ נְאוֹת חָמָס:", french: "Regarde l'alliance ! Car les lieux ténébreux du pays sont remplis de repaires de violence." },
+      { hebrew: "אַל יָשֹׁב דַּךְ נִכְלָם עָנִי וְאֶבְיוֹן יְהַלְלוּ שְׁמֶךָ:", french: "Que l'opprimé ne s'en retourne pas confus ! Que le pauvre et le malheureux louent Ton nom !" },
+      { hebrew: "קוּמָה אֱלֹהִים רִיבָה רִיבֶךָ זְכֹר חֶרְפָּתְךָ מִנִּי נָבָל כָּל הַיּוֹם:", french: "Lève-Toi, ô Dieu, défends Ta cause ! Souviens-Toi des outrages que l'insensé Te fait tout le jour !" },
+      { hebrew: "אַל תִּשְׁכַּח קוֹל צֹרְרֶיךָ שְׁאוֹן קָמֶיךָ עֹלֶה תָמִיד:", french: "N'oublie pas les clameurs de Tes adversaires, le tumulte toujours croissant de ceux qui s'élèvent contre Toi !" },
+    ]
+  },
+  {
+    number: 75,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אַל תַּשְׁחֵת מִזְמוֹר לְאָסָף שִׁיר:", french: "Au chef des chantres. Ne détruis pas. Psaume d'Assaph. Cantique." },
+      { hebrew: "הוֹדִינוּ לְּךָ אֱלֹהִים הוֹדִינוּ וְקָרוֹב שְׁמֶךָ סִפְּרוּ נִפְלְאוֹתֶיךָ:", french: "Nous Te louons, ô Dieu, nous Te louons ; Ton nom est proche, on raconte Tes merveilles." },
+      { hebrew: "כִּי אֶקַּח מוֹעֵד אֲנִי מֵישָׁרִים אֶשְׁפֹּט:", french: "Quand Je choisirai le moment, Je jugerai avec droiture." },
+      { hebrew: "נְמֹגִים אֶרֶץ וְכָל יֹשְׁבֶיהָ אָנֹכִי תִכַּנְתִּי עַמּוּדֶיהָ סֶלָה:", french: "La terre se fond avec tous ses habitants ; c'est Moi qui affermis ses colonnes. Sélah." },
+      { hebrew: "אָמַרְתִּי לַהוֹלְלִים אַל תָּהֹלּוּ וְלָרְשָׁעִים אַל תָּרִימוּ קָרֶן:", french: "Je dis aux insensés : Ne soyez pas insensés ! Et aux méchants : N'élevez pas la tête !" },
+      { hebrew: "אַל תָּרִימוּ לַמָּרוֹם קַרְנְכֶם תְּדַבְּרוּ בְצַוָּאר עָתָק:", french: "N'élevez pas si haut votre tête, ne parlez pas avec un cou raide !" },
+      { hebrew: "כִּי לֹא מִמּוֹצָא וּמִמַּעֲרָב וְלֹא מִמִּדְבַּר הָרִים:", french: "Car ce n'est ni de l'orient, ni de l'occident, ni du désert que vient l'élévation." },
+      { hebrew: "כִּי אֱלֹהִים שֹׁפֵט זֶה יַשְׁפִּיל וְזֶה יָרִים:", french: "Mais Dieu est celui qui juge : Il abaisse l'un et élève l'autre." },
+      { hebrew: "כִּי כוֹס בְּיַד יהוה וְיַיִן חָמַר מָלֵא מֶסֶךְ וַיַּגֵּר מִזֶּה אַךְ שְׁמָרֶיהָ יִמְצוּ יִשְׁתּוּ כֹּל רִשְׁעֵי אָרֶץ:", french: "Car il y a dans la main de l'Éternel une coupe dont le vin fermenté est plein de mélange ; Il en verse, et tous les méchants de la terre en boiront, en suceront la lie." },
+      { hebrew: "וַאֲנִי אַגִּיד לְעֹלָם אֲזַמְּרָה לֵאלֹהֵי יַעֲקֹב:", french: "Et moi, je proclamerai à jamais, je chanterai le Dieu de Jacob." },
+      { hebrew: "וְכָל קַרְנֵי רְשָׁעִים אֲגַדֵּעַ תְּרוֹמַמְנָה קַרְנוֹת צַדִּיק:", french: "Et j'abattrai toutes les cornes des méchants ; les cornes du juste seront élevées." },
+    ]
+  },
+  {
+    number: 76,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ בִּנְגִינֹת מִזְמוֹר לְאָסָף שִׁיר:", french: "Au chef des chantres. Avec instruments à cordes. Psaume d'Assaph. Cantique." },
+      { hebrew: "נוֹדָע בִּיהוּדָה אֱלֹהִים בְּיִשְׂרָאֵל גָּדוֹל שְׁמוֹ:", french: "Dieu est connu en Juda, Son nom est grand en Israël." },
+      { hebrew: "וַיְהִי בְשָׁלֵם סֻכּוֹ וּמְעוֹנָתוֹ בְצִיּוֹן:", french: "Sa tente est à Salem, et Sa demeure à Sion." },
+      { hebrew: "שָׁמָּה שִׁבַּר רִשְׁפֵי קָשֶׁת מָגֵן וְחֶרֶב וּמִלְחָמָה סֶלָה:", french: "C'est là qu'Il a brisé les flèches de l'arc, le bouclier, l'épée et la guerre. Sélah." },
+      { hebrew: "נָאוֹר אַתָּה אַדִּיר מֵהַרְרֵי טָרֶף:", french: "Tu es resplendissant, majestueux, depuis les montagnes de la proie." },
+      { hebrew: "אֶשְׁתּוֹלְלוּ אַבִּירֵי לֵב נָמוּ שְׁנָתָם וְלֹא מָצְאוּ כָל אַנְשֵׁי חַיִל יְדֵיהֶם:", french: "Les vaillants de cœur ont été dépouillés, ils se sont endormis de leur sommeil, et aucun homme de guerre n'a retrouvé ses mains." },
+      { hebrew: "מִגַּעֲרָתְךָ אֱלֹהֵי יַעֲקֹב נִרְדָּם וְרֶכֶב וָסוּס:", french: "À Ta menace, ô Dieu de Jacob, char et cheval se sont endormis." },
+      { hebrew: "אַתָּה נוֹרָא אַתָּה וּמִי יַעֲמֹד לְפָנֶיךָ מֵאָז אַפֶּךָ:", french: "Tu es redoutable, Toi ! Qui peut subsister devant Toi quand Ta colère éclate ?" },
+      { hebrew: "מִשָּׁמַיִם הִשְׁמַעְתָּ דִּין אֶרֶץ יָרְאָה וְשָׁקָטָה:", french: "Du haut des cieux Tu as fait entendre Ta sentence ; la terre a eu peur et s'est tenue tranquille," },
+      { hebrew: "בְּקוּם לַמִּשְׁפָּט אֱלֹהִים לְהוֹשִׁיעַ כָּל עַנְוֵי אֶרֶץ סֶלָה:", french: "quand Dieu s'est levé pour juger, pour sauver tous les malheureux de la terre. Sélah." },
+      { hebrew: "כִּי חֲמַת אָדָם תּוֹדֶךָּ שְׁאֵרִית חֵמֹת תַּחְגֹּר:", french: "Car la fureur de l'homme tourne à Ta louange ; Tu Te ceins du reste de la fureur." },
+      { hebrew: "נִדְרוּ וְשַׁלְּמוּ לַיהוה אֱלֹהֵיכֶם כָּל סְבִיבָיו יוֹבִילוּ שַׁי לַמּוֹרָא:", french: "Faites des vœux et acquittez-les envers l'Éternel votre Dieu ! Que tous ceux qui L'entourent apportent des présents au Redoutable !" },
+      { hebrew: "יִבְצֹר רוּחַ נְגִידִים נוֹרָא לְמַלְכֵי אָרֶץ:", french: "Il retranche l'esprit des princes, Il est redoutable pour les rois de la terre." },
+    ]
+  },
+  {
+    number: 77,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל יְדוּתוּן לְאָסָף מִזְמוֹר:", french: "Au chef des chantres. D'après Yedoutoun. D'Assaph. Psaume." },
+      { hebrew: "קוֹלִי אֶל אֱלֹהִים וְאֶצְעָקָה קוֹלִי אֶל אֱלֹהִים וְהַאֲזִין אֵלָי:", french: "Ma voix s'élève à Dieu, et je crie ; ma voix s'élève à Dieu, et Il me prête l'oreille." },
+      { hebrew: "בְּיוֹם צָרָתִי אֲדֹנָי דָּרָשְׁתִּי יָדִי לַיְלָה נִגְּרָה וְלֹא תָפוּג מָאֲנָה הִנָּחֵם נַפְשִׁי:", french: "Au jour de ma détresse, je cherche le Seigneur ; la nuit, ma main est étendue sans se lasser ; mon âme refuse d'être consolée." },
+      { hebrew: "אֶזְכְּרָה אֱלֹהִים וְאֶהֱמָיָה אָשִׂיחָה וְתִתְעַטֵּף רוּחִי סֶלָה:", french: "Je me souviens de Dieu et je gémis ; je médite et mon esprit est accablé. Sélah." },
+      { hebrew: "אָחַזְתָּ שְׁמֻרוֹת עֵינָי נִפְעַמְתִּי וְלֹא אֲדַבֵּר:", french: "Tu tiens mes paupières ouvertes ; je suis troublé et je ne puis parler." },
+      { hebrew: "חִשַּׁבְתִּי יָמִים מִקֶּדֶם שְׁנוֹת עוֹלָמִים:", french: "Je pense aux jours anciens, aux années d'autrefois." },
+      { hebrew: "אֶזְכְּרָה נְגִינָתִי בַּלָּיְלָה עִם לְבָבִי אָשִׂיחָה וַיְחַפֵּשׂ רוּחִי:", french: "Je me rappelle mes cantiques pendant la nuit, je médite dans mon cœur, et mon esprit fait des recherches." },
+      { hebrew: "הַלְעוֹלָמִים יִזְנַח אֲדֹנָי וְלֹא יֹסִיף לִרְצוֹת עוֹד:", french: "Le Seigneur rejettera-t-Il pour toujours ? Ne sera-t-Il plus favorable ?" },
+      { hebrew: "הֶאָפֵס לָנֶצַח חַסְדּוֹ גָּמַר אֹמֶר לְדֹר וָדֹר:", french: "Sa bonté est-elle épuisée pour toujours ? Sa parole est-elle anéantie pour tous les âges ?" },
+      { hebrew: "הֲשָׁכַח חַנּוֹת אֵל אִם קָפַץ בְּאַף רַחֲמָיו סֶלָה:", french: "Dieu a-t-Il oublié d'avoir pitié ? A-t-Il, dans Sa colère, fermé Ses compassions ? Sélah." },
+      { hebrew: "וָאֹמַר חַלּוֹתִי הִיא שְׁנוֹת יְמִין עֶלְיוֹן:", french: "Et je dis : Ce qui fait ma souffrance, c'est que la droite du Très-Haut a changé." },
+      { hebrew: "אֶזְכּוֹר מַעַלְלֵי יָהּ כִּי אֶזְכְּרָה מִקֶּדֶם פִּלְאֶךָ:", french: "Je rappellerai les hauts faits de l'Éternel, car je me souviens de Tes merveilles d'autrefois." },
+      { hebrew: "וְהָגִיתִי בְכָל פָּעֳלֶךָ וּבַעֲלִילוֹתֶיךָ אָשִׂיחָה:", french: "Je méditerai sur toutes Tes œuvres, et je parlerai de Tes hauts faits." },
+      { hebrew: "אֱלֹהִים בַּקֹּדֶשׁ דַּרְכֶּךָ מִי אֵל גָּדוֹל כֵּאלֹהִים:", french: "Ô Dieu, Tes voies sont saintes ; quel dieu est grand comme Dieu ?" },
+      { hebrew: "אַתָּה הָאֵל עֹשֵׂה פֶלֶא הוֹדַעְתָּ בָעַמִּים עֻזֶּךָ:", french: "Tu es le Dieu qui fait des prodiges ; Tu as fait connaître Ta puissance parmi les peuples." },
+      { hebrew: "גָּאַלְתָּ בִּזְרוֹעַ עַמֶּךָ בְּנֵי יַעֲקֹב וְיוֹסֵף סֶלָה:", french: "Tu as racheté Ton peuple par Ton bras, les fils de Jacob et de Joseph. Sélah." },
+      { hebrew: "רָאוּךָ מַיִם אֱלֹהִים רָאוּךָ מַיִם יָחִילוּ אַף יִרְגְּזוּ תְהֹמוֹת:", french: "Les eaux T'ont vu, ô Dieu, les eaux T'ont vu et ont tremblé, les abîmes aussi ont frémi." },
+      { hebrew: "זֹרְמוּ מַיִם עָבוֹת קוֹל נָתְנוּ שְׁחָקִים אַף חֲצָצֶיךָ יִתְהַלָּכוּ:", french: "Les nuées ont versé leurs eaux, le tonnerre a retenti dans les nues, et Tes flèches ont volé de toutes parts." },
+      { hebrew: "קוֹל רַעַמְךָ בַּגַּלְגַּל הֵאִירוּ בְרָקִים תֵּבֵל רָגְזָה וַתִּרְעַשׁ הָאָרֶץ:", french: "Le bruit de Ton tonnerre était dans le tourbillon, les éclairs ont illuminé le monde, la terre a tremblé et frémi." },
+      { hebrew: "בַּיָּם דַּרְכֶּךָ וּשְׁבִילְךָ בְּמַיִם רַבִּים וְעִקְּבוֹתֶיךָ לֹא נֹדָעוּ:", french: "Tu as marché à travers la mer, Ton chemin a traversé les grandes eaux, et Tes traces n'ont pas été connues." },
+      { hebrew: "נָחִיתָ כַצֹּאן עַמֶּךָ בְּיַד מֹשֶׁה וְאַהֲרֹן:", french: "Tu as conduit Ton peuple comme un troupeau, par la main de Moïse et d'Aaron." },
+    ]
+  },
+  {
+    number: 78,
+    verses: [
+      { hebrew: "מַשְׂכִּיל לְאָסָף הַאֲזִינָה עַמִּי תּוֹרָתִי הַטּוּ אָזְנְכֶם לְאִמְרֵי־פִי׃", french: "" },
+      { hebrew: "אֶפְתְּחָה בְמָשָׁל פִּי אַבִּיעָה חִידוֹת מִנִּי־קֶדֶם׃", french: "" },
+      { hebrew: "אֲשֶׁר שָׁמַעְנוּ וַנֵּדָעֵם וַאֲבוֹתֵינוּ סִפְּרוּ־לָנוּ׃", french: "" },
+      { hebrew: "לֹא נְכַחֵד מִבְּנֵיהֶם לְדוֹר אַחֲרוֹן מְסַפְּרִים תְּהִלּוֹת יְהוָה וֶעֱזוּזוֹ וְנִפְלְאוֹתָיו אֲשֶׁר עָשָׂה׃", french: "" },
+      { hebrew: "וַיָּקֶם עֵדוּת בְּיַעֲקֹב וְתוֹרָה שָׂם בְּיִשְׂרָאֵל אֲשֶׁר צִוָּה אֶת־אֲבוֹתֵינוּ לְהוֹדִיעָם לִבְנֵיהֶם׃", french: "" },
+      { hebrew: "לְמַעַן יֵדְעוּ דּוֹר אַחֲרוֹן בָּנִים יִוָּלֵדוּ יָקֻמוּ וִיסַפְּרוּ לִבְנֵיהֶם׃", french: "" },
+      { hebrew: "וְיָשִׂימוּ בֵאלֹהִים כִּסְלָם וְלֹא יִשְׁכְּחוּ מַעַלְלֵי־אֵל וּמִצְוֺתָיו יִנְצֹרוּ׃", french: "" },
+      { hebrew: "וְלֹא יִהְיוּ כַּאֲבוֹתָם דּוֹר סוֹרֵר וּמֹרֶה דּוֹר לֹא־הֵכִין לִבּוֹ וְלֹא־נֶאֶמְנָה אֶת־אֵל רוּחוֹ׃", french: "" },
+      { hebrew: "בְּנֵי־אֶפְרַיִם נוֹשְׁקֵי רוֹמֵי־קָשֶׁת הָפְכוּ בְּיוֹם קְרָב׃", french: "" },
+      { hebrew: "לֹא שָׁמְרוּ בְּרִית אֱלֹהִים וּבְתוֹרָתוֹ מֵאֲנוּ לָלֶכֶת׃", french: "" },
+      { hebrew: "וַיִּשְׁכְּחוּ עֲלִילוֹתָיו וְנִפְלְאוֹתָיו אֲשֶׁר הֶרְאָם׃", french: "" },
+      { hebrew: "נֶגֶד אֲבוֹתָם עָשָׂה פֶלֶא בְּאֶרֶץ מִצְרַיִם שְׂדֵה־צֹעַן׃", french: "" },
+      { hebrew: "בָּקַע יָם וַיַּעֲבִירֵם וַיַּצֶּב־מַיִם כְּמוֹ־נֵד׃", french: "" },
+      { hebrew: "וַיַּנְחֵם בֶּעָנָן יוֹמָם וְכָל־הַלַּיְלָה בְּאוֹר אֵשׁ׃", french: "" },
+      { hebrew: "יְבַקַּע צֻרִים בַּמִּדְבָּר וַיַּשְׁקְ כִּתְהֹמוֹת רַבָּה׃", french: "" },
+      { hebrew: "וַיּוֹצִא נוֹזְלִים מִסָּלַע וַיּוֹרֶד כַּנְּהָרוֹת מָיִם׃", french: "" },
+      { hebrew: "וַיּוֹסִיפוּ עוֹד לַחֲטֹא־לוֹ לַמְרוֹת עֶלְיוֹן בַּצִּיָּה׃", french: "" },
+      { hebrew: "וַיְנַסּוּ־אֵל בִּלְבָבָם לִשְׁאָל־אֹכֶל לְנַפְשָׁם׃", french: "" },
+      { hebrew: "וַיְדַבְּרוּ בֵּאלֹהִים אָמְרוּ הֲיוּכַל אֵל לַעֲרֹךְ שֻׁלְחָן בַּמִּדְבָּר׃", french: "" },
+      { hebrew: "הֵן הִכָּה־צוּר וַיָּזוּבוּ מַיִם וּנְחָלִים יִשְׁטֹפוּ הֲגַם־לֶחֶם יוּכַל תֵּת אִם־יָכִין שְׁאֵר לְעַמּוֹ׃", french: "" },
+      { hebrew: "לָכֵן שָׁמַע יְהוָה וַיִּתְעַבָּר וְאֵשׁ נִשְּׂקָה בְיַעֲקֹב וְגַם־אַף עָלָה בְיִשְׂרָאֵל׃", french: "" },
+      { hebrew: "כִּי לֹא הֶאֱמִינוּ בֵּאלֹהִים וְלֹא בָטְחוּ בִּישׁוּעָתוֹ׃", french: "" },
+      { hebrew: "וַיְצַו שְׁחָקִים מִמָּעַל וְדַלְתֵי שָׁמַיִם פָּתָח׃", french: "" },
+      { hebrew: "וַיַּמְטֵר עֲלֵיהֶם מָן לֶאֱכֹל וּדְגַן־שָׁמַיִם נָתַן לָמוֹ׃", french: "" },
+      { hebrew: "לֶחֶם אַבִּירִים אָכַל אִישׁ צֵידָה שָׁלַח לָהֶם לָשֹׂבַע׃", french: "" },
+      { hebrew: "יַסַּע קָדִים בַּשָּׁמָיִם וַיְנַהֵג בְּעֻזּוֹ תֵימָן׃", french: "" },
+      { hebrew: "וַיַּמְטֵר עֲלֵיהֶם כֶּעָפָר שְׁאֵר וּכְחוֹל יַמִּים עוֹף כָּנָף׃", french: "" },
+      { hebrew: "וַיַּפֵּל בְּקֶרֶב מַחֲנֵהוּ סָבִיב לְמִשְׁכְּנֹתָיו׃", french: "" },
+      { hebrew: "וַיֹּאכְלוּ וַיִּשְׂבְּעוּ מְאֹד וְתַאֲוָתָם יָבִא לָהֶם׃", french: "" },
+      { hebrew: "לֹא־זָרוּ מִתַּאֲוָתָם עוֹד אָכְלָם בְּפִיהֶם׃", french: "" },
+      { hebrew: "וְאַף אֱלֹהִים עָלָה בָהֶם וַיַּהֲרֹג בְּמִשְׁמַנֵּיהֶם וּבַחוּרֵי יִשְׂרָאֵל הִכְרִיעַ׃", french: "" },
+      { hebrew: "בְּכָל־זֹאת חָטְאוּ־עוֹד וְלֹא־הֶאֱמִינוּ בְּנִפְלְאוֹתָיו׃", french: "" },
+      { hebrew: "וַיְכַל־בַּהֶבֶל יְמֵיהֶם וּשְׁנוֹתָם בַּבֶּהָלָה׃", french: "" },
+      { hebrew: "אִם־הֲרָגָם וּדְרָשׁוּהוּ וְשָׁבוּ וְשִׁחֲרוּ־אֵל׃", french: "" },
+      { hebrew: "וַיִּזְכְּרוּ כִּי־אֱלֹהִים צוּרָם וְאֵל עֶלְיוֹן גֹּאֲלָם׃", french: "" },
+      { hebrew: "וַיְפַתּוּהוּ בְּפִיהֶם וּבִלְשׁוֹנָם יְכַזְּבוּ־לוֹ׃", french: "" },
+      { hebrew: "וְלִבָּם לֹא־נָכוֹן עִמּוֹ וְלֹא נֶאֶמְנוּ בִּבְרִיתוֹ׃", french: "" },
+      { hebrew: "וְהוּא רַחוּם יְכַפֵּר עָוֺן וְלֹא־יַשְׁחִית וְהִרְבָּה לְהָשִׁיב אַפּוֹ וְלֹא־יָעִיר כָּל־חֲמָתוֹ׃", french: "" },
+      { hebrew: "וַיִּזְכֹּר כִּי־בָשָׂר הֵמָּה רוּחַ הוֹלֵךְ וְלֹא יָשׁוּב׃", french: "" },
+      { hebrew: "כַּמָּה יַמְרוּהוּ בַמִּדְבָּר יַעֲצִיבוּהוּ בִּישִׁימוֹן׃", french: "" },
+      { hebrew: "וַיָּשׁוּבוּ וַיְנַסּוּ אֵל וּקְדוֹשׁ יִשְׂרָאֵל הִתְווּ׃", french: "" },
+      { hebrew: "לֹא־זָכְרוּ אֶת־יָדוֹ יוֹם אֲ‍שֶׁר־פָּדָם מִנִּי־צָר׃", french: "" },
+      { hebrew: "אֲשֶׁר־שָׂם בְּמִצְרַיִם אֹתוֹתָיו וּמוֹפְתָיו בִּשְׂדֵה־צֹעַן׃", french: "" },
+      { hebrew: "וַיַּהֲפֹךְ לְדָם יְאֹרֵיהֶם וְנֹזְלֵיהֶם בַּל־יִשְׁתָּיוּן׃", french: "" },
+      { hebrew: "יְשַׁלַּח בָּהֶם עָרֹב וַיֹּאכְלֵם וּצְפַרְדֵּעַ וַתַּשְׁחִיתֵם׃", french: "" },
+      { hebrew: "וַיִּתֵּן לֶחָסִיל יְבוּלָם וִיגִיעָם לָאַרְבֶּה׃", french: "" },
+      { hebrew: "יַהֲרֹג בַּבָּרָד גַּפְנָם וְשִׁקְמוֹתָם בַּחֲנָמַל׃", french: "" },
+      { hebrew: "וַיַּסְגֵּר לַבָּרָד בְּעִירָם וּמִקְנֵיהֶם לָרְשָׁפִים׃", french: "" },
+      { hebrew: "יְשַׁלַּח־בָּם חֲרוֹן אַפּוֹ עֶבְרָה וָזַעַם וְצָרָה מִשְׁלַחַת מַלְאֲכֵי רָעִים׃", french: "" },
+      { hebrew: "יְפַלֵּס נָתִיב לְאַפּוֹ לֹא־חָשַׂךְ מִמָּוֶת נַפְשָׁם וְחַיָּתָם לַדֶּבֶר הִסְגִּיר׃", french: "" },
+      { hebrew: "וַיַּךְ כָּל־בְּכוֹר בְּמִצְרָיִם רֵאשִׁית אוֹנִים בְּאָהֳלֵי־חָם׃", french: "" },
+      { hebrew: "וַיַּסַּע כַּצֹּאן עַמּוֹ וַיְנַהֲגֵם כַּעֵדֶר בַּמִּדְבָּר׃", french: "" },
+      { hebrew: "וַיַּנְחֵם לָבֶטַח וְלֹא פָחָדוּ וְאֶת־אוֹיְבֵיהֶם כִּסָּה הַיָּם׃", french: "" },
+      { hebrew: "וַיְבִיאֵם אֶל־גְּבוּל קָדְשׁוֹ הַר־זֶה קָנְתָה יְמִינוֹ׃", french: "" },
+      { hebrew: "וַיְגָרֶשׁ מִפְּנֵיהֶם גּוֹיִם וַיַּפִּילֵם בְּחֶבֶל נַחֲלָה וַיַּשְׁכֵּן בְּאָהֳלֵיהֶם שִׁבְטֵי יִשְׂרָאֵל׃", french: "" },
+      { hebrew: "וַיְנַסּוּ וַיַּמְרוּ אֶת־אֱלֹהִים עֶלְיוֹן וְעֵדוֹתָיו לֹא שָׁמָרוּ׃", french: "" },
+      { hebrew: "וַיִּסֹּגוּ וַיִּבְגְּדוּ כַּאֲבוֹתָם נֶהְפְּכוּ כְּקֶשֶׁת רְמִיָּה׃", french: "" },
+      { hebrew: "וַיַּכְעִיסוּהוּ בְּבָמוֹתָם וּבִפְסִילֵיהֶם יַקְנִיאוּהוּ׃", french: "" },
+      { hebrew: "שָׁמַע אֱלֹהִים וַיִּתְעַבָּר וַיִּמְאַס מְאֹד בְּיִשְׂרָאֵל׃", french: "" },
+      { hebrew: "וַיִּטֹּשׁ מִשְׁכַּן שִׁלוֹ אֹהֶל שִׁכֵּן בָּאָדָם׃", french: "" },
+      { hebrew: "וַיִּתֵּן לַשְּׁבִי עֻזּוֹ וְתִפְאַרְתּוֹ בְיַד־צָר׃", french: "" },
+      { hebrew: "וַיַּסְגֵּר לַחֶרֶב עַמּוֹ וּבְנַחֲלָתוֹ הִתְעַבָּר׃", french: "" },
+      { hebrew: "בַּחוּרָיו אָכְלָה־אֵשׁ וּבְתוּלֹתָיו לֹא הוּלָּלוּ׃", french: "" },
+      { hebrew: "כֹּהֲנָיו בַּחֶרֶב נָפָלוּ וְאַלְמְנֹתָיו לֹא תִבְכֶּינָה׃", french: "" },
+      { hebrew: "וַיִּקַץ כְּיָשֵׁן אֲדֹנָי כְּגִבּוֹר מִתְרוֹנֵן מִיָּיִן׃", french: "" },
+      { hebrew: "וַיַּךְ־צָרָיו אָחוֹר חֶרְפַּת עוֹלָם נָתַן לָמוֹ׃", french: "" },
+      { hebrew: "וַיִּמְאַס בְּאֹהֶל יוֹסֵף וּבְשֵׁבֶט אֶפְרַיִם לֹא בָחָר׃", french: "" },
+      { hebrew: "וַיִּבְחַר אֶת־שֵׁבֶט יְהוּדָה אֶת־הַר צִיּוֹן אֲשֶׁר אָהֵב׃", french: "" },
+      { hebrew: "וַיִּבֶן כְּמוֹ־רָמִים מִקְדָּשׁוֹ כְּאֶרֶץ יְסָדָהּ לְעוֹלָם׃", french: "" },
+      { hebrew: "וַיִּבְחַר בְּדָוִד עַבְדּוֹ וַיִּקָּחֵהוּ מִמִּכְלְאֹת צֹאן׃", french: "" },
+      { hebrew: "מֵאַחַר עָלוֹת הֱבִיאוֹ לִרְעוֹת בְּיַעֲקֹב עַמּוֹ וּבְיִשְׂרָאֵל נַחֲלָתוֹ׃", french: "" },
+      { hebrew: "וַיִּרְעֵם כְּתֹם לְבָבוֹ וּבִתְבוּנוֹת כַּפָּיו יַנְחֵם׃", french: "" }
+    ]
+  },
+  {
+    number: 79,
+    verses: [
+      { hebrew: "מִזְמוֹר לְאָסָף אֱ‍לֹהִים בָּאוּ גוֹיִם בְּנַחֲלָתֶךָ טִמְּאוּ אֶת־הֵיכַל קָדְשֶׁךָ שָׂמוּ אֶת־יְרוּשָׁלִַם לְעִיִּים׃", french: "" },
+      { hebrew: "נָתְנוּ אֶת־נִבְלַת עֲבָדֶיךָ מַאֲכָל לְעוֹף הַשָּׁמָיִם בְּשַׂר חֲסִידֶיךָ לְחַיְתוֹ־אָרֶץ׃", french: "" },
+      { hebrew: "שָׁפְכוּ דָמָם כַּמַּיִם סְבִיבוֹת יְרוּשָׁלִָם וְאֵין קוֹבֵר׃", french: "" },
+      { hebrew: "הָיִינוּ חֶרְפָּה לִשְׁכֵנֵינוּ לַעַג וָקֶלֶס לִסְבִיבוֹתֵינוּ׃", french: "" },
+      { hebrew: "עַד־מָה יְהוָה תֶּאֱנַף לָנֶצַח תִּבְעַר כְּמוֹ־אֵשׁ קִנְאָתֶךָ׃", french: "" },
+      { hebrew: "שְׁפֹךְ חֲמָתְךָ אֶל־הַגּוֹיִם אֲשֶׁר לֹא־יְדָעוּךָ וְעַל מַמְלָכוֹת אֲשֶׁר בְּשִׁמְךָ לֹא קָרָאוּ׃", french: "" },
+      { hebrew: "כִּי אָכַל אֶת־יַעֲקֹב וְאֶת־נָוֵהוּ הֵשַׁמּוּ׃", french: "" },
+      { hebrew: "אַל־תִּזְכָּר־לָנוּ עֲוֺנֹת רִאשֹׁנִים מַהֵר יְקַדְּמוּנוּ רַחֲמֶיךָ כִּי דַלּוֹנוּ מְאֹד׃", french: "" },
+      { hebrew: "עָזְרֵנוּ אֱלֹהֵי יִשְׁעֵנוּ עַל־דְּבַר כְּבוֹד־שְׁמֶךָ וְהַצִּילֵנוּ וְכַפֵּר עַל־חַטֹּאתֵינוּ לְמַעַן שְׁמֶךָ׃", french: "" },
+      { hebrew: "לָמָּה יֹאמְרוּ הַגּוֹיִם אַיֵּה אֱ‍לֹהֵיהֶם יִוָּדַע בגיים [בַּגּוֹיִם] לְעֵינֵינוּ נִקְמַת דַּם־עֲבָדֶיךָ הַשָּׁפוּךְ׃", french: "" },
+      { hebrew: "תָּבוֹא לְפָנֶיךָ אֶנְקַת אָסִיר כְּגֹדֶל זְרוֹעֲךָ הוֹתֵר בְּנֵי תְמוּתָה׃", french: "" },
+      { hebrew: "וְהָשֵׁב לִשְׁכֵנֵינוּ שִׁבְעָתַיִם אֶל־חֵיקָם חֶרְפָּתָם אֲשֶׁר חֵרְפוּךָ אֲדֹנָי׃", french: "" },
+      { hebrew: "וַאֲנַחְנוּ עַמְּךָ וְצֹאן מַרְעִיתֶךָ נוֹדֶה לְּךָ לְעוֹלָם לְדֹר וָדֹר נְסַפֵּר תְּהִלָּתֶךָ׃", french: "" }
+    ]
+  },
+  {
+    number: 80,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ אֶל־שֹׁשַׁנִּים עֵדוּת לְאָסָף מִזְמוֹר׃", french: "" },
+      { hebrew: "רֹעֵה יִשְׂרָאֵל הַאֲזִינָה נֹהֵג כַּצֹּאן יוֹסֵף יֹשֵׁב הַכְּרוּבִים הוֹפִיעָה׃", french: "" },
+      { hebrew: "לִפְנֵי אֶפְרַיִם וּבִנְיָמִן וּמְנַשֶּׁה עוֹרְרָה אֶת־גְּבוּרָתֶךָ וּלְכָה לִישֻׁעָתָה לָּנוּ׃", french: "" },
+      { hebrew: "אֱלֹהִים הֲשִׁיבֵנוּ וְהָאֵר פָּנֶיךָ וְנִוָּשֵׁעָה׃", french: "" },
+      { hebrew: "יְהוָה אֱלֹהִים צְבָאוֹת עַד־מָתַי עָשַׁנְתָּ בִּתְפִלַּת עַמֶּךָ׃", french: "" },
+      { hebrew: "הֶאֱכַלְתָּם לֶחֶם דִּמְעָה וַתַּשְׁקֵמוֹ בִּדְמָעוֹת שָׁלִישׁ׃", french: "" },
+      { hebrew: "תְּשִׂימֵנוּ מָדוֹן לִשְׁכֵנֵינוּ וְאֹיְבֵינוּ יִלְעֲגוּ־לָמוֹ׃", french: "" },
+      { hebrew: "אֱלֹהִים צְבָאוֹת הֲשִׁיבֵנוּ וְהָאֵר פָּנֶיךָ וְנִוָּשֵׁעָה׃", french: "" },
+      { hebrew: "גֶּפֶן מִמִּצְרַיִם תַּסִּיעַ תְּגָרֵשׁ גּוֹיִם וַתִּטָּעֶהָ׃", french: "" },
+      { hebrew: "פִּנִּיתָ לְפָנֶיהָ וַתַּשְׁרֵשׁ שָׁרָשֶׁיהָ וַתְּמַלֵּא־אָרֶץ׃", french: "" },
+      { hebrew: "כָּסּוּ הָרִים צִלָּהּ וַעֲנָפֶיהָ אַרְזֵי־אֵל׃", french: "" },
+      { hebrew: "תְּשַׁלַּח קְצִירֶהָ עַד־יָם וְאֶל־נָהָר יוֹנְקוֹתֶיהָ׃", french: "" },
+      { hebrew: "לָמָּה פָּרַצְתָּ גְדֵרֶיהָ וְאָרוּהָ כָּל־עֹבְרֵי דָרֶךְ׃", french: "" },
+      { hebrew: "יְכַרְסְמֶנָּה חֲזִיר מִיָּעַר וְזִיז שָׂדַי יִרְעֶנָּה׃", french: "" },
+      { hebrew: "אֱלֹהִים צְבָאוֹת שׁוּב־נָא הַבֵּט מִשָּׁמַיִם וּרְאֵה וּפְקֹד גֶּפֶן זֹאת׃", french: "" },
+      { hebrew: "וְכַנָּה אֲשֶׁר־נָטְעָה יְמִינֶךָ וְעַל־בֵּן אִמַּצְתָּה לָּךְ׃", french: "" },
+      { hebrew: "שְׂרֻפָה בָאֵשׁ כְּסוּחָה מִגַּעֲרַת פָּנֶיךָ יֹאבֵדוּ׃", french: "" },
+      { hebrew: "תְּהִי־יָדְךָ עַל־אִישׁ יְמִינֶךָ עַל־בֶּן־אָדָם אִמַּצְתָּ לָּךְ׃", french: "" },
+      { hebrew: "וְלֹא־נָסוֹג מִמֶּךָּ תְּחַיֵּנוּ וּבְשִׁמְךָ נִקְרָא׃", french: "" },
+      { hebrew: "יְהוָה אֱלֹהִים צְבָאוֹת הֲשִׁיבֵנוּ הָאֵר פָּנֶיךָ וְנִוָּשֵׁעָה׃", french: "" }
+    ]
+  },
+  {
+    number: 81,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל־הַגִּתִּית לְאָסָף׃", french: "" },
+      { hebrew: "הַרְנִינוּ לֵאלֹהִים עוּזֵּנוּ הָרִיעוּ לֵאלֹהֵי יַעֲקֹב׃", french: "" },
+      { hebrew: "שְׂאוּ־זִמְרָה וּתְנוּ־תֹף כִּנּוֹר נָעִים עִם־נָבֶל׃", french: "" },
+      { hebrew: "תִּקְעוּ בַחֹדֶשׁ שׁוֹפָר בַּכֵּסֶה לְיוֹם חַגֵּנוּ׃", french: "" },
+      { hebrew: "כִּי חֹק לְיִשְׂרָאֵל הוּא מִשְׁפָּט לֵאלֹהֵי יַעֲקֹב׃", french: "" },
+      { hebrew: "עֵדוּת בִּיהוֹסֵף שָׂמוֹ בְּצֵאתוֹ עַל־אֶרֶץ מִצְרָיִם שְׂפַת לֹא־יָדַעְתִּי אֶשְׁמָע׃", french: "" },
+      { hebrew: "הֲסִירוֹתִי מִסֵּבֶל שִׁכְמוֹ כַּפָּיו מִדּוּד תַּעֲבֹרְנָה׃", french: "" },
+      { hebrew: "בַּצָּרָה קָרָאתָ וָאֲחַלְּצֶךָּ אֶעֶנְךָ בְּסֵתֶר רַעַם אֶבְחָנְךָ עַל־מֵי מְרִיבָה סֶלָה׃", french: "" },
+      { hebrew: "שְׁמַע עַמִּי וְאָעִידָה בָּךְ יִשְׂרָאֵל אִם־תִּשְׁמַע־לִי׃", french: "" },
+      { hebrew: "לֹא־יִהְיֶה בְךָ אֵל זָר וְלֹא תִשְׁתַּחֲוֶה לְאֵל נֵכָר׃", french: "" },
+      { hebrew: "אָנֹכִי יְהוָה אֱלֹהֶיךָ הַמַּעַלְךָ מֵאֶרֶץ מִצְרָיִם הַרְחֶב־פִּיךָ וַאֲמַלְאֵהוּ׃", french: "" },
+      { hebrew: "וְלֹא־שָׁמַע עַמִּי לְקוֹלִי וְיִשְׂרָאֵל לֹא־אָבָה לִי׃", french: "" },
+      { hebrew: "וָאֲשַׁלְּחֵהוּ בִּשְׁרִירוּת לִבָּם יֵלְכוּ בְּמוֹעֲצוֹתֵיהֶם׃", french: "" },
+      { hebrew: "לוּ עַמִּי שֹׁמֵעַ לִי יִשְׂרָאֵל בִּדְרָכַי יְהַלֵּכוּ׃", french: "" },
+      { hebrew: "כִּמְעַט אוֹיְבֵיהֶם אַכְנִיעַ וְעַל צָרֵיהֶם אָשִׁיב יָדִי׃", french: "" },
+      { hebrew: "מְשַׂנְאֵי יְהוָה יְכַחֲשׁוּ־לוֹ וִיהִי עִתָּם לְעוֹלָם׃", french: "" },
+      { hebrew: "וַיַּאֲכִילֵהוּ מֵחֵלֶב חִטָּה וּמִצּוּר דְּבַשׁ אַשְׂבִּיעֶךָ׃", french: "" }
+    ]
+  },
+  {
+    number: 82,
+    verses: [
+      { hebrew: "מִזְמוֹר לְאָסָף אֱ‍לֹהִים נִצָּב בַּעֲדַת־אֵל בְּקֶרֶב אֱלֹהִים יִשְׁפֹּט׃", french: "" },
+      { hebrew: "עַד־מָתַי תִּשְׁפְּטוּ־עָוֶל וּפְנֵי רְשָׁעִים תִּשְׂאוּ־סֶלָה׃", french: "" },
+      { hebrew: "שִׁפְטוּ־דַל וְיָתוֹם עָנִי וָרָשׁ הַצְדִּיקוּ׃", french: "" },
+      { hebrew: "פַּלְּטוּ־דַל וְאֶבְיוֹן מִיַּד רְשָׁעִים הַצִּילוּ׃", french: "" },
+      { hebrew: "לֹא יָדְעוּ וְלֹא יָבִינוּ בַּחֲשֵׁכָה יִתְהַלָּכוּ יִמּוֹטוּ כָּל־מוֹסְדֵי אָרֶץ׃", french: "" },
+      { hebrew: "אֲ‍נִי־אָמַרְתִּי אֱלֹהִים אַתֶּם וּבְנֵי עֶלְיוֹן כֻּלְּכֶם׃", french: "" },
+      { hebrew: "אָכֵן כְּאָדָם תְּמוּתוּן וּכְאַחַד הַשָּׂרִים תִּפֹּלוּ׃", french: "" },
+      { hebrew: "קוּמָה אֱלֹהִים שָׁפְטָה הָאָרֶץ כִּי־אַתָּה תִנְחַל בְּכָל־הַגּוֹיִם׃", french: "" }
+    ]
+  },
+  {
+    number: 83,
+    verses: [
+      { hebrew: "שִׁיר מִזְמוֹר לְאָסָף׃", french: "" },
+      { hebrew: "אֱלֹהִים אַל־דֳּמִי־לָךְ אַל־תֶּחֱרַשׁ וְאַל־תִּשְׁקֹט אֵל׃", french: "" },
+      { hebrew: "כִּי־הִנֵּה אוֹיְבֶיךָ יֶהֱמָיוּן וּמְשַׂנְאֶיךָ נָשְׂאוּ רֹאשׁ׃", french: "" },
+      { hebrew: "עַל־עַמְּךָ יַעֲרִימוּ סוֹד וְיִתְיָעֲצוּ עַל־צְפוּנֶיךָ׃", french: "" },
+      { hebrew: "אָמְרוּ לְכוּ וְנַכְחִידֵם מִגּוֹי וְלֹא־יִזָּכֵר שֵׁם־יִשְׂרָאֵל עוֹד׃", french: "" },
+      { hebrew: "כִּי נוֹעֲצוּ לֵב יַחְדָּו עָלֶיךָ בְּרִית יִכְרֹתוּ׃", french: "" },
+      { hebrew: "אָהֳלֵי אֱדוֹם וְיִשְׁמְעֵאלִים מוֹאָב וְהַגְרִים׃", french: "" },
+      { hebrew: "גְּבָל וְעַמּוֹן וַעֲמָלֵק פְּלֶשֶׁת עִם־יֹשְׁבֵי צוֹר׃", french: "" },
+      { hebrew: "גַּם־אַשּׁוּר נִלְוָה עִמָּם הָיוּ זְרוֹעַ לִבְנֵי־לוֹט סֶלָה׃", french: "" },
+      { hebrew: "עֲשֵׂה־לָהֶם כְּמִדְיָן כְּסִיסְרָא כְיָבִין בְּנַחַל קִישׁוֹן׃", french: "" },
+      { hebrew: "נִשְׁמְדוּ בְעֵין־דֹּאר הָיוּ דֹּמֶן לָאֲדָמָה׃", french: "" },
+      { hebrew: "שִׁיתֵמוֹ נְדִיבֵמוֹ כְּעֹרֵב וְכִזְאֵב וּכְזֶבַח וּכְצַלְמֻנָּע כָּל־נְסִיכֵמוֹ׃", french: "" },
+      { hebrew: "אֲשֶׁר אָמְרוּ נִירֲשָׁה לָּנוּ אֵת נְאוֹת אֱלֹהִים׃", french: "" },
+      { hebrew: "אֱ‍לֹהַי שִׁיתֵמוֹ כַגַּלְגַּל כְּקַשׁ לִפְנֵי־רוּחַ׃", french: "" },
+      { hebrew: "כְּאֵשׁ תִּבְעַר־יָעַר וּכְלֶהָבָה תְּלַהֵט הָרִים׃", french: "" },
+      { hebrew: "כֵּן תִּרְדְּפֵם בְּסַעֲרֶךָ וּבְסוּפָתְךָ תְבַהֲלֵם׃", french: "" },
+      { hebrew: "מַלֵּא פְנֵיהֶם קָלוֹן וִיבַקְשׁוּ שִׁמְךָ יְהוָה׃", french: "" },
+      { hebrew: "יֵבֹשׁוּ וְיִבָּהֲלוּ עֲדֵי־עַד וְיַחְפְּרוּ וְיֹאבֵדוּ׃", french: "" },
+      { hebrew: "וְיֵדְעוּ כִּי־אַתָּה שִׁמְךָ יְהוָה לְבַדֶּךָ עֶלְיוֹן עַל־כָּל־הָאָרֶץ׃", french: "" }
+    ]
+  },
+  {
+    number: 84,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ עַל־הַגִּתִּית לִבְנֵי־קֹרַח מִזְמוֹר׃", french: "" },
+      { hebrew: "מַה־יְּדִידוֹת מִשְׁכְּנוֹתֶיךָ יְהוָה צְבָאוֹת׃", french: "" },
+      { hebrew: "נִכְסְפָה וְגַם־כָּלְתָה נַפְשִׁי לְחַצְרוֹת יְהוָה לִבִּי וּבְשָׂרִי יְרַנְּנוּ אֶל אֵל־חָי׃", french: "" },
+      { hebrew: "גַּם־צִפּוֹר מָצְאָה בַיִת וּדְרוֹר קֵן לָהּ אֲשֶׁר־שָׁתָה אֶפְרֹחֶיהָ אֶת־מִזְבְּחוֹתֶיךָ יְהוָה צְבָאוֹת מַלְכִּי וֵאלֹהָי׃", french: "" },
+      { hebrew: "אַשְׁרֵי יוֹשְׁבֵי בֵיתֶךָ עוֹד יְהַלְלוּךָ סֶּלָה׃", french: "" },
+      { hebrew: "אַשְׁרֵי אָדָם עוֹז־לוֹ בָךְ מְסִלּוֹת בִּלְבָבָם׃", french: "" },
+      { hebrew: "עֹבְרֵי בְּעֵמֶק הַבָּכָא מַעְיָן יְשִׁיתוּהוּ גַּם־בְּרָכוֹת יַעְטֶה מוֹרֶה׃", french: "" },
+      { hebrew: "יֵלְכוּ מֵחַיִל אֶל־חָיִל יֵרָאֶה אֶל־אֱלֹהִים בְּצִיּוֹן׃", french: "" },
+      { hebrew: "יְהוָה אֱלֹהִים צְבָאוֹת שִׁמְעָה תְפִלָּתִי הַאֲזִינָה אֱלֹהֵי יַעֲקֹב סֶלָה׃", french: "" },
+      { hebrew: "מָגִנֵּנוּ רְאֵה אֱלֹהִים וְהַבֵּט פְּנֵי מְשִׁיחֶךָ׃", french: "" },
+      { hebrew: "כִּי טוֹב־יוֹם בַּחֲצֵרֶיךָ מֵאָלֶף בָּחַרְתִּי הִסְתּוֹפֵף בְּבֵית אֱלֹהַי מִדּוּר בְּאָהֳלֵי־רֶשַׁע׃", french: "" },
+      { hebrew: "כִּי שֶׁמֶשׁ וּמָגֵן יְהוָה אֱלֹהִים חֵן וְכָבוֹד יִתֵּן יְהוָה לֹא יִמְנַע־טוֹב לַהֹלְכִים בְּתָמִים׃", french: "" },
+      { hebrew: "יְהוָה צְבָאוֹת אַשְׁרֵי אָדָם בֹּטֵחַ בָּךְ׃", french: "" }
+    ]
+  },
+  {
+    number: 85,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לִבְנֵי־קֹרַח מִזְמוֹר׃", french: "" },
+      { hebrew: "רָצִיתָ יְהוָה אַרְצֶךָ שַׁבְתָּ שבות [שְׁבִית] יַעֲקֹב׃", french: "" },
+      { hebrew: "נָשָׂאתָ עֲוֺן עַמֶּךָ כִּסִּיתָ כָל־חַטָּאתָם סֶלָה׃", french: "" },
+      { hebrew: "אָסַפְתָּ כָל־עֶבְרָתֶךָ הֱשִׁיבוֹתָ מֵחֲרוֹן אַפֶּךָ׃", french: "" },
+      { hebrew: "שׁוּבֵנוּ אֱלֹהֵי יִשְׁעֵנוּ וְהָפֵר כַּעַסְךָ עִמָּנוּ׃", french: "" },
+      { hebrew: "הַלְעוֹלָם תֶּאֱנַף־בָּנוּ תִּמְשֹׁךְ אַפְּךָ לְדֹר וָדֹר׃", french: "" },
+      { hebrew: "הֲלֹא־אַתָּה תָּשׁוּב תְּחַיֵּנוּ וְעַמְּךָ יִשְׂמְחוּ־בָךְ׃", french: "" },
+      { hebrew: "הַרְאֵנוּ יְהוָה חַסְדֶּךָ וְיֶשְׁעֲךָ תִּתֶּן־לָנוּ׃", french: "" },
+      { hebrew: "אֶשְׁמְעָה מַה־יְדַבֵּר הָאֵל יְהוָה כִּי יְדַבֵּר שָׁלוֹם אֶל־עַמּוֹ וְאֶל־חֲסִידָיו וְאַל־יָשׁוּבוּ לְכִסְלָה׃", french: "" },
+      { hebrew: "אַךְ קָרוֹב לִירֵאָיו יִשְׁעוֹ לִשְׁכֹּן כָּבוֹד בְּאַרְצֵנוּ׃", french: "" },
+      { hebrew: "חֶסֶד־וֶאֱמֶת נִפְגָּשׁוּ צֶדֶק וְשָׁלוֹם נָשָׁקוּ׃", french: "" },
+      { hebrew: "אֱמֶת מֵאֶרֶץ תִּצְמָח וְצֶדֶק מִשָּׁמַיִם נִשְׁקָף׃", french: "" },
+      { hebrew: "גַּם־יְהוָה יִתֵּן הַטּוֹב וְאַרְצֵנוּ תִּתֵּן יְבוּלָהּ׃", french: "" },
+      { hebrew: "צֶדֶק לְפָנָיו יְהַלֵּךְ וְיָשֵׂם לְדֶרֶךְ פְּעָמָיו׃", french: "" }
+    ]
+  },
+  {
+    number: 86,
+    verses: [
+      { hebrew: "תְּפִלָּה לְדָוִד הַטֵּה־יְהוָה אָזְנְךָ עֲנֵנִי כִּי־עָנִי וְאֶבְיוֹן אָנִי׃", french: "" },
+      { hebrew: "שָׁמְרָה נַפְשִׁי כִּי־חָסִיד אָנִי הוֹשַׁע עַבְדְּךָ אַתָּה אֱלֹהַי הַבּוֹטֵחַ אֵלֶיךָ׃", french: "" },
+      { hebrew: "חָנֵּנִי אֲדֹנָי כִּי אֵלֶיךָ אֶקְרָא כָּל־הַיּוֹם׃", french: "" },
+      { hebrew: "שַׂמֵּחַ נֶפֶשׁ עַבְדֶּךָ כִּי אֵלֶיךָ אֲדֹנָי נַפְשִׁי אֶשָּׂא׃", french: "" },
+      { hebrew: "כִּי־אַתָּה אֲדֹנָי טוֹב וְסַלָּח וְרַב־חֶסֶד לְכָל־קֹרְאֶיךָ׃", french: "" },
+      { hebrew: "הַאֲזִינָה יְהוָה תְּפִלָּתִי וְהַקְשִׁיבָה בְּקוֹל תַּחֲנוּנוֹתָי׃", french: "" },
+      { hebrew: "בְּיוֹם צָרָתִי אֶקְרָאֶךָּ כִּי תַעֲנֵנִי׃", french: "" },
+      { hebrew: "אֵין־כָּמוֹךָ בָאֱלֹהִים אֲדֹנָי וְאֵין כְּמַעֲשֶׂיךָ׃", french: "" },
+      { hebrew: "כָּל־גּוֹיִם אֲשֶׁר עָשִׂיתָ יָבוֹאוּ וְיִשְׁתַּחֲווּ לְפָנֶיךָ אֲדֹנָי וִיכַבְּדוּ לִשְׁמֶךָ׃", french: "" },
+      { hebrew: "כִּי־גָדוֹל אַתָּה וְעֹשֵׂה נִפְלָאוֹת אַתָּה אֱלֹהִים לְבַדֶּךָ׃", french: "" },
+      { hebrew: "הוֹרֵנִי יְהוָה דַּרְכֶּךָ אֲהַלֵּךְ בַּאֲמִתֶּךָ יַחֵד לְבָבִי לְיִרְאָה שְׁמֶךָ׃", french: "" },
+      { hebrew: "אוֹדְךָ אֲדֹנָי אֱלֹהַי בְּכָל־לְבָבִי וַאֲכַבְּדָה שִׁמְךָ לְעוֹלָם׃", french: "" },
+      { hebrew: "כִּי־חַסְדְּךָ גָּדוֹל עָלָי וְהִצַּלְתָּ נַפְשִׁי מִשְּׁאוֹל תַּחְתִּיָּה׃", french: "" },
+      { hebrew: "אֱלֹהִים זֵדִים קָמוּ־עָלַי וַעֲדַת עָרִיצִים בִּקְשׁוּ נַפְשִׁי וְלֹא שָׂמוּךָ לְנֶגְדָּם׃", french: "" },
+      { hebrew: "וְאַתָּה אֲדֹנָי אֵל־רַחוּם וְחַנּוּן אֶרֶךְ אַפַּיִם וְרַב־חֶסֶד וֶאֱמֶת׃", french: "" },
+      { hebrew: "פְּנֵה אֵלַי וְחָנֵּנִי תְּנָה־עֻזְּךָ לְעַבְדֶּךָ וְהוֹשִׁיעָה לְבֶן־אֲמָתֶךָ׃", french: "" },
+      { hebrew: "עֲשֵׂה־עִמִּי אוֹת לְטוֹבָה וְיִרְאוּ שֹׂנְאַי וְיֵבֹשׁוּ כִּי־אַתָּה יְהוָה עֲזַרְתַּנִי וְנִחַמְתָּנִי׃", french: "" }
+    ]
+  },
+  {
+    number: 87,
+    verses: [
+      { hebrew: "לִבְנֵי־קֹרַח מִזְמוֹר שִׁיר יְסוּדָתוֹ בְּהַרְרֵי־קֹדֶשׁ׃", french: "" },
+      { hebrew: "אֹהֵב יְהוָה שַׁעֲרֵי צִיּוֹן מִכֹּל מִשְׁכְּנוֹת יַעֲקֹב׃", french: "" },
+      { hebrew: "נִכְבָּדוֹת מְדֻבָּר בָּךְ עִיר הָאֱלֹהִים סֶלָה׃", french: "" },
+      { hebrew: "אַזְכִּיר רַהַב וּבָבֶל לְיֹדְעָי הִנֵּה פְלֶשֶׁת וְצוֹר עִם־כּוּשׁ זֶה יֻלַּד־שָׁם׃", french: "" },
+      { hebrew: "וּלֲצִיּוֹן יֵאָמַר אִישׁ וְאִישׁ יֻלַּד־בָּהּ וְהוּא יְכוֹנְנֶהָ עֶלְיוֹן׃", french: "" },
+      { hebrew: "יְהוָה יִסְפֹּר בִּכְתוֹב עַמִּים זֶה יֻלַּד־שָׁם סֶלָה׃", french: "" },
+      { hebrew: "וְשָׁרִים כְּחֹלְלִים כָּל־מַעְיָנַי בָּךְ׃", french: "" }
+    ]
+  },
+  {
+    number: 88,
+    verses: [
+      { hebrew: "שִׁיר מִזְמוֹר לִבְנֵי קֹרַח לַמְנַצֵּחַ עַל־מָחֲלַת לְעַנּוֹת מַשְׂכִּיל לְהֵימָן הָאֶזְרָחִי׃", french: "" },
+      { hebrew: "יְהוָה אֱלֹהֵי יְשׁוּעָתִי יוֹם־צָעַקְתִּי בַלַּיְלָה נֶגְדֶּךָ׃", french: "" },
+      { hebrew: "תָּבוֹא לְפָנֶיךָ תְּפִלָּתִי הַטֵּה־אָזְנְךָ לְרִנָּתִי׃", french: "" },
+      { hebrew: "כִּי־שָׂבְעָה בְרָעוֹת נַפְשִׁי וְחַיַּי לִשְׁאוֹל הִגִּיעוּ׃", french: "" },
+      { hebrew: "נֶחְשַׁבְתִּי עִם־יוֹרְדֵי בוֹר הָיִיתִי כְּגֶבֶר אֵין־אֱיָל׃", french: "" },
+      { hebrew: "בַּמֵּתִים חָפְשִׁי כְּמוֹ חֲלָלִים שֹׁכְבֵי קֶבֶר אֲשֶׁר לֹא זְכַרְתָּם עוֹד וְהֵמָּה מִיָּדְךָ נִגְזָרוּ׃", french: "" },
+      { hebrew: "שַׁתַּנִי בְּבוֹר תַּחְתִּיּוֹת בְּמַחֲשַׁכִּים בִּמְצֹלוֹת׃", french: "" },
+      { hebrew: "עָלַי סָמְכָה חֲמָתֶךָ וְכָל־מִשְׁבָּרֶיךָ עִנִּיתָ סֶּלָה׃", french: "" },
+      { hebrew: "הִרְחַקְתָּ מְיֻדָּעַי מִמֶּנִּי שַׁתַּנִי תוֹעֵבוֹת לָמוֹ כָּלֻא וְלֹא אֵצֵא׃", french: "" },
+      { hebrew: "עֵינִי דָאֲבָה מִנִּי עֹנִי קְרָאתִיךָ יְהוָה בְּכָל־יוֹם שִׁטַּחְתִּי אֵלֶיךָ כַפָּי׃", french: "" },
+      { hebrew: "הֲלַמֵּתִים תַּעֲשֶׂה־פֶּלֶא אִם־רְפָאִים יָקוּמוּ יוֹדוּךָ סֶּלָה׃", french: "" },
+      { hebrew: "הַיְסֻפַּר בַּקֶּבֶר חַסְדֶּךָ אֱמוּנָתְךָ בָּאֲבַדּוֹן׃", french: "" },
+      { hebrew: "הֲיִוָּדַע בַּחֹשֶׁךְ פִּלְאֶךָ וְצִדְקָתְךָ בְּאֶרֶץ נְשִׁיָּה׃", french: "" },
+      { hebrew: "וַאֲנִי אֵלֶיךָ יְהוָה שִׁוַּעְתִּי וּבַבֹּקֶר תְּפִלָּתִי תְקַדְּמֶךָּ׃", french: "" },
+      { hebrew: "לָמָה יְהוָה תִּזְנַח נַפְשִׁי תַּסְתִּיר פָּנֶיךָ מִמֶּנִּי׃", french: "" },
+      { hebrew: "עָנִי אֲנִי וְגֹוֵעַ מִנֹּעַר נָשָׂאתִי אֵמֶיךָ אָפוּנָה׃", french: "" },
+      { hebrew: "עָלַי עָבְרוּ חֲרוֹנֶיךָ בִּעוּתֶיךָ צִמְּתוּתֻנִי׃", french: "" },
+      { hebrew: "סַבּוּנִי כַמַּיִם כָּל־הַיּוֹם הִקִּיפוּ עָלַי יָחַד׃", french: "" },
+      { hebrew: "הִרְחַקְתָּ מִמֶּנִּי אֹהֵב וָרֵעַ מְיֻדָּעַי מַחְשָׁךְ׃", french: "" }
+    ]
+  },
+  {
+    number: 89,
+    verses: [
+      { hebrew: "מַשְׂכִּיל לְאֵיתָן הָאֶזְרָחִי׃", french: "" },
+      { hebrew: "חַסְדֵי יְהוָה עוֹלָם אָשִׁירָה לְדֹר וָדֹר אוֹדִיעַ אֱמוּנָתְךָ בְּפִי׃", french: "" },
+      { hebrew: "כִּי־אָמַרְתִּי עוֹלָם חֶסֶד יִבָּנֶה שָׁמַיִם תָּכִן אֱמוּנָתְךָ בָהֶם׃", french: "" },
+      { hebrew: "כָּרַתִּי בְרִית לִבְחִירִי נִשְׁבַּעְתִּי לְדָוִד עַבְדִּי׃", french: "" },
+      { hebrew: "עַד־עוֹלָם אָכִין זַרְעֶךָ וּבָנִיתִי לְדֹר־וָדוֹר כִּסְאֲךָ סֶלָה׃", french: "" },
+      { hebrew: "וְיוֹדוּ שָׁמַיִם פִּלְאֲךָ יְהוָה אַף־אֱמוּנָתְךָ בִּקְהַל קְדֹשִׁים׃", french: "" },
+      { hebrew: "כִּי מִי בַשַּׁחַק יַעֲרֹךְ לַיהוָה יִדְמֶה לַיהוָה בִּבְנֵי אֵלִים׃", french: "" },
+      { hebrew: "אֵל נַעֲרָץ בְּסוֹד־קְדֹשִׁים רַבָּה וְנוֹרָא עַל־כָּל־סְבִיבָיו׃", french: "" },
+      { hebrew: "יְהוָה אֱלֹהֵי צְבָאוֹת מִי־כָמוֹךָ חֲסִין יָהּ וֶאֱמוּנָתְךָ סְבִיבוֹתֶיךָ׃", french: "" },
+      { hebrew: "אַתָּה מוֹשֵׁל בְּגֵאוּת הַיָּם בְּשׂוֹא גַלָּיו אַתָּה תְשַׁבְּחֵם׃", french: "" },
+      { hebrew: "אַתָּה דִכִּאתָ כֶחָלָל רָהַב בִּזְרוֹעַ עֻזְּךָ פִּזַּרְתָּ אוֹיְבֶיךָ׃", french: "" },
+      { hebrew: "לְךָ שָׁמַיִם אַף־לְךָ אָרֶץ תֵּבֵל וּמְלֹאָהּ אַתָּה יְסַדְתָּם׃", french: "" },
+      { hebrew: "צָפוֹן וְיָמִין אַתָּה בְרָאתָם תָּבוֹר וְחֶרְמוֹן בְּשִׁמְךָ יְרַנֵּנוּ׃", french: "" },
+      { hebrew: "לְךָ זְרוֹעַ עִם־גְּבוּרָה תָּעֹז יָדְךָ תָּרוּם יְמִינֶךָ׃", french: "" },
+      { hebrew: "צֶדֶק וּמִשְׁפָּט מְכוֹן כִּסְאֶךָ חֶסֶד וֶאֱמֶת יְקַדְּמוּ פָנֶיךָ׃", french: "" },
+      { hebrew: "אַשְׁרֵי הָעָם יוֹדְעֵי תְרוּעָה יְהוָה בְּאוֹר־פָּנֶיךָ יְהַלֵּכוּן׃", french: "" },
+      { hebrew: "בְּשִׁמְךָ יְגִילוּן כָּל־הַיּוֹם וּבְצִדְקָתְךָ יָרוּמוּ׃", french: "" },
+      { hebrew: "כִּי־תִפְאֶרֶת עֻזָּמוֹ אָתָּה וּבִרְצֹנְךָ תרים [תָּרוּם] קַרְנֵנוּ׃", french: "" },
+      { hebrew: "כִּי לַיהוָה מָגִנֵּנוּ וְלִקְדוֹשׁ יִשְׂרָאֵל מַלְכֵּנוּ׃", french: "" },
+      { hebrew: "אָז דִּבַּרְתָּ־בְחָזוֹן לַחֲסִידֶיךָ וַתֹּאמֶר שִׁוִּיתִי עֵזֶר עַל־גִּבּוֹר הֲרִימוֹתִי בָחוּר מֵעָם׃", french: "" },
+      { hebrew: "מָצָאתִי דָּוִד עַבְדִּי בְּשֶׁמֶן קָדְשִׁי מְשַׁחְתִּיו׃", french: "" },
+      { hebrew: "אֲשֶׁר יָדִי תִּכּוֹן עִמּוֹ אַף־זְרוֹעִי תְאַמְּצֶנּוּ׃", french: "" },
+      { hebrew: "לֹא־יַשִּׁא אוֹיֵב בּוֹ וּבֶן־עַוְלָה לֹא יְעַנֶּנּוּ׃", french: "" },
+      { hebrew: "וְכַתּוֹתִי מִפָּנָיו צָרָיו וּמְשַׂנְאָיו אֶגּוֹף׃", french: "" },
+      { hebrew: "וֶאֶמוּנָתִי וְחַסְדִּי עִמּוֹ וּבִשְׁמִי תָּרוּם קַרְנוֹ׃", french: "" },
+      { hebrew: "וְשַׂמְתִּי בַיָּם יָדוֹ וּבַנְּהָרוֹת יְמִינוֹ׃", french: "" },
+      { hebrew: "הוּא יִקְרָאֵנִי אָבִי אָתָּה אֵלִי וְצוּר יְשׁוּעָתִי׃", french: "" },
+      { hebrew: "אַף־אָנִי בְּכוֹר אֶתְּנֵהוּ עֶלְיוֹן לְמַלְכֵי־אָרֶץ׃", french: "" },
+      { hebrew: "לְעוֹלָם אשמור־[אֶשְׁמָר־] לוֹ חַסְדִּי וּבְרִיתִי נֶאֱמֶנֶת לוֹ׃", french: "" },
+      { hebrew: "וְשַׂמְתִּי לָעַד זַרְעוֹ וְכִסְאוֹ כִּימֵי שָׁמָיִם׃", french: "" },
+      { hebrew: "אִם־יַעַזְבוּ בָנָיו תּוֹרָתִי וּבְמִשְׁפָּטַי לֹא יֵלֵכוּן׃", french: "" },
+      { hebrew: "אִם־חֻקֹּתַי יְחַלֵּלוּ וּמִצְוֺתַי לֹא יִשְׁמֹרוּ׃", french: "" },
+      { hebrew: "וּפָקַדְתִּי בְשֵׁבֶט פִּשְׁעָם וּבִנְגָעִים עֲוֺנָם׃", french: "" },
+      { hebrew: "וְחַסְדִּי לֹא־אָפִיר מֵעִמּוֹ וְלֹא־אֲשַׁקֵּר בֶּאֱמוּנָתִי׃", french: "" },
+      { hebrew: "לֹא־אֲחַלֵּל בְּרִיתִי וּמוֹצָא שְׂפָתַי לֹא אֲשַׁנֶּה׃", french: "" },
+      { hebrew: "אַחַת נִשְׁבַּעְתִּי בְקָדְשִׁי אִם־לְדָוִד אֲכַזֵּב׃", french: "" },
+      { hebrew: "זַרְעוֹ לְעוֹלָם יִהְיֶה וְכִסְאוֹ כַשֶּׁמֶשׁ נֶגְדִּי׃", french: "" },
+      { hebrew: "כְּיָרֵחַ יִכּוֹן עוֹלָם וְעֵד בַּשַּׁחַק נֶאֱמָן סֶלָה׃", french: "" },
+      { hebrew: "וְאַתָּה זָנַחְתָּ וַתִּמְאָס הִתְעַבַּרְתָּ עִם־מְשִׁיחֶךָ׃", french: "" },
+      { hebrew: "נֵאַרְתָּה בְּרִית עַבְדֶּךָ חִלַּלְתָּ לָאָרֶץ נִזְרוֹ׃", french: "" },
+      { hebrew: "פָּרַצְתָּ כָל־גְּדֵרֹתָיו שַׂמְתָּ מִבְצָרָיו מְחִתָּה׃", french: "" },
+      { hebrew: "שַׁסֻּהוּ כָּל־עֹבְרֵי דָרֶךְ הָיָה חֶרְפָּה לִשְׁכֵנָיו׃", french: "" },
+      { hebrew: "הֲרִימוֹתָ יְמִין צָרָיו הִשְׂמַחְתָּ כָּל־אוֹיְבָיו׃", french: "" },
+      { hebrew: "אַף־תָּשִׁיב צוּר חַרְבּוֹ וְלֹא הֲקֵימֹתוֹ בַּמִּלְחָמָה׃", french: "" },
+      { hebrew: "הִשְׁבַּתָּ מִטְּהָרוֹ וְכִסְאוֹ לָאָרֶץ מִגַּרְתָּה׃", french: "" },
+      { hebrew: "הִקְצַרְתָּ יְמֵי עֲלוּמָיו הֶעֱטִיתָ עָלָיו בּוּשָׁה סֶלָה׃", french: "" },
+      { hebrew: "עַד־מָה יְהוָה תִּסָּתֵר לָנֶצַח תִּבְעַר כְּמוֹ־אֵשׁ חֲמָתֶךָ׃", french: "" },
+      { hebrew: "זְכָר־אֲנִי מֶה־חָלֶד עַל־מַה־שָּׁוְא בָּרָאתָ כָל־בְּנֵי־אָדָם׃", french: "" },
+      { hebrew: "מִי גֶבֶר יִחְיֶה וְלֹא יִרְאֶה־מָּוֶת יְמַלֵּט נַפְשׁוֹ מִיַּד־שְׁאוֹל סֶלָה׃", french: "" },
+      { hebrew: "אַיֵּה חֲסָדֶיךָ הָרִאשֹׁנִים אֲדֹנָי נִשְׁבַּעְתָּ לְדָוִד בֶּאֱמוּנָתֶךָ׃", french: "" },
+      { hebrew: "זְכֹר אֲדֹנָי חֶרְפַּת עֲבָדֶיךָ שְׂאֵתִי בְחֵיקִי כָּל־רַבִּים עַמִּים׃", french: "" },
+      { hebrew: "אֲשֶׁר חֵרְפוּ אוֹיְבֶיךָ יְהוָה אֲשֶׁר חֵרְפוּ עִקְּבוֹת מְשִׁיחֶךָ׃", french: "" },
+      { hebrew: "בָּרוּךְ יְהוָה לְעוֹלָם אָמֵן וְאָמֵן׃", french: "" }
+    ]
+  },
+  {
+    number: 120,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת אֶל־יְהוָה בַּצָּרָתָה לִּי קָרָאתִי וַיַּעֲנֵנִי׃", french: "" },
+      { hebrew: "יְהוָה הַצִּילָה נַפְשִׁי מִשְּׂפַת־שֶׁקֶר מִלָּשׁוֹן רְמִיָּה׃", french: "" },
+      { hebrew: "מַה־יִּתֵּן לְךָ וּמַה־יֹּסִיף לָךְ לָשׁוֹן רְמִיָּה׃", french: "" },
+      { hebrew: "חִצֵּי גִבּוֹר שְׁנוּנִים עִם גַּחֲלֵי רְתָמִים׃", french: "" },
+      { hebrew: "אוֹיָה־לִי כִּי־גַרְתִּי מֶשֶׁךְ שָׁכַנְתִּי עִם־אָהֳלֵי קֵדָר׃", french: "" },
+      { hebrew: "רַבַּת שָׁכְנָה־לָּהּ נַפְשִׁי עִם שׂוֹנֵא שָׁלוֹם׃", french: "" },
+      { hebrew: "אֲ‍נִי־שָׁלוֹם וְכִי אֲדַבֵּר הֵמָּה לַמִּלְחָמָה׃", french: "" }
+    ]
+  },
+  {
+    number: 121,
+    verses: [
+      { hebrew: "שִׁיר לַמַּעֲלוֹת אֶשָּׂא עֵינַי אֶל־הֶהָרִים מֵאַיִן יָבֹא עֶזְרִי׃", french: "" },
+      { hebrew: "עֶזְרִי מֵעִם יְהוָה עֹשֵׂה שָׁמַיִם וָאָרֶץ׃", french: "" },
+      { hebrew: "אַל־יִתֵּן לַמּוֹט רַגְלֶךָ אַל־יָנוּם שֹׁמְרֶךָ׃", french: "" },
+      { hebrew: "הִנֵּה לֹא־יָנוּם וְלֹא יִישָׁן שׁוֹמֵר יִשְׂרָאֵל׃", french: "" },
+      { hebrew: "יְהוָה שֹׁמְרֶךָ יְהוָה צִלְּךָ עַל־יַד יְמִינֶךָ׃", french: "" },
+      { hebrew: "יוֹמָם הַשֶּׁמֶשׁ לֹא־יַכֶּכָּה וְיָרֵחַ בַּלָּיְלָה׃", french: "" },
+      { hebrew: "יְהוָה יִשְׁמָרְךָ מִכָּל־רָע יִשְׁמֹר אֶת־נַפְשֶׁךָ׃", french: "" },
+      { hebrew: "יְהוָה יִשְׁמָר־צֵאתְךָ וּבוֹאֶךָ מֵעַתָּה וְעַד־עוֹלָם׃", french: "" }
+    ]
+  },
+  {
+    number: 122,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת לְדָוִד שָׂמַחְתִּי בְּאֹמְרִים לִי בֵּית יְהוָה נֵלֵךְ׃", french: "" },
+      { hebrew: "עֹמְדוֹת הָיוּ רַגְלֵינוּ בִּשְׁעָרַיִךְ יְרוּשָׁלִָם׃", french: "" },
+      { hebrew: "יְרוּשָׁלִַם הַבְּנוּיָה כְּעִיר שֶׁחֻבְּרָה־לָּהּ יַחְדָּו׃", french: "" },
+      { hebrew: "שֶׁשָּׁם עָלוּ שְׁבָטִים שִׁבְטֵי־יָהּ עֵדוּת לְיִשְׂרָאֵל לְהֹדוֹת לְשֵׁם יְהוָה׃", french: "" },
+      { hebrew: "כִּי שָׁמָּה יָשְׁבוּ כִסְאוֹת לְמִשְׁפָּט כִּסְאוֹת לְבֵית דָּוִיד׃", french: "" },
+      { hebrew: "שַׁאֲלוּ שְׁלוֹם יְרוּשָׁלִָם יִשְׁלָיוּ אֹהֲבָיִךְ׃", french: "" },
+      { hebrew: "יְהִי־שָׁלוֹם בְּחֵילֵךְ שַׁלְוָה בְּאַרְמְנוֹתָיִךְ׃", french: "" },
+      { hebrew: "לְמַעַן אַחַי וְרֵעָי אֲדַבְּרָה־נָּא שָׁלוֹם בָּךְ׃", french: "" },
+      { hebrew: "לְמַעַן בֵּית־יְהוָה אֱלֹהֵינוּ אֲבַקְשָׁה טוֹב לָךְ׃", french: "" }
+    ]
+  },
+  {
+    number: 123,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת אֵלֶיךָ נָשָׂאתִי אֶת־עֵינַי הַיֹּשְׁבִי בַּשָּׁמָיִם׃", french: "" },
+      { hebrew: "הִנֵּה כְעֵינֵי עֲבָדִים אֶל־יַד אֲ‍דוֹנֵיהֶם כְּעֵינֵי שִׁפְחָה אֶל־יַד גְּבִרְתָּהּ כֵּן עֵינֵינוּ אֶל־יְהוָה אֱלֹהֵינוּ עַד שֶׁיְּחָנֵּנוּ׃", french: "" },
+      { hebrew: "חָנֵּנוּ יְהוָה חָנֵּנוּ כִּי־רַב שָׂבַעְנוּ בוּז׃", french: "" },
+      { hebrew: "רַבַּת שָׂבְעָה־לָּהּ נַפְשֵׁנוּ הַלַּעַג הַשַּׁאֲנַנִּים הַבּוּז לִגְאֵיוֹנִים׃", french: "" }
+    ]
+  },
+  {
+    number: 124,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת לְדָוִד לוּלֵי יְהוָה שֶׁהָיָה לָנוּ יֹאמַר־נָא יִשְׂרָאֵל׃", french: "" },
+      { hebrew: "לוּלֵי יְהוָה שֶׁהָיָה לָנוּ בְּקוּם עָלֵינוּ אָדָם׃", french: "" },
+      { hebrew: "אֲזַי חַיִּים בְּלָעוּנוּ בַּחֲרוֹת אַפָּם בָּנוּ׃", french: "" },
+      { hebrew: "אֲזַי הַמַּיִם שְׁטָפוּנוּ נַחְלָה עָבַר עַל־נַפְשֵׁנוּ׃", french: "" },
+      { hebrew: "אֲזַי עָבַר עַל־נַפְשֵׁנוּ הַמַּיִם הַזֵּידוֹנִים׃", french: "" },
+      { hebrew: "בָּרוּךְ יְהוָה שֶׁלֹּא נְתָנָנוּ טֶרֶף לְשִׁנֵּיהֶם׃", french: "" },
+      { hebrew: "נַפְשֵׁנוּ כְּצִפּוֹר נִמְלְטָה מִפַּח יוֹקְשִׁים הַפַּח נִשְׁבָּר וַאֲנַחְנוּ נִמְלָטְנוּ׃", french: "" },
+      { hebrew: "עֶזְרֵנוּ בְּשֵׁם יְהוָה עֹשֵׂה שָׁמַיִם וָאָרֶץ׃", french: "" }
+    ]
+  },
+  {
+    number: 125,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת הַבֹּטְחִים בַּיהוָה כְּהַר־צִיּוֹן לֹא־יִמּוֹט לְעוֹלָם יֵשֵׁב׃", french: "" },
+      { hebrew: "יְרוּשָׁלִַם הָרִים סָבִיב לָהּ וַיהוָה סָבִיב לְעַמּוֹ מֵעַתָּה וְעַד־עוֹלָם׃", french: "" },
+      { hebrew: "כִּי לֹא יָנוּחַ שֵׁבֶט הָרֶשַׁע עַל גּוֹרַל הַצַּדִּיקִים לְמַעַן לֹא־יִשְׁלְחוּ הַצַּדִּיקִים בְּעַוְלָתָה יְדֵיהֶם׃", french: "" },
+      { hebrew: "הֵיטִיבָה יְהוָה לַטּוֹבִים וְלִישָׁרִים בְּלִבּוֹתָם׃", french: "" },
+      { hebrew: "וְהַמַּטִּים עַקַלְקַלּוֹתָם יוֹלִיכֵם יְהוָה אֶת־פֹּעֲלֵי הָאָוֶן שָׁלוֹם עַל־יִשְׂרָאֵל׃", french: "" }
+    ]
+  },
+  {
+    number: 126,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת בְּשׁוּב יְהוָה אֶת־שִׁיבַת צִיּוֹן הָיִינוּ כְּחֹלְמִים׃", french: "" },
+      { hebrew: "אָז יִמָּלֵא שְׂחוֹק פִּינוּ וּלְשׁוֹנֵנוּ רִנָּה אָז יֹאמְרוּ בַגּוֹיִם הִגְדִּיל יְהוָה לַעֲשׂוֹת עִם־אֵלֶּה׃", french: "" },
+      { hebrew: "הִגְדִּיל יְהוָה לַעֲשׂוֹת עִמָּנוּ הָיִינוּ שְׂמֵחִים׃", french: "" },
+      { hebrew: "שׁוּבָה יְהוָה אֶת־שבותנו [שְׁבִיתֵנוּ] כַּאֲפִיקִים בַּנֶּגֶב׃", french: "" },
+      { hebrew: "הַזֹּרְעִים בְּדִמְעָה בְּרִנָּה יִקְצֹרוּ׃", french: "" },
+      { hebrew: "הָלוֹךְ יֵלֵךְ וּבָכֹה נֹשֵׂא מֶשֶׁךְ־הַזָּרַע בֹּא־יָבוֹא בְרִנָּה נֹשֵׂא אֲלֻמֹּתָיו׃", french: "" }
+    ]
+  },
+  {
+    number: 127,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת לִשְׁלֹמֹה אִם־יְהוָה לֹא־יִבְנֶה בַיִת שָׁוְא עָמְלוּ בוֹנָיו בּוֹ אִם־יְהוָה לֹא־יִשְׁמָר־עִיר שָׁוְא שָׁקַד שׁוֹמֵר׃", french: "" },
+      { hebrew: "שָׁוְא לָכֶם מַשְׁכִּימֵי קוּם מְאַחֲרֵי־שֶׁבֶת אֹכְלֵי לֶחֶם הָעֲצָבִים כֵּן יִתֵּן לִידִידוֹ שֵׁנָא׃", french: "" },
+      { hebrew: "הִנֵּה נַחֲלַת יְהוָה בָּנִים שָׂכָר פְּרִי הַבָּטֶן׃", french: "" },
+      { hebrew: "כְּחִצִּים בְּיַד־גִּבּוֹר כֵּן בְּנֵי הַנְּעוּרִים׃", french: "" },
+      { hebrew: "אַשְׁרֵי הַגֶּבֶר אֲשֶׁר מִלֵּא אֶת־אַשְׁפָּתוֹ מֵהֶם לֹא־יֵבֹשׁוּ כִּי־יְדַבְּרוּ אֶת־אוֹיְבִים בַּשָּׁעַר׃", french: "" }
+    ]
+  },
+  {
+    number: 128,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת אַשְׁרֵי כָּל־יְרֵא יְהוָה הַהֹלֵךְ בִּדְרָכָיו׃", french: "" },
+      { hebrew: "יְגִיעַ כַּפֶּיךָ כִּי תֹאכֵל אַשְׁרֶיךָ וְטוֹב לָךְ׃", french: "" },
+      { hebrew: "אֶשְׁתְּךָ כְּגֶפֶן פֹּרִיָּה בְּיַרְכְּתֵי בֵיתֶךָ בָּנֶיךָ כִּשְׁתִלֵי זֵיתִים סָבִיב לְשֻׁלְחָנֶךָ׃", french: "" },
+      { hebrew: "הִנֵּה כִי־כֵן יְבֹרַךְ גָּבֶר יְרֵא יְהוָה׃", french: "" },
+      { hebrew: "יְבָרֶכְךָ יְהוָה מִצִּיּוֹן וּרְאֵה בְּטוּב יְרוּשָׁלִָם כֹּל יְמֵי חַיֶּיךָ׃", french: "" },
+      { hebrew: "וּרְאֵה־בָנִים לְבָנֶיךָ שָׁלוֹם עַל־יִשְׂרָאֵל׃", french: "" }
+    ]
+  },
+  {
+    number: 129,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת רַבַּת צְרָרוּנִי מִנְּעוּרַי יֹאמַר־נָא יִשְׂרָאֵל׃", french: "" },
+      { hebrew: "רַבַּת צְרָרוּנִי מִנְּעוּרָי גַּם לֹא־יָכְלוּ לִי׃", french: "" },
+      { hebrew: "עַל־גַּבִּי חָרְשׁוּ חֹרְשִׁים הֶאֱרִיכוּ למענותם [לְמַעֲנִיתָם׃]", french: "" },
+      { hebrew: "יְהוָה צַדִּיק קִצֵּץ עֲבוֹת רְשָׁעִים׃", french: "" },
+      { hebrew: "יֵבֹשׁוּ וְיִסֹּגוּ אָחוֹר כֹּל שֹׂנְאֵי צִיּוֹן׃", french: "" },
+      { hebrew: "יִהְיוּ כַּחֲצִיר גַּגּוֹת שֶׁקַּדְמַת שָׁלַף יָבֵשׁ׃", french: "" },
+      { hebrew: "שֶׁלֹּא מִלֵּא כַפּוֹ קוֹצֵר וְחִצְנוֹ מְעַמֵּר׃", french: "" },
+      { hebrew: "וְלֹא אָמְרוּ הָעֹבְרִים בִּרְכַּת־יְהוָה אֲלֵיכֶם בֵּרַכְנוּ אֶתְכֶם בְּשֵׁם יְהוָה׃", french: "" }
+    ]
+  },
+  {
+    number: 130,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת מִמַּעֲמַקִּים קְרָאתִיךָ יְהוָה׃", french: "" },
+      { hebrew: "אֲדֹנָי שִׁמְעָה בְקוֹלִי תִּהְיֶינָה אָזְנֶיךָ קַשֻּׁבוֹת לְקוֹל תַּחֲנוּנָי׃", french: "" },
+      { hebrew: "אִם־עֲוֺנוֹת תִּשְׁמָר־יָהּ אֲדֹנָי מִי יַעֲמֹד׃", french: "" },
+      { hebrew: "כִּי־עִמְּךָ הַסְּלִיחָה לְמַעַן תִּוָּרֵא׃", french: "" },
+      { hebrew: "קִוִּיתִי יְהוָה קִוְּתָה נַפְשִׁי וְלִדְבָרוֹ הוֹחָלְתִּי׃", french: "" },
+      { hebrew: "נַפְשִׁי לַאדֹנָי מִשֹּׁמְרִים לַבֹּקֶר שֹׁמְרִים לַבֹּקֶר׃", french: "" },
+      { hebrew: "יַחֵל יִשְׂרָאֵל אֶל־יְהוָה כִּי־עִם־יְהוָה הַחֶסֶד וְהַרְבֵּה עִמּוֹ פְדוּת׃", french: "" },
+      { hebrew: "וְהוּא יִפְדֶּה אֶת־יִשְׂרָאֵל מִכֹּל עֲוֺנֹתָיו׃", french: "" }
+    ]
+  },
+  {
+    number: 131,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת לְדָוִד יְהוָה לֹא־גָבַהּ לִבִּי וְלֹא־רָמוּ עֵינַי וְלֹא־הִלַּכְתִּי בִּגְדֹלוֹת וּבְנִפְלָאוֹת מִמֶּנִּי׃", french: "" },
+      { hebrew: "אִם־לֹא שִׁוִּיתִי וְדוֹמַמְתִּי נַפְשִׁי כְּגָמֻל עֲלֵי אִמּוֹ כַּגָּמֻל עָלַי נַפְשִׁי׃", french: "" },
+      { hebrew: "יַחֵל יִשְׂרָאֵל אֶל־יְהוָה מֵעַתָּה וְעַד־עוֹלָם׃", french: "" }
+    ]
+  },
+  {
+    number: 132,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת זְכוֹר־יְהוָה לְדָוִד אֵת כָּל־עֻנּוֹתוֹ׃", french: "" },
+      { hebrew: "אֲשֶׁר נִשְׁבַּע לַיהוָה נָדַר לַאֲבִיר יַעֲקֹב׃", french: "" },
+      { hebrew: "אִם־אָבֹא בְּאֹהֶל בֵּיתִי אִם־אֶעֱלֶה עַל־עֶרֶשׂ יְצוּעָי׃", french: "" },
+      { hebrew: "אִם־אֶתֵּן שְׁנַת לְעֵינָי לְעַפְעַפַּי תְּנוּמָה׃", french: "" },
+      { hebrew: "עַד־אֶמְצָא מָקוֹם לַיהוָה מִשְׁכָּנוֹת לַאֲבִיר יַעֲקֹב׃", french: "" },
+      { hebrew: "הִנֵּה־שְׁמַעֲנוּהָ בְאֶפְרָתָה מְצָאנוּהָ בִּשְׂדֵי־יָעַר׃", french: "" },
+      { hebrew: "נָבוֹאָה לְמִשְׁכְּנוֹתָיו נִשְׁתַּחֲוֶה לַהֲדֹם רַגְלָיו׃", french: "" },
+      { hebrew: "קוּמָה יְהוָה לִמְנוּחָתֶךָ אַתָּה וַאֲרוֹן עֻזֶּךָ׃", french: "" },
+      { hebrew: "כֹּהֲנֶיךָ יִלְבְּשׁוּ־צֶדֶק וַחֲסִידֶיךָ יְרַנֵּנוּ׃", french: "" },
+      { hebrew: "בַּעֲבוּר דָּוִד עַבְדֶּךָ אַל־תָּשֵׁב פְּנֵי מְשִׁיחֶךָ׃", french: "" },
+      { hebrew: "נִשְׁבַּע־יְהוָה לְדָוִד אֱמֶת לֹא־יָשׁוּב מִמֶּנָּה מִפְּרִי בִטְנְךָ אָשִׁית לְכִסֵּא־לָךְ׃", french: "" },
+      { hebrew: "אִם־יִשְׁמְרוּ בָנֶיךָ בְּרִיתִי וְעֵדֹתִי זוֹ אֲלַמְּדֵם גַּם־בְּנֵיהֶם עֲדֵי־עַד יֵשְׁבוּ לְכִסֵּא־לָךְ׃", french: "" },
+      { hebrew: "כִּי־בָחַר יְהוָה בְּצִיּוֹן אִוָּהּ לְמוֹשָׁב לוֹ׃", french: "" },
+      { hebrew: "זֹאת־מְנוּחָתִי עֲדֵי־עַד פֹּה־אֵשֵׁב כִּי אִוִּתִיהָ׃", french: "" },
+      { hebrew: "צֵידָהּ בָּרֵךְ אֲבָרֵךְ אֶבְיוֹנֶיהָ אַשְׂבִּיעַ לָחֶם׃", french: "" },
+      { hebrew: "וְכֹהֲנֶיהָ אַלְבִּישׁ יֶשַׁע וַחֲסִידֶיהָ רַנֵּן יְרַנֵּנוּ׃", french: "" },
+      { hebrew: "שָׁם אַצְמִיחַ קֶרֶן לְדָוִד עָרַכְתִּי נֵר לִמְשִׁיחִי׃", french: "" },
+      { hebrew: "אוֹיְבָיו אַלְבִּישׁ בֹּשֶׁת וְעָלָיו יָצִיץ נִזְרוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 133,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת לְדָוִד הִנֵּה מַה־טּוֹב וּמַה־נָּעִים שֶׁבֶת אַחִים גַּם־יָחַד׃", french: "" },
+      { hebrew: "כַּשֶּׁמֶן הַטּוֹב עַל־הָרֹאשׁ יֹרֵד עַל־הַזָּקָן זְקַן־אַהֲרֹן שֶׁיֹּרֵד עַל־פִּי מִדּוֹתָיו׃", french: "" },
+      { hebrew: "כְּטַל־חֶרְמוֹן שֶׁיֹּרֵד עַל־הַרְרֵי צִיּוֹן כִּי שָׁם צִוָּה יְהוָה אֶת־הַבְּרָכָה חַיִּים עַד־הָעוֹלָם׃", french: "" }
+    ]
+  },
+  {
+    number: 134,
+    verses: [
+      { hebrew: "שִׁיר הַמַּעֲלוֹת הִנֵּה בָּרֲכוּ אֶת־יְהוָה כָּל־עַבְדֵי יְהוָה הָעֹמְדִים בְּבֵית־יְהוָה בַּלֵּילוֹת׃", french: "" },
+      { hebrew: "שְׂאוּ־יְדֵכֶם קֹדֶשׁ וּבָרֲכוּ אֶת־יְהוָה׃", french: "" },
+      { hebrew: "יְבָרֶכְךָ יְהוָה מִצִּיּוֹן עֹשֵׂה שָׁמַיִם וָאָרֶץ׃", french: "" }
+    ]
+  },
+  {
+    number: 135,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ הַלְלוּ אֶת־שֵׁם יְהוָה הַלְלוּ עַבְדֵי יְהוָה׃", french: "" },
+      { hebrew: "שֶׁעֹמְדִים בְּבֵית יְהוָה בְּחַצְרוֹת בֵּית אֱלֹהֵינוּ׃", french: "" },
+      { hebrew: "הַלְלוּ־יָהּ כִּי־טוֹב יְהוָה זַמְּרוּ לִשְׁמוֹ כִּי נָעִים׃", french: "" },
+      { hebrew: "כִּי־יַעֲקֹב בָּחַר לוֹ יָהּ יִשְׂרָאֵל לִסְגֻלָּתוֹ׃", french: "" },
+      { hebrew: "כִּי אֲנִי יָדַעְתִּי כִּי־גָדוֹל יְהוָה וַאֲדֹנֵינוּ מִכָּל־אֱלֹהִים׃", french: "" },
+      { hebrew: "כֹּל אֲשֶׁר־חָפֵץ יְהוָה עָשָׂה בַּשָּׁמַיִם וּבָאָרֶץ בַּיַּמִּים וְכָל־תְּהוֹמוֹת׃", french: "" },
+      { hebrew: "מַעֲלֶה נְשִׂאִים מִקְצֵה הָאָרֶץ בְּרָקִים לַמָּטָר עָשָׂה מוֹצֵא־רוּחַ מֵאוֹצְרוֹתָיו׃", french: "" },
+      { hebrew: "שֶׁהִכָּה בְּכוֹרֵי מִצְרָיִם מֵאָדָם עַד־בְּהֵמָה׃", french: "" },
+      { hebrew: "שָׁלַח אֹתוֹת וּמֹפְתִים בְּתוֹכֵכִי מִצְרָיִם בְּפַרְעֹה וּבְכָל־עֲבָדָיו׃", french: "" },
+      { hebrew: "שֶׁהִכָּה גּוֹיִם רַבִּים וְהָרַג מְלָכִים עֲצוּמִים׃", french: "" },
+      { hebrew: "לְסִיחוֹן מֶלֶךְ הָאֱמֹרִי וּלְעוֹג מֶלֶךְ הַבָּשָׁן וּלְכֹל מַמְלְכוֹת כְּנָעַן׃", french: "" },
+      { hebrew: "וְנָתַן אַרְצָם נַחֲלָה נַחֲלָה לְיִשְׂרָאֵל עַמּוֹ׃", french: "" },
+      { hebrew: "יְהוָה שִׁמְךָ לְעוֹלָם יְהוָה זִכְרְךָ לְדֹר־וָדֹר׃", french: "" },
+      { hebrew: "כִּי־יָדִין יְהוָה עַמּוֹ וְעַל־עֲבָדָיו יִתְנֶחָם׃", french: "" },
+      { hebrew: "עֲצַבֵּי הַגּוֹיִם כֶּסֶף וְזָהָב מַעֲשֵׂה יְדֵי אָדָם׃", french: "" },
+      { hebrew: "פֶּה־לָהֶם וְלֹא יְדַבֵּרוּ עֵינַיִם לָהֶם וְלֹא יִרְאוּ׃", french: "" },
+      { hebrew: "אָזְנַיִם לָהֶם וְלֹא יַאֲזִינוּ אַף אֵין־יֶשׁ־רוּחַ בְּפִיהֶם׃", french: "" },
+      { hebrew: "כְּמוֹהֶם יִהְיוּ עֹשֵׂיהֶם כֹּל אֲשֶׁר־בֹּטֵחַ בָּהֶם׃", french: "" },
+      { hebrew: "בֵּית יִשְׂרָאֵל בָּרֲכוּ אֶת־יְהוָה בֵּית אַהֲרֹן בָּרֲכוּ אֶת־יְהוָה׃", french: "" },
+      { hebrew: "בֵּית הַלֵּוִי בָּרֲכוּ אֶת־יְהוָה יִרְאֵי יְהוָה בָּרֲכוּ אֶת־יְהוָה׃", french: "" },
+      { hebrew: "בָּרוּךְ יְהוָה מִצִּיּוֹן שֹׁכֵן יְרוּשָׁלִָם הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 136,
+    verses: [
+      { hebrew: "הוֹדוּ לַיהוָה כִּי־טוֹב כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "הוֹדוּ לֵאלֹהֵי הָאֱלֹהִים כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "הוֹדוּ לַאֲדֹנֵי הָאֲדֹנִים כִּי לְעֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְעֹשֵׂה נִפְלָאוֹת גְּדֹלוֹת לְבַדּוֹ כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְעֹשֵׂה הַשָּׁמַיִם בִּתְבוּנָה כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְרֹקַע הָאָרֶץ עַל־הַמָּיִם כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְעֹשֵׂה אוֹרִים גְּדֹלִים כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "אֶת־הַשֶּׁמֶשׁ לְמֶמְשֶׁלֶת בַּיּוֹם כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "אֶת־הַיָּרֵחַ וְכוֹכָבִים לְמֶמְשְׁלוֹת בַּלָּיְלָה כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְמַכֵּה מִצְרַיִם בִּבְכוֹרֵיהֶם כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וַיּוֹצֵא יִשְׂרָאֵל מִתּוֹכָם כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "בְּיָד חֲזָקָה וּבִזְרוֹעַ נְטוּיָה כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְגֹזֵר יַם־סוּף לִגְזָרִים כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וְהֶעֱבִיר יִשְׂרָאֵל בְּתוֹכוֹ כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וְנִעֵר פַּרְעֹה וְחֵילוֹ בְיַם־סוּף כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְמוֹלִיךְ עַמּוֹ בַּמִּדְבָּר כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְמַכֵּה מְלָכִים גְּדֹלִים כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וַיַּהֲרֹג מְלָכִים אַדִּירִים כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "לְסִיחוֹן מֶלֶךְ הָאֱמֹרִי כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וּלְעוֹג מֶלֶךְ הַבָּשָׁן כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וְנָתַן אַרְצָם לְנַחֲלָה כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "נַחֲלָה לְיִשְׂרָאֵל עַבְדּוֹ כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "שֶׁבְּשִׁפְלֵנוּ זָכַר לָנוּ כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "וַיִּפְרְקֵנוּ מִצָּרֵינוּ כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "נֹתֵן לֶחֶם לְכָל־בָּשָׂר כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "הוֹדוּ לְאֵל הַשָּׁמָיִם כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 137,
+    verses: [
+      { hebrew: "עַל נַהֲרוֹת בָּבֶל שָׁם יָשַׁבְנוּ גַּם־בָּכִינוּ בְּזָכְרֵנוּ אֶת־צִיּוֹן׃", french: "" },
+      { hebrew: "עַל־עֲרָבִים בְּתוֹכָהּ תָּלִינוּ כִּנֹּרוֹתֵינוּ׃", french: "" },
+      { hebrew: "כִּי שָׁם שְׁאֵלוּנוּ שׁוֹבֵינוּ דִּבְרֵי־שִׁיר וְתוֹלָלֵינוּ שִׂמְחָה שִׁירוּ לָנוּ מִשִּׁיר צִיּוֹן׃", french: "" },
+      { hebrew: "אֵיךְ נָשִׁיר אֶת־שִׁיר־יְהוָה עַל אַדְמַת נֵכָר׃", french: "" },
+      { hebrew: "אִם־אֶשְׁכָּחֵךְ יְרוּשָׁלִָם תִּשְׁכַּח יְמִינִי׃", french: "" },
+      { hebrew: "תִּדְבַּק־לְשׁוֹנִי לְחִכִּי אִם־לֹא אֶזְכְּרֵכִי אִם־לֹא אַעֲלֶה אֶת־יְרוּשָׁלִַם עַל רֹאשׁ שִׂמְחָתִי׃", french: "" },
+      { hebrew: "זְכֹר יְהוָה לִבְנֵי אֱדוֹם אֵת יוֹם יְרוּשָׁלִָם הָאֹמְרִים עָרוּ עָרוּ עַד הַיְסוֹד בָּהּ׃", french: "" },
+      { hebrew: "בַּת־בָּבֶל הַשְּׁדוּדָה אַשְׁרֵי שֶׁיְשַׁלֶּם־לָךְ אֶת־גְּמוּלֵךְ שֶׁגָּמַלְתְּ לָנוּ׃", french: "" },
+      { hebrew: "אַשְׁרֵי שֶׁיֹּאחֵז וְנִפֵּץ אֶת־עֹלָלַיִךְ אֶל־הַסָּלַע׃", french: "" }
+    ]
+  },
+  {
+    number: 138,
+    verses: [
+      { hebrew: "לְדָוִד אוֹדְךָ בְכָל־לִבִּי נֶגֶד אֱלֹהִים אֲזַמְּרֶךָּ׃", french: "" },
+      { hebrew: "אֶשְׁתַּחֲוֶה אֶל־הֵיכַל קָדְשְׁךָ וְאוֹדֶה אֶת־שְׁמֶךָ עַל־חַסְדְּךָ וְעַל־אֲמִתֶּךָ כִּי־הִגְדַּלְתָּ עַל־כָּל־שִׁמְךָ אִמְרָתֶךָ׃", french: "" },
+      { hebrew: "בְּיוֹם קָרָאתִי וַתַּעֲנֵנִי תַּרְהִבֵנִי בְנַפְשִׁי עֹז׃", french: "" },
+      { hebrew: "יוֹדוּךָ יְהוָה כָּל־מַלְכֵי־אָרֶץ כִּי שָׁמְעוּ אִמְרֵי־פִיךָ׃", french: "" },
+      { hebrew: "וְיָשִׁירוּ בְּדַרְכֵי יְהוָה כִּי גָדוֹל כְּבוֹד יְהוָה׃", french: "" },
+      { hebrew: "כִּי־רָם יְהוָה וְשָׁפָל יִרְאֶה וְגָבֹהַּ מִמֶּרְחָק יְיֵדָע׃", french: "" },
+      { hebrew: "אִם־אֵלֵךְ בְּקֶרֶב צָרָה תְּחַיֵּנִי עַל אַף אֹיְבַי תִּשְׁלַח יָדֶךָ וְתוֹשִׁיעֵנִי יְמִינֶךָ׃", french: "" },
+      { hebrew: "יְהוָה יִגְמֹר בַּעֲדִי יְהוָה חַסְדְּךָ לְעוֹלָם מַעֲשֵׂי יָדֶיךָ אַל־תֶּרֶף׃", french: "" }
+    ]
+  },
+  {
+    number: 139,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד מִזְמוֹר יְהוָה חֲקַרְתַּנִי וַתֵּדָע׃", french: "" },
+      { hebrew: "אַתָּה יָדַעְתָּ שִׁבְתִּי וְקוּמִי בַּנְתָּה לְרֵעִי מֵרָחוֹק׃", french: "" },
+      { hebrew: "אָרְחִי וְרִבְעִי זֵרִיתָ וְכָל־דְּרָכַי הִסְכַּנְתָּה׃", french: "" },
+      { hebrew: "כִּי אֵין מִלָּה בִּלְשׁוֹנִי הֵן יְהוָה יָדַעְתָּ כֻלָּהּ׃", french: "" },
+      { hebrew: "אָחוֹר וָקֶדֶם צַרְתָּנִי וַתָּשֶׁת עָלַי כַּפֶּכָה׃", french: "" },
+      { hebrew: "פלאיה [פְּלִיאָה] דַעַת מִמֶּנִּי נִשְׂגְּבָה לֹא־אוּכַל לָהּ׃", french: "" },
+      { hebrew: "אָנָה אֵלֵךְ מֵרוּחֶךָ וְאָנָה מִפָּנֶיךָ אֶבְרָח׃", french: "" },
+      { hebrew: "אִם־אֶסַּק שָׁמַיִם שָׁם אָתָּה וְאַצִּיעָה שְּׁאוֹל הִנֶּךָּ׃", french: "" },
+      { hebrew: "אֶשָּׂא כַנְפֵי־שָׁחַר אֶשְׁכְּנָה בְּאַחֲרִית יָם׃", french: "" },
+      { hebrew: "גַּם־שָׁם יָדְךָ תַנְחֵנִי וְתֹאחֲזֵנִי יְמִינֶךָ׃", french: "" },
+      { hebrew: "וָאֹמַר אַךְ־חֹשֶׁךְ יְשׁוּפֵנִי וְלַיְלָה אוֹר בַּעֲדֵנִי׃", french: "" },
+      { hebrew: "גַּם־חֹשֶׁךְ לֹא־יַחְשִׁיךְ מִמֶּךָ וְלַיְלָה כַּיּוֹם יָאִיר כַּחֲשֵׁיכָה כָּאוֹרָה׃", french: "" },
+      { hebrew: "כִּי־אַתָּה קָנִיתָ כִלְיֹתָי תְּסֻכֵּנִי בְּבֶטֶן אִמִּי׃", french: "" },
+      { hebrew: "אוֹדְךָ עַל כִּי נוֹרָאוֹת נִפְלֵיתִי נִפְלָאִים מַעֲשֶׂיךָ וְנַפְשִׁי יֹדַעַת מְאֹד׃", french: "" },
+      { hebrew: "לֹא־נִכְחַד עָצְמִי מִמֶּךָּ אֲשֶׁר־עֻשֵּׂיתִי בַסֵּתֶר רֻקַּמְתִּי בְּתַחְתִּיּוֹת אָרֶץ׃", french: "" },
+      { hebrew: "גָּלְמִי רָאוּ עֵינֶיךָ וְעַל־סִפְרְךָ כֻּלָּם יִכָּתֵבוּ יָמִים יֻצָּרוּ ולא [וְלוֹ] אֶחָד בָּהֶם׃", french: "" },
+      { hebrew: "וְלִי מַה־יָּקְרוּ רֵעֶיךָ אֵל מֶה עָצְמוּ רָאשֵׁיהֶם׃", french: "" },
+      { hebrew: "אֶסְפְּרֵם מֵחוֹל יִרְבּוּן הֱקִיצֹתִי וְעוֹדִי עִמָּךְ׃", french: "" },
+      { hebrew: "אִם־תִּקְטֹל אֱלוֹהַּ רָשָׁע וְאַנְשֵׁי דָמִים סוּרוּ מֶנִּי׃", french: "" },
+      { hebrew: "אֲשֶׁר יֹאמְרֻךָ לִמְזִמָּה נָשֻׂא לַשָּׁוְא עָרֶיךָ׃", french: "" },
+      { hebrew: "הֲלוֹא־מְשַׂנְאֶיךָ יְהוָה אֶשְׂנָא וּבִתְקוֹמְמֶיךָ אֶתְקוֹטָט׃", french: "" },
+      { hebrew: "תַּכְלִית שִׂנְאָה שְׂנֵאתִים לְאוֹיְבִים הָיוּ לִי׃", french: "" },
+      { hebrew: "חָקְרֵנִי אֵל וְדַע לְבָבִי בְּחָנֵנִי וְדַע שַׂרְעַפָּי׃", french: "" },
+      { hebrew: "וּרְאֵה אִם־דֶּרֶךְ־עֹצֶב בִּי וּנְחֵנִי בְּדֶרֶךְ עוֹלָם׃", french: "" }
+    ]
+  },
+  {
+    number: 140,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ מִזְמוֹר לְדָוִד:", french: "Au chef des chantres. Psaume de David." },
+      { hebrew: "חַלְּצֵנִי יהוה מֵאָדָם רָע מֵאִישׁ חֲמָסִים תִּנְצְרֵנִי:", french: "Délivre-moi, Éternel, de l'homme méchant, préserve-moi de l'homme violent," },
+      { hebrew: "אֲשֶׁר חָשְׁבוּ רָעוֹת בְּלֵב כָּל יוֹם יָגוּרוּ מִלְחָמוֹת:", french: "de ceux qui méditent le mal dans leur cœur et chaque jour suscitent des querelles." },
+      { hebrew: "שָׁנֲנוּ לְשׁוֹנָם כְּמוֹ נָחָשׁ חֲמַת עַכְשׁוּב תַּחַת שְׂפָתֵימוֹ סֶלָה:", french: "Ils aiguisent leur langue comme le serpent, un venin d'aspic est sous leurs lèvres. Sélah." },
+      { hebrew: "שָׁמְרֵנִי יהוה מִידֵי רָשָׁע מֵאִישׁ חֲמָסִים תִּנְצְרֵנִי אֲשֶׁר חָשְׁבוּ לִדְחוֹת פְּעָמָי:", french: "Garde-moi, Éternel, des mains du méchant, préserve-moi de l'homme violent, de ceux qui méditent de faire chanceler mes pas." },
+      { hebrew: "טָמְנוּ גֵאִים פַּח לִי וַחֲבָלִים פָּרְשׂוּ רֶשֶׁת לְיַד מַעְגָּל מֹקְשִׁים שָׁתוּ לִי סֶלָה:", french: "Des orgueilleux ont caché un piège et des cordes sous mes pas, ils ont tendu un filet le long du chemin, ils m'ont posé des embûches. Sélah." },
+      { hebrew: "אָמַרְתִּי לַיהוה אֵלִי אָתָּה הַאֲזִינָה יהוה קוֹל תַּחֲנוּנָי:", french: "Je dis à l'Éternel : Tu es mon Dieu ! Éternel, prête l'oreille à mes supplications !" },
+      { hebrew: "יהוה אֲדֹנָי עֹז יְשׁוּעָתִי סַכֹּתָה לְרֹאשִׁי בְּיוֹם נָשֶׁק:", french: "Éternel, Seigneur, force de mon salut ! Tu couvres ma tête au jour du combat." },
+      { hebrew: "אַל תִּתֵּן יהוה מַאֲוַיֵּי רָשָׁע זְמָמוֹ אַל תָּפֵק יָרוּמוּ סֶלָה:", french: "Éternel, n'accomplis pas les désirs du méchant, ne laisse pas réussir ses projets, de peur qu'ils ne s'élèvent. Sélah." },
+      { hebrew: "רֹאשׁ מְסִבָּי עֲמַל שְׂפָתֵימוֹ יְכַסֵּמוֹ:", french: "Que sur la tête de ceux qui m'entourent retombe le mal de leurs propres lèvres !" },
+      { hebrew: "יִמּוֹטוּ עֲלֵיהֶם גֶּחָלִים בָּאֵשׁ יַפִּלֵם בְּמַהֲמֹרוֹת בַּל יָקוּמוּ:", french: "Que des charbons ardents tombent sur eux ! Qu'Il les jette dans le feu, dans des abîmes d'où ils ne se relèvent plus !" },
+      { hebrew: "אִישׁ לָשׁוֹן בַּל יִכּוֹן בָּאָרֶץ אִישׁ חָמָס רָע יְצוּדֶנּוּ לְמַדְחֵפֹת:", french: "L'homme à la langue médisante ne subsistera pas sur la terre ; le malheur emportera l'homme violent et le pourchassera." },
+      { hebrew: "יָדַעְתִּי כִּי יַעֲשֶׂה יהוה דִּין עָנִי מִשְׁפַּט אֶבְיֹנִים:", french: "Je sais que l'Éternel fait droit au malheureux, justice aux pauvres." },
+      { hebrew: "אַךְ צַדִּיקִים יוֹדוּ לִשְׁמֶךָ יֵשְׁבוּ יְשָׁרִים אֶת פָּנֶיךָ:", french: "Oui, les justes célébreront Ton nom, les hommes droits habiteront devant Ta face." },
+    ]
+  },
+  {
+    number: 141,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד יהוה קְרָאתִיךָ חוּשָׁה לִּי הַאֲזִינָה קוֹלִי בְּקָרְאִי לָךְ:", french: "Psaume de David. Éternel, je T'invoque : viens en hâte à mon secours ! Prête l'oreille à ma voix, quand je T'invoque !" },
+      { hebrew: "תִּכּוֹן תְּפִלָּתִי קְטֹרֶת לְפָנֶיךָ מַשְׂאַת כַּפַּי מִנְחַת עָרֶב:", french: "Que ma prière monte devant Toi comme l'encens, et l'élévation de mes mains comme l'offrande du soir !" },
+      { hebrew: "שִׁיתָה יהוה שָׁמְרָה לְפִי נִצְּרָה עַל דַּל שְׂפָתָי:", french: "Éternel, mets une garde à ma bouche, veille sur la porte de mes lèvres !" },
+      { hebrew: "אַל תַּט לִבִּי לְדָבָר רָע לְהִתְעוֹלֵל עֲלִילוֹת בְּרֶשַׁע אֶת אִישִׁים פֹּעֲלֵי אָוֶן וּבַל אֶלְחַם בְּמַנְעַמֵּיהֶם:", french: "N'incline pas mon cœur vers le mal, pour commettre des actes coupables avec les hommes qui font le mal ; et que je ne mange pas de leurs mets délicats !" },
+      { hebrew: "יֶהֶלְמֵנִי צַדִּיק חֶסֶד וְיוֹכִיחֵנִי שֶׁמֶן רֹאשׁ אַל יָנִי רֹאשִׁי כִּי עוֹד וּתְפִלָּתִי בְּרָעוֹתֵיהֶם:", french: "Que le juste me frappe, c'est une faveur ; qu'il me reprenne, c'est une huile pour ma tête ; que ma tête ne la refuse pas ! Car ma prière s'élève encore contre leurs méfaits." },
+      { hebrew: "נִשְׁמְטוּ בִידֵי סֶלַע שֹׁפְטֵיהֶם וְשָׁמְעוּ אֲמָרַי כִּי נָעֵמוּ:", french: "Leurs juges seront précipités le long du rocher, et l'on écoutera mes paroles, car elles sont agréables." },
+      { hebrew: "כְּמוֹ פֹלֵחַ וּבֹקֵעַ בָּאָרֶץ נִפְזְרוּ עֲצָמֵינוּ לְפִי שְׁאוֹל:", french: "Comme quand on laboure et qu'on fend la terre, ainsi nos os sont dispersés à l'entrée du Chéol." },
+      { hebrew: "כִּי אֵלֶיךָ יהוה אֲדֹנָי עֵינָי בְּכָה חָסִיתִי אַל תְּעַר נַפְשִׁי:", french: "Car vers Toi, Éternel, Seigneur, se tournent mes yeux, en Toi je cherche un refuge : ne laisse pas mon âme sans défense !" },
+      { hebrew: "שָׁמְרֵנִי מִידֵי פַח יָקְשׁוּ לִי וּמֹקְשׁוֹת פֹּעֲלֵי אָוֶן:", french: "Préserve-moi du piège qu'ils m'ont tendu, et des embûches de ceux qui font le mal !" },
+      { hebrew: "יִפְּלוּ בְמַכְמֹרָיו רְשָׁעִים יַחַד אָנֹכִי עַד אֶעֱבוֹר:", french: "Que les méchants tombent dans leurs propres filets, tandis que moi j'échapperai !" },
+    ]
+  },
+  {
+    number: 142,
+    verses: [
+      { hebrew: "מַשְׂכִּיל לְדָוִד בִּהְיוֹתוֹ בַמְּעָרָה תְפִלָּה:", french: "Maskil de David. Lorsqu'il était dans la caverne. Prière." },
+      { hebrew: "קוֹלִי אֶל יהוה אֶזְעָק קוֹלִי אֶל יהוה אֶתְחַנָּן:", french: "De ma voix je crie vers l'Éternel, de ma voix j'implore l'Éternel." },
+      { hebrew: "אֶשְׁפֹּךְ לְפָנָיו שִׂיחִי צָרָתִי לְפָנָיו אַגִּיד:", french: "Je répands devant Lui ma plainte, j'expose devant Lui ma détresse." },
+      { hebrew: "בְּהִתְעַטֵּף עָלַי רוּחִי וְאַתָּה יָדַעְתָּ נְתִיבָתִי בְּאֹרַח זוּ אֲהַלֵּךְ טָמְנוּ פַח לִי:", french: "Quand mon esprit est abattu en moi, Toi Tu connais mon sentier. Sur le chemin où je marche, ils m'ont tendu un piège." },
+      { hebrew: "הַבֵּיט יָמִין וּרְאֵה וְאֵין לִי מַכִּיר אָבַד מָנוֹס מִמֶּנִּי אֵין דּוֹרֵשׁ לְנַפְשִׁי:", french: "Regarde à droite et vois : personne ne me reconnaît ! Tout refuge m'est fermé, nul ne prend soin de mon âme." },
+      { hebrew: "זָעַקְתִּי אֵלֶיךָ יהוה אָמַרְתִּי אַתָּה מַחְסִי חֶלְקִי בְּאֶרֶץ הַחַיִּים:", french: "Je crie vers Toi, Éternel ! Je dis : Tu es mon refuge, mon partage sur la terre des vivants." },
+      { hebrew: "הַקְשִׁיבָה אֶל רִנָּתִי כִּי דַלּוֹתִי מְאֹד הַצִּילֵנִי מֵרֹדְפַי כִּי אָמְצוּ מִמֶּנִּי:", french: "Sois attentif à mes cris, car je suis bien malheureux ! Délivre-moi de mes persécuteurs, car ils sont plus forts que moi." },
+      { hebrew: "הוֹצִיאָה מִמַּסְגֵּר נַפְשִׁי לְהוֹדוֹת אֶת שְׁמֶךָ בִּי יַכְתִּרוּ צַדִּיקִים כִּי תִגְמֹל עָלָי:", french: "Fais sortir mon âme de sa prison, pour que je célèbre Ton nom ! Les justes m'entoureront quand Tu m'auras fait du bien." },
+    ]
+  },
+  {
+    number: 143,
+    verses: [
+      { hebrew: "מִזְמוֹר לְדָוִד יהוה שְׁמַע תְּפִלָּתִי הַאֲזִינָה אֶל תַּחֲנוּנַי בֶּאֱמֻנָתְךָ עֲנֵנִי בְּצִדְקָתֶךָ:", french: "Psaume de David. Éternel, écoute ma prière, prête l'oreille à mes supplications ! Réponds-moi dans Ta fidélité, dans Ta justice !" },
+      { hebrew: "וְאַל תָּבוֹא בְמִשְׁפָּט אֶת עַבְדֶּךָ כִּי לֹא יִצְדַּק לְפָנֶיךָ כָל חָי:", french: "N'entre pas en jugement avec Ton serviteur, car aucun vivant n'est juste devant Toi." },
+      { hebrew: "כִּי רָדַף אוֹיֵב נַפְשִׁי דִּכָּא לָאָרֶץ חַיָּתִי הוֹשִׁיבַנִי בְמַחֲשַׁכִּים כְּמֵתֵי עוֹלָם:", french: "Car l'ennemi poursuit mon âme, il écrase ma vie contre terre ; il me fait habiter dans les ténèbres, comme ceux qui sont morts depuis longtemps." },
+      { hebrew: "וַתִּתְעַטֵּף עָלַי רוּחִי בְּתוֹכִי יִשְׁתּוֹמֵם לִבִּי:", french: "Mon esprit est abattu en moi, mon cœur est éperdu au-dedans de moi." },
+      { hebrew: "זָכַרְתִּי יָמִים מִקֶּדֶם הָגִיתִי בְכָל פָּעֳלֶךָ בְּמַעֲשֵׂה יָדֶיךָ אֲשׂוֹחֵחַ:", french: "Je me souviens des jours d'autrefois, je médite sur toutes Tes œuvres, je réfléchis à l'ouvrage de Tes mains." },
+      { hebrew: "פֵּרַשְׂתִּי יָדַי אֵלֶיךָ נַפְשִׁי כְּאֶרֶץ עֲיֵפָה לְךָ סֶלָה:", french: "J'étends mes mains vers Toi ; mon âme est devant Toi comme une terre desséchée. Sélah." },
+      { hebrew: "מַהֵר עֲנֵנִי יהוה כָּלְתָה רוּחִי אַל תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי וְנִמְשַׁלְתִּי עִם יֹרְדֵי בוֹר:", french: "Hâte-Toi de me répondre, Éternel ! Mon esprit s'épuise. Ne me cache pas Ta face, sinon je ressemblerais à ceux qui descendent dans la fosse." },
+      { hebrew: "הַשְׁמִיעֵנִי בַבֹּקֶר חַסְדֶּךָ כִּי בְךָ בָטָחְתִּי הוֹדִיעֵנִי דֶּרֶךְ זוּ אֵלֵךְ כִּי אֵלֶיךָ נָשָׂאתִי נַפְשִׁי:", french: "Fais-moi entendre dès le matin Ta bonté, car je me confie en Toi ! Fais-moi connaître le chemin où je dois marcher, car j'élève mon âme vers Toi." },
+      { hebrew: "הַצִּילֵנִי מֵאֹיְבַי יהוה אֵלֶיךָ כִסִּתִי:", french: "Délivre-moi de mes ennemis, Éternel ! C'est auprès de Toi que je cherche un refuge." },
+      { hebrew: "לַמְּדֵנִי לַעֲשׂוֹת רְצוֹנֶךָ כִּי אַתָּה אֱלוֹהָי רוּחֲךָ טוֹבָה תַּנְחֵנִי בְּאֶרֶץ מִישׁוֹר:", french: "Enseigne-moi à faire Ta volonté, car Tu es mon Dieu. Que Ton bon esprit me conduise sur une terre unie !" },
+      { hebrew: "לְמַעַן שִׁמְךָ יהוה תְּחַיֵּנִי בְּצִדְקָתְךָ תּוֹצִיא מִצָּרָה נַפְשִׁי:", french: "À cause de Ton nom, Éternel, rends-moi la vie ! Dans Ta justice, retire mon âme de la détresse !" },
+      { hebrew: "וּבְחַסְדְּךָ תַּצְמִית אֹיְבַי וְהַאֲבַדְתָּ כָּל צֹרְרֵי נַפְשִׁי כִּי אֲנִי עַבְדֶּךָ:", french: "Dans Ta bonté, anéantis mes ennemis, et fais périr tous les adversaires de mon âme ! Car je suis Ton serviteur." },
+    ]
+  },
+  {
+    number: 144,
+    verses: [
+      { hebrew: "לְדָוִד בָּרוּךְ יהוה צוּרִי הַמְלַמֵּד יָדַי לַקְרָב אֶצְבְּעוֹתַי לַמִּלְחָמָה:", french: "De David. Béni soit l'Éternel, mon rocher, qui exerce mes mains au combat, mes doigts à la bataille !" },
+      { hebrew: "חַסְדִּי וּמְצוּדָתִי מִשְׂגַּבִּי וּמְפַלְטִי לִי מָגִנִּי וּבוֹ חָסִיתִי הָרוֹדֵד עַמִּי תַחְתָּי:", french: "Il est ma grâce et ma forteresse, ma haute retraite et mon libérateur, mon bouclier, Celui en qui je me réfugie, qui soumet mon peuple sous moi." },
+      { hebrew: "יהוה מָה אָדָם וַתֵּדָעֵהוּ בֶּן אֱנוֹשׁ וַתְּחַשְּׁבֵהוּ:", french: "Éternel, qu'est-ce que l'homme pour que Tu le connaisses, le fils de l'homme pour que Tu penses à lui ?" },
+      { hebrew: "אָדָם לַהֶבֶל דָּמָה יָמָיו כְּצֵל עוֹבֵר:", french: "L'homme est semblable à un souffle, ses jours sont comme l'ombre qui passe." },
+      { hebrew: "יהוה הַט שָׁמֶיךָ וְתֵרֵד גַּע בֶּהָרִים וְיֶעֱשָׁנוּ:", french: "Éternel, abaisse Tes cieux et descends ! Touche les montagnes et qu'elles fument !" },
+      { hebrew: "בְּרוֹק בָּרָק וּתְפִיצֵם שְׁלַח חִצֶּיךָ וּתְהֻמֵּם:", french: "Lance l'éclair et disperse-les ! Décoche Tes flèches et mets-les en déroute !" },
+      { hebrew: "שְׁלַח יָדֶיךָ מִמָּרוֹם פְּצֵנִי וְהַצִּילֵנִי מִמַּיִם רַבִּים מִיַּד בְּנֵי נֵכָר:", french: "Étends Tes mains d'en haut, délivre-moi et sauve-moi des grandes eaux, de la main des fils de l'étranger," },
+      { hebrew: "אֲשֶׁר פִּיהֶם דִּבֶּר שָׁוְא וִימִינָם יְמִין שָׁקֶר:", french: "dont la bouche profère le mensonge, et dont la droite est une droite trompeuse." },
+      { hebrew: "אֱלֹהִים שִׁיר חָדָשׁ אָשִׁירָה לָּךְ בְּנֵבֶל עָשׂוֹר אֲזַמְּרָה לָּךְ:", french: "Ô Dieu, je Te chanterai un cantique nouveau, je Te célébrerai sur le luth à dix cordes." },
+      { hebrew: "הַנּוֹתֵן תְּשׁוּעָה לַמְּלָכִים הַפּוֹצֶה אֶת דָּוִד עַבְדּוֹ מֵחֶרֶב רָעָה:", french: "Toi qui donnes le salut aux rois, qui délivres David, Ton serviteur, de l'épée meurtrière." },
+      { hebrew: "פְּצֵנִי וְהַצִּילֵנִי מִיַּד בְּנֵי נֵכָר אֲשֶׁר פִּיהֶם דִּבֶּר שָׁוְא וִימִינָם יְמִין שָׁקֶר:", french: "Délivre-moi et sauve-moi de la main des fils de l'étranger, dont la bouche profère le mensonge, et dont la droite est une droite trompeuse." },
+      { hebrew: "אֲשֶׁר בָּנֵינוּ כִּנְטִעִים מְגֻדָּלִים בִּנְעוּרֵיהֶם בְּנוֹתֵינוּ כְזָוִיֹּת מְחֻטָּבוֹת תַּבְנִית הֵיכָל:", french: "Nos fils sont comme des plantes qui grandissent dans leur jeunesse ; nos filles sont comme des colonnes sculptées, ornement d'un palais." },
+      { hebrew: "מְזָוֵינוּ מְלֵאִים מְפִיקִים מִזַּן אֶל זַן צֹאונֵנוּ מַאֲלִיפוֹת מְרֻבָּבוֹת בְּחוּצוֹתֵינוּ:", french: "Nos greniers sont pleins, regorgeant de toute espèce de biens ; nos brebis se multiplient par milliers et par dizaines de milliers dans nos campagnes." },
+      { hebrew: "אַלּוּפֵינוּ מְסֻבָּלִים אֵין פֶּרֶץ וְאֵין יוֹצֵאת וְאֵין צְוָחָה בִּרְחֹבֹתֵינוּ:", french: "Nos bœufs sont chargés ; point de brèche, point de sortie, point de cri dans nos places publiques !" },
+      { hebrew: "אַשְׁרֵי הָעָם שֶׁכָּכָה לּוֹ אַשְׁרֵי הָעָם שֶׁיהוה אֱלֹהָיו:", french: "Heureux le peuple dont la condition est pareille ! Heureux le peuple dont l'Éternel est le Dieu !" },
+    ]
+  },
+  {
+    number: 145,
+    verses: [
+      { hebrew: "תְּהִלָּה לְדָוִד אֲרוֹמִמְךָ אֱלוֹהַי הַמֶּלֶךְ וַאֲבָרֲכָה שִׁמְךָ לְעוֹלָם וָעֶד׃", french: "" },
+      { hebrew: "בְּכָל־יוֹם אֲבָרֲכֶךָּ וַאֲהַלְלָה שִׁמְךָ לְעוֹלָם וָעֶד׃", french: "" },
+      { hebrew: "גָּדוֹל יְהוָה וּמְהֻלָּל מְאֹד וְלִגְדֻלָּתוֹ אֵין חֵקֶר׃", french: "" },
+      { hebrew: "דּוֹר לְדוֹר יְשַׁבַּח מַעֲשֶׂיךָ וּגְבוּרֹתֶיךָ יַגִּידוּ׃", french: "" },
+      { hebrew: "הֲדַר כְּבוֹד הוֹדֶךָ וְדִבְרֵי נִפְלְאוֹתֶיךָ אָשִׂיחָה׃", french: "" },
+      { hebrew: "וֶעֱזוּז נוֹרְאֹתֶיךָ יֹאמֵרוּ וגדולתיך [וּגְדוּלָּתְךָ] אֲסַפְּרֶנָּה׃", french: "" },
+      { hebrew: "זֵכֶר רַב־טוּבְךָ יַבִּיעוּ וְצִדְקָתְךָ יְרַנֵּנוּ׃", french: "" },
+      { hebrew: "חַנּוּן וְרַחוּם יְהוָה אֶרֶךְ אַפַּיִם וּגְדָל־חָסֶד׃", french: "" },
+      { hebrew: "טוֹב־יְהוָה לַכֹּל וְרַחֲמָיו עַל־כָּל־מַעֲשָׂיו׃", french: "" },
+      { hebrew: "יוֹדוּךָ יְהוָה כָּל־מַעֲשֶׂיךָ וַחֲסִידֶיךָ יְבָרֲכוּכָה׃", french: "" },
+      { hebrew: "כְּבוֹד מַלְכוּתְךָ יֹאמֵרוּ וּגְבוּרָתְךָ יְדַבֵּרוּ׃", french: "" },
+      { hebrew: "לְהוֹדִיעַ לִבְנֵי הָאָדָם גְּבוּרֹתָיו וּכְבוֹד הֲדַר מַלְכוּתוֹ׃", french: "" },
+      { hebrew: "מַלְכוּתְךָ מַלְכוּת כָּל־עֹלָמִים וּמֶמְשֶׁלְתְּךָ בְּכָל־דּוֹר וָדוֹר׃", french: "" },
+      { hebrew: "סוֹמֵךְ יְהוָה לְכָל־הַנֹּפְלִים וְזוֹקֵף לְכָל־הַכְּפוּפִים׃", french: "" },
+      { hebrew: "עֵינֵי־כֹל אֵלֶיךָ יְשַׂבֵּרוּ וְאַתָּה נוֹתֵן־לָהֶם אֶת־אָכְלָם בְּעִתּוֹ׃", french: "" },
+      { hebrew: "פּוֹתֵחַ אֶת־יָדֶךָ וּמַשְׂבִּיעַ לְכָל־חַי רָצוֹן׃", french: "" },
+      { hebrew: "צַדִּיק יְהוָה בְּכָל־דְּרָכָיו וְחָסִיד בְּכָל־מַעֲשָׂיו׃", french: "" },
+      { hebrew: "קָרוֹב יְהוָה לְכָל־קֹרְאָיו לְכֹל אֲשֶׁר יִקְרָאֻהוּ בֶאֱמֶת׃", french: "" },
+      { hebrew: "רְצוֹן־יְרֵאָיו יַעֲשֶׂה וְאֶת־שַׁוְעָתָם יִשְׁמַע וְיוֹשִׁיעֵם׃", french: "" },
+      { hebrew: "שׁוֹמֵר יְהוָה אֶת־כָּל־אֹהֲבָיו וְאֵת כָּל־הָרְשָׁעִים יַשְׁמִיד׃", french: "" },
+      { hebrew: "תְּהִלַּת יְהוָה יְדַבֶּר־פִּי וִיבָרֵךְ כָּל־בָּשָׂר שֵׁם קָדְשׁוֹ לְעוֹלָם וָעֶד׃", french: "" }
+    ]
+  },
+  {
+    number: 146,
+    verses: [
+      { hebrew: "הַלְלוּ־יָהּ הַלְלִי נַפְשִׁי אֶת־יְהוָה׃", french: "" },
+      { hebrew: "אֲהַלְלָה יְהוָה בְּחַיָּי אֲזַמְּרָה לֵאלֹהַי בְּעוֹדִי׃", french: "" },
+      { hebrew: "אַל־תִּבְטְחוּ בִנְדִיבִים בְּבֶן־אָדָם שֶׁאֵין לוֹ תְשׁוּעָה׃", french: "" },
+      { hebrew: "תֵּצֵא רוּחוֹ יָשֻׁב לְאַדְמָתוֹ בַּיּוֹם הַהוּא אָבְדוּ עֶשְׁתֹּנֹתָיו׃", french: "" },
+      { hebrew: "אַשְׁרֵי שֶׁאֵל יַעֲקֹב בְּעֶזְרוֹ שִׂבְרוֹ עַל־יְהוָה אֱלֹהָיו׃", french: "" },
+      { hebrew: "עֹשֶׂה שָׁמַיִם וָאָרֶץ אֶת־הַיָּם וְאֶת־כָּל־אֲשֶׁר־בָּם הַשֹּׁמֵר אֱמֶת לְעוֹלָם׃", french: "" },
+      { hebrew: "עֹשֶׂה מִשְׁפָּט לָעֲשׁוּקִים נֹתֵן לֶחֶם לָרְעֵבִים יְהוָה מַתִּיר אֲסוּרִים׃", french: "" },
+      { hebrew: "יְהוָה פֹּקֵחַ עִוְרִים יְהוָה זֹקֵף כְּפוּפִים יְהוָה אֹהֵב צַדִּיקִים׃", french: "" },
+      { hebrew: "יְהוָה שֹׁמֵר אֶת־גֵּרִים יָתוֹם וְאַלְמָנָה יְעוֹדֵד וְדֶרֶךְ רְשָׁעִים יְעַוֵּת׃", french: "" },
+      { hebrew: "יִמְלֹךְ יְהוָה לְעוֹלָם אֱלֹהַיִךְ צִיּוֹן לְדֹר וָדֹר הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 147,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ כִּי־טוֹב זַמְּרָה אֱלֹהֵינוּ כִּי־נָעִים נָאוָה תְהִלָּה׃", french: "" },
+      { hebrew: "בּוֹנֵה יְרוּשָׁלִַם יְהוָה נִדְחֵי יִשְׂרָאֵל יְכַנֵּס׃", french: "" },
+      { hebrew: "הָרֹפֵא לִשְׁבוּרֵי לֵב וּמְחַבֵּשׁ לְעַצְּבוֹתָם׃", french: "" },
+      { hebrew: "מוֹנֶה מִסְפָּר לַכּוֹכָבִים לְכֻלָּם שֵׁמוֹת יִקְרָא׃", french: "" },
+      { hebrew: "גָּדוֹל אֲדוֹנֵינוּ וְרַב־כֹּחַ לִתְבוּנָתוֹ אֵין מִסְפָּר׃", french: "" },
+      { hebrew: "מְעוֹדֵד עֲנָוִים יְהוָה מַשְׁפִּיל רְשָׁעִים עֲדֵי־אָרֶץ׃", french: "" },
+      { hebrew: "עֱנוּ לַיהוָה בְּתוֹדָה זַמְּרוּ לֵאלֹהֵינוּ בְכִנּוֹר׃", french: "" },
+      { hebrew: "הַמְכַסֶּה שָׁמַיִם בְּעָבִים הַמֵּכִין לָאָרֶץ מָטָר הַמַּצְמִיחַ הָרִים חָצִיר׃", french: "" },
+      { hebrew: "נוֹתֵן לִבְהֵמָה לַחְמָהּ לִבְנֵי עֹרֵב אֲשֶׁר יִקְרָאוּ׃", french: "" },
+      { hebrew: "לֹא בִגְבוּרַת הַסּוּס יֶחְפָּץ לֹא־בְשׁוֹקֵי הָאִישׁ יִרְצֶה׃", french: "" },
+      { hebrew: "רוֹצֶה יְהוָה אֶת־יְרֵאָיו אֶת־הַמְיַחֲלִים לְחַסְדּוֹ׃", french: "" },
+      { hebrew: "שַׁבְּחִי יְרוּשָׁלִַם אֶת־יְהוָה הַלְלִי אֱלֹהַיִךְ צִיּוֹן׃", french: "" },
+      { hebrew: "כִּי־חִזַּק בְּרִיחֵי שְׁעָרָיִךְ בֵּרַךְ בָּנַיִךְ בְּקִרְבֵּךְ׃", french: "" },
+      { hebrew: "הַשָּׂם־גְּבוּלֵךְ שָׁלוֹם חֵלֶב חִטִּים יַשְׂבִּיעֵךְ׃", french: "" },
+      { hebrew: "הַשֹּׁלֵחַ אִמְרָתוֹ אָרֶץ עַד־מְהֵרָה יָרוּץ דְּבָרוֹ׃", french: "" },
+      { hebrew: "הַנֹּתֵן שֶׁלֶג כַּצָּמֶר כְּפוֹר כָּאֵפֶר יְפַזֵּר׃", french: "" },
+      { hebrew: "מַשְׁלִיךְ קַרְחוֹ כְפִתִּים לִפְנֵי קָרָתוֹ מִי יַעֲמֹד׃", french: "" },
+      { hebrew: "יִשְׁלַח דְּבָרוֹ וְיַמְסֵם יַשֵּׁב רוּחוֹ יִזְּלוּ־מָיִם׃", french: "" },
+      { hebrew: "מַגִּיד דברו [דְּבָרָיו] לְיַעֲקֹב חֻקָּיו וּמִשְׁפָּטָיו לְיִשְׂרָאֵל׃", french: "" },
+      { hebrew: "לֹא עָשָׂה כֵן לְכָל־גּוֹי וּמִשְׁפָּטִים בַּל־יְדָעוּם הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 148,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ הַלְלוּ אֶת־יְהוָה מִן־הַשָּׁמַיִם הַלְלוּהוּ בַּמְּרוֹמִים׃", french: "" },
+      { hebrew: "הַלְלוּהוּ כָל־מַלְאָכָיו הַלְלוּהוּ כָּל־צבאו [צְבָאָיו׃]", french: "" },
+      { hebrew: "הַלְלוּהוּ שֶׁמֶשׁ וְיָרֵחַ הַלְלוּהוּ כָּל־כּוֹכְבֵי אוֹר׃", french: "" },
+      { hebrew: "הַלְלוּהוּ שְׁמֵי הַשָּׁמָיִם וְהַמַּיִם אֲשֶׁר מֵעַל הַשָּׁמָיִם׃", french: "" },
+      { hebrew: "יְהַלְלוּ אֶת־שֵׁם יְהוָה כִּי הוּא צִוָּה וְנִבְרָאוּ׃", french: "" },
+      { hebrew: "וַיַּעֲמִידֵם לָעַד לְעוֹלָם חָק־נָתַן וְלֹא יַעֲבוֹר׃", french: "" },
+      { hebrew: "הַלְלוּ אֶת־יְהוָה מִן־הָאָרֶץ תַּנִּינִים וְכָל־תְּהֹמוֹת׃", french: "" },
+      { hebrew: "אֵשׁ וּבָרָד שֶׁלֶג וְקִיטוֹר רוּחַ סְעָרָה עֹשָׂה דְבָרוֹ׃", french: "" },
+      { hebrew: "הֶהָרִים וְכָל־גְּבָעוֹת עֵץ פְּרִי וְכָל־אֲרָזִים׃", french: "" },
+      { hebrew: "הַחַיָּה וְכָל־בְּהֵמָה רֶמֶשׂ וְצִפּוֹר כָּנָף׃", french: "" },
+      { hebrew: "מַלְכֵי־אֶרֶץ וְכָל־לְאֻמִּים שָׂרִים וְכָל־שֹׁפְטֵי אָרֶץ׃", french: "" },
+      { hebrew: "בַּחוּרִים וְגַם־בְּתוּלוֹת זְקֵנִים עִם־נְעָרִים׃", french: "" },
+      { hebrew: "יְהַלְלוּ אֶת־שֵׁם יְהוָה כִּי־נִשְׂגָּב שְׁמוֹ לְבַדּוֹ הוֹדוֹ עַל־אֶרֶץ וְשָׁמָיִם׃", french: "" },
+      { hebrew: "וַיָּרֶם קֶרֶן לְעַמּוֹ תְּהִלָּה לְכָל־חֲסִידָיו לִבְנֵי יִשְׂרָאֵל עַם־קְרֹבוֹ הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 149,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ שִׁירוּ לַיהוָה שִׁיר חָדָשׁ תְּהִלָּתוֹ בִּקְהַל חֲסִידִים׃", french: "" },
+      { hebrew: "יִשְׂמַח יִשְׂרָאֵל בְּעֹשָׂיו בְּנֵי־צִיּוֹן יָגִילוּ בְמַלְכָּם׃", french: "" },
+      { hebrew: "יְהַלְלוּ שְׁמוֹ בְמָחוֹל בְּתֹף וְכִנּוֹר יְזַמְּרוּ־לוֹ׃", french: "" },
+      { hebrew: "כִּי־רוֹצֶה יְהוָה בְּעַמּוֹ יְפָאֵר עֲנָוִים בִּישׁוּעָה׃", french: "" },
+      { hebrew: "יַעְלְזוּ חֲסִידִים בְּכָבוֹד יְרַנְּנוּ עַל־מִשְׁכְּבוֹתָם׃", french: "" },
+      { hebrew: "רוֹמְמוֹת אֵל בִּגְרוֹנָם וְחֶרֶב פִּיפִיּוֹת בְּיָדָם׃", french: "" },
+      { hebrew: "לַעֲשׂוֹת נְקָמָה בַּגּוֹיִם תּוֹכֵחֹת בַּל־אֻמִּים׃", french: "" },
+      { hebrew: "לֶאְסֹר מַלְכֵיהֶם בְּזִקִּים וְנִכְבְּדֵיהֶם בְּכַבְלֵי בַרְזֶל׃", french: "" },
+      { hebrew: "לַעֲשׂוֹת בָּהֶם מִשְׁפָּט כָּתוּב הָדָר הוּא לְכָל־חֲסִידָיו הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 150,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ הַלְלוּ־אֵל בְּקָדְשׁוֹ הַלְלוּהוּ בִּרְקִיעַ עֻזּוֹ׃", french: "" },
+      { hebrew: "הַלְלוּהוּ בִגְבוּרֹתָיו הַלְלוּהוּ כְּרֹב גֻּדְלוֹ׃", french: "" },
+      { hebrew: "הַלְלוּהוּ בְּתֵקַע שׁוֹפָר הַלְלוּהוּ בְּנֵבֶל וְכִנּוֹר׃", french: "" },
+      { hebrew: "הַלְלוּהוּ בְתֹף וּמָחוֹל הַלְלוּהוּ בְּמִנִּים וְעוּגָב׃", french: "" },
+      { hebrew: "הַלְלוּהוּ בְצִלְצְלֵי־שָׁמַע הַלְלוּהוּ בְּצִלְצְלֵי תְרוּעָה׃", french: "" },
+      { hebrew: "כֹּל הַנְּשָׁמָה תְּהַלֵּל יָהּ הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 90,
+    verses: [
+      { hebrew: "תְּפִלָּה לְמֹשֶׁה אִישׁ־הָאֱלֹהִים אֲ‍דֹנָי מָעוֹן אַתָּה הָיִיתָ לָּנוּ בְּדֹר וָדֹר׃", french: "" },
+      { hebrew: "בְּטֶרֶם הָרִים יֻלָּדוּ וַתְּחוֹלֵל אֶרֶץ וְתֵבֵל וּמֵעוֹלָם עַד־עוֹלָם אַתָּה אֵל׃", french: "" },
+      { hebrew: "תָּשֵׁב אֱנוֹשׁ עַד־דַּכָּא וַתֹּאמֶר שׁוּבוּ בְנֵי־אָדָם׃", french: "" },
+      { hebrew: "כִּי אֶלֶף שָׁנִים בְּעֵינֶיךָ כְּיוֹם אֶתְמוֹל כִּי יַעֲבֹר וְאַשְׁמוּרָה בַלָּיְלָה׃", french: "" },
+      { hebrew: "זְרַמְתָּם שֵׁנָה יִהְיוּ בַּבֹּקֶר כֶּחָצִיר יַחֲלֹף׃", french: "" },
+      { hebrew: "בַּבֹּקֶר יָצִיץ וְחָלָף לָעֶרֶב יְמוֹלֵל וְיָבֵשׁ׃", french: "" },
+      { hebrew: "כִּי־כָלִינוּ בְאַפֶּךָ וּבַחֲמָתְךָ נִבְהָלְנוּ׃", french: "" },
+      { hebrew: "שת [שַׁתָּה] עֲוֺנֹתֵינוּ לְנֶגְדֶּךָ עֲלֻמֵנוּ לִמְאוֹר פָּנֶיךָ׃", french: "" },
+      { hebrew: "כִּי כָל־יָמֵינוּ פָּנוּ בְעֶבְרָתֶךָ כִּלִּינוּ שָׁנֵינוּ כְמוֹ־הֶגֶה׃", french: "" },
+      { hebrew: "יְמֵי־שְׁנוֹתֵינוּ בָהֶם שִׁבְעִים שָׁנָה וְאִם בִּגְבוּרֹת שְׁמוֹנִים שָׁנָה וְרָהְבָּם עָמָל וָאָוֶן כִּי־גָז חִישׁ וַנָּעֻפָה׃", french: "" },
+      { hebrew: "מִי־יוֹדֵעַ עֹז אַפֶּךָ וּכְיִרְאָתְךָ עֶבְרָתֶךָ׃", french: "" },
+      { hebrew: "לִמְנוֹת יָמֵינוּ כֵּן הוֹדַע וְנָבִא לְבַב חָכְמָה׃", french: "" },
+      { hebrew: "שׁוּבָה יְהוָה עַד־מָתָי וְהִנָּחֵם עַל־עֲבָדֶיךָ׃", french: "" },
+      { hebrew: "שַׂבְּעֵנוּ בַבֹּקֶר חַסְדֶּךָ וּנְרַנְּנָה וְנִשְׂמְחָה בְּכָל־יָמֵינוּ׃", french: "" },
+      { hebrew: "שַׂמְּחֵנוּ כִּימוֹת עִנִּיתָנוּ שְׁנוֹת רָאִינוּ רָעָה׃", french: "" },
+      { hebrew: "יֵרָאֶה אֶל־עֲבָדֶיךָ פָעֳלֶךָ וַהֲדָרְךָ עַל־בְּנֵיהֶם׃", french: "" },
+      { hebrew: "וִיהִי נֹעַם אֲדֹנָי אֱלֹהֵינוּ עָלֵינוּ וּמַעֲשֵׂה יָדֵינוּ כּוֹנְנָה עָלֵינוּ וּמַעֲשֵׂה יָדֵינוּ כּוֹנְנֵהוּ׃", french: "" }
+    ]
+  },
+  {
+    number: 91,
+    verses: [
+      { hebrew: "יֹשֵׁב בְּסֵתֶר עֶלְיוֹן בְּצֵל שַׁדַּי יִתְלוֹנָן׃", french: "" },
+      { hebrew: "אֹמַר לַיהוָה מַחְסִי וּמְצוּדָתִי אֱלֹהַי אֶבְטַח־בּוֹ׃", french: "" },
+      { hebrew: "כִּי הוּא יַצִּילְךָ מִפַּח יָקוּשׁ מִדֶּבֶר הַוּוֹת׃", french: "" },
+      { hebrew: "בְּאֶבְרָתוֹ יָסֶךְ לָךְ וְתַחַת־כְּנָפָיו תֶּחְסֶה צִנָּה וְסֹחֵרָה אֲמִתּוֹ׃", french: "" },
+      { hebrew: "לֹא־תִירָא מִפַּחַד לָיְלָה מֵחֵץ יָעוּף יוֹמָם׃", french: "" },
+      { hebrew: "מִדֶּבֶר בָּאֹפֶל יַהֲלֹךְ מִקֶּטֶב יָשׁוּד צָהֳרָיִם׃", french: "" },
+      { hebrew: "יִפֹּל מִצִּדְּךָ אֶלֶף וּרְבָבָה מִימִינֶךָ אֵלֶיךָ לֹא יִגָּשׁ׃", french: "" },
+      { hebrew: "רַק בְּעֵינֶיךָ תַבִּיט וְשִׁלֻּמַת רְשָׁעִים תִּרְאֶה׃", french: "" },
+      { hebrew: "כִּי־אַתָּה יְהוָה מַחְסִי עֶלְיוֹן שַׂמְתָּ מְעוֹנֶךָ׃", french: "" },
+      { hebrew: "לֹא־תְאֻנֶּה אֵלֶיךָ רָעָה וְנֶגַע לֹא־יִקְרַב בְּאָהֳלֶךָ׃", french: "" },
+      { hebrew: "כִּי מַלְאָכָיו יְצַוֶּה־לָּךְ לִשְׁמָרְךָ בְּכָל־דְּרָכֶיךָ׃", french: "" },
+      { hebrew: "עַל־כַּפַּיִם יִשָּׂאוּנְךָ פֶּן־תִּגֹּף בָּאֶבֶן רַגְלֶךָ׃", french: "" },
+      { hebrew: "עַל־שַׁחַל וָפֶתֶן תִּדְרֹךְ תִּרְמֹס כְּפִיר וְתַנִּין׃", french: "" },
+      { hebrew: "כִּי בִי חָשַׁק וַאֲפַלְּטֵהוּ אֲשַׂגְּבֵהוּ כִּי־יָדַע שְׁמִי׃", french: "" },
+      { hebrew: "יִקְרָאֵנִי וְאֶעֱנֵהוּ עִמּוֹ־אָנֹכִי בְצָרָה אֲחַלְּצֵהוּ וַאֲכַבְּדֵהוּ׃", french: "" },
+      { hebrew: "אֹרֶךְ יָמִים אַשְׂבִּיעֵהוּ וְאַרְאֵהוּ בִּישׁוּעָתִי׃", french: "" }
+    ]
+  },
+  {
+    number: 92,
+    verses: [
+      { hebrew: "מִזְמוֹר שִׁיר לְיוֹם הַשַּׁבָּת׃", french: "" },
+      { hebrew: "טוֹב לְהֹדוֹת לַיהוָה וּלְזַמֵּר לְשִׁמְךָ עֶלְיוֹן׃", french: "" },
+      { hebrew: "לְהַגִּיד בַּבֹּקֶר חַסְדֶּךָ וֶאֱמוּנָתְךָ בַּלֵּילוֹת׃", french: "" },
+      { hebrew: "עֲ‍לֵי־עָשׂוֹר וַעֲלֵי־נָבֶל עֲלֵי הִגָּיוֹן בְּכִנּוֹר׃", french: "" },
+      { hebrew: "כִּי שִׂמַּחְתַּנִי יְהוָה בְּפָעֳלֶךָ בְּמַעֲשֵׂי יָדֶיךָ אֲרַנֵּן׃", french: "" },
+      { hebrew: "מַה־גָּדְלוּ מַעֲשֶׂיךָ יְהוָה מְאֹד עָמְקוּ מַחְשְׁבֹתֶיךָ׃", french: "" },
+      { hebrew: "אִישׁ־בַּעַר לֹא יֵדָע וּכְסִיל לֹא־יָבִין אֶת־זֹאת׃", french: "" },
+      { hebrew: "בִּפְרֹחַ רְשָׁעִים כְּמוֹ עֵשֶׂב וַיָּצִיצוּ כָּל־פֹּעֲלֵי אָוֶן לְהִשָּׁמְדָם עֲדֵי־עַד׃", french: "" },
+      { hebrew: "וְאַתָּה מָרוֹם לְעֹלָם יְהוָה׃", french: "" },
+      { hebrew: "כִּי הִנֵּה אֹיְבֶיךָ יְהוָה כִּי־הִנֵּה אֹיְבֶיךָ יֹאבֵדוּ יִתְפָּרְדוּ כָּל־פֹּעֲלֵי אָוֶן׃", french: "" },
+      { hebrew: "וַתָּרֶם כִּרְאֵים קַרְנִי בַּלֹּתִי בְּשֶׁמֶן רַעֲנָן׃", french: "" },
+      { hebrew: "וַתַּבֵּט עֵינִי בְּשׁוּרָי בַּקָּמִים עָלַי מְרֵעִים תִּשְׁמַעְנָה אָזְנָי׃", french: "" },
+      { hebrew: "צַדִּיק כַּתָּמָר יִפְרָח כְּאֶרֶז בַּלְּבָנוֹן יִשְׂגֶּה׃", french: "" },
+      { hebrew: "שְׁתוּלִים בְּבֵית יְהוָה בְּחַצְרוֹת אֱלֹהֵינוּ יַפְרִיחוּ׃", french: "" },
+      { hebrew: "עוֹד יְנוּבוּן בְּשֵׂיבָה דְּשֵׁנִים וְרַעֲנַנִּים יִהְיוּ׃", french: "" },
+      { hebrew: "לְהַגִּיד כִּי־יָשָׁר יְהוָה צוּרִי וְלֹא־עלתה [עַוְלָתָה] בּוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 93,
+    verses: [
+      { hebrew: "יְהוָה מָלָךְ גֵּאוּת לָבֵשׁ לָבֵשׁ יְהוָה עֹז הִתְאַזָּר אַף־תִּכּוֹן תֵּבֵל בַּל־תִּמּוֹט׃", french: "" },
+      { hebrew: "נָכוֹן כִּסְאֲךָ מֵאָז מֵעוֹלָם אָתָּה׃", french: "" },
+      { hebrew: "נָשְׂאוּ נְהָרוֹת יְהוָה נָשְׂאוּ נְהָרוֹת קוֹלָם יִשְׂאוּ נְהָרוֹת דָּכְיָם׃", french: "" },
+      { hebrew: "מִקֹּלוֹת מַיִם רַבִּים אַדִּירִים מִשְׁבְּרֵי־יָם אַדִּיר בַּמָּרוֹם יְהוָה׃", french: "" },
+      { hebrew: "עֵדֹתֶיךָ נֶאֶמְנוּ מְאֹד לְבֵיתְךָ נַאֲוָה־קֹדֶשׁ יְהוָה לְאֹרֶךְ יָמִים׃", french: "" }
+    ]
+  },
+  {
+    number: 94,
+    verses: [
+      { hebrew: "אֵל־נְקָמוֹת יְהוָה אֵל נְקָמוֹת הוֹפִיַע׃", french: "" },
+      { hebrew: "הִנָּשֵׂא שֹׁפֵט הָאָרֶץ הָשֵׁב גְּמוּל עַל־גֵּאִים׃", french: "" },
+      { hebrew: "עַד־מָתַי רְשָׁעִים יְהוָה עַד־מָתַי רְשָׁעִים יַעֲלֹזוּ׃", french: "" },
+      { hebrew: "יַבִּיעוּ יְדַבְּרוּ עָתָק יִתְאַמְּרוּ כָּל־פֹּעֲלֵי אָוֶן׃", french: "" },
+      { hebrew: "עַמְּךָ יְהוָה יְדַכְּאוּ וְנַחֲלָתְךָ יְעַנּוּ׃", french: "" },
+      { hebrew: "אַלְמָנָה וְגֵר יַהֲרֹגוּ וִיתוֹמִים יְרַצֵּחוּ׃", french: "" },
+      { hebrew: "וַיֹּאמְרוּ לֹא יִרְאֶה־יָּהּ וְלֹא־יָבִין אֱלֹהֵי יַעֲקֹב׃", french: "" },
+      { hebrew: "בִּינוּ בֹּעֲרִים בָּעָם וּכְסִילִים מָתַי תַּשְׂכִּילוּ׃", french: "" },
+      { hebrew: "הֲנֹטַע אֹזֶן הֲלֹא יִשְׁמָע אִם־יֹצֵר עַיִן הֲלֹא יַבִּיט׃", french: "" },
+      { hebrew: "הֲיֹסֵר גּוֹיִם הֲלֹא יוֹכִיחַ הַמְלַמֵּד אָדָם דָּעַת׃", french: "" },
+      { hebrew: "יְהוָה יֹדֵעַ מַחְשְׁבוֹת אָדָם כִּי־הֵמָּה הָבֶל׃", french: "" },
+      { hebrew: "אַשְׁרֵי הַגֶּבֶר אֲשֶׁר־תְּיַסְּרֶנּוּ יָּהּ וּמִתּוֹרָתְךָ תְלַמְּדֶנּוּ׃", french: "" },
+      { hebrew: "לְהַשְׁקִיט לוֹ מִימֵי רָע עַד יִכָּרֶה לָרָשָׁע שָׁחַת׃", french: "" },
+      { hebrew: "כִּי לֹא־יִטֹּשׁ יְהוָה עַמּוֹ וְנַחֲלָתוֹ לֹא יַעֲזֹב׃", french: "" },
+      { hebrew: "כִּי־עַד־צֶדֶק יָשׁוּב מִשְׁפָּט וְאַחֲרָיו כָּל־יִשְׁרֵי־לֵב׃", french: "" },
+      { hebrew: "מִי־יָקוּם לִי עִם־מְרֵעִים מִי־יִתְיַצֵּב לִי עִם־פֹּעֲלֵי אָוֶן׃", french: "" },
+      { hebrew: "לוּלֵי יְהוָה עֶזְרָתָה לִּי כִּמְעַט שָׁכְנָה דוּמָה נַפְשִׁי׃", french: "" },
+      { hebrew: "אִם־אָמַרְתִּי מָטָה רַגְלִי חַסְדְּךָ יְהוָה יִסְעָדֵנִי׃", french: "" },
+      { hebrew: "בְּרֹב שַׂרְעַפַּי בְּקִרְבִּי תַּנְחוּמֶיךָ יְשַׁעַשְׁעוּ נַפְשִׁי׃", french: "" },
+      { hebrew: "הַיְחָבְרְךָ כִּסֵּא הַוּוֹת יֹצֵר עָמָל עֲלֵי־חֹק׃", french: "" },
+      { hebrew: "יָגוֹדּוּ עַל־נֶפֶשׁ צַדִּיק וְדָם נָקִי יַרְשִׁיעוּ׃", french: "" },
+      { hebrew: "וַיְהִי יְהוָה לִי לְמִשְׂגָּב וֵאלֹהַי לְצוּר מַחְסִי׃", french: "" },
+      { hebrew: "וַיָּשֶׁב עֲלֵיהֶם אֶת־אוֹנָם וּבְרָעָתָם יַצְמִיתֵם יַצְמִיתֵם יְהוָה אֱלֹהֵינוּ׃", french: "" }
+    ]
+  },
+  {
+    number: 95,
+    verses: [
+      { hebrew: "לְכוּ נְרַנְּנָה לַיהוָה נָרִיעָה לְצוּר יִשְׁעֵנוּ׃", french: "" },
+      { hebrew: "נְקַדְּמָה פָנָיו בְּתוֹדָה בִּזְמִרוֹת נָרִיעַ לוֹ׃", french: "" },
+      { hebrew: "כִּי אֵל גָּדוֹל יְהוָה וּמֶלֶךְ גָּדוֹל עַל־כָּל־אֱלֹהִים׃", french: "" },
+      { hebrew: "אֲשֶׁר בְּיָדוֹ מֶחְקְרֵי־אָרֶץ וְתוֹעֲפוֹת הָרִים לוֹ׃", french: "" },
+      { hebrew: "אֲשֶׁר־לוֹ הַיָּם וְהוּא עָשָׂהוּ וְיַבֶּשֶׁת יָדָיו יָצָרוּ׃", french: "" },
+      { hebrew: "בֹּאוּ נִשְׁתַּחֲוֶה וְנִכְרָעָה נִבְרְכָה לִפְנֵי־יְהוָה עֹשֵׂנוּ׃", french: "" },
+      { hebrew: "כִּי הוּא אֱלֹהֵינוּ וַאֲנַחְנוּ עַם מַרְעִיתוֹ וְצֹאן יָדוֹ הַיּוֹם אִם־בְּקֹלוֹ תִשְׁמָעוּ׃", french: "" },
+      { hebrew: "אַל־תַּקְשׁוּ לְבַבְכֶם כִּמְרִיבָה כְּיוֹם מַסָּה בַּמִּדְבָּר׃", french: "" },
+      { hebrew: "אֲשֶׁר נִסּוּנִי אֲבוֹתֵיכֶם בְּחָנוּנִי גַּם־רָאוּ פָעֳלִי׃", french: "" },
+      { hebrew: "אַרְבָּעִים שָׁנָה אָקוּט בְּדוֹר וָאֹמַר עַם תֹּעֵי לֵבָב הֵם וְהֵם לֹא־יָדְעוּ דְרָכָי׃", french: "" },
+      { hebrew: "אֲשֶׁר־נִשְׁבַּעְתִּי בְאַפִּי אִם־יְבֹאוּן אֶל־מְנוּחָתִי׃", french: "" }
+    ]
+  },
+  {
+    number: 96,
+    verses: [
+      { hebrew: "שִׁירוּ לַיהוָה שִׁיר חָדָשׁ שִׁירוּ לַיהוָה כָּל־הָאָרֶץ׃", french: "" },
+      { hebrew: "שִׁירוּ לַיהוָה בָּרֲכוּ שְׁמוֹ בַּשְּׂרוּ מִיּוֹם־לְיוֹם יְשׁוּעָתוֹ׃", french: "" },
+      { hebrew: "סַפְּרוּ בַגּוֹיִם כְּבוֹדוֹ בְּכָל־הָעַמִּים נִפְלְאוֹתָיו׃", french: "" },
+      { hebrew: "כִּי גָדוֹל יְהוָה וּמְהֻלָּל מְאֹד נוֹרָא הוּא עַל־כָּל־אֱלֹהִים׃", french: "" },
+      { hebrew: "כִּי כָּל־אֱלֹהֵי הָעַמִּים אֱלִילִים וַיהוָה שָׁמַיִם עָשָׂה׃", french: "" },
+      { hebrew: "הוֹד־וְהָדָר לְפָנָיו עֹז וְתִפְאֶרֶת בְּמִקְדָּשׁוֹ׃", french: "" },
+      { hebrew: "הָבוּ לַיהוָה מִשְׁפְּחוֹת עַמִּים הָבוּ לַיהוָה כָּבוֹד וָעֹז׃", french: "" },
+      { hebrew: "הָבוּ לַיהוָה כְּבוֹד שְׁמוֹ שְׂאוּ־מִנְחָה וּבֹאוּ לְחַצְרוֹתָיו׃", french: "" },
+      { hebrew: "הִשְׁתַּחֲווּ לַיהוָה בְּהַדְרַת־קֹדֶשׁ חִילוּ מִפָּנָיו כָּל־הָאָרֶץ׃", french: "" },
+      { hebrew: "אִמְרוּ בַגּוֹיִם יְהוָה מָלָךְ אַף־תִּכּוֹן תֵּבֵל בַּל־תִּמּוֹט יָדִין עַמִּים בְּמֵישָׁרִים׃", french: "" },
+      { hebrew: "יִשְׂמְחוּ הַשָּׁמַיִם וְתָגֵל הָאָרֶץ יִרְעַם הַיָּם וּמְלֹאוֹ׃", french: "" },
+      { hebrew: "יַעֲלֹז שָׂדַי וְכָל־אֲשֶׁר־בּוֹ אָז יְרַנְּנוּ כָּל־עֲצֵי־יָעַר׃", french: "" },
+      { hebrew: "לִפְנֵי יְהוָה כִּי בָא כִּי בָא לִשְׁפֹּט הָאָרֶץ יִשְׁפֹּט־תֵּבֵל בְּצֶדֶק וְעַמִּים בֶּאֱמוּנָתוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 97,
+    verses: [
+      { hebrew: "יְהוָה מָלָךְ תָּגֵל הָאָרֶץ יִשְׂמְחוּ אִיִּים רַבִּים׃", french: "" },
+      { hebrew: "עָנָן וַעֲרָפֶל סְבִיבָיו צֶדֶק וּמִשְׁפָּט מְכוֹן כִּסְאוֹ׃", french: "" },
+      { hebrew: "אֵשׁ לְפָנָיו תֵּלֵךְ וּתְלַהֵט סָבִיב צָרָיו׃", french: "" },
+      { hebrew: "הֵאִירוּ בְרָקָיו תֵּבֵל רָאֲתָה וַתָּחֵל הָאָרֶץ׃", french: "" },
+      { hebrew: "הָרִים כַּדּוֹנַג נָמַסּוּ מִלִּפְנֵי יְהוָה מִלִּפְנֵי אֲדוֹן כָּל־הָאָרֶץ׃", french: "" },
+      { hebrew: "הִגִּידוּ הַשָּׁמַיִם צִדְקוֹ וְרָאוּ כָל־הָעַמִּים כְּבוֹדוֹ׃", french: "" },
+      { hebrew: "יֵבֹשׁוּ כָּל־עֹבְדֵי פֶסֶל הַמִּתְהַלְלִים בָּאֱלִילִים הִשְׁתַּחֲווּ־לוֹ כָּל־אֱלֹהִים׃", french: "" },
+      { hebrew: "שָׁמְעָה וַתִּשְׂמַח צִיּוֹן וַתָּגֵלְנָה בְּנוֹת יְהוּדָה לְמַעַן מִשְׁפָּטֶיךָ יְהוָה׃", french: "" },
+      { hebrew: "כִּי־אַתָּה יְהוָה עֶלְיוֹן עַל־כָּל־הָאָרֶץ מְאֹד נַעֲלֵיתָ עַל־כָּל־אֱלֹהִים׃", french: "" },
+      { hebrew: "אֹהֲבֵי יְהוָה שִׂנְאוּ רָע שֹׁמֵר נַפְשׁוֹת חֲסִידָיו מִיַּד רְשָׁעִים יַצִּילֵם׃", french: "" },
+      { hebrew: "אוֹר זָרֻעַ לַצַּדִּיק וּלְיִשְׁרֵי־לֵב שִׂמְחָה׃", french: "" },
+      { hebrew: "שִׂמְחוּ צַדִּיקִים בַּיהוָה וְהוֹדוּ לְזֵכֶר קָדְשׁוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 98,
+    verses: [
+      { hebrew: "מִזְמוֹר שִׁירוּ לַיהוָה שִׁיר חָדָשׁ כִּי־נִפְלָאוֹת עָשָׂה הוֹשִׁיעָה־לּוֹ יְמִינוֹ וּזְרוֹעַ קָדְשׁוֹ׃", french: "" },
+      { hebrew: "הוֹדִיעַ יְהוָה יְשׁוּעָתוֹ לְעֵינֵי הַגּוֹיִם גִּלָּה צִדְקָתוֹ׃", french: "" },
+      { hebrew: "זָכַר חַסְדּוֹ וֶאֱמוּנָתוֹ לְבֵית יִשְׂרָאֵל רָאוּ כָל־אַפְסֵי־אָרֶץ אֵת יְשׁוּעַת אֱלֹהֵינוּ׃", french: "" },
+      { hebrew: "הָרִיעוּ לַיהוָה כָּל־הָאָרֶץ פִּצְחוּ וְרַנְּנוּ וְזַמֵּרוּ׃", french: "" },
+      { hebrew: "זַמְּרוּ לַיהוָה בְּכִנּוֹר בְּכִנּוֹר וְקוֹל זִמְרָה׃", french: "" },
+      { hebrew: "בַּחֲצֹצְרוֹת וְקוֹל שׁוֹפָר הָרִיעוּ לִפְנֵי הַמֶּלֶךְ יְהוָה׃", french: "" },
+      { hebrew: "יִרְעַם הַיָּם וּמְלֹאוֹ תֵּבֵל וְיֹשְׁבֵי בָהּ׃", french: "" },
+      { hebrew: "נְהָרוֹת יִמְחֲאוּ־כָף יַחַד הָרִים יְרַנֵּנוּ׃", french: "" },
+      { hebrew: "לִפְנֵי־יְהוָה כִּי בָא לִשְׁפֹּט הָאָרֶץ יִשְׁפֹּט־תֵּבֵל בְּצֶדֶק וְעַמִּים בְּמֵישָׁרִים׃", french: "" }
+    ]
+  },
+  {
+    number: 99,
+    verses: [
+      { hebrew: "יְהוָה מָלָךְ יִרְגְּזוּ עַמִּים יֹשֵׁב כְּרוּבִים תָּנוּט הָאָרֶץ׃", french: "" },
+      { hebrew: "יְהוָה בְּצִיּוֹן גָּדוֹל וְרָם הוּא עַל־כָּל־הָעַמִּים׃", french: "" },
+      { hebrew: "יוֹדוּ שִׁמְךָ גָּדוֹל וְנוֹרָא קָדוֹשׁ הוּא׃", french: "" },
+      { hebrew: "וְעֹז מֶלֶךְ מִשְׁפָּט אָהֵב אַתָּה כּוֹנַנְתָּ מֵישָׁרִים מִשְׁפָּט וּצְדָקָה בְּיַעֲקֹב אַתָּה עָשִׂיתָ׃", french: "" },
+      { hebrew: "רוֹמְמוּ יְהוָה אֱלֹהֵינוּ וְהִשְׁתַּחֲווּ לַהֲדֹם רַגְלָיו קָדוֹשׁ הוּא׃", french: "" },
+      { hebrew: "מֹשֶׁה וְאַהֲרֹן בְּכֹהֲנָיו וּשְׁמוּאֵל בְּקֹרְאֵי שְׁמוֹ קֹרִאים אֶל־יְהוָה וְהוּא יַעֲנֵם׃", french: "" },
+      { hebrew: "בְּעַמּוּד עָנָן יְדַבֵּר אֲלֵיהֶם שָׁמְרוּ עֵדֹתָיו וְחֹק נָתַן־לָמוֹ׃", french: "" },
+      { hebrew: "יְהוָה אֱלֹהֵינוּ אַתָּה עֲנִיתָם אֵל נֹשֵׂא הָיִיתָ לָהֶם וְנֹקֵם עַל־עֲלִילוֹתָם׃", french: "" },
+      { hebrew: "רוֹמְמוּ יְהוָה אֱלֹהֵינוּ וְהִשְׁתַּחֲווּ לְהַר קָדְשׁוֹ כִּי־קָדוֹשׁ יְהוָה אֱלֹהֵינוּ׃", french: "" }
+    ]
+  },
+  {
+    number: 100,
+    verses: [
+      { hebrew: "מִזְמוֹר לְתוֹדָה הָרִיעוּ לַיהוָה כָּל־הָאָרֶץ׃", french: "" },
+      { hebrew: "עִבְדוּ אֶת־יְהוָה בְּשִׂמְחָה בֹּאוּ לְפָנָיו בִּרְנָנָה׃", french: "" },
+      { hebrew: "דְּעוּ כִּי־יְהוָה הוּא אֱלֹהִים הוּא־עָשָׂנוּ ולא [וְלוֹ] אֲנַחְנוּ עַמּוֹ וְצֹאן מַרְעִיתוֹ׃", french: "" },
+      { hebrew: "בֹּאוּ שְׁעָרָיו בְּתוֹדָה חֲצֵרֹתָיו בִּתְהִלָּה הוֹדוּ־לוֹ בָּרֲכוּ שְׁמוֹ׃", french: "" },
+      { hebrew: "כִּי־טוֹב יְהֹוָה לְעוֹלָם חַסְדּוֹ וְעַד־דֹּר וָדֹר אֱמוּנָתוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 101,
+    verses: [
+      { hebrew: "לְדָוִד מִזְמוֹר חֶסֶד־וּמִשְׁפָּט אָשִׁירָה לְךָ יְהוָה אֲזַמֵּרָה׃", french: "" },
+      { hebrew: "אַשְׂכִּילָה בְּדֶרֶךְ תָּמִים מָתַי תָּבוֹא אֵלָי אֶתְהַלֵּךְ בְּתָם־לְבָבִי בְּקֶרֶב בֵּיתִי׃", french: "" },
+      { hebrew: "לֹא־אָשִׁית לְנֶגֶד עֵינַי דְּבַר־בְּלִיָּעַל עֲשֹׂה־סֵטִים שָׂנֵאתִי לֹא יִדְבַּק בִּי׃", french: "" },
+      { hebrew: "לֵבָב עִקֵּשׁ יָסוּר מִמֶּנִּי רָע לֹא אֵדָע׃", french: "" },
+      { hebrew: "מלושני [מְלָשְׁנִי] בַסֵּתֶר רֵעֵהוּ אוֹתוֹ אַצְמִית גְּבַהּ־עֵינַיִם וּרְחַב לֵבָב אֹתוֹ לֹא אוּכָל׃", french: "" },
+      { hebrew: "עֵינַי בְּנֶאֶמְנֵי־אֶרֶץ לָשֶׁבֶת עִמָּדִי הֹלֵךְ בְּדֶרֶךְ תָּמִים הוּא יְשָׁרְתֵנִי׃", french: "" },
+      { hebrew: "לֹא־יֵשֵׁב בְּקֶרֶב בֵּיתִי עֹשֵׂה רְמִיָּה דֹּבֵר שְׁקָרִים לֹא־יִכּוֹן לְנֶגֶד עֵינָי׃", french: "" },
+      { hebrew: "לַבְּקָרִים אַצְמִית כָּל־רִשְׁעֵי־אָרֶץ לְהַכְרִית מֵעִיר־יְהוָה כָּל־פֹּעֲלֵי אָוֶן׃", french: "" }
+    ]
+  },
+  {
+    number: 102,
+    verses: [
+      { hebrew: "תְּפִלָּה לְעָנִי כִי־יַעֲטֹף וְלִפְנֵי יְהוָה יִשְׁפֹּךְ שִׂיחוֹ׃", french: "" },
+      { hebrew: "יְהוָה שִׁמְעָה תְפִלָּתִי וְשַׁוְעָתִי אֵלֶיךָ תָבוֹא׃", french: "" },
+      { hebrew: "אַל־תַּסְתֵּר פָּנֶיךָ מִמֶּנִּי בְּיוֹם צַר לִי הַטֵּה־אֵלַי אָזְנֶךָ בְּיוֹם אֶקְרָא מַהֵר עֲנֵנִי׃", french: "" },
+      { hebrew: "כִּי־כָלוּ בְעָשָׁן יָמָי וְעַצְמוֹתַי כְּמוֹ־קֵד נִחָרוּ׃", french: "" },
+      { hebrew: "הוּכָּה־כָעֵשֶׂב וַיִּבַשׁ לִבִּי כִּי־שָׁכַחְתִּי מֵאֲכֹל לַחְמִי׃", french: "" },
+      { hebrew: "מִקּוֹל אַנְחָתִי דָּבְקָה עַצְמִי לִבְשָׂרִי׃", french: "" },
+      { hebrew: "דָּמִיתִי לִקְאַת מִדְבָּר הָיִיתִי כְּכוֹס חֳרָבוֹת׃", french: "" },
+      { hebrew: "שָׁקַדְתִּי וָאֶהְיֶה כְּצִפּוֹר בּוֹדֵד עַל־גָּג׃", french: "" },
+      { hebrew: "כָּל־הַיּוֹם חֵרְפוּנִי אוֹיְבָי מְהוֹלָלַי בִּי נִשְׁבָּעוּ׃", french: "" },
+      { hebrew: "כִּי־אֵפֶר כַּלֶּחֶם אָכָלְתִּי וְשִׁקֻּוַי בִּבְכִי מָסָכְתִּי׃", french: "" },
+      { hebrew: "מִפְּנֵי־זַעַמְךָ וְקִצְפֶּךָ כִּי נְשָׂאתַנִי וַתַּשְׁלִיכֵנִי׃", french: "" },
+      { hebrew: "יָמַי כְּצֵל נָטוּי וַאֲנִי כָּעֵשֶׂב אִיבָשׁ׃", french: "" },
+      { hebrew: "וְאַתָּה יְהוָה לְעוֹלָם תֵּשֵׁב וְזִכְרְךָ לְדֹר וָדֹר׃", french: "" },
+      { hebrew: "אַתָּה תָקוּם תְּרַחֵם צִיּוֹן כִּי־עֵת לְחֶנְנָהּ כִּי־בָא מוֹעֵד׃", french: "" },
+      { hebrew: "כִּי־רָצוּ עֲבָדֶיךָ אֶת־אֲבָנֶיהָ וְאֶת־עֲפָרָהּ יְחֹנֵנוּ׃", french: "" },
+      { hebrew: "וְיִירְאוּ גוֹיִם אֶת־שֵׁם יְהוָה וְכָל־מַלְכֵי הָאָרֶץ אֶת־כְּבוֹדֶךָ׃", french: "" },
+      { hebrew: "כִּי־בָנָה יְהוָה צִיּוֹן נִרְאָה בִּכְבוֹדוֹ׃", french: "" },
+      { hebrew: "פָּנָה אֶל־תְּפִלַּת הָעַרְעָר וְלֹא־בָזָה אֶת־תְּפִלָּתָם׃", french: "" },
+      { hebrew: "תִּכָּתֶב זֹאת לְדוֹר אַחֲרוֹן וְעַם נִבְרָא יְהַלֶּל־יָהּ׃", french: "" },
+      { hebrew: "כִּי־הִשְׁקִיף מִמְּרוֹם קָדְשׁוֹ יְהוָה מִשָּׁמַיִם אֶל־אֶרֶץ הִבִּיט׃", french: "" },
+      { hebrew: "לִשְׁמֹעַ אֶנְקַת אָסִיר לְפַתֵּחַ בְּנֵי תְמוּתָה׃", french: "" },
+      { hebrew: "לְסַפֵּר בְּצִיּוֹן שֵׁם יְהוָה וּתְהִלָּתוֹ בִּירוּשָׁלִָם׃", french: "" },
+      { hebrew: "בְּהִקָּבֵץ עַמִּים יַחְדָּו וּמַמְלָכוֹת לַעֲבֹד אֶת־יְהוָה׃", french: "" },
+      { hebrew: "עִנָּה בַדֶּרֶךְ כחו [כֹּחִי] קִצַּר יָמָי׃", french: "" },
+      { hebrew: "אֹמַר אֵלִי אַל־תַּעֲלֵנִי בַּחֲצִי יָמָי בְּדוֹר דּוֹרִים שְׁנוֹתֶיךָ׃", french: "" },
+      { hebrew: "לְפָנִים הָאָרֶץ יָסַדְתָּ וּמַעֲשֵׂה יָדֶיךָ שָׁמָיִם׃", french: "" },
+      { hebrew: "הֵמָּה יֹאבֵדוּ וְאַתָּה תַעֲמֹד וְכֻלָּם כַּבֶּגֶד יִבְלוּ כַּלְּבוּשׁ תַּחֲלִיפֵם וְיַחֲלֹפוּ׃", french: "" },
+      { hebrew: "וְאַתָּה־הוּא וּשְׁנוֹתֶיךָ לֹא יִתָּמּוּ׃", french: "" },
+      { hebrew: "בְּנֵי־עֲבָדֶיךָ יִשְׁכּוֹנוּ וְזַרְעָם לְפָנֶיךָ יִכּוֹן׃", french: "" }
+    ]
+  },
+  {
+    number: 103,
+    verses: [
+      { hebrew: "לְדָוִד בָּרֲכִי נַפְשִׁי אֶת־יְהוָה וְכָל־קְרָבַי אֶת־שֵׁם קָדְשׁוֹ׃", french: "" },
+      { hebrew: "בָּרֲכִי נַפְשִׁי אֶת־יְהוָה וְאַל־תִּשְׁכְּחִי כָּל־גְּמוּלָיו׃", french: "" },
+      { hebrew: "הַסֹּלֵחַ לְכָל־עֲוֺנֵכִי הָרֹפֵא לְכָל־תַּחֲלֻאָיְכִי׃", french: "" },
+      { hebrew: "הַגּוֹאֵל מִשַּׁחַת חַיָּיְכִי הַמְעַטְּרֵכִי חֶסֶד וְרַחֲמִים׃", french: "" },
+      { hebrew: "הַמַּשְׂבִּיַע בַּטּוֹב עֶדְיֵךְ תִּתְחַדֵּשׁ כַּנֶּשֶׁר נְעוּרָיְכִי׃", french: "" },
+      { hebrew: "עֹשֵׂה צְדָקוֹת יְהוָה וּמִשְׁפָּטִים לְכָל־עֲשׁוּקִים׃", french: "" },
+      { hebrew: "יוֹדִיעַ דְּרָכָיו לְמֹשֶׁה לִבְנֵי יִשְׂרָאֵל עֲלִילוֹתָיו׃", french: "" },
+      { hebrew: "רַחוּם וְחַנּוּן יְהוָה אֶרֶךְ אַפַּיִם וְרַב־חָסֶד׃", french: "" },
+      { hebrew: "לֹא־לָנֶצַח יָרִיב וְלֹא לְעוֹלָם יִטּוֹר׃", french: "" },
+      { hebrew: "לֹא כַחֲטָאֵינוּ עָשָׂה לָנוּ וְלֹא כַעֲוֺנֹתֵינוּ גָּמַל עָלֵינוּ׃", french: "" },
+      { hebrew: "כִּי כִגְבֹהַּ שָׁמַיִם עַל־הָאָרֶץ גָּבַר חַסְדּוֹ עַל־יְרֵאָיו׃", french: "" },
+      { hebrew: "כִּרְחֹק מִזְרָח מִמַּעֲרָב הִרְחִיק מִמֶּנּוּ אֶת־פְּשָׁעֵינוּ׃", french: "" },
+      { hebrew: "כְּרַחֵם אָב עַל־בָּנִים רִחַם יְהוָה עַל־יְרֵאָיו׃", french: "" },
+      { hebrew: "כִּי־הוּא יָדַע יִצְרֵנוּ זָכוּר כִּי־עָפָר אֲנָחְנוּ׃", french: "" },
+      { hebrew: "אֱנוֹשׁ כֶּחָצִיר יָמָיו כְּצִיץ הַשָּׂדֶה כֵּן יָצִיץ׃", french: "" },
+      { hebrew: "כִּי רוּחַ עָבְרָה־בּוֹ וְאֵינֶנּוּ וְלֹא־יַכִּירֶנּוּ עוֹד מְקוֹמוֹ׃", french: "" },
+      { hebrew: "וְחֶסֶד יְהוָה מֵעוֹלָם וְעַד־עוֹלָם עַל־יְרֵאָיו וְצִדְקָתוֹ לִבְנֵי בָנִים׃", french: "" },
+      { hebrew: "לְשֹׁמְרֵי בְרִיתוֹ וּלְזֹכְרֵי פִקֻּדָיו לַעֲשׂוֹתָם׃", french: "" },
+      { hebrew: "יְהוָה בַּשָּׁמַיִם הֵכִין כִּסְאוֹ וּמַלְכוּתוֹ בַּכֹּל מָשָׁלָה׃", french: "" },
+      { hebrew: "בָּרֲכוּ יְהוָה מַלְאָכָיו גִּבֹּרֵי כֹחַ עֹשֵׂי דְבָרוֹ לִשְׁמֹעַ בְּקוֹל דְּבָרוֹ׃", french: "" },
+      { hebrew: "בָּרֲכוּ יְהוָה כָּל־צְבָאָיו מְשָׁרְתָיו עֹשֵׂי רְצוֹנוֹ׃", french: "" },
+      { hebrew: "בָּרֲכוּ יְהוָה כָּל־מַעֲשָׂיו בְּכָל־מְקֹמוֹת מֶמְשַׁלְתּוֹ בָּרֲכִי נַפְשִׁי אֶת־יְהוָה׃", french: "" }
+    ]
+  },
+  {
+    number: 104,
+    verses: [
+      { hebrew: "בָּרֲכִי נַפְשִׁי אֶת־יְהוָה יְהוָה אֱלֹהַי גָּדַלְתָּ מְּאֹד הוֹד וְהָדָר לָבָשְׁתָּ׃", french: "" },
+      { hebrew: "עֹטֶה־אוֹר כַּשַּׂלְמָה נוֹטֶה שָׁמַיִם כַּיְרִיעָה׃", french: "" },
+      { hebrew: "הַמְקָרֶה בַמַּיִם עֲ‍לִיּוֹתָיו הַשָּׂם־עָבִים רְכוּבוֹ הַמְהַלֵּךְ עַל־כַּנְפֵי־רוּחַ׃", french: "" },
+      { hebrew: "עֹשֶׂה מַלְאָכָיו רוּחוֹת מְשָׁרְתָיו אֵשׁ לֹהֵט׃", french: "" },
+      { hebrew: "יָסַד־אֶרֶץ עַל־מְכוֹנֶיהָ בַּל־תִּמּוֹט עוֹלָם וָעֶד׃", french: "" },
+      { hebrew: "תְּהוֹם כַּלְּבוּשׁ כִּסִּיתוֹ עַל־הָרִים יַעַמְדוּ־מָיִם׃", french: "" },
+      { hebrew: "מִן־גַּעֲרָתְךָ יְנוּסוּן מִן־קוֹל רַעַמְךָ יֵחָפֵזוּן׃", french: "" },
+      { hebrew: "יַעֲלוּ הָרִים יֵרְדוּ בְקָעוֹת אֶל־מְקוֹם זֶה יָסַדְתָּ לָהֶם׃", french: "" },
+      { hebrew: "גְּבוּל־שַׂמְתָּ בַּל־יַעֲבֹרוּן בַּל־יְשׁוּבוּן לְכַסּוֹת הָאָרֶץ׃", french: "" },
+      { hebrew: "הַמְשַׁלֵּחַ מַעְיָנִים בַּנְּחָלִים בֵּין הָרִים יְהַלֵּכוּן׃", french: "" },
+      { hebrew: "יַשְׁקוּ כָּל־חַיְתוֹ שָׂדָי יִשְׁבְּרוּ פְרָאִים צְמָאָם׃", french: "" },
+      { hebrew: "עֲלֵיהֶם עוֹף־הַשָּׁמַיִם יִשְׁכּוֹן מִבֵּין עֳפָאיִם יִתְּנוּ־קוֹל׃", french: "" },
+      { hebrew: "מַשְׁקֶה הָרִים מֵעֲלִיּוֹתָיו מִפְּרִי מַעֲשֶׂיךָ תִּשְׂבַּע הָאָרֶץ׃", french: "" },
+      { hebrew: "מַצְמִיחַ חָצִיר לַבְּהֵמָה וְעֵשֶׂב לַעֲבֹדַת הָאָדָם לְהוֹצִיא לֶחֶם מִן־הָאָרֶץ׃", french: "" },
+      { hebrew: "וְיַיִן יְשַׂמַּח לְבַב־אֱנוֹשׁ לְהַצְהִיל פָּנִים מִשָּׁמֶן וְלֶחֶם לְבַב־אֱנוֹשׁ יִסְעָד׃", french: "" },
+      { hebrew: "יִשְׂבְּעוּ עֲצֵי יְהוָה אַרְזֵי לְבָנוֹן אֲשֶׁר נָטָע׃", french: "" },
+      { hebrew: "אֲשֶׁר־שָׁם צִפֳּרִים יְקַנֵּנוּ חֲסִידָה בְּרוֹשִׁים בֵּיתָהּ׃", french: "" },
+      { hebrew: "הָרִים הַגְּבֹהִים לַיְּעֵלִים סְלָעִים מַחְסֶה לַשְׁפַנִּים׃", french: "" },
+      { hebrew: "עָשָׂה יָרֵחַ לְמוֹעֲדִים שֶׁמֶשׁ יָדַע מְבוֹאוֹ׃", french: "" },
+      { hebrew: "תָּשֶׁת־חֹשֶׁךְ וִיהִי לָיְלָה בּוֹ־תִרְמֹשׂ כָּל־חַיְתוֹ־יָעַר׃", french: "" },
+      { hebrew: "הַכְּפִירִים שֹׁאֲגִים לַטָּרֶף וּלְבַקֵּשׁ מֵאֵל אָכְלָם׃", french: "" },
+      { hebrew: "תִּזְרַח הַשֶּׁמֶשׁ יֵאָסֵפוּן וְאֶל־מְעוֹנֹתָם יִרְבָּצוּן׃", french: "" },
+      { hebrew: "יֵצֵא אָדָם לְפָעֳלוֹ וְלַעֲבֹדָתוֹ עֲדֵי־עָרֶב׃", french: "" },
+      { hebrew: "מָה־רַבּוּ מַעֲשֶׂיךָ יְהוָה כֻּלָּם בְּחָכְמָה עָשִׂיתָ מָלְאָה הָאָרֶץ קִנְיָנֶךָ׃", french: "" },
+      { hebrew: "זֶה הַיָּם גָּדוֹל וּרְחַב יָדָיִם שָׁם־רֶמֶשׂ וְאֵין מִסְפָּר חַיּוֹת קְטַנּוֹת עִם־גְּדֹלוֹת׃", french: "" },
+      { hebrew: "שָׁם אֳנִיּוֹת יְהַלֵּכוּן לִוְיָתָן זֶה־יָצַרְתָּ לְשַׂחֶק־בּוֹ׃", french: "" },
+      { hebrew: "כֻּלָּם אֵלֶיךָ יְשַׂבֵּרוּן לָתֵת אָכְלָם בְּעִתּוֹ׃", french: "" },
+      { hebrew: "תִּתֵּן לָהֶם יִלְקֹטוּן תִּפְתַּח יָדְךָ יִשְׂבְּעוּן טוֹב׃", french: "" },
+      { hebrew: "תַּסְתִּיר פָּנֶיךָ יִבָּהֵלוּן תֹּסֵף רוּחָם יִגְוָעוּן וְאֶל־עֲפָרָם יְשׁוּבוּן׃", french: "" },
+      { hebrew: "תְּשַׁלַּח רוּחֲךָ יִבָּרֵאוּן וּתְחַדֵּשׁ פְּנֵי אֲדָמָה׃", french: "" },
+      { hebrew: "יְהִי כְבוֹד יְהוָה לְעוֹלָם יִשְׂמַח יְהוָה בְּמַעֲשָׂיו׃", french: "" },
+      { hebrew: "הַמַּבִּיט לָאָרֶץ וַתִּרְעָד יִגַּע בֶּהָרִים וְיֶעֱשָׁנוּ׃", french: "" },
+      { hebrew: "אָשִׁירָה לַיהוָה בְּחַיָּי אֲזַמְּרָה לֵאלֹהַי בְּעוֹדִי׃", french: "" },
+      { hebrew: "יֶעֱרַב עָלָיו שִׂיחִי אָנֹכִי אֶשְׂמַח בַּיהוָה׃", french: "" },
+      { hebrew: "יִתַּמּוּ חַטָּאִים מִן־הָאָרֶץ וּרְשָׁעִים עוֹד אֵינָם בָּרֲכִי נַפְשִׁי אֶת־יְהוָה הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 105,
+    verses: [
+      { hebrew: "הוֹדוּ לַיהוָה קִרְאוּ בִּשְׁמוֹ הוֹדִיעוּ בָעַמִּים עֲלִילוֹתָיו׃", french: "" },
+      { hebrew: "שִׁירוּ־לוֹ זַמְּרוּ־לוֹ שִׂיחוּ בְּכָל־נִפְלְאוֹתָיו׃", french: "" },
+      { hebrew: "הִתְהַלְלוּ בְּשֵׁם קָדְשׁוֹ יִשְׂמַח לֵב מְבַקְשֵׁי יְהוָה׃", french: "" },
+      { hebrew: "דִּרְשׁוּ יְהוָה וְעֻזּוֹ בַּקְּשׁוּ פָנָיו תָּמִיד׃", french: "" },
+      { hebrew: "זִכְרוּ נִפְלְאוֹתָיו אֲשֶׁר־עָשָׂה מֹפְתָיו וּמִשְׁפְּטֵי־פִיו׃", french: "" },
+      { hebrew: "זֶרַע אַבְרָהָם עַבְדּוֹ בְּנֵי יַעֲקֹב בְּחִירָיו׃", french: "" },
+      { hebrew: "הוּא יְהוָה אֱלֹהֵינוּ בְּכָל־הָאָרֶץ מִשְׁפָּטָיו׃", french: "" },
+      { hebrew: "זָכַר לְעוֹלָם בְּרִיתוֹ דָּבָר צִוָּה לְאֶלֶף דּוֹר׃", french: "" },
+      { hebrew: "אֲשֶׁר כָּרַת אֶת־אַבְרָהָם וּשְׁבוּעָתוֹ לְיִשְׂחָק׃", french: "" },
+      { hebrew: "וַיַּעֲמִידֶהָ לְיַעֲקֹב לְחֹק לְיִשְׂרָאֵל בְּרִית עוֹלָם׃", french: "" },
+      { hebrew: "לֵאמֹר לְךָ אֶתֵּן אֶת־אֶרֶץ־כְּנָעַן חֶבֶל נַחֲלַתְכֶם׃", french: "" },
+      { hebrew: "בִּהְיוֹתָם מְתֵי מִסְפָּר כִּמְעַט וְגָרִים בָּהּ׃", french: "" },
+      { hebrew: "וַיִּתְהַלְּכוּ מִגּוֹי אֶל־גּוֹי מִמַּמְלָכָה אֶל־עַם אַחֵר׃", french: "" },
+      { hebrew: "לֹא־הִנִּיחַ אָדָם לְעָשְׁקָם וַיּוֹכַח עֲלֵיהֶם מְלָכִים׃", french: "" },
+      { hebrew: "אַל־תִּגְּעוּ בִמְשִׁיחָי וְלִנְבִיאַי אַל־תָּרֵעוּ׃", french: "" },
+      { hebrew: "וַיִּקְרָא רָעָב עַל־הָאָרֶץ כָּל־מַטֵּה־לֶחֶם שָׁבָר׃", french: "" },
+      { hebrew: "שָׁלַח לִפְנֵיהֶם אִישׁ לְעֶבֶד נִמְכַּר יוֹסֵף׃", french: "" },
+      { hebrew: "עִנּוּ בַכֶּבֶל רגליו [רַגְלוֹ] בַּרְזֶל בָּאָה נַפְשׁוֹ׃", french: "" },
+      { hebrew: "עַד־עֵת בֹּא־דְבָרוֹ אִמְרַת יְהוָה צְרָפָתְהוּ׃", french: "" },
+      { hebrew: "שָׁלַח מֶלֶךְ וַיַּתִּירֵהוּ מֹשֵׁל עַמִּים וַיְפַתְּחֵהוּ׃", french: "" },
+      { hebrew: "שָׂמוֹ אָדוֹן לְבֵיתוֹ וּמֹשֵׁל בְּכָל־קִנְיָנוֹ׃", french: "" },
+      { hebrew: "לֶאְסֹר שָׂרָיו בְּנַפְשׁוֹ וּזְקֵנָיו יְחַכֵּם׃", french: "" },
+      { hebrew: "וַיָּבֹא יִשְׂרָאֵל מִצְרָיִם וְיַעֲקֹב גָּר בְּאֶרֶץ־חָם׃", french: "" },
+      { hebrew: "וַיֶּפֶר אֶת־עַמּוֹ מְאֹד וַיַּעֲצִמֵהוּ מִצָּרָיו׃", french: "" },
+      { hebrew: "הָפַךְ לִבָּם לִשְׂנֹא עַמּוֹ לְהִתְנַכֵּל בַּעֲבָדָיו׃", french: "" },
+      { hebrew: "שָׁלַח מֹשֶׁה עַבְדּוֹ אַהֲרֹן אֲשֶׁר בָּחַר־בּוֹ׃", french: "" },
+      { hebrew: "שָׂמוּ־בָם דִּבְרֵי אֹתוֹתָיו וּמֹפְתִים בְּאֶרֶץ חָם׃", french: "" },
+      { hebrew: "שָׁלַח חֹשֶׁךְ וַיַּחְשִׁךְ וְלֹא־מָרוּ אֶת־דברוו [דְּבָרוֹ׃]", french: "" },
+      { hebrew: "הָפַךְ אֶת־מֵימֵיהֶם לְדָם וַיָּמֶת אֶת־דְּגָתָם׃", french: "" },
+      { hebrew: "שָׁרַץ אַרְצָם צְפַרְדְּעִים בְּחַדְרֵי מַלְכֵיהֶם׃", french: "" },
+      { hebrew: "אָמַר וַיָּבֹא עָרֹב כִּנִּים בְּכָל־גְּבוּלָם׃", french: "" },
+      { hebrew: "נָתַן גִּשְׁמֵיהֶם בָּרָד אֵשׁ לֶהָבוֹת בְּאַרְצָם׃", french: "" },
+      { hebrew: "וַיַּךְ גַּפְנָם וּתְאֵנָתָם וַיְשַׁבֵּר עֵץ גְּבוּלָם׃", french: "" },
+      { hebrew: "אָמַר וַיָּבֹא אַרְבֶּה וְיֶלֶק וְאֵין מִסְפָּר׃", french: "" },
+      { hebrew: "וַיֹּאכַל כָּל־עֵשֶׂב בְּאַרְצָם וַיֹּאכַל פְּרִי אַדְמָתָם׃", french: "" },
+      { hebrew: "וַיַּךְ כָּל־בְּכוֹר בְּאַרְצָם רֵאשִׁית לְכָל־אוֹנָם׃", french: "" },
+      { hebrew: "וַיּוֹצִיאֵם בְּכֶסֶף וְזָהָב וְאֵין בִּשְׁבָטָיו כּוֹשֵׁל׃", french: "" },
+      { hebrew: "שָׂמַח מִצְרַיִם בְּצֵאתָם כִּי־נָפַל פַּחְדָּם עֲלֵיהֶם׃", french: "" },
+      { hebrew: "פָּרַשׂ עָנָן לְמָסָךְ וְאֵשׁ לְהָאִיר לָיְלָה׃", french: "" },
+      { hebrew: "שָׁאַל וַיָּבֵא שְׂלָו וְלֶחֶם שָׁמַיִם יַשְׂבִּיעֵם׃", french: "" },
+      { hebrew: "פָּתַח צוּר וַיָּזוּבוּ מָיִם הָלְכוּ בַּצִּיּוֹת נָהָר׃", french: "" },
+      { hebrew: "כִּי־זָכַר אֶת־דְּבַר קָדְשׁוֹ אֶת־אַבְרָהָם עַבְדּוֹ׃", french: "" },
+      { hebrew: "וַיּוֹצִא עַמּוֹ בְשָׂשׂוֹן בְּרִנָּה אֶת־בְּחִירָיו׃", french: "" },
+      { hebrew: "וַיִּתֵּן לָהֶם אַרְצוֹת גּוֹיִם וַעֲמַל לְאֻמִּים יִירָשׁוּ׃", french: "" },
+      { hebrew: "בַּעֲבוּר יִשְׁמְרוּ חֻקָּיו וְתוֹרֹתָיו יִנְצֹרוּ הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 106,
+    verses: [
+      { hebrew: "הַלְלוּיָהּ הוֹדוּ לַיהוָה כִּי־טוֹב כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "מִי יְמַלֵּל גְּבוּרוֹת יְהוָה יַשְׁמִיעַ כָּל־תְּהִלָּתוֹ׃", french: "" },
+      { hebrew: "אַשְׁרֵי שֹׁמְרֵי מִשְׁפָּט עֹשֵׂה צְדָקָה בְכָל־עֵת׃", french: "" },
+      { hebrew: "זָכְרֵנִי יְהוָה בִּרְצוֹן עַמֶּךָ פָּקְדֵנִי בִּישׁוּעָתֶךָ׃", french: "" },
+      { hebrew: "לִרְאוֹת בְּטוֹבַת בְּחִירֶיךָ לִשְׂמֹחַ בְּשִׂמְחַת גּוֹיֶךָ לְהִתְהַלֵּל עִם־נַחֲלָתֶךָ׃", french: "" },
+      { hebrew: "חָטָאנוּ עִם־אֲבוֹתֵינוּ הֶעֱוִינוּ הִרְשָׁעְנוּ׃", french: "" },
+      { hebrew: "אֲבוֹתֵינוּ בְמִצְרַיִם לֹא־הִשְׂכִּילוּ נִפְלְאוֹתֶיךָ לֹא זָכְרוּ אֶת־רֹב חֲסָדֶיךָ וַיַּמְרוּ עַל־יָם בְּיַם־סוּף׃", french: "" },
+      { hebrew: "וַיּוֹשִׁיעֵם לְמַעַן שְׁמוֹ לְהוֹדִיעַ אֶת־גְּבוּרָתוֹ׃", french: "" },
+      { hebrew: "וַיִּגְעַר בְּיַם־סוּף וַיֶּחֱרָב וַיּוֹלִיכֵם בַּתְּהֹמוֹת כַּמִּדְבָּר׃", french: "" },
+      { hebrew: "וַיּוֹשִׁיעֵם מִיַּד שׂוֹנֵא וַיִּגְאָלֵם מִיַּד אוֹיֵב׃", french: "" },
+      { hebrew: "וַיְכַסּוּ־מַיִם צָרֵיהֶם אֶחָד מֵהֶם לֹא נוֹתָר׃", french: "" },
+      { hebrew: "וַיַּאֲמִינוּ בִדְבָרָיו יָשִׁירוּ תְּהִלָּתוֹ׃", french: "" },
+      { hebrew: "מִהֲרוּ שָׁכְחוּ מַעֲשָׂיו לֹא־חִכּוּ לַעֲצָתוֹ׃", french: "" },
+      { hebrew: "וַיִּתְאַוּוּ תַאֲוָה בַּמִּדְבָּר וַיְנַסּוּ־אֵל בִּישִׁימוֹן׃", french: "" },
+      { hebrew: "וַיִּתֵּן לָהֶם שֶׁאֱלָתָם וַיְשַׁלַּח רָזוֹן בְּנַפְשָׁם׃", french: "" },
+      { hebrew: "וַיְקַנְאוּ לְמֹשֶׁה בַּמַּחֲנֶה לְאַהֲרֹן קְדוֹשׁ יְהוָה׃", french: "" },
+      { hebrew: "תִּפְתַּח־אֶרֶץ וַתִּבְלַע דָּתָן וַתְּכַס עַל־עֲדַת אֲבִירָם׃", french: "" },
+      { hebrew: "וַתִּבְעַר־אֵשׁ בַּעֲדָתָם לֶהָבָה תְּלַהֵט רְשָׁעִים׃", french: "" },
+      { hebrew: "יַעֲשׂוּ־עֵגֶל בְּחֹרֵב וַיִּשְׁתַּחֲווּ לְמַסֵּכָה׃", french: "" },
+      { hebrew: "וַיָּמִירוּ אֶת־כְּבוֹדָם בְּתַבְנִית שׁוֹר אֹכֵל עֵשֶׂב׃", french: "" },
+      { hebrew: "שָׁכְחוּ אֵל מוֹשִׁיעָם עֹשֶׂה גְדֹלוֹת בְּמִצְרָיִם׃", french: "" },
+      { hebrew: "נִפְלָאוֹת בְּאֶרֶץ חָם נוֹרָאוֹת עַל־יַם־סוּף׃", french: "" },
+      { hebrew: "וַיֹּאמֶר לְהַשְׁמִידָם לוּלֵי מֹשֶׁה בְחִירוֹ עָמַד בַּפֶּרֶץ לְפָנָיו לְהָשִׁיב חֲמָתוֹ מֵהַשְׁחִית׃", french: "" },
+      { hebrew: "וַיִּמְאֲסוּ בְּאֶרֶץ חֶמְדָּה לֹא־הֶאֱמִינוּ לִדְבָרוֹ׃", french: "" },
+      { hebrew: "וַיֵּרָגְנוּ בְאָהֳלֵיהֶם לֹא שָׁמְעוּ בְּקוֹל יְהוָה׃", french: "" },
+      { hebrew: "וַיִּשָּׂא יָדוֹ לָהֶם לְהַפִּיל אוֹתָם בַּמִּדְבָּר׃", french: "" },
+      { hebrew: "וּלְהַפִּיל זַרְעָם בַּגּוֹיִם וּלְזָרוֹתָם בָּאֲרָצוֹת׃", french: "" },
+      { hebrew: "וַיִּצָּמְדוּ לְבַעַל פְּעוֹר וַיֹּאכְלוּ זִבְחֵי מֵתִים׃", french: "" },
+      { hebrew: "וַיַּכְעִיסוּ בְּמַעַלְלֵיהֶם וַתִּפְרָץ־בָּם מַגֵּפָה׃", french: "" },
+      { hebrew: "וַיַּעֲמֹד פִּינְחָס וַיְפַלֵּל וַתֵּעָצַר הַמַּגֵּפָה׃", french: "" },
+      { hebrew: "וַתֵּחָשֶׁב לוֹ לִצְדָקָה לְדֹר וָדֹר עַד־עוֹלָם׃", french: "" },
+      { hebrew: "וַיַּקְצִיפוּ עַל־מֵי מְרִיבָה וַיֵּרַע לְמֹשֶׁה בַּעֲבוּרָם׃", french: "" },
+      { hebrew: "כִּי־הִמְרוּ אֶת־רוּחוֹ וַיְבַטֵּא בִּשְׂפָתָיו׃", french: "" },
+      { hebrew: "לֹא־הִשְׁמִידוּ אֶת־הָעַמִּים אֲשֶׁר אָמַר יְהוָה לָהֶם׃", french: "" },
+      { hebrew: "וַיִּתְעָרְבוּ בַגּוֹיִם וַיִּלְמְדוּ מַעֲשֵׂיהֶם׃", french: "" },
+      { hebrew: "וַיַּעַבְדוּ אֶת־עֲצַבֵּיהֶם וַיִּהְיוּ לָהֶם לְמוֹקֵשׁ׃", french: "" },
+      { hebrew: "וַיִּזְבְּחוּ אֶת־בְּנֵיהֶם וְאֶת־בְּנוֹתֵיהֶם לַשֵּׁדִים׃", french: "" },
+      { hebrew: "וַיִּשְׁפְּכוּ דָם נָקִי דַּם־בְּנֵיהֶם וּבְנוֹתֵיהֶם אֲשֶׁר זִבְּחוּ לַעֲצַבֵּי כְנָעַן וַתֶּחֱנַף הָאָרֶץ בַּדָּמִים׃", french: "" },
+      { hebrew: "וַיִּטְמְאוּ בְמַעֲשֵׂיהֶם וַיִּזְנוּ בְּמַעַלְלֵיהֶם׃", french: "" },
+      { hebrew: "וַיִּחַר־אַף יְהוָה בְּעַמּוֹ וַיְתָעֵב אֶת־נַחֲלָתוֹ׃", french: "" },
+      { hebrew: "וַיִּתְּנֵם בְּיַד־גּוֹיִם וַיִּמְשְׁלוּ בָהֶם שֹׂנְאֵיהֶם׃", french: "" },
+      { hebrew: "וַיִּלְחָצוּם אוֹיְבֵיהֶם וַיִּכָּנְעוּ תַּחַת יָדָם׃", french: "" },
+      { hebrew: "פְּעָמִים רַבּוֹת יַצִּילֵם וְהֵמָּה יַמְרוּ בַעֲצָתָם וַיָּמֹכּוּ בַּעֲוֺנָם׃", french: "" },
+      { hebrew: "וַיַּרְא בַּצַּר לָהֶם בְּשָׁמְעוֹ אֶת־רִנָּתָם׃", french: "" },
+      { hebrew: "וַיִּזְכֹּר לָהֶם בְּרִיתוֹ וַיִּנָּחֵם כְּרֹב חסדו [חֲסָדָיו׃]", french: "" },
+      { hebrew: "וַיִּתֵּן אוֹתָם לְרַחֲמִים לִפְנֵי כָּל־שׁוֹבֵיהֶם׃", french: "" },
+      { hebrew: "הוֹשִׁיעֵנוּ יְהוָה אֱלֹהֵינוּ וְקַבְּצֵנוּ מִן־הַגּוֹיִם לְהֹדוֹת לְשֵׁם קָדְשֶׁךָ לְהִשְׁתַּבֵּחַ בִּתְהִלָּתֶךָ׃", french: "" },
+      { hebrew: "בָּרוּךְ־יְהוָה אֱלֹהֵי יִשְׂרָאֵל מִן־הָעוֹלָם וְעַד הָעוֹלָם וְאָמַר כָּל־הָעָם אָמֵן הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 107,
+    verses: [
+      { hebrew: "הֹדוּ לַיהוָה כִּי־טוֹב כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "יֹאמְרוּ גְּאוּלֵי יְהוָה אֲשֶׁר גְּאָלָם מִיַּד־צָר׃", french: "" },
+      { hebrew: "וּמֵאֲרָצוֹת קִבְּצָם מִמִּזְרָח וּמִמַּעֲרָב מִצָּפוֹן וּמִיָּם׃", french: "" },
+      { hebrew: "תָּעוּ בַמִּדְבָּר בִּישִׁימוֹן דָּרֶךְ עִיר מוֹשָׁב לֹא מָצָאוּ׃", french: "" },
+      { hebrew: "רְעֵבִים גַּם־צְמֵאִים נַפְשָׁם בָּהֶם תִּתְעַטָּף׃", french: "" },
+      { hebrew: "וַיִּצְעֲקוּ אֶל־יְהוָה בַּצַּר לָהֶם מִמְּצוּקוֹתֵיהֶם יַצִּילֵם׃", french: "" },
+      { hebrew: "וַיַּדְרִיכֵם בְּדֶרֶךְ יְשָׁרָה לָלֶכֶת אֶל־עִיר מוֹשָׁב׃", french: "" },
+      { hebrew: "יוֹדוּ לַיהוָה חַסְדּוֹ וְנִפְלְאוֹתָיו לִבְנֵי אָדָם׃", french: "" },
+      { hebrew: "כִּי־הִשְׂבִּיעַ נֶפֶשׁ שֹׁקֵקָה וְנֶפֶשׁ רְעֵבָה מִלֵּא־טוֹב׃", french: "" },
+      { hebrew: "יֹשְׁבֵי חֹשֶׁךְ וְצַלְמָוֶת אֲסִירֵי עֳנִי וּבַרְזֶל׃", french: "" },
+      { hebrew: "כִּי־הִמְרוּ אִמְרֵי־אֵל וַעֲצַת עֶלְיוֹן נָאָצוּ׃", french: "" },
+      { hebrew: "וַיַּכְנַע בֶּעָמָל לִבָּם כָּשְׁלוּ וְאֵין עֹזֵר׃", french: "" },
+      { hebrew: "וַיִּזְעֲקוּ אֶל־יְהוָה בַּצַּר לָהֶם מִמְּצֻקוֹתֵיהֶם יוֹשִׁיעֵם׃", french: "" },
+      { hebrew: "יוֹצִיאֵם מֵחֹשֶׁךְ וְצַלְמָוֶת וּמוֹסְרוֹתֵיהֶם יְנַתֵּק׃", french: "" },
+      { hebrew: "יוֹדוּ לַיהוָה חַסְדּוֹ וְנִפְלְאוֹתָיו לִבְנֵי אָדָם׃", french: "" },
+      { hebrew: "כִּי־שִׁבַּר דַּלְתוֹת נְחֹשֶׁת וּבְרִיחֵי בַרְזֶל גִּדֵּעַ׃", french: "" },
+      { hebrew: "אֱוִלִים מִדֶּרֶךְ פִּשְׁעָם וּמֵעֲוֺנֹתֵיהֶם יִתְעַנּוּ׃", french: "" },
+      { hebrew: "כָּל־אֹכֶל תְּתַעֵב נַפְשָׁם וַיַּגִּיעוּ עַד־שַׁעֲרֵי מָוֶת׃", french: "" },
+      { hebrew: "וַיִּזְעֲקוּ אֶל־יְהוָה בַּצַּר לָהֶם מִמְּצֻקוֹתֵיהֶם יוֹשִׁיעֵם׃", french: "" },
+      { hebrew: "יִשְׁלַח דְּבָרוֹ וְיִרְפָּאֵם וִימַלֵּט מִשְּׁחִיתוֹתָם׃", french: "" },
+      { hebrew: "יוֹדוּ לַיהוָה חַסְדּוֹ וְנִפְלְאוֹתָיו לִבְנֵי אָדָם׃", french: "" },
+      { hebrew: "וְיִזְבְּחוּ זִבְחֵי תוֹדָה וִיסַפְּרוּ מַעֲשָׂיו בְּרִנָּה׃", french: "" },
+      { hebrew: "יוֹרְדֵי הַיָּם בָּאֳנִיּוֹת עֹשֵׂי מְלָאכָה בְּמַיִם רַבִּים׃", french: "" },
+      { hebrew: "הֵמָּה רָאוּ מַעֲשֵׂי יְהוָה וְנִפְלְאוֹתָיו בִּמְצוּלָה׃", french: "" },
+      { hebrew: "וַיֹּאמֶר וַיַּעֲמֵד רוּחַ סְעָרָה וַתְּרוֹמֵם גַּלָּיו׃", french: "" },
+      { hebrew: "יַעֲלוּ שָׁמַיִם יֵרְדוּ תְהוֹמוֹת נַפְשָׁם בְּרָעָה תִתְמוֹגָג׃", french: "" },
+      { hebrew: "יָחוֹגּוּ וְיָנוּעוּ כַּשִּׁכּוֹר וְכָל־חָכְמָתָם תִּתְבַּלָּע׃", french: "" },
+      { hebrew: "וַיִּצְעֲקוּ אֶל־יְהוָה בַּצַּר לָהֶם וּמִמְּצוּקֹתֵיהֶם יוֹצִיאֵם׃", french: "" },
+      { hebrew: "יָקֵם סְעָרָה לִדְמָמָה וַיֶּחֱשׁוּ גַּלֵּיהֶם׃", french: "" },
+      { hebrew: "וַיִּשְׂמְחוּ כִי־יִשְׁתֹּקוּ וַיַּנְחֵם אֶל־מְחוֹז חֶפְצָם׃", french: "" },
+      { hebrew: "יוֹדוּ לַיהוָה חַסְדּוֹ וְנִפְלְאוֹתָיו לִבְנֵי אָדָם׃", french: "" },
+      { hebrew: "וִירֹמְמוּהוּ בִּקְהַל־עָם וּבְמוֹשַׁב זְקֵנִים יְהַלְלוּהוּ׃", french: "" },
+      { hebrew: "יָשֵׂם נְהָרוֹת לְמִדְבָּר וּמֹצָאֵי מַיִם לְצִמָּאוֹן׃", french: "" },
+      { hebrew: "אֶרֶץ פְּרִי לִמְלֵחָה מֵרָעַת יֹשְׁבֵי בָהּ׃", french: "" },
+      { hebrew: "יָשֵׂם מִדְבָּר לַאֲגַם־מַיִם וְאֶרֶץ צִיָּה לְמֹצָאֵי מָיִם׃", french: "" },
+      { hebrew: "וַיּוֹשֶׁב שָׁם רְעֵבִים וַיְכוֹנְנוּ עִיר מוֹשָׁב׃", french: "" },
+      { hebrew: "וַיִּזְרְעוּ שָׂדוֹת וַיִּטְּעוּ כְרָמִים וַיַּעֲשׂוּ פְּרִי תְבוּאָה׃", french: "" },
+      { hebrew: "וַיְבָרֲכֵם וַיִּרְבּוּ מְאֹד וּבְהֶמְתָּם לֹא יַמְעִיט׃", french: "" },
+      { hebrew: "וַיִּמְעֲטוּ וַיָּשֹׁחוּ מֵעֹצֶר רָעָה וְיָגוֹן׃", french: "" },
+      { hebrew: "שֹׁפֵךְ בּוּז עַל־נְדִיבִים וַיַּתְעֵם בְּתֹהוּ לֹא־דָרֶךְ׃", french: "" },
+      { hebrew: "וַיְשַׂגֵּב אֶבְיוֹן מֵעוֹנִי וַיָּשֶׂם כַּצֹּאן מִשְׁפָּחוֹת׃", french: "" },
+      { hebrew: "יִרְאוּ יְשָׁרִים וְיִשְׂמָחוּ וְכָל־עַוְלָה קָפְצָה פִּיהָ׃", french: "" },
+      { hebrew: "מִי־חָכָם וְיִשְׁמָר־אֵלֶּה וְיִתְבּוֹנְנוּ חַסְדֵי יְהוָה׃", french: "" }
+    ]
+  },
+  {
+    number: 108,
+    verses: [
+      { hebrew: "שִׁיר מִזְמוֹר לְדָוִד׃", french: "" },
+      { hebrew: "נָכוֹן לִבִּי אֱלֹהִים אָשִׁירָה וַאֲזַמְּרָה אַף־כְּבוֹדִי׃", french: "" },
+      { hebrew: "עוּרָה הַנֵּבֶל וְכִנּוֹר אָעִירָה שָּׁחַר׃", french: "" },
+      { hebrew: "אוֹדְךָ בָעַמִּים יְהוָה וַאֲזַמֶּרְךָ בַּל־אֻמִּים׃", french: "" },
+      { hebrew: "כִּי־גָדוֹל מֵעַל־שָׁמַיִם חַסְדֶּךָ וְעַד־שְׁחָקִים אֲמִתֶּךָ׃", french: "" },
+      { hebrew: "רוּמָה עַל־שָׁמַיִם אֱלֹהִים וְעַל כָּל־הָאָרֶץ כְּבוֹדֶךָ׃", french: "" },
+      { hebrew: "לְמַעַן יֵחָלְצוּן יְדִידֶיךָ הוֹשִׁיעָה יְמִינְךָ וַעֲנֵנִי׃", french: "" },
+      { hebrew: "אֱלֹהִים דִּבֶּר בְּקָדְשׁוֹ אֶעְלֹזָה אֲחַלְּקָה שְׁכֶם וְעֵמֶק סֻכּוֹת אֲמַדֵּד׃", french: "" },
+      { hebrew: "לִי גִלְעָד לִי מְנַשֶּׁה וְאֶפְרַיִם מָעוֹז רֹאשִׁי יְהוּדָה מְחֹקְקִי׃", french: "" },
+      { hebrew: "מוֹאָב סִיר רַחְצִי עַל־אֱדוֹם אַשְׁלִיךְ נַעֲלִי עֲלֵי־פְלֶשֶׁת אֶתְרוֹעָע׃", french: "" },
+      { hebrew: "מִי יֹבִלֵנִי עִיר מִבְצָר מִי נָחַנִי עַד־אֱדוֹם׃", french: "" },
+      { hebrew: "הֲלֹא־אֱלֹהִים זְנַחְתָּנוּ וְלֹא־תֵצֵא אֱלֹהִים בְּצִבְאֹתֵינוּ׃", french: "" },
+      { hebrew: "הָבָה־לָּנוּ עֶזְרָת מִצָּר וְשָׁוְא תְּשׁוּעַת אָדָם׃", french: "" },
+      { hebrew: "בֵּאלֹהִים נַעֲשֶׂה־חָיִל וְהוּא יָבוּס צָרֵינוּ׃", french: "" }
+    ]
+  },
+  {
+    number: 109,
+    verses: [
+      { hebrew: "לַמְנַצֵּחַ לְדָוִד מִזְמוֹר אֱלֹהֵי תְהִלָּתִי אַל־תֶּחֱרַשׁ׃", french: "" },
+      { hebrew: "כִּי פִי רָשָׁע וּפִי־מִרְמָה עָלַי פָּתָחוּ דִּבְּרוּ אִתִּי לְשׁוֹן שָׁקֶר׃", french: "" },
+      { hebrew: "וְדִבְרֵי שִׂנְאָה סְבָבוּנִי וַיִּלָּחֲמוּנִי חִנָּם׃", french: "" },
+      { hebrew: "תַּחַת־אַהֲבָתִי יִשְׂטְנוּנִי וַאֲנִי תְפִלָּה׃", french: "" },
+      { hebrew: "וַיָּשִׂימוּ עָלַי רָעָה תַּחַת טוֹבָה וְשִׂנְאָה תַּחַת אַהֲבָתִי׃", french: "" },
+      { hebrew: "הַפְקֵד עָלָיו רָשָׁע וְשָׂטָן יַעֲמֹד עַל־יְמִינוֹ׃", french: "" },
+      { hebrew: "בְּהִשָּׁפְטוֹ יֵצֵא רָשָׁע וּתְפִלָּתוֹ תִּהְיֶה לַחֲטָאָה׃", french: "" },
+      { hebrew: "יִהְיוּ־יָמָיו מְעַטִּים פְּקֻדָּתוֹ יִקַּח אַחֵר׃", french: "" },
+      { hebrew: "יִהְיוּ־בָנָיו יְתוֹמִים וְאִשְׁתּוֹ אַלְמָנָה׃", french: "" },
+      { hebrew: "וְנוֹעַ יָנוּעוּ בָנָיו וְשִׁאֵלוּ וְדָרְשׁוּ מֵחָרְבוֹתֵיהֶם׃", french: "" },
+      { hebrew: "יְנַקֵּשׁ נוֹשֶׁה לְכָל־אֲשֶׁר־לוֹ וְיָבֹזּוּ זָרִים יְגִיעוֹ׃", french: "" },
+      { hebrew: "אַל־יְהִי־לוֹ מֹשֵׁךְ חָסֶד וְאַל־יְהִי חוֹנֵן לִיתוֹמָיו׃", french: "" },
+      { hebrew: "יְהִי־אַחֲרִיתוֹ לְהַכְרִית בְּדוֹר אַחֵר יִמַּח שְׁמָם׃", french: "" },
+      { hebrew: "יִזָּכֵר עֲוֺן אֲבֹתָיו אֶל־יְהוָה וְחַטַּאת אִמּוֹ אַל־תִּמָּח׃", french: "" },
+      { hebrew: "יִהְיוּ נֶגֶד־יְהוָה תָּמִיד וְיַכְרֵת מֵאֶרֶץ זִכְרָם׃", french: "" },
+      { hebrew: "יַעַן אֲשֶׁר לֹא זָכַר עֲשׂוֹת חָסֶד וַיִּרְדֹּף אִישׁ־עָנִי וְאֶבְיוֹן וְנִכְאֵה לֵבָב לְמוֹתֵת׃", french: "" },
+      { hebrew: "וַיֶּאֱהַב קְלָלָה וַתְּבוֹאֵהוּ וְלֹא־חָפֵץ בִּבְרָכָה וַתִּרְחַק מִמֶּנּוּ׃", french: "" },
+      { hebrew: "וַיִּלְבַּשׁ קְלָלָה כְּמַדּוֹ וַתָּבֹא כַמַּיִם בְּקִרְבּוֹ וְכַשֶּׁמֶן בְּעַצְמוֹתָיו׃", french: "" },
+      { hebrew: "תְּהִי־לוֹ כְּבֶגֶד יַעְטֶה וּלְמֵזַח תָּמִיד יַחְגְּרֶהָ׃", french: "" },
+      { hebrew: "זֹאת פְּעֻלַּת שֹׂטְנַי מֵאֵת יְהוָה וְהַדֹּבְרִים רָע עַל־נַפְשִׁי׃", french: "" },
+      { hebrew: "וְאַתָּה יְהוִה אֲדֹנָי עֲ‍שֵׂה־אִתִּי לְמַעַן שְׁמֶךָ כִּי־טוֹב חַסְדְּךָ הַצִּילֵנִי׃", french: "" },
+      { hebrew: "כִּי־עָנִי וְאֶבְיוֹן אָנֹכִי וְלִבִּי חָלַל בְּקִרְבִּי׃", french: "" },
+      { hebrew: "כְּצֵל־כִּנְטוֹתוֹ נֶהֱלָכְתִּי נִנְעַרְתִּי כָּאַרְבֶּה׃", french: "" },
+      { hebrew: "בִּרְכַּי כָּשְׁלוּ מִצּוֹם וּבְשָׂרִי כָּחַשׁ מִשָּׁמֶן׃", french: "" },
+      { hebrew: "וַאֲנִי הָיִיתִי חֶרְפָּה לָהֶם יִרְאוּנִי יְנִיעוּן רֹאשָׁם׃", french: "" },
+      { hebrew: "עָזְרֵנִי יְהוָה אֱלֹהָי הוֹשִׁיעֵנִי כְחַסְדֶּךָ׃", french: "" },
+      { hebrew: "וְיֵדְעוּ כִּי־יָדְךָ זֹּאת אַתָּה יְהוָה עֲשִׂיתָהּ׃", french: "" },
+      { hebrew: "יְקַלְלוּ־הֵמָּה וְאַתָּה תְבָרֵךְ קָמוּ וַיֵּבֹשׁוּ וְעַבְדְּךָ יִשְׂמָח׃", french: "" },
+      { hebrew: "יִלְבְּשׁוּ שׂוֹטְנַי כְּלִמָּה וְיַעֲטוּ כַמְעִיל בָּשְׁתָּם׃", french: "" },
+      { hebrew: "אוֹדֶה יְהוָה מְאֹד בְּפִי וּבְתוֹךְ רַבִּים אֲהַלְלֶנּוּ׃", french: "" },
+      { hebrew: "כִּי־יַעֲמֹד לִימִין אֶבְיוֹן לְהוֹשִׁיעַ מִשֹּׁפְטֵי נַפְשׁוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 110,
+    verses: [
+      { hebrew: "לְדָוִד מִזְמוֹר נְאֻם יְהוָה לַאדֹנִי שֵׁב לִימִינִי עַד־אָשִׁית אֹיְבֶיךָ הֲדֹם לְרַגְלֶיךָ׃", french: "" },
+      { hebrew: "מַטֵּה־עֻזְּךָ יִשְׁלַח יְהוָה מִצִּיּוֹן רְדֵה בְּקֶרֶב אֹיְבֶיךָ׃", french: "" },
+      { hebrew: "עַמְּךָ נְדָבֹת בְּיוֹם חֵילֶךָ בְּהַדְרֵי־קֹדֶשׁ מֵרֶחֶם מִשְׁחָר לְךָ טַל יַלְדֻתֶיךָ׃", french: "" },
+      { hebrew: "נִשְׁבַּע יְהוָה וְלֹא יִנָּחֵם אַתָּה־כֹהֵן לְעוֹלָם עַל־דִּבְרָתִי מַלְכִּי־צֶדֶק׃", french: "" },
+      { hebrew: "אֲדֹנָי עַל־יְמִינְךָ מָחַץ בְּיוֹם־אַפּוֹ מְלָכִים׃", french: "" },
+      { hebrew: "יָדִין בַּגּוֹיִם מָלֵא גְוִיּוֹת מָחַץ רֹאשׁ עַל־אֶרֶץ רַבָּה׃", french: "" },
+      { hebrew: "מִנַּחַל בַּדֶּרֶךְ יִשְׁתֶּה עַל־כֵּן יָרִים רֹאשׁ׃", french: "" }
+    ]
+  },
+  {
+    number: 111,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ אוֹדֶה יְהוָה בְּכָל־לֵבָב בְּסוֹד יְשָׁרִים וְעֵדָה׃", french: "" },
+      { hebrew: "גְּדֹלִים מַעֲשֵׂי יְהוָה דְּרוּשִׁים לְכָל־חֶפְצֵיהֶם׃", french: "" },
+      { hebrew: "הוֹד־וְהָדָר פָּעֳלוֹ וְצִדְקָתוֹ עֹמֶדֶת לָעַד׃", french: "" },
+      { hebrew: "זֵכֶר עָשָׂה לְנִפְלְאֹתָיו חַנּוּן וְרַחוּם יְהוָה׃", french: "" },
+      { hebrew: "טֶרֶף נָתַן לִירֵאָיו יִזְכֹּר לְעוֹלָם בְּרִיתוֹ׃", french: "" },
+      { hebrew: "כֹּחַ מַעֲשָׂיו הִגִּיד לְעַמּוֹ לָתֵת לָהֶם נַחֲלַת גּוֹיִם׃", french: "" },
+      { hebrew: "מַעֲשֵׂי יָדָיו אֱמֶת וּמִשְׁפָּט נֶאֱמָנִים כָּל־פִּקּוּדָיו׃", french: "" },
+      { hebrew: "סְמוּכִים לָעַד לְעוֹלָם עֲשׂוּיִם בֶּאֱמֶת וְיָשָׁר׃", french: "" },
+      { hebrew: "פְּדוּת שָׁלַח לְעַמּוֹ צִוָּה־לְעוֹלָם בְּרִיתוֹ קָדוֹשׁ וְנוֹרָא שְׁמוֹ׃", french: "" },
+      { hebrew: "רֵאשִׁית חָכְמָה יִרְאַת יְהוָה שֵׂכֶל טוֹב לְכָל־עֹשֵׂיהֶם תְּהִלָּתוֹ עֹמֶדֶת לָעַד׃", french: "" }
+    ]
+  },
+  {
+    number: 112,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ אַשְׁרֵי־אִישׁ יָרֵא אֶת־יְהוָה בְּמִצְוֺתָיו חָפֵץ מְאֹד׃", french: "" },
+      { hebrew: "גִּבּוֹר בָּאָרֶץ יִהְיֶה זַרְעוֹ דּוֹר יְשָׁרִים יְבֹרָךְ׃", french: "" },
+      { hebrew: "הוֹן־וָעֹשֶׁר בְּבֵיתוֹ וְצִדְקָתוֹ עֹמֶדֶת לָעַד׃", french: "" },
+      { hebrew: "זָרַח בַּחֹשֶׁךְ אוֹר לַיְשָׁרִים חַנּוּן וְרַחוּם וְצַדִּיק׃", french: "" },
+      { hebrew: "טוֹב־אִישׁ חוֹנֵן וּמַלְוֶה יְכַלְכֵּל דְּבָרָיו בְּמִשְׁפָּט׃", french: "" },
+      { hebrew: "כִּי־לְעוֹלָם לֹא־יִמּוֹט לְזֵכֶר עוֹלָם יִהְיֶה צַדִּיק׃", french: "" },
+      { hebrew: "מִשְּׁמוּעָה רָעָה לֹא יִירָא נָכוֹן לִבּוֹ בָּטֻחַ בַּיהוָה׃", french: "" },
+      { hebrew: "סָמוּךְ לִבּוֹ לֹא יִירָא עַד אֲשֶׁר־יִרְאֶה בְצָרָיו׃", french: "" },
+      { hebrew: "פִּזַּר נָתַן לָאֶבְיוֹנִים צִדְקָתוֹ עֹמֶדֶת לָעַד קַרְנוֹ תָּרוּם בְּכָבוֹד׃", french: "" },
+      { hebrew: "רָשָׁע יִרְאֶה וְכָעָס שִׁנָּיו יַחֲרֹק וְנָמָס תַּאֲוַת רְשָׁעִים תֹּאבֵד׃", french: "" }
+    ]
+  },
+  {
+    number: 113,
+    verses: [
+      { hebrew: "הַלְלוּ יָהּ הַלְלוּ עַבְדֵי יְהוָה הַלְלוּ אֶת־שֵׁם יְהוָה׃", french: "" },
+      { hebrew: "יְהִי שֵׁם יְהוָה מְבֹרָךְ מֵעַתָּה וְעַד־עוֹלָם׃", french: "" },
+      { hebrew: "מִמִּזְרַח־שֶׁמֶשׁ עַד־מְבוֹאוֹ מְהֻלָּל שֵׁם יְהוָה׃", french: "" },
+      { hebrew: "רָם עַל־כָּל־גּוֹיִם יְהוָה עַל הַשָּׁמַיִם כְּבוֹדוֹ׃", french: "" },
+      { hebrew: "מִי כַּיהוָה אֱלֹהֵינוּ הַמַּגְבִּיהִי לָשָׁבֶת׃", french: "" },
+      { hebrew: "הַמַּשְׁפִּילִי לִרְאוֹת בַּשָּׁמַיִם וּבָאָרֶץ׃", french: "" },
+      { hebrew: "מְקִימִי מֵעָפָר דָּל מֵאַשְׁפֹּת יָרִים אֶבְיוֹן׃", french: "" },
+      { hebrew: "לְהוֹשִׁיבִי עִם־נְדִיבִים עִם נְדִיבֵי עַמּוֹ׃", french: "" },
+      { hebrew: "מוֹשִׁיבִי עֲקֶרֶת הַבַּיִת אֵם־הַבָּנִים שְׂמֵחָה הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 114,
+    verses: [
+      { hebrew: "בְּצֵאת יִשְׂרָאֵל מִמִּצְרָיִם בֵּית יַעֲקֹב מֵעַם לֹעֵז׃", french: "" },
+      { hebrew: "הָיְתָה יְהוּדָה לְקָדְשׁוֹ יִשְׂרָאֵל מַמְשְׁלוֹתָיו׃", french: "" },
+      { hebrew: "הַיָּם רָאָה וַיָּנֹס הַיַּרְדֵּן יִסֹּב לְאָחוֹר׃", french: "" },
+      { hebrew: "הֶהָרִים רָקְדוּ כְאֵילִים גְּבָעוֹת כִּבְנֵי־צֹאן׃", french: "" },
+      { hebrew: "מַה־לְּךָ הַיָּם כִּי תָנוּס הַיַּרְדֵּן תִּסֹּב לְאָחוֹר׃", french: "" },
+      { hebrew: "הֶהָרִים תִּרְקְדוּ כְאֵילִים גְּבָעוֹת כִּבְנֵי־צֹאן׃", french: "" },
+      { hebrew: "מִלִּפְנֵי אָדוֹן חוּלִי אָרֶץ מִלִּפְנֵי אֱלוֹהַּ יַעֲקֹב׃", french: "" },
+      { hebrew: "הַהֹפְכִי הַצּוּר אֲגַם־מָיִם חַלָּמִישׁ לְמַעְיְנוֹ־מָיִם׃", french: "" }
+    ]
+  },
+  {
+    number: 115,
+    verses: [
+      { hebrew: "לֹא לָנוּ יְהוָה לֹא לָנוּ כִּי־לְשִׁמְךָ תֵּן כָּבוֹד עַל־חַסְדְּךָ עַל־אֲמִתֶּךָ׃", french: "" },
+      { hebrew: "לָמָּה יֹאמְרוּ הַגּוֹיִם אַיֵּה־נָא אֱלֹהֵיהֶם׃", french: "" },
+      { hebrew: "וֵאלֹהֵינוּ בַשָּׁמָיִם כֹּל אֲשֶׁר־חָפֵץ עָשָׂה׃", french: "" },
+      { hebrew: "עֲ‍צַבֵּיהֶם כֶּסֶף וְזָהָב מַעֲשֵׂה יְדֵי אָדָם׃", french: "" },
+      { hebrew: "פֶּה־לָהֶם וְלֹא יְדַבֵּרוּ עֵינַיִם לָהֶם וְלֹא יִרְאוּ׃", french: "" },
+      { hebrew: "אָזְנַיִם לָהֶם וְלֹא יִשְׁמָעוּ אַף לָהֶם וְלֹא יְרִיחוּן׃", french: "" },
+      { hebrew: "יְדֵיהֶם וְלֹא יְמִישׁוּן רַגְלֵיהֶם וְלֹא יְהַלֵּכוּ לֹא־יֶהְגּוּ בִּגְרוֹנָם׃", french: "" },
+      { hebrew: "כְּמוֹהֶם יִהְיוּ עֹשֵׂיהֶם כֹּל אֲשֶׁר־בֹּטֵחַ בָּהֶם׃", french: "" },
+      { hebrew: "יִשְׂרָאֵל בְּטַח בַּיהוָה עֶזְרָם וּמָגִנָּם הוּא׃", french: "" },
+      { hebrew: "בֵּית אַהֲרֹן בִּטְחוּ בַיהוָה עֶזְרָם וּמָגִנָּם הוּא׃", french: "" },
+      { hebrew: "יִרְאֵי יְהוָה בִּטְחוּ בַיהוָה עֶזְרָם וּמָגִנָּם הוּא׃", french: "" },
+      { hebrew: "יְהוָה זְכָרָנוּ יְבָרֵךְ יְבָרֵךְ אֶת־בֵּית יִשְׂרָאֵל יְבָרֵךְ אֶת־בֵּית אַהֲרֹן׃", french: "" },
+      { hebrew: "יְבָרֵךְ יִרְאֵי יְהוָה הַקְּטַנִּים עִם־הַגְּדֹלִים׃", french: "" },
+      { hebrew: "יֹסֵף יְהוָה עֲלֵיכֶם עֲלֵיכֶם וְעַל־בְּנֵיכֶם׃", french: "" },
+      { hebrew: "בְּרוּכִים אַתֶּם לַיהוָה עֹשֵׂה שָׁמַיִם וָאָרֶץ׃", french: "" },
+      { hebrew: "הַשָּׁמַיִם שָׁמַיִם לַיהוָה וְהָאָרֶץ נָתַן לִבְנֵי־אָדָם׃", french: "" },
+      { hebrew: "לֹא הַמֵּתִים יְהַלְלוּ־יָהּ וְלֹא כָּל־יֹרְדֵי דוּמָה׃", french: "" },
+      { hebrew: "וַאֲנַחְנוּ נְבָרֵךְ יָהּ מֵעַתָּה וְעַד־עוֹלָם הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 116,
+    verses: [
+      { hebrew: "אָהַבְתִּי כִּי־יִשְׁמַע יְהוָה אֶת־קוֹלִי תַּחֲנוּנָי׃", french: "" },
+      { hebrew: "כִּי־הִטָּה אָזְנוֹ לִי וּבְיָמַי אֶקְרָא׃", french: "" },
+      { hebrew: "אֲפָפוּנִי חֶבְלֵי־מָוֶת וּמְצָרֵי שְׁאוֹל מְצָאוּנִי צָרָה וְיָגוֹן אֶמְצָא׃", french: "" },
+      { hebrew: "וּבְשֵׁם־יְהוָה אֶקְרָא אָנָּה יְהוָה מַלְּטָה נַפְשִׁי׃", french: "" },
+      { hebrew: "חַנּוּן יְהֹוָה וְצַדִּיק וֵאלֹהֵינוּ מְרַחֵם׃", french: "" },
+      { hebrew: "שֹׁמֵר פְּתָאיִם יְהֹוָה דַּלּוֹתִי וְלִי יְהוֹשִׁיעַ׃", french: "" },
+      { hebrew: "שׁוּבִי נַפְשִׁי לִמְנוּחָיְכִי כִּי־יְהוָה גָּמַל עָלָיְכִי׃", french: "" },
+      { hebrew: "כִּי חִלַּצְתָּ נַפְשִׁי מִמָּוֶת אֶת־עֵינִי מִן־דִּמְעָה אֶת־רַגְלִי מִדֶּחִי׃", french: "" },
+      { hebrew: "אֶתְהַלֵּךְ לִפְנֵי יְהוָה בְּאַרְצוֹת הַחַיִּים׃", french: "" },
+      { hebrew: "הֶאֱמַנְתִּי כִּי אֲדַבֵּר אֲנִי עָנִיתִי מְאֹד׃", french: "" },
+      { hebrew: "אֲנִי אָמַרְתִּי בְחָפְזִי כָּל־הָאָדָם כֹּזֵב׃", french: "" },
+      { hebrew: "מָה־אָשִׁיב לַיהוָה כָּל־תַּגְמוּלוֹהִי עָלָי׃", french: "" },
+      { hebrew: "כּוֹס־יְשׁוּעוֹת אֶשָּׂא וּבְשֵׁם יְהוָה אֶקְרָא׃", french: "" },
+      { hebrew: "נְדָרַי לַיהוָה אֲשַׁלֵּם נֶגְדָה־נָּא לְכָל־עַמּוֹ׃", french: "" },
+      { hebrew: "יָקָר בְּעֵינֵי יְהוָה הַמָּוְתָה לַחֲסִידָיו׃", french: "" },
+      { hebrew: "אָנָּה יְהוָה כִּי־אֲנִי עַבְדֶּךָ אֲ‍נִי־עַבְדְּךָ בֶּן־אֲמָתֶךָ פִּתַּחְתָּ לְמוֹסֵרָי׃", french: "" },
+      { hebrew: "לְךָ־אֶזְבַּח זֶבַח תּוֹדָה וּבְשֵׁם יְהוָה אֶקְרָא׃", french: "" },
+      { hebrew: "נְדָרַי לַיהוָה אֲשַׁלֵּם נֶגְדָה־נָּא לְכָל־עַמּוֹ׃", french: "" },
+      { hebrew: "בְּחַצְרוֹת בֵּית יְהוָה בְּתוֹכֵכִי יְרוּשָׁלִָם הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 117,
+    verses: [
+      { hebrew: "הַלְלוּ אֶת־יְהוָה כָּל־גּוֹיִם שַׁבְּחוּהוּ כָּל־הָאֻמִּים׃", french: "" },
+      { hebrew: "כִּי גָבַר עָלֵינוּ חַסְדּוֹ וֶאֱמֶת־יְהוָה לְעוֹלָם הַלְלוּ־יָהּ׃", french: "" }
+    ]
+  },
+  {
+    number: 118,
+    verses: [
+      { hebrew: "הוֹדוּ לַיהוָה כִּי־טוֹב כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "יֹאמַר־נָא יִשְׂרָאֵל כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "יֹאמְרוּ־נָא בֵית־אַהֲרֹן כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "יֹאמְרוּ־נָא יִרְאֵי יְהוָה כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" },
+      { hebrew: "מִן־הַמֵּצַר קָרָאתִי יָּהּ עָנָנִי בַמֶּרְחָב יָהּ׃", french: "" },
+      { hebrew: "יְהוָה לִי לֹא אִירָא מַה־יַּעֲשֶׂה לִי אָדָם׃", french: "" },
+      { hebrew: "יְהוָה לִי בְּעֹזְרָי וַאֲנִי אֶרְאֶה בְשֹׂנְאָי׃", french: "" },
+      { hebrew: "טוֹב לַחֲסוֹת בַּיהוָה מִבְּטֹחַ בָּאָדָם׃", french: "" },
+      { hebrew: "טוֹב לַחֲסוֹת בַּיהוָה מִבְּטֹחַ בִּנְדִיבִים׃", french: "" },
+      { hebrew: "כָּל־גּוֹיִם סְבָבוּנִי בְּשֵׁם יְהוָה כִּי אֲמִילַם׃", french: "" },
+      { hebrew: "סַבּוּנִי גַם־סְבָבוּנִי בְּשֵׁם יְהוָה כִּי אֲמִילַם׃", french: "" },
+      { hebrew: "סַבּוּנִי כִדְבוֹרִים דֹּעֲכוּ כְּאֵשׁ קוֹצִים בְּשֵׁם יְהוָה כִּי אֲמִילַם׃", french: "" },
+      { hebrew: "דַּחֹה דְחִיתַנִי לִנְפֹּל וַיהוָה עֲזָרָנִי׃", french: "" },
+      { hebrew: "עָזִּי וְזִמְרָת יָהּ וַיְהִי־לִי לִישׁוּעָה׃", french: "" },
+      { hebrew: "קוֹל רִנָּה וִישׁוּעָה בְּאָהֳלֵי צַדִּיקִים יְמִין יְהוָה עֹשָׂה חָיִל׃", french: "" },
+      { hebrew: "יְמִין יְהוָה רוֹמֵמָה יְמִין יְהוָה עֹשָׂה חָיִל׃", french: "" },
+      { hebrew: "לֹא אָמוּת כִּי־אֶחְיֶה וַאֲסַפֵּר מַעֲשֵׂי יָהּ׃", french: "" },
+      { hebrew: "יַסֹּר יִסְּרַנִּי יָּהּ וְלַמָּוֶת לֹא נְתָנָנִי׃", french: "" },
+      { hebrew: "פִּתְחוּ־לִי שַׁעֲרֵי־צֶדֶק אָבֹא־בָם אוֹדֶה יָהּ׃", french: "" },
+      { hebrew: "זֶה־הַשַּׁעַר לַיהוָה צַדִּיקִים יָבֹאוּ בוֹ׃", french: "" },
+      { hebrew: "אוֹדְךָ כִּי עֲנִיתָנִי וַתְּהִי־לִי לִישׁוּעָה׃", french: "" },
+      { hebrew: "אֶבֶן מָאֲסוּ הַבּוֹנִים הָיְתָה לְרֹאשׁ פִּנָּה׃", french: "" },
+      { hebrew: "מֵאֵת יְהוָה הָיְתָה זֹּאת הִיא נִפְלָאת בְּעֵינֵינוּ׃", french: "" },
+      { hebrew: "זֶה־הַיּוֹם עָשָׂה יְהוָה נָגִילָה וְנִשְׂמְחָה בוֹ׃", french: "" },
+      { hebrew: "אָנָּא יְהוָה הוֹשִׁיעָה נָּא אָנָּא יְהוָה הַצְלִיחָה נָּא׃", french: "" },
+      { hebrew: "בָּרוּךְ הַבָּא בְּשֵׁם יְהוָה בֵּרַכְנוּכֶם מִבֵּית יְהוָה׃", french: "" },
+      { hebrew: "אֵל יְהוָה וַיָּאֶר לָנוּ אִסְרוּ־חַג בַּעֲבֹתִים עַד־קַרְנוֹת הַמִּזְבֵּחַ׃", french: "" },
+      { hebrew: "אֵלִי אַתָּה וְאוֹדֶךָּ אֱלֹהַי אֲרוֹמְמֶךָּ׃", french: "" },
+      { hebrew: "הוֹדוּ לַיהוָה כִּי־טוֹב כִּי לְעוֹלָם חַסְדּוֹ׃", french: "" }
+    ]
+  },
+  {
+    number: 119,
+    verses: [
+      { hebrew: "אַשְׁרֵי תְמִֽימֵי־דָרֶךְ הַהֹלְכִים בְּתוֹרַת יְהֹוָֽה׃", french: "Heureux ceux dont la voie est intègre, qui suivent la Loi de l'Éternel!" },
+      { hebrew: "אַשְׁרֵי נֹצְרֵי עֵדֹתָיו בְּכָל־לֵב יִדְרְשֽׁוּהוּ׃", french: "Heureux ceux qui respectent ses statuts, le recherchent de tout leur cœur," },
+      { hebrew: "אַף לֹא־פָעֲלוּ עַוְלָה בִּדְרָכָיו הָלָֽכוּ׃", french: "qui, se gardant bien de commettre aucune injustice, marchent dans ses voies!" },
+      { hebrew: "אַתָּה צִוִּיתָה פִקֻּדֶיךָ לִשְׁמֹר מְאֹֽד׃", french: "Tu as promulgué tes ordonnances, pour qu'on les observe strictement." },
+      { hebrew: "אַחֲלַי יִכֹּנוּ דְרָכָי לִשְׁמֹר חֻקֶּֽיךָ׃", french: "Ah! puissent mes pas être fermes, pour que j'observe tes préceptes!" },
+      { hebrew: "אָז לֹא־אֵבוֹשׁ בְּהַבִּיטִי אֶל־כָּל־מִצְוֹתֶֽיךָ׃", french: "Alors, je ne serai point déçu, en portant mes regards sur tous tes commandements." },
+      { hebrew: "אוֹדְךָ בְּיֹשֶׁר לֵבָב בְּלָמְדִי מִשְׁפְּטֵי צִדְקֶֽךָ׃", french: "Je te rendrai grâce en toute droiture de cœur, en m'instruisant des règles de ta justice." },
+      { hebrew: "אֶת־חֻקֶּיךָ אֶשְׁמֹר אַֽל־תַּעַזְבֵנִי עַד־מְאֹֽד׃", french: "Tes statuts, je les observerai: ne m'abandonne en aucun temps." },
+      { hebrew: "בַּמֶּה יְזַכֶּה־נַּעַר אֶת־אָרְחוֹ לִשְׁמֹר כִּדְבָרֶֽךָ׃", french: "Comment le jeune homme rendra-t-il pure sa conduite? En se conformant à tes paroles." },
+      { hebrew: "בְּכָל־לִבִּי דְרַשְׁתִּיךָ אַל־תַּשְׁגֵּנִי מִמִּצְוֹתֶֽיךָ׃", french: "De tout mon cœur je m'enquiers de toi, ne me laisse pas dévier de tes prescriptions." },
+      { hebrew: "בְּלִבִּי צָפַנְתִּי אִמְרָתֶךָ לְמַעַן לֹא אֶחֱטָא־לָֽךְ׃", french: "En mon sein j'ai déposé tes instructions, pour ne pas faillir à ton égard." },
+      { hebrew: "בָּרוּךְ אַתָּה יְהֹוָה לַמְּדֵנִי חֻקֶּֽיךָ׃", french: "Béni sois-tu, ô Éternel! Enseigne-moi tes préceptes." },
+      { hebrew: "בִּשְׂפָתַי סִפַּרְתִּי כֹּל מִשְׁפְּטֵי־פִֽיךָ׃", french: "De mes lèvres je proclame toutes les règles sorties de ta bouche." },
+      { hebrew: "בְּדֶרֶךְ עֵדְוֹתֶיךָ שַּׂשְׂתִּי כְּעַל כָּל־הֽוֹן׃", french: "Dans le chemin tracé par tes témoignages je trouve ma joie, comme si c'était le comble de la richesse." },
+      { hebrew: "בְּפִקּוּדֶיךָ אָשִׂיחָה וְאַבִּיטָה אֹֽרְחֹתֶֽיךָ׃", french: "Je m'entretiens de tes commandements, et je contemple tes voies." },
+      { hebrew: "בְּחֻקֹּתֶיךָ אֶֽשְׁתַּעֲשָׁע לֹא אֶשְׁכַּח דְּבָרֶֽךָ׃", french: "Je me délecte de tes préceptes, et n'oublie point tes paroles." },
+      { hebrew: "גְּמֹל עַל־עַבְדְּךָ אֶחְיֶה וְאֶשְׁמְרָה דְבָרֶֽךָ׃", french: "Accorde tes bienfaits à ton serviteur, pour que je vive et observe tes paroles." },
+      { hebrew: "גַּל־עֵינַי וְאַבִּיטָה נִפְלָאוֹת מִתּוֹרָתֶֽךָ׃", french: "Dessille-moi les yeux, pour que je puisse contempler les merveilles issues de ta Loi." },
+      { hebrew: "גֵּר אָנֹכִי בָאָרֶץ אַל־תַּסְתֵּר מִמֶּנִּי מִצְוֹתֶֽיךָ׃", french: "Je suis un simple étranger sur la terre, ne me tiens pas cachés tes commandements." },
+      { hebrew: "גָּרְסָה נַפְשִׁי לְתַאֲבָה אֶֽל־מִשְׁפָּטֶיךָ בְכָל־עֵֽת׃", french: "Mon âme est travaillée du désir de tes règlements, à toute époque." },
+      { hebrew: "גָּעַרְתָּ זֵדִים אֲרוּרִים הַשֹּׁגִים מִמִּצְוֹתֶֽיךָ׃", french: "Toi, tu réprouves les arrogants maudits, qui se fourvoient loin de tes commandements." },
+      { hebrew: "גַּל מֵעָלַי חֶרְפָּה וָבוּז כִּי עֵדֹתֶיךָ נָצָֽרְתִּי׃", french: "Affranchis-moi de la honte et du mépris, car je respecte tes témoignages." },
+      { hebrew: "גַּם יָשְׁבוּ שָׂרִים בִּי נִדְבָּרוּ עַבְדְּךָ יָשִׂיחַ בְּחֻקֶּֽיךָ׃", french: "Dussent même les grands prendre siège et déblatérer contre moi, ton serviteur méditera tes lois." },
+      { hebrew: "גַּֽם־עֵדֹתֶיךָ שַׁעֲשֻׁעָי אַנְשֵׁי עֲצָתִֽי׃", french: "Oui, tes témoignages sont mes délices, mes meilleurs conseillers." },
+      { hebrew: "דָּבְקָה לֶעָפָר נַפְשִׁי חַיֵּנִי כִּדְבָרֶֽךָ׃", french: "Mon âme est collée à la poussière, conserve-moi en vie, suivant ta parole." },
+      { hebrew: "דְּרָכַי סִפַּרְתִּי וַֽתַּעֲנֵנִי לַמְּדֵנִי חֻקֶּֽיךָ׃", french: "J'ai exposé ma conduite, et tu m'as répondu; enseigne-moi tes lois." },
+      { hebrew: "דֶּרֶךְ־פִּקּוּדֶיךָ הֲבִינֵנִי וְאָשִׂיחָה בְּנִפְלְאוֹתֶֽיךָ׃", french: "Laisse-moi comprendre le chemin de tes préceptes, et je réfléchirai à tes merveilles." },
+      { hebrew: "דָּלְפָה נַפְשִׁי מִתּוּגָה קַיְּמֵנִי כִּדְבָרֶֽךָ׃", french: "Mon âme, de chagrin, se fond en larmes, redresse-moi, selon ta parole." },
+      { hebrew: "דֶּֽרֶךְ־שֶׁקֶר הָסֵר מִמֶּנִּי וְֽתוֹרָתְךָ חָנֵּֽנִי׃", french: "Eloigne de moi le chemin du mensonge, gratifie-moi de ta Loi." },
+      { hebrew: "דֶּֽרֶךְ־אֱמוּנָה בָחָרְתִּי מִשְׁפָּטֶיךָ שִׁוִּֽיתִי׃", french: "J'ai choisi la voie de la fidélité, placé tes règles sous mes regards." },
+      { hebrew: "דָּבַקְתִּי בְעֵדְוֹתֶיךָ יְהֹוָה אַל־תְּבִישֵֽׁנִי׃", french: "Je suis attaché à tes statuts, Seigneur, ne m'inflige aucune déception." },
+      { hebrew: "דֶּֽרֶךְ־מִצְוֹתֶיךָ אָרוּץ כִּי תַרְחִיב לִבִּֽי׃", french: "Je suivrai avec empressement le chemin de tes préceptes, car tu élargis mon cœur." },
+      { hebrew: "הוֹרֵנִי יְהֹוָה דֶּרֶךְ חֻקֶּיךָ וְאֶצְּרֶנָּה עֵֽקֶב׃", french: "Enseigne-moi le chemin de tes préceptes, je veux en suivre les traces." },
+      { hebrew: "הֲבִינֵנִי וְאֶצְּרָה תוֹרָתֶךָ וְאֶשְׁמְרֶנָּה בְכָל־לֵֽב׃", french: "Donne-moi l'intelligence pour que je garde ta loi et l'observe de tout mon cœur." },
+      { hebrew: "הַדְרִיכֵנִי בִּנְתִיב מִצְוֹתֶיךָ כִּי־בוֹ חָפָֽצְתִּי׃", french: "Dirige-moi dans le sentier de tes commandements, car j'y trouve ma satisfaction." },
+      { hebrew: "הַט־לִבִּי אֶל־עֵדְוֹתֶיךָ וְאַל אֶל־בָּֽצַע׃", french: "Incline mon cœur vers tes vérités, et non vers un vain lucre." },
+      { hebrew: "הַעֲבֵר עֵינַי מֵרְאוֹת שָׁוְא בִּדְרָכֶךָ חַיֵּֽנִי׃", french: "Détourne mes yeux de la vue des choses frivoles, fais-moi vivre dans tes voies." },
+      { hebrew: "הָקֵם לְעַבְדְּךָ אִמְרָתֶךָ אֲשֶׁר לְיִרְאָתֶֽךָ׃", french: "Accomplis ton dire en faveur de ton serviteur, car [il amène] à te révérer." },
+      { hebrew: "הַעֲבֵר חֶרְפָּתִי אֲשֶׁר יָגֹרְתִּי כִּי מִשְׁפָּטֶיךָ טוֹבִֽים׃", french: "Ecarte de moi la honte que je redoute, car tes jugements sont précieux." },
+      { hebrew: "הִנֵּה תָּאַבְתִּי לְפִקֻּדֶיךָ בְּצִדְקָתְךָ חַיֵּֽנִי׃", french: "Voici, j'ai la passion de tes préceptes, fais-moi vivre par ta justice." },
+      { hebrew: "וִיבֹאֻנִי חֲסָדֶךָ יְהֹוָה תְּשׁוּעָתְךָ כְּאִמְרָתֶֽךָ׃", french: "Que tes bontés descendent sur moi, Éternel, ton salut, tel que tu l'as promis." },
+      { hebrew: "וְאֶעֱנֶה חֹרְפִי דָבָר כִּֽי־בָטַחְתִּי בִּדְבָרֶֽךָ׃", french: "Je pourrai ainsi répliquer à qui m'outrage, car j'ai confiance en ta parole." },
+      { hebrew: "וְֽאַל־תַּצֵּל מִפִּי דְבַר־אֱמֶת עַד־מְאֹד כִּי לְמִשְׁפָּטֶךָ יִחָֽלְתִּי׃", french: "Ne supprime jamais une parole de vérité de ma bouche, car je mets mon attente en tes jugements." },
+      { hebrew: "וְאֶשְׁמְרָה תוֹרָתְךָ תָמִיד לְעוֹלָם וָעֶֽד׃", french: "Je veux observer ta Loi constamment, à tout jamais." },
+      { hebrew: "וְאֶתְהַלְּכָה בָרְחָבָה כִּי פִקֻּדֶיךָ דָרָֽשְׁתִּי׃", french: "Ainsi je circulerai bien au large, car j'aurai eu le souci de tes préceptes." },
+      { hebrew: "וַאֲדַבְּרָה בְעֵדֹתֶיךָ נֶגֶד מְלָכִים וְלֹא אֵבֽוֹשׁ׃", french: "Je ferai de tes vérités l'objet de mes discours, en face des rois, sans aucune fausse honte." },
+      { hebrew: "וְאֶשְׁתַּעֲשַׁע בְּמִצְוֹתֶיךָ אֲשֶׁר אָהָֽבְתִּי׃", french: "Et je ferai mes délices de tes commandements, qui me sont bien chers." },
+      { hebrew: "וְאֶשָּֽׂא־כַפַּי אֶֽל־מִצְוֹתֶיךָ אֲשֶׁר אָהָבְתִּי וְאָשִׂיחָה בְחֻקֶּֽיךָ׃", french: "Je tendrai mes mains vers tes commandements, que j'aime, et consacrerai mes méditations à tes préceptes." },
+      { hebrew: "זְכֹר־דָּבָר לְעַבְדֶּךָ עַל אֲשֶׁר יִחַלְתָּֽנִי׃", french: "Rappelle-toi, en faveur de ton serviteur, la promesse où tu as voulu que je mette mon attente." },
+      { hebrew: "זֹאת נֶחָמָתִי בְעָנְיִי כִּי אִמְרָתְךָ חִיָּֽתְנִי׃", french: "C'est là ma consolation dans la misère, que ta parole me rende la vie." },
+      { hebrew: "זֵדִים הֱלִיצֻנִי עַד־מְאֹד מִתּוֹרָתְךָ לֹא נָטִֽיתִי׃", french: "Des arrogants m'ont raillé au possible: je n'ai point dévié de ta Loi." },
+      { hebrew: "זָכַרְתִּי מִשְׁפָּטֶיךָ מֵעוֹלָם ׀ יְהֹוָה וָאֶתְנֶחָֽם׃", french: "Je me remémore tes jugements de jadis, ô Éternel, et j'y trouve du réconfort." },
+      { hebrew: "זַלְעָפָה אֲחָזַתְנִי מֵרְשָׁעִים עֹזְבֵי תּוֹרָתֶֽךָ׃", french: "Un violent frisson m'avait saisi à cause des méchants, qui abandonnent ta Loi." },
+      { hebrew: "זְמִרוֹת הָיוּ־לִי חֻקֶּיךָ בְּבֵית מְגוּרָֽי׃", french: "[Mais] tes préceptes sont devenus pour moi un sujet de cantiques dans ma demeure passagère." },
+      { hebrew: "זָכַרְתִּי בַלַּיְלָה שִׁמְךָ יְהֹוָה וָאֶשְׁמְרָה תּוֹרָתֶֽךָ׃", french: "Je me souviens de ton nom pendant la nuit, Seigneur, et j'observe ta Loi." },
+      { hebrew: "זֹאת הָיְתָה־לִּי כִּי פִקֻּדֶיךָ נָצָֽרְתִּי׃", french: "C'est là mon bonheur à moi, de m'attacher à tes préceptes." },
+      { hebrew: "חֶלְקִי יְהֹוָה אָמַרְתִּי לִשְׁמֹר דְּבָרֶֽיךָ׃", french: "\"C'est mon lot à moi, ô Éternel, me suis-je dit, d'observer tes paroles.\"" },
+      { hebrew: "חִלִּיתִי פָנֶיךָ בְכָל־לֵב חָנֵּנִי כְּאִמְרָתֶֽךָ׃", french: "Je t'implore de tout mon cœur, sois-moi propice, selon ta promesse." },
+      { hebrew: "חִשַּׁבְתִּי דְרָכָי וָאָשִׁיבָה רַגְלַי אֶל־עֵדֹתֶֽיךָ׃", french: "J'ai médité sur mes voies, et ramené mes pas vers tes statuts." },
+      { hebrew: "חַשְׁתִּי וְלֹא הִתְמַהְמָהְתִּי לִשְׁמֹר מִצְוֹתֶֽיךָ׃", french: "Je me suis empressé, sans perdre un moment, d'observer tes commandements." },
+      { hebrew: "חֶבְלֵי רְשָׁעִים עִוְּדֻנִי תּוֹרָתְךָ לֹא שָׁכָֽחְתִּי׃", french: "Les liens des méchants m'avaient enserré: je n'ai point oublié ta Loi." },
+      { hebrew: "חֲצֽוֹת־לַיְלָה אָקוּם לְהוֹדוֹת לָךְ עַל מִשְׁפְּטֵי צִדְקֶֽךָ׃", french: "Au milieu de la nuit je me lève pour te rendre grâce, à cause de tes équitables jugements." },
+      { hebrew: "חָבֵר אָנִי לְכָל־אֲשֶׁר יְרֵאוּךָ וּלְשֹׁמְרֵי פִּקּוּדֶֽיךָ׃", french: "Je suis l'allié de tous ceux qui te révèrent et qui pratiquent tes lois." },
+      { hebrew: "חַסְדְּךָ יְהֹוָה מָלְאָה הָאָרֶץ חֻקֶּיךָ לַמְּדֵֽנִי׃", french: "De ta grâce, Éternel, la terre est remplie: enseigne-moi tes préceptes." },
+      { hebrew: "טוֹב עָשִׂיתָ עִֽם־עַבְדְּךָ יְהֹוָה כִּדְבָרֶֽךָ׃", french: "Tu as traité avec bienveillance ton serviteur, ô Éternel, conformément à ta parole." },
+      { hebrew: "טוּב טַעַם וָדַעַת לַמְּדֵנִי כִּי בְמִצְוֹתֶיךָ הֶאֱמָֽנְתִּי׃", french: "Enseigne-moi ces choses précieuses: le jugement et la science, car j'ai foi en tes commandements." },
+      { hebrew: "טֶרֶם אֶעֱנֶה אֲנִי שֹׁגֵג וְעַתָּה אִמְרָתְךָ שָׁמָֽרְתִּי׃", french: "Avant que je fusse humilié, je m'égarais; maintenant, je suis attentif à tes discours." },
+      { hebrew: "טוֹב־אַתָּה וּמֵטִיב לַמְּדֵנִי חֻקֶּֽיךָ׃", french: "Tu es bon et tu exerces le bien, instruis-moi dans tes préceptes." },
+      { hebrew: "טָפְלוּ עָלַי שֶׁקֶר זֵדִים אֲנִי בְּכָל־לֵב ׀ אֶצֹּר פִּקּוּדֶֽיךָ׃", french: "Des orgueilleux inventent des mensonges contre moi, et moi, de tout cœur, j'observe tes ordonnances." },
+      { hebrew: "טָפַשׁ כַּחֵלֶב לִבָּם אֲנִי תּוֹרָתְךָ שִׁעֲשָֽׁעְתִּי׃", french: "Leur cœur est bouché comme par la graisse: moi, je fais mes délices de ta Loi." },
+      { hebrew: "טֽוֹב־לִי כִי־עֻנֵּיתִי לְמַעַן אֶלְמַד חֻקֶּֽיךָ׃", french: "C'est un avantage pour moi d'avoir connu la misère, pour mieux apprendre tes préceptes." },
+      { hebrew: "טֽוֹב־לִי תוֹרַת־פִּיךָ מֵאַלְפֵי זָהָב וָכָֽסֶף׃", french: "Plus précieux est pour moi l'enseignement de ta bouche que des monceaux de pièces d'or et d'argent." },
+      { hebrew: "יָדֶיךָ עָשׂוּנִי וַֽיְכוֹנְנוּנִי הֲבִינֵנִי וְאֶלְמְדָה מִצְוֹתֶֽיךָ׃", french: "Ce sont tes mains qui m'ont formé et organisé, donne-moi l'intelligence pour que j'apprenne à connaître tes commandements." },
+      { hebrew: "יְרֵאֶיךָ יִרְאוּנִי וְיִשְׂמָחוּ כִּי לִדְבָרְךָ יִחָֽלְתִּי׃", french: "Ceux qui te craignent, en me voyant, seront dans la joie, car j'espère en ta parole." },
+      { hebrew: "יָדַעְתִּי יְהֹוָה כִּי־צֶדֶק מִשְׁפָּטֶיךָ וֶאֱמוּנָה עִנִּיתָֽנִי׃", french: "Je sais, ô Seigneur, que tes arrêts sont toute justice, et que c'est en équité que tu m'as humilié." },
+      { hebrew: "יְהִי־נָא חַסְדְּךָ לְנַחֲמֵנִי כְּאִמְרָתְךָ לְעַבְדֶּֽךָ׃", french: "Que ta grâce s'applique donc à me consoler, comme tu l'avais promis à ton serviteur." },
+      { hebrew: "יְבֹאוּנִי רַחֲמֶיךָ וְאֶחְיֶה כִּי־תוֹרָתְךָ שַׁעֲשֻׁעָֽי׃", french: "Que ta miséricorde s'étende sur moi et que je vive, puisque ta Loi fait mes délices." },
+      { hebrew: "יֵבֹשׁוּ זֵדִים כִּי־שֶׁקֶר עִוְּתוּנִי אֲנִי אָשִׂיחַ בְּפִקּוּדֶֽיךָ׃", french: "Que les orgueilleux soient déçus, pour m'avoir maltraité gratuitement; moi, je méditerai tes préceptes." },
+      { hebrew: "יָשׁוּבוּ לִי יְרֵאֶיךָ וְיֹדְעֵי עֵדֹתֶֽיךָ׃", french: "Que tes adorateurs reviennent à moi, et ceux qui connaissent tes vérités." },
+      { hebrew: "יְהִי־לִבִּי תָמִים בְּחֻקֶּיךָ לְמַעַן לֹא אֵבֽוֹשׁ׃", french: "Que mon cœur soit sincèrement attaché à tes lois, afin que je n'aie point à rougir." },
+      { hebrew: "כָּלְתָה לִתְשׁוּעָתְךָ נַפְשִׁי לִדְבָרְךָ יִחָֽלְתִּי׃", french: "Mon âme languit après ton secours, c'est en ta parole que je mets mon espoir." },
+      { hebrew: "כָּלוּ עֵינַי לְאִמְרָתֶךָ לֵאמֹר מָתַי תְּֽנַחֲמֵֽנִי׃", french: "Mes yeux se consument dans l'attente de ta parole, tandis que je dis: \"Quand me consoleras-tu?\"" },
+      { hebrew: "כִּֽי־הָיִיתִי כְּנֹאד בְּקִיטוֹר חֻקֶּיךָ לֹא שָׁכָֽחְתִּי׃", french: "Car je suis comme une outre dans des flots de fumée: tes préceptes, je ne les ai point oubliés." },
+      { hebrew: "כַּמָּה יְמֵֽי־עַבְדֶּךָ מָתַי תַּעֲשֶׂה בְרֹדְפַי מִשְׁפָּֽט׃", french: "Que dureront les jours de ton serviteur? Quand feras-tu justice de mes persécuteurs?" },
+      { hebrew: "כָּרוּ־לִי זֵדִים שִׁיחוֹת אֲשֶׁר לֹא כְתוֹרָתֶֽךָ׃", french: "Des pervers m'ont creusé des fosses, au mépris de ta Loi." },
+      { hebrew: "כָּל־מִצְוֹתֶיךָ אֱמוּנָה שֶׁקֶר רְדָפוּנִי עָזְרֵֽנִי׃", french: "Tous tes commandements sont loyauté parfaite, eux me pourchassent sans motif: viens à mon aide." },
+      { hebrew: "כִּמְעַט כִּלּוּנִי בָאָרֶץ וַאֲנִי לֹא־עָזַבְתִּי פִקֻּדֶֽיךָ׃", french: "Peu s'en faut qu'ils ne m'aient anéanti sur terre, alors que moi, je n'ai point délaissé tes préceptes." },
+      { hebrew: "כְּחַסְדְּךָ חַיֵּנִי וְאֶשְׁמְרָה עֵדוּת פִּֽיךָ׃", french: "Fidèle à ta bonté, conserve-moi en vie, et je respecterai le témoignage de ta bouche." },
+      { hebrew: "לְעוֹלָם יְהֹוָה דְּבָרְךָ נִצָּב בַּשָּׁמָֽיִם׃", french: "Pour l'éternité, Seigneur, ta parole demeure immuable dans les cieux." },
+      { hebrew: "לְדֹר וָדֹר אֱמוּנָתֶךָ כּוֹנַנְתָּֽ אֶרֶץ וַֽתַּעֲמֹֽד׃", french: "D'âge en âge dure ta fidélité: tu as affermi la terre, et elle est inébranlable." },
+      { hebrew: "לְֽמִשְׁפָּטֶיךָ עָמְדוּ הַיּוֹם כִּי הַכֹּל עֲבָדֶֽיךָ׃", french: "Selon tes lois, les êtres subsistent aujourd'hui, car ils sont tous tes serviteurs." },
+      { hebrew: "לוּלֵי תוֹרָתְךָ שַׁעֲשֻׁעָי אָז אָבַדְתִּי בְעָנְיִֽי׃", french: "Si ta Loi n'avait fait mes délices, j'aurais succombé dans ma misère." },
+      { hebrew: "לְעוֹלָם לֹא־אֶשְׁכַּח פִּקּוּדֶיךָ כִּי בָם חִיִּיתָֽנִי׃", french: "Jamais je n'oublierai tes préceptes, car par eux tu m'assures la vie." },
+      { hebrew: "לְֽךָ־אֲנִי הוֹשִׁיעֵנִי כִּי פִקּוּדֶיךָ דָרָֽשְׁתִּי׃", french: "Je suis à toi, prête-moi secours, car je m'enquiers de tes ordres." },
+      { hebrew: "לִי קִוּוּ רְשָׁעִים לְאַבְּדֵנִי עֵדֹתֶיךָ אֶתְבּוֹנָֽן׃", french: "Des méchants me guettent pour me perdre: je cherche à pénétrer le sens de tes prescriptions." },
+      { hebrew: "לְֽכָל־תִּכְלָה רָאִיתִי קֵץ רְחָבָה מִצְוָתְךָ מְאֹֽד׃", french: "A tout bien j'ai vu des limites: ta Loi est infiniment vaste." },
+      { hebrew: "מָה־אָהַבְתִּי תוֹרָתֶךָ כָּל־הַיּוֹם הִיא שִׂיחָתִֽי׃", french: "Combien j'aime ta Loi! Tout le temps elle est l'objet de mes méditations." },
+      { hebrew: "מֵֽאֹיְבַי תְּחַכְּמֵנִי מִצְוֹתֶךָ כִּי לְעוֹלָם הִיא־לִֽי׃", french: "Tes commandements me rendent plus sage que mes ennemis, car ils sont pour moi un bien inépuisable." },
+      { hebrew: "מִכָּל־מְלַמְּדַי הִשְׂכַּלְתִּי כִּי עֵדְוֹתֶיךָ שִׂיחָה לִֽי׃", french: "Je suis plus avisé que tous mes précepteurs, car tes vérités sont le thème de mes réflexions." },
+      { hebrew: "מִזְּקֵנִים אֶתְבּוֹנָן כִּי פִקּוּדֶיךָ נָצָֽרְתִּי׃", french: "J'ai plus d'expérience que les vieillards, car je respecte tes préceptes." },
+      { hebrew: "מִכָּל־אֹרַח רָע כָּלִאתִי רַגְלָי לְמַעַן אֶשְׁמֹר דְּבָרֶֽךָ׃", french: "J'ai tenu mes pas éloignés de tout mauvais chemin, en vue d'observer tes paroles." },
+      { hebrew: "מִמִּשְׁפָּטֶיךָ לֹא־סָרְתִּי כִּי־אַתָּה הוֹרֵתָֽנִי׃", french: "Je n'ai point dévié de tes règles, car c'est toi qui m'as instruit." },
+      { hebrew: "מַה־נִּמְלְצוּ לְחִכִּי אִמְרָתֶךָ מִדְּבַשׁ לְפִֽי׃", french: "Que tes paroles sont douces à mon palais! Le miel l'est moins à ma bouche." },
+      { hebrew: "מִפִּקּוּדֶיךָ אֶתְבּוֹנָן עַל־כֵּן שָׂנֵאתִי ׀ כָּל־אֹרַח שָֽׁקֶר׃", french: "J'ai puisé mon savoir dans tes préceptes, c'est pourquoi je hais toute voie mensongère." },
+      { hebrew: "נֵר־לְרַגְלִי דְבָרֶךָ וְאוֹר לִנְתִיבָתִֽי׃", french: "Ta parole est un flambeau qui éclaire mes pas, une lumière qui rayonne sur ma route." },
+      { hebrew: "נִשְׁבַּעְתִּי וָאֲקַיֵּמָה לִשְׁמֹר מִשְׁפְּטֵי צִדְקֶֽךָ׃", french: "J'ai fait le serment, et je le tiendrai, d'observer les règles de ta justice." },
+      { hebrew: "נַעֲנֵיתִי עַד־מְאֹד יְהֹוָה חַיֵּנִי כִדְבָרֶֽךָ׃", french: "Je suis extrêmement accablé, Éternel, conserve-moi en vie selon ta parole." },
+      { hebrew: "נִדְבוֹת פִּי רְצֵה־נָא יְהֹוָה וּֽמִשְׁפָּטֶיךָ לַמְּדֵֽנִי׃", french: "Agrée de grâce, Seigneur, les vœux de ma bouche, et enseigne-moi tes lois." },
+      { hebrew: "נַפְשִׁי בְכַפִּי תָמִיד וְתוֹרָתְךָ לֹא שָׁכָֽחְתִּי׃", french: "Mon âme court sans cesse des dangers, et je n'ai point oublié ta loi." },
+      { hebrew: "נָתְנוּ רְשָׁעִים פַּח לִי וּמִפִּקּוּדֶיךָ לֹא תָעִֽיתִי׃", french: "Des méchants me dressent des pièges, pourtant je ne dévie point de tes préceptes." },
+      { hebrew: "נָחַלְתִּי עֵדְוֹתֶיךָ לְעוֹלָם כִּֽי־שְׂשׂוֹן לִבִּי הֵֽמָּה׃", french: "Je reste pour toujours en possession de tes vérités, car elles sont la joie de mon cœur." },
+      { hebrew: "נָטִיתִי לִבִּי לַעֲשׂוֹת חֻקֶּיךָ לְעוֹלָם עֵֽקֶב׃", french: "J'ai incliné mon cœur à accomplir tes lois à tout jamais, jusqu'à la fin dernière." },
+      { hebrew: "סֵעֲפִים שָׂנֵאתִי וְֽתוֹרָתְךָ אָהָֽבְתִּי׃", french: "Je hais les gens à double face, mais ta Loi, je l'aime." },
+      { hebrew: "סִתְרִי וּמָגִנִּי אָתָּה לִדְבָרְךָ יִחָֽלְתִּי׃", french: "Tu es mon abri et mon bouclier, j'espère en ta parole." },
+      { hebrew: "סוּרוּ־מִמֶּנִּי מְרֵעִים וְאֶצְּרָה מִצְוֹת אֱלֹהָֽי׃", french: "Loin de moi, ô malfaiteurs! Je veux observer les commandements de mon Dieu." },
+      { hebrew: "סָמְכֵנִי כְאִמְרָתְךָ וְאֶחְיֶה וְאַל־תְּבִישֵׁנִי מִשִּׂבְרִֽי׃", french: "Soutiens-moi selon ta promesse pour que je vive, et ne laisse pas mon espoir se changer en déception." },
+      { hebrew: "סְעָדֵנִי וְאִוָּשֵׁעָה וְאֶשְׁעָה בְחֻקֶּיךָ תָמִֽיד׃", french: "Accorde-moi ton appui pour que je sois sauvé, je me tournerai sans cesse vers tes lois." },
+      { hebrew: "סָלִיתָ כָּל־שׁוֹגִים מֵחֻקֶּיךָ כִּי־שֶׁקֶר תַּרְמִיתָֽם׃", french: "Tu foules aux pieds ceux qui errent loin de tes préceptes, car leurs ruses habiles ne sont que mensonge." },
+      { hebrew: "סִגִים הִשְׁבַּתָּ כָל־רִשְׁעֵי־אָרֶץ לָכֵן אָהַבְתִּי עֵדֹתֶֽיךָ׃", french: "Comme des scories, tu élimines tous les méchants sur terre, c'est pourquoi j'aime tes vérités." },
+      { hebrew: "סָמַר מִפַּחְדְּךָ בְשָׂרִי וּֽמִמִּשְׁפָּטֶיךָ יָרֵֽאתִי׃", french: "Ma chair frissonne de la terreur que tu inspires, et je redoute tes jugements." },
+      { hebrew: "עָשִׂיתִי מִשְׁפָּט וָצֶדֶק בַּל־תַּנִּיחֵנִי לְעֹשְׁקָֽי׃", french: "J'ai pratiqué la justice et l'équité, ne m'abandonne pas à mes oppresseurs." },
+      { hebrew: "עֲרֹב עַבְדְּךָ לְטוֹב אַֽל־יַעַשְׁקֻנִי זֵדִֽים׃", french: "Interviens pour le bonheur de ton serviteur, que des arrogants ne m'accablent point." },
+      { hebrew: "עֵינַי כָּלוּ לִישׁוּעָתֶךָ וּלְאִמְרַת צִדְקֶֽךָ׃", french: "Mes yeux languissent après ton secours, et après ta parole de salut." },
+      { hebrew: "עֲשֵׂה עִם־עַבְדְּךָ כְחַסְדֶּךָ וְחֻקֶּיךָ לַמְּדֵֽנִי׃", french: "Traite ton serviteur selon ta grâce, et enseigne-moi tes préceptes." },
+      { hebrew: "עַבְדְּךָ־אָנִי הֲבִינֵנִי וְאֵדְעָה עֵדֹתֶֽיךָ׃", french: "Je suis ton serviteur, donne-moi la sagacité, pour que je comprenne tes vérités." },
+      { hebrew: "עֵת לַעֲשׂוֹת לַיהֹוָה הֵפֵרוּ תּוֹרָתֶֽךָ׃", french: "Le temps est venu d'agir pour l'Éternel: on a violé ta Loi." },
+      { hebrew: "עַל־כֵּן אָהַבְתִּי מִצְוֹתֶיךָ מִזָּהָב וּמִפָּֽז׃", french: "C'est pourquoi j'aime tes commandements, plus que l'or et le métal fin." },
+      { hebrew: "עַל־כֵּן ׀ כָּל־פִּקּוּדֵי כֹל יִשָּׁרְתִּי כָּל־אֹרַח שֶׁקֶר שָׂנֵֽאתִי׃", french: "C'est pourquoi je reconnais la parfaite droiture de tous [tes] préceptes, et déteste toute voie mensongère." },
+      { hebrew: "פְּלָאוֹת עֵדְוֹתֶיךָ עַל־כֵּן נְצָרָתַם נַפְשִֽׁי׃", french: "Merveilleux sont tes statuts, aussi mon âme les garde-t-elle avec soin." },
+      { hebrew: "פֵּתַח דְּבָרֶיךָ יָאִיר מֵבִין פְּתָיִֽים׃", french: "La révélation de tes paroles projette de la lumière, donne de l'intelligence aux simples." },
+      { hebrew: "פִּֽי־פָעַרְתִּי וָאֶשְׁאָפָה כִּי לְמִצְוֹתֶיךָ יָאָֽבְתִּי׃", french: "J'ouvre largement la bouche pour aspirer, car j'ai la passion de tes commandements." },
+      { hebrew: "פְּנֵה־אֵלַי וְחָנֵּנִי כְּמִשְׁפָּט לְאֹהֲבֵי שְׁמֶֽךָ׃", french: "Tourne-toi vers moi et sois-moi propice, comme tu le fais pour ceux qui aiment ton nom." },
+      { hebrew: "פְּעָמַי הָכֵן בְּאִמְרָתֶךָ וְֽאַל־תַּשְׁלֶט־בִּי כָל־אָֽוֶן׃", french: "Affermis mes pas par tes discours, qu'aucune mauvaise passion ne prenne le dessus sur moi." },
+      { hebrew: "פְּדֵנִי מֵעֹשֶׁק אָדָם וְאֶשְׁמְרָה פִּקּוּדֶֽיךָ׃", french: "Délivre-moi de l'oppression des hommes, pour que je puisse observer tes préceptes." },
+      { hebrew: "פָּנֶיךָ הָאֵר בְּעַבְדֶּךָ וְלַמְּדֵנִי אֶת־חֻקֶּֽיךָ׃", french: "Fais luire ta face sur ton serviteur, et enseigne-moi tes préceptes." },
+      { hebrew: "פַּלְגֵי־מַיִם יָרְדוּ עֵינָי עַל לֹא־שָׁמְרוּ תוֹרָתֶֽךָ׃", french: "Mes yeux ont versé des torrents de larmes, parce qu'on n'observe pas ta Loi." },
+      { hebrew: "צַדִּיק אַתָּה יְהֹוָה וְיָשָׁר מִשְׁפָּטֶֽיךָ׃", french: "Tu es juste, ô Seigneur, et équitables sont tes jugements." },
+      { hebrew: "צִוִּיתָ צֶדֶק עֵדֹתֶיךָ וֶאֱמוּנָה מְאֹֽד׃", french: "Tu as imposé tes justes ordonnances: elles sont tout à fait infaillibles." },
+      { hebrew: "צִמְּתַתְנִי קִנְאָתִי כִּֽי־שָׁכְחוּ דְבָרֶיךָ צָרָֽי׃", french: "Je suis consumé par mon zèle jaloux, car mes adversaires oublient tes paroles." },
+      { hebrew: "צְרוּפָה אִמְרָתְךָ מְאֹד וְֽעַבְדְּךָ אֲהֵבָֽהּ׃", french: "Ta parole est infiniment épurée, elle est chère à ton serviteur." },
+      { hebrew: "צָעִיר אָנֹכִי וְנִבְזֶה פִּקֻּדֶיךָ לֹא שָׁכָֽחְתִּי׃", french: "Je suis chétif et méprisé: tes préceptes, je ne les ai point oubliés." },
+      { hebrew: "צִדְקָתְךָ צֶדֶק לְעוֹלָם וְֽתוֹרָתְךָ אֱמֶֽת׃", french: "Ta justice est éternellement équitable, et ta Loi est vérité." },
+      { hebrew: "צַר־וּמָצוֹק מְצָאוּנִי מִצְוֹתֶיךָ שַׁעֲשֻׁעָֽי׃", french: "La détresse et l'angoisse m'ont atteint: tes commandements sont mes délices." },
+      { hebrew: "צֶדֶק עֵדְוֹתֶיךָ לְעוֹלָם הֲבִינֵנִי וְאֶחְיֶֽה׃", french: "Tes statuts sont à jamais équitables, permets-moi de les comprendre, pour que je vive." },
+      { hebrew: "קָרָאתִי בְכָל־לֵב עֲנֵנִי יְהֹוָה חֻקֶּיךָ אֶצֹּֽרָה׃", french: "Je t'invoque de tout cœur, exauce-moi, Seigneur! Je veux observer tes préceptes." },
+      { hebrew: "קְרָאתִיךָ הוֹשִׁיעֵנִי וְאֶשְׁמְרָה עֵדֹתֶֽיךָ׃", french: "Je t'appelle, viens à mon secours, et je garderai tes statuts." },
+      { hebrew: "קִדַּמְתִּי בַנֶּשֶׁף וָאֲשַׁוֵּעָה לִדְבָרְךָ יִחָֽלְתִּי׃", french: "Dès l'aurore je m'empresse d'implorer, j'espère en ta parole." },
+      { hebrew: "קִדְּמוּ עֵינַי אַשְׁמֻרוֹת לָשִׂיחַ בְּאִמְרָתֶֽךָ׃", french: "Mes yeux devancent les veilles [de la nuit], pour méditer ta parole." },
+      { hebrew: "קוֹלִי שִׁמְעָה כְחַסְדֶּךָ יְהֹוָה כְּֽמִשְׁפָּטֶךָ חַיֵּֽנִי׃", french: "Daigne écouter ma voix, selon ta bonté, Éternel; fais-moi vivre selon l'arrêt de ta justice." },
+      { hebrew: "קָרְבוּ רֹדְפֵי זִמָּה מִתּוֹרָתְךָ רָחָֽקוּ׃", french: "Ils m'approchent, ceux qui courent après l'infamie, il s'éloignent de ta Loi." },
+      { hebrew: "קָרוֹב אַתָּה יְהֹוָה וְֽכָל־מִצְוֹתֶיךָ אֱמֶֽת׃", french: "Toi, Seigneur, tu es près [de moi], tous tes commandements sont vérité." },
+      { hebrew: "קֶדֶם יָדַעְתִּי מֵעֵדֹתֶיךָ כִּי לְעוֹלָם יְסַדְתָּֽם׃", french: "Dès longtemps j'avais connaissance de tes statuts, car tu les as établis pour l'éternité." },
+      { hebrew: "רְאֵה־עָנְיִי וְחַלְּצֵנִי כִּי־תוֹרָתְךָ לֹא שָׁכָֽחְתִּי׃", french: "Vois ma misère et tire-moi du danger, car je n'ai pas oublié ta Loi." },
+      { hebrew: "רִיבָה רִיבִי וּגְאָלֵנִי לְאִמְרָתְךָ חַיֵּֽנִי׃", french: "Prends en main ma cause et délivre-moi, fais-moi vivre pour me consacrer à ta parole." },
+      { hebrew: "רָחוֹק מֵרְשָׁעִים יְשׁוּעָה כִּי־חֻקֶּיךָ לֹא דָרָֽשׁוּ׃", french: "Le salut est loin des méchants, car ils ne se soucient pas de tes préceptes." },
+      { hebrew: "רַחֲמֶיךָ רַבִּים ׀ יְהֹוָה כְּֽמִשְׁפָּטֶיךָ חַיֵּֽנִי׃", french: "Grande est ta miséricorde, Éternel, fais-moi vivre selon l'arrêt de ta justice." },
+      { hebrew: "רַבִּים רֹדְפַי וְצָרָי מֵעֵדְוֹתֶיךָ לֹא נָטִֽיתִי׃", french: "Nombreux sont mes persécuteurs et mes ennemis; je n'ai point dévié de tes statuts." },
+      { hebrew: "רָאִיתִי בֹגְדִים וָאֶתְקוֹטָטָה אֲשֶׁר אִמְרָתְךָ לֹא שָׁמָֽרוּ׃", french: "J'ai observé les traîtres et j'en ai été écœuré, car ils ne respectent pas ta parole." },
+      { hebrew: "רְאֵה כִּי־פִקּוּדֶיךָ אָהָבְתִּי יְהֹוָה כְּֽחַסְדְּךָ חַיֵּֽנִי׃", french: "Vois comme j'aime tes prescriptions, Seigneur, selon ta bonté, fais-moi vivre." },
+      { hebrew: "רֹאשׁ־דְּבָרְךָ אֱמֶת וּלְעוֹלָם כָּל־מִשְׁפַּט צִדְקֶֽךָ׃", french: "L'ensemble de tes paroles est vérité, éternels sont tous les arrêts de ta justice." },
+      { hebrew: "שָׂרִים רְדָפוּנִי חִנָּם וּמִדְּבָרְךָ פָּחַד לִבִּֽי׃", french: "Des grands me persécutent gratuitement, et mon cœur tremble devant ta parole." },
+      { hebrew: "שָׂשׂ אָנֹכִי עַל־אִמְרָתֶךָ כְּמוֹצֵא שָׁלָל רָֽב׃", french: "Je me réjouis de tes promesses, comme quelqu'un qui a trouvé un riche butin." },
+      { hebrew: "שֶׁקֶר שָׂנֵאתִי וַאֲתַעֵבָה תּוֹרָתְךָ אָהָֽבְתִּי׃", french: "Je hais le mensonge, je l'ai en horreur, c'est ta Loi que j'aime." },
+      { hebrew: "שֶׁבַע בַּיּוֹם הִלַּלְתִּיךָ עַל מִשְׁפְּטֵי צִדְקֶֽךָ׃", french: "Sept fois par jour je célèbre tes louanges, en raison de tes justes arrêts." },
+      { hebrew: "שָׁלוֹם רָב לְאֹהֲבֵי תוֹרָתֶךָ וְאֵֽין־לָמוֹ מִכְשֽׁוֹל׃", french: "Un grand bonheur attend ceux qui aiment ta Loi: pour eux point de cause de chute." },
+      { hebrew: "שִׂבַּרְתִּי לִישׁוּעָתְךָ יְהֹוָה וּֽמִצְוֹתֶיךָ עָשִֽׂיתִי׃", french: "J'ai pleine confiance en ton secours, Seigneur, et j'accomplis tes commandements." },
+      { hebrew: "שָֽׁמְרָה נַפְשִׁי עֵדֹתֶיךָ וָאֹהֲבֵם מְאֹֽד׃", french: "Mon âme observe tes témoignages, je les aime infiniment." },
+      { hebrew: "שָׁמַרְתִּי פִקּוּדֶיךָ וְעֵדֹתֶיךָ כִּי כָל־דְּרָכַי נֶגְדֶּֽךָ׃", french: "J'observe tes prescriptions et tes statuts, car toutes mes voies sont sous tes regards." },
+      { hebrew: "תִּקְרַב רִנָּתִי לְפָנֶיךָ יְהֹוָה כִּדְבָרְךָ הֲבִינֵֽנִי׃", french: "Que mon hymne arrive jusqu'à toi, Éternel, fais-moi comprendre le sens de ta parole." },
+      { hebrew: "תָּבוֹא תְחִנָּתִי לְפָנֶיךָ כְּאִמְרָתְךָ הַצִּילֵֽנִי׃", french: "Que ma supplication vienne devant toi, sauve-moi selon ta promesse." },
+      { hebrew: "תַּבַּעְנָה שְׂפָתַי תְּהִלָּה כִּי תְלַמְּדֵנִי חֻקֶּֽיךָ׃", french: "Mes lèvres laisseront s'échapper tes louanges, car tu m'enseignes tes préceptes." },
+      { hebrew: "תַּעַן לְשׁוֹנִי אִמְרָתֶךָ כִּי כָל־מִצְוֹתֶיךָ צֶּֽדֶק׃", french: "Ma langue chantera ta parole, car tous tes commandements sont équité." },
+      { hebrew: "תְּהִי־יָדְךָ לְעָזְרֵנִי כִּי פִקּוּדֶיךָ בָחָֽרְתִּי׃", french: "Puisse ta main s'appliquer à me secourir, puisque j'ai fait choix de tes prescriptions!" },
+      { hebrew: "תָּאַבְתִּי לִישׁוּעָתְךָ יְהֹוָה וְתוֹרָתְךָ שַׁעֲשֻׁעָֽי׃", french: "J'aspire à ton secours, Éternel, et ta Loi fait mes délices." },
+      { hebrew: "תְּֽחִי־נַפְשִׁי וּֽתְהַלְלֶךָּ וּֽמִשְׁפָּטֶךָ יַעְזְרֻֽנִי׃", french: "Que mon âme vive pour te louer, que tes jugements soient mon soutien." },
+      { hebrew: "תָּעִיתִי כְּשֶׂה אֹבֵד בַּקֵּשׁ עַבְדֶּךָ כִּי מִצְוֹתֶיךָ לֹא שָׁכָֽחְתִּי׃", french: "J'erre comme une brebis égarée; mets-toi à la recherche de ton serviteur! Car je n'ai pas oublié tes commandements." },
+
+    ]
+  },
+
 ];
-var TOTAL_OBJ = 13; // total sub-items across all periods
 
-var _objStoryIdx = 0;
-var _objStoryTimer = null;
 
-function getObjStorageKey() {
-  var d = new Date();
-  return 'tehilim_obj_' + d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
-
-function getObjState() {
-  try { return JSON.parse(localStorage.getItem(getObjStorageKey()) || '{}'); }
-  catch(e) { return {}; }
-}
-
-function saveObjState(state) {
-  localStorage.setItem(getObjStorageKey(), JSON.stringify(state));
-}
-
-function getCurrentPeriodIndex() {
-  var h = new Date().getHours();
-  for (var i = 0; i < DAILY_PERIODS.length; i++) {
-    var p = DAILY_PERIODS[i];
-    if (p.h1 > p.h0) {
-      if (h >= p.h0 && h < p.h1) return i;
-    } else {
-      if (h >= p.h0 || h < p.h1) return i;
-    }
-  }
-  return 0;
-}
-
-function countAllChecked(state) {
-  var n = 0;
-  DAILY_PERIODS.forEach(function(p) {
-    p.items.forEach(function(it) { if (state[it.id]) n++; });
-  });
-  return n;
-}
-
-function countPeriodChecked(period, state) {
-  var n = 0;
-  period.items.forEach(function(it) { if (state[it.id]) n++; });
-  return n;
-}
-
-// ---- STORY BAR (3 circles: matin / aprem / soir) ----
-// Build flat list of all items with period info
-var ALL_OBJ_ITEMS = [];
-DAILY_PERIODS.forEach(function(p) {
-  p.items.forEach(function(it) {
-    ALL_OBJ_ITEMS.push({ id: it.id, emoji: it.emoji, label: it.label, period: p });
-  });
-});
-
-function getCurrentItemIndex() {
-  var pi = getCurrentPeriodIndex();
-  var p = DAILY_PERIODS[pi];
-  var state = getObjState();
-  // Find first unchecked in current period
-  var offset = 0;
-  for (var i = 0; i < DAILY_PERIODS.length; i++) {
-    if (i === pi) {
-      for (var j = 0; j < p.items.length; j++) {
-        if (!state[p.items[j].id]) return offset + j;
-      }
-      return offset;
-    }
-    offset += DAILY_PERIODS[i].items.length;
-  }
-  return 0;
-}
-
-function renderObjStoryBar() {
-  var state = getObjState();
-  var currentIdx = getCurrentPeriodIndex();
-  // HOME: 3 period circles + HYY after Matin + Rambam after Après-midi
-  var html3 = '';
-  DAILY_PERIODS.forEach(function(p, i) {
-    var total = p.items.length;
-    var done = countPeriodChecked(p, state);
-    var allDone = done === total;
-    var isCurrent = i === currentIdx;
-    var pct = total > 0 ? Math.round(done / total * 100) : 0;
-    var ringBg = allDone ? '#dbdbdb' : (isCurrent ? 'conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34)' : 'conic-gradient(from 0deg, #f9ce34 0%, #ee2a7b ' + pct + '%, var(--gray-5) ' + pct + '%)');
-    html3 += '<div class="os-item' + (allDone ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openObjStory(' + i + ')">';
-    html3 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + p.emoji + '</div></div>';
-    html3 += '<span class="os-label">' + p.label + ' ' + done + '/' + total + '</span>';
-    html3 += '</div>';
-    // Insert HYY story after Matin (index 0)
-    if (i === 0) {
-      html3 += '<div class="os-item" onclick="openTextStory(\'hyy\')">';
-      html3 += '<div class="os-ring" style="background:linear-gradient(135deg, #f9ce34, #ee2a7b)"><div class="os-circle">📜</div></div>';
-      html3 += '<span class="os-label">Hayom Yom</span>';
-      html3 += '</div>';
-    }
-    // Insert Rambam story after Après-midi (index 1)
-    if (i === 1) {
-      html3 += '<div class="os-item" onclick="openTextStory(\'rambam\')">';
-      html3 += '<div class="os-ring" style="background:linear-gradient(135deg, #6228d7, #ee2a7b)"><div class="os-circle">📚</div></div>';
-      html3 += '<span class="os-label">Rambam</span>';
-      html3 += '</div>';
-    }
-  });
-  var bar = document.getElementById('obj-story-bar');
-  if (bar) bar.innerHTML = html3;
-
-  // SUB: 13 individual circles
-  var curItem = getCurrentItemIndex();
-  var html13 = '';
-  ALL_OBJ_ITEMS.forEach(function(it, i) {
-    var done = !!state[it.id];
-    var isCurrent = i === curItem;
-    var ringBg = done ? '#dbdbdb' : 'conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34)';
-    html13 += '<div class="os-item' + (done ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openItemStory(' + i + ')">';
-    html13 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + it.emoji + '</div></div>';
-    html13 += '<span class="os-label">' + it.label + '</span>';
-    html13 += '</div>';
-  });
-  var barSub = document.getElementById('obj-story-bar-sub');
-  if (barSub) {
-    barSub.innerHTML = html13;
-    // Scroll to current
-    setTimeout(function() {
-      var items = barSub.querySelectorAll('.os-item');
-      if (items[curItem]) items[curItem].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
-    }, 100);
-  }
-}
-
-// ---- TEXT STORY (HYY / Rambam) ----
-var _textStoryTimer = null;
-
-function openTextStory(type) {
-  _storyMode = 'text';
-  var overlay = document.getElementById('obj-story-overlay');
-  overlay.style.display = 'flex';
-
-  // Hide tap zones for text stories, enable content interaction
-  var tapL = overlay.querySelector('.os-tap-left');
-  var tapR = overlay.querySelector('.os-tap-right');
-  var content = document.getElementById('os-content');
-  if (tapL) tapL.style.display = 'none';
-  if (tapR) tapR.style.display = 'none';
-  if (content) content.style.pointerEvents = 'auto';
-
-  // No progress bar - text stories stay open
-  document.getElementById('os-progress').innerHTML = '';
-
-  var html = '';
-  if (type === 'hyy') {
-    overlay.style.background = 'linear-gradient(160deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%)';
-    var dateEl = document.getElementById('hyy-date');
-    var textEl = document.getElementById('hyy-text');
-    var heDate = dateEl ? dateEl.textContent : '';
-    var text = textEl ? (textEl.innerText || textEl.textContent || '') : '';
-    text = text.replace('Chargement…', '').replace('Lire la suite ▾', '').trim();
-    html += '<div class="os-emoji">📜</div>';
-    html += '<div class="os-name" style="color:#f9ce34;font-size:22px;">Hayom Yom</div>';
-    if (heDate) html += '<div class="os-time-badge" style="color:rgba(255,255,255,0.6)">' + heDate + '</div>';
-    html += '<div style="color:#fff;font-size:15px;line-height:1.8;padding:16px 4px 0;text-align:left;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">' + (text || '<em style="color:rgba(255,255,255,0.4)">Texte non disponible</em>') + '</div>';
-    html += '<button onclick="shareHyy(event)" style="margin-top:20px;padding:12px 32px;border:2px solid rgba(255,255,255,0.7);border-radius:50px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font);"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
-  } else if (type === 'rambam') {
-    overlay.style.background = 'linear-gradient(160deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%)';
-    var titleEl = document.getElementById('rambam-date');
-    var textEl2 = document.getElementById('rambam-text');
-    var title = titleEl ? titleEl.textContent : '';
-    var text2 = textEl2 ? (textEl2.innerText || textEl2.textContent || '') : '';
-    text2 = text2.replace('Chargement…', '').replace('Lire la suite ▾', '').trim();
-    html += '<div class="os-emoji">📚</div>';
-    html += '<div class="os-name" style="color:#c084fc;font-size:22px;">Rambam</div>';
-    if (title) html += '<div class="os-time-badge" style="color:rgba(255,255,255,0.6)">' + title + '</div>';
-    html += '<div style="color:#fff;font-size:15px;line-height:1.8;padding:16px 4px 0;text-align:left;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">' + (text2 || '<em style="color:rgba(255,255,255,0.4)">Texte non disponible</em>') + '</div>';
-    html += '<button onclick="shareRambam(event)" style="margin-top:20px;padding:12px 32px;border:2px solid rgba(255,255,255,0.7);border-radius:50px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font);"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
-  }
-
-  document.getElementById('os-content').innerHTML = html;
-}
-
-// ---- ITEM STORY (13 individual) ----
-var _itemStoryIdx = 0;
-var _itemStoryTimer = null;
-var _storyMode = 'period'; // 'period' or 'item'
-
-function storyNav(dir) {
-  if (_storyMode === 'text') { closeObjStory(); return; }
-  if (_storyMode === 'item') { dir === 'next' ? itemStoryNext() : itemStoryPrev(); }
-  else { dir === 'next' ? objStoryNext() : objStoryPrev(); }
-}
-
-function openItemStory(idx) {
-  _storyMode = 'item';
-  _itemStoryIdx = idx;
-  var overlay = document.getElementById('obj-story-overlay');
-  overlay.style.display = 'flex';
-  renderItemStoryContent();
-  startItemStoryTimer();
-}
-
-function renderItemStoryContent() {
-  var it = ALL_OBJ_ITEMS[_itemStoryIdx];
-  var period = it.period;
-  var state = getObjState();
-  var done = !!state[it.id];
-  var dark = period.dark;
-  var textColor = dark ? '#fff' : '#1a1a1a';
-
-  // Progress bars (13 segments)
-  var progHtml = '';
-  for (var i = 0; i < ALL_OBJ_ITEMS.length; i++) {
-    var pct = i < _itemStoryIdx ? 100 : (i === _itemStoryIdx ? 0 : 0);
-    progHtml += '<div class="os-prog-seg"><div class="os-prog-fill" style="width:' + pct + '%"></div></div>';
-  }
-  document.getElementById('os-progress').innerHTML = progHtml;
-  setTimeout(function() {
-    var segs = document.querySelectorAll('.os-prog-fill');
-    if (segs[_itemStoryIdx]) {
-      segs[_itemStoryIdx].style.transition = 'width 6s linear';
-      segs[_itemStoryIdx].style.width = '100%';
-    }
-  }, 50);
-
-  var html = '<div class="os-time-badge" style="color:' + textColor + '">' + period.label + '</div>';
-  html += '<div class="os-emoji">' + it.emoji + '</div>';
-  html += '<div class="os-name" style="color:' + textColor + '">' + it.label + '</div>';
-  html += '<div class="os-msg" style="color:' + textColor + '">' + period.msg + '</div>';
-  html += '<button class="os-check-btn' + (done ? ' checked' : '') + '" style="color:' + textColor + '" onclick="event.stopPropagation();toggleItemFromStory(\'' + it.id + '\')">';
-  html += done ? '✅ Accompli' : '☐ Marquer comme fait';
-  html += '</button>';
-  html += '<button onclick="event.stopPropagation();shareObjectives(event)" style="margin-top:12px;padding:10px 28px;border:2px solid ' + (dark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.15)') + ';border-radius:50px;background:' + (dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)') + ';color:' + textColor + ';font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="' + textColor + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
-
-  document.getElementById('os-content').innerHTML = html;
-  document.getElementById('obj-story-overlay').style.background = period.bg;
-}
-
-function toggleItemFromStory(id) {
-  var state = getObjState();
-  if (state[id]) { delete state[id]; } else { state[id] = new Date().toISOString(); }
-  saveObjState(state);
-  renderItemStoryContent();
-  startItemStoryTimer();
-}
-
-function itemStoryNext() {
-  if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
-  if (_itemStoryIdx < ALL_OBJ_ITEMS.length - 1) {
-    _itemStoryIdx++;
-    renderItemStoryContent();
-    startItemStoryTimer();
-  } else { closeObjStory(); }
-}
-
-function itemStoryPrev() {
-  if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
-  if (_itemStoryIdx > 0) {
-    _itemStoryIdx--;
-    renderItemStoryContent();
-    startItemStoryTimer();
-  }
-}
-
-function startItemStoryTimer() {
-  if (_itemStoryTimer) clearTimeout(_itemStoryTimer);
-  _itemStoryTimer = setTimeout(itemStoryNext, 6000);
-}
-
-// ---- STORY OVERLAY (fullscreen per period) ----
-function openObjStory(idx) {
-  _storyMode = 'period';
-  _objStoryIdx = idx;
-  var overlay = document.getElementById('obj-story-overlay');
-  overlay.style.display = 'flex';
-  renderObjStoryContent();
-  startObjStoryTimer();
-}
-
-function closeObjStory() {
-  var overlay = document.getElementById('obj-story-overlay');
-  overlay.style.display = 'none';
-  if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
-  if (_itemStoryTimer) { clearTimeout(_itemStoryTimer); _itemStoryTimer = null; }
-  if (_textStoryTimer) { clearTimeout(_textStoryTimer); _textStoryTimer = null; }
-  // Restore tap zones and pointer-events
-  var tapL = overlay.querySelector('.os-tap-left');
-  var tapR = overlay.querySelector('.os-tap-right');
-  var content = document.getElementById('os-content');
-  if (tapL) tapL.style.display = '';
-  if (tapR) tapR.style.display = '';
-  if (content) content.style.pointerEvents = '';
-  renderObjStoryBar();
-  updateBigObjSub();
-  var objList = document.getElementById('obj-list');
-  if (objList && objList.offsetParent !== null) renderObjectives();
-}
-
-function renderObjStoryContent() {
-  var period = DAILY_PERIODS[_objStoryIdx];
-  var state = getObjState();
-  var dark = period.dark;
-  var textColor = dark ? '#fff' : '#1a1a1a';
-
-  // Progress bars (3 segments)
-  var progHtml = '';
-  for (var i = 0; i < DAILY_PERIODS.length; i++) {
-    var pct = i < _objStoryIdx ? 100 : (i === _objStoryIdx ? 0 : 0);
-    progHtml += '<div class="os-prog-seg"><div class="os-prog-fill" style="width:' + pct + '%"></div></div>';
-  }
-  document.getElementById('os-progress').innerHTML = progHtml;
-  setTimeout(function() {
-    var segs = document.querySelectorAll('.os-prog-fill');
-    if (segs[_objStoryIdx]) {
-      segs[_objStoryIdx].style.transition = 'width 8s linear';
-      segs[_objStoryIdx].style.width = '100%';
-    }
-  }, 50);
-
-  // Content
-  var html = '<div class="os-time-badge" style="color:' + textColor + '">' + period.label + '</div>';
-  html += '<div class="os-emoji">' + period.emoji + '</div>';
-  html += '<div class="os-hebrew" style="color:' + textColor + '">' + period.hebrew + '</div>';
-  html += '<div class="os-msg" style="color:' + textColor + '">' + period.msg + '</div>';
-
-  // Checklist items
-  html += '<div class="os-checklist">';
-  period.items.forEach(function(it) {
-    var done = !!state[it.id];
-    html += '<div class="os-check-row' + (done ? ' checked' : '') + '" onclick="event.stopPropagation();toggleObjFromStory(\'' + it.id + '\')">';
-    html += '<div class="os-check-box">' + (done ? '✅' : '☐') + '</div>';
-    html += '<span class="os-check-emoji">' + it.emoji + '</span>';
-    html += '<span class="os-check-label" style="color:' + textColor + '">' + it.label + '</span>';
-    html += '</div>';
-  });
-  html += '</div>';
-
-  document.getElementById('os-content').innerHTML = html;
-  document.getElementById('obj-story-overlay').style.background = period.bg;
-}
-
-function toggleObjFromStory(id) {
-  var state = getObjState();
-  if (state[id]) { delete state[id]; } else { state[id] = new Date().toISOString(); }
-  saveObjState(state);
-  renderObjStoryContent();
-  renderObjectives();
-  // Reset timer on interaction
-  startObjStoryTimer();
-}
-
-function objStoryNext() {
-  if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
-  if (_objStoryIdx < DAILY_PERIODS.length - 1) {
-    _objStoryIdx++;
-    renderObjStoryContent();
-    startObjStoryTimer();
-  } else {
-    closeObjStory();
-  }
-}
-
-function objStoryPrev() {
-  if (_objStoryTimer) { clearTimeout(_objStoryTimer); _objStoryTimer = null; }
-  if (_objStoryIdx > 0) {
-    _objStoryIdx--;
-    renderObjStoryContent();
-    startObjStoryTimer();
-  }
-}
-
-function startObjStoryTimer() {
-  if (_objStoryTimer) clearTimeout(_objStoryTimer);
-  _objStoryTimer = setTimeout(objStoryNext, 8000);
-}
-
-// Auto-show story on app open for current period
-function autoShowObjStory() {
-  var state = getObjState();
-  var itemIdx = getCurrentItemIndex();
-  var it = ALL_OBJ_ITEMS[itemIdx];
-  if (!state[it.id]) {
-    var sessionKey = 'tehilim_story_shown_' + new Date().getHours();
-    if (!sessionStorage.getItem(sessionKey)) {
-      sessionStorage.setItem(sessionKey, '1');
-      setTimeout(function() { openItemStory(itemIdx); }, 600);
-    }
-  }
-}
-
-// ---- HOME CHECKLIST ----
-function renderObjectives() {
-  var container = document.getElementById('obj-list');
-  if (!container) return;
-  var state = getObjState();
-  var checked = countAllChecked(state);
-  var html = '';
-
-  DAILY_PERIODS.forEach(function(period, pi) {
-    var periodDone = countPeriodChecked(period, state);
-    var periodTotal = period.items.length;
-    html += '<div class="obj-period-header" onclick="openObjStory(' + pi + ')">';
-    html += '<span class="obj-period-emoji">' + period.emoji + '</span>';
-    html += '<span class="obj-period-name">' + period.label + '</span>';
-    html += '<span class="obj-period-count">' + periodDone + '/' + periodTotal + '</span>';
-    html += '</div>';
-    period.items.forEach(function(it) {
-      var done = !!state[it.id];
-      html += '<div class="obj-item' + (done ? ' checked' : '') + '" onclick="toggleObjective(\'' + it.id + '\')">';
-      html += '<div class="obj-checkbox"><svg class="obj-check-svg" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
-      html += '<span class="obj-emoji">' + it.emoji + '</span>';
-      html += '<span class="obj-label">' + it.label + '</span>';
-      html += '</div>';
-    });
-  });
-
-  container.innerHTML = html;
-
-  // Completion quote
-  var cqEl = document.getElementById('obj-complete-quote');
-  if (checked === TOTAL_OBJ) {
-    var dayIdx = new Date().getDate() % COMPLETION_QUOTES.length;
-    var cq = COMPLETION_QUOTES[dayIdx];
-    cqEl.innerHTML = '<div class="obj-cq-bravo">🎉 Kol HaKavod !</div><div class="obj-cq-text">« ' + cq.text + ' »</div><div class="obj-cq-source">— ' + cq.source + '</div>';
-    cqEl.classList.add('show');
-  } else {
-    cqEl.classList.remove('show');
-    cqEl.innerHTML = '';
-  }
-
-  // Counter & progress
-  var counter = document.getElementById('obj-counter');
-  if (counter) { counter.textContent = checked + '/' + TOTAL_OBJ; counter.classList.toggle('done', checked === TOTAL_OBJ); }
-  var fill = document.getElementById('obj-progress-fill');
-  if (fill) fill.style.width = (checked / TOTAL_OBJ * 100) + '%';
-  var bigSub = document.getElementById('big-obj-sub');
-  if (bigSub) bigSub.textContent = checked + '/' + TOTAL_OBJ + ' accomplis';
-  var homeFill = document.getElementById('obj-progress-home-fill');
-  if (homeFill) { homeFill.style.width = (checked / TOTAL_OBJ * 100) + '%'; homeFill.style.background = checked === TOTAL_OBJ ? '#16a34a' : ''; }
-  var homePct = document.getElementById('obj-progress-home-pct');
-  if (homePct) { homePct.textContent = Math.round(checked / TOTAL_OBJ * 100) + '%'; homePct.style.color = checked === TOTAL_OBJ ? '#16a34a' : ''; }
-  renderObjStoryBar();
-}
-
-function toggleObjective(id) {
-  var state = getObjState();
-  if (state[id]) { delete state[id]; } else { state[id] = new Date().toISOString(); }
-  saveObjState(state);
-  renderObjectives();
-}
-
-function resetObjectives() {
-  if (!confirm('Réinitialiser tous les objectifs du jour ?')) return;
-  localStorage.removeItem(getObjStorageKey());
-  renderObjectives();
-}
-
-function cleanOldObjectives() {
-  var now = new Date();
-  for (var i = 0; i < localStorage.length; i++) {
-    var key = localStorage.key(i);
-    if (key && key.startsWith('tehilim_obj_')) {
-      var dateStr = key.replace('tehilim_obj_', '');
-      var date = new Date(dateStr);
-      var diff = (now - date) / (1000 * 60 * 60 * 24);
-      if (diff > 7) localStorage.removeItem(key);
-    }
-  }
-}
-
-// ====== CHAINS DE TEHILIM ======
-// --- BACKEND ---
-var CHAIN_API_URL = "https://script.google.com/macros/s/AKfycbyZI_VrGxMU0ecYy5DNFTZEnvPyx-4TU_GVwXarpQ9jkbN_9qko5oAGZmPPsDoa68gG/exec";
-
-var currentChainId = null;
-var _chainUserId = null;
-var _chainUserName = null;
-var _myAssignment = null; // current assigned psalm number
-
-function getChainUserId() {
-  if (_chainUserId) return _chainUserId;
-  _chainUserId = localStorage.getItem('tehilim_user_id');
-  if (!_chainUserId) {
-    _chainUserId = 'u_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
-    localStorage.setItem('tehilim_user_id', _chainUserId);
-  }
-  return _chainUserId;
-}
-
-function getChainUserName() {
-  if (_chainUserName) return _chainUserName;
-  _chainUserName = localStorage.getItem('tehilim_user_name') || '';
-  return _chainUserName;
-}
-
-function setChainUserName(name) {
-  _chainUserName = name;
-  localStorage.setItem('tehilim_user_name', name);
-}
-
-function chainApi(params, callback) {
-  if (!CHAIN_API_URL) { callback({ error: "Backend non configuré" }); return; }
-  var url = CHAIN_API_URL + '?';
-  var keys = Object.keys(params);
-  for (var i = 0; i < keys.length; i++) {
-    if (i > 0) url += '&';
-    url += encodeURIComponent(keys[i]) + '=' + encodeURIComponent(params[keys[i]]);
-  }
-  fetch(url).then(function(r) { return r.json(); })
-    .then(function(data) { callback(data); })
-    .catch(function(err) { callback({ error: err.message }); });
-}
-
-// --- LOCAL STORAGE (fallback + cache) ---
-function getChains() {
-  try { return JSON.parse(localStorage.getItem('tehilim_chains') || '[]'); } catch(e) { return []; }
-}
-function saveChains(chains) {
-  localStorage.setItem('tehilim_chains', JSON.stringify(chains));
-}
-function generateId() {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
-}
-
-var chainTypeLabels = {
-  refoua: '🩺 Réfoua Chéléma',
-  mariage: '💍 Pour le mariage',
-  memoire: '🕯️ À la mémoire',
-  autre: '✨ Autre'
-};
-
-// --- UI: FORM ---
-function showChainForm() {
-  document.getElementById('chain-form').style.display = 'block';
-  document.getElementById('chain-create-section').style.display = 'none';
-  document.getElementById('chain-firstname').value = '';
-  document.getElementById('chain-mothername').value = '';
-  document.getElementById('chain-desc-input').value = '';
-  document.querySelectorAll('.chain-type-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.querySelector('.chain-type-btn[data-type="refoua"]').classList.add('active');
-  var chainSlider = document.querySelector('.chain-benbat-slider .bb-slider-track');
-  if (chainSlider) chainSlider.classList.remove('bat');
-  ensureNamePrompt();
-}
-function hideChainForm() {
-  document.getElementById('chain-form').style.display = 'none';
-  document.getElementById('chain-create-section').style.display = 'block';
-}
-function selectChainType(el) {
-  document.querySelectorAll('.chain-type-btn').forEach(function(b) { b.classList.remove('active'); });
-  el.classList.add('active');
-}
-function getSelectedType() {
-  var active = document.querySelector('.chain-type-btn.active');
-  return active ? active.getAttribute('data-type') : 'refoua';
-}
-
-function ensureNamePrompt() {
-  if (getChainUserName()) return;
-  var name = prompt("Entrez votre prénom (visible par les autres participants) :");
-  if (name && name.trim()) setChainUserName(name.trim());
-}
-
-// --- CREATE CHAIN ---
-function createChain() {
-  var firstname = document.getElementById('chain-firstname').value.trim();
-  var mothername = document.getElementById('chain-mothername').value.trim();
-  if (!firstname) { document.getElementById('chain-firstname').style.borderColor = '#e74c3c'; return; }
-  var bb = getChainBenBat();
-  var name = firstname + ' ' + bb + ' ' + mothername;
-  if (!mothername) name = firstname;
-  ensureNamePrompt();
+// Prénoms hébraïques
+var HEBREW_NAMES = [
+  // === HOMMES (M) ===
+  [['avraham','abraham','avraam'], 'אברהם', 'M'],
+  [['itskhak','itshak','yitshak','yitzhak','isaac','its\'hak'], 'יצחק', 'M'],
+  [['yaakov','yaacov','jacob'], 'יעקב', 'M'],
+  [['moshe','moche','moise'], 'משה', 'M'],
+  [['aharon','aaron','aron'], 'אהרן', 'M'],
+  [['david','davide','dawid'], 'דוד', 'M'],
+  [['shlomo','chelomo','salomon'], 'שלמה', 'M'],
+  [['yossef','yosef','joseph'], 'יוסף', 'M'],
+  [['binyamin','beniamin','benjamin'], 'בנימין', 'M'],
+  [['reuven','reuben','ruben'], 'ראובן', 'M'],
+  [['shimon','chimon','simon','simeon'], 'שמעון', 'M'],
+  [['levi','levy','lewi'], 'לוי', 'M'],
+  [['yehuda','yehouda','juda','judah'], 'יהודה', 'M'],
+  [['dan','dane'], 'דן', 'M'],
+  [['naftali','naphtali'], 'נפתלי', 'M'],
+  [['gad'], 'גד', 'M'],
+  [['asher','acher'], 'אשר', 'M'],
+  [['issachar','issakhar','issakar','issakhar'], 'יששכר', 'M'],
+  [['zevouloun','zevulun','zebulun'], 'זבולון', 'M'],
+  [['menahem','menakhem','menahem','mena\'hem'], 'מנחם', 'M'],
+  [['mendel'], 'מענדל', 'M'],
+  [['menahem mendel','menakhem mendel'], 'מנחם מענדל', 'M'],
+  [['shneur','chneur'], 'שניאור', 'M'],
+  [['shneur zalman','chneur zalman'], 'שניאור זלמן', 'M'],
+  [['zalman','zalmen'], 'זלמן', 'M'],
+  [['dov','dove'], 'דב', 'M'],
+  [['dovber','dov ber','dov bear'], 'דובער', 'M'],
+  [['shmuel','chemuel','samuel','chmuel'], 'שמואל', 'M'],
+  [['eliezer','elieser','elizer'], 'אליעזר', 'M'],
+  [['eliyahou','eliyahu','eliahou','elie','eliaou'], 'אליהו', 'M'],
+  [['yeshaya','yechaya','ishaya','ichaya','isaie'], 'ישעיה', 'M'],
+  [['yeshayahou','yechayahou','isaie'], 'ישעיהו', 'M'],
+  [['yirmeyahou','yirmiyahu','jeremie'], 'ירמיהו', 'M'],
+  [['yekhezkel','yehezkel','ezechiel'], 'יחזקאל', 'M'],
+  [['daniel','danielle'], 'דניאל', 'M'],
+  [['mordekhai','mordehai','mordechai','morde\'hai'], 'מרדכי', 'M'],
+  [['efraim','efrayim','ephraim'], 'אפרים', 'M'],
+  [['menasche','menashe','menache','manasse'], 'מנשה', 'M'],
+  [['yehochoua','yehoshua','josue','yehoshouah'], 'יהושע', 'M'],
+  [['kalev','calev','caleb'], 'כלב', 'M'],
+  [['pinkhas','pin\'has','pinhas','phineas'], 'פינחס', 'M'],
+  [['yona','yonah','jonas'], 'יונה', 'M'],
+  [['nahman','na\'hman','nachman'], 'נחמן', 'M'],
+  [['nathan','natan','nathane'], 'נתן', 'M'],
+  [['netanel','nethaniel','nathanael'], 'נתנאל', 'M'],
+  [['baroukh','barukh','baruch'], 'ברוך', 'M'],
+  [['tsvi','tzvi','zvi','tsevi'], 'צבי', 'M'],
+  [['meir','meier','meyer'], 'מאיר', 'M'],
+  [['haim','chaim','haym','hayim','\'haim'], 'חיים', 'M'],
+  [['raphael','rafael','refael'], 'רפאל', 'M'],
+  [['michael','mikhael','mikael','micha\'el'], 'מיכאל', 'M'],
+  [['gavriel','gabriel','gavri\'el'], 'גבריאל', 'M'],
+  [['ouriel','uriel'], 'אוריאל', 'M'],
+  [['ariel','ari\'el'], 'אריאל', 'M'],
+  [['israel','isra\'el','yisrael','yisra\'el'], 'ישראל', 'M'],
+  [['ari','arye','arié','aryeh'], 'אריה', 'M'],
+  [['zeev','zeev','ze\'ev','wolf'], 'זאב', 'M'],
+  [['nahum','na\'houm','nahoum'], 'נחום', 'M'],
+  [['ovadia','ovadya','obadia'], 'עובדיה', 'M'],
+  [['tsadok','tzadok','zadok'], 'צדוק', 'M'],
+  [['yohai','yokhai','yo\'hai'], 'יוחאי', 'M'],
+  [['yoel','joel'], 'יואל', 'M'],
+  [['amos'], 'עמוס', 'M'],
+  [['eitan','eytan','ethan'], 'איתן', 'M'],
+  [['boaz','bo\'az'], 'בועז', 'M'],
+  [['guershon','gershon','gershom'], 'גרשון', 'M'],
+  [['eldad'], 'אלדד', 'M'],
+  [['elyakim','eliakim'], 'אליקים', 'M'],
+  [['noakh','noa\'h','noah','noe'], 'נח', 'M'],
+  [['hanokh','hanoch','enoch','\'hanokh'], 'חנוך', 'M'],
+  [['nimrod'], 'נמרוד', 'M'],
+  [['oren'], 'אורן', 'M'],
+  [['yishai','ishai','ichay','ishay','yichai','jesse'], 'ישי', 'M'],
+  [['nethanel','netanel'], 'נתנאל', 'M'],
+  [['itamar','ithamar'], 'איתמר', 'M'],
+  [['avishai','avichai'], 'אבישי', 'M'],
+  [['avner','abner'], 'אבנר', 'M'],
+  [['ido'], 'עידו', 'M'],
+  [['gilad','guilad'], 'גלעד', 'M'],
+  [['nadav'], 'נדב', 'M'],
+  [['oded'], 'עודד', 'M'],
+  [['yotam','yotham','jotham'], 'יותם', 'M'],
+  [['yigal','yigael'], 'יגאל', 'M'],
+  [['amit'], 'עמית', 'M'],
+  [['tomer'], 'תומר', 'M'],
+  [['noam'], 'נועם', 'M'],
+  [['ori'], 'אורי', 'M'],
+  [['roi','roï'], 'רועי', 'M'],
+  [['tal'], 'טל', 'U'],
+  [['maayan','ma\'ayan'], 'מעיין', 'U'],
+  [['shahar','sha\'har','cha\'har'], 'שחר', 'U'],
+  [['yarden','yardene'], 'ירדן', 'U'],
+  [['oz'], 'עוז', 'M'],
+  [['omer'], 'עומר', 'M'],
+  [['amir'], 'אמיר', 'M'],
+  [['ilan'], 'אילן', 'M'],
+  [['ofir'], 'אופיר', 'M'],
+  [['nir'], 'ניר', 'M'],
+  [['erez'], 'ארז', 'M'],
+  [['lior'], 'ליאור', 'M'],
+  [['matan','mathan'], 'מתן', 'M'],
+  [['dvir'], 'דביר', 'M'],
+  [['yogev'], 'יוגב', 'M'],
+  [['yonatan','yonathan','jonathan'], 'יונתן', 'M'],
+  [['elad','ellade'], 'אלעד', 'M'],
+  [['assaf'], 'אסף', 'M'],
+  [['guy','gui'], 'גיא', 'M'],
+  [['shaoul','shaul','saul'], 'שאול', 'M'],
+  [['shmoulik','shmulik'], 'שמוליק', 'M'],
+  [['avigdor','abigdor'], 'אביגדור', 'M'],
+  [['avital'], 'אביטל', 'U'],
+  [['avia'], 'אביה', 'U'],
+  [['aviad'], 'אביעד', 'M'],
+  [['achinoam','ahinoam'], 'אחינועם', 'F'],
+  [['adin'], 'עדין', 'M'],
+  [['adom','adam'], 'אדם', 'M'],
+  [['agam'], 'אגם', 'U'],
+  [['akiva','akiba'], 'עקיבא', 'M'],
+  [['alon'], 'אלון', 'M'],
+  [['amnon'], 'אמנון', 'M'],
+  [['amram'], 'עמרם', 'M'],
+  [['aryeh','arieh'], 'אריה', 'M'],
+  [['asaf'], 'אסף', 'M'],
+  [['ayala','ayalah'], 'איילה', 'F'],
+  [['azriel','azri\'el'], 'עזריאל', 'M'],
+  [['batsion','bat tsion','bat tsiyon'], 'בת ציון', 'F'],
+  [['benyamin','benjamin'], 'בנימין', 'M'],
+  [['bezalel','betsalel','betzalel'], 'בצלאל', 'M'],
+  [['elazar','eleazar'], 'אלעזר', 'M'],
+  [['elimelekh','elimelech'], 'אלימלך', 'M'],
+  [['elisha','elicha'], 'אלישע', 'M'],
+  [['emmanuel','imanuel','immanouel'], 'עמנואל', 'M'],
+  [['gamliel','gamaliel'], 'גמליאל', 'M'],
+  [['gershon','guershon'], 'גרשון', 'M'],
+  [['gideon','guideon'], 'גדעון', 'M'],
+  [['hillel','hilel'], 'הלל', 'M'],
+  [['hiram','\'hiram'], 'חירם', 'M'],
+  [['ido','iddo'], 'עידו', 'M'],
+  [['ilan'], 'אילן', 'M'],
+  [['lev','lev'], 'לב', 'M'],
+  [['matan'], 'מתן', 'M'],
+  [['matityahou','matityahu','matthias','matisyahu'], 'מתתיהו', 'M'],
+  [['nahshon','nakhshon','nachshon','na\'hchon'], 'נחשון', 'M'],
+  [['oren'], 'אורן', 'M'],
+  [['shai','shay'], 'שי', 'M'],
+  [['shamgar','chamgar'], 'שמגר', 'M'],
+  [['shalom','chalom'], 'שלום', 'M'],
+  [['shimshon','chimchon','samson'], 'שמשון', 'M'],
+  [['shimon','chimon'], 'שמעון', 'M'],
+  [['tzion','tsion','sion'], 'ציון', 'M'],
+  [['yaaков'], 'יעקב', 'M'],
+  [['yo\'el','yoel'], 'יואל', 'M'],
+  [['yoav','joab'], 'יואב', 'M'],
+  [['yossi','yosi'], 'יוסי', 'M'],
+  [['zekharya','zekharia','zacharie','zechariah','za\'haria'], 'זכריה', 'M'],
+  [['tsemakh','tsemah','zemakh','tsema\'h'], 'צמח', 'M'],
+  [['shmouel','chmuel'], 'שמואל', 'M'],
+  [['yitzhak','yits\'hak'], 'יצחק', 'M'],
+  [['shelomo','chelomo'], 'שלמה', 'M'],
+  [['shimshin'], 'שמשון', 'M'],
+  [['shmaryahou','shmaryahu','chemaryahou'], 'שמריהו', 'M'],
+  [['shmarya','chemarya'], 'שמריה', 'M'],
+  [['yehiel','ye\'hiel'], 'יחיאל', 'M'],
+  [['nissan','nisan','nissane'], 'ניסן', 'M'],
+  [['nisim','nissim'], 'ניסים', 'M'],
+  [['yaron'], 'ירון', 'M'],
+  [['ronen'], 'רונן', 'M'],
+  [['ron'], 'רון', 'M'],
+  [['yehonatan','yehonathan'], 'יהונתן', 'M'],
+  [['barak','baraq'], 'ברק', 'M'],
+  [['moti'], 'מוטי', 'M'],
+  [['avi'], 'אבי', 'M'],
+  [['dror'], 'דרור', 'M'],
+  [['yossef haim','yosef haim','yosef chaim'], 'יוסף חיים', 'M'],
+  [['shlomo yitshak','chelomo yitshak','rachi'], 'שלמה יצחק', 'M'],
+  [['yaakov israel','yaacov israel'], 'יעקב ישראל', 'M'],
+  [['simha','sim\'ha','simkha'], 'שמחה', 'M'],
+  [['pessakh','pessah','pessa\'h'], 'פסח', 'M'],
+  [['yedidia','yedidya','jedidiah'], 'ידידיה', 'M'],
+  [['yoshiyahou','josias','yoshiyahu'], 'יאשיהו', 'M'],
+  [['nerya','neriya'], 'נריה', 'M'],
+  [['ouriya','uriya','uriyah','ouriyah'], 'אוריה', 'M'],
+  [['ovadiya','obadiah'], 'עובדיה', 'M'],
+  [['shabtai','chabtai'], 'שבתי', 'M'],
+  [['shraga'], 'שרגא', 'M'],
+  [['shmaya','shemaya','chemaya'], 'שמעיה', 'M'],
+  [['tuvya','tuvia','tobie','touvya'], 'טוביה', 'M'],
+  [['tzfanya','tsefanya','tsefania','sophonie'], 'צפניה', 'M'],
+  [['yekutiel','yekoutiel'], 'יקותיאל', 'M'],
+  [['yair','yaïr'], 'יאיר', 'M'],
+  [['yiftakh','yiftach','jephte'], 'יפתח', 'M'],
+  [['yokheved','yokhaved'], 'יוכבד', 'F'],
+  [['zohar'], 'זהר', 'U'],
+  [['ziv'], 'זיו', 'M'],
   
-  var chain = {
-    id: generateId(),
-    type: getSelectedType(),
-    name: name,
-    description: document.getElementById('chain-desc-input').value.trim(),
-    created: new Date().toISOString(),
-    psalmsRead: [], psalmsAssigned: [],
-    cycles: 0, nextPsalm: 1,
-    participantCount: 1, synced: false
-  };
-  
-  if (CHAIN_API_URL) {
-    chainApi({
-      action: 'createChain',
-      type: chain.type, name: chain.name,
-      description: chain.description,
-      userId: getChainUserId(),
-      userName: getChainUserName() || 'Créateur'
-    }, function(result) {
-      if (result.success && result.chainId) {
-        chain.id = result.chainId;
-        chain.synced = true;
-      }
-      var chains = getChains();
-      chains.unshift(chain);
-      saveChains(chains);
-      hideChainForm();
-      renderChainList();
-      openChainDetail(chain.id);
-    });
-  } else {
-    var chains = getChains();
-    chains.unshift(chain);
-    saveChains(chains);
-    hideChainForm();
-    renderChainList();
-    openChainDetail(chain.id);
-  }
-}
-
-// --- LIST ---
-function renderChainList() {
-  var chains = getChains();
-  var list = document.getElementById('chain-list');
-  if (chains.length === 0) {
-    list.innerHTML = '<div class="chain-empty"><div style="font-size:40px;margin-bottom:12px">🔗</div>Aucune chaîne pour le moment.<br>Créez-en une pour commencer !</div>';
-    return;
-  }
-  var html = '';
-  chains.forEach(function(c) {
-    var readLen = (c.psalmsRead || []).length;
-    var progress = Math.round((readLen / 150) * 100);
-    var typeLabel = c.type === 'refoua' ? 'Réfoua' : c.type === 'mariage' ? 'Mariage' : c.type === 'memoire' ? 'Mémoire' : 'Autre';
-    var dateStr = new Date(c.created).toLocaleDateString('fr-FR', { day:'numeric', month:'short' });
-    html += '<div class="chain-card" onclick="openChainDetail(\'' + c.id + '\')">';
-    html += '<div class="chain-card-top"><span class="chain-card-type ' + c.type + '">' + typeLabel + '</span>';
-    if (c.participantCount > 1) html += '<span class="chain-card-date">👥 ' + c.participantCount + '</span>';
-    html += '<span class="chain-card-date">' + dateStr + '</span></div>';
-    html += '<div class="chain-card-name">' + escapeHtml(c.name) + '</div>';
-    if (c.description) html += '<div class="chain-card-descr">' + escapeHtml(c.description) + '</div>';
-    html += '<div class="chain-card-progress"><div class="chain-progress-bar"><div class="chain-progress-fill" style="width:' + progress + '%"></div></div>';
-    html += '<span class="chain-progress-text">' + readLen + '/150' + (c.cycles > 0 ? ' · Cycle ' + (c.cycles + 1) : '') + '</span></div>';
-    html += '</div>';
-  });
-  list.innerHTML = html;
-}
-
-function escapeHtml(t) {
-  var d = document.createElement('div'); d.textContent = t; return d.innerHTML;
-}
-
-// --- OPEN DETAIL ---
-function openChainDetail(id) {
-  currentChainId = id;
-  var content = document.getElementById('chain-detail-content');
-  content.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--gray-3)"><div style="font-size:28px;margin-bottom:12px">⏳</div>Chargement de la chaîne...</div>';
-  switchTab('chain-detail');
-  
-  if (CHAIN_API_URL) {
-    chainApi({ action: 'getChain', chainId: id }, function(result) {
-      if (result.success && result.chain) {
-        var sc = result.chain;
-        // Update local cache
-        var chains = getChains();
-        var idx = chains.findIndex(function(c) { return c.id === id; });
-        var localChain = {
-          id: sc.id, type: sc.type, name: sc.name,
-          description: sc.description || '', created: sc.createdAt,
-          psalmsRead: sc.psalmsRead || [], psalmsAssigned: sc.psalmsAssigned || [],
-          cycles: sc.cycles || 0, participantCount: sc.participantCount || 0,
-          synced: true
-        };
-        if (idx >= 0) chains[idx] = localChain;
-        else chains.unshift(localChain);
-        saveChains(chains);
-        renderChainDetailV2(sc);
-      } else {
-        // Fallback local
-        var chains = getChains();
-        var chain = chains.find(function(c) { return c.id === id; });
-        if (chain) renderChainDetailLocal(chain);
-        else content.innerHTML = '<div style="text-align:center;padding:40px;color:#e74c3c">Chaîne non trouvée</div>';
-      }
-    });
-  } else {
-    var chains = getChains();
-    var chain = chains.find(function(c) { return c.id === id; });
-    if (chain) renderChainDetailLocal(chain);
-  }
-}
-
-// --- RENDER DETAIL v2 (with server data) ---
-function renderChainDetailV2(sc) {
-  var content = document.getElementById('chain-detail-content');
-  var progress = sc.progress || 0;
-  var typeLabel = chainTypeLabels[sc.type] || sc.type;
-
-  var html = '';
-  
-  // Header
-  html += '<div class="chain-detail-header">';
-  html += '<div class="chain-detail-type" style="background:' + getTypeColor(sc.type) + '">' + typeLabel + '</div>';
-  html += '<div class="chain-detail-name">' + escapeHtml(sc.name) + '</div>';
-  if (sc.description) html += '<div class="chain-detail-desc">' + escapeHtml(sc.description) + '</div>';
-  html += '</div>';
-
-  // Stats bar
-  html += '<div style="display:flex;gap:8px;margin:0 16px 16px;flex-wrap:wrap">';
-  html += '<div class="chain-stat-pill">👥 ' + (sc.participantCount || 0) + ' participant' + ((sc.participantCount || 0) > 1 ? 's' : '') + '</div>';
-  html += '<div class="chain-stat-pill">📖 ' + (sc.totalReadAllTime || 0) + ' lecture' + ((sc.totalReadAllTime || 0) > 1 ? 's' : '') + ' au total</div>';
-  if (sc.cycles > 0) html += '<div class="chain-stat-pill">🔄 ' + sc.cycles + ' cycle' + (sc.cycles > 1 ? 's' : '') + ' complété' + (sc.cycles > 1 ? 's' : '') + '</div>';
-  html += '</div>';
-
-  // Progress wheel
-  html += '<div class="chain-wheel">';
-  html += '<div class="chain-wheel-ring" style="background:conic-gradient(#ee2a7b 0% ' + progress + '%, var(--gray-5) ' + progress + '% 100%)">';
-  html += '<div class="chain-wheel-inner">';
-  html += '<div class="chain-wheel-count">' + sc.totalRead + '<span style="font-size:16px;color:var(--gray-3)">/150</span></div>';
-  html += '<div class="chain-wheel-label">psaumes lus</div>';
-  if (sc.cycles > 0) html += '<div class="chain-wheel-cycle">Cycle ' + (sc.cycles + 1) + '</div>';
-  html += '</div></div></div>';
-
-  // My assignment / Join button
-  html += '<div id="chain-assignment-section" style="margin:0 16px 16px">';
-  html += '<div style="text-align:center;padding:12px;color:var(--gray-3);font-size:12px">Chargement de votre psaume...</div>';
-  html += '</div>';
-
-  // Grid
-  html += '<div class="chain-psalms-grid">';
-  for (var i = 1; i <= 150; i++) {
-    var cls = 'chain-psalm-cell';
-    if (sc.psalmsRead.indexOf(i) !== -1) cls += ' read';
-    else if (sc.psalmsAssigned.indexOf(i) !== -1) cls += ' assigned';
-    html += '<div class="' + cls + '">' + i + '</div>';
-  }
-  html += '</div>';
-
-  // Legend
-  html += '<div style="display:flex;gap:16px;justify-content:center;margin:8px 16px 16px;font-size:11px;color:var(--gray-3)">';
-  html += '<span>⬜ Disponible</span><span style="color:#f39c12">🟧 Attribué</span><span style="color:#ee2a7b">✅ Lu</span>';
-  html += '</div>';
-
-  // Reader stats
-  if (sc.readerStats && Object.keys(sc.readerStats).length > 0) {
-    html += '<div class="cem-section-title" style="font-size:12px">🏆 Classement des lecteurs</div>';
-    var sorted = Object.entries(sc.readerStats).sort(function(a,b) { return b[1] - a[1]; });
-    html += '<div style="margin:0 16px 16px">';
-    sorted.forEach(function(entry, idx) {
-      var medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '📖';
-      html += '<div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--white);border:1px solid var(--gray-5);border-radius:8px;margin-bottom:4px;font-size:13px">';
-      html += '<span>' + medal + ' ' + escapeHtml(entry[0]) + '</span>';
-      html += '<span style="font-weight:700;color:var(--black)">' + entry[1] + ' psaumes</span>';
-      html += '</div>';
-    });
-    html += '</div>';
-  }
-
-  // Share
-  html += '<div class="chain-share-section">';
-  html += '<button class="chain-share-btn" onclick="shareChain()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
-  html += '</div>';
-
-  // Delete
-  html += '<button class="chain-delete-btn" onclick="deleteChain()">🗑️ Supprimer cette chaîne</button>';
-
-  content.innerHTML = html;
-  
-  // Load my assignment
-  loadMyAssignment(sc);
-}
-
-function loadMyAssignment(sc) {
-  var section = document.getElementById('chain-assignment-section');
-  if (!section) return;
-  
-  chainApi({ 
-    action: 'getMyAssignment', 
-    chainId: currentChainId, 
-    userId: getChainUserId() 
-  }, function(result) {
-    if (result.success) {
-      _myAssignment = result.assignedPsalm;
-      var html = '';
-      if (result.assignedPsalm) {
-        html += '<div style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:16px;padding:20px;text-align:center;color:white">';
-        html += '<div style="font-size:12px;opacity:0.8;margin-bottom:4px">Votre psaume à lire</div>';
-        html += '<div style="font-size:36px;font-weight:700;font-family:Noto Serif Hebrew,serif;margin-bottom:8px">תהלים ' + toHebrewNumeral(result.assignedPsalm) + '</div>';
-        html += '<div style="font-size:14px;margin-bottom:12px">Tehilim ' + result.assignedPsalm + '</div>';
-        html += '<button onclick="readMyAssignment()" style="background:white;color:#764ba2;border:none;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font)">📖 Lire maintenant</button>';
-        html += '</div>';
-        if (result.myTotalRead > 0) {
-          html += '<div style="text-align:center;margin-top:8px;font-size:12px;color:var(--gray-3)">Vous avez lu ' + result.myTotalRead + ' psaume' + (result.myTotalRead > 1 ? 's' : '') + ' au total</div>';
-        }
-      } else {
-        // No assignment yet - need to join
-        html += '<button onclick="joinCurrentChain()" class="chain-next-btn" style="width:100%">🤝 Rejoindre et recevoir un psaume</button>';
-      }
-      section.innerHTML = html;
-    }
-  });
-}
-
-function joinCurrentChain() {
-  ensureNamePrompt();
-  var section = document.getElementById('chain-assignment-section');
-  if (section) section.innerHTML = '<div style="text-align:center;padding:16px;color:var(--gray-3)">Attribution en cours...</div>';
-  
-  chainApi({
-    action: 'joinChain',
-    chainId: currentChainId,
-    userId: getChainUserId(),
-    userName: getChainUserName() || 'Anonyme'
-  }, function(result) {
-    if (result.success && result.assignedPsalm) {
-      _myAssignment = result.assignedPsalm;
-      // Refresh the whole detail
-      openChainDetail(currentChainId);
-    } else if (result.success && !result.assignedPsalm) {
-      if (section) section.innerHTML = '<div style="text-align:center;padding:16px;font-size:14px">🎉 Tous les psaumes sont attribués pour ce cycle !</div>';
-    } else {
-      if (section) section.innerHTML = '<div style="text-align:center;padding:16px;color:#e74c3c">' + (result.error || 'Erreur') + '</div>';
-    }
-  });
-}
-
-function readMyAssignment() {
-  if (!_myAssignment) return;
-  var psalmData = TEHILIM.find(function(p) { return p.number === _myAssignment; });
-  if (!psalmData) {
-    alert('Tehilim ' + _myAssignment + ' bientôt disponible');
-    return;
-  }
-  browseSource = 'chain';
-  window._chainPsalmNum = _myAssignment;
-  availablePsalms = [psalmData];
-  currentPsalm = 0;
-  currentScreen = 'reading';
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('reading').style.display = 'flex';
-  window.scrollTo(0, 0);
-  document.getElementById('reading').scrollTop = 0;
-  renderReading();
-}
-
-// --- LOCAL FALLBACK RENDER ---
-function renderChainDetailLocal(chain) {
-  var content = document.getElementById('chain-detail-content');
-  var readLen = (chain.psalmsRead || []).length;
-  var progress = Math.round((readLen / 150) * 100);
-  var typeLabel = chainTypeLabels[chain.type] || chain.type;
-
-  var html = '<div class="chain-detail-header">';
-  html += '<div class="chain-detail-type" style="background:' + getTypeColor(chain.type) + '">' + typeLabel + '</div>';
-  html += '<div class="chain-detail-name">' + escapeHtml(chain.name) + '</div>';
-  if (chain.description) html += '<div class="chain-detail-desc">' + escapeHtml(chain.description) + '</div>';
-  html += '</div>';
-
-  html += '<div class="chain-wheel">';
-  html += '<div class="chain-wheel-ring" style="background:conic-gradient(#ee2a7b 0% ' + progress + '%, var(--gray-5) ' + progress + '% 100%)">';
-  html += '<div class="chain-wheel-inner">';
-  html += '<div class="chain-wheel-count">' + readLen + '<span style="font-size:16px;color:var(--gray-3)">/150</span></div>';
-  html += '<div class="chain-wheel-label">psaumes lus</div>';
-  html += '</div></div></div>';
-
-  html += '<div style="text-align:center;padding:12px;font-size:12px;color:var(--gray-3)">⚠️ Mode hors ligne · Les données ne sont pas synchronisées</div>';
-
-  html += '<div class="chain-share-section">';
-  html += '<button class="chain-share-btn" onclick="shareChain()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
-  html += '</div>';
-  html += '<button class="chain-delete-btn" onclick="deleteChain()">🗑️ Supprimer cette chaîne</button>';
-
-  content.innerHTML = html;
-}
-
-function getTypeColor(type) {
-  if (type === 'refoua') return '#e74c3c';
-  if (type === 'mariage') return '#9b59b6';
-  if (type === 'memoire') return '#2c3e50';
-  return '#27ae60';
-}
-
-// --- READING FLOW ---
-function readNextPsalm() {
-  readMyAssignment();
-}
-
-function backToChains() {
-  switchTab('chains');
-  currentChainId = null;
-  _myAssignment = null;
-}
-
-function deleteChain() {
-  if (!confirm('Supprimer cette chaîne ?')) return;
-  var chains = getChains();
-  chains = chains.filter(function(c) { return c.id !== currentChainId; });
-  saveChains(chains);
-  backToChains();
-}
-
-function getChainShareUrl() {
-  var base = window.location.href.split('?')[0].split('#')[0];
-  return base + '?chain=' + currentChainId;
-}
-
-function sharePsalm(num) {
-  var url = window.location.href.split('?')[0].split('#')[0];
-  var text = '📖 Tehilim ' + num + ' · תהלים ' + toHebrewNumeral(num);
-  if (browseSource === 'chain') {
-    var chains = getChains();
-    var chain = chains.find(function(c) { return c.id === currentChainId; });
-    if (chain) {
-      text += '\n\n' + chainTypeLabels[chain.type] + ' · ' + chain.name;
-    }
-  }
-  text += '\n\n📲 Chab\'app — ' + url;
-  if (navigator.share) {
-    navigator.share({ title: 'Tehilim ' + num, text: text }).catch(function(){});
-  } else if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(function() { alert('Copié dans le presse-papier !'); });
-  } else {
-    prompt('Copiez ce texte :', text);
-  }
-}
-
-function updateHomeNav(activeTab) {
-  var nav = document.getElementById('home-nav');
-  if (!nav) return;
-  var items = nav.querySelectorAll('.insta-nav-item, .insta-nav-center');
-  items.forEach(function(item) { item.classList.remove('active'); });
-  var tabMap = { menu: 0, 'sub-sidour': 1, 'sub-sidour-patakh': 1, 'sub-objectifs': 2, 'sub-tehilim': 3, 'sub-etudes': 4, 'sub-club': 0, 'sub-beth': 0, jour: 0, chains: 0, 'chain-detail': 0, perek: 3, birthday: 0 };
-  var idx = tabMap[activeTab];
-  if (idx !== undefined && items[idx]) items[idx].classList.add('active');
-}
-
-function shareChain() {
-  var chains = getChains();
-  var chain = chains.find(function(c) { return c.id === currentChainId; });
-  if (!chain) return;
-  var shareUrl = getChainShareUrl();
-  var text = chainTypeLabels[chain.type] + ' · ' + chain.name;
-  if (chain.description) text += '\n' + chain.description;
-  text += '\n\n📖 Rejoignez la chaîne de Tehilim ! Chaque participant reçoit un psaume unique à lire.';
-  text += '\n\n📲 Chab\'app — ' + shareUrl;
-  if (navigator.share) {
-    navigator.share({ title: 'Chaîne de Tehilim', text: text }).catch(function(){});
-  } else if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(function() { alert('Copié !'); });
-  }
-}
-
-// --- SHARED CHAIN URL ---
-function checkSharedChain() {
-  if (window._sharedChainChecked) return;
-  window._sharedChainChecked = true;
-  var params = new URLSearchParams(window.location.search);
-  var chainId = params.get('chain');
-  if (!chainId) return;
-  
-  // Save in local list if not present
-  var chains = getChains();
-  var exists = chains.find(function(c) { return c.id === chainId; });
-  if (!exists) {
-    chains.unshift({ id: chainId, type: 'autre', name: 'Chargement...', created: new Date().toISOString(), psalmsRead: [], synced: true });
-    saveChains(chains);
-  }
-  
-  // Open chain detail (will load from API)
-  setTimeout(function() { openChainDetail(chainId); }, 300);
-}
-
-// ====== HAYOM YOM (Hebrew date calc + Sefaria JSONP) ======
-var _hyyExpanded = false;
-function toggleHyy(e) {
-  var txt = document.getElementById('hyy-text');
-  var exp = document.getElementById('hyy-expand');
-  if (!txt || txt.querySelector('.hyy-loading')) return;
-  _hyyExpanded = !_hyyExpanded;
-  if (_hyyExpanded) {
-    txt.classList.add('expanded');
-    exp.textContent = 'R\u00e9duire \u25b4';
-  } else {
-    txt.classList.remove('expanded');
-    exp.textContent = 'Lire la suite \u25be';
-  }
-}
-
-// ---- Pure JS Hebrew date converter ----
-function _hyyFloor(x){return Math.floor(x);}
-function _hyyMod(x,y){return x-y*_hyyFloor(x/y);}
-function _hyyHebElapsedDays(y){
-  var m=_hyyFloor((235*y-234)/19);
-  var p=12084+13753*m;
-  var d=29*m+_hyyFloor(p/25920);
-  if(_hyyMod(3*(d+1),7)<3)d++;
-  return d;
-}
-function _hyyHebYearDays(y){return _hyyHebElapsedDays(y+1)-_hyyHebElapsedDays(y);}
-function _hyyIsLeap(y){return _hyyMod(7*y+1,19)<7;}
-function _hyyHebMonthDays(y,m){
-  // m: 1=Tishrei(30),2=Cheshvan(29/30),3=Kislev(29/30),4=Tevet(29),5=Shevat(30)
-  // 6=AdarI(30leap/29),7=AdarII(29leap/0),8=Nisan(30),9=Iyyar(29),10=Sivan(30)
-  // 11=Tammuz(29),12=Av(30),13=Elul(29)
-  if(m==2)return _hyyHebYearDays(y)%10==5?30:29;
-  if(m==3)return _hyyHebYearDays(y)%10!=3?30:29;
-  if(m==4)return 29;
-  if(m==6)return _hyyIsLeap(y)?30:29;
-  if(m==7)return _hyyIsLeap(y)?29:0;
-  if(m==9||m==11||m==13)return 29;
-  return 30;
-}
-function _hyyGregToAbs(gy,gm,gd){
-  var a=_hyyFloor((gy-1)/4)-_hyyFloor((gy-1)/100)+_hyyFloor((gy-1)/400);
-  var b=365*(gy-1)+a+gd;
-  var ml=[0,31,28,31,30,31,30,31,31,30,31,30];
-  for(var i=1;i<gm;i++){b+=ml[i];}
-  if(gm>2&&((gy%4==0&&gy%100!=0)||gy%400==0))b++;
-  return b;
-}
-function gregToHebrew(gy,gm,gd){
-  var abs=_hyyGregToAbs(gy,gm,gd);
-  // Approximate Hebrew year
-  var hy=gy+3760;
-  // Hebrew epoch offset (calibrated: abs(1 Tishrei Y) = elapsed(Y) + epoch)
-  var epoch=-1373427;
-  // Use elapsed days to find year
-  while(_hyyHebElapsedDays(hy+1)+epoch<=abs)hy++;
-  while(_hyyHebElapsedDays(hy)+epoch>abs)hy--;
-  var dayInYear=abs-(_hyyHebElapsedDays(hy)+epoch)+1;
-  var hm=1,md;
-  var monthOrder=_hyyIsLeap(hy)?[1,2,3,4,5,6,7,8,9,10,11,12,13]:[1,2,3,4,5,6,8,9,10,11,12,13];
-  for(var i=0;i<monthOrder.length;i++){
-    md=_hyyHebMonthDays(hy,monthOrder[i]);
-    if(dayInYear<=md){hm=monthOrder[i];break;}
-    dayInYear-=md;
-  }
-  var hd=dayInYear;
-  var names={1:'Tishrei',2:'Cheshvan',3:'Kislev',4:'Tevet',5:'Shevat',6:'Adar I',7:'Adar II',8:'Nisan',9:'Iyyar',10:'Sivan',11:'Tammuz',12:'Av',13:'Elul'};
-  // If not leap year, Adar I is just "Adar"
-  var mName=names[hm]||'';
-  if(hm==6&&!_hyyIsLeap(hy))mName='Adar';
-  return {hy:hy,hm:hm,hd:hd,mName:mName};
-}
-
-
-// HaYom Yom: month index mapping for Sefaria-Export dataset
-// text[0]=Tishrei, text[1]=Cheshvan, ..., text[4]=Shevat, text[5]=Adar/AdarI, text[6]=AdarII, text[7]=Nisan, ..., text[12]=Elul
-// ====== SHABBAT TIMES (Hebcal API) ======
-var _shabbatDefaultLat = 48.8566;
-var _shabbatDefaultLng = 2.3522;
-var _shabbatDefaultTz = 'Europe/Paris';
-var _shabbatDefaultCity = 'Paris';
-
-function loadShabbatTimes() {
-  var cacheKey = 'tehilim_shabbat_v2_' + new Date().toISOString().slice(0,10);
-  // Check cache first
-  try {
-    var cached = JSON.parse(localStorage.getItem(cacheKey));
-    if (cached) { renderShabbatCard(cached); return; }
-  } catch(e) {}
-
-  // Try geolocation, fallback to Paris
-  if (navigator.geolocation) {
-    var _geoTimedOut = false;
-    var _geoTimer = setTimeout(function() {
-      _geoTimedOut = true;
-      _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
-    }, 3000);
-    navigator.geolocation.getCurrentPosition(
-      function(pos) {
-        if (_geoTimedOut) return;
-        clearTimeout(_geoTimer);
-        _fetchShabbatTimes(pos.coords.latitude, pos.coords.longitude, null, cacheKey);
-      },
-      function() {
-        if (_geoTimedOut) return;
-        clearTimeout(_geoTimer);
-        _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
-      },
-      { timeout: 3000 }
-    );
-  } else {
-    _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
-  }
-}
-
-function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
-  // Detect timezone
-  var tzid = _shabbatDefaultTz;
-  try { tzid = Intl.DateTimeFormat().resolvedOptions().timeZone || _shabbatDefaultTz; } catch(e) {}
-
-  var url = 'https://www.hebcal.com/shabbat?cfg=json&geo=pos&latitude=' + lat.toFixed(4) + '&longitude=' + lng.toFixed(4) + '&tzid=' + encodeURIComponent(tzid) + '&M=on&b=18';
-  console.log('Shabbat: fetching', url);
-
-  fetch(url)
-    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data) {
-      var result = _parseShabbatData(data, cityName);
-      if (result) {
-        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-        renderShabbatCard(result);
-      }
-    })
-    .catch(function(err) {
-      console.log('Shabbat: API error:', err.message);
-      // Fallback: show card with default Paris data
-      renderShabbatCard({
-        parasha: '', parashaHe: '',
-        candles: '--:--', havdalah: '--:--',
-        candleDate: '', havdalahDate: '',
-        candleHeDate: '', havdalahHeDate: '',
-        location: _shabbatDefaultCity
-      });
-    });
-}
-
-function _parseShabbatData(data, cityName) {
-  var items = data.items || [];
-  var candleDate = null, havdalahDate = null, candleTime = '', havdalahTime = '', parasha = '', parashaHe = '';
-
-  for (var i = 0; i < items.length; i++) {
-    var it = items[i];
-    if (it.category === 'candles') {
-      candleTime = _formatHebcalTime(it.date);
-      candleDate = new Date(it.date);
-    } else if (it.category === 'havdalah') {
-      havdalahTime = _formatHebcalTime(it.date);
-      havdalahDate = new Date(it.date);
-    } else if (it.category === 'parashat') {
-      parasha = (it.title || '').replace('Parashat ', '');
-      parashaHe = it.hebrew || '';
-    }
-  }
-
-  if (!candleTime) candleTime = '--:--';
-
-  var friday = candleDate || new Date();
-  var saturday = havdalahDate || new Date(friday);
-  if (!havdalahDate) saturday.setDate(saturday.getDate() + 1);
-
-  var _pad = function(n) { return n < 10 ? '0' + n : '' + n; };
-  var candleDateStr = _pad(friday.getDate()) + '/' + _pad(friday.getMonth() + 1);
-  var havdalahDateStr = _pad(saturday.getDate()) + '/' + _pad(saturday.getMonth() + 1);
-
-  // Hebrew dates
-  var candleHeb = gregToHebrew(friday.getFullYear(), friday.getMonth() + 1, friday.getDate());
-  var havdalahHeb = gregToHebrew(saturday.getFullYear(), saturday.getMonth() + 1, saturday.getDate());
-  var candleHeDateStr = candleHeb.hd + ' ' + candleHeb.mName;
-  var havdalahHeDateStr = havdalahHeb.hd + ' ' + havdalahHeb.mName;
-
-  var location = cityName || (data.location ? (data.location.city || data.location.title || _shabbatDefaultCity) : _shabbatDefaultCity);
-
-  return {
-    parasha: parasha,
-    parashaHe: parashaHe,
-    candles: candleTime,
-    havdalah: havdalahTime,
-    candleDate: candleDateStr,
-    havdalahDate: havdalahDateStr,
-    candleHeDate: candleHeDateStr,
-    havdalahHeDate: havdalahHeDateStr,
-    location: location
-  };
-}
-
-function _formatHebcalTime(isoStr) {
-  try {
-    var d = new Date(isoStr);
-    var h = d.getHours();
-    var m = d.getMinutes();
-    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
-  } catch(e) { return ''; }
-}
-
-function renderShabbatCard(data) {
-  var card = document.getElementById('shabbat-card');
-  if (!card || !data) return;
-  var parashaEl = document.getElementById('shabbat-parasha');
-  var parashaHeEl = document.getElementById('shabbat-parasha-he');
-  if (data.parasha) {
-    parashaEl.textContent = data.parasha;
-    parashaHeEl.textContent = data.parashaHe || '';
-  } else {
-    parashaEl.textContent = 'Chabbat';
-    parashaHeEl.textContent = 'שבת';
-  }
-  // Smart badge (removed from UI)
-  var now = new Date();
-  var day = now.getDay();
-  document.getElementById('shabbat-candles').textContent = data.candles || '--:--';
-  document.getElementById('shabbat-havdalah').textContent = data.havdalah || '--:--';
-  document.getElementById('shabbat-candles-date').textContent = data.candleDate || '';
-  document.getElementById('shabbat-havdalah-date').textContent = data.havdalahDate || '';
-  document.getElementById('shabbat-candles-hedate').textContent = data.candleHeDate || '';
-  document.getElementById('shabbat-havdalah-hedate').textContent = data.havdalahHeDate || '';
-  // City
-  var cityEl = document.getElementById('shabbat-city');
-  if (cityEl && data.location) cityEl.textContent = '🇫🇷 ' + data.location;
-  // Background image from Wikipedia
-  _loadCityImage(data.location);
-  card.style.display = '';
-}
-
-function _loadCityImage(city) {
-  if (!city) return;
-  var bgEl = document.getElementById('shabbat-bg');
-  if (!bgEl) return;
-  // Check cache
-  var cacheKey = 'shabbat_img_' + city.toLowerCase().replace(/\s+/g, '_');
-  var cachedUrl = null;
-  try { cachedUrl = localStorage.getItem(cacheKey); } catch(e) {}
-  if (cachedUrl) {
-    bgEl.style.backgroundImage = 'url(' + cachedUrl + ')';
-    bgEl.classList.add('loaded');
-    return;
-  }
-  // Fetch from Wikipedia
-  var wikiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(city);
-  fetch(wikiUrl)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      var imgUrl = d.originalimage ? d.originalimage.source : (d.thumbnail ? d.thumbnail.source : null);
-      if (imgUrl) {
-        imgUrl = imgUrl.replace(/\/\d+px-/, '/1200px-');
-        _applyBgImage(bgEl, imgUrl, cacheKey);
-      } else {
-        _fallbackCityImage(bgEl, city, cacheKey);
-      }
-    })
-    .catch(function() {
-      _fallbackCityImage(bgEl, city, cacheKey);
-    });
-}
-
-function _fallbackCityImage(bgEl, city, cacheKey) {
-  // Fallback: try Wikipedia with "Eiffel Tower" for Paris
-  var fallbacks = {
-    'paris': 'Eiffel_Tower',
-    'jerusalem': 'Western_Wall',
-    'tel aviv': 'Tel_Aviv',
-    'new york': 'Manhattan',
-    'london': 'Big_Ben',
-    'marseille': 'Marseille',
-    'lyon': 'Lyon',
-    'nice': 'Nice',
-    'strasbourg': 'Strasbourg'
-  };
-  var key = city.toLowerCase();
-  var article = fallbacks[key] || city;
-  var wikiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(article);
-  fetch(wikiUrl)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      var imgUrl = d.originalimage ? d.originalimage.source : (d.thumbnail ? d.thumbnail.source : null);
-      if (imgUrl) {
-        imgUrl = imgUrl.replace(/\/\d+px-/, '/1200px-');
-        _applyBgImage(bgEl, imgUrl, cacheKey);
-      }
-    })
-    .catch(function() {});
-}
-
-function _applyBgImage(bgEl, imgUrl, cacheKey) {
-  try { localStorage.setItem(cacheKey, imgUrl); } catch(e) {}
-  var img = new Image();
-  img.onload = function() {
-    bgEl.style.backgroundImage = 'url(' + imgUrl + ')';
-    bgEl.classList.add('loaded');
-  };
-  img.src = imgUrl;
-}
-
-// ====== UNIVERSAL SHARE ======
-var _shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
-
-function appShare(title, text) {
-  var url = window.location.href.split('?')[0].split('#')[0];
-  text += '\n\n📲 Chab\'app — ' + url;
-  if (navigator.share) {
-    navigator.share({ title: title, text: text }).catch(function(){});
-  } else if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(function() { alert('Copié dans le presse-papier !'); });
-  } else {
-    prompt('Copiez ce texte :', text);
-  }
-}
-
-function shareShabbat(e) {
-  if (e) e.stopPropagation();
-  var parasha = document.getElementById('shabbat-parasha').textContent || '';
-  var candles = document.getElementById('shabbat-candles').textContent || '';
-  var havdalah = document.getElementById('shabbat-havdalah').textContent || '';
-  var candleDate = document.getElementById('shabbat-candles-date').textContent || '';
-  var havdalahDate = document.getElementById('shabbat-havdalah-date').textContent || '';
-  var city = document.getElementById('shabbat-city').textContent || '';
-  var text = '🕯️ Horaires de Chabbat\n';
-  if (city) text += city + '\n';
-  if (parasha) text += 'Paracha : ' + parasha + '\n';
-  text += '\n🕯️ Allumage : ' + candles + ' (' + candleDate + ')';
-  text += '\n🌙 Havdalah : ' + havdalah + ' (' + havdalahDate + ')';
-  text += '\n\nChabbat Chalom ! ✨';
-  appShare('Horaires de Chabbat', text);
-}
-
-function shareHyy(e) {
-  if (e) e.stopPropagation();
-  var date = document.getElementById('hyy-date').textContent || '';
-  var text = document.getElementById('hyy-text');
-  var content = text ? (text.innerText || text.textContent || '').replace('Chargement…','').replace('Lire la suite ▾','').trim() : '';
-  var msg = '📜 Hayom Yom' + (date ? ' — ' + date : '') + '\n\n' + content;
-  appShare('Hayom Yom', msg);
-}
-
-function shareRambam(e) {
-  if (e) e.stopPropagation();
-  var date = document.getElementById('rambam-date').textContent || '';
-  var text = document.getElementById('rambam-text');
-  var content = text ? (text.innerText || text.textContent || '').replace('Chargement…','').replace('Lire la suite ▾','').trim() : '';
-  var msg = '📚 Rambam' + (date ? ' — ' + date : '') + '\n\n' + content;
-  appShare('Rambam', msg);
-}
-
-function shareObjectives(e) {
-  if (e) e.stopPropagation();
-  var state = getObjState();
-  var total = ALL_OBJ_ITEMS.length;
-  var done = Object.keys(state).length;
-  var pct = total > 0 ? Math.round(done / total * 100) : 0;
-  var msg = '🕎 Objectifs du jour\n\n✅ ' + done + '/' + total + ' accomplis (' + pct + '%)\n\nRejoignez-moi sur Chab\'app !';
-  appShare('Objectifs du jour', msg);
-}
-
-function shareQuote() {
-  var q = document.getElementById('home-quote');
-  var s = document.getElementById('home-source');
-  var text = (q ? q.textContent : '') + '\n' + (s ? s.textContent : '');
-  appShare('Citation du jour', text.trim());
-}
-
-// ====== DONATION CAMPAIGN ======
-var _donSelectedAmount = 0;
-
-function selectDonAmount(amount, el) {
-  _donSelectedAmount = amount;
-  var btns = document.querySelectorAll('.don-amount-btn');
-  btns.forEach(function(b) { b.classList.remove('selected'); });
-  if (el) el.classList.add('selected');
-}
-
-function promptDonAmount(el) {
-  var val = prompt('Entrez un montant (€) :');
-  if (val && !isNaN(val) && Number(val) > 0) {
-    _donSelectedAmount = Number(val);
-    var btns = document.querySelectorAll('.don-amount-btn');
-    btns.forEach(function(b) { b.classList.remove('selected'); });
-    if (el) { el.classList.add('selected'); el.textContent = val + ' €'; }
-  }
-}
-
-function submitDonation() {
-  if (!_donSelectedAmount) {
-    alert('Veuillez choisir un montant.');
-    return;
-  }
-  alert('Merci pour votre générosité !\n\nMontant : ' + _donSelectedAmount + ' €\n\nLa fonctionnalité de paiement sera bientôt disponible.');
-}
-
-function syncEtudesPanel() {
-  // Copy HYY content to études panel
-  var srcDate = document.getElementById('hyy-date');
-  var srcText = document.getElementById('hyy-text');
-  var dstDate = document.getElementById('etudes-hyy-date');
-  var dstText = document.getElementById('etudes-hyy-text');
-  if (srcDate && dstDate) dstDate.textContent = srcDate.textContent;
-  if (srcText && dstText) dstText.innerHTML = srcText.innerHTML;
-  // Copy Rambam content to études panel
-  var rSrcDate = document.getElementById('rambam-date');
-  var rSrcText = document.getElementById('rambam-text');
-  var rDstDate = document.getElementById('etudes-rambam-date');
-  var rDstText = document.getElementById('etudes-rambam-text');
-  if (rSrcDate && rDstDate) rDstDate.textContent = rSrcDate.textContent;
-  if (rSrcText && rDstText) rDstText.innerHTML = rSrcText.innerHTML;
-}
-
-function loadHayomYom() {
-  var d = new Date();
-  var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
-  var cacheKey = 'tehilim_hyy8_' + dateKey;
-  var heb = gregToHebrew(d.getFullYear(), d.getMonth()+1, d.getDate());
-  var hyyKey = heb.mName.replace(' ', '_') + '_' + heb.hd;
-  console.log('HYY: Hebrew date =', heb.mName, heb.hd, 'key=', hyyKey);
-
-  // PRIORITY 1: fr.chabad.org (automatic French)
-  _hyyLoadFrChabad(heb, dateKey, cacheKey, hyyKey);
-}
-
-// ====== FR.CHABAD.ORG AUTO-FETCH ======
-var _corsProxies = [
-  function(u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); },
-  function(u) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u); }
+  // === FEMMES (F) ===
+  [['sarah','sara'], 'שרה', 'F'],
+  [['rivka','rebecca','rivkah'], 'רבקה', 'F'],
+  [['rahel','rachel','ra\'hel'], 'רחל', 'F'],
+  [['leah','lea','léa'], 'לאה', 'F'],
+  [['miriam','myriam'], 'מרים', 'F'],
+  [['esther','ester'], 'אסתר', 'F'],
+  [['ruth','routh'], 'רות', 'F'],
+  [['naomi','noémi','naomie','no\'omi'], 'נעמי', 'F'],
+  [['hannah','hanna','anna','\'hanna','\'hannah'], 'חנה', 'F'],
+  [['devora','devorah','deborah','debora'], 'דבורה', 'F'],
+  [['tamar','thamar','tamara'], 'תמר', 'F'],
+  [['batsheva','bathcheva','bat sheva','batcheva'], 'בת שבע', 'F'],
+  [['tsipora','tzipora','tsippora','tsipora','sephora'], 'צפורה', 'F'],
+  [['dina','dinah'], 'דינה', 'F'],
+  [['yael','yaëlle','yaël'], 'יעל', 'F'],
+  [['michal','mikhal'], 'מיכל', 'F'],
+  [['abigail','avigail','avigaïl'], 'אביגיל', 'F'],
+  [['atara','atarah'], 'עטרה', 'F'],
+  [['noa','noa\'h'], 'נעה', 'F'],
+  [['shifra','chifra'], 'שפרה', 'F'],
+  [['poua','pou\'a','puah'], 'פועה', 'F'],
+  [['yehoudit','yehudit','judith'], 'יהודית', 'F'],
+  [['orpah','orpa'], 'ערפה', 'F'],
+  [['penina','peninna','peninah'], 'פנינה', 'F'],
+  [['hadassah','hadassa','hadasa'], 'הדסה', 'F'],
+  [['shulamit','choulamit','sulamite'], 'שולמית', 'F'],
+  [['hagar','agar'], 'הגר', 'F'],
+  [['keturah','ketoura'], 'קטורה', 'F'],
+  [['tirtsa','tirzah','tirtza'], 'תרצה', 'F'],
+  [['avishag','avichag','abishag'], 'אבישג', 'F'],
+  [['bilha','bilhah','bilha'], 'בלהה', 'F'],
+  [['zilpa','zilpah'], 'זלפה', 'F'],
+  [['moriya','moriyah'], 'מוריה', 'F'],
+  [['shira','chirah','shirah'], 'שירה', 'F'],
+  [['tehila','tehilah','te\'hila','tehilla'], 'תהילה', 'F'],
+  [['maya','maïa'], 'מאיה', 'F'],
+  [['yaffa','jaffa','yafa'], 'יפה', 'F'],
+  [['simha','sim\'ha','simkha'], 'שמחה', 'F'],
+  [['malka','malca','malkah'], 'מלכה', 'F'],
+  [['ora','orah'], 'אורה', 'F'],
+  [['orit'], 'אורית', 'F'],
+  [['nava','navah'], 'נאוה', 'F'],
+  [['bracha','brakha','bra\'ha'], 'ברכה', 'F'],
+  [['guila','gila','guilah','gilah'], 'גילה', 'F'],
+  [['dalya','dalia','daliah'], 'דליה', 'F'],
+  [['elana','ellanah','ilanah','ilana'], 'אילנה', 'F'],
+  [['galit','galith'], 'גלית', 'F'],
+  [['haya','khaya','\'haya'], 'חיה', 'F'],
+  [['hedva','hedvah'], 'חדוה', 'F'],
+  [['idit','idith'], 'עידית', 'F'],
+  [['keren'], 'קרן', 'F'],
+  [['liora','liorah'], 'ליאורה', 'F'],
+  [['liat'], 'ליאת', 'F'],
+  [['limor'], 'לימור', 'F'],
+  [['linoy','linoï'], 'לינוי', 'F'],
+  [['meital','meital'], 'מיטל', 'F'],
+  [['moriah','moria'], 'מוריה', 'F'],
+  [['neta'], 'נטע', 'F'],
+  [['nirit'], 'נירית', 'F'],
+  [['nurit','nourith'], 'נורית', 'F'],
+  [['orna','ornah'], 'אורנה', 'F'],
+  [['osnat','asnath','ossnath'], 'אסנת', 'F'],
+  [['pnina','pninah'], 'פנינה', 'F'],
+  [['rakefet'], 'רקפת', 'F'],
+  [['rinat','rinath'], 'רינת', 'F'],
+  [['ronit','ronith'], 'רונית', 'F'],
+  [['roni'], 'רוני', 'F'],
+  [['sapir','saphir'], 'ספיר', 'F'],
+  [['sarit','sarith'], 'שרית', 'F'],
+  [['sigal','sigalit','sigalith'], 'סיגל', 'F'],
+  [['sivan','sivane'], 'סיון', 'F'],
+  [['talia','talya','thalia'], 'טליה', 'F'],
+  [['tammy','tami'], 'תמי', 'F'],
+  [['vered'], 'ורד', 'F'],
+  [['yardena','yardénah'], 'ירדנה', 'F'],
+  [['dikla','diklah'], 'דקלה', 'F'],
+  [['einat','einath'], 'עינת', 'F'],
+  [['etti','etty'], 'אתי', 'F'],
+  [['gali'], 'גלי', 'F'],
+  [['hagit','haguith'], 'חגית', 'F'],
+  [['inbar'], 'ענבר', 'F'],
+  [['livnat'], 'לבנת', 'F'],
+  [['merav'], 'מירב', 'F'],
+  [['mirit','mirith'], 'מירית', 'F'],
+  [['naamah','na\'amah','naama'], 'נעמה', 'F'],
+  [['nechama','ne\'hama','nekhama'], 'נחמה', 'F'],
+  [['carmela','carmella'], 'כרמלה', 'F'],
+  [['carmel'], 'כרמל', 'U'],
+  [['chana','\'hana'], 'חנה', 'F'],
+  [['chava','hava','eve','\'hava'], 'חוה', 'F'],
+  [['dafna','dafnah','daphna','daphnee'], 'דפנה', 'F'],
+  [['efrat','efrath'], 'אפרת', 'F'],
+  [['margalit','margalith'], 'מרגלית', 'F'],
+  [['mazal'], 'מזל', 'F'],
+  [['tova','tovah','touvah'], 'טובה', 'F'],
+  [['tsila','tzila','zilla','tsillah'], 'צילה', 'F'],
+  [['dvora','devoirah','dvoire'], 'דבורה', 'F'],
+  [['freidel','fraydel','fraidel'], 'פריידל', 'F'],
+  [['feiga','feigah','feigue'], 'פייגא', 'F'],
+  [['guitel','gittel','guittel','gitel'], 'גיטל', 'F'],
+  [['guenendel','gnendel'], 'גנענדל', 'F'],
+  [['hentcha','hentche'], 'הענטשע', 'F'],
+  [['mushka','mouchka','moushka'], 'מושקא', 'F'],
+  [['haya mushka','haya mouchka','\'haya mouchka'], 'חיה מושקא', 'F'],
+  [['shoula','shula','choulah'], 'שולה', 'F'],
+  [['tsherna','tcherna'], 'טשערנא', 'F'],
+  [['yenta','yentah'], 'יענטא', 'F'],
+  [['zelda'], 'זעלדא', 'F'],
+  [['reizl','reizel','rayzel'], 'רייזל', 'F'],
+  [['bassya','bassia','batya','bathia'], 'בתיה', 'F'],
+  [['menuha','menou\'ha','menukhah'], 'מנוחה', 'F'],
+  [['sterna','sterno'], 'שטערנא', 'F'],
+  [['perl','perel','perle'], 'פערל', 'F'],
+  [['brouria','brouria'], 'ברוריה', 'F'],
+  [['adina','adinah'], 'עדינה', 'F'],
+  [['aliza','alizah'], 'עליזה', 'F'],
+  [['aviva','avivah'], 'אביבה', 'F'],
+  [['chochana','shoshana','shoshanah','chochannah','suzanne'], 'שושנה', 'F'],
+  [['rinah','rina'], 'רנה', 'F'],
+  [['shoshana','chochana','susanne'], 'שושנה', 'F'],
+  [['yocheved','yokheved','jochebed'], 'יוכבד', 'F'],
+  [['zehava','zehavah'], 'זהבה', 'F'],
+  [['meira','me\'irah'], 'מאירה', 'F'],
+  [['batsheva','batcheva'], 'בת שבע', 'F'],
+  [['odelia','odelya','odélia'], 'אודליה', 'F'],
+  [['orly','orli'], 'אורלי', 'F'],
+  [['revital','revithal'], 'רויטל', 'F'],
+  [['tzivya','tsivya','tsivyah'], 'צביה', 'F'],
+  [['yehoudith','yehudis'], 'יהודית', 'F'],
+  [['noga','nogah'], 'נגה', 'F'],
+  [['pazit','pazith'], 'פזית', 'F'],
+  [['rakhelé','rachelé'], 'רחלה', 'F'],
+  [['adel','adele','adelle'], 'אדל', 'F'],
+  [['raizy','raisy','raïzy'], 'רייזי', 'F'],
+  [['baila','bailah','beïla'], 'ביילא', 'F'],
+  [['blima','blimah','blimé'], 'בלימה', 'F'],
+  [['breindel','braindel','breindl'], 'בריינדל', 'F'],
+  [['libby','libbé','liba','libah'], 'ליבא', 'F'],
+  [['shaindel','chaindel','shaindl'], 'שיינדל', 'F'],
+  [['zissel','zisel','zisil'], 'זיסל', 'F'],
+  [['dobrish','dobrush'], 'דאברוש', 'F'],
+  [['nechama dina','ne\'hama dinah'], 'נחמה דינה', 'F'],
+  [['sara rivka'], 'שרה רבקה', 'F'],
+  [['hanna leah','hannah leah','\'hanna lea'], 'חנה לאה', 'F'],
+  [['raizel','rayzel','raïzel'], 'רייזל', 'F'],
+  [['mirel','mirele'], 'מירל', 'F'],
 ];
-
-function _fetchViaCors(url, proxyIdx, onSuccess, onFail) {
-  if (proxyIdx >= _corsProxies.length) { onFail(); return; }
-  var proxyUrl = _corsProxies[proxyIdx](url);
-  console.log('CORS proxy', proxyIdx, 'for:', url);
-  var ctrl = null;
-  try { ctrl = new AbortController(); setTimeout(function(){ ctrl.abort(); }, 10000); } catch(e) {}
-  fetch(proxyUrl, ctrl ? { signal: ctrl.signal } : {})
-    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-    .then(function(html) { onSuccess(html); })
-    .catch(function(err) {
-      console.log('CORS proxy', proxyIdx, 'failed:', err.message);
-      _fetchViaCors(url, proxyIdx + 1, onSuccess, onFail);
-    });
-}
-
-function _extractChabadText(html) {
-  try {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(html, 'text/html');
-    // Try multiple selectors for chabad.org content
-    var selectors = [
-      '#TextContent', '#textContent', '.article-text',
-      '.page-text-content', '#contentArea', '#pageTextArea',
-      '.entry-content', 'article', '#article-body',
-      '.article-body', '.article_body', '#article',
-      '.parsha-content', '#ContentPlaceHolder_TextContent',
-      '.content-inner'
-    ];
-    var contentEl = null;
-    for (var i = 0; i < selectors.length; i++) {
-      contentEl = doc.querySelector(selectors[i]);
-      if (contentEl && contentEl.textContent.trim().length > 50) break;
-      contentEl = null;
-    }
-    // Fallback: find largest text block in main area
-    if (!contentEl) {
-      var divs = doc.querySelectorAll('div, td');
-      var best = null, bestLen = 0;
-      for (var j = 0; j < divs.length; j++) {
-        var txt = divs[j].textContent.trim();
-        // Skip navigation/footer/header content
-        if (txt.length > bestLen && txt.length > 100 && txt.length < 10000) {
-          var tag = divs[j].tagName;
-          var cls = (divs[j].className || '').toLowerCase();
-          if (cls.indexOf('nav') === -1 && cls.indexOf('footer') === -1 && cls.indexOf('header') === -1 && cls.indexOf('menu') === -1) {
-            best = divs[j]; bestLen = txt.length;
-          }
-        }
-      }
-      contentEl = best;
-    }
-    if (!contentEl) return null;
-    // Get inner HTML and clean it
-    var rawHtml = contentEl.innerHTML;
-    // Remove scripts, styles, nav elements
-    rawHtml = rawHtml.replace(new RegExp('<script[\\s\\S]*?<\\/script>', 'gi'), '');
-    rawHtml = rawHtml.replace(new RegExp('<style[\\s\\S]*?<\\/style>', 'gi'), '');
-    rawHtml = rawHtml.replace(new RegExp('<nav[\\s\\S]*?<\\/nav>', 'gi'), '');
-    // Parse again to get clean text
-    var tmp = document.createElement('div');
-    tmp.innerHTML = rawHtml;
-    var text = tmp.textContent || tmp.innerText || '';
-    text = text.replace(/\s+/g, ' ').trim();
-    // Must have enough French-looking content
-    if (text.length < 30) return null;
-    return text;
-  } catch(e) {
-    console.log('Parse error:', e.message);
-    return null;
-  }
-}
-
-function _hyyLoadFrChabad(heb, dateKey, cacheKey, hyyKey) {
-  var d = new Date();
-  var url = 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
-  console.log('HYY: Trying fr.chabad.org:', url);
-  _fetchViaCors(url, 0, function(html) {
-    var text = _extractChabadText(html);
-    if (text && text.length > 30) {
-      console.log('HYY: French text from fr.chabad.org! (' + text.length + ' chars)');
-      var result = { fr: text, heDate: heb.mName + ' ' + heb.hd, fetched: dateKey, source: 'fr.chabad.org' };
-      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-      displayHyy(result);
-    } else {
-      console.log('HYY: fr.chabad.org - could not extract text, falling back to admin');
-      _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey);
-    }
-  }, function() {
-    console.log('HYY: fr.chabad.org unreachable, falling back to admin');
-    _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey);
-  });
-}
-
-function _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey) {
-  // PRIORITY 2: Check hyy-data.json (admin panel)
-  fetch('hyy-data.json?_=' + dateKey)
-    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data) {
-      if (data.hayom_yom && data.hayom_yom[hyyKey]) {
-        console.log('HYY: French text found in admin panel!');
-        var result = { fr: data.hayom_yom[hyyKey], heDate: heb.mName + ' ' + heb.hd, fetched: dateKey };
-        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-        displayHyy(result);
-        return;
-      }
-      // PRIORITY 3: Cache
-      var cached = null;
-      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayHyy(cached); return; }
-      displayHyyFallback();
-    })
-    .catch(function(err) {
-      console.log('HYY: admin failed:', err.message);
-      var cached = null;
-      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayHyy(cached); return; }
-      displayHyyFallback();
-    });
-}
-
-function displayHyy(data) {
-  var el=document.getElementById('hyy-text');
-  var dateEl=document.getElementById('hyy-date');
-  var expEl=document.getElementById('hyy-expand');
-  if(!el) return;
-  var content='';
-  if(data.fr) {
-    content='<div style="font-size:15px;line-height:1.8;color:var(--gray-1);">'+data.fr.replace(/\n/g,'<br>')+'</div>';
-  } else if(data.en) {
-    content='<div style="font-size:14.5px;line-height:1.8;color:var(--gray-1);font-family:\'EB Garamond\',Georgia,serif;">'+data.en+'</div>';
-  }
-  if(data.he && !data.fr) content='<div style="direction:rtl;text-align:right;font-family:\'Noto Serif Hebrew\',serif;line-height:1.9;margin-bottom:10px;">'+data.he+'</div>'+content;
-  if(content){
-    el.innerHTML=content;
-    expEl.style.display='block';
-  } else { displayHyyFallback(); return; }
-  if(dateEl) dateEl.textContent=data.heDate||'';
-}
-
-function displayHyyFallback() {
-  var el=document.getElementById('hyy-text');
-  var dateEl=document.getElementById('hyy-date');
-  if(!el) return;
-  var d=new Date();
-  var heb=gregToHebrew(d.getFullYear(),d.getMonth()+1,d.getDate());
-  if(dateEl) dateEl.textContent=heb.mName+' '+heb.hd;
-  el.innerHTML='<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Le texte du Hayom Yom sera bientôt disponible</span>';
-}
-
-
-// ====== RAMBAM (Sefaria Calendar API) ======
-var _rambamExpanded = false;
-function openRambam(e) {
-  var txt = document.getElementById('rambam-text');
-  var exp = document.getElementById('rambam-expand');
-  if (!txt || txt.querySelector('.hyy-loading')) return;
-  _rambamExpanded = !_rambamExpanded;
-  if (_rambamExpanded) {
-    txt.classList.add('expanded');
-    exp.textContent = 'R\u00e9duire \u25b4';
-  } else {
-    txt.classList.remove('expanded');
-    exp.textContent = 'Lire la suite \u25be';
-  }
-}
-
-function loadRambam() {
-  var d = new Date();
-  var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
-  var cacheKey = 'tehilim_rambam3_' + dateKey;
-
-  // PRIORITY 1: fr.chabad.org (automatic French)
-  _rambamLoadFrChabad(dateKey, cacheKey);
-}
-
-function _rambamLoadFrChabad(dateKey, cacheKey) {
-  var d = new Date();
-  var url = 'https://fr.chabad.org/dailystudy/rambam.asp?rambamChapters=1&tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
-  console.log('Rambam: Trying fr.chabad.org:', url);
-  _fetchViaCors(url, 0, function(html) {
-    var text = _extractChabadText(html);
-    if (text && text.length > 30) {
-      console.log('Rambam: French text from fr.chabad.org! (' + text.length + ' chars)');
-      var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-      var title = titleMatch ? titleMatch[1].replace(/\s*-\s*fr\.chabad\.org.*/i, '').trim() : '';
-      var result = { fr: text, title: title, fetched: dateKey, source: 'fr.chabad.org' };
-      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-      displayRambam(result);
-    } else {
-      console.log('Rambam: fr.chabad.org - could not extract text, falling back to admin');
-      _rambamLoadAdmin(dateKey, cacheKey);
-    }
-  }, function() {
-    console.log('Rambam: fr.chabad.org unreachable, falling back to admin');
-    _rambamLoadAdmin(dateKey, cacheKey);
-  });
-}
-
-function _rambamLoadAdmin(dateKey, cacheKey) {
-  // PRIORITY 2: Check hyy-data.json (admin panel)
-  fetch('hyy-data.json?_=' + dateKey)
-    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(function(data) {
-      if (data.rambam && data.rambam[dateKey]) {
-        var entry = data.rambam[dateKey];
-        var result = { fr: entry.text || entry, title: entry.title || '', fetched: dateKey };
-        console.log('Rambam: French text found in admin panel!');
-        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-        displayRambam(result);
-        return;
-      }
-      // PRIORITY 3: Cache
-      var cached = null;
-      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayRambam(cached); return; }
-      displayRambamFallback();
-    })
-    .catch(function(err) {
-      console.log('Rambam: admin failed:', err.message);
-      var cached = null;
-      try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayRambam(cached); return; }
-      displayRambamFallback();
-    });
-}
-
-function displayRambam(data) {
-  var el = document.getElementById('rambam-text');
-  var dateEl = document.getElementById('rambam-date');
-  var expEl = document.getElementById('rambam-expand');
-  if (!el) return;
-  var content = '';
-  if (data.title && dateEl) dateEl.textContent = data.title;
-  if (data.fr) {
-    content = '<div style="font-size:15px;line-height:1.8;color:var(--gray-1);">' + data.fr.replace(/\n/g,'<br>') + '</div>';
-  } else {
-    if (data.he) content += '<div style="direction:rtl;text-align:right;font-family:\'Noto Serif Hebrew\',serif;line-height:1.9;margin-bottom:10px;">' + data.he + '</div>';
-    if (data.en) content += '<div style="color:var(--gray-2);font-size:14px;line-height:1.7;">' + data.en + '</div>';
-  }
-  if (content) {
-    el.innerHTML = content;
-    expEl.style.display = 'block';
-  } else {
-    displayRambamFallback();
-  }
-}
-
-function displayRambamFallback() {
-  var el = document.getElementById('rambam-text');
-  var dateEl = document.getElementById('rambam-date');
-  if (!el) return;
-  var d = new Date();
-  var heb = gregToHebrew(d.getFullYear(), d.getMonth()+1, d.getDate());
-  if (dateEl) dateEl.textContent = heb.mName + ' ' + heb.hd;
-  el.innerHTML = '<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Le texte du Rambam sera bientôt disponible</span>';
-}
-
-
-// ====== BETH CHABAD (Leaflet + Overpass API) ======
-var _bethMap = null;
-var _bethMarkers = [];
-
-function openBethChabad() {
-  switchTab('sub-beth');
-  setTimeout(loadBethMap, 200);
-}
-
-function loadBethMap() {
-  var loading = document.getElementById('beth-map-loading');
-  var info = document.getElementById('beth-location-info');
-  if (loading) loading.style.display = 'flex';
-  if (info) info.textContent = 'Localisation en cours\u2026';
-
-  if (!navigator.geolocation) {
-    if (info) info.textContent = 'G\u00e9olocalisation non disponible';
-    showBethMap(48.8566, 2.3522);
-    return;
-  }
-  navigator.geolocation.getCurrentPosition(
-    function(pos) { showBethMap(pos.coords.latitude, pos.coords.longitude); },
-    function(err) {
-      console.log('Geo error:', err);
-      if (info) info.textContent = 'Position par d\u00e9faut (Paris)';
-      showBethMap(48.8566, 2.3522);
-    },
-    { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
-  );
-}
-
-function showBethMap(lat, lng) {
-  var loading = document.getElementById('beth-map-loading');
-  var info = document.getElementById('beth-location-info');
-  if (loading) loading.style.display = 'none';
-
-  if (!_bethMap) {
-    _bethMap = L.map('beth-map').setView([lat, lng], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '\u00a9 OpenStreetMap'
-    }).addTo(_bethMap);
-    setTimeout(function(){ _bethMap.invalidateSize(); }, 300);
-  } else {
-    _bethMap.setView([lat, lng], 13);
-    _bethMap.invalidateSize();
-  }
-
-  L.marker([lat, lng], {
-    icon: L.divIcon({ className:'', html:'<div style="background:#e53e3e;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div>', iconSize:[20,20], iconAnchor:[10,10] })
-  }).addTo(_bethMap).bindPopup('<b>Vous \u00eates ici</b>');
-
-  if (info) info.textContent = 'Recherche des Beth Chabad\u2026';
-
-  var radius = 50000;
-  var query = '[out:json][timeout:15];(' +
-    'node["name"~"[Cc]habad|[Hh]abad|[Ll]oubavitch|[Ll]ubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
-    'way["name"~"[Cc]habad|[Hh]abad|[Ll]oubavitch|[Ll]ubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
-    'node["denomination"="chabad_lubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
-    'way["denomination"="chabad_lubavitch"](around:' + radius + ',' + lat + ',' + lng + ');' +
-    ');out center body;';
-
-  fetch('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(query))
-    .then(function(r) { return r.json(); })
-    .then(function(data) { displayBethResults(data.elements || [], lat, lng); })
-    .catch(function(err) {
-      console.log('Overpass error:', err);
-      if (info) info.textContent = 'Erreur de connexion. Essayez de r\u00e9actualiser.';
-    });
-}
-
-function displayBethResults(elements, userLat, userLng) {
-  var info = document.getElementById('beth-location-info');
-  var results = document.getElementById('beth-results');
-  _bethMarkers.forEach(function(m) { _bethMap.removeLayer(m); });
-  _bethMarkers = [];
-
-  var seen = {};
-  var places = [];
-  elements.forEach(function(el) {
-    var lat = el.lat || (el.center && el.center.lat);
-    var lng = el.lon || (el.center && el.center.lon);
-    if (!lat || !lng) return;
-    var name = (el.tags && el.tags.name) || 'Beth Chabad';
-    var key = Math.round(lat*1000) + ',' + Math.round(lng*1000);
-    if (seen[key]) return;
-    seen[key] = true;
-    var dist = haversine(userLat, userLng, lat, lng);
-    places.push({ name:name, lat:lat, lng:lng, dist:dist, addr:(el.tags&&el.tags['addr:street'])||'', phone:(el.tags&&el.tags.phone)||'', website:(el.tags&&el.tags.website)||'' });
-  });
-  places.sort(function(a,b) { return a.dist - b.dist; });
-
-  if (info) info.textContent = places.length + ' Beth Chabad trouv\u00e9' + (places.length > 1 ? 's' : '') + ' dans un rayon de 50km';
-
-  var chabadIcon = L.divIcon({ className:'', html:'<div style="font-size:22px;">\ud83d\udd4d</div>', iconSize:[28,28], iconAnchor:[14,14] });
-  places.forEach(function(p) {
-    var m = L.marker([p.lat, p.lng], { icon: chabadIcon }).addTo(_bethMap);
-    var popup = '<b>' + p.name + '</b>';
-    if (p.addr) popup += '<br>' + p.addr;
-    if (p.dist) popup += '<br><small>' + p.dist.toFixed(1) + ' km</small>';
-    if (p.phone) popup += '<br><a href="tel:' + p.phone + '">' + p.phone + '</a>';
-    if (p.website) popup += '<br><a href="' + p.website + '" target="_blank">Site web \u2197</a>';
-    m.bindPopup(popup);
-    _bethMarkers.push(m);
-  });
-
-  if (places.length > 0) {
-    var group = L.featureGroup(_bethMarkers);
-    _bethMap.fitBounds(group.getBounds().pad(0.15));
-  }
-
-  if (results && places.length > 0) {
-    var html = '';
-    places.slice(0, 8).forEach(function(p) {
-      html += '<div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;" onclick="_bethMap.setView([' + p.lat + ',' + p.lng + '],15)">';
-      html += '<div style="font-size:14px;font-weight:700;color:var(--black);">' + p.name + '</div>';
-      if (p.addr) html += '<div style="font-size:12px;color:var(--gray-3);">' + p.addr + '</div>';
-      html += '<div style="font-size:11px;color:var(--gray-3);margin-top:2px;">' + p.dist.toFixed(1) + ' km</div>';
-      html += '</div>';
-    });
-    results.innerHTML = html;
-  } else if (results) {
-    results.innerHTML = '<div style="text-align:center;padding:12px;color:var(--gray-3);font-size:13px;">Aucun Beth Chabad trouv\u00e9 dans un rayon de 50km. Essayez d\u2019actualiser votre position.</div>';
-  }
-}
-
-function haversine(lat1,lon1,lat2,lon2) {
-  var R = 6371;
-  var d2r = Math.PI/180;
-  var dLat = (lat2-lat1)*d2r;
-  var dLon = (lon2-lon1)*d2r;
-  var a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1*d2r)*Math.cos(lat2*d2r)*Math.sin(dLon/2)*Math.sin(dLon/2);
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-}
-
-function refreshBethMap() {
-  if (_bethMap) { _bethMap.remove(); _bethMap = null; }
-  _bethMarkers = [];
-  var r = document.getElementById('beth-results');
-  if (r) r.innerHTML = '';
-  loadBethMap();
-}
-
-
-// ====== SIDOUR / PATAKH ELIYAHOU ======
-var PATAKH_PRAYERS = {
-  shaharit: {
-    title: "Cha\'harit (Pri\u00e8re du matin)",
-    sections: [
-      { name: "Mod\u00e9 Ani", he: "\u05de\u05d5\u05b9\u05d3\u05b6\u05d4 \u05d0\u05b2\u05e0\u05b4\u05d9 \u05dc\u05b0\u05e4\u05b8\u05e0\u05b6\u05d9\u05da\u05b8 \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d7\u05b7\u05d9 \u05d5\u05b0\u05e7\u05b7\u05d9\u05b8\u05bc\u05dd, \u05e9\u05b6\u05c1\u05d4\u05b6\u05d7\u05b1\u05d6\u05b7\u05e8\u05b0\u05ea\u05b8\u05bc \u05d1\u05b4\u05bc\u05d9 \u05e0\u05b4\u05e9\u05b0\u05c1\u05de\u05b8\u05ea\u05b4\u05d9 \u05d1\u05b0\u05bc\u05d7\u05b6\u05de\u05b0\u05dc\u05b8\u05d4, \u05e8\u05b7\u05d1\u05b8\u05bc\u05d4 \u05d0\u05b1\u05de\u05d5\u05e0\u05b8\u05ea\u05b6\u05da\u05b8.", ph: "Mod\u00e9 ani l\u00e9fan\u00e9kha, m\u00e9lekh \u2018ha\u00ef v\u00e9kayam, ch\u00e9h\u00e9\u2018h\u00e9zarta bi nichmati b\u00e9\u2018h\u00e9mla, raba \u00e9mounat\u00e9kha." },
-      { name: "N\u00e9tilat Yada\u00efm", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d0\u05b2\u05e9\u05b6\u05c1\u05e8 \u05e7\u05b4\u05d3\u05b0\u05bc\u05e9\u05b8\u05c1\u05e0\u05d5\u05bc \u05d1\u05b0\u05bc\u05de\u05b4\u05e6\u05b0\u05d5\u05b9\u05ea\u05b8\u05d9\u05d5, \u05d5\u05b0\u05e6\u05b4\u05d5\u05b8\u05bc\u05e0\u05d5\u05bc \u05e2\u05b7\u05dc \u05e0\u05b0\u05d8\u05b4\u05d9\u05dc\u05b7\u05ea \u05d9\u05b8\u05d3\u05b8\u05d9\u05b4\u05dd.", ph: "Baroukh ata Ado-na\u00ef Elo-h\u00e9nou m\u00e9lekh ha\u2018olam, ach\u00e9r kid\u00e9chanou b\u00e9mitsvotav, v\u00e9tsivanou al n\u00e9tilat yada\u00efm." },
-      { name: "\u00c9lo-ha\u00ef N\u00e9chama", he: "\u05d0\u05b1\u05dc\u05b9\u05d4\u05b7\u05d9, \u05e0\u05b0\u05e9\u05b8\u05c1\u05de\u05b8\u05d4 \u05e9\u05b6\u05c1\u05e0\u05b8\u05bc\u05ea\u05b7\u05ea\u05b8\u05bc \u05d1\u05b4\u05bc\u05d9 \u05d8\u05b0\u05d4\u05d5\u05b9\u05e8\u05b8\u05d4 \u05d4\u05b4\u05d9\u05d0. \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d1\u05b0\u05e8\u05b8\u05d0\u05ea\u05b8\u05bc\u05d4\u05bc, \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05e6\u05b7\u05e8\u05b0\u05ea\u05b8\u05bc\u05d4\u05bc, \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05e0\u05b0\u05e4\u05b7\u05d7\u05b0\u05ea\u05b8\u05bc\u05d4\u05bc \u05d1\u05b4\u05bc\u05d9.", ph: "\u00c9lo-ha\u00ef, n\u00e9chama ch\u00e9natata bi t\u00e9hora hi. Ata b\u00e9rata, ata y\u00e9tsarta, ata n\u00e9fa\u2018htah bi." },
-      { name: "Birkhot HaTorah", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d0\u05b2\u05e9\u05b6\u05c1\u05e8 \u05e7\u05b4\u05d3\u05b0\u05bc\u05e9\u05b8\u05c1\u05e0\u05d5\u05bc \u05d1\u05b0\u05bc\u05de\u05b4\u05e6\u05b0\u05d5\u05b9\u05ea\u05b8\u05d9\u05d5, \u05d5\u05b0\u05e6\u05b4\u05d5\u05b8\u05bc\u05e0\u05d5\u05bc \u05dc\u05b7\u05e2\u05b2\u05e1\u05d5\u05b9\u05e7 \u05d1\u05b0\u05bc\u05d3\u05b4\u05d1\u05b0\u05e8\u05b5\u05d9 \u05ea\u05d5\u05b9\u05e8\u05b8\u05d4.", ph: "Baroukh ata Ado-na\u00ef Elo-h\u00e9nou m\u00e9lekh ha\u2018olam, ach\u00e9r kid\u00e9chanou b\u00e9mitsvotav, v\u00e9tsivanou la\u2018assok b\u00e9divr\u00e9 Tora." }
-    ]
-  },
-  minha: {
-    title: "Min\u2018ha (Pri\u00e8re de l\u2018apr\u00e8s-midi)",
-    sections: [
-      { name: "Achr\u00e9", he: "\u05d0\u05b7\u05e9\u05b0\u05c1\u05e8\u05b5\u05d9 \u05d9\u05d5\u05b9\u05e9\u05b0\u05c1\u05d1\u05b5\u05d9 \u05d1\u05b5\u05d9\u05ea\u05b6\u05da\u05b8, \u05e2\u05d5\u05b9\u05d3 \u05d9\u05b0\u05d4\u05b7\u05dc\u05b0\u05dc\u05d5\u05bc\u05da\u05b8 \u05e1\u05b6\u05bc\u05dc\u05b8\u05d4.", ph: "Achr\u00e9 yochv\u00e9 v\u00e9t\u00e9kha, \u2018od y\u00e9hal\u00e9loukha s\u00e9la." },
-      { name: "Amida", he: "\u05d0\u05b2\u05d3\u05b9\u05e0\u05b8\u05d9 \u05e9\u05b0\u05c2\u05e4\u05b8\u05ea\u05b7\u05d9 \u05ea\u05b4\u05bc\u05e4\u05b0\u05ea\u05b8\u05bc\u05d7, \u05d5\u05bc\u05e4\u05b4\u05d9 \u05d9\u05b7\u05d2\u05b4\u05bc\u05d9\u05d3 \u05ea\u05b0\u05bc\u05d4\u05b4\u05dc\u05b8\u05bc\u05ea\u05b6\u05da\u05b8.", ph: "Ado-na\u00ef sfata\u00ef tifta\u2018h, oufi yaguid t\u00e9hilat\u00e9kha." }
-    ]
-  },
-  arvit: {
-    title: "Arvit (Pri\u00e8re du soir)",
-    sections: [
-      { name: "V\u00e9hou Ra\u2018houm", he: "\u05d5\u05b0\u05d4\u05d5\u05bc\u05d0 \u05e8\u05b7\u05d7\u05d5\u05bc\u05dd \u05d9\u05b0\u05db\u05b7\u05e4\u05b5\u05bc\u05e8 \u05e2\u05b8\u05d5\u05b9\u05df \u05d5\u05b0\u05dc\u05b9\u05d0 \u05d9\u05b7\u05e9\u05b0\u05c1\u05d7\u05b4\u05d9\u05ea, \u05d5\u05b0\u05d4\u05b4\u05e8\u05b0\u05d1\u05b8\u05bc\u05d4 \u05dc\u05b0\u05d4\u05b8\u05e9\u05b4\u05c1\u05d9\u05d1 \u05d0\u05b7\u05e4\u05bc\u05d5\u05b9, \u05d5\u05b0\u05dc\u05b9\u05d0 \u05d9\u05b8\u05e2\u05b4\u05d9\u05e8 \u05db\u05b8\u05bc\u05dc \u05d7\u05b2\u05de\u05b8\u05ea\u05d5\u05b9.", ph: "V\u00e9hou ra\u2018houm y\u00e9khap\u00e9r \u2018avon v\u00e9lo yach\u2018hit, v\u00e9hirba l\u00e9hachiv apo, v\u00e9lo ya\u2018ir kol \u2018hamato." },
-      { name: "Ch\u00e9ma", he: "\u05e9\u05b0\u05c1\u05de\u05b7\u05e2 \u05d9\u05b4\u05e9\u05b0\u05c2\u05e8\u05b8\u05d0\u05b5\u05dc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b6\u05d7\u05b8\u05d3.", ph: "Ch\u00e9ma Isra\u00ebl, Ado-na\u00ef \u00c9lo-h\u00e9nou, Ado-na\u00ef \u00c9\u2018had." }
-    ]
-  },
-  shema: {
-    title: "Ch\u00e9ma Isra\u00ebl",
-    sections: [
-      { name: "Ch\u00e9ma", he: "\u05e9\u05b0\u05c1\u05de\u05b7\u05e2 \u05d9\u05b4\u05e9\u05b0\u05c2\u05e8\u05b8\u05d0\u05b5\u05dc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc, \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b6\u05d7\u05b8\u05d3.", ph: "Ch\u00e9ma Isra\u00ebl, Ado-na\u00ef \u00c9lo-h\u00e9nou, Ado-na\u00ef \u00c9\u2018had." },
-      { name: "V\u00e9ahavta", he: "\u05d5\u05b0\u05d0\u05b8\u05d4\u05b7\u05d1\u05b0\u05ea\u05b8\u05bc \u05d0\u05b5\u05ea \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b6\u05d9\u05da\u05b8, \u05d1\u05b0\u05bc\u05db\u05b8\u05dc \u05dc\u05b0\u05d1\u05b8\u05d1\u05b0\u05da\u05b8, \u05d5\u05bc\u05d1\u05b0\u05db\u05b8\u05dc \u05e0\u05b7\u05e4\u05b0\u05e9\u05b0\u05c1\u05da\u05b8, \u05d5\u05bc\u05d1\u05b0\u05db\u05b8\u05dc \u05de\u05b0\u05d0\u05b9\u05d3\u05b6\u05da\u05b8.", ph: "V\u00e9ahavta \u00e9t Ado-na\u00ef \u00c9lo-h\u00e9kha, b\u00e9khol l\u00e9vav\u00e9kha, ouv\u00e9khol nafch\u00e9kha, ouv\u00e9khol m\u00e9od\u00e9kha." }
-    ]
-  },
-  birkat: {
-    title: "Birkat Hamazon",
-    sections: [
-      { name: "Zimoun", he: "\u05e8\u05b7\u05d1\u05bc\u05d5\u05b9\u05ea\u05b7\u05d9 \u05e0\u05b0\u05d1\u05b8\u05e8\u05b5\u05da\u05b0. \u05d9\u05b0\u05d4\u05b4\u05d9 \u05e9\u05b5\u05c1\u05dd \u05d9\u05b0\u05d9\u05b8 \u05de\u05b0\u05d1\u05b9\u05e8\u05b8\u05da\u05b0 \u05de\u05b5\u05e2\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d5\u05b0\u05e2\u05b7\u05d3 \u05e2\u05d5\u05b9\u05dc\u05b8\u05dd.", ph: "Rabota\u00ef n\u00e9var\u00e9\u2018kh. Y\u00e9hi ch\u00e9m Ado-na\u00ef m\u00e9vora\u2018kh m\u00e9\u2018ata v\u00e9\u2018ad \u2018olam." },
-      { name: "Hazan", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d4\u05b7\u05d6\u05b8\u05bc\u05df \u05d0\u05b6\u05ea \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd \u05db\u05bb\u05bc\u05dc\u05bc\u05d5\u05b9 \u05d1\u05b0\u05bc\u05d8\u05d5\u05bc\u05d1\u05d5\u05b9.", ph: "Baroukh ata Ado-na\u00ef \u00c9lo-h\u00e9nou m\u00e9lekh ha\u2018olam, hazan \u00e9t ha\u2018olam koulo b\u00e9touvo." }
-    ]
-  }
-};
-
-function showPatakh(key) {
-  var data = PATAKH_PRAYERS[key];
-  if (!data) return;
-  document.querySelectorAll('.patakh-tab').forEach(function(t) { t.classList.remove('active'); });
-  event.target.classList.add('active');
-  showPatakhDirect(key);
-}
-
-function showPatakhDirect(key) {
-  var data = PATAKH_PRAYERS[key];
-  if (!data) return;
-  var el = document.getElementById('patakh-content');
-  if (!el) return;
-  var html = '<div style="font-size:15px;font-weight:700;color:var(--black);margin-bottom:16px;">' + data.title + '</div>';
-  data.sections.forEach(function(s) {
-    html += '<div style="font-size:12px;font-weight:700;color:var(--gray-3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">' + s.name + '</div>';
-    html += '<div class="patakh-he">' + s.he + '</div>';
-    html += '<div class="patakh-ph">' + s.ph + '</div>';
-  });
-  el.innerHTML = html;
-  el.scrollTop = 0;
-}
-
-// ====== START ======
-document.addEventListener("DOMContentLoaded", init);
-</script>
-</body>
-</html>
