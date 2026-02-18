@@ -901,6 +901,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <div class="hyy-text" id="rambam-text"><span class="hyy-loading">Chargement…</span></div>
         <div class="hyy-expand" id="rambam-expand" style="display:none">Lire la suite ▾</div>
       </div>
+      <div class="hyy-card" id="tanya-card" onclick="openTanya(event)">
+        <div class="hyy-header">
+          <span class="hyy-icon" style="background:linear-gradient(135deg,#0d9488,#2dd4bf);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+          <span class="hyy-title">Tanya</span>
+          <span class="hyy-date" id="tanya-date"></span>
+          <button class="insta-share-btn" onclick="shareTanya(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+        <div class="hyy-text" id="tanya-text"><span class="hyy-loading">Chargement…</span></div>
+        <div class="hyy-expand" id="tanya-expand" style="display:none">Lire la suite ▾</div>
+      </div>
       <div class="big-card" onclick="switchTab('sub-club')">
         <div class="big-card-icon" style="animation-delay:0.6s;background:linear-gradient(135deg,#ee2a7b,#f472b6);box-shadow:0 3px 12px rgba(238,42,123,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="3.5"/><path d="M10 24c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="8" cy="13" r="2.5" opacity="0.7"/><path d="M4 24c0-2.5 1.8-4.5 4-4.5" opacity="0.7"/><circle cx="24" cy="13" r="2.5" opacity="0.7"/><path d="M28 24c0-2.5-1.8-4.5-4-4.5" opacity="0.7"/></svg></div>
         <div class="big-card-info">
@@ -1124,7 +1134,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
     <div style="padding:0 16px 16px;">
       <div style="font-size:18px;font-weight:800;color:var(--black);margin-bottom:4px;">📖 Études du jour</div>
-      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Hayom Yom & Rambam quotidiens</div>
+      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Hayom Yom, Rambam & Tanya quotidiens</div>
 
       <!-- HYY Card (mirror) -->
       <div class="hyy-card" style="margin-bottom:12px;">
@@ -1138,7 +1148,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       </div>
 
       <!-- Rambam Card (mirror) -->
-      <div class="hyy-card">
+      <div class="hyy-card" style="margin-bottom:12px;">
         <div class="hyy-header">
           <span class="hyy-icon" style="background:linear-gradient(135deg,#6228d7,#8b5cf6);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5a3 3 0 013 3v13c-1.5-1-3.5-1.5-8-1V4z"/><path d="M20 4h-5a3 3 0 00-3 3v13c1.5-1 3.5-1.5 8-1V4z"/></svg></span>
           <span class="hyy-title">Rambam</span>
@@ -1146,6 +1156,17 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <button class="insta-share-btn" onclick="shareRambam(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="etudes-rambam-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
+      </div>
+
+      <!-- Tanya Card (mirror) -->
+      <div class="hyy-card">
+        <div class="hyy-header">
+          <span class="hyy-icon" style="background:linear-gradient(135deg,#0d9488,#2dd4bf);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+          <span class="hyy-title">Tanya</span>
+          <span class="hyy-date" id="etudes-tanya-date"></span>
+          <button class="insta-share-btn" onclick="shareTanya(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        </div>
+        <div class="hyy-text" id="etudes-tanya-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
       </div>
     </div>
   </div>
@@ -1871,6 +1892,7 @@ function showHome() {
   renderObjStoryBar();
   loadHayomYom();
   loadRambam();
+  loadTanya();
   loadShabbatTimes();
   updateBigObjSub();
   cleanOldObjectives();
@@ -5318,6 +5340,15 @@ function shareRambam(e) {
   appShare('Rambam', msg);
 }
 
+function shareTanya(e) {
+  if (e) e.stopPropagation();
+  var date = document.getElementById('tanya-date').textContent || '';
+  var text = document.getElementById('tanya-text');
+  var content = text ? (text.innerText || text.textContent || '').replace('Chargement…','').replace('Lire la suite ▾','').trim() : '';
+  var msg = '📖 Tanya' + (date ? ' — ' + date : '') + '\n\n' + content;
+  appShare('Tanya', msg);
+}
+
 function shareObjectives(e) {
   if (e) e.stopPropagation();
   var state = getObjState();
@@ -5378,6 +5409,13 @@ function syncEtudesPanel() {
   var rDstText = document.getElementById('etudes-rambam-text');
   if (rSrcDate && rDstDate) rDstDate.textContent = rSrcDate.textContent;
   if (rSrcText && rDstText) rDstText.innerHTML = rSrcText.innerHTML;
+  // Copy Tanya content to études panel
+  var tSrcDate = document.getElementById('tanya-date');
+  var tSrcText = document.getElementById('tanya-text');
+  var tDstDate = document.getElementById('etudes-tanya-date');
+  var tDstText = document.getElementById('etudes-tanya-text');
+  if (tSrcDate && tDstDate) tDstDate.textContent = tSrcDate.textContent;
+  if (tSrcText && tDstText) tDstText.innerHTML = tSrcText.innerHTML;
 }
 
 function loadHayomYom() {
@@ -5653,6 +5691,162 @@ function displayRambamFallback() {
   var heb = gregToHebrew(d.getFullYear(), d.getMonth()+1, d.getDate());
   if (dateEl) dateEl.textContent = heb.mName + ' ' + heb.hd;
   el.innerHTML = '<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Le texte du Rambam sera bientôt disponible</span>';
+}
+
+
+// ====== TANYA (fr.chabad.org) ======
+var _tanyaExpanded = false;
+function openTanya(e) {
+  var txt = document.getElementById('tanya-text');
+  var exp = document.getElementById('tanya-expand');
+  if (!txt || txt.querySelector('.hyy-loading')) return;
+  _tanyaExpanded = !_tanyaExpanded;
+  if (_tanyaExpanded) {
+    txt.classList.add('expanded');
+    exp.textContent = 'R\u00e9duire \u25b4';
+  } else {
+    txt.classList.remove('expanded');
+    exp.textContent = 'Lire la suite \u25be';
+  }
+}
+
+function loadTanya() {
+  var d = new Date();
+  var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+  var cacheKey = 'tehilim_tanya1_' + dateKey;
+
+  // Check cache first
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+  if (cached && cached.fr) {
+    displayTanya(cached);
+    return;
+  }
+
+  // PRIORITY 1: fr.chabad.org
+  _tanyaLoadFrChabad(dateKey, cacheKey);
+}
+
+function _tanyaLoadFrChabad(dateKey, cacheKey) {
+  var d = new Date();
+  var url = 'https://fr.chabad.org/dailystudy/tanya.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  console.log('Tanya: Trying fr.chabad.org:', url);
+  _fetchViaCors(url, 0, function(html) {
+    var text = _extractChabadText(html);
+    if (text && text.length > 30) {
+      console.log('Tanya: French text from fr.chabad.org! (' + text.length + ' chars)');
+      var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+      var title = titleMatch ? titleMatch[1].replace(/\s*-\s*fr\.chabad\.org.*/i, '').trim() : '';
+      var result = { fr: text, title: title, fetched: dateKey, source: 'fr.chabad.org' };
+      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+      displayTanya(result);
+    } else {
+      console.log('Tanya: fr.chabad.org - could not extract text, falling back to admin');
+      _tanyaLoadAdmin(dateKey, cacheKey);
+    }
+  }, function() {
+    console.log('Tanya: fr.chabad.org unreachable, falling back to admin');
+    _tanyaLoadAdmin(dateKey, cacheKey);
+  });
+}
+
+function _tanyaLoadAdmin(dateKey, cacheKey) {
+  // PRIORITY 2: Check hyy-data.json (admin panel)
+  fetch('hyy-data.json?_=' + dateKey)
+    .then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(function(data) {
+      if (data.tanya && data.tanya[dateKey]) {
+        var entry = data.tanya[dateKey];
+        var result = { fr: entry.text || entry, title: entry.title || '', fetched: dateKey };
+        console.log('Tanya: French text found in admin panel!');
+        try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+        displayTanya(result);
+        return;
+      }
+      // PRIORITY 3: Sefaria API
+      _tanyaLoadSefaria(dateKey, cacheKey);
+    })
+    .catch(function(err) {
+      console.log('Tanya: admin failed:', err.message);
+      _tanyaLoadSefaria(dateKey, cacheKey);
+    });
+}
+
+function _tanyaLoadSefaria(dateKey, cacheKey) {
+  fetch('https://www.sefaria.org/api/calendars')
+    .then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(cal) {
+      var tanyaRef = null;
+      var tanyaTitle = '';
+      var items = cal.calendar_items || [];
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (item.title && item.title.en && item.title.en.indexOf('Tanya') !== -1 && item.title.en.indexOf('Daily') !== -1) {
+          tanyaRef = item.ref || (item.url ? item.url.replace('/','') : null);
+          tanyaTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
+          break;
+        }
+      }
+      if (!tanyaRef) {
+        // Broader match
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          if (item.title && item.title.en && item.title.en.indexOf('Tanya') !== -1) {
+            tanyaRef = item.ref || (item.url ? item.url.replace('/','') : null);
+            tanyaTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
+            break;
+          }
+        }
+      }
+      if (!tanyaRef) { displayTanyaFallback(); return; }
+      console.log('Tanya: Sefaria ref =', tanyaRef, 'title =', tanyaTitle);
+      return fetch('https://www.sefaria.org/api/texts/' + encodeURIComponent(tanyaRef) + '?context=0')
+        .then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function(txt) {
+          var heText = '', enText = '';
+          if (txt.he) heText = Array.isArray(txt.he) ? txt.he.join(' ') : txt.he;
+          if (txt.text) enText = Array.isArray(txt.text) ? txt.text.join(' ') : txt.text;
+          function strip(s) { var d = document.createElement('div'); d.innerHTML = s; return d.textContent || d.innerText || ''; }
+          var result = { he: strip(heText), en: strip(enText), title: tanyaTitle, fetched: dateKey, source: 'sefaria' };
+          try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+          displayTanya(result);
+        });
+    })
+    .catch(function(err) {
+      console.log('Tanya: Sefaria error:', err);
+      displayTanyaFallback();
+    });
+}
+
+function displayTanya(data) {
+  var el = document.getElementById('tanya-text');
+  var dateEl = document.getElementById('tanya-date');
+  var expEl = document.getElementById('tanya-expand');
+  if (!el) return;
+  var content = '';
+  if (data.title && dateEl) dateEl.textContent = data.title;
+  if (data.fr) {
+    content = '<div style="font-size:15px;line-height:1.8;color:var(--gray-1);">' + data.fr.replace(/\n/g,'<br>') + '</div>';
+  } else {
+    if (data.he) content += '<div style="direction:rtl;text-align:right;font-family:\'Noto Serif Hebrew\',serif;line-height:1.9;margin-bottom:10px;">' + data.he + '</div>';
+    if (data.en) content += '<div style="color:var(--gray-2);font-size:14px;line-height:1.7;">' + data.en + '</div>';
+  }
+  if (content) {
+    el.innerHTML = content;
+    expEl.style.display = 'block';
+  } else {
+    displayTanyaFallback();
+  }
+}
+
+function displayTanyaFallback() {
+  var el = document.getElementById('tanya-text');
+  var dateEl = document.getElementById('tanya-date');
+  if (!el) return;
+  var d = new Date();
+  var heb = gregToHebrew(d.getFullYear(), d.getMonth()+1, d.getDate());
+  if (dateEl) dateEl.textContent = heb.mName + ' ' + heb.hd;
+  el.innerHTML = '<span style="color:var(--gray-3);font-style:italic;font-size:13px;">Le texte du Tanya sera bientôt disponible</span>';
 }
 
 
