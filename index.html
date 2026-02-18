@@ -369,6 +369,11 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .insta-nav-item span { font-size:9px; font-weight:600; letter-spacing:0.2px; font-family:var(--font); }
 .insta-nav-item.active { color:var(--black); }
 .insta-nav-item.active svg { stroke-width:2.2; }
+.insta-nav-center { position:relative; display:flex; flex-direction:column; align-items:center; gap:1px; background:none; border:none; cursor:pointer; padding:6px 12px; -webkit-tap-highlight-color:transparent; }
+.insta-nav-center-ring { width:50px; height:50px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; margin-top:-22px; box-shadow:0 2px 12px rgba(98,40,215,0.25); }
+.insta-nav-center-inner { width:44px; height:44px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:22px; }
+.insta-nav-center span { font-size:9px; font-weight:600; letter-spacing:0.2px; font-family:var(--font); color:var(--gray-3); margin-top:2px; }
+.insta-nav-center.active span { color:var(--black); }
 /* SHARE BTN next to heart */
 .insta-share-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; transition:transform 0.15s; }
 .insta-share-btn:active { transform:scale(1.2); }
@@ -956,6 +961,35 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     </div>
   </div>
 
+  <!-- SUB-PANEL: ÉTUDES -->
+  <div id="panel-sub-etudes" style="display:none">
+    <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
+    <div style="padding:0 16px 16px;">
+      <div style="font-size:18px;font-weight:800;color:var(--black);margin-bottom:4px;">📖 Études du jour</div>
+      <div style="font-size:12px;color:var(--gray-3);margin-bottom:16px;">Hayom Yom & Rambam quotidiens</div>
+
+      <!-- HYY Card (mirror) -->
+      <div class="hyy-card" style="margin-bottom:12px;">
+        <div class="hyy-header">
+          <span class="hyy-icon">📜</span>
+          <span class="hyy-title">Hayom Yom</span>
+          <span class="hyy-date" id="etudes-hyy-date"></span>
+        </div>
+        <div class="hyy-text" id="etudes-hyy-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
+      </div>
+
+      <!-- Rambam Card (mirror) -->
+      <div class="hyy-card">
+        <div class="hyy-header">
+          <span class="hyy-icon">📚</span>
+          <span class="hyy-title">Rambam</span>
+          <span class="hyy-date" id="etudes-rambam-date"></span>
+        </div>
+        <div class="hyy-text" id="etudes-rambam-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- SUB-PANEL: CHABAP CLUB -->
   <div id="panel-sub-club" style="display:none">
     <div class="panel-back-wrap"><button class="panel-back" onclick="switchTab('menu')">← Accueil</button></div>
@@ -1292,9 +1326,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="app-footer"><span class="footer-logo-wrap"><img src="data:image/png;base64,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" alt="770 Lab" style="height:22px;width:auto;opacity:0.4;"></span></div>
   <div class="insta-bottom-nav" id="home-nav">
     <button class="insta-nav-item active" onclick="switchTab('menu')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
-    <button class="insta-nav-item" onclick="openJourReading()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Jour</span></button>
-    <button class="insta-nav-item" onclick="switchTab('chains');renderChainList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg><span>Chaînes</span></button>
-    <button class="insta-nav-item" onclick="switchTab('perek');renderPerek()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Chapitres</span></button>
+    <button class="insta-nav-item" onclick="switchTab('sub-tehilim')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Tehilim</span></button>
+    <button class="insta-nav-center" onclick="switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner">🕎</div></div><span>Objectifs</span></button>
+    <button class="insta-nav-item" onclick="switchTab('sub-etudes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Études</span></button>
+    <button class="insta-nav-item" onclick="switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6 2 10.5c0 3 1.5 5.5 4 7v4.5l3.5-2.5c.8.2 1.6.3 2.5.3 5.52 0 10-4 10-8.5S17.52 2 12 2z"/><path d="M8 10h8M8 14h5"/></svg><span>Prières</span></button>
   </div>
 </div>
 
@@ -1310,9 +1345,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="reading-bottom-bar"></div>
   <div class="insta-bottom-nav">
     <button class="insta-nav-item" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
-    <button class="insta-nav-item" onclick="goHome();openJourReading()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Jour</span></button>
-    <button class="insta-nav-item" onclick="goHome();switchTab('chains');renderChainList()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg><span>Chaînes</span></button>
-    <button class="insta-nav-item" onclick="goHome();switchTab('perek');renderPerek()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Chapitres</span></button>
+    <button class="insta-nav-item" onclick="goHome();switchTab('sub-tehilim')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Tehilim</span></button>
+    <button class="insta-nav-center" onclick="goHome();switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner">🕎</div></div><span>Objectifs</span></button>
+    <button class="insta-nav-item" onclick="goHome();switchTab('sub-etudes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Études</span></button>
+    <button class="insta-nav-item" onclick="goHome();switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6 2 10.5c0 3 1.5 5.5 4 7v4.5l3.5-2.5c.8.2 1.6.3 2.5.3 5.52 0 10-4 10-8.5S17.52 2 12 2z"/><path d="M8 10h8M8 14h5"/></svg><span>Prières</span></button>
   </div>
 </div>
 
@@ -4961,7 +4997,7 @@ function goHome() {
 
 function switchTab(tab) {
   activeTab = tab;
-  var panels = ["menu","sub-objectifs","sub-tehilim","sub-club","sub-beth","sub-sidour","sub-sidour-patakh","jour","perek","birthday","chains","chain-detail","t119","cemetery"];
+  var panels = ["menu","sub-objectifs","sub-tehilim","sub-club","sub-beth","sub-sidour","sub-sidour-patakh","sub-etudes","jour","perek","birthday","chains","chain-detail","t119","cemetery"];
   panels.forEach(function(p) {
     var el = document.getElementById("panel-" + p);
     if (el) el.style.display = p === tab ? "block" : "none";
@@ -4972,6 +5008,7 @@ function switchTab(tab) {
   if (tab === "chains") renderChainList();
   if (tab === "cemetery") renderCemetery();
   if (tab === "sub-objectifs") { renderObjectives(); renderObjStoryBar(); }
+  if (tab === "sub-etudes") { syncEtudesPanel(); }
   if (tab === "sub-sidour-patakh") { showPatakhDirect('shaharit'); }
   if (tab === "menu") { renderObjStoryBar(); updateBigObjSub(); }
   window.scrollTo(0, 0);
@@ -8318,9 +8355,9 @@ function sharePsalm(num) {
 function updateHomeNav(activeTab) {
   var nav = document.getElementById('home-nav');
   if (!nav) return;
-  var items = nav.querySelectorAll('.insta-nav-item');
+  var items = nav.querySelectorAll('.insta-nav-item, .insta-nav-center');
   items.forEach(function(item) { item.classList.remove('active'); });
-  var tabMap = { menu: 0, 'sub-objectifs': 0, 'sub-tehilim': 0, 'sub-club': 0, 'sub-beth': 0, 'sub-sidour': 0, 'sub-sidour-patakh': 0, jour: 1, chains: 2, 'chain-detail': 2, perek: 3 };
+  var tabMap = { menu: 0, 'sub-tehilim': 1, 'sub-objectifs': 2, 'sub-etudes': 3, 'sub-sidour': 4, 'sub-sidour-patakh': 4, 'sub-club': 0, 'sub-beth': 0, jour: 0, chains: 0, 'chain-detail': 0, perek: 1, birthday: 0 };
   var idx = tabMap[activeTab];
   if (idx !== undefined && items[idx]) items[idx].classList.add('active');
 }
@@ -8574,6 +8611,23 @@ function renderShabbatCard(data) {
   document.getElementById('shabbat-candles').textContent = data.candles || '--:--';
   document.getElementById('shabbat-havdalah').textContent = data.havdalah || '--:--';
   card.style.display = '';
+}
+
+function syncEtudesPanel() {
+  // Copy HYY content to études panel
+  var srcDate = document.getElementById('hyy-date');
+  var srcText = document.getElementById('hyy-text');
+  var dstDate = document.getElementById('etudes-hyy-date');
+  var dstText = document.getElementById('etudes-hyy-text');
+  if (srcDate && dstDate) dstDate.textContent = srcDate.textContent;
+  if (srcText && dstText) dstText.innerHTML = srcText.innerHTML;
+  // Copy Rambam content to études panel
+  var rSrcDate = document.getElementById('rambam-date');
+  var rSrcText = document.getElementById('rambam-text');
+  var rDstDate = document.getElementById('etudes-rambam-date');
+  var rDstText = document.getElementById('etudes-rambam-text');
+  if (rSrcDate && rDstDate) rDstDate.textContent = rSrcDate.textContent;
+  if (rSrcText && rDstText) rDstText.innerHTML = rSrcText.innerHTML;
 }
 
 function loadHayomYom() {
