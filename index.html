@@ -31,28 +31,28 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-icon .icon-770 { width:120px; height:auto; color:var(--black); }
 .splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
 /* CHABAD ANIMATED TITLE */
-.splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-top:0; margin-bottom:4px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:baseline; justify-content:center; overflow:visible; height:70px; }
-.sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; }
-.sc-apos { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.6s ease 3.2s forwards; }
-.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:2; }
-.sc-letter-d2 { display:inline-block; opacity:0; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:1; }
-@keyframes scFadeIn { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
-@keyframes scInsert { to { max-width:30px; opacity:1; letter-spacing:2px; } }
+.splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-top:0; margin-bottom:16px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:flex-end; justify-content:center; overflow:visible; line-height:1; }
+.sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; line-height:1; }
+.sc-apos { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.6s ease 3.2s forwards; line-height:1; }
+.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:2; line-height:1; }
+.sc-letter-d2 { display:inline-block; opacity:0; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:1; line-height:1; }
+@keyframes scFadeIn { from { opacity:0; transform:translateY(-0.23em); } to { opacity:1; transform:translateY(0); } }
+@keyframes scInsert { to { max-width:0.6em; opacity:1; letter-spacing:2px; } }
 @keyframes scD1 {
-  0%   { opacity:0; transform:translateY(-12px) rotate(0deg); }
+  0%   { opacity:0; transform:translateY(-0.23em) rotate(0deg); }
   8%   { opacity:1; transform:translateY(0) rotate(0deg); }
   50%  { opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { transform:translateY(12px) rotate(180deg); opacity:1; }
-  100% { transform:translateY(12px) rotate(180deg); opacity:1; }
+  68%  { transform:translateY(0.23em) rotate(180deg); opacity:1; }
+  100% { transform:translateY(0.23em) rotate(180deg); opacity:1; }
 }
 @keyframes scD2 {
   0%   { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
   28%  { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
   30%  { margin-left:-0.62em; opacity:1; transform:translateY(0) rotate(0deg); }
-  46%  { margin-left:0px; opacity:1; transform:translateY(0) rotate(0deg); }
-  50%  { margin-left:0px; opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { margin-left:0px; opacity:1; transform:translateY(12px) rotate(180deg); }
-  100% { margin-left:0px; opacity:1; transform:translateY(12px) rotate(180deg); }
+  46%  { margin-left:0; opacity:1; transform:translateY(0) rotate(0deg); }
+  50%  { margin-left:0; opacity:1; transform:translateY(0) rotate(0deg); }
+  68%  { margin-left:0; opacity:1; transform:translateY(0.23em) rotate(180deg); }
+  100% { margin-left:0; opacity:1; transform:translateY(0.23em) rotate(180deg); }
 }
 .splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 3.8s forwards; direction:rtl; }
 @keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -235,27 +235,34 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
 .obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
-.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:175px; }
+.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:190px; }
 .shabbat-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:opacity 0.8s ease; opacity:0; filter:blur(1px); }
 .shabbat-bg.loaded { opacity:1; }
 .shabbat-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,30,0.3) 0%, rgba(10,10,30,0.5) 50%, rgba(10,10,30,0.7) 100%); }
-.shabbat-content { position:relative; z-index:1; padding:16px 20px; }
-.shabbat-city { text-align:center; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:4px; }
-.shabbat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.shabbat-content { position:relative; z-index:1; padding:18px 20px 16px; }
+.shabbat-city { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.95); }
+.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; }
 .shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
-.shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.5); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
+.shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
 .shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap; animation:iconPulse 3s ease-in-out infinite; backdrop-filter:blur(6px); }
-.shabbat-times-row { display:flex; align-items:center; gap:0; }
-.shabbat-time-block { flex:1; display:flex; align-items:center; gap:10px; }
-.shabbat-time-icon { font-size:22px; animation:iconGlow 2s ease-in-out infinite alternate; filter:drop-shadow(0 0 8px rgba(255,200,50,0.4)); }
+.shabbat-times-row { display:flex; align-items:center; justify-content:center; gap:0; }
+.shabbat-time-block { flex:1; display:flex; align-items:center; gap:10px; justify-content:center; }
+.shabbat-time-icon { font-size:22px; filter:drop-shadow(0 0 8px rgba(255,200,50,0.3)); }
 .shabbat-time-icon svg { width:22px; height:22px; }
+.shabbat-time-icon.candle-icon { filter:drop-shadow(0 0 10px rgba(249,206,52,0.5)); animation:candleGlow 2s ease-in-out infinite alternate; }
+.shabbat-time-icon.moon-icon { filter:drop-shadow(0 0 8px rgba(192,132,252,0.4)); animation:moonGlow 3s ease-in-out infinite alternate; }
+@keyframes candleGlow { from { filter:drop-shadow(0 0 8px rgba(249,206,52,0.3)); } to { filter:drop-shadow(0 0 14px rgba(249,206,52,0.6)); } }
+@keyframes moonGlow { from { filter:drop-shadow(0 0 6px rgba(192,132,252,0.3)); } to { filter:drop-shadow(0 0 12px rgba(192,132,252,0.5)); } }
+.shabbat-time-icon.candle-icon svg { width:20px; height:28px; }
+.shabbat-time-icon.moon-icon svg { width:26px; height:26px; }
 .shabbat-time-detail {}
-.shabbat-time-label { font-size:10px; color:rgba(255,255,255,0.45); letter-spacing:0.5px; text-transform:uppercase; }
+.shabbat-time-label { font-size:10px; color:rgba(255,255,255,0.9); letter-spacing:0.5px; text-transform:uppercase; }
 .shabbat-time-val { font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:0.5px; }
 .shabbat-time-val.candles { color:#f9ce34; text-shadow:0 0 12px rgba(249,206,52,0.3); }
 .shabbat-time-val.havdalah { color:#c084fc; text-shadow:0 0 12px rgba(192,132,252,0.3); }
-.shabbat-time-date { font-size:11px; color:rgba(255,255,255,0.55); margin-top:2px; font-weight:500; }
-.shabbat-sep { width:1px; height:40px; background:rgba(255,255,255,0.12); margin:0 6px; }
+.shabbat-time-date { font-size:11px; color:rgba(255,255,255,0.85); margin-top:2px; font-weight:500; }
+.shabbat-time-hedate { font-size:10px; color:rgba(255,255,255,0.65); margin-top:1px; font-style:italic; }
+.shabbat-sep { width:1px; height:55px; background:rgba(255,255,255,0.15); margin:0 16px; flex-shrink:0; }
 .obj-list { padding:0 8px 4px; }
 .obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
 .obj-item:active { background:var(--gray-6); }
@@ -749,30 +756,31 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <div class="shabbat-bg" id="shabbat-bg"></div>
       <div class="shabbat-overlay"></div>
       <div class="shabbat-content">
-        <div class="shabbat-city" id="shabbat-city">📍 Paris</div>
         <div class="shabbat-top">
           <div>
             <div class="shabbat-parasha" id="shabbat-parasha"></div>
             <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
           </div>
-          <div class="shabbat-badge" id="shabbat-badge">🕯️ Chabbat</div>
+          <div class="shabbat-city" id="shabbat-city">🇫🇷 Paris</div>
         </div>
         <div class="shabbat-times-row">
           <div class="shabbat-time-block">
-            <div class="shabbat-time-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="10" y="10" width="4" height="10" rx="1" fill="rgba(255,255,255,0.9)"/><ellipse cx="12" cy="8" rx="2.5" ry="3.5" fill="#f9ce34" opacity="0.9"/><ellipse cx="12" cy="8.5" rx="1" ry="2" fill="#fff" opacity="0.6"/></svg></div>
+            <div class="shabbat-time-icon candle-icon"><svg viewBox="0 0 24 32" fill="none" width="24" height="32"><defs><radialGradient id="flameG" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.9"/><stop offset="40%" stop-color="#ffe066"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.6"/></radialGradient></defs><rect x="10" y="16" width="4" height="14" rx="1.5" fill="rgba(255,255,255,0.85)"/><rect x="11" y="16" width="2" height="14" rx="1" fill="rgba(255,255,255,0.95)"/><ellipse cx="12" cy="13" rx="3.5" ry="5.5" fill="url(#flameG)" opacity="0.9"><animate attributeName="ry" values="5.5;6;5.2;5.8;5.5" dur="1.5s" repeatCount="indefinite"/><animate attributeName="rx" values="3.5;3.2;3.8;3.3;3.5" dur="2s" repeatCount="indefinite"/></ellipse><ellipse cx="12" cy="13.5" rx="1.5" ry="3" fill="#fff" opacity="0.7"><animate attributeName="ry" values="3;3.3;2.8;3.1;3" dur="1.8s" repeatCount="indefinite"/></ellipse><ellipse cx="12" cy="10" rx="4" ry="3" fill="#f9ce34" opacity="0.15"><animate attributeName="ry" values="3;3.5;2.8;3.2;3" dur="2s" repeatCount="indefinite"/></ellipse></svg></div>
             <div class="shabbat-time-detail">
               <div class="shabbat-time-label">Allumage</div>
               <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
               <div class="shabbat-time-date" id="shabbat-candles-date"></div>
+              <div class="shabbat-time-hedate" id="shabbat-candles-hedate"></div>
             </div>
           </div>
           <div class="shabbat-sep"></div>
           <div class="shabbat-time-block">
-            <div class="shabbat-time-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="rgba(255,255,255,0.85)" stroke="none"/><circle cx="10" cy="9" r="0.8" fill="rgba(200,200,220,0.4)"/><circle cx="13" cy="14" r="0.5" fill="rgba(200,200,220,0.3)"/></svg></div>
+            <div class="shabbat-time-icon moon-icon"><svg viewBox="0 0 28 28" fill="none" width="26" height="26"><defs><radialGradient id="moonG" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#f0e6ff"/><stop offset="100%" stop-color="#c084fc"/></radialGradient></defs><path d="M22 14.79A9 9 0 1113.21 5 7 7 0 0022 14.79z" fill="url(#moonG)"><animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite"/></path><circle cx="11" cy="10" r="0.8" fill="rgba(200,200,230,0.35)"/><circle cx="15" cy="16" r="0.5" fill="rgba(200,200,230,0.25)"/><circle cx="10" cy="15" r="0.4" fill="rgba(200,200,230,0.2)"/><circle cx="4" cy="6" r="0.6" fill="#fff" opacity="0.4"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="24" cy="8" r="0.4" fill="#fff" opacity="0.3"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.2s" repeatCount="indefinite"/></circle><circle cx="7" cy="22" r="0.5" fill="#fff" opacity="0.35"><animate attributeName="opacity" values="0.35;0.75;0.35" dur="2.8s" repeatCount="indefinite"/></circle></svg></div>
             <div class="shabbat-time-detail">
               <div class="shabbat-time-label">Havdalah</div>
               <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
               <div class="shabbat-time-date" id="shabbat-havdalah-date"></div>
+              <div class="shabbat-time-hedate" id="shabbat-havdalah-hedate"></div>
             </div>
           </div>
         </div>
@@ -781,7 +789,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     </div>
     <div class="home-big-cards">
       <div class="big-card" onclick="switchTab('sub-objectifs')">
-        <div class="big-card-icon" style="animation-delay:0s;background:linear-gradient(135deg,#6228d7,#8b5cf6);box-shadow:0 3px 12px rgba(98,40,215,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><line x1="16" y1="8" x2="16" y2="26"/><line x1="8" y1="26" x2="24" y2="26"/><path d="M8 14c0-4 4-6 8-6s8 2 8 6" stroke-width="1.3"/><line x1="8" y1="14" x2="8" y2="10"/><line x1="12" y1="11" x2="12" y2="8"/><line x1="16" y1="8" x2="16" y2="5"/><line x1="20" y1="11" x2="20" y2="8"/><line x1="24" y1="14" x2="24" y2="10"/><circle cx="8" cy="9" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="12" cy="7" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="16" cy="4" r="1.5" fill="#f9ce34" stroke="none"/><circle cx="20" cy="7" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="24" cy="9" r="1.2" fill="#f9ce34" stroke="none"/></svg></div>
+        <div class="big-card-icon" style="animation-delay:0s;background:none;box-shadow:none;padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" alt="Objectifs"></div>
         <div class="big-card-info">
           <div class="big-card-title">Objectifs du jour</div>
           <div class="big-card-sub" id="big-obj-sub">0/13 accomplis</div>
@@ -8593,7 +8601,7 @@ var _shabbatDefaultTz = 'Europe/Paris';
 var _shabbatDefaultCity = 'Paris';
 
 function loadShabbatTimes() {
-  var cacheKey = 'tehilim_shabbat_' + new Date().toISOString().slice(0,10);
+  var cacheKey = 'tehilim_shabbat_v2_' + new Date().toISOString().slice(0,10);
   // Check cache first
   try {
     var cached = JSON.parse(localStorage.getItem(cacheKey));
@@ -8649,6 +8657,7 @@ function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
         parasha: '', parashaHe: '',
         candles: '--:--', havdalah: '--:--',
         candleDate: '', havdalahDate: '',
+        candleHeDate: '', havdalahHeDate: '',
         location: _shabbatDefaultCity
       });
     });
@@ -8682,6 +8691,12 @@ function _parseShabbatData(data, cityName) {
   var candleDateStr = _pad(friday.getDate()) + '/' + _pad(friday.getMonth() + 1);
   var havdalahDateStr = _pad(saturday.getDate()) + '/' + _pad(saturday.getMonth() + 1);
 
+  // Hebrew dates
+  var candleHeb = gregToHebrew(friday.getFullYear(), friday.getMonth() + 1, friday.getDate());
+  var havdalahHeb = gregToHebrew(saturday.getFullYear(), saturday.getMonth() + 1, saturday.getDate());
+  var candleHeDateStr = candleHeb.hd + ' ' + candleHeb.mName;
+  var havdalahHeDateStr = havdalahHeb.hd + ' ' + havdalahHeb.mName;
+
   var location = cityName || (data.location ? (data.location.city || data.location.title || _shabbatDefaultCity) : _shabbatDefaultCity);
 
   return {
@@ -8691,6 +8706,8 @@ function _parseShabbatData(data, cityName) {
     havdalah: havdalahTime,
     candleDate: candleDateStr,
     havdalahDate: havdalahDateStr,
+    candleHeDate: candleHeDateStr,
+    havdalahHeDate: havdalahHeDateStr,
     location: location
   };
 }
@@ -8709,7 +8726,6 @@ function renderShabbatCard(data) {
   if (!card || !data) return;
   var parashaEl = document.getElementById('shabbat-parasha');
   var parashaHeEl = document.getElementById('shabbat-parasha-he');
-  var badgeEl = document.getElementById('shabbat-badge');
   if (data.parasha) {
     parashaEl.textContent = data.parasha;
     parashaHeEl.textContent = data.parashaHe || '';
@@ -8717,20 +8733,18 @@ function renderShabbatCard(data) {
     parashaEl.textContent = 'Chabbat';
     parashaHeEl.textContent = 'שבת';
   }
-  // Smart badge
+  // Smart badge (removed from UI)
   var now = new Date();
   var day = now.getDay();
-  if (day === 5) { badgeEl.textContent = '🕯️ Ce soir'; }
-  else if (day === 6) { badgeEl.textContent = '✨ Chabbat Chalom'; }
-  else if (day === 4) { badgeEl.textContent = '🕯️ Demain soir'; }
-  else { badgeEl.textContent = '🕯️ Chabbat'; }
   document.getElementById('shabbat-candles').textContent = data.candles || '--:--';
   document.getElementById('shabbat-havdalah').textContent = data.havdalah || '--:--';
   document.getElementById('shabbat-candles-date').textContent = data.candleDate || '';
   document.getElementById('shabbat-havdalah-date').textContent = data.havdalahDate || '';
+  document.getElementById('shabbat-candles-hedate').textContent = data.candleHeDate || '';
+  document.getElementById('shabbat-havdalah-hedate').textContent = data.havdalahHeDate || '';
   // City
   var cityEl = document.getElementById('shabbat-city');
-  if (cityEl && data.location) cityEl.textContent = '📍 ' + data.location;
+  if (cityEl && data.location) cityEl.textContent = '🇫🇷 ' + data.location;
   // Background image from Wikipedia
   _loadCityImage(data.location);
   card.style.display = '';
