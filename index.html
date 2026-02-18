@@ -136,7 +136,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .home-big-cards { padding:8px 16px 0; display:flex; flex-direction:column; gap:10px; }
 .big-card { display:flex; align-items:center; gap:14px; padding:18px 16px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; border-left:3px solid #ccc; }
 .big-card:active { transform:scale(0.98); background:var(--gray-6); }
-.big-card-icon { font-size:36px; flex-shrink:0; }
+.big-card-icon { width:48px; height:48px; flex-shrink:0; border-radius:14px; display:flex; align-items:center; justify-content:center; animation:iconFloat 3s ease-in-out infinite; overflow:hidden; }
+.big-card-icon svg { width:36px; height:36px; }
 .big-card-info { flex:1; min-width:0; }
 .big-card-title { font-size:17px; font-weight:700; color:var(--black); }
 .big-card-sub { font-size:12px; color:var(--gray-3); margin-top:2px; }
@@ -153,7 +154,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .hyy-card { padding:20px 18px; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); cursor:pointer; transition:all 0.15s; -webkit-tap-highlight-color:transparent; border-left:3px solid #ccc; }
 .hyy-card:active { transform:scale(0.98); background:var(--gray-6); }
 .hyy-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-.hyy-icon { font-size:24px; }
+.hyy-icon { width:30px; height:30px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; animation:iconPulse 2.5s ease-in-out infinite; flex-shrink:0; }
+.hyy-icon svg { width:18px; height:18px; }
 .hyy-title { font-size:14px; font-weight:700; color:var(--black); flex:1; }
 .hyy-date { font-size:11px; color:var(--gray-3); font-weight:600; }
 .hyy-text { font-family:'EB Garamond',Georgia,serif; font-size:15px; line-height:1.7; color:var(--gray-1); max-height:120px; overflow:hidden; transition:max-height 0.4s ease; position:relative; }
@@ -211,7 +213,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .os-prog-fill { height:100%; border-radius:2px; background:rgba(255,255,255,0.9); width:0%; transition:width 0.3s; }
 .os-close { position:absolute; top:24px; right:16px; z-index:20; background:none; border:none; color:white; font-size:22px; cursor:pointer; width:40px; height:40px; display:flex; align-items:center; justify-content:center; text-shadow:0 1px 4px rgba(0,0,0,0.3); }
 .os-content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:50px 20px 30px; text-align:center; transition:opacity 0.3s; overflow-y:auto; position:relative; z-index:6; pointer-events:none; }
-.os-emoji { font-size:48px; margin-bottom:10px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15)); }
+.os-emoji { font-size:52px; margin-bottom:10px; filter:drop-shadow(0 4px 16px rgba(0,0,0,0.25)); animation:iconBounce 2s ease-in-out infinite; }
 .os-hebrew { font-family:'Noto Serif Hebrew',serif; font-size:26px; font-weight:700; margin-bottom:6px; direction:rtl; text-shadow:0 2px 8px rgba(0,0,0,0.1); }
 .os-name { font-size:16px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; opacity:0.9; }
 .os-msg { font-size:14px; line-height:1.6; max-width:320px; opacity:0.85; font-family:'EB Garamond',Georgia,serif; margin-bottom:20px; }
@@ -233,21 +235,27 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
 .obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
-.shabbat-card { margin:0 16px 12px; padding:16px 20px; border-radius:var(--radius); background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color:#fff; position:relative; overflow:hidden; }
-.shabbat-card::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; background:radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%); border-radius:50%; }
-.shabbat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-.shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; }
+.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:175px; }
+.shabbat-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:opacity 0.8s ease; opacity:0; filter:blur(1px); }
+.shabbat-bg.loaded { opacity:1; }
+.shabbat-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,30,0.3) 0%, rgba(10,10,30,0.5) 50%, rgba(10,10,30,0.7) 100%); }
+.shabbat-content { position:relative; z-index:1; padding:16px 20px; }
+.shabbat-city { text-align:center; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:4px; }
+.shabbat-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
 .shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.5); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
-.shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.12); padding:3px 8px; border-radius:20px; white-space:nowrap; }
+.shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap; animation:iconPulse 3s ease-in-out infinite; backdrop-filter:blur(6px); }
 .shabbat-times-row { display:flex; align-items:center; gap:0; }
 .shabbat-time-block { flex:1; display:flex; align-items:center; gap:10px; }
-.shabbat-time-icon { font-size:18px; }
+.shabbat-time-icon { font-size:22px; animation:iconGlow 2s ease-in-out infinite alternate; filter:drop-shadow(0 0 8px rgba(255,200,50,0.4)); }
+.shabbat-time-icon svg { width:22px; height:22px; }
 .shabbat-time-detail {}
 .shabbat-time-label { font-size:10px; color:rgba(255,255,255,0.45); letter-spacing:0.5px; text-transform:uppercase; }
 .shabbat-time-val { font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:0.5px; }
-.shabbat-time-val.candles { color:#f9ce34; }
-.shabbat-time-val.havdalah { color:#c084fc; }
-.shabbat-sep { width:1px; height:32px; background:rgba(255,255,255,0.12); margin:0 6px; }
+.shabbat-time-val.candles { color:#f9ce34; text-shadow:0 0 12px rgba(249,206,52,0.3); }
+.shabbat-time-val.havdalah { color:#c084fc; text-shadow:0 0 12px rgba(192,132,252,0.3); }
+.shabbat-time-date { font-size:11px; color:rgba(255,255,255,0.55); margin-top:2px; font-weight:500; }
+.shabbat-sep { width:1px; height:40px; background:rgba(255,255,255,0.12); margin:0 6px; }
 .obj-list { padding:0 8px 4px; }
 .obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
 .obj-item:active { background:var(--gray-6); }
@@ -281,12 +289,18 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-cq-source { font-size:10px; color:var(--gray-3); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
 .obj-cq-bravo { font-size:13px; font-weight:600; color:#16a34a; margin-bottom:8px; }
 @keyframes objFadeIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes iconFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
+@keyframes iconPulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.08); } }
+@keyframes iconBounce { 0%,100% { transform:translateY(0) scale(1); } 25% { transform:translateY(-6px) scale(1.05); } 75% { transform:translateY(2px) scale(0.98); } }
+@keyframes iconGlow { 0% { filter:drop-shadow(0 0 4px rgba(255,200,50,0.2)); } 100% { filter:drop-shadow(0 0 12px rgba(255,200,50,0.6)); } }
+@keyframes shareRotate { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
 
 /* DAILY QUOTE */
 .don-card { border-radius:var(--radius); cursor:pointer; overflow:hidden; transition:transform 0.15s; display:block; }
 .don-card:active { transform:scale(0.98); }
 .don-card-inner { display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; padding:22px 12px; }
-.don-card-icon { font-size:32px; }
+.don-card-icon { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.15); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; animation:iconFloat 2.5s ease-in-out infinite; }
+.don-card-icon svg { width:24px; height:24px; }
 .don-card-text { }
 .don-card-title { font-size:15px; font-weight:700; color:#fff; margin-bottom:2px; }
 .don-card-sub { font-size:10px; color:rgba(255,255,255,0.7); }
@@ -297,7 +311,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .don-campaign-card { display:flex; align-items:center; padding:18px 20px; border-radius:var(--radius); background:linear-gradient(135deg, #4338ca 0%, #6d28d9 50%, #7c3aed 100%); cursor:pointer; transition:transform 0.15s; }
 .don-campaign-card:active { transform:scale(0.98); }
 .daily-quote { margin:20px 16px 24px; padding:20px; text-align:center; background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); }
-.quote-decor { color:var(--gray-4); font-size:14px; margin-bottom:10px; }
+.quote-decor { font-size:16px; margin-bottom:10px; background:linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:iconPulse 3s ease-in-out infinite; }
 .quote-text { font-style:italic; color:var(--gray-2); font-size:17px; line-height:1.7; margin-bottom:10px; min-height:50px; transition: opacity 0.6s ease, transform 0.6s ease; font-family:'EB Garamond',Georgia,serif; }
 .quote-source { font-size:11px; color:var(--gray-3); font-weight:600; letter-spacing:1.5px; text-transform:uppercase; transition: opacity 0.6s ease; }
 .quote-dots { display:flex; gap:5px; justify-content:center; margin-top:10px; cursor:pointer; padding:8px 0; }
@@ -323,7 +337,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .story-bar::-webkit-scrollbar { display:none; }
 .story-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
 .story-circle { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:16px; font-weight:700; color:var(--gray-1); background:var(--white); direction:rtl; transition:all 0.2s; }
-.story-ring { width:62px; height:62px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; padding:2px; }
+.story-ring { width:62px; height:62px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; padding:2px; animation:shimmer 8s linear infinite; }
 .story-item.read .story-ring { background:#dbdbdb; }
 .story-item.active .story-circle { color:var(--black); font-weight:800; }
 .story-item.read .story-circle { color:var(--gray-4); }
@@ -390,14 +404,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .insta-nav-item.active { color:var(--black); }
 .insta-nav-item.active svg { stroke-width:2.2; }
 .insta-nav-center { position:relative; display:flex; flex-direction:column; align-items:center; gap:1px; background:none; border:none; cursor:pointer; padding:6px 12px; -webkit-tap-highlight-color:transparent; }
-.insta-nav-center-ring { width:50px; height:50px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; margin-top:-22px; box-shadow:0 2px 12px rgba(98,40,215,0.25); }
+.insta-nav-center-ring { width:50px; height:50px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; margin-top:-22px; box-shadow:0 2px 12px rgba(98,40,215,0.25); animation:shimmer 6s linear infinite; }
 .insta-nav-center-inner { width:44px; height:44px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; font-size:22px; }
 .insta-nav-center span { font-size:9px; font-weight:600; letter-spacing:0.2px; font-family:var(--font); color:var(--gray-3); margin-top:2px; }
 .insta-nav-center.active span { color:var(--black); }
 /* SHARE BTN next to heart */
-.insta-share-btn { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; transition:transform 0.15s; }
-.insta-share-btn:active { transform:scale(1.2); }
-.insta-share-btn svg { width:24px; height:24px; fill:none; stroke:var(--black); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.insta-share-btn { background:none; border:none; cursor:pointer; padding:6px; display:flex; align-items:center; transition:transform 0.2s, filter 0.2s; border-radius:50%; position:relative; }
+.insta-share-btn:hover { filter:brightness(1.2); }
+.insta-share-btn:active { transform:scale(1.3) rotate(15deg); filter:brightness(1.4); }
+.insta-share-btn svg { width:22px; height:22px; fill:none; stroke:url(#shareGrad); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 1px 4px rgba(98,40,215,0.3)); }
 /* INSTA POST CARD */
 .insta-post { background:var(--white); border:1px solid var(--gray-5); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; }
 
@@ -690,6 +705,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <linearGradient id="shareGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9ce34"/>
+      <stop offset="50%" stop-color="#ee2a7b"/>
+      <stop offset="100%" stop-color="#6228d7"/>
+    </linearGradient>
+  </defs>
+</svg>
 
 <!-- SPLASH SCREEN -->
 <div id="splash" onclick="skipSplash()">
@@ -721,35 +745,43 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div id="panel-menu">
     <div class="home-date-line" id="home-date-line"></div>
     <div class="obj-story-bar" id="obj-story-bar"></div>
-    <div class="shabbat-card" id="shabbat-card" style="display:none">
-      <div class="shabbat-top">
-        <div>
-          <div class="shabbat-parasha" id="shabbat-parasha"></div>
-          <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
+    <div class="shabbat-card" id="shabbat-card" style="display:none;background:#1a1a2e;">
+      <div class="shabbat-bg" id="shabbat-bg"></div>
+      <div class="shabbat-overlay"></div>
+      <div class="shabbat-content">
+        <div class="shabbat-city" id="shabbat-city">📍 Paris</div>
+        <div class="shabbat-top">
+          <div>
+            <div class="shabbat-parasha" id="shabbat-parasha"></div>
+            <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
+          </div>
+          <div class="shabbat-badge" id="shabbat-badge">🕯️ Chabbat</div>
         </div>
-        <div class="shabbat-badge" id="shabbat-badge">🕯️ Chabbat</div>
-      </div>
-      <div class="shabbat-times-row">
-        <div class="shabbat-time-block">
-          <div class="shabbat-time-icon">🕯️</div>
-          <div class="shabbat-time-detail">
-            <div class="shabbat-time-label">Allumage</div>
-            <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
+        <div class="shabbat-times-row">
+          <div class="shabbat-time-block">
+            <div class="shabbat-time-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="10" y="10" width="4" height="10" rx="1" fill="rgba(255,255,255,0.9)"/><ellipse cx="12" cy="8" rx="2.5" ry="3.5" fill="#f9ce34" opacity="0.9"/><ellipse cx="12" cy="8.5" rx="1" ry="2" fill="#fff" opacity="0.6"/></svg></div>
+            <div class="shabbat-time-detail">
+              <div class="shabbat-time-label">Allumage</div>
+              <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
+              <div class="shabbat-time-date" id="shabbat-candles-date"></div>
+            </div>
+          </div>
+          <div class="shabbat-sep"></div>
+          <div class="shabbat-time-block">
+            <div class="shabbat-time-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="rgba(255,255,255,0.85)" stroke="none"/><circle cx="10" cy="9" r="0.8" fill="rgba(200,200,220,0.4)"/><circle cx="13" cy="14" r="0.5" fill="rgba(200,200,220,0.3)"/></svg></div>
+            <div class="shabbat-time-detail">
+              <div class="shabbat-time-label">Havdalah</div>
+              <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
+              <div class="shabbat-time-date" id="shabbat-havdalah-date"></div>
+            </div>
           </div>
         </div>
-        <div class="shabbat-sep"></div>
-        <div class="shabbat-time-block">
-          <div class="shabbat-time-icon">🌙</div>
-          <div class="shabbat-time-detail">
-            <div class="shabbat-time-label">Havdalah</div>
-            <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
-          </div>
-        </div>
+        <button class="insta-share-btn" onclick="shareShabbat(event)" style="position:absolute;bottom:12px;right:14px;padding:6px;"><svg viewBox="0 0 24 24" style="stroke:#fff;width:20px;height:20px;opacity:0.7;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
       </div>
     </div>
     <div class="home-big-cards">
       <div class="big-card" onclick="switchTab('sub-objectifs')">
-        <div class="big-card-icon">🕎</div>
+        <div class="big-card-icon" style="animation-delay:0s;background:linear-gradient(135deg,#6228d7,#8b5cf6);box-shadow:0 3px 12px rgba(98,40,215,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><line x1="16" y1="8" x2="16" y2="26"/><line x1="8" y1="26" x2="24" y2="26"/><path d="M8 14c0-4 4-6 8-6s8 2 8 6" stroke-width="1.3"/><line x1="8" y1="14" x2="8" y2="10"/><line x1="12" y1="11" x2="12" y2="8"/><line x1="16" y1="8" x2="16" y2="5"/><line x1="20" y1="11" x2="20" y2="8"/><line x1="24" y1="14" x2="24" y2="10"/><circle cx="8" cy="9" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="12" cy="7" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="16" cy="4" r="1.5" fill="#f9ce34" stroke="none"/><circle cx="20" cy="7" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="24" cy="9" r="1.2" fill="#f9ce34" stroke="none"/></svg></div>
         <div class="big-card-info">
           <div class="big-card-title">Objectifs du jour</div>
           <div class="big-card-sub" id="big-obj-sub">0/13 accomplis</div>
@@ -761,15 +793,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <!-- HAYOM YOM CARD -->
       <div class="hyy-card" id="hyy-card" onclick="toggleHyy(event)">
         <div class="hyy-header">
-          <span class="hyy-icon">📜</span>
+          <span class="hyy-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H8a3 3 0 00-3 3v12a3 3 0 003 3h10"/><path d="M18 3v18c1.5 0 3-1 3-3V6c0-2-1.5-3-3-3z"/><line x1="9" y1="8" x2="15" y2="8" opacity="0.6"/><line x1="9" y1="11" x2="14" y2="11" opacity="0.6"/><line x1="9" y1="14" x2="12" y2="14" opacity="0.6"/></svg></span>
           <span class="hyy-title">Hayom Yom</span>
           <span class="hyy-date" id="hyy-date"></span>
+          <button class="insta-share-btn" onclick="shareHyy(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="hyy-text"><span class="hyy-loading">Chargement…</span></div>
         <div class="hyy-expand" id="hyy-expand" style="display:none">Lire la suite ▾</div>
       </div>
       <div class="big-card" onclick="switchTab('sub-tehilim')">
-        <div class="big-card-icon">📖</div>
+        <div class="big-card-icon" style="animation-delay:0.3s;background:linear-gradient(135deg,#8b2fb8,#c084fc);box-shadow:0 3px 12px rgba(139,47,184,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7c3-2 6-1.5 11 1v18c-5-2.5-8-3-11-1V7z"/><path d="M27 7c-3-2-6-1.5-11 1v18c5-2.5 8-3 11-1V7z"/><line x1="9" y1="12" x2="13" y2="13.5" stroke-width="0.8" opacity="0.6"/><line x1="9" y1="15" x2="13" y2="16.5" stroke-width="0.8" opacity="0.6"/><line x1="9" y1="18" x2="13" y2="19.5" stroke-width="0.8" opacity="0.6"/><line x1="19" y1="13.5" x2="23" y2="12" stroke-width="0.8" opacity="0.6"/><line x1="19" y1="16.5" x2="23" y2="15" stroke-width="0.8" opacity="0.6"/></svg></div>
         <div class="big-card-info">
           <div class="big-card-title">Tehilim</div>
           <div class="big-card-sub" id="big-teh-sub">Lire les Tehilim</div>
@@ -778,15 +811,16 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       </div>
       <div class="hyy-card" id="rambam-card" onclick="openRambam(event)">
         <div class="hyy-header">
-          <span class="hyy-icon">📚</span>
+          <span class="hyy-icon" style="background:linear-gradient(135deg,#6228d7,#8b5cf6);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5a3 3 0 013 3v13c-1.5-1-3.5-1.5-8-1V4z"/><path d="M20 4h-5a3 3 0 00-3 3v13c1.5-1 3.5-1.5 8-1V4z"/></svg></span>
           <span class="hyy-title">Rambam</span>
           <span class="hyy-date" id="rambam-date"></span>
+          <button class="insta-share-btn" onclick="shareRambam(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="rambam-text"><span class="hyy-loading">Chargement…</span></div>
         <div class="hyy-expand" id="rambam-expand" style="display:none">Lire la suite ▾</div>
       </div>
       <div class="big-card" onclick="switchTab('sub-club')">
-        <div class="big-card-icon">🤝</div>
+        <div class="big-card-icon" style="animation-delay:0.6s;background:linear-gradient(135deg,#ee2a7b,#f472b6);box-shadow:0 3px 12px rgba(238,42,123,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="3.5"/><path d="M10 24c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="8" cy="13" r="2.5" opacity="0.7"/><path d="M4 24c0-2.5 1.8-4.5 4-4.5" opacity="0.7"/><circle cx="24" cy="13" r="2.5" opacity="0.7"/><path d="M28 24c0-2.5-1.8-4.5-4-4.5" opacity="0.7"/></svg></div>
         <div class="big-card-info">
           <div class="big-card-title">Chabad Club</div>
           <div class="big-card-sub">Éclaire le monde</div>
@@ -794,7 +828,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <div class="big-card-arrow">›</div>
       </div>
       <div class="big-card" onclick="openBethChabad()">
-        <div class="big-card-icon">🕍</div>
+        <div class="big-card-icon" style="animation-delay:0.9s;background:linear-gradient(135deg,#f59e0b,#fbbf24);box-shadow:0 3px 12px rgba(245,158,11,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26V14l10-8 10 8v12H6z"/><rect x="13" y="19" width="6" height="7" rx="0.5"/><path d="M16 6v-2"/><circle cx="16" cy="3" r="1" fill="#fff" stroke="none"/><rect x="9" y="16" width="3" height="3" rx="0.5" opacity="0.7"/><rect x="20" y="16" width="3" height="3" rx="0.5" opacity="0.7"/></svg></div>
         <div class="big-card-info">
           <div class="big-card-title">Beth Chabad</div>
           <div class="big-card-sub">Trouver un Beth Chabad près de moi</div>
@@ -802,7 +836,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <div class="big-card-arrow">›</div>
       </div>
       <div class="big-card" onclick="switchTab('sub-sidour')">
-        <div class="big-card-icon">🕯️</div>
+        <div class="big-card-icon" style="animation-delay:1.2s;background:linear-gradient(135deg,#0ea5e9,#38bdf8);box-shadow:0 3px 12px rgba(14,165,233,0.3);"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><!-- Tallit drape --><path d="M10 14c1-4 5-7 12-7s11 3 12 7v20c0 1-1 2-2 2H12c-1 0-2-1-2-2V14z" fill="rgba(255,255,255,0.95)"/><path d="M10 16h24" stroke="rgba(14,165,233,0.4)" stroke-width="1.2"/><path d="M10 18.5h24" stroke="rgba(14,165,233,0.25)" stroke-width="0.6"/><path d="M10 32h24" stroke="rgba(14,165,233,0.4)" stroke-width="1.2"/><path d="M10 34.5h24" stroke="rgba(14,165,233,0.25)" stroke-width="0.6"/><path d="M14 16v-2.5" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><path d="M30 16v-2.5" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><path d="M14 32v4" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><path d="M30 32v4" stroke="rgba(14,165,233,0.15)" stroke-width="4"/><!-- Head --><ellipse cx="22" cy="14" rx="4" ry="4.5" fill="rgba(210,180,140,0.9)"/><!-- Beard --><path d="M19 16c0 3 2 5 3 5.5 1-0.5 3-2.5 3-5.5" fill="rgba(80,50,20,0.5)"/><!-- Body under tallit --><path d="M16 20v16h12V20" fill="rgba(240,240,240,0.3)"/><!-- Arms forward holding siddur --><path d="M16 22c-1 2-1 5 2 6h8c3-1 3-4 2-6" fill="rgba(210,180,140,0.7)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/><!-- Siddur (book) --><rect x="18" y="24" width="8" height="6" rx="0.5" fill="rgba(14,165,233,0.6)" stroke="#fff" stroke-width="0.5"/><line x1="22" y1="24" x2="22" y2="30" stroke="#fff" stroke-width="0.3" opacity="0.6"/><line x1="19.5" y1="26" x2="21" y2="26" stroke="#fff" stroke-width="0.3" opacity="0.4"/><line x1="19.5" y1="27.5" x2="21" y2="27.5" stroke="#fff" stroke-width="0.3" opacity="0.4"/><line x1="23" y1="26" x2="24.5" y2="26" stroke="#fff" stroke-width="0.3" opacity="0.4"/><line x1="23" y1="27.5" x2="24.5" y2="27.5" stroke="#fff" stroke-width="0.3" opacity="0.4"/><!-- Tallit fringe (tzitzit) --><line x1="11" y1="36" x2="11" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="12" y1="36" x2="12" y2="41" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="13" y1="36" x2="13" y2="39" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="31" y1="36" x2="31" y2="40" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="32" y1="36" x2="32" y2="41" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/><line x1="33" y1="36" x2="33" y2="39" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/></svg></div>
         <div class="big-card-info">
           <div class="big-card-title">Sidour</div>
           <div class="big-card-sub">Patakh Eliyahou · Tehilat Hachem</div>
@@ -814,7 +848,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
     <div style="display:flex;gap:10px;margin:12px 16px 0;">
       <div class="don-card" onclick="switchTab('sub-don')" style="flex:1;margin:0;background:linear-gradient(135deg, #6228d7, #ee2a7b, #f9ce34);">
         <div class="don-card-inner">
-          <div class="don-card-icon">💝</div>
+          <div class="don-card-icon" style="animation-delay:0s"><svg viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
           <div class="don-card-text">
             <div class="don-card-title">Faire un don</div>
             <div class="don-card-sub">Soutenez les Beth Chabad</div>
@@ -823,7 +857,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       </div>
       <a class="don-card" href="https://www.allodons.fr/" target="_blank" rel="noopener" style="flex:1;margin:0;text-decoration:none;background:linear-gradient(135deg, #6228d7, #ee2a7b, #f9ce34);">
         <div class="don-card-inner">
-          <div class="don-card-icon">🤝</div>
+          <div class="don-card-icon" style="animation-delay:0.5s"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M7 21v-3a5 5 0 0110 0v3"/><path d="M17 10l2 2 4-4" stroke-width="2"/></svg></div>
           <div class="don-card-text">
             <div class="don-card-title">Rejoignez une campagne</div>
             <div class="don-card-sub">Campagnes AlloDons ↗</div>
@@ -836,6 +870,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <p class="quote-text" id="home-quote"></p>
       <p class="quote-source" id="home-source"></p>
       <div class="quote-dots" id="home-dots"></div>
+      <button class="insta-share-btn" onclick="shareQuote()" style="margin:10px auto 0;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
   </div>
 
@@ -1012,9 +1047,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <!-- HYY Card (mirror) -->
       <div class="hyy-card" style="margin-bottom:12px;">
         <div class="hyy-header">
-          <span class="hyy-icon">📜</span>
+          <span class="hyy-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H8a3 3 0 00-3 3v12a3 3 0 003 3h10"/><path d="M18 3v18c1.5 0 3-1 3-3V6c0-2-1.5-3-3-3z"/><line x1="9" y1="8" x2="15" y2="8" opacity="0.6"/><line x1="9" y1="11" x2="14" y2="11" opacity="0.6"/><line x1="9" y1="14" x2="12" y2="14" opacity="0.6"/></svg></span>
           <span class="hyy-title">Hayom Yom</span>
           <span class="hyy-date" id="etudes-hyy-date"></span>
+          <button class="insta-share-btn" onclick="shareHyy(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="etudes-hyy-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
       </div>
@@ -1022,9 +1058,10 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <!-- Rambam Card (mirror) -->
       <div class="hyy-card">
         <div class="hyy-header">
-          <span class="hyy-icon">📚</span>
+          <span class="hyy-icon" style="background:linear-gradient(135deg,#6228d7,#8b5cf6);"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5a3 3 0 013 3v13c-1.5-1-3.5-1.5-8-1V4z"/><path d="M20 4h-5a3 3 0 00-3 3v13c1.5-1 3.5-1.5 8-1V4z"/></svg></span>
           <span class="hyy-title">Rambam</span>
           <span class="hyy-date" id="etudes-rambam-date"></span>
+          <button class="insta-share-btn" onclick="shareRambam(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="etudes-rambam-text" style="max-height:none;-webkit-line-clamp:unset;"><span class="hyy-loading">Chargement…</span></div>
       </div>
@@ -1041,7 +1078,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <!-- BLOC 1: FAIRE UN DON -->
       <div style="background:var(--white);border:1px solid var(--gray-5);border-radius:var(--radius);padding:20px;margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-          <span style="font-size:28px;">🤲</span>
+          <span style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1a6b3c,#2d8f5e);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
           <div>
             <div style="font-size:16px;font-weight:700;color:var(--black);">Faire un don</div>
             <div style="font-size:11px;color:var(--gray-3);">Don direct · Reçu fiscal immédiat</div>
@@ -1252,7 +1289,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div id="panel-chain-detail" style="display:none">
     <div class="panel-back-wrap">
       <button class="panel-back" onclick="backToChains()">← Retour</button>
-      <button class="chain-share-top" onclick="shareChain()">Partager</button>
+      <button class="chain-share-top" onclick="shareChain()" style="display:flex;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>
     </div>
     <div id="chain-detail-content"></div>
   </div>
@@ -1400,8 +1437,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="app-footer"><span class="footer-logo-wrap"><img src="data:image/png;base64,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" alt="770 Lab" style="height:22px;width:auto;opacity:0.4;"></span></div>
   <div class="insta-bottom-nav" id="home-nav">
     <button class="insta-nav-item active" onclick="switchTab('menu')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
-    <button class="insta-nav-item" onclick="switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6 2 10.5c0 3 1.5 5.5 4 7v4.5l3.5-2.5c.8.2 1.6.3 2.5.3 5.52 0 10-4 10-8.5S17.52 2 12 2z"/><path d="M8 10h8M8 14h5"/></svg><span>Prières</span></button>
-    <button class="insta-nav-center" onclick="switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner">🕎</div></div><span>Objectifs</span></button>
+    <button class="insta-nav-item" onclick="switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="6" rx="2.5" ry="3"/><path d="M7 10c1-1 3-1.5 5-1.5s4 .5 5 1.5"/><path d="M7 10v11H17V10"/><path d="M7 10.5c-.5.5-1 1.5-1 3" opacity="0.5"/><path d="M17 10.5c.5.5 1 1.5 1 3" opacity="0.5"/><rect x="10" y="14" width="4" height="3" rx="0.5" opacity="0.5"/></svg><span>Prières</span></button>
+    <button class="insta-nav-center" onclick="switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner"><svg viewBox="0 0 28 28" width="22" height="22" fill="none" stroke="#6228d7" stroke-width="1.3" stroke-linecap="round"><line x1="14" y1="7" x2="14" y2="22"/><line x1="7" y1="22" x2="21" y2="22"/><path d="M7 12c0-3.5 3.5-5 7-5s7 1.5 7 5"/><line x1="7" y1="12" x2="7" y2="9"/><line x1="10.5" y1="9.5" x2="10.5" y2="7"/><line x1="14" y1="7" x2="14" y2="4.5"/><line x1="17.5" y1="9.5" x2="17.5" y2="7"/><line x1="21" y1="12" x2="21" y2="9"/><circle cx="7" cy="8" r="1" fill="#f9ce34" stroke="none"/><circle cx="10.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="14" cy="3.5" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="17.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="21" cy="8" r="1" fill="#f9ce34" stroke="none"/></svg></div></div><span>Objectifs</span></button>
     <button class="insta-nav-item" onclick="switchTab('sub-tehilim')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Tehilim</span></button>
     <button class="insta-nav-item" onclick="switchTab('sub-etudes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Études</span></button>
   </div>
@@ -1419,8 +1456,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="reading-bottom-bar"></div>
   <div class="insta-bottom-nav">
     <button class="insta-nav-item" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Accueil</span></button>
-    <button class="insta-nav-item" onclick="goHome();switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6 2 10.5c0 3 1.5 5.5 4 7v4.5l3.5-2.5c.8.2 1.6.3 2.5.3 5.52 0 10-4 10-8.5S17.52 2 12 2z"/><path d="M8 10h8M8 14h5"/></svg><span>Prières</span></button>
-    <button class="insta-nav-center" onclick="goHome();switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner">🕎</div></div><span>Objectifs</span></button>
+    <button class="insta-nav-item" onclick="goHome();switchTab('sub-sidour')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="12" cy="6" rx="2.5" ry="3"/><path d="M7 10c1-1 3-1.5 5-1.5s4 .5 5 1.5"/><path d="M7 10v11H17V10"/><path d="M7 10.5c-.5.5-1 1.5-1 3" opacity="0.5"/><path d="M17 10.5c.5.5 1 1.5 1 3" opacity="0.5"/><rect x="10" y="14" width="4" height="3" rx="0.5" opacity="0.5"/></svg><span>Prières</span></button>
+    <button class="insta-nav-center" onclick="goHome();switchTab('sub-objectifs')"><div class="insta-nav-center-ring"><div class="insta-nav-center-inner"><svg viewBox="0 0 28 28" width="22" height="22" fill="none" stroke="#6228d7" stroke-width="1.3" stroke-linecap="round"><line x1="14" y1="7" x2="14" y2="22"/><line x1="7" y1="22" x2="21" y2="22"/><path d="M7 12c0-3.5 3.5-5 7-5s7 1.5 7 5"/><line x1="7" y1="12" x2="7" y2="9"/><line x1="10.5" y1="9.5" x2="10.5" y2="7"/><line x1="14" y1="7" x2="14" y2="4.5"/><line x1="17.5" y1="9.5" x2="17.5" y2="7"/><line x1="21" y1="12" x2="21" y2="9"/><circle cx="7" cy="8" r="1" fill="#f9ce34" stroke="none"/><circle cx="10.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="14" cy="3.5" r="1.2" fill="#f9ce34" stroke="none"/><circle cx="17.5" cy="6" r="1" fill="#f9ce34" stroke="none"/><circle cx="21" cy="8" r="1" fill="#f9ce34" stroke="none"/></svg></div></div><span>Objectifs</span></button>
     <button class="insta-nav-item" onclick="goHome();switchTab('sub-tehilim')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg><span>Tehilim</span></button>
     <button class="insta-nav-item" onclick="goHome();switchTab('sub-etudes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><span>Études</span></button>
   </div>
@@ -7673,6 +7710,7 @@ function openTextStory(type) {
     html += '<div class="os-name" style="color:#f9ce34;font-size:22px;">Hayom Yom</div>';
     if (heDate) html += '<div class="os-time-badge" style="color:rgba(255,255,255,0.6)">' + heDate + '</div>';
     html += '<div style="color:#fff;font-size:15px;line-height:1.8;padding:16px 4px 0;text-align:left;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">' + (text || '<em style="color:rgba(255,255,255,0.4)">Texte non disponible</em>') + '</div>';
+    html += '<button onclick="shareHyy(event)" style="margin-top:20px;padding:12px 32px;border:2px solid rgba(255,255,255,0.7);border-radius:50px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font);"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
   } else if (type === 'rambam') {
     overlay.style.background = 'linear-gradient(160deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%)';
     var titleEl = document.getElementById('rambam-date');
@@ -7684,6 +7722,7 @@ function openTextStory(type) {
     html += '<div class="os-name" style="color:#c084fc;font-size:22px;">Rambam</div>';
     if (title) html += '<div class="os-time-badge" style="color:rgba(255,255,255,0.6)">' + title + '</div>';
     html += '<div style="color:#fff;font-size:15px;line-height:1.8;padding:16px 4px 0;text-align:left;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">' + (text2 || '<em style="color:rgba(255,255,255,0.4)">Texte non disponible</em>') + '</div>';
+    html += '<button onclick="shareRambam(event)" style="margin-top:20px;padding:12px 32px;border:2px solid rgba(255,255,255,0.7);border-radius:50px;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);color:#fff;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font);"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
   }
 
   document.getElementById('os-content').innerHTML = html;
@@ -7739,6 +7778,7 @@ function renderItemStoryContent() {
   html += '<button class="os-check-btn' + (done ? ' checked' : '') + '" style="color:' + textColor + '" onclick="event.stopPropagation();toggleItemFromStory(\'' + it.id + '\')">';
   html += done ? '✅ Accompli' : '☐ Marquer comme fait';
   html += '</button>';
+  html += '<button onclick="event.stopPropagation();shareObjectives(event)" style="margin-top:12px;padding:10px 28px;border:2px solid ' + (dark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.15)') + ';border-radius:50px;background:' + (dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)') + ';color:' + textColor + ';font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:var(--font);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="' + textColor + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
 
   document.getElementById('os-content').innerHTML = html;
   document.getElementById('obj-story-overlay').style.background = period.bg;
@@ -8258,8 +8298,7 @@ function renderChainDetailV2(sc) {
 
   // Share
   html += '<div class="chain-share-section">';
-  html += '<button class="chain-share-btn whatsapp" onclick="shareChainWhatsApp()">WhatsApp</button>';
-  html += '<button class="chain-share-btn" onclick="shareChain()">📋 Copier le lien</button>';
+  html += '<button class="chain-share-btn" onclick="shareChain()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
   html += '</div>';
 
   // Delete
@@ -8367,8 +8406,7 @@ function renderChainDetailLocal(chain) {
   html += '<div style="text-align:center;padding:12px;font-size:12px;color:var(--gray-3)">⚠️ Mode hors ligne · Les données ne sont pas synchronisées</div>';
 
   html += '<div class="chain-share-section">';
-  html += '<button class="chain-share-btn whatsapp" onclick="shareChainWhatsApp()">WhatsApp</button>';
-  html += '<button class="chain-share-btn" onclick="shareChain()">📋 Copier le lien</button>';
+  html += '<button class="chain-share-btn" onclick="shareChain()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>';
   html += '</div>';
   html += '<button class="chain-delete-btn" onclick="deleteChain()">🗑️ Supprimer cette chaîne</button>';
 
@@ -8414,15 +8452,15 @@ function sharePsalm(num) {
     var chain = chains.find(function(c) { return c.id === currentChainId; });
     if (chain) {
       text += '\n\n' + chainTypeLabels[chain.type] + ' · ' + chain.name;
-      text += '\n🔗 ' + url + '?chain=' + currentChainId;
     }
-  } else {
-    text += '\n\n🔗 ' + url;
   }
+  text += '\n\n📲 Chab\'app — ' + url;
   if (navigator.share) {
     navigator.share({ title: 'Tehilim ' + num, text: text }).catch(function(){});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() { alert('Copié dans le presse-papier !'); });
   } else {
-    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    prompt('Copiez ce texte :', text);
   }
 }
 
@@ -8444,24 +8482,12 @@ function shareChain() {
   var text = chainTypeLabels[chain.type] + ' · ' + chain.name;
   if (chain.description) text += '\n' + chain.description;
   text += '\n\n📖 Rejoignez la chaîne de Tehilim ! Chaque participant reçoit un psaume unique à lire.';
-  text += '\n\n🔗 ' + shareUrl;
+  text += '\n\n📲 Chab\'app — ' + shareUrl;
   if (navigator.share) {
-    navigator.share({ title: 'Chaîne de Tehilim', text: text, url: shareUrl }).catch(function(){});
+    navigator.share({ title: 'Chaîne de Tehilim', text: text }).catch(function(){});
   } else if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(function() { alert('Copié !'); });
   }
-}
-
-function shareChainWhatsApp() {
-  var chains = getChains();
-  var chain = chains.find(function(c) { return c.id === currentChainId; });
-  if (!chain) return;
-  var shareUrl = getChainShareUrl();
-  var text = chainTypeLabels[chain.type] + ' · ' + chain.name;
-  if (chain.description) text += '\n' + chain.description;
-  text += '\n\n📖 Rejoignez la chaîne de Tehilim ! Chaque participant reçoit un psaume unique à lire.';
-  text += '\n\n🔗 ' + shareUrl;
-  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
 }
 
 // --- SHARED CHAIN URL ---
@@ -8566,8 +8592,6 @@ var _shabbatDefaultLng = 2.3522;
 var _shabbatDefaultTz = 'Europe/Paris';
 var _shabbatDefaultCity = 'Paris';
 
-var _frenchMonths = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-
 function loadShabbatTimes() {
   var cacheKey = 'tehilim_shabbat_' + new Date().toISOString().slice(0,10);
   // Check cache first
@@ -8578,14 +8602,23 @@ function loadShabbatTimes() {
 
   // Try geolocation, fallback to Paris
   if (navigator.geolocation) {
+    var _geoTimedOut = false;
+    var _geoTimer = setTimeout(function() {
+      _geoTimedOut = true;
+      _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
+    }, 3000);
     navigator.geolocation.getCurrentPosition(
       function(pos) {
+        if (_geoTimedOut) return;
+        clearTimeout(_geoTimer);
         _fetchShabbatTimes(pos.coords.latitude, pos.coords.longitude, null, cacheKey);
       },
       function() {
+        if (_geoTimedOut) return;
+        clearTimeout(_geoTimer);
         _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
       },
-      { timeout: 5000 }
+      { timeout: 3000 }
     );
   } else {
     _fetchShabbatTimes(_shabbatDefaultLat, _shabbatDefaultLng, _shabbatDefaultCity, cacheKey);
@@ -8611,12 +8644,19 @@ function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
     })
     .catch(function(err) {
       console.log('Shabbat: API error:', err.message);
+      // Fallback: show card with default Paris data
+      renderShabbatCard({
+        parasha: '', parashaHe: '',
+        candles: '--:--', havdalah: '--:--',
+        candleDate: '', havdalahDate: '',
+        location: _shabbatDefaultCity
+      });
     });
 }
 
 function _parseShabbatData(data, cityName) {
   var items = data.items || [];
-  var candleDate = null, candleTime = '', havdalahTime = '', parasha = '', parashaHe = '';
+  var candleDate = null, havdalahDate = null, candleTime = '', havdalahTime = '', parasha = '', parashaHe = '';
 
   for (var i = 0; i < items.length; i++) {
     var it = items[i];
@@ -8625,30 +8665,32 @@ function _parseShabbatData(data, cityName) {
       candleDate = new Date(it.date);
     } else if (it.category === 'havdalah') {
       havdalahTime = _formatHebcalTime(it.date);
+      havdalahDate = new Date(it.date);
     } else if (it.category === 'parashat') {
       parasha = (it.title || '').replace('Parashat ', '');
       parashaHe = it.hebrew || '';
     }
   }
 
-  if (!candleTime) return null;
+  if (!candleTime) candleTime = '--:--';
 
-  // Build date strings
-  var friday = candleDate ? candleDate : new Date();
-  var saturday = new Date(friday);
-  saturday.setDate(saturday.getDate() + 1);
+  var friday = candleDate || new Date();
+  var saturday = havdalahDate || new Date(friday);
+  if (!havdalahDate) saturday.setDate(saturday.getDate() + 1);
 
-  var dateStr = 'Vendredi ' + friday.getDate() + ' ' + _frenchMonths[friday.getMonth()] +
-    ' - Samedi ' + saturday.getDate() + ' ' + _frenchMonths[saturday.getMonth()];
+  var _pad = function(n) { return n < 10 ? '0' + n : '' + n; };
+  var candleDateStr = _pad(friday.getDate()) + '/' + _pad(friday.getMonth() + 1);
+  var havdalahDateStr = _pad(saturday.getDate()) + '/' + _pad(saturday.getMonth() + 1);
 
   var location = cityName || (data.location ? (data.location.city || data.location.title || _shabbatDefaultCity) : _shabbatDefaultCity);
 
   return {
-    date: dateStr,
     parasha: parasha,
     parashaHe: parashaHe,
     candles: candleTime,
     havdalah: havdalahTime,
+    candleDate: candleDateStr,
+    havdalahDate: havdalahDateStr,
     location: location
   };
 }
@@ -8675,16 +8717,159 @@ function renderShabbatCard(data) {
     parashaEl.textContent = 'Chabbat';
     parashaHeEl.textContent = 'שבת';
   }
-  // Smart badge: show relative day info
+  // Smart badge
   var now = new Date();
-  var day = now.getDay(); // 0=Sun
+  var day = now.getDay();
   if (day === 5) { badgeEl.textContent = '🕯️ Ce soir'; }
   else if (day === 6) { badgeEl.textContent = '✨ Chabbat Chalom'; }
   else if (day === 4) { badgeEl.textContent = '🕯️ Demain soir'; }
   else { badgeEl.textContent = '🕯️ Chabbat'; }
   document.getElementById('shabbat-candles').textContent = data.candles || '--:--';
   document.getElementById('shabbat-havdalah').textContent = data.havdalah || '--:--';
+  document.getElementById('shabbat-candles-date').textContent = data.candleDate || '';
+  document.getElementById('shabbat-havdalah-date').textContent = data.havdalahDate || '';
+  // City
+  var cityEl = document.getElementById('shabbat-city');
+  if (cityEl && data.location) cityEl.textContent = '📍 ' + data.location;
+  // Background image from Wikipedia
+  _loadCityImage(data.location);
   card.style.display = '';
+}
+
+function _loadCityImage(city) {
+  if (!city) return;
+  var bgEl = document.getElementById('shabbat-bg');
+  if (!bgEl) return;
+  // Check cache
+  var cacheKey = 'shabbat_img_' + city.toLowerCase().replace(/\s+/g, '_');
+  var cachedUrl = null;
+  try { cachedUrl = localStorage.getItem(cacheKey); } catch(e) {}
+  if (cachedUrl) {
+    bgEl.style.backgroundImage = 'url(' + cachedUrl + ')';
+    bgEl.classList.add('loaded');
+    return;
+  }
+  // Fetch from Wikipedia
+  var wikiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(city);
+  fetch(wikiUrl)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var imgUrl = d.originalimage ? d.originalimage.source : (d.thumbnail ? d.thumbnail.source : null);
+      if (imgUrl) {
+        imgUrl = imgUrl.replace(/\/\d+px-/, '/1200px-');
+        _applyBgImage(bgEl, imgUrl, cacheKey);
+      } else {
+        _fallbackCityImage(bgEl, city, cacheKey);
+      }
+    })
+    .catch(function() {
+      _fallbackCityImage(bgEl, city, cacheKey);
+    });
+}
+
+function _fallbackCityImage(bgEl, city, cacheKey) {
+  // Fallback: try Wikipedia with "Eiffel Tower" for Paris
+  var fallbacks = {
+    'paris': 'Eiffel_Tower',
+    'jerusalem': 'Western_Wall',
+    'tel aviv': 'Tel_Aviv',
+    'new york': 'Manhattan',
+    'london': 'Big_Ben',
+    'marseille': 'Marseille',
+    'lyon': 'Lyon',
+    'nice': 'Nice',
+    'strasbourg': 'Strasbourg'
+  };
+  var key = city.toLowerCase();
+  var article = fallbacks[key] || city;
+  var wikiUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(article);
+  fetch(wikiUrl)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var imgUrl = d.originalimage ? d.originalimage.source : (d.thumbnail ? d.thumbnail.source : null);
+      if (imgUrl) {
+        imgUrl = imgUrl.replace(/\/\d+px-/, '/1200px-');
+        _applyBgImage(bgEl, imgUrl, cacheKey);
+      }
+    })
+    .catch(function() {});
+}
+
+function _applyBgImage(bgEl, imgUrl, cacheKey) {
+  try { localStorage.setItem(cacheKey, imgUrl); } catch(e) {}
+  var img = new Image();
+  img.onload = function() {
+    bgEl.style.backgroundImage = 'url(' + imgUrl + ')';
+    bgEl.classList.add('loaded');
+  };
+  img.src = imgUrl;
+}
+
+// ====== UNIVERSAL SHARE ======
+var _shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+
+function appShare(title, text) {
+  var url = window.location.href.split('?')[0].split('#')[0];
+  text += '\n\n📲 Chab\'app — ' + url;
+  if (navigator.share) {
+    navigator.share({ title: title, text: text }).catch(function(){});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() { alert('Copié dans le presse-papier !'); });
+  } else {
+    prompt('Copiez ce texte :', text);
+  }
+}
+
+function shareShabbat(e) {
+  if (e) e.stopPropagation();
+  var parasha = document.getElementById('shabbat-parasha').textContent || '';
+  var candles = document.getElementById('shabbat-candles').textContent || '';
+  var havdalah = document.getElementById('shabbat-havdalah').textContent || '';
+  var candleDate = document.getElementById('shabbat-candles-date').textContent || '';
+  var havdalahDate = document.getElementById('shabbat-havdalah-date').textContent || '';
+  var city = document.getElementById('shabbat-city').textContent || '';
+  var text = '🕯️ Horaires de Chabbat\n';
+  if (city) text += city + '\n';
+  if (parasha) text += 'Paracha : ' + parasha + '\n';
+  text += '\n🕯️ Allumage : ' + candles + ' (' + candleDate + ')';
+  text += '\n🌙 Havdalah : ' + havdalah + ' (' + havdalahDate + ')';
+  text += '\n\nChabbat Chalom ! ✨';
+  appShare('Horaires de Chabbat', text);
+}
+
+function shareHyy(e) {
+  if (e) e.stopPropagation();
+  var date = document.getElementById('hyy-date').textContent || '';
+  var text = document.getElementById('hyy-text');
+  var content = text ? (text.innerText || text.textContent || '').replace('Chargement…','').replace('Lire la suite ▾','').trim() : '';
+  var msg = '📜 Hayom Yom' + (date ? ' — ' + date : '') + '\n\n' + content;
+  appShare('Hayom Yom', msg);
+}
+
+function shareRambam(e) {
+  if (e) e.stopPropagation();
+  var date = document.getElementById('rambam-date').textContent || '';
+  var text = document.getElementById('rambam-text');
+  var content = text ? (text.innerText || text.textContent || '').replace('Chargement…','').replace('Lire la suite ▾','').trim() : '';
+  var msg = '📚 Rambam' + (date ? ' — ' + date : '') + '\n\n' + content;
+  appShare('Rambam', msg);
+}
+
+function shareObjectives(e) {
+  if (e) e.stopPropagation();
+  var state = getObjState();
+  var total = ALL_OBJ_ITEMS.length;
+  var done = Object.keys(state).length;
+  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  var msg = '🕎 Objectifs du jour\n\n✅ ' + done + '/' + total + ' accomplis (' + pct + '%)\n\nRejoignez-moi sur Chab\'app !';
+  appShare('Objectifs du jour', msg);
+}
+
+function shareQuote() {
+  var q = document.getElementById('home-quote');
+  var s = document.getElementById('home-source');
+  var text = (q ? q.textContent : '') + '\n' + (s ? s.textContent : '');
+  appShare('Citation du jour', text.trim());
 }
 
 // ====== DONATION CAMPAIGN ======
