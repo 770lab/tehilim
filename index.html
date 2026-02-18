@@ -222,9 +222,9 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-counter { font-size:12px; font-weight:700; color:var(--gray-3); background:var(--gray-6); padding:3px 10px; border-radius:20px; transition:all 0.3s; }
 .obj-counter.done { background:#dcfce7; color:#16a34a; }
 .obj-progress-bar { height:3px; background:var(--gray-6); margin:0 16px 6px; border-radius:2px; overflow:hidden; }
-.obj-progress-fill { height:100%; background:linear-gradient(90deg, #f9ce34, #ee2a7b, #6228d7); border-radius:2px; transition:width 0.4s cubic-bezier(0.4,0,0.2,1); width:0%; }
+.obj-progress-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:2px; transition:width 0.4s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
-.obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #f9ce34, #ee2a7b, #6228d7); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
+.obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
 .obj-list { padding:0 8px 4px; }
 .obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
@@ -7629,6 +7629,7 @@ function toggleObjFromStory(id) {
   if (state[id]) { delete state[id]; } else { state[id] = new Date().toISOString(); }
   saveObjState(state);
   renderObjStoryContent();
+  renderObjectives();
   // Reset timer on interaction
   startObjStoryTimer();
 }
