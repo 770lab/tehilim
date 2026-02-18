@@ -8374,6 +8374,110 @@ function loadHayomYom() {
 }
 
 function _hyyLoadCacheOrEnglish(heb, dateKey, cacheKey) {
+  // PRIORITY 2: Try fr.chabad.org via CORS proxy (automatic French!)
+  _hyyLoadFrChabad(heb, dateKey, cacheKey);
+}
+
+// ====== FR.CHABAD.ORG AUTO-FETCH ======
+var _corsProxies = [
+  function(u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); },
+  function(u) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u); }
+];
+
+function _fetchViaCors(url, proxyIdx, onSuccess, onFail) {
+  if (proxyIdx >= _corsProxies.length) { onFail(); return; }
+  var proxyUrl = _corsProxies[proxyIdx](url);
+  console.log('CORS proxy', proxyIdx, 'for:', url);
+  var ctrl = null;
+  try { ctrl = new AbortController(); setTimeout(function(){ ctrl.abort(); }, 10000); } catch(e) {}
+  fetch(proxyUrl, ctrl ? { signal: ctrl.signal } : {})
+    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    .then(function(html) { onSuccess(html); })
+    .catch(function(err) {
+      console.log('CORS proxy', proxyIdx, 'failed:', err.message);
+      _fetchViaCors(url, proxyIdx + 1, onSuccess, onFail);
+    });
+}
+
+function _extractChabadText(html) {
+  try {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, 'text/html');
+    // Try multiple selectors for chabad.org content
+    var selectors = [
+      '#TextContent', '#textContent', '.article-text',
+      '.page-text-content', '#contentArea', '#pageTextArea',
+      '.entry-content', 'article', '#article-body',
+      '.article-body', '.article_body', '#article',
+      '.parsha-content', '#ContentPlaceHolder_TextContent',
+      '.content-inner'
+    ];
+    var contentEl = null;
+    for (var i = 0; i < selectors.length; i++) {
+      contentEl = doc.querySelector(selectors[i]);
+      if (contentEl && contentEl.textContent.trim().length > 50) break;
+      contentEl = null;
+    }
+    // Fallback: find largest text block in main area
+    if (!contentEl) {
+      var divs = doc.querySelectorAll('div, td');
+      var best = null, bestLen = 0;
+      for (var j = 0; j < divs.length; j++) {
+        var txt = divs[j].textContent.trim();
+        // Skip navigation/footer/header content
+        if (txt.length > bestLen && txt.length > 100 && txt.length < 10000) {
+          var tag = divs[j].tagName;
+          var cls = (divs[j].className || '').toLowerCase();
+          if (cls.indexOf('nav') === -1 && cls.indexOf('footer') === -1 && cls.indexOf('header') === -1 && cls.indexOf('menu') === -1) {
+            best = divs[j]; bestLen = txt.length;
+          }
+        }
+      }
+      contentEl = best;
+    }
+    if (!contentEl) return null;
+    // Get inner HTML and clean it
+    var rawHtml = contentEl.innerHTML;
+    // Remove scripts, styles, nav elements
+    rawHtml = rawHtml.replace(new RegExp('<script[\\s\\S]*?<\\/script>', 'gi'), '');
+    rawHtml = rawHtml.replace(new RegExp('<style[\\s\\S]*?<\\/style>', 'gi'), '');
+    rawHtml = rawHtml.replace(new RegExp('<nav[\\s\\S]*?<\\/nav>', 'gi'), '');
+    // Parse again to get clean text
+    var tmp = document.createElement('div');
+    tmp.innerHTML = rawHtml;
+    var text = tmp.textContent || tmp.innerText || '';
+    text = text.replace(/\s+/g, ' ').trim();
+    // Must have enough French-looking content
+    if (text.length < 30) return null;
+    return text;
+  } catch(e) {
+    console.log('Parse error:', e.message);
+    return null;
+  }
+}
+
+function _hyyLoadFrChabad(heb, dateKey, cacheKey) {
+  var d = new Date();
+  var url = 'https://fr.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  console.log('HYY: Trying fr.chabad.org:', url);
+  _fetchViaCors(url, 0, function(html) {
+    var text = _extractChabadText(html);
+    if (text && text.length > 30) {
+      console.log('HYY: French text from fr.chabad.org! (' + text.length + ' chars)');
+      var result = { fr: text, heDate: heb.mName + ' ' + heb.hd, fetched: dateKey, source: 'fr.chabad.org' };
+      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+      displayHyy(result);
+    } else {
+      console.log('HYY: fr.chabad.org - could not extract text, falling back');
+      _hyyFallbackToCache(heb, dateKey, cacheKey);
+    }
+  }, function() {
+    console.log('HYY: fr.chabad.org unreachable, falling back');
+    _hyyFallbackToCache(heb, dateKey, cacheKey);
+  });
+}
+
+function _hyyFallbackToCache(heb, dateKey, cacheKey) {
   var cached = null;
   try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
   if (cached && (cached.fr || cached.en || cached.he)) {
@@ -8557,6 +8661,35 @@ function loadRambam() {
 }
 
 function _rambamLoadCacheOrSefaria(dateKey, cacheKey) {
+  // PRIORITY 2: Try fr.chabad.org via CORS proxy (automatic French!)
+  _rambamLoadFrChabad(dateKey, cacheKey);
+}
+
+function _rambamLoadFrChabad(dateKey, cacheKey) {
+  var d = new Date();
+  var url = 'https://fr.chabad.org/dailystudy/rambam.asp?rambamChapters=1&tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  console.log('Rambam: Trying fr.chabad.org:', url);
+  _fetchViaCors(url, 0, function(html) {
+    var text = _extractChabadText(html);
+    if (text && text.length > 30) {
+      console.log('Rambam: French text from fr.chabad.org! (' + text.length + ' chars)');
+      // Try to extract title from page
+      var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+      var title = titleMatch ? titleMatch[1].replace(/\s*-\s*fr\.chabad\.org.*/i, '').trim() : '';
+      var result = { fr: text, title: title, fetched: dateKey, source: 'fr.chabad.org' };
+      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+      displayRambam(result);
+    } else {
+      console.log('Rambam: fr.chabad.org - could not extract text, falling back');
+      _rambamFallbackToCache(dateKey, cacheKey);
+    }
+  }, function() {
+    console.log('Rambam: fr.chabad.org unreachable, falling back');
+    _rambamFallbackToCache(dateKey, cacheKey);
+  });
+}
+
+function _rambamFallbackToCache(dateKey, cacheKey) {
   var cached = null;
   try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
   if (cached && (cached.fr || cached.he || cached.en)) {
