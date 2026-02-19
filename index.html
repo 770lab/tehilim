@@ -193,16 +193,15 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .club-hero-title { font-size:22px; font-weight:800; color:var(--black); margin-bottom:4px; }
 .club-hero-sub { font-size:13px; color:var(--gray-3); }
 .club-cards { display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; padding:0 16px 16px; }
-.obj-story-bar { display:flex; align-items:center; gap:6px; padding:12px 10px 8px; justify-content:space-around; flex-wrap:nowrap; }
+.obj-story-bar { display:flex; align-items:center; gap:6px; padding:10px 10px 8px; justify-content:space-around; flex-wrap:nowrap; }
 .obj-story-bar-scroll { justify-content:flex-start; overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; gap:12px; }
 .obj-story-bar-scroll::-webkit-scrollbar { display:none; }
 .obj-story-bar-scroll .os-ring { width:56px; height:56px; }
 .obj-story-bar-scroll .os-circle { font-size:22px; }
 .obj-story-bar::-webkit-scrollbar { display:none; }
 .os-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
-.os-ring { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
-#obj-story-bar .os-ring { width:52px; height:52px; }
-#obj-story-bar .os-circle { font-size:20px; }
+.os-ring { width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:3px; transition:all 0.3s; }
+.obj-story-bar .os-ring { width:52px; height:52px; }
 .os-item.done .os-ring { background:#27ae60 !important; }
 .os-item.current .os-ring { animation:storyPulse 2s ease-in-out infinite; }
 @keyframes storyPulse { 0%,100% { box-shadow:0 0 0 0 rgba(238,42,123,0.4); } 50% { box-shadow:0 0 0 8px rgba(238,42,123,0); } }
@@ -245,19 +244,19 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .shabbat-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,30,0.3) 0%, rgba(10,10,30,0.5) 50%, rgba(10,10,30,0.7) 100%); }
 .shabbat-content { position:relative; z-index:1; padding:18px 20px 16px; display:flex; flex-direction:column; min-height:180px; }
 .shabbat-city { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.95); }
-.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:auto; }
+.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; }
 .shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
 .shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
 .shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap; animation:iconPulse 3s ease-in-out infinite; backdrop-filter:blur(6px); }
 .shabbat-times-row { display:flex; align-items:center; justify-content:flex-start; gap:0; margin-top:auto; }
-.shabbat-time-block { flex:0 1 auto; display:flex; align-items:center; gap:8px; justify-content:flex-start; }
+.shabbat-time-block { flex:0 1 auto; display:flex; align-items:center; gap:10px; justify-content:flex-start; }
 .shabbat-time-icon { flex-shrink:0; }
 .shabbat-time-icon svg { display:block; }
 .shabbat-time-icon.candle-icon { filter:drop-shadow(0 0 10px rgba(249,206,52,0.5)); animation:candleGlow 2s ease-in-out infinite alternate; }
 .shabbat-time-icon.moon-icon { filter:drop-shadow(0 0 6px rgba(192,132,252,0.3)); }
 @keyframes candleGlow { from { filter:drop-shadow(0 0 8px rgba(249,206,52,0.3)); } to { filter:drop-shadow(0 0 16px rgba(249,206,52,0.6)); } }
 .shabbat-time-icon.candle-icon svg { width:24px; height:42px; }
-.shabbat-time-icon.moon-icon svg { width:34px; height:34px; border-radius:6px; }
+.shabbat-time-icon.moon-icon svg { width:34px; height:34px; border-radius:8px; }
 .shabbat-time-detail {}
 .shabbat-time-label { font-size:10px; color:rgba(255,255,255,0.9); letter-spacing:0.5px; text-transform:uppercase; }
 .shabbat-time-val { font-size:17px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:0.5px; }
@@ -265,7 +264,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .shabbat-time-val.havdalah { color:#c084fc; text-shadow:0 0 12px rgba(192,132,252,0.3); }
 .shabbat-time-date { font-size:11px; color:rgba(255,255,255,0.85); margin-top:2px; font-weight:500; }
 .shabbat-time-hedate { font-size:10px; color:rgba(255,255,255,0.65); margin-top:1px; font-style:italic; }
-.shabbat-sep { width:1px; height:40px; background:rgba(255,255,255,0.15); margin:0 10px; flex-shrink:0; }
+.shabbat-sep { width:1px; height:40px; background:rgba(255,255,255,0.15); margin:0 12px; flex-shrink:0; }
 .obj-list { padding:0 8px 4px; }
 .obj-item { display:flex; align-items:center; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
 .obj-item:active { background:var(--gray-6); }
@@ -886,7 +885,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <button class="insta-share-btn" onclick="shareHyy(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="hyy-text"><span class="hyy-loading">Chargement…</span></div>
-        <div class="hyy-expand" id="hyy-expand" style="display:none">Lire la suite â–¾</div>
+        <div class="hyy-expand" id="hyy-expand" style="display:none">Lire la suite ▾</div>
       </div>
       <div class="big-card" onclick="switchTab('sub-tehilim')">
         <div class="big-card-icon" style="animation-delay:0.3s;background:linear-gradient(135deg,#8b2fb8,#c084fc);box-shadow:0 3px 12px rgba(139,47,184,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7c3-2 6-1.5 11 1v18c-5-2.5-8-3-11-1V7z"/><path d="M27 7c-3-2-6-1.5-11 1v18c5-2.5 8-3 11-1V7z"/><line x1="9" y1="12" x2="13" y2="13.5" stroke-width="0.8" opacity="0.6"/><line x1="9" y1="15" x2="13" y2="16.5" stroke-width="0.8" opacity="0.6"/><line x1="9" y1="18" x2="13" y2="19.5" stroke-width="0.8" opacity="0.6"/><line x1="19" y1="13.5" x2="23" y2="12" stroke-width="0.8" opacity="0.6"/><line x1="19" y1="16.5" x2="23" y2="15" stroke-width="0.8" opacity="0.6"/></svg></div>
@@ -905,7 +904,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <button class="insta-share-btn" onclick="shareRambam(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="rambam-text"><span class="hyy-loading">Chargement…</span></div>
-        <div class="hyy-expand" id="rambam-expand" style="display:none">Lire la suite â–¾</div>
+        <div class="hyy-expand" id="rambam-expand" style="display:none">Lire la suite ▾</div>
       </div>
       <div class="hyy-card" id="tanya-card" onclick="openTanya(event)">
         <div class="hyy-header">
@@ -915,7 +914,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <button class="insta-share-btn" onclick="shareTanya(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="tanya-text"><span class="hyy-loading">Chargement…</span></div>
-        <div class="hyy-expand" id="tanya-expand" style="display:none">Lire la suite â–¾</div>
+        <div class="hyy-expand" id="tanya-expand" style="display:none">Lire la suite ▾</div>
       </div>
       <div class="hyy-card" id="houmash-card" onclick="openHoumash(event)">
         <div class="hyy-header">
@@ -925,7 +924,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
           <button class="insta-share-btn" onclick="shareHoumash(event)" style="margin-left:auto;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
         <div class="hyy-text" id="houmash-text"><span class="hyy-loading">Chargement…</span></div>
-        <div class="hyy-expand" id="houmash-expand" style="display:none">Lire la suite â–¾</div>
+        <div class="hyy-expand" id="houmash-expand" style="display:none">Lire la suite ▾</div>
       </div>
       <div class="big-card" onclick="switchTab('sub-club')">
         <div class="big-card-icon" style="animation-delay:0.6s;background:linear-gradient(135deg,#ee2a7b,#f472b6);box-shadow:0 3px 12px rgba(238,42,123,0.3);"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="3.5"/><path d="M10 24c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="8" cy="13" r="2.5" opacity="0.7"/><path d="M4 24c0-2.5 1.8-4.5 4-4.5" opacity="0.7"/><circle cx="24" cy="13" r="2.5" opacity="0.7"/><path d="M28 24c0-2.5-1.8-4.5-4-4.5" opacity="0.7"/></svg></div>
@@ -1461,25 +1460,25 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <div class="t119-kb-row">
           <button onclick="t119AddLetter('א')">א</button>
           <button onclick="t119AddLetter('ב')">ב</button>
-          <button onclick="t119AddLetter('×'')">×'</button>
+          <button onclick="t119AddLetter('ג')">ג</button>
           <button onclick="t119AddLetter('ד')">ד</button>
-          <button onclick="t119AddLetter('×"')">×"</button>
+          <button onclick="t119AddLetter('ה')">ה</button>
           <button onclick="t119AddLetter('ו')">ו</button>
-          <button onclick="t119AddLetter('×–')">×–</button>
-          <button onclick="t119AddLetter('×—')">×—</button>
+          <button onclick="t119AddLetter('ז')">ז</button>
+          <button onclick="t119AddLetter('ח')">ח</button>
           <button onclick="t119AddLetter('ט')">ט</button>
-          <button onclick="t119AddLetter('×™')">×™</button>
-          <button onclick="t119AddLetter('×›')">×›</button>
+          <button onclick="t119AddLetter('י')">י</button>
+          <button onclick="t119AddLetter('כ')">כ</button>
         </div>
         <div class="t119-kb-row">
           <button onclick="t119AddLetter('ל')">ל</button>
           <button onclick="t119AddLetter('מ')">מ</button>
-          <button onclick="t119AddLetter('× ')">× </button>
+          <button onclick="t119AddLetter('נ')">נ</button>
           <button onclick="t119AddLetter('ס')">ס</button>
-          <button onclick="t119AddLetter('×¢')">×¢</button>
+          <button onclick="t119AddLetter('ע')">ע</button>
           <button onclick="t119AddLetter('פ')">פ</button>
           <button onclick="t119AddLetter('צ')">צ</button>
-          <button onclick="t119AddLetter('×§')">×§</button>
+          <button onclick="t119AddLetter('ק')">ק</button>
           <button onclick="t119AddLetter('ר')">ר</button>
           <button onclick="t119AddLetter('ש')">ש</button>
           <button onclick="t119AddLetter('ת')">ת</button>
@@ -1519,27 +1518,27 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
         <div class="t119-kb-row">
           <button onclick="cemAddLetter('א')">א</button>
           <button onclick="cemAddLetter('ב')">ב</button>
-          <button onclick="cemAddLetter('×'')">×'</button>
+          <button onclick="cemAddLetter('ג')">ג</button>
           <button onclick="cemAddLetter('ד')">ד</button>
-          <button onclick="cemAddLetter('×"')">×"</button>
+          <button onclick="cemAddLetter('ה')">ה</button>
           <button onclick="cemAddLetter('ו')">ו</button>
-          <button onclick="cemAddLetter('×–')">×–</button>
-          <button onclick="cemAddLetter('×—')">×—</button>
+          <button onclick="cemAddLetter('ז')">ז</button>
+          <button onclick="cemAddLetter('ח')">ח</button>
           <button onclick="cemAddLetter('ט')">ט</button>
         </div>
         <div class="t119-kb-row">
-          <button onclick="cemAddLetter('×™')">×™</button>
-          <button onclick="cemAddLetter('×›')">×›</button>
+          <button onclick="cemAddLetter('י')">י</button>
+          <button onclick="cemAddLetter('כ')">כ</button>
           <button onclick="cemAddLetter('ל')">ל</button>
           <button onclick="cemAddLetter('מ')">מ</button>
-          <button onclick="cemAddLetter('× ')">× </button>
+          <button onclick="cemAddLetter('נ')">נ</button>
           <button onclick="cemAddLetter('ס')">ס</button>
-          <button onclick="cemAddLetter('×¢')">×¢</button>
+          <button onclick="cemAddLetter('ע')">ע</button>
           <button onclick="cemAddLetter('פ')">פ</button>
           <button onclick="cemAddLetter('צ')">צ</button>
         </div>
         <div class="t119-kb-row">
-          <button onclick="cemAddLetter('×§')">×§</button>
+          <button onclick="cemAddLetter('ק')">ק</button>
           <button onclick="cemAddLetter('ר')">ר</button>
           <button onclick="cemAddLetter('ש')">ש</button>
           <button onclick="cemAddLetter('ת')">ת</button>
@@ -3445,7 +3444,7 @@ function closeBdayPopup() {
 // ====== TEHILIM AU CIMETIERE ======
 var CEMETERY_PSALMS = [33, 16, 17, 72, 91, 104, 130];
 var NESHAMA_LETTERS = [
-  { letter: '× ', name: 'Noun', start: 105, end: 112 },
+  { letter: 'נ', name: 'Noun', start: 105, end: 112 },
   { letter: 'ש', name: 'Chin', start: 161, end: 168 },
   { letter: 'מ', name: 'Mem', start: 97, end: 104 },
   { letter: 'ה', name: 'Hé', start: 33, end: 40 }
@@ -3526,7 +3525,7 @@ function renderCemetery() {
       html += '<div class="cem-psalm-card">';
       html += '<div class="cem-psalm-header" onclick="toggleCemPsalm(\'' + id + '\')">';
       html += '<span class="cem-psalm-num">פרק ' + toHebrewNumeral(num) + ' · Psaume ' + num + '</span>';
-      html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">â–¼</span>';
+      html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
       html += '</div>';
       html += '<div class="cem-psalm-body" id="' + id + '" data-cem=\'' + JSON.stringify({type:'psalm',num:num}) + '\'>';
       html += cemToggleHtml(id, mode);
@@ -3558,7 +3557,7 @@ function renderCemNeshama() {
     html += '<div class="cem-119-circle">' + info.letter + '</div>';
     html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + '<div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
     html += '</div>';
-    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">â–¼</span>';
+    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
     html += '</div>';
     html += '<div class="cem-psalm-body" id="' + id + '" data-cem=\'' + JSON.stringify({type:'119section',start:info.start,end:info.end}) + '\'>';
     html += cemToggleHtml(id, mode);
@@ -3676,7 +3675,7 @@ function renderCemNameResults(letters, hebrewName) {
     html += '<div class="cem-119-circle">' + info.letter + '</div>';
     html += '<div class="cem-119-info">' + info.name + ' · ' + info.letter + ' <span style="font-size:11px;color:var(--gray-3);font-weight:400">(lettre ' + (idx + 1) + ')</span><div class="cem-119-range">Versets ' + info.start + '–' + info.end + '</div></div>';
     html += '</div>';
-    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">â–¼</span>';
+    html += '<span class="cem-psalm-toggle" id="' + id + '-toggle">▼</span>';
     html += '</div>';
     html += '<div class="cem-psalm-body open" id="' + id + '" data-cem=\'' + JSON.stringify({type:'119section',start:info.start,end:info.end}) + '\'>';
     html += cemToggleHtml(id, mode);
@@ -3785,23 +3784,23 @@ function renderT119Suggestions(query) {
 var HEBREW_LETTERS_119 = [
   { letter: 'א', name: 'Aleph', start: 1, end: 8 },
   { letter: 'ב', name: 'Beth', start: 9, end: 16 },
-  { letter: '×'', name: 'Guimel', start: 17, end: 24 },
+  { letter: 'ג', name: 'Guimel', start: 17, end: 24 },
   { letter: 'ד', name: 'Daleth', start: 25, end: 32 },
   { letter: 'ה', name: 'Hé', start: 33, end: 40 },
   { letter: 'ו', name: 'Vav', start: 41, end: 48 },
-  { letter: '×–', name: 'Zayin', start: 49, end: 56 },
-  { letter: '×—', name: 'Heth', start: 57, end: 64 },
+  { letter: 'ז', name: 'Zayin', start: 49, end: 56 },
+  { letter: 'ח', name: 'Heth', start: 57, end: 64 },
   { letter: 'ט', name: 'Teth', start: 65, end: 72 },
-  { letter: '×™', name: 'Youd', start: 73, end: 80 },
-  { letter: '×›', name: 'Kaf', start: 81, end: 88 },
+  { letter: 'י', name: 'Youd', start: 73, end: 80 },
+  { letter: 'כ', name: 'Kaf', start: 81, end: 88 },
   { letter: 'ל', name: 'Lamed', start: 89, end: 96 },
   { letter: 'מ', name: 'Mem', start: 97, end: 104 },
-  { letter: '× ', name: 'Noun', start: 105, end: 112 },
+  { letter: 'נ', name: 'Noun', start: 105, end: 112 },
   { letter: 'ס', name: 'Samekh', start: 113, end: 120 },
-  { letter: '×¢', name: 'Ayin', start: 121, end: 128 },
+  { letter: 'ע', name: 'Ayin', start: 121, end: 128 },
   { letter: 'פ', name: 'Pé', start: 129, end: 136 },
   { letter: 'צ', name: 'Tsadi', start: 137, end: 144 },
-  { letter: '×§', name: 'Kouf', start: 145, end: 152 },
+  { letter: 'ק', name: 'Kouf', start: 145, end: 152 },
   { letter: 'ר', name: 'Rech', start: 153, end: 160 },
   { letter: 'ש', name: 'Chin', start: 161, end: 168 },
   { letter: 'ת', name: 'Tav', start: 169, end: 176 }
@@ -3817,7 +3816,7 @@ var FR_HEB_MAP = {
   'g': 'ג', 'h': 'ה', 'i': 'י', 'j': 'ג', 'k': 'כ', 'l': 'ל',
   'm': 'מ', 'n': 'נ', 'o': 'ע', 'p': 'פ', 'q': 'ק', 'r': 'ר',
   's': 'ס', 't': 'ת', 'u': 'ו', 'v': 'ו', 'w': 'ו', 'x': 'כ',
-  'y': '×™', 'z': '×–'
+  'y': 'י', 'z': 'ז'
 };
 
 function frenchToHebrew(text) {
@@ -4169,7 +4168,7 @@ function renderObjStoryBar() {
   ALL_OBJ_ITEMS.forEach(function(it, i) {
     var done = !!state[it.id];
     var isCurrent = i === curItem;
-    var ringBg = done ? '#dbdbdb' : 'conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34)';
+    var ringBg = done ? '#27ae60' : 'conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34)';
     html13 += '<div class="os-item' + (done ? ' done' : '') + (isCurrent ? ' current' : '') + '" onclick="openItemStory(' + i + ')">';
     html13 += '<div class="os-ring" style="background:' + ringBg + '"><div class="os-circle">' + it.emoji + '</div></div>';
     html13 += '<span class="os-label">' + it.label + '</span>';
@@ -5378,29 +5377,29 @@ function shareObjectives(e) {
   appShare('Objectifs du jour', msg);
 }
 
-function shareQuote() {
-  var q = document.getElementById('home-quote');
-  var s = document.getElementById('home-source');
-  var text = (q ? q.textContent : '') + '\n' + (s ? s.textContent : '');
-  appShare('Citation du jour', text.trim());
-}
-
 function shareCategorieDuJour(e) {
   if (e) e.stopPropagation();
   var badge = document.getElementById('home-badge');
   var dateLine = document.getElementById('home-date-line-text');
-  var dateText = dateLine ? dateLine.textContent : '';
-  var badgeText = badge ? badge.textContent : '';
-  var msg = 'ðŸ"… ' + dateText + '\n\nðŸ"– ' + badgeText;
+  var badgeText = badge ? (badge.innerText || badge.textContent || '').trim() : '';
+  var dateText = dateLine ? (dateLine.innerText || dateLine.textContent || '').trim() : '';
+  var msg = '📅 ' + dateText + '\n\n📖 ' + badgeText;
   appShare('Tehilim du jour', msg);
 }
 
 function shareTehilimCard(e) {
   if (e) e.stopPropagation();
   var sub = document.getElementById('big-teh-sub');
-  var subText = sub ? sub.textContent : 'Tehilim';
-  var msg = 'ðŸ"– Tehilim\n\n' + subText + '\n\nVenez lire les Tehilim avec moi !';
+  var subText = sub ? (sub.innerText || sub.textContent || '').trim() : '';
+  var msg = '📖 Tehilim\n\n' + subText + '\n\nVenez lire les Tehilim avec moi !';
   appShare('Tehilim', msg);
+}
+
+function shareQuote() {
+  var q = document.getElementById('home-quote');
+  var s = document.getElementById('home-source');
+  var text = (q ? q.textContent : '') + '\n' + (s ? s.textContent : '');
+  appShare('Citation du jour', text.trim());
 }
 
 // ====== DONATION CAMPAIGN ======
@@ -5809,7 +5808,7 @@ function openTanya(e) {
     exp.textContent = 'Réduire ▴';
   } else {
     txt.classList.remove('expanded');
-    exp.textContent = 'Lire la suite â–¾';
+    exp.textContent = 'Lire la suite ▾';
   }
 }
 
@@ -5894,7 +5893,7 @@ function openHoumash(e) {
     exp.textContent = 'Réduire ▴';
   } else {
     txt.classList.remove('expanded');
-    exp.textContent = 'Lire la suite â–¾';
+    exp.textContent = 'Lire la suite ▾';
   }
 }
 
