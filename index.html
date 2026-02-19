@@ -31,28 +31,28 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .splash-icon .icon-770 { width:120px; height:auto; color:var(--black); }
 .splash-title { font-family:'Noto Serif Hebrew',serif; font-size:52px; color:var(--black); font-weight:700; margin-bottom:4px; direction:rtl; }
 /* CHABAD ANIMATED TITLE */
-.splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-top:0; margin-bottom:16px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:flex-end; justify-content:center; overflow:visible; line-height:1; }
+.splash-title-chabad { font-size:52px; color:var(--black); font-weight:800; margin-top:0; margin-bottom:16px; letter-spacing:2px; font-family:var(--font); display:flex; align-items:flex-end; justify-content:center; overflow:visible; line-height:1; transform-style:preserve-3d; -webkit-transform-style:preserve-3d; }
 .sc-static { display:inline-block; opacity:0; animation:scFadeIn 0.4s ease forwards; line-height:1; }
 .sc-apos { display:inline-block; max-width:0; opacity:0; overflow:hidden; letter-spacing:0; animation:scInsert 0.6s ease 3.2s forwards; line-height:1; }
-.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:2; line-height:1; }
-.sc-letter-d2 { display:inline-block; opacity:0; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:1; line-height:1; }
+.sc-letter-d { display:inline-block; opacity:0; animation:scD1 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:2; line-height:1; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform,opacity; }
+.sc-letter-d2 { display:inline-block; opacity:0; animation:scD2 4s ease 0.3s forwards; transform-origin:center center; position:relative; z-index:1; line-height:1; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform,opacity; }
 @keyframes scFadeIn { from { opacity:0; transform:translateY(-0.23em); } to { opacity:1; transform:translateY(0); } }
 @keyframes scInsert { to { max-width:0.6em; opacity:1; letter-spacing:2px; } }
 @keyframes scD1 {
-  0%   { opacity:0; transform:translateY(-0.23em) rotate(0deg); }
-  8%   { opacity:1; transform:translateY(0) rotate(0deg); }
-  50%  { opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { transform:translateY(0.23em) rotate(180deg); opacity:1; }
-  100% { transform:translateY(0.23em) rotate(180deg); opacity:1; }
+  0%   { opacity:0; transform:translateY(-0.23em) translateZ(0) rotate(0deg); }
+  8%   { opacity:1; transform:translateY(0) translateZ(0) rotate(0deg); }
+  50%  { opacity:1; transform:translateY(0) translateZ(0) rotate(0deg); }
+  68%  { transform:translateY(0.23em) translateZ(0) rotate(180deg); opacity:1; }
+  100% { transform:translateY(0.23em) translateZ(0) rotate(180deg); opacity:1; }
 }
 @keyframes scD2 {
-  0%   { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
-  28%  { margin-left:-0.62em; opacity:0; transform:translateY(0) rotate(0deg); }
-  30%  { margin-left:-0.62em; opacity:1; transform:translateY(0) rotate(0deg); }
-  46%  { margin-left:0; opacity:1; transform:translateY(0) rotate(0deg); }
-  50%  { margin-left:0; opacity:1; transform:translateY(0) rotate(0deg); }
-  68%  { margin-left:0; opacity:1; transform:translateY(0.23em) rotate(180deg); }
-  100% { margin-left:0; opacity:1; transform:translateY(0.23em) rotate(180deg); }
+  0%   { margin-left:-0.62em; opacity:0; transform:translateY(0) translateZ(0) rotate(0deg); }
+  28%  { margin-left:-0.62em; opacity:0; transform:translateY(0) translateZ(0) rotate(0deg); }
+  30%  { margin-left:-0.62em; opacity:1; transform:translateY(0) translateZ(0) rotate(0deg); }
+  46%  { margin-left:0; opacity:1; transform:translateY(0) translateZ(0) rotate(0deg); }
+  50%  { margin-left:0; opacity:1; transform:translateY(0) translateZ(0) rotate(0deg); }
+  68%  { margin-left:0; opacity:1; transform:translateY(0.23em) translateZ(0) rotate(180deg); }
+  100% { margin-left:0; opacity:1; transform:translateY(0.23em) translateZ(0) rotate(180deg); }
 }
 .splash-subtitle { font-family:'Noto Serif Hebrew',serif; font-size:22px; color:var(--gray-2); letter-spacing:6px; font-weight:700; margin-bottom:28px; opacity:0; animation:scSubIn 0.8s ease 3.8s forwards; direction:rtl; }
 @keyframes scSubIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -235,13 +235,13 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
 .obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
-.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:200px; }
+.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; }
 .shabbat-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:opacity 0.8s ease; opacity:0; filter:blur(1px); }
 .shabbat-bg.loaded { opacity:1; }
 .shabbat-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,30,0.3) 0%, rgba(10,10,30,0.5) 50%, rgba(10,10,30,0.7) 100%); }
-.shabbat-content { position:relative; z-index:1; padding:18px 20px 16px; }
+.shabbat-content { position:relative; z-index:1; padding:18px 20px 16px; display:flex; flex-direction:column; justify-content:space-between; min-height:200px; box-sizing:border-box; }
 .shabbat-city { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.95); }
-.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; }
+.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; }
 .shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
 .shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
 .shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap; animation:iconPulse 3s ease-in-out infinite; backdrop-filter:blur(6px); }
@@ -5479,6 +5479,16 @@ function loadHayomYom() {
   var hyyKey = heb.mName.replace(' ', '_') + '_' + heb.hd;
   console.log('HYY: Hebrew date =', heb.mName, heb.hd, 'key=', hyyKey);
 
+  // Check cache first (accepts fr, he, or en)
+  try {
+    var cached = JSON.parse(localStorage.getItem(cacheKey));
+    if (cached && (cached.fr || cached.he || cached.en)) {
+      console.log('HYY: Using cached data (source: ' + (cached.source || 'cache') + ')');
+      displayHyy(cached);
+      return;
+    }
+  } catch(e) {}
+
   // PRIORITY 1: fr.chabad.org (automatic French)
   _hyyLoadFrChabad(heb, dateKey, cacheKey, hyyKey);
 }
@@ -5597,16 +5607,38 @@ function _hyyLoadAdmin(heb, dateKey, cacheKey, hyyKey) {
       // PRIORITY 3: Cache
       var cached = null;
       try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayHyy(cached); return; }
-      displayHyyFallback();
+      if (cached && (cached.fr || cached.he || cached.en)) { displayHyy(cached); return; }
+      // PRIORITY 4: Sefaria API
+      _hyyLoadEnChabad(heb, dateKey, cacheKey);
     })
     .catch(function(err) {
       console.log('HYY: admin failed:', err.message);
       var cached = null;
       try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayHyy(cached); return; }
-      displayHyyFallback();
+      if (cached && (cached.fr || cached.he || cached.en)) { displayHyy(cached); return; }
+      _hyyLoadEnChabad(heb, dateKey, cacheKey);
     });
+}
+
+function _hyyLoadEnChabad(heb, dateKey, cacheKey) {
+  var d = new Date();
+  var url = 'https://www.chabad.org/dailystudy/hayomyom.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  console.log('HYY: Trying www.chabad.org (EN):', url);
+  _fetchViaCors(url, 0, function(html) {
+    var text = _extractChabadText(html);
+    if (text && text.length > 30) {
+      console.log('HYY: English text from www.chabad.org! (' + text.length + ' chars)');
+      var result = { en: text, heDate: heb.mName + ' ' + heb.hd, fetched: dateKey, source: 'chabad.org' };
+      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+      displayHyy(result);
+    } else {
+      console.log('HYY: www.chabad.org - could not extract text');
+      displayHyyFallback();
+    }
+  }, function() {
+    console.log('HYY: www.chabad.org unreachable');
+    displayHyyFallback();
+  });
 }
 
 function displayHyy(data) {
@@ -5660,6 +5692,16 @@ function loadRambam() {
   var dateKey = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
   var cacheKey = 'tehilim_rambam3_' + dateKey;
 
+  // Check cache first (accepts fr, he, or en)
+  try {
+    var cached = JSON.parse(localStorage.getItem(cacheKey));
+    if (cached && (cached.fr || cached.he || cached.en)) {
+      console.log('Rambam: Using cached data (source: ' + (cached.source || 'cache') + ')');
+      displayRambam(cached);
+      return;
+    }
+  } catch(e) {}
+
   // PRIORITY 1: fr.chabad.org (automatic French)
   _rambamLoadFrChabad(dateKey, cacheKey);
 }
@@ -5703,16 +5745,40 @@ function _rambamLoadAdmin(dateKey, cacheKey) {
       // PRIORITY 3: Cache
       var cached = null;
       try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayRambam(cached); return; }
-      displayRambamFallback();
+      if (cached && (cached.fr || cached.he || cached.en)) { displayRambam(cached); return; }
+      // PRIORITY 4: Sefaria API
+      _rambamLoadEnChabad(dateKey, cacheKey);
     })
     .catch(function(err) {
       console.log('Rambam: admin failed:', err.message);
       var cached = null;
       try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
-      if (cached && cached.fr) { displayRambam(cached); return; }
-      displayRambamFallback();
+      if (cached && (cached.fr || cached.he || cached.en)) { displayRambam(cached); return; }
+      _rambamLoadEnChabad(dateKey, cacheKey);
     });
+}
+
+function _rambamLoadEnChabad(dateKey, cacheKey) {
+  var d = new Date();
+  var url = 'https://www.chabad.org/dailystudy/rambam.asp?rambamChapters=1&tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  console.log('Rambam: Trying www.chabad.org (EN):', url);
+  _fetchViaCors(url, 0, function(html) {
+    var text = _extractChabadText(html);
+    if (text && text.length > 30) {
+      console.log('Rambam: English text from www.chabad.org! (' + text.length + ' chars)');
+      var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+      var title = titleMatch ? titleMatch[1].replace(/\s*-\s*Chabad\.org.*/i, '').trim() : '';
+      var result = { en: text, title: title, fetched: dateKey, source: 'chabad.org' };
+      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+      displayRambam(result);
+    } else {
+      console.log('Rambam: www.chabad.org - could not extract text');
+      displayRambamFallback();
+    }
+  }, function() {
+    console.log('Rambam: www.chabad.org unreachable');
+    displayRambamFallback();
+  });
 }
 
 function displayRambam(data) {
@@ -5817,58 +5883,35 @@ function _tanyaLoadAdmin(dateKey, cacheKey) {
         return;
       }
       // PRIORITY 3: Sefaria API
-      _tanyaLoadSefaria(dateKey, cacheKey);
+      _tanyaLoadEnChabad(dateKey, cacheKey);
     })
     .catch(function(err) {
       console.log('Tanya: admin failed:', err.message);
-      _tanyaLoadSefaria(dateKey, cacheKey);
+      _tanyaLoadEnChabad(dateKey, cacheKey);
     });
 }
 
-function _tanyaLoadSefaria(dateKey, cacheKey) {
-  fetch('https://www.sefaria.org/api/calendars')
-    .then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(cal) {
-      var tanyaRef = null;
-      var tanyaTitle = '';
-      var items = cal.calendar_items || [];
-      for (var i = 0; i < items.length; i++) {
-        var item = items[i];
-        if (item.title && item.title.en && item.title.en.indexOf('Tanya') !== -1 && item.title.en.indexOf('Daily') !== -1) {
-          tanyaRef = item.ref || (item.url ? item.url.replace('/','') : null);
-          tanyaTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
-          break;
-        }
-      }
-      if (!tanyaRef) {
-        // Broader match
-        for (var i = 0; i < items.length; i++) {
-          var item = items[i];
-          if (item.title && item.title.en && item.title.en.indexOf('Tanya') !== -1) {
-            tanyaRef = item.ref || (item.url ? item.url.replace('/','') : null);
-            tanyaTitle = item.displayValue ? (item.displayValue.en || '') : (item.ref || '');
-            break;
-          }
-        }
-      }
-      if (!tanyaRef) { displayTanyaFallback(); return; }
-      console.log('Tanya: Sefaria ref =', tanyaRef, 'title =', tanyaTitle);
-      return fetch('https://www.sefaria.org/api/texts/' + encodeURIComponent(tanyaRef) + '?context=0')
-        .then(function(r) { if(!r.ok) throw new Error(r.status); return r.json(); })
-        .then(function(txt) {
-          var heText = '', enText = '';
-          if (txt.he) heText = Array.isArray(txt.he) ? txt.he.join(' ') : txt.he;
-          if (txt.text) enText = Array.isArray(txt.text) ? txt.text.join(' ') : txt.text;
-          function strip(s) { var d = document.createElement('div'); d.innerHTML = s; return d.textContent || d.innerText || ''; }
-          var result = { he: strip(heText), en: strip(enText), title: tanyaTitle, fetched: dateKey, source: 'sefaria' };
-          try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
-          displayTanya(result);
-        });
-    })
-    .catch(function(err) {
-      console.log('Tanya: Sefaria error:', err);
+function _tanyaLoadEnChabad(dateKey, cacheKey) {
+  var d = new Date();
+  var url = 'https://www.chabad.org/dailystudy/tanya.asp?tdate=' + (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+  console.log('Tanya: Trying www.chabad.org (EN):', url);
+  _fetchViaCors(url, 0, function(html) {
+    var text = _extractChabadText(html);
+    if (text && text.length > 30) {
+      console.log('Tanya: English text from www.chabad.org! (' + text.length + ' chars)');
+      var titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
+      var title = titleMatch ? titleMatch[1].replace(/\s*-\s*Chabad\.org.*/i, '').trim() : '';
+      var result = { en: text, title: title, fetched: dateKey, source: 'chabad.org' };
+      try { localStorage.setItem(cacheKey, JSON.stringify(result)); } catch(e) {}
+      displayTanya(result);
+    } else {
+      console.log('Tanya: www.chabad.org - could not extract text');
       displayTanyaFallback();
-    });
+    }
+  }, function() {
+    console.log('Tanya: www.chabad.org unreachable');
+    displayTanyaFallback();
+  });
 }
 
 function displayTanya(data) {
