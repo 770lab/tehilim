@@ -346,7 +346,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .story-bar::-webkit-scrollbar { display:none; }
 .story-item { display:flex; flex-direction:column; align-items:center; gap:4px; cursor:pointer; flex-shrink:0; -webkit-tap-highlight-color:transparent; }
 .story-circle { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Noto Serif Hebrew',serif; font-size:16px; font-weight:700; color:var(--gray-1); background:var(--white); direction:rtl; transition:all 0.2s; }
-.story-ring { width:62px; height:62px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; padding:2px; animation:shimmer 8s linear infinite; }
+.story-ring { width:62px; height:62px; border-radius:50%; background:conic-gradient(from 210deg, #f9ce34, #ee2a7b, #6228d7, #ee2a7b, #f9ce34); display:flex; align-items:center; justify-content:center; padding:2px; }
 .story-item.read .story-ring { background:#dbdbdb; }
 .story-item.active .story-circle { color:var(--black); font-weight:800; }
 .story-item.read .story-circle { color:var(--gray-4); }
@@ -398,7 +398,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .cal-completion-text strong { color:#f9ce34; }
 .cal-completion-footer { font-size:11px; color:rgba(255,255,255,0.4); position:relative; z-index:1; font-family:'Noto Serif Hebrew',serif; }
 .story-item.active .story-label { color:var(--black); }
-@keyframes storySpinIn { 0% { transform:scale(0) rotate(0deg); opacity:0; } 50% { transform:scale(0.8) rotate(180deg); opacity:0.7; } 100% { transform:scale(1) rotate(360deg); opacity:1; } }
+@keyframes storySpinIn { 0% { transform:scale(0); opacity:0; } 50% { transform:scale(0.8); opacity:0.7; } 100% { transform:scale(1); opacity:1; } }
 .story-item.anim-in { animation: storySpinIn 0.5s ease forwards; opacity:0; }
 .reading-body { flex:1; overflow-y:scroll; scroll-snap-type:y mandatory; -webkit-overflow-scrolling:touch; min-height:0; }
 /* FLOATING BOTTOM BAR */
