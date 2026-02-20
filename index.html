@@ -235,20 +235,25 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .obj-progress-home { height:4px; background:var(--gray-6); border-radius:3px; overflow:hidden; margin-top:6px; width:100%; }
 .obj-progress-home-fill { height:100%; background:linear-gradient(90deg, #6228d7, #ee2a7b, #f9ce34); border-radius:3px; transition:width 0.5s cubic-bezier(0.4,0,0.2,1); width:0%; }
 .obj-progress-home-pct { font-size:11px; font-weight:700; color:var(--gray-3); margin-top:3px; }
-.shabbat-card { margin:12px 16px 16px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:200px; }
+.shabbat-card { margin:0 16px 12px; border-radius:var(--radius); color:#fff; position:relative; overflow:hidden; min-height:220px; }
 .shabbat-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:opacity 0.8s ease; opacity:0; filter:blur(1px); }
 .shabbat-bg.loaded { opacity:1; }
 .shabbat-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,30,0.3) 0%, rgba(10,10,30,0.5) 50%, rgba(10,10,30,0.7) 100%); }
-.shabbat-content { position:relative; z-index:1; padding:18px 20px 16px; }
-.shabbat-city { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.95); cursor:pointer; display:flex; align-items:center; gap:4px; }
-.shabbat-city::after { content:'▾'; font-size:10px; opacity:0.6; }
-.shabbat-loc-wrap { position:relative; }
-.shabbat-loc-search { position:absolute; top:100%; right:0; z-index:10; margin-top:6px; min-width:220px; }
-.shabbat-loc-search input { width:100%; padding:8px 12px; border:none; border-radius:8px; font-size:14px; background:rgba(255,255,255,0.95); color:#1a1a2e; outline:none; box-shadow:0 4px 20px rgba(0,0,0,0.3); }
-.shabbat-loc-results { background:rgba(255,255,255,0.95); border-radius:0 0 8px 8px; max-height:180px; overflow-y:auto; }
-.shabbat-loc-results .loc-item { padding:10px 12px; font-size:13px; color:#1a1a2e; cursor:pointer; border-top:1px solid rgba(0,0,0,0.06); }
-.shabbat-loc-results .loc-item:active { background:rgba(0,0,0,0.05); }
-.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; }
+.shabbat-content { position:relative; z-index:1; padding:18px 20px 14px; display:flex; flex-direction:column; min-height:220px; }
+.shabbat-city { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.95); }
+.shabbat-change-city { display:inline-flex; align-items:center; gap:4px; margin-top:6px; padding:5px 12px; font-size:11px; font-weight:600; color:rgba(255,255,255,0.9); background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.25); border-radius:20px; cursor:pointer; backdrop-filter:blur(6px); letter-spacing:0.3px; transition:all 0.2s; }
+.shabbat-change-city:active { background:rgba(255,255,255,0.25); transform:scale(0.97); }
+.shabbat-loc-wrap { text-align:right; position:relative; }
+.shabbat-loc-search { position:absolute; top:100%; right:0; z-index:10; margin-top:6px; min-width:240px; }
+.shabbat-loc-search input { width:100%; padding:10px 14px; border:none; border-radius:10px; font-size:14px; background:rgba(255,255,255,0.97); color:#1a1a2e; outline:none; box-shadow:0 4px 24px rgba(0,0,0,0.35); }
+.shabbat-loc-results { background:rgba(255,255,255,0.97); border-radius:0 0 10px 10px; max-height:200px; overflow-y:auto; }
+.shabbat-loc-results .loc-item { padding:10px 14px; font-size:13px; color:#1a1a2e; cursor:pointer; border-top:1px solid rgba(0,0,0,0.06); }
+.shabbat-loc-results .loc-item:active { background:rgba(0,0,0,0.06); }
+.shabbat-spacer { flex:1; min-height:16px; }
+.shabbat-bottom-row { display:flex; flex-direction:column; align-items:stretch; gap:0; }
+.shabbat-share-btn { display:flex; align-items:center; justify-content:center; gap:5px; margin:8px auto 0; padding:6px 14px; font-size:11px; font-weight:600; color:rgba(255,255,255,0.8); background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); border-radius:20px; cursor:pointer; letter-spacing:0.3px; backdrop-filter:blur(6px); transition:all 0.2s; flex-shrink:0; }
+.shabbat-share-btn:active { background:rgba(255,255,255,0.2); }
+.shabbat-top { display:flex; align-items:flex-start; justify-content:space-between; }
 .shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
 .shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
 .shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap;  backdrop-filter:blur(6px); }
@@ -758,6 +763,126 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div id="panel-menu">
     <div class="home-date-line" id="home-date-line"></div>
     <div class="obj-story-bar" id="obj-story-bar"></div>
+    <div class="shabbat-card" id="shabbat-card" style="display:none;background:#1a1a2e;">
+      <div class="shabbat-bg" id="shabbat-bg"></div>
+      <div class="shabbat-overlay"></div>
+      <div class="shabbat-content">
+        <div class="shabbat-top">
+          <div>
+            <div class="shabbat-parasha" id="shabbat-parasha"></div>
+            <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
+          </div>
+          <div class="shabbat-loc-wrap">
+            <div class="shabbat-city" id="shabbat-city">🇫🇷 Paris</div>
+            <button class="shabbat-change-city" onclick="toggleShabbatLocSearch()" id="shabbat-change-btn">📍 Modifier</button>
+            <div class="shabbat-loc-search" id="shabbat-loc-search" style="display:none;">
+              <input type="text" id="shabbat-loc-input" placeholder="Rechercher une ville…" autocomplete="off" />
+              <div class="shabbat-loc-results" id="shabbat-loc-results"></div>
+            </div>
+          </div>
+        </div>
+        <div class="shabbat-spacer"></div>
+        <div class="shabbat-bottom-row">
+          <div class="shabbat-times-row">
+          <div class="shabbat-time-block">
+            <div class="shabbat-time-icon candle-icon"><svg viewBox="0 0 40 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="flameOuter" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#fff8e1"/><stop offset="30%" stop-color="#ffe082"/><stop offset="60%" stop-color="#ffb300"/><stop offset="100%" stop-color="#e65100" stop-opacity="0.4"/></radialGradient>
+                <radialGradient id="flameInner" cx="50%" cy="40%" r="45%"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#fff9c4"/><stop offset="100%" stop-color="#ffcc02" stop-opacity="0.6"/></radialGradient>
+                <radialGradient id="flameCore" cx="50%" cy="50%" r="40%"><stop offset="0%" stop-color="#e3f2fd" stop-opacity="0.9"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.3"/></radialGradient>
+                <radialGradient id="glowR" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffb300" stop-opacity="0.25"/><stop offset="100%" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
+                <linearGradient id="waxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff8e1"/><stop offset="100%" stop-color="#f5f0e0"/></linearGradient>
+              </defs>
+              <!-- Glow halo -->
+              <ellipse cx="20" cy="22" rx="18" ry="16" fill="url(#glowR)"><animate attributeName="rx" values="18;20;17;19;18" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;1;0.6;0.9;0.7" dur="3s" repeatCount="indefinite"/></ellipse>
+              <!-- Candle body -->
+              <rect x="15" y="38" width="10" height="28" rx="2" fill="url(#waxG)" opacity="0.9"/>
+              <rect x="16" y="38" width="3" height="28" rx="1" fill="rgba(255,255,255,0.15)"/>
+              <!-- Wick -->
+              <line x1="20" y1="38" x2="20" y2="33" stroke="#555" stroke-width="1" stroke-linecap="round"/>
+              <!-- Outer flame -->
+              <ellipse cx="20" cy="24" rx="5" ry="11" fill="url(#flameOuter)" opacity="0.85">
+                <animate attributeName="ry" values="11;12;10.5;11.5;10;11" dur="0.8s" repeatCount="indefinite"/>
+                <animate attributeName="rx" values="5;4.5;5.5;4.8;5.2;5" dur="1.1s" repeatCount="indefinite"/>
+                <animate attributeName="cx" values="20;19.5;20.5;20;19.8;20.2;20" dur="1.4s" repeatCount="indefinite"/>
+              </ellipse>
+              <!-- Middle flame -->
+              <ellipse cx="20" cy="26" rx="3.2" ry="8" fill="url(#flameInner)" opacity="0.9">
+                <animate attributeName="ry" values="8;8.5;7.5;8.2;7.8;8" dur="0.7s" repeatCount="indefinite"/>
+                <animate attributeName="rx" values="3.2;2.8;3.5;3;3.3;3.2" dur="0.9s" repeatCount="indefinite"/>
+                <animate attributeName="cx" values="20;20.3;19.7;20.1;19.9;20" dur="1.2s" repeatCount="indefinite"/>
+              </ellipse>
+              <!-- Core flame (blue-white) -->
+              <ellipse cx="20" cy="30" rx="1.8" ry="4.5" fill="url(#flameCore)" opacity="0.8">
+                <animate attributeName="ry" values="4.5;5;4;4.8;4.2;4.5" dur="0.6s" repeatCount="indefinite"/>
+              </ellipse>
+              <!-- Tiny sparks -->
+              <circle cx="17" cy="16" r="0.4" fill="#ffe082" opacity="0"><animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/><animate attributeName="cy" values="16;12" dur="2.5s" repeatCount="indefinite"/></circle>
+              <circle cx="23" cy="18" r="0.3" fill="#ffcc02" opacity="0"><animate attributeName="opacity" values="0;0.6;0" dur="3.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="18;13" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
+            </svg></div>
+            <div class="shabbat-time-detail">
+              <div class="shabbat-time-label">Allumage</div>
+              <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
+              <div class="shabbat-time-date" id="shabbat-candles-date"></div>
+              <div class="shabbat-time-hedate" id="shabbat-candles-hedate"></div>
+            </div>
+          </div>
+          <div class="shabbat-sep"></div>
+          <div class="shabbat-time-block">
+            <div class="shabbat-time-icon moon-icon"><svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0d1b2a"><animate attributeName="stop-color" values="#1b2838;#0d1b2a;#1b2838" dur="6s" repeatCount="indefinite"/></stop>
+                  <stop offset="40%" stop-color="#1b2838"/>
+                  <stop offset="70%" stop-color="#415a77"><animate attributeName="stop-color" values="#415a77;#2c3e6b;#415a77" dur="8s" repeatCount="indefinite"/></stop>
+                  <stop offset="100%" stop-color="#e07040" stop-opacity="0.4"><animate attributeName="stop-opacity" values="0.4;0.2;0.4" dur="5s" repeatCount="indefinite"/></stop>
+                </linearGradient>
+                <radialGradient id="moonG2" cx="40%" cy="35%" r="55%"><stop offset="0%" stop-color="#f5f0ff"/><stop offset="100%" stop-color="#d4b8ff"/></radialGradient>
+                <radialGradient id="moonGlow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c084fc" stop-opacity="0.3"/><stop offset="100%" stop-color="#c084fc" stop-opacity="0"/></radialGradient>
+              </defs>
+              <!-- Sky -->
+              <rect x="0" y="0" width="50" height="50" rx="8" fill="url(#skyG)"/>
+              <!-- Horizon glow -->
+              <ellipse cx="25" cy="48" rx="28" ry="8" fill="#e07040" opacity="0.12"><animate attributeName="opacity" values="0.12;0.18;0.1;0.15;0.12" dur="5s" repeatCount="indefinite"/></ellipse>
+              <!-- Moon glow -->
+              <circle cx="16" cy="15" r="8" fill="url(#moonGlow2)"><animate attributeName="r" values="8;9;7.5;8.5;8" dur="4s" repeatCount="indefinite"/></circle>
+              <!-- Crescent moon -->
+              <path d="M21 15a7 7 0 11-7.5-6.9 5.5 5.5 0 007.5 6.9z" fill="url(#moonG2)">
+                <animate attributeName="opacity" values="0.9;1;0.85;1;0.9" dur="4s" repeatCount="indefinite"/>
+              </path>
+              <!-- Stars layer 1 - bright -->
+              <circle cx="32" cy="10" r="0.7" fill="#fff"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
+              <circle cx="40" cy="18" r="0.5" fill="#fff"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" begin="0.5s" repeatCount="indefinite"/></circle>
+              <circle cx="36" cy="28" r="0.6" fill="#fff"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" begin="1s" repeatCount="indefinite"/></circle>
+              <!-- Stars layer 2 - subtle -->
+              <circle cx="27" cy="6" r="0.4" fill="#e0d4ff"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.5s" begin="0.3s" repeatCount="indefinite"/></circle>
+              <circle cx="44" cy="8" r="0.35" fill="#e0d4ff"><animate attributeName="opacity" values="0.1;0.6;0.1" dur="4s" begin="1.5s" repeatCount="indefinite"/></circle>
+              <circle cx="8" cy="30" r="0.4" fill="#e0d4ff"><animate attributeName="opacity" values="0.15;0.65;0.15" dur="3.2s" begin="0.7s" repeatCount="indefinite"/></circle>
+              <circle cx="22" cy="35" r="0.35" fill="#fff"><animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.6s" begin="2s" repeatCount="indefinite"/></circle>
+              <!-- Stars layer 3 - twinkling cross stars -->
+              <g transform="translate(38,5)" opacity="0.6"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" begin="0.4s" repeatCount="indefinite"/>
+                <line x1="0" y1="-1.2" x2="0" y2="1.2" stroke="#fff" stroke-width="0.4"/>
+                <line x1="-1.2" y1="0" x2="1.2" y2="0" stroke="#fff" stroke-width="0.4"/>
+              </g>
+              <g transform="translate(10,12)" opacity="0.5"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.8s" begin="1.2s" repeatCount="indefinite"/>
+                <line x1="0" y1="-1" x2="0" y2="1" stroke="#fff" stroke-width="0.3"/>
+                <line x1="-1" y1="0" x2="1" y2="0" stroke="#fff" stroke-width="0.3"/>
+              </g>
+              <!-- Silhouette horizon -->
+              <path d="M0 44 Q5 41 10 43 Q15 40 20 42 Q25 39 30 41 Q35 40 40 42 Q45 41 50 43 L50 50 L0 50 Z" fill="#0a0f1a" opacity="0.7"/>
+            </svg></div>
+            <div class="shabbat-time-detail">
+              <div class="shabbat-time-label">Havdalah</div>
+              <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
+              <div class="shabbat-time-date" id="shabbat-havdalah-date"></div>
+              <div class="shabbat-time-hedate" id="shabbat-havdalah-hedate"></div>
+            </div>
+          </div>
+        </div>
+        <button class="shabbat-share-btn" onclick="shareShabbat(event)"><svg viewBox="0 0 24 24" style="stroke:#fff;width:18px;height:18px;opacity:0.8;fill:none;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Partager</button>
+        </div>
+      </div>
+    </div>
     <div class="home-big-cards">
       <div class="big-card" onclick="switchTab('sub-objectifs')">
         <div class="big-card-icon"><img src="data:image/jpeg;base64,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" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" alt="Objectifs"></div>
@@ -872,122 +997,6 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
       <button class="insta-share-btn" onclick="shareQuote()" style="margin:10px auto 0;"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
 
-    <div class="shabbat-card" id="shabbat-card" style="display:none;background:#1a1a2e;">
-      <div class="shabbat-bg" id="shabbat-bg"></div>
-      <div class="shabbat-overlay"></div>
-      <div class="shabbat-content">
-        <div class="shabbat-top">
-          <div>
-            <div class="shabbat-parasha" id="shabbat-parasha"></div>
-            <div class="shabbat-parasha-he" id="shabbat-parasha-he"></div>
-          </div>
-          <div class="shabbat-loc-wrap">
-            <div class="shabbat-city" id="shabbat-city" onclick="toggleShabbatLocSearch()">🇫🇷 Paris</div>
-            <div class="shabbat-loc-search" id="shabbat-loc-search" style="display:none;">
-              <input type="text" id="shabbat-loc-input" placeholder="Entrez une ville…" autocomplete="off" />
-              <div class="shabbat-loc-results" id="shabbat-loc-results"></div>
-            </div>
-          </div>
-        </div>
-        <div class="shabbat-times-row">
-          <div class="shabbat-time-block">
-            <div class="shabbat-time-icon candle-icon"><svg viewBox="0 0 40 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="flameOuter" cx="50%" cy="45%" r="50%"><stop offset="0%" stop-color="#fff8e1"/><stop offset="30%" stop-color="#ffe082"/><stop offset="60%" stop-color="#ffb300"/><stop offset="100%" stop-color="#e65100" stop-opacity="0.4"/></radialGradient>
-                <radialGradient id="flameInner" cx="50%" cy="40%" r="45%"><stop offset="0%" stop-color="#ffffff"/><stop offset="50%" stop-color="#fff9c4"/><stop offset="100%" stop-color="#ffcc02" stop-opacity="0.6"/></radialGradient>
-                <radialGradient id="flameCore" cx="50%" cy="50%" r="40%"><stop offset="0%" stop-color="#e3f2fd" stop-opacity="0.9"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.3"/></radialGradient>
-                <radialGradient id="glowR" cx="50%" cy="30%" r="70%"><stop offset="0%" stop-color="#ffb300" stop-opacity="0.25"/><stop offset="100%" stop-color="#ffb300" stop-opacity="0"/></radialGradient>
-                <linearGradient id="waxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff8e1"/><stop offset="100%" stop-color="#f5f0e0"/></linearGradient>
-              </defs>
-              <!-- Glow halo -->
-              <ellipse cx="20" cy="22" rx="18" ry="16" fill="url(#glowR)"><animate attributeName="rx" values="18;20;17;19;18" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;1;0.6;0.9;0.7" dur="3s" repeatCount="indefinite"/></ellipse>
-              <!-- Candle body -->
-              <rect x="15" y="38" width="10" height="28" rx="2" fill="url(#waxG)" opacity="0.9"/>
-              <rect x="16" y="38" width="3" height="28" rx="1" fill="rgba(255,255,255,0.15)"/>
-              <!-- Wick -->
-              <line x1="20" y1="38" x2="20" y2="33" stroke="#555" stroke-width="1" stroke-linecap="round"/>
-              <!-- Outer flame -->
-              <ellipse cx="20" cy="24" rx="5" ry="11" fill="url(#flameOuter)" opacity="0.85">
-                <animate attributeName="ry" values="11;12;10.5;11.5;10;11" dur="0.8s" repeatCount="indefinite"/>
-                <animate attributeName="rx" values="5;4.5;5.5;4.8;5.2;5" dur="1.1s" repeatCount="indefinite"/>
-                <animate attributeName="cx" values="20;19.5;20.5;20;19.8;20.2;20" dur="1.4s" repeatCount="indefinite"/>
-              </ellipse>
-              <!-- Middle flame -->
-              <ellipse cx="20" cy="26" rx="3.2" ry="8" fill="url(#flameInner)" opacity="0.9">
-                <animate attributeName="ry" values="8;8.5;7.5;8.2;7.8;8" dur="0.7s" repeatCount="indefinite"/>
-                <animate attributeName="rx" values="3.2;2.8;3.5;3;3.3;3.2" dur="0.9s" repeatCount="indefinite"/>
-                <animate attributeName="cx" values="20;20.3;19.7;20.1;19.9;20" dur="1.2s" repeatCount="indefinite"/>
-              </ellipse>
-              <!-- Core flame (blue-white) -->
-              <ellipse cx="20" cy="30" rx="1.8" ry="4.5" fill="url(#flameCore)" opacity="0.8">
-                <animate attributeName="ry" values="4.5;5;4;4.8;4.2;4.5" dur="0.6s" repeatCount="indefinite"/>
-              </ellipse>
-              <!-- Tiny sparks -->
-              <circle cx="17" cy="16" r="0.4" fill="#ffe082" opacity="0"><animate attributeName="opacity" values="0;0.8;0" dur="2.5s" repeatCount="indefinite"/><animate attributeName="cy" values="16;12" dur="2.5s" repeatCount="indefinite"/></circle>
-              <circle cx="23" cy="18" r="0.3" fill="#ffcc02" opacity="0"><animate attributeName="opacity" values="0;0.6;0" dur="3.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="cy" values="18;13" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
-            </svg></div>
-            <div class="shabbat-time-detail">
-              <div class="shabbat-time-label">Allumage</div>
-              <div class="shabbat-time-val candles" id="shabbat-candles">--:--</div>
-              <div class="shabbat-time-date" id="shabbat-candles-date"></div>
-              <div class="shabbat-time-hedate" id="shabbat-candles-hedate"></div>
-            </div>
-          </div>
-          <div class="shabbat-sep"></div>
-          <div class="shabbat-time-block">
-            <div class="shabbat-time-icon moon-icon"><svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#0d1b2a"><animate attributeName="stop-color" values="#1b2838;#0d1b2a;#1b2838" dur="6s" repeatCount="indefinite"/></stop>
-                  <stop offset="40%" stop-color="#1b2838"/>
-                  <stop offset="70%" stop-color="#415a77"><animate attributeName="stop-color" values="#415a77;#2c3e6b;#415a77" dur="8s" repeatCount="indefinite"/></stop>
-                  <stop offset="100%" stop-color="#e07040" stop-opacity="0.4"><animate attributeName="stop-opacity" values="0.4;0.2;0.4" dur="5s" repeatCount="indefinite"/></stop>
-                </linearGradient>
-                <radialGradient id="moonG2" cx="40%" cy="35%" r="55%"><stop offset="0%" stop-color="#f5f0ff"/><stop offset="100%" stop-color="#d4b8ff"/></radialGradient>
-                <radialGradient id="moonGlow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c084fc" stop-opacity="0.3"/><stop offset="100%" stop-color="#c084fc" stop-opacity="0"/></radialGradient>
-              </defs>
-              <!-- Sky -->
-              <rect x="0" y="0" width="50" height="50" rx="8" fill="url(#skyG)"/>
-              <!-- Horizon glow -->
-              <ellipse cx="25" cy="48" rx="28" ry="8" fill="#e07040" opacity="0.12"><animate attributeName="opacity" values="0.12;0.18;0.1;0.15;0.12" dur="5s" repeatCount="indefinite"/></ellipse>
-              <!-- Moon glow -->
-              <circle cx="16" cy="15" r="8" fill="url(#moonGlow2)"><animate attributeName="r" values="8;9;7.5;8.5;8" dur="4s" repeatCount="indefinite"/></circle>
-              <!-- Crescent moon -->
-              <path d="M21 15a7 7 0 11-7.5-6.9 5.5 5.5 0 007.5 6.9z" fill="url(#moonG2)">
-                <animate attributeName="opacity" values="0.9;1;0.85;1;0.9" dur="4s" repeatCount="indefinite"/>
-              </path>
-              <!-- Stars layer 1 - bright -->
-              <circle cx="32" cy="10" r="0.7" fill="#fff"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
-              <circle cx="40" cy="18" r="0.5" fill="#fff"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" begin="0.5s" repeatCount="indefinite"/></circle>
-              <circle cx="36" cy="28" r="0.6" fill="#fff"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" begin="1s" repeatCount="indefinite"/></circle>
-              <!-- Stars layer 2 - subtle -->
-              <circle cx="27" cy="6" r="0.4" fill="#e0d4ff"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.5s" begin="0.3s" repeatCount="indefinite"/></circle>
-              <circle cx="44" cy="8" r="0.35" fill="#e0d4ff"><animate attributeName="opacity" values="0.1;0.6;0.1" dur="4s" begin="1.5s" repeatCount="indefinite"/></circle>
-              <circle cx="8" cy="30" r="0.4" fill="#e0d4ff"><animate attributeName="opacity" values="0.15;0.65;0.15" dur="3.2s" begin="0.7s" repeatCount="indefinite"/></circle>
-              <circle cx="22" cy="35" r="0.35" fill="#fff"><animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.6s" begin="2s" repeatCount="indefinite"/></circle>
-              <!-- Stars layer 3 - twinkling cross stars -->
-              <g transform="translate(38,5)" opacity="0.6"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" begin="0.4s" repeatCount="indefinite"/>
-                <line x1="0" y1="-1.2" x2="0" y2="1.2" stroke="#fff" stroke-width="0.4"/>
-                <line x1="-1.2" y1="0" x2="1.2" y2="0" stroke="#fff" stroke-width="0.4"/>
-              </g>
-              <g transform="translate(10,12)" opacity="0.5"><animate attributeName="opacity" values="0.2;0.7;0.2" dur="3.8s" begin="1.2s" repeatCount="indefinite"/>
-                <line x1="0" y1="-1" x2="0" y2="1" stroke="#fff" stroke-width="0.3"/>
-                <line x1="-1" y1="0" x2="1" y2="0" stroke="#fff" stroke-width="0.3"/>
-              </g>
-              <!-- Silhouette horizon -->
-              <path d="M0 44 Q5 41 10 43 Q15 40 20 42 Q25 39 30 41 Q35 40 40 42 Q45 41 50 43 L50 50 L0 50 Z" fill="#0a0f1a" opacity="0.7"/>
-            </svg></div>
-            <div class="shabbat-time-detail">
-              <div class="shabbat-time-label">Havdalah</div>
-              <div class="shabbat-time-val havdalah" id="shabbat-havdalah">--:--</div>
-              <div class="shabbat-time-date" id="shabbat-havdalah-date"></div>
-              <div class="shabbat-time-hedate" id="shabbat-havdalah-hedate"></div>
-            </div>
-          </div>
-        </div>
-        <button class="insta-share-btn" onclick="shareShabbat(event)" style="position:absolute;bottom:12px;right:14px;padding:6px;"><svg viewBox="0 0 24 24" style="stroke:#fff;width:20px;height:20px;opacity:0.7;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-      </div>
-    </div>
   </div>
 
   <!-- SUB-PANEL: OBJECTIFS -->
@@ -2517,42 +2526,114 @@ function setReadingMode(mode) {
   renderReading();
 }
 
-// French Chabad-style Hebrew to phonetic transliteration
+// French Patakh Eliyahou-style Hebrew to phonetic transliteration
 function transliterate(heb) {
-  const map = {
-    'א':'', 'בÖ¼':'b', 'ב':'v', 'גÖ¼':'g', 'ג':'g', 'דÖ¼':'d', 'ד':'d',
-    'ה':'h', 'ו':'v', 'ז':'z', 'ח':'\u2019h', 'ט':'t', 'י':'y',
-    'כÖ¼':'k', 'כ':'kh', 'ך':'kh', 'ל':'l', 'מ':'m', 'ם':'m',
-    'נ':'n', 'ן':'n', 'ס':'s', 'ע':'\u2019', 'פÖ¼':'p', 'פ':'f', 'ף':'f',
-    'צ':'ts', 'ץ':'ts', 'ק':'k', 'ר':'r', 'שׁ':'ch', 'שׂ':'s', 'ש':'ch',
-    'תÖ¼':'t', 'ת':'t',
-    'ַ':'a', 'ָ':'a', 'ֶ':'é', 'ֵ':'é', 'ִ':'i', 'ֹ':'o', 'ֻ':'ou', 'ּ':'',
-    'וÖ¹':'o', 'וÖ¼':'ou', 'Ö°':'e', 'Ö²':'a', 'Ö³':'o', 'Ö±':'é',
-    ':':'', '׃':'', 'Ö¾':'-'
-  };
-  let result = '';
-  let i = 0;
-  const s = heb;
-  while (i < s.length) {
-    // Try 2-char match first
-    if (i + 1 < s.length && map[s[i] + s[i+1]] !== undefined) {
-      result += map[s[i] + s[i+1]];
-      i += 2;
-    } else if (map[s[i]] !== undefined) {
-      result += map[s[i]];
-      i++;
-    } else if (s[i] === ' ') {
-      result += ' ';
-      i++;
-    } else {
-      i++; // skip unknown
-    }
+  var D='\u05BC',SHD='\u05C1',SID='\u05C2',SHVA='\u05B0',
+    HS='\u05B1',HP='\u05B2',HQ='\u05B3',
+    HI='\u05B4',TSE='\u05B5',SE='\u05B6',PA='\u05B7',
+    QA='\u05B8',HO='\u05B9',HO2='\u05BA',QU='\u05BB',
+    MET='\u05BD',MAQ='\u05BE',SOF='\u05C3',QQ='\u05C7';
+  var VW={};[SHVA,HS,HP,HQ,HI,TSE,SE,PA,QA,HO,HO2,QU,QQ].forEach(function(v){VW[v]=1;});
+  function isCV(c){return c>='\u05D0'&&c<='\u05EA';}
+
+  heb=heb.replace(/יְהוָ[\u0591-\u05AF]*ה|יְהֹוָ[\u0591-\u05AF]*ה|יהוה/g,'Ado-na\u00ef');
+  heb=heb.replace(/אֱ?לֹהִ[\u0591-\u05AF]*ים/g,'Élo-him');
+  heb=heb.replace(/אֱ?לֹהֵ[\u0591-\u05AF]*ינוּ/g,'Élo-hénou');
+  heb=heb.replace(/אֲדֹנָ[\u0591-\u05AF]*י/g,'Ado-naï');
+
+  var TK=[],i=0;
+  while(i<heb.length){
+    var ch=heb[i];
+    if(ch===' '||ch===MAQ){TK.push({t:'s'});i++;continue;}
+    if(ch===SOF||ch==='׀'||ch===':'){i++;continue;}
+    if(ch>='\u0591'&&ch<='\u05AF'||ch===MET){i++;continue;}
+    if(/[A-Za-z\u00C0-\u00FF\-]/.test(ch)){TK.push({t:'l',c:ch});i++;continue;}
+    if(isCV(ch)){
+      var tk={t:'C',l:ch,d:false,v:'',sh:false,si:false};i++;
+      while(i<heb.length){
+        var m=heb[i];
+        if(m===D){tk.d=true;i++;}
+        else if(m===SHD){tk.sh=true;i++;}
+        else if(m===SID){tk.si=true;i++;}
+        else if(VW[m]){tk.v=m;i++;}
+        else if(m===MET||(m>='\u0591'&&m<='\u05AF')){i++;}
+        else break;
+      }
+      TK.push(tk);
+    } else i++;
   }
-  // Clean up: remove double spaces, trim, fix apostrophe spacing
-  result = result.replace(/\s+/g, ' ').trim();
-  // Clean leading apostrophe after space (keep attached to next letter)
-  result = result.replace(/ \u2019 /g, ' \u2019');
-  return result;
+  function nxC(f){for(var n=f+1;n<TK.length;n++){if(TK[n].t==='C')return{tk:TK[n],i:n};if(TK[n].t==='s')return null;}return null;}
+  function pvC(f){for(var p=f-1;p>=0;p--){if(TK[p].t==='C')return{tk:TK[p],i:p};if(TK[p].t==='s')return null;}return null;}
+  function atE(f){return !nxC(f);}
+  function isKol(idx){var tk=TK[idx];if(tk.l!=='\u05DB'||!tk.d)return false;if(tk.v!==QA&&tk.v!==QQ)return false;var n=nxC(idx);if(n&&n.tk.l==='\u05DC'&&(!n.tk.v||n.tk.v===SHVA))return true;return !n;}
+
+  var res='',ws=true;
+  for(var t=0;t<TK.length;t++){
+    var tk=TK[t];
+    if(tk.t==='s'){res+=' ';ws=true;continue;}
+    if(tk.t==='l'){res+=tk.c;ws=false;continue;}
+    if(tk.t!=='C')continue;
+    var L=tk.l,dg=tk.d,V=tk.v;
+    var nx=nxC(t),pv=pvC(t),ae=atE(t);
+    var c='';
+    switch(L){
+      case'\u05D0':c='';break;
+      case'\u05D1':c=dg?'b':'v';break;
+      case'\u05D2':c='g';break;
+      case'\u05D3':c='d';break;
+      case'\u05D4':c=(ae&&!dg)?'':'h';break;
+      case'\u05D5':
+        if(dg&&!V&&nx&&nx.tk.l==='\u05D5'){c='v';break;}
+        if(V===HO||V===HO2){c='';V=HO;}
+        else if(dg&&!V){c='';V=QU;dg=false;}
+        else c='v';break;
+      case'\u05D6':c='z';break;
+      case'\u05D7':c='\u2019h';break;
+      case'\u05D8':c='t';break;
+      case'\u05D9':if(!V&&pv&&(pv.tk.v===TSE||pv.tk.v===HI)){c='';break;}c='y';break;
+      case'\u05DB':c=dg?'k':'kh';break;
+      case'\u05DA':c='kh';break;
+      case'\u05DC':c='l';break;
+      case'\u05DE':c='m';break;
+      case'\u05DD':c='m';break;
+      case'\u05E0':c='n';break;
+      case'\u05DF':c='n';break;
+      case'\u05E1':c='s';break;
+      case'\u05E2':c='\u2019';break;
+      case'\u05E4':c=dg?'p':'f';break;
+      case'\u05E3':c='f';break;
+      case'\u05E6':c='ts';break;
+      case'\u05E5':c='ts';break;
+      case'\u05E7':c='k';break;
+      case'\u05E8':c='r';break;
+      case'\u05E9':c=tk.si?'s':'ch';break;
+      case'\u05EA':c='t';break;
+      default:c='';
+    }
+    var vo='';
+    switch(V){
+      case PA:vo='a';break;
+      case QA:vo=(tk.v===QQ||isKol(t))?'o':'a';break;
+      case QQ:vo='o';break;
+      case SE:vo='\u00e9';break;
+      case TSE:vo='\u00e9';break;
+      case HI:vo='i';break;
+      case HO:case HO2:vo='o';break;
+      case QU:vo='ou';break;
+      case HS:vo='\u00e9';break;
+      case HP:vo='a';break;
+      case HQ:vo='o';break;
+      case SHVA:if(ws)vo='e';else if(pv&&pv.tk.v===SHVA)vo='e';else vo='';break;
+      default:vo='';
+    }
+    if(V===PA&&(L==='\u05D7'||L==='\u05E2'||L==='\u05D4')&&ae){res+=vo+c;ws=false;continue;}
+    if(L==='\u05D2'&&(vo==='\u00e9'||vo==='i'||vo==='e')){res+=c+'u'+vo;ws=false;continue;}
+    res+=c+vo;ws=false;
+  }
+  res=res.replace(/\s+/g,' ').trim().replace(/\u2019\u2019/g,'\u2019');
+  var fi=0;while(fi<res.length&&res[fi]==='\u2019')fi++;
+  if(fi<res.length)res=res.slice(0,fi)+res[fi].toUpperCase()+res.slice(fi+1);
+  return res;
 }
 
 function getReadHistory(num) {
