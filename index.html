@@ -1619,7 +1619,7 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
   <div class="os-tap-right" onclick="storyNav('next')"></div>
 </div>
 
-<script src="tehilim-data.js"></script>
+<script src="tehilim-data.js?v=20260220"></script>
 <script>
 
 const QUOTES = [
@@ -2724,8 +2724,9 @@ function renderReading() {
       });
     } else {
       psalm.verses.forEach((v, i) => {
+        var frText = v.french || '<em style="color:var(--gray-4)">Traduction à venir</em>';
         allHtml += '<div class="verse-block"><span class="verse-num">' + toHebrewNumeral(i + 1) + '</span>';
-        allHtml += '<p class="french-text">' + v.french + '</p></div>';
+        allHtml += '<p class="french-text">' + frText + '</p></div>';
       });
     }
     allHtml += '</div>'; // close content
