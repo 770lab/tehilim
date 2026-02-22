@@ -272,8 +272,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--gray-1); ov
 .shabbat-parasha { font-size:18px; font-weight:700; line-height:1.2; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
 .shabbat-parasha-he { font-size:13px; color:rgba(255,255,255,0.85); font-weight:400; margin-top:1px; font-family:'Noto Serif Hebrew',serif; }
 .shabbat-badge { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f9ce34; background:rgba(249,206,52,0.15); padding:3px 8px; border-radius:20px; white-space:nowrap;  backdrop-filter:blur(6px); }
-.shabbat-times-row { display:flex; align-items:center; justify-content:center; gap:0; }
-.shabbat-time-block { flex:1; display:flex; align-items:center; gap:10px; justify-content:center; }
+.shabbat-times-row { display:flex; align-items:center; justify-content:flex-start; gap:0; }
+.shabbat-time-block { display:flex; align-items:center; gap:10px; justify-content:flex-start; }
 .shabbat-time-icon { flex-shrink:0; }
 .shabbat-time-icon svg { display:block; }
 .shabbat-time-icon.candle-icon { filter:drop-shadow(0 0 10px rgba(249,206,52,0.5));  }
@@ -9066,12 +9066,35 @@ function _countryFlag(cc) {
   return String.fromCodePoint(base + cc.charCodeAt(0) - 65, base + cc.charCodeAt(1) - 65);
 }
 
-function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
-  var tzid = _shabbatDefaultTz;
-  try { tzid = Intl.DateTimeFormat().resolvedOptions().timeZone || _shabbatDefaultTz; } catch(e) {}
+function _getTimezoneForCoords(lat, lng, fallbackTz) {
+  // Use timeapi.io to get the IANA timezone for coordinates
+  var url = 'https://timeapi.io/api/timezone/coordinate?latitude=' + lat.toFixed(4) + '&longitude=' + lng.toFixed(4);
+  // Race between fetch and a 3s timeout
+  var timeout = new Promise(function(resolve) {
+    setTimeout(function() { resolve(fallbackTz); }, 3000);
+  });
+  var lookup = fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data && data.timeZone) {
+        console.log('Shabbat: timezone for coords:', data.timeZone);
+        return data.timeZone;
+      }
+      return fallbackTz;
+    })
+    .catch(function() {
+      console.log('Shabbat: timezone lookup failed, using fallback:', fallbackTz);
+      return fallbackTz;
+    });
+  return Promise.race([lookup, timeout]);
+}
 
-  var url = 'https://www.hebcal.com/shabbat?cfg=json&geo=pos&latitude=' + lat.toFixed(4) + '&longitude=' + lng.toFixed(4) + '&tzid=' + encodeURIComponent(tzid) + '&M=on&b=18';
-  console.log('Shabbat: fetching', url);
+function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
+  var browserTz = _shabbatDefaultTz;
+  try { browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || _shabbatDefaultTz; } catch(e) {}
+
+  // Try to get the correct timezone for the target coordinates
+  var tzPromise = _getTimezoneForCoords(lat, lng, browserTz);
 
   var geoPromise;
   if (!cityName) {
@@ -9089,11 +9112,19 @@ function _fetchShabbatTimes(lat, lng, cityName, cacheKey) {
   }
 
   Promise.all([
-    fetch(url).then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }),
+    tzPromise,
     geoPromise
-  ]).then(function(results) {
-    var data = results[0];
-    var geoInfo = results[1];
+  ]).then(function(preResults) {
+    var tzid = preResults[0];
+    var geoInfo = preResults[1];
+    var url = 'https://www.hebcal.com/shabbat?cfg=json&geo=pos&latitude=' + lat.toFixed(4) + '&longitude=' + lng.toFixed(4) + '&tzid=' + encodeURIComponent(tzid) + '&M=on&b=18';
+    console.log('Shabbat: fetching', url, 'tzid=' + tzid);
+    return fetch(url).then(function(r) { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }).then(function(data) {
+      return { data: data, geoInfo: geoInfo };
+    });
+  }).then(function(combined) {
+    var data = combined.data;
+    var geoInfo = combined.geoInfo;
     var result = _parseShabbatData(data, geoInfo.city);
     if (result) {
       result.countryCode = geoInfo.cc;
@@ -9165,6 +9196,11 @@ function _parseShabbatData(data, cityName) {
 
 function _formatHebcalTime(isoStr) {
   try {
+    // Extract time directly from ISO string to preserve the city's local time
+    // Hebcal returns: "2024-01-19T17:30:00-05:00" — the T portion is already local
+    var match = isoStr.match(/T(\d{2}):(\d{2})/);
+    if (match) return match[1] + ':' + match[2];
+    // Fallback to Date parsing
     var d = new Date(isoStr);
     var h = d.getHours();
     var m = d.getMinutes();
@@ -10149,10 +10185,21 @@ var PATAKH_PRAYERS = {
     ]
   },
   birkat: {
-    title: "Birkat Hamazon",
+    title: "Birkat Hamazon (Bénédiction après le repas)",
     sections: [
-      { name: "Zimoun", he: "\u05e8\u05b7\u05d1\u05bc\u05d5\u05b9\u05ea\u05b7\u05d9 \u05e0\u05b0\u05d1\u05b8\u05e8\u05b5\u05da\u05b0. \u05d9\u05b0\u05d4\u05b4\u05d9 \u05e9\u05b5\u05c1\u05dd \u05d9\u05b0\u05d9\u05b8 \u05de\u05b0\u05d1\u05b9\u05e8\u05b8\u05da\u05b0 \u05de\u05b5\u05e2\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d5\u05b0\u05e2\u05b7\u05d3 \u05e2\u05d5\u05b9\u05dc\u05b8\u05dd.", ph: "Rabota\u00ef n\u00e9var\u00e9\u2018kh. Y\u00e9hi ch\u00e9m Ado-na\u00ef m\u00e9vora\u2018kh m\u00e9\u2018ata v\u00e9\u2018ad \u2018olam." },
-      { name: "Hazan", he: "\u05d1\u05b8\u05bc\u05e8\u05d5\u05bc\u05da\u05b0 \u05d0\u05b7\u05ea\u05b8\u05bc\u05d4 \u05d9\u05b0\u05d9\u05b8 \u05d0\u05b1\u05dc\u05b9\u05d4\u05b5\u05d9\u05e0\u05d5\u05bc \u05de\u05b6\u05dc\u05b6\u05da\u05b0 \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd, \u05d4\u05b7\u05d6\u05b8\u05bc\u05df \u05d0\u05b6\u05ea \u05d4\u05b8\u05e2\u05d5\u05b9\u05dc\u05b8\u05dd \u05db\u05bb\u05bc\u05dc\u05bc\u05d5\u05b9 \u05d1\u05b0\u05bc\u05d8\u05d5\u05bc\u05d1\u05d5\u05b9.", ph: "Baroukh ata Ado-na\u00ef \u00c9lo-h\u00e9nou m\u00e9lekh ha\u2018olam, hazan \u00e9t ha\u2018olam koulo b\u00e9touvo." }
+      { name: "Zimoun (à 3 ou plus)", he: "רַבּוֹתַי נְבָרֵךְ.\nיְהִי שֵׁם יְיָ מְבֹרָךְ מֵעַתָּה וְעַד עוֹלָם.\nבִּרְשׁוּת מָרָנָן וְרַבָּנָן וְרַבּוֹתַי, נְבָרֵךְ (אֱלֹהֵינוּ) שֶׁאָכַלְנוּ מִשֶּׁלּוֹ.\nבָּרוּךְ (אֱלֹהֵינוּ) שֶׁאָכַלְנוּ מִשֶּׁלּוֹ וּבְטוּבוֹ חָיִינוּ.\nבָּרוּךְ הוּא וּבָרוּךְ שְׁמוֹ.", ph: "Rabotaï névarékh.\nYéhi chém Ado-naï mévora\u2018kh mé\u2018ata vé\u2018ad \u2018olam.\nBirchout maranan vérabanan vérabotaï, névarékh (Élo-hénou) chéakhalnou michélo.\nBaroukh (Élo-hénou) chéakhalnou michélo ouvétouvo \u2018hayinou.\nBaroukh hou ouvaroukh chémo." },
+
+      { name: "1ère Brakha — Hazan ét hakol", he: "בָּרוּךְ אַתָּה יְיָ אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, הַזָּן אֶת הָעוֹלָם כֻּלּוֹ בְּטוּבוֹ בְּחֵן בְּחֶסֶד וּבְרַחֲמִים. הוּא נוֹתֵן לֶחֶם לְכָל בָּשָׂר, כִּי לְעוֹלָם חַסְדּוֹ. וּבְטוּבוֹ הַגָּדוֹל תָּמִיד לֹא חָסַר לָנוּ, וְאַל יֶחְסַר לָנוּ, מָזוֹן לְעוֹלָם וָעֶד. בַּעֲבוּר שְׁמוֹ הַגָּדוֹל, כִּי הוּא אֵל זָן וּמְפַרְנֵס לַכֹּל וּמֵטִיב לַכֹּל, וּמֵכִין מָזוֹן לְכָל בְּרִיּוֹתָיו אֲשֶׁר בָּרָא. בָּרוּךְ אַתָּה יְיָ, הַזָּן אֶת הַכֹּל.", ph: "Baroukh ata Ado-naï Élo-hénou mélekh ha\u2018olam, hazan ét ha\u2018olam koulo bétouvo, bé\u2018hén bé\u2018hésséd ouvéra\u2018hamim. Hou notén lé\u2018hém lékhol bassar, ki lé\u2018olam \u2018hassdo. Ouvétouvo hagadol tamid lo \u2018hassar lanou, véal yé\u2018hssar lanou, mazon lé\u2018olam vaéd. Ba\u2018avour chémo hagadol, ki hou El zan ouméfarnéss lakol ouméitiv lakol, ouméikhin mazon lékhol bériyotav achér bara. Baroukh ata Ado-naï, hazan ét hakol." },
+
+      { name: "2ème Brakha — Al Haarets Véal Hamazon", he: "נוֹדֶה לְּךָ יְיָ אֱלֹהֵינוּ, עַל שֶׁהִנְחַלְתָּ לַאֲבוֹתֵינוּ אֶרֶץ חֶמְדָּה טוֹבָה וּרְחָבָה, וְעַל שֶׁהוֹצֵאתָנוּ יְיָ אֱלֹהֵינוּ מֵאֶרֶץ מִצְרַיִם, וּפְדִיתָנוּ מִבֵּית עֲבָדִים, וְעַל בְּרִיתְךָ שֶׁחָתַמְתָּ בִּבְשָׂרֵנוּ, וְעַל תּוֹרָתְךָ שֶׁלִּמַּדְתָּנוּ, וְעַל חֻקֶּיךָ שֶׁהוֹדַעְתָּנוּ, וְעַל חַיִּים חֵן וָחֶסֶד שֶׁחוֹנַנְתָּנוּ, וְעַל אֲכִילַת מָזוֹן שָׁאַתָּה זָן וּמְפַרְנֵס אוֹתָנוּ תָּמִיד, בְּכָל יוֹם וּבְכָל עֵת וּבְכָל שָׁעָה.\n\nוְעַל הַכֹּל יְיָ אֱלֹהֵינוּ, אֲנַחְנוּ מוֹדִים לָךְ וּמְבָרְכִים אוֹתָךְ, יִתְבָּרַךְ שִׁמְךָ בְּפִי כָל חַי תָּמִיד לְעוֹלָם וָעֶד. כַּכָּתוּב: וְאָכַלְתָּ וְשָׂבָעְתָּ, וּבֵרַכְתָּ אֶת יְיָ אֱלֹהֶיךָ עַל הָאָרֶץ הַטֹּבָה אֲשֶׁר נָתַן לָךְ. בָּרוּךְ אַתָּה יְיָ, עַל הָאָרֶץ וְעַל הַמָּזוֹן.", ph: "Nodé lékha Ado-naï Élo-hénou, \u2018al chéhin\u2018halta laavoténou éréts \u2018hemda tova our\u2018hava, vé\u2018al chéhotsétanou Ado-naï Élo-hénou mééréts mitsraïm, ouféditanou mibéit \u2018avadim, vé\u2018al béritkha ché\u2018hatamta bivsarénou, vé\u2018al toratkha chélimadtanou, vé\u2018al \u2018houkékha chéhoda\u2018tanou, vé\u2018al \u2018hayim \u2018hén va\u2018hésséd ché\u2018honantanou, vé\u2018al akhilat mazon chaata zan ouméfarnéss otanou tamid, békhol yom ouvékhol \u2018ét ouvékhol cha\u2018a.\n\nVé\u2018al hakol Ado-naï Élo-hénou, ana\u2018hnou modim lakh oumévarkhim otakh, yitbarakh chimkha béfi khol \u2018haï tamid lé\u2018olam vaéd. Kakatouv: véakhalta véssava\u2018ta, ouvérakhta ét Ado-naï Élo-hékha \u2018al haaréts hatova achér natan lakh. Baroukh ata Ado-naï, \u2018al haaréts vé\u2018al hamazon." },
+
+      { name: "3ème Brakha — Ra\u2018hém (Boné Yérouchalayim)", he: "רַחֶם נָא יְיָ אֱלֹהֵינוּ, עַל יִשְׂרָאֵל עַמֶּךָ, וְעַל יְרוּשָׁלַיִם עִירֶךָ, וְעַל צִיּוֹן מִשְׁכַּן כְּבוֹדֶךָ, וְעַל מַלְכוּת בֵּית דָּוִד מְשִׁיחֶךָ, וְעַל הַבַּיִת הַגָּדוֹל וְהַקָּדוֹשׁ שֶׁנִּקְרָא שִׁמְךָ עָלָיו. אֱלֹהֵינוּ, אָבִינוּ, רְעֵנוּ, זוּנֵנוּ, פַּרְנְסֵנוּ, וְכַלְכְּלֵנוּ, וְהַרְוִיחֵנוּ, וְהַרְוַח לָנוּ יְיָ אֱלֹהֵינוּ מְהֵרָה מִכָּל צָרוֹתֵינוּ. וְנָא אַל תַּצְרִיכֵנוּ יְיָ אֱלֹהֵינוּ, לֹא לִידֵי מַתְּנַת בָּשָׂר וָדָם, וְלֹא לִידֵי הַלְוָאָתָם, כִּי אִם לְיָדְךָ הַמְּלֵאָה, הַפְּתוּחָה, הָרְחָבָה, הַקְּדוֹשָׁה, שֶׁלֹּא נֵבוֹשׁ וְלֹא נִכָּלֵם לְעוֹלָם וָעֶד.\n\nוּבְנֵה יְרוּשָׁלַיִם עִיר הַקֹּדֶשׁ בִּמְהֵרָה בְיָמֵינוּ. בָּרוּךְ אַתָּה יְיָ, בּוֹנֵה בְרַחֲמָיו יְרוּשָׁלָיִם. אָמֵן.", ph: "Ra\u2018hém na Ado-naï Élo-hénou, \u2018al Israël \u2018amékha, vé\u2018al Yérouchalayim \u2018irékha, vé\u2018al Tsiyon michkan kévodékha, vé\u2018al malkhout béit David méchi\u2018hékha, vé\u2018al habaït hagadol véhakadoch chénikra chimkha \u2018alav. Élo-hénou, avinou, ré\u2018énou, zounénou, parnéssénou, vékhalkhélénou, véharviy\u2018hénou, véharva\u2018h lanou Ado-naï Élo-hénou méhéra mikol tsaroténou. Véna al tatsirikénou Ado-naï Élo-hénou, lo lidé matnat bassar vadam, vélo lidé halvaatam, ki im léyadkha haméléa, hapetouy\u2018ha, har\u2018hava, hakédocha, chélo névoch vélo nikalém lé\u2018olam vaéd.\n\nOuvné Yérouchalayim \u2018ir hakodéch biméhéra véyaménou. Baroukh ata Ado-naï, boné véra\u2018hamav Yérouchalayim. Amén." },
+
+      { name: "4ème Brakha — Hatov Véhamétiv", he: "בָּרוּךְ אַתָּה יְיָ, אֱלֹהֵינוּ מֶלֶךְ הָעוֹלָם, הָאֵל אָבִינוּ, מַלְכֵּנוּ, אַדִּירֵנוּ, בּוֹרְאֵנוּ, גּוֹאֲלֵנוּ, יוֹצְרֵנוּ, קְדוֹשֵׁנוּ קְדוֹשׁ יַעֲקֹב, רוֹעֵנוּ רוֹעֵה יִשְׂרָאֵל, הַמֶּלֶךְ הַטּוֹב וְהַמֵּטִיב לַכֹּל, שֶׁבְּכָל יוֹם וָיוֹם הוּא הֵטִיב, הוּא מֵטִיב, הוּא יֵיטִיב לָנוּ. הוּא גְמָלָנוּ, הוּא גוֹמְלֵנוּ, הוּא יִגְמְלֵנוּ לָעַד, לְחֵן וּלְחֶסֶד וּלְרַחֲמִים וּלְרֶוַח, הַצָּלָה וְהַצְלָחָה, בְּרָכָה וִישׁוּעָה, נֶחָמָה, פַּרְנָסָה וְכַלְכָּלָה, וְרַחֲמִים וְחַיִּים וְשָׁלוֹם וְכָל טוֹב, וּמִכָּל טוּב לְעוֹלָם אַל יְחַסְּרֵנוּ.", ph: "Baroukh ata Ado-naï, Élo-hénou mélekh ha\u2018olam, haÉl avinou, malkénou, adirénou, borénou, goalénou, yotsrénou, kédochénou kédoch Ya\u2018akov, ro\u2018énou ro\u2018é Israël, hamélekh hatov véhamétiv lakol, chébékhol yom vayom hou hétiv, hou métiv, hou yétiv lanou. Hou gémalanou, hou gomélénou, hou yigmélénou la\u2018ad, lé\u2018hén oulé\u2018hésséd oulra\u2018hamim oulréva\u2018h, hatsala véhatsla\u2018ha, bérakha vichou\u2018a, né\u2018hama, parnassa vékhalkhala, véra\u2018hamim vé\u2018hayim véchalom vékhol tov, oumikal touv lé\u2018olam al yé\u2018hassrénou." },
+
+      { name: "Hara\u2018haman", he: "הָרַחֲמָן הוּא יִמְלוֹךְ עָלֵינוּ לְעוֹלָם וָעֶד.\nהָרַחֲמָן הוּא יִתְבָּרַךְ בַּשָּׁמַיִם וּבָאָרֶץ.\nהָרַחֲמָן הוּא יִשְׁתַּבַּח לְדוֹר דּוֹרִים, וְיִתְפָּאַר בָּנוּ לָעַד וּלְנֵצַח נְצָחִים, וְיִתְהַדַּר בָּנוּ לָעַד וּלְעוֹלְמֵי עוֹלָמִים.\nהָרַחֲמָן הוּא יְפַרְנְסֵנוּ בְּכָבוֹד.\nהָרַחֲמָן הוּא יִשְׁבּוֹר עֻלֵּנוּ מֵעַל צַוָּארֵנוּ, וְהוּא יוֹלִיכֵנוּ קוֹמְמִיּוּת לְאַרְצֵנוּ.\nהָרַחֲמָן הוּא יִשְׁלַח לָנוּ בְּרָכָה מְרֻבָּה בַּבַּיִת הַזֶּה, וְעַל שֻׁלְחָן זֶה שֶׁאָכַלְנוּ עָלָיו.\nהָרַחֲמָן הוּא יִשְׁלַח לָנוּ אֶת אֵלִיָּהוּ הַנָּבִיא זָכוּר לַטּוֹב, וִיבַשֶּׂר לָנוּ בְּשׂוֹרוֹת טוֹבוֹת יְשׁוּעוֹת וְנֶחָמוֹת.\nהָרַחֲמָן הוּא יְבָרֵךְ אֶת כָּל הַמְּסֻבִּין כָּאן.", ph: "Hara\u2018haman hou yimlokh \u2018alénou lé\u2018olam vaéd.\nHara\u2018haman hou yitbarakh bachamayim ouva\u2018aréts.\nHara\u2018haman hou yichtaba\u2018h lédor dorim, véyitpaar banou la\u2018ad oulnétsa\u2018h nétsa\u2018him, véyithadar banou la\u2018ad oulé\u2018olémé \u2018olamim.\nHara\u2018haman hou yéfarnéssénou békavod.\nHara\u2018haman hou yichbor \u2018oulénou mé\u2018al tsavarénou, véhou yolikhénou komémiyout léartsénou.\nHara\u2018haman hou yichla\u2018h lanou bérakha mérouba babaït hazé, vé\u2018al choul\u2018han zé chéakhalnou \u2018alav.\nHara\u2018haman hou yichla\u2018h lanou ét Éliyahou hanavi zakhor latov, vivassér lanou béssorot tovot yéchouot véné\u2018hamot.\nHara\u2018haman hou yévarékh ét kol hamésoubin kan." },
+
+      { name: "\u2018Ossé Chalom", he: "עֹשֶׂה שָׁלוֹם בִּמְרוֹמָיו, הוּא יַעֲשֶׂה שָׁלוֹם עָלֵינוּ, וְעַל כָּל יִשְׂרָאֵל, וְאִמְרוּ אָמֵן.\n\nיְראוּ אֶת יְיָ קְדוֹשָׁיו, כִּי אֵין מַחְסוֹר לִירֵאָיו. כְּפִירִים רָשׁוּ וְרָעֵבוּ, וְדוֹרְשֵׁי יְיָ לֹא יַחְסְרוּ כָל טוֹב. הוֹדוּ לַיְיָ כִּי טוֹב, כִּי לְעוֹלָם חַסְדּוֹ. פּוֹתֵחַ אֶת יָדֶךָ, וּמַשְׂבִּיעַ לְכָל חַי רָצוֹן. בָּרוּךְ הַגֶּבֶר אֲשֶׁר יִבְטַח בַּיְיָ, וְהָיָה יְיָ מִבְטַחוֹ. נַעַר הָיִיתִי גַם זָקַנְתִּי, וְלֹא רָאִיתִי צַדִּיק נֶעֱזָב, וְזַרְעוֹ מְבַקֶּשׁ לָחֶם. יְיָ עֹז לְעַמּוֹ יִתֵּן, יְיָ יְבָרֵךְ אֶת עַמּוֹ בַשָּׁלוֹם.", ph: "\u2018Ossé chalom bimromav, hou ya\u2018assé chalom \u2018alénou, vé\u2018al kol Israël, véimrou amén.\n\nYérou ét Ado-naï kédochav, ki éin ma\u2018hssor liréav. Kéfirim rachou véraévou, védorché Ado-naï lo ya\u2018hsserou khol tov. Hodou lAdo-naï ki tov, ki lé\u2018olam \u2018hassdo. Potéa\u2018h ét yadékha, oumassbiya lékhol \u2018haï ratson. Baroukh haguévér achér yivta\u2018h bAdo-naï, véhaya Ado-naï mivta\u2018ho. Na\u2018ar hayiti gam zakanti, vélo raïti tsadik nééza v, vézar\u2018o mévakéch la\u2018hém. Ado-naï \u2018oz lé\u2018amo yitén, Ado-naï yévarékh ét \u2018amo vachalom." }
     ]
   }
 };
