@@ -10086,10 +10086,7 @@ function displayBethResults(places, userLat, userLng) {
     _bethMarkers.push(m);
   });
 
-  if (places.length > 0) {
-    var group = L.featureGroup(_bethMarkers);
-    _bethMap.fitBounds(group.getBounds().pad(0.15));
-  }
+  // Keep map centered on user location (zoom 13), don't fitBounds all markers
 
   if (results && places.length > 0) {
     var html = '';
